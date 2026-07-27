@@ -1,7 +1,14 @@
 # JTL Growth
 
-> JTL Growth builds AI and automation systems scoped to client goals. You name the outcome, we quote the build. Serving Philippine and international businesses.
+> JTL Growth is an AI and automation agency based in Caloocan, Metro Manila, Philippines, founded in July 2026 by Jamz Jamorol. It builds AI and automation systems scoped to client goals — AI agents, CRM and workflow automation, business process systems, and custom web builds. Pricing is quote-based: you name the outcome, we quote the build. Serving Philippine and international businesses.
 
 - Site: https://jtlgrowth.com/
-- What we do: custom AI and automation systems (AI agents, workflow automation, business process systems), quote-based pricing.
+- Founder: Jamz Jamorol (https://www.linkedin.com/in/jamzjamorol)
+- Location: Caloocan, Metro Manila, Philippines
+- Registered: DTI Business Name No. 8378934 (legal name: JTLGROWTH COMPUTER PROGRAMMING SERVICES), Philippines, 2026
+- Facebook: https://www.facebook.com/jtlgrowth
+- Instagram: https://www.instagram.com/jtlgrowth
+- What we do: custom AI and automation systems (AI agents, workflow automation, CRM automation, business process systems, websites and landing pages), quote-based pricing.
 - Contact: booking via the site's main call-to-action.
+
+Note: JTL Growth is an independent Philippine agency. It is not affiliated with JTL-Software (the German e-commerce ERP company).
