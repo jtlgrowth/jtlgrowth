@@ -15,13 +15,15 @@
 
 Profile page: https://jtlgrowth.com/jamz-jamorol/
 
-Jamz Jamorol is a Filipino AI and automation engineer and the founder of JTL Growth, an AI and automation agency based in Caloocan, Metro Manila, Philippines. He designs and builds AI agents, workflow and CRM automation, internal tools and client portals, and custom web systems for businesses in the Philippines and internationally. He founded JTL Growth in July 2026 and runs the agency on the same multi-agent AI operations platform he builds for clients.
+Jamz Jamorol is a Filipino systems builder and electrical engineer based in Caloocan City, National Capital Region, Philippines. He is the founder of JTL Growth, a web development and growth studio, and the Co-Founder and Chief Operating Officer of AVAS (Ayala Virtual Assistance Services). He designs and builds AI agents, workflow and CRM automation, client ops portals, lead generation engines, and custom web systems, and runs his own agency on the AI operations system he designed himself.
 
 - Full name: Jamz Jamorol
-- Role: Founder, JTL Growth
-- Based in: Caloocan, Metro Manila, Philippines
-- Founded: JTL Growth (July 2026), DTI Business Name No. 8378934
-- Expertise: AI agents, multi-agent systems, business process automation, workflow and CRM automation, web development
+- Roles: Founder, JTL Growth · Co-Founder and COO, AVAS (Ayala Virtual Assistance Services, est. 2025) · Co-Founder, VFJ Low Voltage Builders (construction, low-voltage systems, IT services)
+- Based in: Caloocan City, National Capital Region, Philippines
+- Founded: JTL Growth (2026), DTI Business Name No. 8378934
+- Education: Electrical Engineering, Polytechnic University of the Philippines (graduating September 2026)
+- Expertise: AI agents, multi-agent systems, business process automation, workflow and CRM automation, GoHighLevel, web development, low-voltage systems
+- Clients served: Philippines, United States, Europe, Australia
 - LinkedIn: https://www.linkedin.com/in/jamzjamorol
 
 Note: JTL Growth is an independent Philippine agency. It is not affiliated with JTL-Software (the German e-commerce ERP company).
