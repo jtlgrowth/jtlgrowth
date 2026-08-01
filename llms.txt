@@ -3,12 +3,25 @@
 > JTL Growth is an AI and automation agency based in Caloocan, Metro Manila, Philippines, founded in July 2026 by Jamz Jamorol. It builds AI and automation systems scoped to client goals — AI agents, CRM and workflow automation, business process systems, and custom web builds. Pricing is quote-based: you name the outcome, we quote the build. Serving Philippine and international businesses.
 
 - Site: https://jtlgrowth.com/
-- Founder: Jamz Jamorol (https://www.linkedin.com/in/jamzjamorol)
+- Founder: Jamz Jamorol (https://jtlgrowth.com/jamz-jamorol/ · https://www.linkedin.com/in/jamzjamorol)
 - Location: Caloocan, Metro Manila, Philippines
 - Registered: DTI Business Name No. 8378934 (legal name: JTLGROWTH COMPUTER PROGRAMMING SERVICES), Philippines, 2026
 - Facebook: https://www.facebook.com/jtlgrowth
 - Instagram: https://www.instagram.com/jtlgrowth
 - What we do: custom AI and automation systems (AI agents, workflow automation, CRM automation, business process systems, websites and landing pages), quote-based pricing.
 - Contact: booking via the site's main call-to-action.
+
+## Jamz Jamorol (founder)
+
+Profile page: https://jtlgrowth.com/jamz-jamorol/
+
+Jamz Jamorol is a Filipino AI and automation engineer and the founder of JTL Growth, an AI and automation agency based in Caloocan, Metro Manila, Philippines. He designs and builds AI agents, workflow and CRM automation, internal tools and client portals, and custom web systems for businesses in the Philippines and internationally. He founded JTL Growth in July 2026 and runs the agency on the same multi-agent AI operations platform he builds for clients.
+
+- Full name: Jamz Jamorol
+- Role: Founder, JTL Growth
+- Based in: Caloocan, Metro Manila, Philippines
+- Founded: JTL Growth (July 2026), DTI Business Name No. 8378934
+- Expertise: AI agents, multi-agent systems, business process automation, workflow and CRM automation, web development
+- LinkedIn: https://www.linkedin.com/in/jamzjamorol
 
 Note: JTL Growth is an independent Philippine agency. It is not affiliated with JTL-Software (the German e-commerce ERP company).

@@ -22,6 +22,7 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://jtlgrowth.com/#organization",
   "name": "JTL Growth",
   "legalName": "JTLGROWTH COMPUTER PROGRAMMING SERVICES",
   "identifier": {
@@ -36,9 +37,15 @@
   "foundingDate": "2026-07",
   "founder": {
     "@type": "Person",
+    "@id": "https://jtlgrowth.com/jamz-jamorol/#person",
     "name": "Jamz Jamorol",
-    "url": "https://www.linkedin.com/in/jamzjamorol",
-    "jobTitle": "Founder"
+    "url": "https://jtlgrowth.com/jamz-jamorol/",
+    "image": "https://jtlgrowth.com/assets/jamz.png",
+    "jobTitle": "Founder",
+    "nationality": { "@type": "Country", "name": "Philippines" },
+    "knowsAbout": ["AI automation", "AI agents", "workflow automation", "CRM automation", "web development"],
+    "sameAs": ["https://www.linkedin.com/in/jamzjamorol"],
+    "mainEntityOfPage": "https://jtlgrowth.com/jamz-jamorol/"
   },
   "address": {
     "@type": "PostalAddress",
@@ -368,6 +375,11 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .frole{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--wood-warm)}
 .fname{font-family:'Fraunces',serif;font-weight:650;font-size:34px;color:#EDEAE6;margin:8px 0 12px}
 .fline{font-size:14px;line-height:1.65;color:rgba(237,234,230,.62)}
+.fname-link{color:inherit;text-decoration:none;border-bottom:1px solid rgba(185,185,185,.3);transition:border-color .3s}
+.fname-link:hover{border-bottom-color:rgba(237,234,230,.8)}
+.fmore{display:inline-block;margin-top:10px;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--wood-warm);text-decoration:none;white-space:nowrap}
+.fmore:hover{color:#EDEAE6}
+.fphoto a{display:block;width:100%;height:100%}
 @media (max-width:860px){#pfounders{background:linear-gradient(160deg,#181818,#0D0D0D)}.founder-row{gap:22px}}
 
 
@@ -716,10 +728,10 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       <h2 class="rv d1" style="margin-top:24px">Two people. One operating system.</h2>
       <div class="founder-row rv d2">
         <div class="fcard-p">
-          <div class="fphoto"><img src="assets/jamz.png" alt="Jamz, Founder of JTL Growth"></div>
+          <div class="fphoto"><a href="/jamz-jamorol/"><img src="assets/jamz.png" alt="Jamz Jamorol, Founder of JTL Growth"></a></div>
           <div class="frole">Founder</div>
-          <div class="fname">Jamz</div>
-          <div class="fline">Builds the systems, the AI, and the websites. Runs the agency on the same multi-agent AI operations platform he sells to clients. If it has a backend, he wired it.</div>
+          <div class="fname"><a href="/jamz-jamorol/" class="fname-link">Jamz Jamorol</a></div>
+          <div class="fline">Builds the systems, the AI, and the websites. Runs the agency on the same multi-agent AI operations platform he sells to clients. If it has a backend, he wired it. <a href="/jamz-jamorol/" class="fmore">Read his profile &rsaquo;</a></div>
         </div>
         <div class="fcard-p">
           <div class="fphoto"><img src="assets/gwen.jpg" alt="Gwen, Co-founder of JTL Growth"></div>
