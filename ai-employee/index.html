@@ -96,14 +96,17 @@
   --line:#CDD2DF; --line-soft:#DDE1EA; --ink:#1D1D1F; --mut:#515154;
   --t1:#E2E6ED; --t2:#C8D2E6; --t3:#9FB2D9; --t4:#4A6FD4;
   --shell:min(92vw,1280px);
-  --r:14px; --r-sm:8px;
+  --r:14px; --r-sm:8px; --fm:clamp(10px,2vw,28px);
   --e:cubic-bezier(.2,0,0,1); --t:160ms;
   --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,sans-serif;
   --mono:'Space Mono',ui-monospace,Menlo,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--white);color:var(--ink);font:400 17px/1.6 var(--sans);
-  letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+/* Owner 2026-08-20: page sits in a contained frame with outer margin; ground is
+   a deeper gray, frame surface is light gray (never pure white). */
+body{background:#D9DDE5;color:var(--ink);font:400 17px/1.6 var(--sans);
+  letter-spacing:-.011em;-webkit-font-smoothing:antialiased;padding:var(--fm)}
+.frame{background:var(--white);border:1px solid var(--line);border-radius:16px}
 img,svg{max-width:100%;display:block}
 h1,h2,h3{letter-spacing:-.03em;line-height:1.08;font-weight:700}
 a{color:inherit}
@@ -126,14 +129,14 @@ section:last-of-type{border-bottom:0}
 .grid{display:grid;gap:20px}
 
 /* site header/footer — not part of W-26, ported from shared subpage chrome */
-header.site{border-bottom:1px solid var(--line-soft);background:var(--white);position:sticky;top:0;z-index:20}
+header.site{border-bottom:1px solid var(--line-soft);background:var(--white);position:sticky;top:0;z-index:20;border-radius:16px 16px 0 0}
 header.site .shell{display:flex;align-items:center;justify-content:space-between;height:64px;padding-block:0}
 header.site .logo{display:flex;align-items:center}
 header.site .logo svg{height:26px;width:auto;color:var(--ink)}
 header.site .nav-cta{font:600 13.5px/1 var(--sans);background:var(--ink);color:#fff;
   text-decoration:none;padding:9px 18px;border-radius:999px;transition:background var(--t) var(--e)}
 header.site .nav-cta:hover{background:#000}
-footer.site{padding:30px 0 70px;font:13.5px/1 var(--sans);color:var(--mut)}
+footer.site{padding:30px 0 70px;font:13.5px/1 var(--sans);color:var(--mut);border-radius:0 0 16px 16px}
 footer.site .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 footer.site a{color:var(--mut)}
 
@@ -181,20 +184,21 @@ footer.site a{color:var(--mut)}
 /* 07 GROWTH CTA — verbatim, posts/ai-employee/post.html .cta source of truth */
 #cta{background:var(--ink);color:var(--white);border-bottom:0}
 #cta .kicker{font:600 12px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;
-  color:var(--mut);padding-bottom:11px}
+  color:#A3A8B4;padding-bottom:11px}
 #cta .lock{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 #cta .word{display:inline-block;background:var(--white);color:var(--ink);
   font:700 34px/1 var(--sans);letter-spacing:.16em;padding:9px 22px 10px}
 #cta .tail{font-size:16px;color:#B9BEC9;line-height:1.4;max-width:32ch}
 #cta .foot{display:flex;justify-content:space-between;align-items:baseline;
   font:12.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
-  color:#7C8190;padding-top:20px;margin-top:20px;border-top:1px solid #2A2E38}
+  color:#9BA0AC;padding-top:20px;margin-top:20px;border-top:1px solid #2A2E38}
 
 /* E-02 section progress bar — on for this variant (7-stage build = long) */
-#progress-bar{position:fixed;left:0;right:0;bottom:0;
+#progress-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:var(--fm);
+  max-width:calc(100vw - 2*var(--fm));
   background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(8px);
-  border-top:1px solid var(--line);display:flex;gap:6px;padding:10px 4%;
-  overflow-x:auto;z-index:10}
+  border:1px solid var(--line);border-radius:999px;display:flex;gap:6px;padding:8px 10px;
+  overflow-x:auto;z-index:10;box-shadow:0 14px 34px -18px rgba(29,29,31,.3)}
 html:not([data-progress]) #progress-bar{display:none}
 #progress-bar .chip{flex:0 0 auto;font:600 11px/1 var(--mono);letter-spacing:.1em;
   color:var(--mut);text-decoration:none;padding:8px 12px;border-radius:999px;
@@ -202,7 +206,7 @@ html:not([data-progress]) #progress-bar{display:none}
 #progress-bar .chip b{margin-right:6px;font-weight:700}
 #progress-bar .chip.on{background:var(--ink);color:#fff}
 #progress-bar .chip:hover:not(.on){border-color:var(--line)}
-html[data-progress] body{padding-bottom:56px}
+html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
 
 @media(max-width:640px){
   #demo .plate{height:180px}
@@ -212,6 +216,7 @@ html[data-progress] body{padding-bottom:56px}
 </head>
 <body>
 
+<div class="frame">
 <header class="site"><div class="shell">
   <a class="logo" href="/" aria-label="JTL Growth home">
     <svg viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg>
@@ -350,6 +355,7 @@ html[data-progress] body{padding-bottom:56px}
   <span>JTL Growth — AI and automation systems · Built in the Philippines</span>
   <span><a href="/">jtlgrowth.com</a> · <a href="/privacy/">Privacy</a></span>
 </div></footer>
+</div><!-- /.frame -->
 
 <script>
   if (window.veniceTrack) window.veniceTrack('magnet_view', {magnet:'ai-employee'}, 'ViewContent');
