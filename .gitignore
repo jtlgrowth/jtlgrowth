@@ -1,3 +1,6 @@
 .DS_Store
 **/.DS_Store
 .ruff_cache/
+qa/node_modules/
+qa/*.png
+qa/package*.json

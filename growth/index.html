@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- template: homepage v4 register (monochrome cement + Fraunces), per the
+     brand rule: new slugs extract from the homepage, never the retired
+     apple-gray/warm-paper registers. Demo clips recorded from the live
+     Venice HQ build (zen mode, demo-safe views only). -->
+<script src="/assets/tracking.js"></script>
+<title>Growth Software · Watch the Demo · JTL Growth</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta name="theme-color" content="#121212">
+<meta name="description" content="Watch the AI operations software JTL Growth runs on: an animated HQ where every AI employee has a desk, work flows through a visible pipeline, and the whole org fits one screen.">
+<link rel="canonical" href="https://jtlgrowth.com/growth/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JTL Growth">
+<meta property="og:title" content="Growth Software · Watch the Demo">
+<meta property="og:description" content="The AI operations HQ we run our agency on. Every agent has a desk. Every task is visible.">
+<meta property="og:url" content="https://jtlgrowth.com/growth/">
+<meta property="og:image" content="https://jtlgrowth.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,650;1,9..144,650&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cement:#E2E2E2;--navy:#181818;--blue:#575757;--wood:#1A1A1A;
+  --wood-warm:#B9B9B9;--gray:#616161;--line:rgba(24,24,24,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cement);color:var(--navy);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased}
+::selection{background:var(--navy);color:var(--cement)}
+.inner{width:min(1180px,90vw);margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;padding:28px min(5vw,68px)}
+.logo .lmark{height:22px;width:auto;color:var(--navy)}
+.nav-cta{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cement);background:var(--navy);padding:13px 26px;text-decoration:none;transition:background .3s}
+.nav-cta:hover{background:var(--wood)}
+.kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--blue)}
+.kicker::before{content:"[ ";color:var(--blue)}
+.kicker::after{content:" ]";color:var(--blue)}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:clamp(40px,5.6vw,84px);line-height:1.05;letter-spacing:-.01em;margin-top:24px}
+h1 .accent{font-style:italic}
+.lead{font-size:clamp(16px,1.3vw,19px);line-height:1.6;color:var(--gray);max-width:56ch;margin-top:24px}
+.hero{padding:56px 0 20px;text-align:center}
+.hero .lead{margin-left:auto;margin-right:auto}
+.clips{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px);padding:56px 0 8px}
+.clip-card{background:#141414;border:1px solid rgba(24,24,24,.3);overflow:hidden}
+.clip-card.wide{grid-column:1/-1}
+.clip-card video{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;background:#0c0c0c}
+.clip-card .cap{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 20px;color:var(--cement)}
+.clip-card .cap b{font-family:'Archivo Expanded',sans-serif;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.clip-card .cap span{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,228,228,.65)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:56px 0 0}
+.fact{background:rgba(255,255,255,.42);border:1px solid var(--line);padding:26px 24px}
+.fact b{display:block;font-family:'Archivo Expanded',sans-serif;font-size:17px;font-weight:600}
+.fact span{display:block;font-size:13.5px;line-height:1.6;color:var(--gray);margin-top:8px}
+.cta{padding:80px 0 40px;text-align:center}
+.cta h2{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:clamp(30px,3.6vw,54px)}
+.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;text-decoration:none;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(24,24,24,.3);color:var(--navy);transition:background .3s,color .3s}
+.btn:hover{background:var(--navy);color:var(--cement)}
+.btn.solid{background:var(--navy);color:var(--cement)}
+.btn.solid:hover{background:#000}
+.footline{padding:60px 0 30px}
+.footline .inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+:focus-visible{outline:2px solid #575757;outline-offset:3px}
+@media (max-width:860px){.clips{grid-template-columns:1fr}.facts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/" aria-label="JTL Growth home"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
+  <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
+</header>
+
+<main class="inner">
+  <section class="hero">
+    <div class="kicker">Growth software · live demo</div>
+    <h1>The office that <em class="accent">runs itself.</em></h1>
+    <p class="lead">This is the AI operations HQ we run our agency on — the same system we install for clients. Every AI employee has a desk. Every task is visible. Recorded from the live build, not a mockup.</p>
+  </section>
+
+  <section class="clips" aria-label="Demo recordings">
+    <div class="clip-card wide">
+      <video src="tour.mp4" poster="tour-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="Demo: touring the animated HQ, moving between department islands where AI employees work"></video>
+      <div class="cap"><b>The HQ — every agent at a desk</b><span>Dept dive tour</span></div>
+    </div>
+    <div class="clip-card">
+      <video src="circuit.mp4" poster="circuit-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="Demo: the work-flow circuit view showing tasks moving through the pipeline"></video>
+      <div class="cap"><b>Work flow</b><span>Circuit view</span></div>
+    </div>
+    <div class="clip-card">
+      <video src="org.mp4" poster="org-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="Demo: the org flow chart — fourteen seats across seven departments, each with its own model routing"></video>
+      <div class="cap"><b>Org flow</b><span>14 seats · 7 depts</span></div>
+    </div>
+  </section>
+
+  <section class="facts" aria-label="What the software does">
+    <div class="fact"><b>AI employees, not chat tabs</b><span>Named agents with jobs, tool scopes, and schedules — finance, engineering, copy, research, QA — each visible at its desk.</span></div>
+    <div class="fact"><b>Work you can watch</b><span>Tasks flow through a visible pipeline: queued, working, waiting on you. Nothing disappears into a black box.</span></div>
+    <div class="fact"><b>Installed on your process</b><span>We scope it to your funnel and stack, install it in weeks, and you watch it go live on real work.</span></div>
+  </section>
+
+  <section class="cta">
+    <h2>Want this running <em style="font-style:italic">your</em> ops?</h2>
+    <div class="row">
+      <a class="btn solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book the 30-min call ↗</a>
+      <a class="btn" href="/">Back to the homepage</a>
+    </div>
+  </section>
+</main>
+
+<div class="footline"><div class="inner"><span>© 2026 JTL Growth · Caloocan, Metro Manila, PH · DTI BN 8378934</span><span>AI &amp; Automation Systems</span></div></div>
+
+<script src="/assets/v3-ui.js" defer></script>
+<script>
+// autoplay the muted loops only when motion is welcome and the clip is on screen
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var vids=[].slice.call(document.querySelectorAll('.clip-card video'));
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){e.target.play().catch(function(){})}
+      else e.target.pause();
+    });
+  },{threshold:.4});
+  vids.forEach(function(v){io.observe(v)});
+})();
+</script>
+</body>
+</html>

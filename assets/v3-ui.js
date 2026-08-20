@@ -16,7 +16,8 @@
   var cv=document.getElementById('jtl-mini'),ctx=cv.getContext('2d');
   var DPR=Math.min(2,window.devicePixelRatio||1),S=52;
   cv.width=S*DPR;cv.height=S*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
-  var V=[[0,-1.42,0],[0,1.42,0],[1,0,0],[0,0,1],[-1,0,0],[0,0,-1]];
+  /* v4: the "seal" form from the homepage leak story (funnel -> stone -> seal) */
+  var V=[[0,-1.75,0],[0,.55,0],[.95,.05,0],[0,.05,.95],[-.95,.05,0],[0,.05,-.95]];
   var F=[[0,2,3,0,1.10],[0,3,4,1,.97],[0,4,5,0,.85],[0,5,2,1,1.0],
     [1,3,2,2,.94],[1,4,3,3,1.0],[1,5,4,2,.85],[1,2,5,3,.9]];
   /* mono ramp — black stone (subpages run light grounds) */

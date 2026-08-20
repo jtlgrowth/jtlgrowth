@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!-- template: W-26 landing-template — single-file reusable landing page.
+     Tokens: W-24 apple-gray v3.1 light register (drafts/v31-light.html).
+     Components stolen+adapted: E-02 section-progress-bar (sticky chip nav),
+     E-04 blur-tease-gate (hybrid gate — FILE downloads only, page content
+     stays ungated per the "free and ungated" GROWTH DM promise), GROWTH CTA
+     lockup ported verbatim from content/jtl-growth/posts/ai-employee/post.html .cta.
+     Skeleton order: hook -> demo (show, don't describe) -> what's inside ->
+     hybrid gate -> checklist -> author card -> GROWTH CTA.
+     Copy-fill markers: [FILL: ...]. Replace before shipping a variant. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[FILL: Page Title] · JTL Growth</title>
+<meta name="description" content="[FILL: one-sentence description, 150-160 chars]">
+<link rel="canonical" href="[FILL: https://jtlgrowth.com/path/]">
+
+<!-- ── consent-safe analytics slot ──────────────────────────────────────────
+     Same consent-default-before-config contract as assets/tracking.js.
+     Fill the IDs, delete unused platforms. Never flip consentDefault to
+     'granted' for EU/UK traffic without a real CMP — see consent-audit skill. -->
+<script>
+(function(){
+  var CFG = {
+    ga4: '',              // 'G-XXXXXXX', or '' to disable
+    metaPixel: '',        // pixel id, or '' to disable
+    consentDefault: 'granted', // PH/US default; flip + wire CMP for EU/UK traffic
+  };
+  var w = window; w.dataLayer = w.dataLayer || [];
+  function gtag(){ w.dataLayer.push(arguments); }
+  gtag('consent', 'default', {
+    ad_storage: CFG.consentDefault, analytics_storage: CFG.consentDefault,
+    ad_user_data: CFG.consentDefault, ad_personalization: CFG.consentDefault,
+    functionality_storage: 'granted', security_storage: 'granted'
+  });
+  if (CFG.ga4) {
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + CFG.ga4;
+    document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', CFG.ga4);
+  }
+  if (CFG.metaPixel) {
+    /* [FILL: standard Meta pixel base-code snippet, id CFG.metaPixel] */
+  }
+  window.__gtag = gtag; // exposed so CTA/gate handlers below can fire events
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* W-24 apple-gray v3.1 light register — refkit-locked 2026-08-19 */
+  --white:#F1F3F7; --card:#FFFFFF; --gray:#E9ECF2; --panelc:#E1E5EE;
+  --line:#CDD2DF; --line-soft:#DDE1EA; --ink:#1D1D1F; --mut:#515154;
+  --t1:#E2E6ED; --t2:#C8D2E6; --t3:#9FB2D9; --t4:#4A6FD4;
+  --shell:min(92vw,1280px);
+  --r:14px; --r-sm:8px;
+  --e:cubic-bezier(.2,0,0,1); --t:160ms;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,sans-serif;
+  --mono:'Space Mono',ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--white);color:var(--ink);font:400 17px/1.6 var(--sans);
+  letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+h1,h2,h3{letter-spacing:-.03em;line-height:1.08;font-weight:700}
+a{color:inherit}
+::selection{background:var(--ink);color:var(--white)}
+.shell{width:var(--shell);margin-inline:auto;padding-inline:clamp(16px,3vw,32px)}
+section{padding:96px 0;border-bottom:1px solid var(--line-soft)}
+section:last-of-type{border-bottom:0}
+.eyebrow{font:600 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mut);margin-bottom:14px}
+.display{font-size:clamp(2rem,1.2rem + 3.4vw,3.8rem)}
+.lede{font-size:clamp(1.02rem,.94rem + .4vw,1.25rem);color:var(--mut);max-width:52ch;
+  line-height:1.5;letter-spacing:-.012em;margin-top:clamp(14px,2vw,22px)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;
+  font:600 15px/1 var(--sans);text-decoration:none;transition:transform var(--t) var(--e),background var(--t) var(--e)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);background:#000}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.grid{display:grid;gap:20px}
+
+/* 01 hook */
+#hook{padding-top:clamp(64px,10vh,120px)}
+#hook .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+
+/* 02 demo-not-description */
+#demo .demo-frame{background:var(--ink);color:var(--panelc);border-radius:var(--r);
+  padding:28px;margin-top:32px;font:14px/1.7 var(--mono);overflow:hidden}
+#demo .demo-frame .line{opacity:0;animation:typeIn .4s var(--e) forwards}
+#demo .demo-frame .line b{color:#fff}
+#demo .demo-frame .line:nth-child(1){animation-delay:.1s}
+#demo .demo-frame .line:nth-child(2){animation-delay:.5s}
+#demo .demo-frame .line:nth-child(3){animation-delay:.9s}
+#demo .demo-frame .line:nth-child(4){animation-delay:1.3s}
+#demo .demo-frame .line:nth-child(5){animation-delay:1.7s}
+@keyframes typeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){#demo .demo-frame .line{animation:none;opacity:1}}
+
+/* 03 what's inside */
+#inside .grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+#inside .card .num{font:700 12px/1 var(--mono);color:var(--t4);margin-bottom:10px}
+#inside .card h3{font-size:18px;margin-bottom:8px}
+#inside .card p{color:var(--mut);font-size:14.5px;line-height:1.55}
+
+/* 04 hybrid gate — E-04 blur-tease, FILE downloads only */
+#gate .gate-note{font:500 13px/1.5 var(--mono);color:var(--mut);margin-bottom:24px}
+#gate .file-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:28px;text-align:center;box-shadow:0 12px 32px rgba(29,29,31,.06)}
+#gate .file-card .lock{font-size:22px;margin-bottom:8px}
+#gate .file-card h3{font-size:18px;margin-bottom:6px}
+#gate .file-card p{color:var(--mut);font-size:14px;margin-bottom:18px}
+#gate form{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#gate input[type=email]{flex:1 1 240px;padding:13px 14px;border:1px solid var(--line);
+  border-radius:var(--r-sm);font:inherit;font-size:14px;background:var(--white)}
+#gate button{padding:13px 22px;border:0;border-radius:var(--r-sm);background:var(--ink);
+  color:#fff;font:600 14px/1 inherit;cursor:pointer}
+#gate button:hover{background:var(--t4)}
+#gate .teased{filter:blur(6px);user-select:none;pointer-events:none;transition:filter .6s ease;
+  margin-top:20px}
+#gate.unlocked .teased{filter:none;user-select:auto;pointer-events:auto}
+#gate.unlocked .file-card{display:none}
+
+/* 05 checklist — ungated, readable */
+#checklist ul{list-style:none;display:grid;gap:14px;margin-top:28px;max-width:60ch}
+#checklist li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--ink)}
+#checklist li::before{content:"";flex:0 0 20px;height:20px;margin-top:2px;border-radius:6px;
+  border:1.5px solid var(--t4);background:linear-gradient(135deg,var(--t3),var(--t4))}
+
+/* 06 author card */
+#author .card{display:flex;gap:20px;align-items:center;max-width:560px}
+#author .avatar{width:64px;height:64px;border-radius:50%;background:var(--panelc);
+  flex:0 0 64px;display:flex;align-items:center;justify-content:center;
+  font:700 20px/1 var(--sans);color:var(--mut)}
+#author .name{font-weight:700;font-size:16px}
+#author .role{color:var(--mut);font-size:14px}
+#author .bio{color:var(--mut);font-size:14.5px;margin-top:8px;line-height:1.5}
+
+/* 07 GROWTH CTA — ported from posts/ai-employee/post.html .cta */
+#cta{background:var(--ink);color:var(--white);border-bottom:0}
+#cta .kicker{font:600 12px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;
+  color:var(--mut);padding-bottom:11px}
+#cta .lock{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+#cta .word{display:inline-block;background:var(--white);color:var(--ink);
+  font:700 34px/1 var(--sans);letter-spacing:.16em;padding:9px 22px 10px}
+#cta .tail{font-size:16px;color:#B9BEC9;line-height:1.4;max-width:32ch}
+#cta .foot{display:flex;justify-content:space-between;align-items:baseline;
+  font:12.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:#7C8190;padding-top:20px;margin-top:20px;border-top:1px solid #2A2E38}
+
+/* E-02 section progress bar — sticky bottom chip nav, toggle for long variants
+   by removing the `data-progress` attribute on <html> (short variants can skip it) */
+#progress-bar{position:fixed;left:0;right:0;bottom:0;
+  background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);display:flex;gap:6px;padding:10px 4%;
+  overflow-x:auto;z-index:10}
+html:not([data-progress]) #progress-bar{display:none}
+#progress-bar .chip{flex:0 0 auto;font:600 11px/1 var(--mono);letter-spacing:.1em;
+  color:var(--mut);text-decoration:none;padding:8px 12px;border-radius:999px;
+  border:1px solid transparent;transition:background .25s,color .25s,border-color .25s}
+#progress-bar .chip b{margin-right:6px;font-weight:700}
+#progress-bar .chip.on{background:var(--ink);color:#fff}
+#progress-bar .chip:hover:not(.on){border-color:var(--line)}
+html[data-progress] body{padding-bottom:56px}
+</style>
+</head>
+<body>
+
+<main>
+
+<section id="hook" class="shell">
+  <div class="eyebrow">[FILL: EYEBROW LABEL]</div>
+  <h1 class="display">[FILL: Hook headline — the outcome, not the feature]</h1>
+  <p class="lede">[FILL: one-line proof or promise that makes the headline credible]</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="#cta">[FILL: Primary CTA]</a>
+    <a class="btn btn-ghost" href="#demo">[FILL: Secondary CTA]</a>
+  </div>
+</section>
+
+<section id="demo" class="shell">
+  <div class="eyebrow">SEE IT, DON'T READ ABOUT IT</div>
+  <h2>[FILL: Demo section headline]</h2>
+  <!-- demo-not-description: show the system doing the work, not prose describing it.
+       Swap this typed-log mock for a real screenshot/gif/embed when one exists. -->
+  <div class="demo-frame" aria-label="[FILL: demo description for screen readers]">
+    <p class="line">&gt; [FILL: step 1 the system runs]</p>
+    <p class="line">&gt; [FILL: step 2]</p>
+    <p class="line">&gt; [FILL: step 3]</p>
+    <p class="line">&gt; <b>[FILL: the result line]</b></p>
+    <p class="line">&gt; done in [FILL: time]</p>
+  </div>
+</section>
+
+<section id="inside" class="shell">
+  <div class="eyebrow">WHAT'S INSIDE</div>
+  <h2>[FILL: What's inside headline]</h2>
+  <div class="grid" style="margin-top:32px">
+    <div class="card"><div class="num">01</div><h3>[FILL: item 1]</h3><p>[FILL: one-line detail]</p></div>
+    <div class="card"><div class="num">02</div><h3>[FILL: item 2]</h3><p>[FILL: one-line detail]</p></div>
+    <div class="card"><div class="num">03</div><h3>[FILL: item 3]</h3><p>[FILL: one-line detail]</p></div>
+  </div>
+</section>
+
+<section id="gate" class="shell">
+  <div class="eyebrow">GET THE FILES</div>
+  <h2>[FILL: gate section headline]</h2>
+  <!-- hybrid gate: page content stays fully readable ungated everywhere else on
+       this page. This block gates FILE DOWNLOADS ONLY, per the "free and
+       ungated" GROWTH DM promise — never blur page copy itself. -->
+  <p class="gate-note">Everything above is free to read. This section is a file download — drop an email to unlock it.</p>
+  <div class="file-card">
+    <div class="lock" aria-hidden="true">🔒</div>
+    <h3>[FILL: file name, e.g. "The template pack"]</h3>
+    <p>[FILL: one line on what unlocks]</p>
+    <form onsubmit="document.getElementById('gate').classList.add('unlocked');window.__gtag&&window.__gtag('event','file_gate_unlock');return false">
+      <input type="email" required placeholder="you@company.com" aria-label="Email">
+      <button type="submit">Unlock →</button>
+    </form>
+  </div>
+  <div class="teased" aria-hidden="true">
+    <p>[FILL: real preview text of what the unlocked file contains — visible-enough teaser, not a placeholder]</p>
+  </div>
+</section>
+
+<section id="checklist" class="shell">
+  <div class="eyebrow">DO THIS NEXT</div>
+  <h2>[FILL: checklist headline]</h2>
+  <ul>
+    <li>[FILL: actionable step 1]</li>
+    <li>[FILL: actionable step 2]</li>
+    <li>[FILL: actionable step 3]</li>
+    <li>[FILL: actionable step 4]</li>
+  </ul>
+</section>
+
+<section id="author" class="shell">
+  <div class="card">
+    <div class="avatar" aria-hidden="true">[FILL: initials]</div>
+    <div>
+      <div class="name">[FILL: Author name]</div>
+      <div class="role">[FILL: role / title]</div>
+      <p class="bio">[FILL: one-line bio or credibility line]</p>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="shell">
+  <div class="kicker">To get it</div>
+  <div class="lock">
+    <span class="word">GROWTH</span>
+    <span class="tail">Comment the word.<br>The full build lands in your DMs. Free.</span>
+  </div>
+  <div class="foot"><span>jtlgrowth.com</span><span>Manila · Worldwide</span></div>
+</section>
+
+</main>
+
+<nav id="progress-bar" aria-label="Section progress">
+  <a class="chip" href="#hook"><b>01</b>HOOK</a>
+  <a class="chip" href="#demo"><b>02</b>DEMO</a>
+  <a class="chip" href="#inside"><b>03</b>INSIDE</a>
+  <a class="chip" href="#gate"><b>04</b>GET IT</a>
+  <a class="chip" href="#checklist"><b>05</b>CHECKLIST</a>
+  <a class="chip" href="#author"><b>06</b>AUTHOR</a>
+  <a class="chip" href="#cta"><b>07</b>GROWTH</a>
+</nav>
+
+<script>
+(function(){
+  var chips = [].slice.call(document.querySelectorAll('#progress-bar .chip'));
+  if (!chips.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        chips.forEach(function(c){
+          c.classList.toggle('on', c.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+})();
+</script>
+
+</body>
+</html>

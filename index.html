@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- template: v2-mono (own, 2026-07-23) + v3.1 grafts 2026-08-19: mono crystal
-     through-line (neomas declarative-scroll-stops, sahni/neomas absorb),
-     flick, Konami burst, ⌘K palette. Owner 2026-08-20: no click sound. Owner: keep the site, keep the black —
-     zero palette changes. Light variant preserved at drafts/v31-light.html. -->
+<!-- template: v2-mono (own, 2026-07-23) + v3.1 grafts + v4 "clean filmstrip"
+     2026-08-20 (Owner directive, Saturday presentation): 8 panels -> 3
+     (Hero / Proof / Contact), light with one dark accent panel, crystal ->
+     leak-story morph object (funnel -> sealed stone -> seal), Dynamic Island
+     greetpill, named section markers, hub chips to landing pages, magnetic
+     buttons, "leak" easter egg, WCAG 2.2 AA pass (reduced-motion = vertical
+     fallback). Prior 8-panel build preserved in git history + drafts/. -->
 <!-- Tracking: GA4 + consent default + conversion events. See deliverables/tracking/ -->
 <script src="/assets/tracking.js"></script>
 
@@ -106,7 +109,7 @@
   --wood-deep:#0D0D0D;   /* mono accent deep: gradient stop, deep panel tint */
   --wood-warm:#B9B9B9;   /* silver accent: rare thread, dark-context accents, hover glow */
   --ink:#121212;
-  --gray:#838383;
+  --gray:#616161;   /* v4 a11y: was #838383 (3.2:1 on cement) -> 4.9:1 AA */
   --gray-light:#AFAFAF;
   --line:rgba(24,24,24,.14);
   --brown-glow:rgba(255,255,255,.06);
@@ -126,13 +129,10 @@ body{font-family:'Archivo',sans-serif;color:var(--navy);-webkit-font-smoothing:a
 /* v2.1 kicker: bracketed mono index token, [ 01 / LABEL ], replaces the thin-dash
    style site-wide; one signature label system, applied consistently on every panel */
 .kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--blue);display:inline-flex;align-items:baseline}
-.kicker::before{content:"[ ";color:var(--wood-warm);font-weight:700}
-.kicker::after{content:" ]";color:var(--wood-warm);font-weight:700}
-.kicker .ki{color:var(--wood-warm);font-weight:700}
+.kicker::before{content:"[ ";color:var(--blue);font-weight:700}
+.kicker::after{content:" ]";color:var(--blue);font-weight:700}
+.kicker .ki{color:var(--blue);font-weight:700}
 .kicker .ki::after{content:"\00a0/\00a0";color:var(--blue);font-weight:400}
-#p3 .kicker::before,#p3 .kicker::after,#p3 .kicker .ki{color:var(--wood-warm)}
-#p4 .kicker::before,#p4 .kicker::after,#p4 .kicker .ki{color:var(--blue-soft)}
-#pstack .kicker::before,#pstack .kicker::after,#pstack .kicker .ki,
 #pwork .kicker::before,#pwork .kicker::after,#pwork .kicker .ki{color:var(--wood-warm)}
 h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:650;line-height:1.05;letter-spacing:-.01em}
 h1 .accent,h2 .accent{font-style:italic;color:inherit}
@@ -151,15 +151,20 @@ header.on-dark .logo,header.on-dark .logo span{color:var(--cement)}
 header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 
 /* ---------- dots + progress ---------- */
-#dots{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:10px;align-items:center}
-#dots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--gray-light);cursor:pointer;transition:all .45s cubic-bezier(.6,0,.2,1);padding:0}
-#dots button.active{width:30px;border-radius:5px;background:var(--wood)}
-#dots.on-dark button{background:rgba(228,228,228,.3)}
-#dots.on-dark button.active{background:var(--cement)}
+#dots{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:8px;align-items:center}
+/* v4: named, clickable section markers (24px+ targets, WCAG 2.2 target-size) */
+#dots button{font:700 9.5px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--gray);cursor:pointer;padding:8px 14px;transition:all .45s cubic-bezier(.6,0,.2,1);display:inline-flex;align-items:center;gap:8px}
+#dots button::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gray-light);transition:background .45s}
+#dots button.active{color:var(--navy);border-color:rgba(24,24,24,.25)}
+#dots button.active::before{background:var(--wood)}
+#dots.on-dark button{color:rgba(228,228,228,.72)}
+#dots.on-dark button::before{background:rgba(228,228,228,.3)}
+#dots.on-dark button.active{color:var(--cement);border-color:rgba(228,228,228,.35)}
+#dots.on-dark button.active::before{background:var(--cement)}
 #counter{position:fixed;bottom:30px;right:min(5vw,68px);z-index:50;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--gray);font-weight:400;transition:color .5s}
-#counter.on-dark{color:rgba(228,228,228,.5)}
+#counter.on-dark{color:rgba(228,228,228,.65)}
 #hint{position:fixed;bottom:30px;left:min(5vw,68px);z-index:50;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);display:flex;align-items:center;gap:10px;transition:color .5s,opacity .8s}
-#hint.on-dark{color:rgba(228,228,228,.5)}
+#hint.on-dark{color:rgba(228,228,228,.65)}
 #hint .arrow{display:inline-block;animation:nudge 2.2s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
 
@@ -177,7 +182,7 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 @media(prefers-reduced-motion:reduce){.fcard .fin{animation:none}}
 .fc1{left:9%;top:17%;width:min(23vw,330px)}
 .fc1 .fin{--r:-2deg;--d:8s;background:#181818;border:1px solid rgba(226,226,226,.1);padding:16px}
-.fc1 .t{font:600 10px 'Archivo';letter-spacing:.14em;text-transform:uppercase;color:rgba(228,228,228,.5)}
+.fc1 .t{font:600 10px 'Archivo';letter-spacing:.14em;text-transform:uppercase;color:rgba(228,228,228,.75)}
 .fc1 .v{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:30px;color:var(--cement);margin:8px 0 12px}
 .fc1 .img{height:104px;border-radius:8px;background:radial-gradient(70% 90% at 70% 20%,rgba(255,255,255,.14),transparent),linear-gradient(150deg,#1A1A1A,#181818)}
 .fc2{right:8%;top:14%;width:min(21vw,300px)}
@@ -189,9 +194,9 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .fc2 .sk.s{width:55%;margin-top:8px}
 .fc3{left:13%;bottom:11%;width:min(22vw,320px)}
 .fc3 .fin{--r:-1.4deg;--d:7.5s;--dl:-4s;background:#131313;border:1px solid rgba(226,226,226,.08);padding:18px;color:var(--cement)}
-.fc3 .top{display:flex;gap:12px;font:600 8.5px 'Archivo';letter-spacing:.12em;text-transform:uppercase;color:rgba(228,228,228,.45)}
+.fc3 .top{display:flex;gap:12px;font:600 8.5px 'Archivo';letter-spacing:.12em;text-transform:uppercase;color:rgba(228,228,228,.72)}
 .fc3 h4{font-family:'Archivo Expanded',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.01em;margin:14px 0 8px}
-.fc3 p{font-size:10.5px;color:rgba(228,228,228,.55);line-height:1.5}
+.fc3 p{font-size:10.5px;color:rgba(228,228,228,.72);line-height:1.5}
 .fc3 .b{display:inline-block;margin-top:12px;background:var(--wood-warm);color:#111111;font:600 10px 'Archivo';padding:7px 12px;border-radius:6px}
 
 /* ---------- gift copy box (stolen: copy-command) ---------- */
@@ -230,87 +235,23 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .hero-meta .m b{display:block;font-family:'Archivo Expanded',sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em}
 .hero-meta .m span{font-size:12.5px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
 
-/* ================= P2 SERVICES (stolen: icon-fly-in-convergence + hover-scale-cards) ================= */
-#p2{background:transparent}
-#p2 .inner{text-align:center}
-#p2 .kicker{justify-content:center}
-#p2 .lead{margin:26px auto 0}
-.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,24px);margin-top:56px}
-.svc-card{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:18px;padding:30px 24px 32px;text-align:left;will-change:transform,opacity;transition:box-shadow .3s,border-color .3s;box-shadow:0 2px 10px -8px rgba(41,41,41,.25)}
-.svc-card:hover{box-shadow:0 24px 46px -24px rgba(41,41,41,.45);border-color:rgba(41,41,41,.22)}
-.svc-card .ico{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;color:var(--navy);background:rgba(24,24,24,.04);border:1px solid var(--line);margin:0 0 22px}
-.svc-card .ico svg{width:30px;height:30px}
-.svc-card h3{font-family:'Archivo Expanded',sans-serif;font-size:clamp(16px,1.35vw,20px);font-weight:600;letter-spacing:-.01em}
-.svc-card .tag{display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--blue);margin:9px 0 12px}
-.svc-card p{font-size:13.5px;line-height:1.6;color:var(--gray)}
-
-/* ================= P3 PROCESS (wood) ================= */
-#p3{background:transparent;color:var(--cement)}
-#p3::after{content:"";position:absolute;inset:0;background:
-  repeating-linear-gradient(93deg,rgba(0,0,0,.13) 0 2px,transparent 2px 90px),
-  repeating-linear-gradient(91deg,rgba(255,255,255,.025) 0 1px,transparent 1px 34px);
-  opacity:.8;pointer-events:none}
-#p3 .inner{text-align:center}
-#p3 .kicker{color:var(--cement);justify-content:center}
-#p3 .lead{color:rgba(228,228,228,.62);margin:0 auto}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px;text-align:left}
-.step{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);padding:34px 28px 40px;position:relative;transition:background .35s,transform .35s}
-.step:hover{background:rgba(255,255,255,.07)}
-.step:hover{background:rgba(0,0,0,.36);transform:translateY(-6px)}
-.step .sico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:var(--wood-warm);border:1px solid rgba(228,228,228,.22);margin-bottom:22px}
-.step .sico svg{width:24px;height:24px}
-.step .sn{font-family:'Space Mono',monospace;font-size:12px;color:var(--wood-warm);font-weight:400;letter-spacing:.2em}
-.step h3{font-family:'Archivo Expanded',sans-serif;font-size:21px;font-weight:600;margin:16px 0 12px}
-.step p{font-size:13.5px;line-height:1.6;color:rgba(228,228,228,.6)}
-.quote-note{margin:44px auto 0;display:inline-flex;align-items:center;gap:16px;border:1px solid rgba(228,228,228,.25);padding:18px 26px;font-size:14px;letter-spacing:.02em;color:rgba(228,228,228,.85);text-align:left}
-.quote-note b{color:var(--cement)}
-.quote-note .dot{width:7px;height:7px;border-radius:50%;background:var(--wood-warm);flex:none}
-
-/* ================= P4 PROOF (navy) ================= */
-#p4{background:transparent;color:var(--cement)}
-#p4::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(228,228,228,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(228,228,228,.05) 1px,transparent 1px);background-size:110px 110px;mask-image:radial-gradient(ellipse at 75% 30%,black 10%,transparent 70%);pointer-events:none}
-#p4 .kicker{color:var(--blue-soft);justify-content:center}
-#p4 .inner{text-align:center}
-#p4 .lead{color:rgba(228,228,228,.6);max-width:64ch;margin:26px auto 0}
-.proof-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:44px auto 0;max-width:1000px}
-.pstat{background:rgba(228,228,228,.06);padding:32px 24px;transition:background .35s;text-align:left}
-.pstat:hover{background:rgba(228,228,228,.11)}
-.pstat b{display:block;font-family:'Archivo Expanded',sans-serif;font-size:clamp(30px,2.6vw,42px);font-weight:700;letter-spacing:-.02em;color:var(--cement)}
-.pstat b em{font-style:normal;color:var(--wood-warm)}
-.pstat span{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(228,228,228,.5);display:block;margin-top:8px;line-height:1.5}
-.receipt{margin-top:34px;font-size:13.5px;line-height:1.7;color:rgba(228,228,228,.55);border-left:2px solid var(--wood-warm);padding-left:20px;max-width:50ch}
-
-/* ================= P5 STACK WALL (NEW v2.1) basement.studio "trusted by" grid ================= */
-#pstack{background:transparent;color:var(--cement)}
-#pstack::after{content:"";position:absolute;inset:0;background:
-  radial-gradient(55% 45% at 18% 8%,var(--brown-glow),transparent 62%),
-  radial-gradient(46% 40% at 88% 92%,rgba(255,255,255,.05),transparent 65%);
-  pointer-events:none}
-#pstack .inner{text-align:center}
-#pstack .kicker{color:var(--blue-soft);justify-content:center}
-#pstack .lead{color:rgba(228,228,228,.6);margin:20px auto 0}
-.stack-marquee{display:flex;flex-direction:column;gap:14px;margin-top:52px;width:100%;overflow:hidden}
-.stack-row{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);background:rgba(228,228,228,.08);border:1px solid rgba(228,228,228,.08)}
-.stack-track{display:flex;width:max-content;animation:marquee-left 36s linear infinite}
-.row2 .stack-track{animation-name:marquee-right}
-.stack-row:hover .stack-track{animation-play-state:paused}
+/* ================= PROOF STRIP (v4): stack logos + shipped numbers, one marquee ================= */
+.proof-strip{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);border-top:1px solid rgba(228,228,228,.1);border-bottom:1px solid rgba(228,228,228,.1);margin-top:38px}
+.proof-strip .ptrack{display:flex;width:max-content;align-items:center;animation:marquee-left 46s linear infinite}
+.proof-strip:hover .ptrack{animation-play-state:paused}
 @keyframes marquee-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes marquee-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.stack-marquee .cell{flex:none;width:clamp(150px,15vw,210px);background:#100f0d;aspect-ratio:2.2/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;transition:background .3s,box-shadow .3s;border-right:1px solid rgba(228,228,228,.06)}
-.stack-marquee .cell img{height:28px;width:auto;max-width:70%;filter:grayscale(1) brightness(1.6);opacity:.7;transition:opacity .3s}
-.stack-marquee .cell span{font-family:'Archivo Expanded',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:-.01em;color:rgba(228,228,228,.4);transition:color .3s}
-.stack-marquee .cell.wordmark span{font-size:clamp(13px,1.1vw,17px)}
-.stack-marquee .cell:hover{background:#1a1a1a;box-shadow:inset 0 0 44px -12px var(--brown-glow)}
-.stack-marquee .cell:hover img{opacity:1}
-.stack-marquee .cell:hover span{color:var(--wood-warm)}
-@media(prefers-reduced-motion:reduce){.stack-track{animation:none}}
+.proof-strip .pi{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,228,228,.72);border-right:1px solid rgba(228,228,228,.08);white-space:nowrap}
+.proof-strip .pi img{height:20px;width:auto;filter:grayscale(1) brightness(1.7);opacity:.8}
+.proof-strip .pi b{color:var(--wood-warm);font-weight:700}
+@media(prefers-reduced-motion:reduce){.proof-strip .ptrack{animation:none}}
 
-/* ================= P6 SHIPPED WORK (NEW v2.1) real screenshots in 3D laptop frames ================= */
+/* ================= PROOF PANEL (v4): shipped work + stack, the one dark panel ================= */
 #pwork{background:transparent;color:var(--cement)}
 #pwork::after{content:"";position:absolute;inset:0;background:radial-gradient(55% 42% at 50% -4%,var(--brown-glow),transparent 66%);pointer-events:none}
 #pwork .inner{width:min(1380px,92vw);text-align:center}
 #pwork .kicker{color:var(--blue-soft);justify-content:center}
-.portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,1.8vw,30px);margin:54px auto 0;align-items:start;max-width:1340px;text-align:left}
+#pwork .lead{color:rgba(228,228,228,.7);margin:20px auto 0}
+.portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,1.8vw,30px);margin:40px auto 0;align-items:start;max-width:1340px;text-align:left}
 .lap-card{display:flex;flex-direction:column;gap:20px}
 .laptop3d{width:100%;perspective:1200px}
 .laptop3d .lid{position:relative;background:linear-gradient(160deg,#2c2c2c,#100f0d);border-radius:12px 12px 3px 3px;padding:9px 9px 0;box-shadow:0 30px 60px -24px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.06) inset}
@@ -321,7 +262,7 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .laptop3d .deck::after{content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:14%;height:5px;background:#0a0a0a;border-radius:0 0 4px 4px}
 .laptop3d .refl{height:40px;margin-top:10px;background:linear-gradient(180deg,var(--brown-glow),transparent);filter:blur(3px);opacity:.55;border-radius:50%;transform:scaleY(-.32) scaleX(.88);mask-image:linear-gradient(to bottom,black,transparent)}
 .lap-name{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:var(--cement)}
-.lap-desc{font-size:13px;line-height:1.55;color:rgba(228,228,228,.55);margin-top:6px}
+.lap-desc{font-size:13px;line-height:1.55;color:rgba(228,228,228,.72);margin-top:6px}
 .lap-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .lap-tags span{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--wood-warm);border:1px solid rgba(185,185,185,.35);padding:5px 9px;border-radius:3px}
 
@@ -337,20 +278,18 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .contact-side{font-size:13.5px;line-height:2;color:var(--gray);letter-spacing:.03em}
 .contact-side a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm)}
 .footline{position:absolute;bottom:96px;left:0;right:0}
-.footline .inner{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-light)}
+.footline .inner{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
 
-/* ---------- mobile: vertical fallback ---------- */
-@media (max-width:860px){
+/* ---------- vertical fallback: mobile AND prefers-reduced-motion (a11y) ----------
+   One shared static mode: native vertical scroll, no filmstrip hijack, no canvas
+   morph, no marquee. JS mobile() mirrors this exact condition. */
+@media (max-width:860px), (prefers-reduced-motion: reduce){
   html,body{overflow:auto;height:auto}
   header{background:#111;padding:14px 5vw}
   header .logo,header .logo span,header.on-dark .logo,header.on-dark .logo span{color:#E2E2E2}
   header .nav-cta,header.on-dark .nav-cta{background:#E2E2E2;color:#111;padding:10px 16px;font-size:11px}
-  #greetpill{display:none}
+  #greetpill,#crystal{display:none!important} /* !important: the v4 island rule is declared later and would win otherwise */
   #p1,#p5{background:var(--cement)}
-  #p2{background:var(--cement-deep)}
-  #p3{background:linear-gradient(160deg,var(--wood) 0%,var(--wood-deep) 100%)}
-  #p4{background:linear-gradient(150deg,var(--navy) 0%,var(--navy-deep) 100%)}
-  #pstack{background:linear-gradient(160deg,#181818 0%,#100f0d 100%)}
   #pwork{background:linear-gradient(150deg,#181818 0%,#0d0d0d 100%)}
   #viewport{position:static;overflow:visible}
   #track{display:block;width:100%;transform:none!important}
@@ -363,38 +302,33 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
   .hero-meta .m{text-align:left}
   .panel .rv{opacity:1;transform:none}
   #dots,#counter,#hint{display:none}
-  #p2 .inner,#p4 .inner{grid-template-columns:1fr;gap:48px}
-  .steps{grid-template-columns:1fr 1fr}
   .footline{position:static;margin-top:70px}
   #p1 .bignum{font-size:24vh}
   .floaters{display:none}
-  .svc-card{opacity:1!important;transform:none!important}
-  .svc-grid{grid-template-columns:1fr 1fr}
   .wreveal .w{color:inherit}
-  .stack-marquee .cell{width:130px}
-  .stack-marquee .cell img{height:22px}
-  .portfolio-grid{grid-template-columns:1fr;gap:40px}
-  .proof-stats{grid-template-columns:1fr 1fr}
-  #greetpill{font-size:8px;letter-spacing:.16em;padding:4px 10px 5px}
+  .founder-mini,.hub-row{justify-content:center}
+}
+@media (max-width:860px){
+  .portfolio-grid{grid-template-columns:1fr}
+  .hub-chip{width:100%;justify-content:space-between}
 }
 
-/* ---- v2.1 founders panel ---- */
-#pfounders h2{color:#EDEAE6}
-#pfounders h2 .accent{color:inherit}
-#pfounders .kicker{color:rgba(237,234,230,.55)}
-.founder-row{display:flex;gap:44px;margin-top:56px;flex-wrap:wrap}
-.fcard-p{flex:1;min-width:260px;max-width:400px;border:1px solid rgba(185,185,185,.28);border-radius:16px;padding:34px 30px;background:linear-gradient(170deg,rgba(255,255,255,.05),rgba(0,0,0,.25));text-align:center}
-.fphoto{width:120px;height:120px;margin:0 auto 22px;border-radius:18px;overflow:hidden;border:1px solid rgba(185,185,185,.55);box-shadow:0 18px 40px -18px rgba(0,0,0,.7)}
-.fphoto img{width:100%;height:100%;object-fit:cover;display:block}
-.frole{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--wood-warm)}
-.fname{font-family:'Fraunces',serif;font-weight:650;font-size:34px;color:#EDEAE6;margin:8px 0 12px}
-.fline{font-size:14px;line-height:1.65;color:rgba(237,234,230,.62)}
-.fname-link{color:inherit;text-decoration:none;border-bottom:1px solid rgba(185,185,185,.3);transition:border-color .3s}
-.fname-link:hover{border-bottom-color:rgba(237,234,230,.8)}
-.fmore{display:inline-block;margin-top:10px;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--wood-warm);text-decoration:none;white-space:nowrap}
-.fmore:hover{color:#EDEAE6}
-.fphoto a{display:block;width:100%;height:100%}
-@media (max-width:860px){#pfounders{background:linear-gradient(160deg,#181818,#0D0D0D)}.founder-row{gap:22px}}
+/* ---- v4 founders mini chips (folded into contact panel) ---- */
+.founder-mini{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
+.fchip{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(24,24,24,.22);border-radius:999px;padding:8px 18px 8px 9px;text-decoration:none;color:var(--navy);background:rgba(255,255,255,.35);transition:border-color .3s,background .3s}
+a.fchip:hover{border-color:var(--navy);background:rgba(255,255,255,.6)}
+.fchip img{width:38px;height:38px;border-radius:50%;object-fit:cover;filter:grayscale(1)}
+.fchip .fm b{display:block;font:600 13px 'Archivo',sans-serif;letter-spacing:.01em}
+.fchip .fm span{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+
+/* ---- v4 hub chips: buttons out to the landing pages ---- */
+.hub-row{display:flex;gap:14px;margin-top:48px;flex-wrap:wrap;justify-content:center}
+.hub-chip{display:inline-flex;align-items:center;gap:14px;border:1px solid rgba(24,24,24,.25);padding:15px 22px;text-decoration:none;color:var(--navy);font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s;will-change:transform}
+.hub-chip .arr{font-family:'Archivo',sans-serif;font-weight:400;transition:transform .3s}
+.hub-chip:hover{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+.hub-chip:hover .arr{transform:translate(3px,-3px)}
+.hub-chip.hero-chip{border-style:solid;background:var(--navy);color:var(--cement)}
+.hub-chip.hero-chip:hover{background:var(--wood)}
 
 
 
@@ -428,14 +362,14 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .phone{display:block;width:min(64vw,380px);background:#0A0A0A;border:1px solid #2E2E2E;border-radius:38px;padding:14px;text-decoration:none;transform-style:preserve-3d;transition:transform .15s ease-out;box-shadow:0 44px 80px -34px rgba(0,0,0,.55);position:relative}
 .p-notch{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:86px;height:20px;background:#000;border-radius:12px;z-index:2}
 .p-screen{background:linear-gradient(175deg,#161616,#0C0C0C);border-radius:26px;padding:58px 28px 30px;text-align:center;min-height:470px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-.p-eyebrow{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(228,228,228,.5)}
+.p-eyebrow{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(228,228,228,.68)}
 .p-avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;border:1px solid rgba(228,228,228,.25);margin-top:6px}
 .p-avatar img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
 .p-name{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:23px;color:#EDEAE6}
 .p-sub{font-size:12.5px;line-height:1.6;color:rgba(228,228,228,.55);max-width:30ch}
 .p-accept{margin-top:10px;background:#E2E2E2;color:#111;font:600 12px 'Archivo';letter-spacing:.06em;text-transform:uppercase;padding:14px 26px;border-radius:999px;transition:background .25s}
 .phone:hover .p-accept{background:#fff}
-.p-decline{font-size:10.5px;color:rgba(228,228,228,.4)}
+.p-decline{font-size:10.5px;color:rgba(228,228,228,.62)}
 @media (max-width:860px){.phone-stage{margin:0 auto}}
 /* ---- v2.2 finale bento (wide, Tarsi-style) ---- */
 .cta-bento{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;max-width:1080px;margin:44px auto 0;text-align:left}
@@ -456,7 +390,15 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 #p5 .contact-row{flex-direction:column;align-items:center;justify-content:center;gap:40px}
 #p5 .contact-side{text-align:center}
 #p5 .cta-micro{margin-left:auto;margin-right:auto}
-#greetpill{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:99;font:700 10px 'Space Mono',monospace;letter-spacing:.28em;padding:6px 18px 7px;background:#111;color:#EEE;border-radius:0 0 10px 10px;white-space:nowrap;text-transform:uppercase}
+/* ---- v4 Dynamic Island greetpill: floating pill, spring hover, morphs to
+   section nav while scrolling, rotates live stats on hover, opens ⌘K on click ---- */
+#greetpill{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99;display:inline-flex;align-items:center;gap:12px;font:700 10px 'Space Mono',monospace;letter-spacing:.24em;padding:9px 20px;background:#111;color:#EEE;border:1px solid rgba(226,226,226,.14);border-radius:999px;white-space:nowrap;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 30px -12px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.34,1.56,.64,1),background .3s;-webkit-user-select:none;user-select:none}
+#greetpill:hover{transform:translateX(-50%) scale(1.06);background:#000}
+#greetpill .gp-txt{transition:opacity .22s;pointer-events:none}
+#greetpill.swap .gp-txt{opacity:0}
+#greetpill .gk{font-size:8.5px;letter-spacing:.1em;border:1px solid rgba(238,238,238,.35);border-radius:6px;padding:3px 6px;color:rgba(238,238,238,.75);pointer-events:none}
+.skip-link{position:fixed;top:-60px;left:16px;z-index:200;background:var(--navy);color:var(--cement);padding:12px 18px;font:600 12px 'Archivo',sans-serif;letter-spacing:.06em;text-decoration:none;transition:top .2s}
+.skip-link:focus-visible{top:12px}
 
 :focus-visible{outline:2px solid #8A8A8A;outline-offset:3px;border-radius:0}
 header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
@@ -504,9 +446,10 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 })();
 </script>
 
-<div id="greetpill" aria-hidden="true"></div>
+<a class="skip-link" href="#p5">Skip to contact</a>
+<button id="greetpill" aria-label="Open the command palette" type="button"><span class="gp-txt"></span><span class="gk" aria-hidden="true">⌘K</span></button>
 <header id="hdr">
-  <a class="logo" href="#" data-go="0"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
+  <a class="logo" href="#" data-go="0" aria-label="JTL Growth — back to the start"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
   <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
 </header>
 
@@ -515,7 +458,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <div id="track">
 
   <!-- 1 · HERO -->
-  <section class="panel in" id="p1">
+  <section class="panel in" id="p1" aria-label="JTL Growth — AI and automation agency">
     <div class="grid-lines"></div>
     <div class="hero-glow"></div>
     <div class="floaters rv d4">
@@ -546,132 +489,13 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     </div>
   </section>
 
-  <!-- 2 · WHAT WE BUILD -->
-  <section class="panel" id="p2">
+  <!-- 2 · PROOF (v4): shipped work + stack strip, the one dark panel -->
+  <section class="panel" id="pwork" aria-label="Live proof — shipped work and stack">
     <div class="inner">
-      <div class="kicker rv"><span class="ki">02</span>WHAT WE BUILD</div>
-      <h2 class="rv d1" style="margin-top:24px">Your leads are leaking.</h2>
-      <p class="lead rv d2" style="margin:22px auto 0;text-align:center">These four systems catch them and turn them into revenue.</p>
-      <div class="svc-grid">
-        <div class="svc-card" data-tx="-260" data-ty="-120" data-r="-7">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="12" height="11" rx="3"/><path d="M12 3v4"/><circle cx="12" cy="3" r="1.1" fill="currentColor" stroke="none"/><circle cx="9.5" cy="12.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="12.5" r="1.1" fill="currentColor" stroke="none"/><path d="M9 16h6"/><path d="M3 11v3M21 11v3"/></svg>
-          </div>
-          <h3>AI Employees</h3><span class="tag">Always-on team members that never sleep.</span>
-          <p>Trained agents that answer, qualify, and follow up inside your inbox, chat, and CRM. Around the clock, on your process.</p>
-        </div>
-        <div class="svc-card" data-tx="-90" data-ty="180" data-r="5">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.4"/><circle cx="19" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.1 7.2 10 16M16.9 7.2 14 16M7.4 6h9.2"/></svg>
-          </div>
-          <h3>Automation Systems</h3><span class="tag">Work that runs itself while you sleep.</span>
-          <p>Your tools, wired together. A lead triggers the sequence, the booking confirms itself, nothing slips.</p>
-        </div>
-        <div class="svc-card" data-tx="110" data-ty="-190" data-r="6">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 8v6l-4 2v-8Z"/></svg>
-          </div>
-          <h3>Funnels &amp; Websites</h3><span class="tag">Pages built to convert, not to win design awards.</span>
-          <p>Pages engineered around one question: does the visitor take the next step? Copy, flow, and tracking included.</p>
-        </div>
-        <div class="svc-card" data-tx="280" data-ty="130" data-r="-5">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M3.5 12h17M12 3.5v17"/></svg>
-          </div>
-          <h3>Ops Portals</h3><span class="tag">Your whole operation visible from one screen.</span>
-          <p>Your team, tasks, and pipeline on one screen. AI seats handle the intake and the reporting.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · HOW WE WORK -->
-  <section class="panel" id="p3">
-    <div class="inner">
-      <div class="kicker rv"><span class="ki">03</span>HOW WE WORK</div>
-      <h2 class="rv d1 wreveal" data-accent="mystery." style="margin-top:24px">Four steps. No mystery.</h2>
-      <div class="steps">
-        <div class="step rv d1">
-          <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.7-4.7"/></svg></div>
-          <div class="sn">STEP 01</div><h3>Discover</h3><p>We map your funnel and show you exactly where the money leaks.</p>
-        </div>
-        <div class="step rv d2">
-          <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 9h16M9 20V9"/><circle cx="14.5" cy="14.5" r="2.2"/></svg></div>
-          <div class="sn">STEP 02</div><h3>Blueprint</h3><p>You see the plan, the timeline, and one price before we build anything.</p>
-        </div>
-        <div class="step rv d3">
-          <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 6.5 3 3-8 8-3.6.6.6-3.6z"/><path d="m17.5 3.5 3 3-2 2-3-3z"/></svg></div>
-          <div class="sn">STEP 03</div><h3>Build</h3><p>Installed in weeks, tested on real work, and you watch it go live.</p>
-        </div>
-        <div class="step rv d4">
-          <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h4l2 6 4-16 2 10h6"/></svg></div>
-          <div class="sn">STEP 04</div><h3>Run</h3><p>We monitor, tune, and report. It gets sharper every month.</p>
-        </div>
-      </div>
-      <div class="quote-note rv d5"><span class="dot"></span><span>No price list on this page. <b>Every business has a different funnel, a different stack, a different leak.</b> We scope the work, then we tell you what it costs. No package deals, no surprise add-ons.</span></div>
-    </div>
-  </section>
-
-  <!-- 4 · PROOF -->
-  <section class="panel" id="p4">
-    <div class="inner">
-      <div class="kicker rv"><span class="ki">04</span>WHY TRUST US</div>
-      <h2 class="rv d1 wreveal" data-accent="this." style="margin-top:24px">We run our agency on this.</h2>
-      <p class="lead rv d2" style="margin-top:26px">Every system we sell, we use daily. Our leads, tasks, and reports run on the same AI stack we install for clients. You're not buying a theory. You're buying what we already broke and fixed on ourselves.</p>
-      <div class="proof-stats rv d3">
-        <div class="pstat"><b>42</b><span>Member community platform, built from zero, live and growing</span></div>
-        <div class="pstat"><b>&#8369;475K+</b><span>In client contracts closed</span></div>
-        <div class="pstat"><b>34</b><span>Paid customers from one funnel launch</span></div>
-        <div class="pstat"><b>6</b><span>Page brand site, designed and built end to end for our sister company</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 · THE STACK WE RUN (NEW v2.1) -->
-  <section class="panel" id="pstack">
-    <div class="inner">
-      <div class="kicker rv"><span class="ki">05</span>THE STACK</div>
-      <h2 class="rv d1" style="margin-top:24px">The stack we run.</h2>
-      <p class="lead rv d2">GoHighLevel, custom AI agents, Python automation, hand-coded web. We pick the tool that solves the problem, not the one that looks good on a proposal.</p>
-      <div class="stack-marquee rv d3">
-        <div class="stack-row row1"><div class="stack-track">
-          <div class="cell"><img src="assets/logos/claude.svg" alt="" loading="lazy"><span>Claude</span></div>
-          <div class="cell wordmark"><span>GPT&#8209;5</span></div>
-          <div class="cell"><img src="assets/logos/deepseek.svg" alt="" loading="lazy"><span>DeepSeek</span></div>
-          <div class="cell"><img src="assets/logos/mistralai.svg" alt="" loading="lazy"><span>Mistral</span></div>
-          <div class="cell"><img src="assets/logos/googlegemini.svg" alt="" loading="lazy"><span>Gemini</span></div>
-          <div class="cell wordmark"><span>GLM</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/claude.svg" alt="" loading="lazy"><span>Claude</span></div>
-          <div class="cell wordmark" aria-hidden="true"><span>GPT&#8209;5</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/deepseek.svg" alt="" loading="lazy"><span>DeepSeek</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/mistralai.svg" alt="" loading="lazy"><span>Mistral</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/googlegemini.svg" alt="" loading="lazy"><span>Gemini</span></div>
-          <div class="cell wordmark" aria-hidden="true"><span>GLM</span></div>
-        </div></div>
-        <div class="stack-row row2"><div class="stack-track">
-          <div class="cell"><img src="assets/logos/moonshotai.svg" alt="" loading="lazy"><span>Kimi</span></div>
-          <div class="cell"><img src="assets/logos/n8n.svg" alt="" loading="lazy"><span>n8n</span></div>
-          <div class="cell wordmark"><span>GoHighLevel</span></div>
-          <div class="cell wordmark"><span>Playwright</span></div>
-          <div class="cell"><img src="assets/logos/fastapi.svg" alt="" loading="lazy"><span>FastAPI</span></div>
-          <div class="cell"><img src="assets/logos/supabase.svg" alt="" loading="lazy"><span>Supabase</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/moonshotai.svg" alt="" loading="lazy"><span>Kimi</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/n8n.svg" alt="" loading="lazy"><span>n8n</span></div>
-          <div class="cell wordmark" aria-hidden="true"><span>GoHighLevel</span></div>
-          <div class="cell wordmark" aria-hidden="true"><span>Playwright</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/fastapi.svg" alt="" loading="lazy"><span>FastAPI</span></div>
-          <div class="cell" aria-hidden="true"><img src="assets/logos/supabase.svg" alt="" loading="lazy"><span>Supabase</span></div>
-        </div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 * SHIPPED WORK (NEW v2.1) real screenshots in dimensional laptop frames -->
-  <section class="panel" id="pwork">
-    <div class="inner">
-      <div class="kicker rv"><span class="ki">06</span>SHIPPED WORK</div>
-      <h2 class="rv d1" style="margin-top:24px">Live right now.</h2>
-      <div class="portfolio-grid">
+      <div class="kicker rv"><span class="ki">02</span>LIVE PROOF</div>
+      <h2 class="rv d1 wreveal" data-accent="live." style="margin-top:24px">Everything here is live.</h2>
+      <p class="lead rv d2">Real client systems and our own products, built by hand on the stack below. We run our agency on the same systems we sell.</p>
+      <div class="portfolio-grid" tabindex="0" role="region" aria-label="Shipped work gallery">
         <div class="lap-card rv d1">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
@@ -721,33 +545,39 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
           <div class="lap-tags"><span>Storefront</span><span>Product Library</span><span>Live</span></div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 7 · FOUNDERS -->
-  <section class="panel" id="pfounders">
-    <div class="inner">
-      <div class="kicker rv"><span class="ki">07</span>FOUNDERS</div>
-      <h2 class="rv d1" style="margin-top:24px">Two people. One operating system.</h2>
-      <div class="founder-row rv d2">
-        <div class="fcard-p">
-          <div class="fphoto"><a href="/jamz-jamorol/"><img src="assets/jamz.png" alt="Jamz Jamorol, Founder of JTL Growth"></a></div>
-          <div class="frole">Founder</div>
-          <div class="fname"><a href="/jamz-jamorol/" class="fname-link">Jamz Jamorol</a></div>
-          <div class="fline">Builds the systems, the AI, and the websites. Runs the agency on the same multi-agent AI operations platform he sells to clients. If it has a backend, he wired it. <a href="/jamz-jamorol/" class="fmore">Read his profile &rsaquo;</a></div>
-        </div>
-        <div class="fcard-p">
-          <div class="fphoto"><img src="assets/gwen.jpg" alt="Gwen, Co-founder of JTL Growth"></div>
-          <div class="frole">Co-founder</div>
-          <div class="fname">Gwen</div>
-          <div class="fline">Runs marketing, brand, and creative. Founded AVAS, our sister-agency and marketing partner. If it has a voice, she shaped it.</div>
+      <div class="proof-strip rv d3" aria-label="Numbers and stack">
+        <div class="ptrack">
+          <span class="pi"><b>&#8369;475K+</b> closed</span>
+          <span class="pi"><img src="assets/logos/claude.svg" alt="">Claude</span>
+          <span class="pi"><b>42</b>-member community</span>
+          <span class="pi">GPT&#8209;5</span>
+          <span class="pi"><b>34</b> paid customers</span>
+          <span class="pi"><img src="assets/logos/googlegemini.svg" alt="">Gemini</span>
+          <span class="pi"><b>15+</b> agents on duty</span>
+          <span class="pi"><img src="assets/logos/n8n.svg" alt="">n8n</span>
+          <span class="pi">GoHighLevel</span>
+          <span class="pi"><img src="assets/logos/supabase.svg" alt="">Supabase</span>
+          <span class="pi"><img src="assets/logos/fastapi.svg" alt="">FastAPI</span>
+          <span class="pi">Playwright</span>
+          <span class="pi" aria-hidden="true"><b>&#8369;475K+</b> closed</span>
+          <span class="pi" aria-hidden="true"><img src="assets/logos/claude.svg" alt="">Claude</span>
+          <span class="pi" aria-hidden="true"><b>42</b>-member community</span>
+          <span class="pi" aria-hidden="true">GPT&#8209;5</span>
+          <span class="pi" aria-hidden="true"><b>34</b> paid customers</span>
+          <span class="pi" aria-hidden="true"><img src="assets/logos/googlegemini.svg" alt="">Gemini</span>
+          <span class="pi" aria-hidden="true"><b>15+</b> agents on duty</span>
+          <span class="pi" aria-hidden="true"><img src="assets/logos/n8n.svg" alt="">n8n</span>
+          <span class="pi" aria-hidden="true">GoHighLevel</span>
+          <span class="pi" aria-hidden="true"><img src="assets/logos/supabase.svg" alt="">Supabase</span>
+          <span class="pi" aria-hidden="true"><img src="assets/logos/fastapi.svg" alt="">FastAPI</span>
+          <span class="pi" aria-hidden="true">Playwright</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 8 · CONTACT -->
-  <section class="panel" id="p5">
+  <!-- 3 · CONTACT (v4): CTA + founders folded in + hub chips out to the landing pages -->
+  <section class="panel" id="p5" aria-label="Contact and booking">
     <div class="inner">
       <div class="cta-split rv d1">
         <div class="phone-stage">
@@ -764,7 +594,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
           </a>
         </div>
         <div class="cta-copycol">
-          <div class="kicker rv"><span class="ki">08</span>FINAL CTA</div>
+          <div class="kicker rv"><span class="ki">03</span>FINAL CTA</div>
           <h2 style="margin-top:22px">Find the <em class="accent">leak.</em></h2>
           <div class="gift">
             <div class="glabel">A gift before you go</div>
@@ -776,11 +606,19 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
           <div class="cta-contact">
             <div>hello@jtlgrowth.com</div>
             <div>Philippines, serving PH, US &amp; EU</div>
-            <div><a href="#" data-go="1">See what we build</a></div>
+          </div>
+          <div class="founder-mini rv d2">
+            <a class="fchip" href="/jamz-jamorol/"><img src="assets/jamz.png" alt="Jamz Jamorol"><span class="fm"><b>Jamz Jamorol</b><span>Founder · systems</span></span></a>
+            <span class="fchip"><img src="assets/gwen.jpg" alt="Gwen"><span class="fm"><b>Gwen</b><span>Co-founder · brand</span></span></span>
           </div>
         </div>
       </div>
-</div>
+      <nav class="hub-row rv d3" aria-label="More from JTL Growth">
+        <a class="hub-chip magnet" href="/growth/">Growth software · Demo <span class="arr">↗</span></a>
+        <a class="hub-chip magnet" href="/ai-employee/">The AI Employee <span class="arr">↗</span></a>
+        <a class="hub-chip magnet" href="/inbox-scout/">Inbox Scout <span class="arr">↗</span></a>
+        <a class="hub-chip magnet" href="/jamz-jamorol/">Jamz Jamorol <span class="arr">↗</span></a>
+      </nav>
     </div>
     <div class="footline"><div class="inner"><span>© 2026 JTL Growth · Caloocan, Metro Manila, PH · DTI BN 8378934</span><span>AI &amp; Automation Systems</span></div></div>
   </section>
@@ -823,8 +661,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </div>
 </div>
 
-<div id="dots" role="tablist" aria-label="Sections"></div>
-<div id="counter">01 / 08</div>
+<nav id="dots" aria-label="Sections"></nav>
+<div id="counter">01 / 03</div>
 <div id="hint"><span>Scroll</span><span class="arrow">→</span></div>
 
 <script>
@@ -836,14 +674,17 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   const hint=document.getElementById('hint');
   const hdr=document.getElementById('hdr');
   const N=panels.length;
-  const darkPanels=[2,3,4,5,6]; // wood, navy, stack wall, shipped work, founders
+  const darkPanels=[1]; // v4: proof is the one dark panel
+  const LABELS=['Hero','Proof','Contact'];
   let target=0,current=0,idx=0,raf=null,moved=false;
-  const mobile=()=>matchMedia('(max-width:860px)').matches;
+  // static mode = small screens OR prefers-reduced-motion; mirrors the CSS media list
+  const mobile=()=>matchMedia('(max-width:860px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // dots
+  // named section markers (24px+ targets)
   panels.forEach((_,i)=>{
     const b=document.createElement('button');
-    b.setAttribute('aria-label','Section '+(i+1));
+    b.textContent=LABELS[i]||('Section '+(i+1));
+    b.setAttribute('aria-label','Go to section: '+(LABELS[i]||i+1));
     b.addEventListener('click',()=>goTo(i));
     dotsEl.appendChild(b);
   });
@@ -851,7 +692,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   // virtual scroll map: transit segments slide the track, HOLD segments pin the
   // panel while extra scrolling scrubs its inner effect (words, phone feeds)
-  const HOLD={2:0.7,3:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
+  const HOLD={1:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
   // LOOP: extend the transit map one extra segment past the last real panel (i=N)
   // to arrive at the clone of panel 0 appended after it in the DOM. Forward-only:
   // scrolling past the clone wraps back to real position 0 (see loop()); scrolling
@@ -889,7 +730,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   // scroll-driven background morph (stolen: bg-color-morph-scroll), direct
   // per-frame backgroundColor set, no CSS transition, lerped between stops)
   const viewport=document.getElementById('viewport');
-  const STOPS=[[226,226,226],[213,213,213],[47,47,47],[24,24,24],[18,18,18],[14,14,14],[20,20,20],[226,226,226],[226,226,226]]; // v2.2: neutral near-black stops for pstack/pwork/pfounders; last entry is the loop-wrap stop (clone == panel 0)
+  const STOPS=[[226,226,226],[16,16,16],[226,226,226],[226,226,226]]; // v4: light / dark proof / light / loop-wrap stop (clone == panel 0)
   const lerp=(a,b,t)=>a+(b-a)*t;
   function paintBg(x){
     const p=Math.max(0,Math.min(N,x/innerWidth)); // N (not N-1): STOPS carries one extra wrap-stop for the clone
@@ -918,10 +759,6 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     return {words,idx:panels.indexOf(el.closest('.panel'))};
   });
 
-  // services fly-in (stolen: icon-fly-in-convergence), scatter offsets converge on entry
-  const svcIdx=panels.indexOf(document.getElementById('p2'));
-  const svcCards=[...document.querySelectorAll('.svc-card')];
-
   const clamp01=v=>Math.max(0,Math.min(1,v));
   function fx(m){
     const pos=m.xu;
@@ -930,12 +767,6 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       const pr=HOLD[r.idx]!=null?(m.scrub[r.idx]||0):clamp01(pos-(r.idx-1));
       const on=Math.round(pr*r.words.length);
       r.words.forEach((w,i)=>w.classList.toggle('on',i<on));
-    });
-    const qs=clamp01(pos-(svcIdx-1));
-    svcCards.forEach(c=>{
-      const e=1-qs;
-      c.style.transform='translate('+(c.dataset.tx*e)+'px,'+(c.dataset.ty*e)+'px) rotate('+(c.dataset.r*e)+'deg) scale('+(0.6+0.4*qs)+')';
-      c.style.opacity=qs;
     });
   }
 
@@ -1019,17 +850,52 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 })();
 </script>
 <script>
-  // greeting pill: time-aware hook, updates each minute
+  // v4 Dynamic Island: greeting at rest, section readout while scrolling,
+  // rotating live stats on hover, click opens the \u2318K palette
   (function(){
-    const el=document.getElementById('greetpill');
-    function tick(){
+    const el=document.getElementById('greetpill'),txt=el.querySelector('.gp-txt');
+    const LBL=['HERO','PROOF','CONTACT'];
+    const STATS=['\u20b1475K+ IN CLIENT CONTRACTS CLOSED','15+ AI AGENTS ON DUTY RIGHT NOW','42-MEMBER COMMUNITY \u00b7 BUILT FROM ZERO','34 PAID CUSTOMERS FROM ONE FUNNEL'];
+    let mode='greet',hoverT=null,idleT=null,lastU=0,si=0;
+    function greet(){
       const d=new Date(),h=d.getHours();
       const t=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-      if(h<5){el.textContent='UP LATE \u00b7 '+t+' \u00b7 SO ARE OUR AGENTS';return}
+      if(h<5)return 'UP LATE \u00b7 '+t+' \u00b7 SO ARE OUR AGENTS';
       const g=h<12?'GOOD MORNING':h<18?'GOOD AFTERNOON':'GOOD EVENING';
-      el.textContent=g+' \u00b7 '+t+' \u00b7 OUR AGENTS ARE ALREADY WORKING';
+      return g+' \u00b7 '+t+' \u00b7 OUR AGENTS ARE ALREADY WORKING';
     }
-    tick();setInterval(tick,60000);
+    function put(s){
+      if(txt.textContent===s)return;
+      el.classList.add('swap');
+      setTimeout(function(){txt.textContent=s;el.classList.remove('swap')},220);
+    }
+    function render(){
+      if(mode==='hover')put(STATS[si%STATS.length]);
+      else if(mode==='nav'){
+        const i=Math.round(Math.max(0,Math.min(3,window.__xu||0)))%3;
+        put('[ 0'+(i+1)+' / '+LBL[i]+' ]');
+      }else put(greet());
+    }
+    txt.textContent=greet();setInterval(function(){if(mode==='greet')render()},60000);
+    // scroll watcher: while the filmstrip moves, read out the section
+    (function watch(){
+      const u=window.__xu||0;
+      if(Math.abs(u-lastU)>0.002){
+        lastU=u;
+        if(mode!=='hover'){mode='nav';render()}
+        clearTimeout(idleT);
+        idleT=setTimeout(function(){if(mode==='nav'){mode='greet';render()}},1400);
+      }
+      requestAnimationFrame(watch);
+    })();
+    el.addEventListener('mouseenter',function(){
+      mode='hover';si=0;render();
+      hoverT=setInterval(function(){si++;render()},2200);
+    });
+    el.addEventListener('mouseleave',function(){
+      clearInterval(hoverT);mode='greet';render();
+    });
+    el.addEventListener('click',function(){if(window.__openPal)window.__openPal()});
   })();
 </script>
 <script>
@@ -1066,6 +932,25 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 })();
 </script>
 <script>
+/* v4 magnetic buttons: nav CTA + hub chips pull gently toward the cursor.
+   pointer:fine only, disabled under prefers-reduced-motion */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer: fine)').matches)return;
+  var els=[].slice.call(document.querySelectorAll('.nav-cta,.hub-chip,.fchip'));
+  els.forEach(function(el){
+    el.style.transition='transform .3s cubic-bezier(.34,1.56,.64,1)';
+    el.addEventListener('mousemove',function(e){
+      var r=el.getBoundingClientRect();
+      var x=(e.clientX-r.left-r.width/2)/r.width, y=(e.clientY-r.top-r.height/2)/r.height;
+      el.style.transform='translate('+(x*10)+'px,'+(y*8)+'px)';
+    });
+    el.addEventListener('mouseleave',function(){el.style.transform=''});
+    el.addEventListener('mousedown',function(){el.style.transform+=' scale(.96)'});
+    el.addEventListener('mouseup',function(){el.style.transform=el.style.transform.replace(' scale(.96)','')});
+  });
+})();
+</script>
+<script>
 /* v3.1 grafts on v2 — Owner 2026-08-19: keep the site, keep the black; add the mono
    crystal through-line (neomas declarative-scroll-stops, from the absorb),
    flick, Konami burst, ⌘K palette. Zero palette changes to the page. */
@@ -1081,21 +966,20 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   function fit(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;
     ctx.setTransform(DPR,0,0,DPR,0,0)}
   fit();addEventListener('resize',fit);
-  /* stops per real panel + the loop clone (index 8 = clone of 0). pal 0 = black
-     stone on the light panels, pal 1 = silver stone on the dark run (2-6). */
+  /* v4 leak-story stops: hero / proof (dark) / contact + loop clone (index 3).
+     pal 0 = black stone on light panels, pal 1 = silver on the dark proof panel. */
   var STOPS=[
-    {x:.50,y:.15,s:.065,pal:0},{x:.92,y:.20,s:.10,pal:0},
-    {x:.08,y:.76,s:.11,pal:1},{x:.93,y:.80,s:.085,pal:1},
-    {x:.08,y:.22,s:.10,pal:1},{x:.91,y:.76,s:.10,pal:1},
-    {x:.09,y:.24,s:.10,pal:1},{x:.50,y:.12,s:.065,pal:0},
+    {x:.50,y:.15,s:.065,pal:0},
+    {x:.075,y:.17,s:.075,pal:1},
+    {x:.87,y:.32,s:.07,pal:0},
     {x:.50,y:.15,s:.065,pal:0}];
   function sstep(t){return t*t*t*(t*(t*6-15)+10)}
-  /* morph forms cycle with the panels: stone, pyramid, gem, compact */
+  /* v4 morph story, one form per panel: open funnel (the leak) ->
+     sealed stone (the system) -> upward seal (the win). Clone wraps to funnel. */
   var VSETS=[
-    [[0,-1.42,0],[0,1.42,0],[1,0,0],[0,0,1],[-1,0,0],[0,0,-1]],
-    [[0,-1.70,0],[0,.35,0],[1.15,0,0],[0,0,1.15],[-1.15,0,0],[0,0,-1.15]],
-    [[0,-.50,0],[0,1.75,0],[.92,0,0],[0,0,.92],[-.92,0,0],[0,0,-.92]],
-    [[0,-1.05,0],[0,1.05,0],[.80,0,0],[0,0,.80],[-.80,0,0],[0,0,-.80]]];
+    [[0,-1.15,0],[0,1.75,0],[1.25,-.75,0],[0,-.75,1.25],[-1.25,-.75,0],[0,-.75,-1.25]],
+    [[0,-1.10,0],[0,1.10,0],[.95,0,0],[0,0,.95],[-.95,0,0],[0,0,-.95]],
+    [[0,-1.75,0],[0,.55,0],[.95,.05,0],[0,.05,.95],[-.95,.05,0],[0,.05,-.95]]];
   var V=VSETS[0].map(function(v){return v.slice()});
   var F=[[0,2,3,0,1.10],[0,3,4,1,.97],[0,4,5,0,.85],[0,5,2,1,1.0],
     [1,3,2,2,.94],[1,4,3,3,1.0],[1,5,4,2,.85],[1,2,5,3,.9]];
@@ -1117,9 +1001,17 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     spinV=Math.max(-.25,Math.min(.25,spinV));lx=e.clientX;});
   addEventListener('pointerup',function(){down=false});
   var SEQ=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],ki=0;
+  var wordBuf='';
   addEventListener('keydown',function(e){
     ki=(e.key===SEQ[ki])?ki+1:(e.key===SEQ[0]?1:0);
     if(ki===SEQ.length){ki=0;if(!burstDir){burstDir=1}}
+    /* v4 easter egg: type "leak" anywhere (outside inputs) and the stone
+       springs a leak, then reseals — the whole pitch in one keystroke */
+    if(e.target&&/^(input|textarea)$/i.test(e.target.tagName))return;
+    if(e.key&&e.key.length===1){
+      wordBuf=(wordBuf+e.key.toLowerCase()).slice(-4);
+      if(wordBuf==='leak'&&!burstDir)burstDir=1;
+    }
   });
   function draw(){
     a+=spinV;spinV+=(0.004-spinV)*0.02;
@@ -1128,14 +1020,14 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       if(burst<=0){burst=0;burstDir=0}}
     ctx.clearRect(0,0,W,H);
     if(mobile())return;
-    var u=Math.max(0,Math.min(8,window.__xu||0));
+    var u=Math.max(0,Math.min(3,window.__xu||0));
     a+=(u-lastXu)*.6;lastXu=u; /* scroll-coupled yaw */
-    var i0=Math.floor(u),i1=Math.min(8,i0+1),f=sstep(u-i0);
+    var i0=Math.floor(u),i1=Math.min(3,i0+1),f=sstep(u-i0);
     var A=STOPS[i0],B=STOPS[i1];
     var x=(A.x+(B.x-A.x)*f)*W,y=(A.y+(B.y-A.y)*f)*H;
     var s=(A.s+(B.s-A.s)*f)*Math.min(W,H);
     var pal=A.pal+(B.pal-A.pal)*f;
-    var VA=VSETS[i0%4],VB=VSETS[i1%4],vi,vj;
+    var VA=VSETS[i0%3],VB=VSETS[i1%3],vi,vj;
     for(vi=0;vi<6;vi++)for(vj=0;vj<3;vj++)V[vi][vj]=VA[vi][vj]+(VB[vi][vj]-VA[vi][vj])*f;
     cx=x;cy=y;cs=s;
     var ca=Math.cos(a),sa=Math.sin(a),pts=[],z=[],i;
@@ -1158,7 +1050,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       ctx.closePath();ctx.fill();ctx.stroke();});
     ctx.globalAlpha=1;
   }
-  if(reduced){draw()}else{
+  if(!reduced){
     (function loop(){if(document.visibilityState==='visible')draw();
       requestAnimationFrame(loop)})();
   }
@@ -1170,13 +1062,14 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
    +'.pal-box{width:min(560px,90vw);background:#121212;border:1px solid rgba(226,226,226,.18);border-radius:12px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.5)}'
    +'.pal-box input{width:100%;border:0;outline:0;background:transparent;color:#E2E2E2;font:400 16px/1 Archivo,sans-serif;padding:16px 18px;border-bottom:1px solid rgba(226,226,226,.12)}'
    +'.pal-box ul{list-style:none;margin:0;max-height:300px;overflow-y:auto;padding:6px}'
-   +'.pal-box li{padding:11px 13px;border-radius:8px;font:400 15px/1.4 Archivo,sans-serif;color:#9E9E9E;display:flex;justify-content:space-between;cursor:pointer}'
+   +'.pal-box li{padding:11px 13px;border-radius:8px;font:400 15px/1.4 Archivo,sans-serif;color:#B5B5B5;display:flex;justify-content:space-between;cursor:pointer}'
    +'.pal-box li.sel{background:rgba(226,226,226,.1);color:#E2E2E2}'
    +'.pal-box li .k{font:700 10px/1.6 "Space Mono",monospace;letter-spacing:.1em;opacity:.7}'
    +'.pal-hint{font:700 9.5px/1 "Space Mono",monospace;letter-spacing:.1em;color:#838383;padding:10px 16px;border-top:1px solid rgba(226,226,226,.12)}'
    +'@media (max-width:860px){.pal{display:none!important}}';
   document.head.appendChild(st);
   var pal=document.createElement('div');pal.className='pal';pal.id='pal';
+  pal.setAttribute('role','dialog');pal.setAttribute('aria-modal','true');pal.setAttribute('aria-label','Command palette');
   pal.innerHTML='<div class="pal-box"><input id="pal-in" type="text" placeholder="Where to?" autocomplete="off">'
    +'<ul id="pal-ls"></ul><div class="pal-hint">⌘K OPEN · ↑↓ MOVE · ↵ GO · ESC CLOSE</div></div>';
   document.body.appendChild(pal);
@@ -1184,14 +1077,10 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   function dot(i){var d=document.querySelectorAll('#dots button')[i];if(d)d.click()}
   var ACTIONS=[
     {t:'Hero — Growth, engineered',k:'01',f:function(){dot(0)}},
-    {t:'What we build',k:'02',f:function(){dot(1)}},
-    {t:'How we work',k:'03',f:function(){dot(2)}},
-    {t:'Why trust us',k:'04',f:function(){dot(3)}},
-    {t:'The stack',k:'05',f:function(){dot(4)}},
-    {t:'Shipped work',k:'06',f:function(){dot(5)}},
-    {t:'Founders',k:'07',f:function(){dot(6)}},
-    {t:'Find the leak — contact',k:'08',f:function(){dot(7)}},
+    {t:'Live proof — shipped work + stack',k:'02',f:function(){dot(1)}},
+    {t:'Find the leak — contact',k:'03',f:function(){dot(2)}},
     {t:'Copy the 60-second audit prompt',k:'⧉',f:function(){var g=document.getElementById('giftcopy');if(g)g.click()}},
+    {t:'Growth software — watch the demo',k:'↗',f:function(){location.href='/growth/'}},
     {t:'Free build: The AI Employee',k:'↗',f:function(){location.href='/ai-employee/'}},
     {t:'Free build: Inbox Scout',k:'↗',f:function(){location.href='/inbox-scout/'}},
     {t:'Founder — Jamz Jamorol',k:'↗',f:function(){location.href='/jamz-jamorol/'}}];
@@ -1201,8 +1090,10 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     sel=Math.min(sel,Math.max(0,view.length-1));
     ls.innerHTML=view.map(function(x,i){
       return '<li class="'+(i===sel?'sel':'')+'" data-i="'+i+'"><span>'+x.t+'</span><span class="k">'+x.k+'</span></li>'}).join('');}
-  function open(){pal.classList.add('open');inp.value='';sel=0;render('');inp.focus()}
-  function close(){pal.classList.remove('open')}
+  var lastFocus=null;
+  function open(){lastFocus=document.activeElement;pal.classList.add('open');inp.value='';sel=0;render('');inp.focus()}
+  function close(){pal.classList.remove('open');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+  window.__openPal=open; /* the Dynamic Island pill opens the palette on click */
   addEventListener('keydown',function(e){
     if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();
       pal.classList.contains('open')?close():open();return}

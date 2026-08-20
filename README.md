@@ -1,2 +1,2 @@
 # jtlgrowth.com
-JTL Growth agency site. Source of truth: ~/Venice/deliverables/jtl-growth/v1/
+JTL Growth agency site. Source of truth: THIS repo (~/Venice/deploys/deploys/jtlgrowth-site). Hand-coded, no build step; GitHub Pages serves main as-is.
