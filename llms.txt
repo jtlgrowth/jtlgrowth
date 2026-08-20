@@ -27,3 +27,9 @@ Jamz Jamorol is a Filipino systems builder and electrical engineer based in Calo
 - LinkedIn: https://www.linkedin.com/in/jamzjamorol
 
 Note: JTL Growth is an independent Philippine agency. It is not affiliated with JTL-Software (the German e-commerce ERP company).
+
+## Full text of this site
+
+- [Every page in plain text](https://jtlgrowth.com/llms-full.txt) — the complete content of
+  every indexed page (home, founder profile, Inbox Scout, The AI Employee, privacy policy),
+  quoted close to verbatim, for crawlers and language models that don't execute JavaScript.

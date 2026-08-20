@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- template: W-26 landing-template (W-24 apple-gray v3.1 tokens).
+     No file download on this page -> #gate section omitted per template
+     conflict rule (gate is FILE-downloads-only, never blur page copy).
+     Real /assets/tracking.js already runs the consent-default pattern
+     site-wide, so the template's standalone analytics stub is not duplicated
+     here. data-progress enabled: 7-stage build qualifies as a long variant. -->
+<html lang="en" data-progress>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,85 +17,202 @@
 <meta property="og:description" content="Not a chatbot — a system that does the work and leaves receipts. The whole build, free.">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://jtlgrowth.com/#organization",
+      "name": "JTL Growth",
+      "legalName": "JTLGROWTH COMPUTER PROGRAMMING SERVICES",
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "DTI Business Name Registration (Philippines)",
+        "value": "8378934"
+      },
+      "url": "https://jtlgrowth.com/",
+      "logo": "https://jtlgrowth.com/assets/logo-mark.svg",
+      "image": "https://jtlgrowth.com/og-image.png",
+      "description": "JTL Growth is an AI and automation agency in Caloocan, Metro Manila, Philippines, founded by Jamz Jamorol. It builds AI and automation systems scoped to your goals: AI agents, CRM and workflow automation, and custom web builds. You name the outcome, we quote the build.",
+      "foundingDate": "2026-07",
+      "founder": { "@id": "https://jtlgrowth.com/jamz-jamorol/#person" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Caloocan",
+        "addressRegion": "Metro Manila",
+        "addressCountry": "PH"
+      },
+      "sameAs": [
+        "https://www.facebook.com/jtlgrowth",
+        "https://www.instagram.com/jtlgrowth"
+      ],
+      "areaServed": ["Philippines", "Worldwide"],
+      "knowsAbout": ["AI automation", "business process automation", "AI agents", "workflow systems", "CRM automation", "web development"],
+      "priceRange": "Quote-based"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://jtlgrowth.com/jamz-jamorol/#person",
+      "name": "Jamz Jamorol",
+      "url": "https://jtlgrowth.com/jamz-jamorol/",
+      "image": "https://jtlgrowth.com/assets/jamz.png",
+      "jobTitle": "Founder",
+      "description": "Jamz Jamorol is a Filipino systems builder and electrical engineer based in Caloocan City, Metro Manila, Philippines. Founder of JTL Growth and Co-Founder of AVAS (Ayala Virtual Assistance Services).",
+      "nationality": { "@type": "Country", "name": "Philippines" },
+      "worksFor": { "@id": "https://jtlgrowth.com/#organization" },
+      "knowsAbout": ["AI automation", "AI agents", "workflow automation", "CRM automation", "web development"],
+      "sameAs": ["https://www.linkedin.com/in/jamzjamorol"],
+      "mainEntityOfPage": "https://jtlgrowth.com/jamz-jamorol/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://jtlgrowth.com/#website",
+      "url": "https://jtlgrowth.com/",
+      "name": "JTL Growth",
+      "description": "JTL Growth — AI and automation agency site: services, founder profile, and free tools (Inbox Scout, The AI Employee).",
+      "publisher": { "@id": "https://jtlgrowth.com/#organization" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://jtlgrowth.com/ai-employee/#webpage",
+      "url": "https://jtlgrowth.com/ai-employee/",
+      "name": "The AI Employee · the seven-stage build, free",
+      "isPartOf": { "@id": "https://jtlgrowth.com/#website" },
+      "about": { "@id": "https://jtlgrowth.com/#organization" },
+      "inLanguage": "en"
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,650;1,9..144,650&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cement:#E2E2E2; --navy:#181818; --navy-deep:#121212; --ink:#121212;
-    --gray:#838383; --gray-light:#AFAFAF; --wood-warm:#B9B9B9;
-    --line:rgba(24,24,24,.14); --paper:#F4F4F4; --card:#FFFFFF;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'Archivo',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+:root{
+  /* W-24 apple-gray v3.1 light register — refkit-locked 2026-08-19 */
+  --white:#F1F3F7; --card:#FFFFFF; --gray:#E9ECF2; --panelc:#E1E5EE;
+  --line:#CDD2DF; --line-soft:#DDE1EA; --ink:#1D1D1F; --mut:#515154;
+  --t1:#E2E6ED; --t2:#C8D2E6; --t3:#9FB2D9; --t4:#4A6FD4;
+  --shell:min(92vw,1280px);
+  --r:14px; --r-sm:8px;
+  --e:cubic-bezier(.2,0,0,1); --t:160ms;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,sans-serif;
+  --mono:'Space Mono',ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--white);color:var(--ink);font:400 17px/1.6 var(--sans);
+  letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;display:block}
+h1,h2,h3{letter-spacing:-.03em;line-height:1.08;font-weight:700}
+a{color:inherit}
+::selection{background:var(--ink);color:var(--white)}
+.shell{width:var(--shell);margin-inline:auto;padding-inline:clamp(16px,3vw,32px)}
+section{padding:96px 0;border-bottom:1px solid var(--line-soft)}
+section:last-of-type{border-bottom:0}
+.eyebrow{font:600 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mut);margin-bottom:14px}
+.display{font-size:clamp(2rem,1.2rem + 3.4vw,3.8rem)}
+.lede{font-size:clamp(1.02rem,.94rem + .4vw,1.25rem);color:var(--mut);max-width:56ch;
+  line-height:1.5;letter-spacing:-.012em;margin-top:clamp(14px,2vw,22px)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;
+  font:600 15px/1 var(--sans);text-decoration:none;transition:transform var(--t) var(--e),background var(--t) var(--e)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);background:#000}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.grid{display:grid;gap:20px}
 
-  header.top{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:20}
-  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{display:flex;align-items:center;color:var(--ink);text-decoration:none}
-  .logo svg{height:26px;width:auto}
-  .nav-cta{font-size:13.5px;font-weight:600;background:var(--navy);color:#fff;text-decoration:none;padding:9px 18px;border-radius:2px;letter-spacing:.01em;transition:background .15s}
-  .nav-cta:hover{background:#000}
+/* site header/footer — not part of W-26, ported from shared subpage chrome */
+header.site{border-bottom:1px solid var(--line-soft);background:var(--white);position:sticky;top:0;z-index:20}
+header.site .shell{display:flex;align-items:center;justify-content:space-between;height:64px;padding-block:0}
+header.site .logo{display:flex;align-items:center}
+header.site .logo svg{height:26px;width:auto;color:var(--ink)}
+header.site .nav-cta{font:600 13.5px/1 var(--sans);background:var(--ink);color:#fff;
+  text-decoration:none;padding:9px 18px;border-radius:999px;transition:background var(--t) var(--e)}
+header.site .nav-cta:hover{background:#000}
+footer.site{padding:30px 0 70px;font:13.5px/1 var(--sans);color:var(--mut)}
+footer.site .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer.site a{color:var(--mut)}
 
-  .kicker{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+/* 01 hook */
+#hook{padding-top:clamp(64px,10vh,120px)}
+#hook .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 
-  /* hero */
-  .hero{padding:76px 0 8px}
-  .hero h1{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:clamp(40px,7.4vw,70px);line-height:1.0;letter-spacing:-.025em;margin:16px 0 20px}
-  .lede{font-size:20px;color:#3a3a3a;max-width:62ch}
-  .lede b{color:var(--ink);font-weight:600}
-  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-  .pill{font-family:'Space Mono',monospace;font-size:12px;background:#E8E8E8;border:1px solid var(--line);padding:5px 12px;color:#444}
+/* 02 demo — real engraving, not a mock */
+#demo .plate{margin-top:32px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  position:relative;height:280px;background:var(--panelc)}
+#demo .plate img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+  filter:grayscale(1) contrast(1.04)}
+#demo .plate figcaption{position:absolute;left:16px;bottom:12px;font:11px/1 var(--mono);
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+#demo .why{margin-top:28px;max-width:64ch}
+#demo .why p{color:var(--mut);margin-top:10px;line-height:1.6}
 
-  /* engraving strip */
-  .plate{margin:44px 0 0;border:1px solid var(--line);background:#E9E5DC;overflow:hidden;position:relative;height:210px}
-  .plate img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:grayscale(1) contrast(1.04);display:block}
-  .plate figcaption{position:absolute;left:14px;bottom:10px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5f5a52}
+/* 03 what's inside — seven stages */
+#inside .grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+#inside .card .num{font:700 12px/1 var(--mono);color:var(--t4);margin-bottom:10px}
+#inside .card h3{font-size:18px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.02em}
+#inside .card .does{color:var(--mut);font-size:14.5px;line-height:1.55;margin-bottom:14px}
+#inside .card .cost{border-left:2px solid var(--t4);padding-left:12px;font-size:13.5px;
+  color:var(--mut);line-height:1.5;margin-bottom:12px}
+#inside .card .cost b{color:var(--ink)}
+#inside .card .tools{font:12px/1.5 var(--mono);color:var(--mut);border-top:1px solid var(--line-soft);
+  padding-top:10px}
 
-  /* sections */
-  section{padding:56px 0}
-  h2{font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
-  .sub{font-size:16.5px;color:#4a4a4a;max-width:64ch;margin-bottom:28px}
-  p{margin-bottom:14px;max-width:66ch}
+/* 05 checklist — ungated, readable */
+#checklist ul{list-style:none;display:grid;gap:14px;margin-top:28px;max-width:60ch}
+#checklist li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--ink)}
+#checklist li::before{content:"";flex:0 0 20px;height:20px;margin-top:2px;border-radius:6px;
+  border:1.5px solid var(--t4);background:linear-gradient(135deg,var(--t3),var(--t4))}
+#checklist .fineprint{margin-top:24px;font-size:14px;color:var(--mut)}
 
-  /* the seven */
-  .stage{background:var(--card);border:1px solid var(--line);padding:28px 30px;margin-bottom:14px}
-  .stage-hd{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
-  .stage-n{font-family:'Space Mono',monospace;font-size:13px;color:var(--gray);font-weight:700}
-  .stage-hd h3{font-family:'Archivo Expanded','Archivo',sans-serif;font-size:19px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
-  .stage .does{font-size:16px;color:#333;margin-bottom:16px}
-  .cost{border-left:2px solid var(--navy);padding:2px 0 2px 14px;margin:14px 0;font-size:15px;color:#3a3a3a}
-  .cost b{font-weight:600;color:var(--ink)}
-  .tools{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--gray);border-top:1px solid var(--line);padding-top:12px;margin-top:16px}
-  .tools span{color:#4a4a4a}
+/* 06 author card */
+#author .card{display:flex;gap:20px;align-items:center;max-width:560px}
+#author .avatar{width:64px;height:64px;border-radius:50%;background:var(--panelc);
+  flex:0 0 64px;display:flex;align-items:center;justify-content:center;
+  font:700 20px/1 var(--sans);color:var(--mut)}
+#author .name{font-weight:700;font-size:16px}
+#author .role{color:var(--mut);font-size:14px}
+#author .bio{color:var(--mut);font-size:14.5px;margin-top:8px;line-height:1.5}
 
-  .callout{background:var(--navy);color:#EDEDED;padding:34px 34px;margin:36px 0}
-  .callout h3{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:24px;color:#fff;margin-bottom:10px;letter-spacing:-.01em}
-  .callout p{color:#C4C4C4;max-width:60ch;margin-bottom:0}
-  .callout p+p{margin-top:12px}
+/* 07 GROWTH CTA — verbatim, posts/ai-employee/post.html .cta source of truth */
+#cta{background:var(--ink);color:var(--white);border-bottom:0}
+#cta .kicker{font:600 12px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;
+  color:var(--mut);padding-bottom:11px}
+#cta .lock{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+#cta .word{display:inline-block;background:var(--white);color:var(--ink);
+  font:700 34px/1 var(--sans);letter-spacing:.16em;padding:9px 22px 10px}
+#cta .tail{font-size:16px;color:#B9BEC9;line-height:1.4;max-width:32ch}
+#cta .foot{display:flex;justify-content:space-between;align-items:baseline;
+  font:12.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:#7C8190;padding-top:20px;margin-top:20px;border-top:1px solid #2A2E38}
 
-  /* cta */
-  .cta-card{background:var(--card);border:2px solid var(--navy);padding:38px 34px;margin-top:8px}
-  .cta-card h3{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:26px;letter-spacing:-.01em;margin-bottom:10px}
-  .cta-card p{font-size:16px;color:#444}
-  a.cta{display:inline-block;font-size:15.5px;font-weight:600;background:var(--navy);color:#fff;text-decoration:none;padding:14px 28px;border-radius:2px;margin-top:10px;transition:background .15s}
-  a.cta:hover{background:#000}
-  .fineprint{font-size:13.5px;color:var(--gray);margin-top:16px}
+/* E-02 section progress bar — on for this variant (7-stage build = long) */
+#progress-bar{position:fixed;left:0;right:0;bottom:0;
+  background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);display:flex;gap:6px;padding:10px 4%;
+  overflow-x:auto;z-index:10}
+html:not([data-progress]) #progress-bar{display:none}
+#progress-bar .chip{flex:0 0 auto;font:600 11px/1 var(--mono);letter-spacing:.1em;
+  color:var(--mut);text-decoration:none;padding:8px 12px;border-radius:999px;
+  border:1px solid transparent;transition:background .25s,color .25s,border-color .25s}
+#progress-bar .chip b{margin-right:6px;font-weight:700}
+#progress-bar .chip.on{background:var(--ink);color:#fff}
+#progress-bar .chip:hover:not(.on){border-color:var(--line)}
+html[data-progress] body{padding-bottom:56px}
 
-  footer{border-top:1px solid var(--line);padding:30px 0 70px;font-size:13.5px;color:var(--gray)}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-  footer a{color:var(--gray)}
-  a{color:inherit}
-  @media(max-width:640px){
-    .stage{padding:22px 20px}
-    .plate{height:150px}
-  }
+@media(max-width:640px){
+  #demo .plate{height:180px}
+  #inside .card{padding:22px 20px}
+}
 </style>
 </head>
 <body>
 
-<header class="top"><div class="wrap">
+<header class="site"><div class="shell">
   <a class="logo" href="/" aria-label="JTL Growth home">
     <svg viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg>
   </a>
@@ -97,102 +220,133 @@
 </div></header>
 
 <main>
-<div class="wrap">
 
-  <div class="hero">
-    <p class="kicker">№ 01 · The System</p>
-    <h1>The AI Employee</h1>
-    <p class="lede">Everybody selling you an "AI agent" is selling you a chat window. A chat window is not an employee. <b>An employee has a job, a process, and receipts.</b></p>
-    <p class="lede" style="margin-top:14px">Below is the actual seven-stage build we run — the same one, every client, in this order. Nothing is held back and there is no email box at the bottom of this page.</p>
-    <div class="pills">
-      <span class="pill">free</span>
-      <span class="pill">nothing gated</span>
-      <span class="pill">the real process</span>
-    </div>
+<section id="hook" class="shell">
+  <div class="eyebrow">THE AI EMPLOYEE · SEVEN-STAGE BUILD</div>
+  <h1 class="display">The AI Employee</h1>
+  <p class="lede">Everybody selling you an "AI agent" is selling you a chat window. A chat window is not an employee. <b>An employee has a job, a process, and receipts.</b></p>
+  <p class="lede">Below is the actual seven-stage build we run — the same one, every client, in this order. Free, nothing gated, no email box at the bottom of this page.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="#cta">Get the build</a>
+    <a class="btn btn-ghost" href="#inside">See the seven stages</a>
   </div>
+</section>
 
+<section id="demo" class="shell">
+  <div class="eyebrow">WHY THE GENTLEMAN</div>
+  <h2>Same job. Different tools.</h2>
   <figure class="plate">
     <img src="/ai-employee/gentleman.jpg" alt="An 18th-century line engraving of a seated gentleman resting his chin on his hand, a cat on the chair behind him.">
     <figcaption>John Kay, drawn &amp; engraved by himself, 1786 · Met Open Access</figcaption>
   </figure>
-
-  <section>
-    <h2>Most people stop at stage three</h2>
-    <p class="sub">That is why their AI is a demo instead of a hire. The money is in stage four and stage seven — the wiring and the watching. Unwired AI is a party trick. Unwatched AI quietly gets worse.</p>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">01</span><h3>Brief</h3></div>
-      <p class="does">Learns the business, the offer, and — the only part that matters — the bottleneck. Not "where could AI help" but "what breaks first when you get twice as busy."</p>
-      <div class="cost"><b>Skip it and:</b> you automate the wrong thing beautifully. The usual result is a polished assistant answering questions nobody was asking, while the actual constraint — follow-up, or quoting, or onboarding — is untouched.</div>
-      <div class="tools">Tools: <span>a real conversation, the last 90 days of the inbox, and whatever the owner complains about twice</span></div>
-    </div>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">02</span><h3>Research</h3></div>
-      <p class="does">Reads the market, the competitors, and your own data before writing a word. What do your best customers have in common, what language do they use, what do your rivals promise and fail to deliver.</p>
-      <div class="cost"><b>Skip it and:</b> the system speaks in your industry's generic voice. It will be fluent, confident, and indistinguishable from every competitor — which is the one thing a growth system cannot afford to be.</div>
-      <div class="tools">Tools: <span>your CRM export, competitor teardowns, primary-source search, review mining</span></div>
-    </div>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">03</span><h3>Build</h3></div>
-      <p class="does">Drafts the agent, the page, the funnel. This is the part everyone shows on social media, and it is genuinely the easy part now. A working draft takes hours, not weeks.</p>
-      <div class="cost"><b>Skip it and:</b> nothing, obviously — but this is where most projects <em>stop</em>. A build with no wiring behind it is a demo you will show once and never open again.</div>
-      <div class="tools">Tools: <span>Claude, structured prompts held in version control, a real front end — not a screenshot</span></div>
-    </div>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">04</span><h3>Wire</h3></div>
-      <p class="does">Connects it to the CRM, the calendar, the inbox, and payments. The system stops being something you visit and becomes something that happens to your business while you sleep.</p>
-      <div class="cost"><b>Skip it and:</b> you have bought yourself a second job. Every output has to be copied somewhere by a human, which means it gets done for a fortnight and then stops. This is the single most common reason AI projects quietly die.</div>
-      <div class="tools">Tools: <span>CRM APIs, webhooks, calendar and payment integrations, an idempotency rule so nothing fires twice</span></div>
-    </div>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">05</span><h3>Test</h3></div>
-      <p class="does">Runs it against real inputs until green. Not happy-path inputs — the angry email, the half-filled form, the message in Taglish, the one with an attachment nobody expected.</p>
-      <div class="cost"><b>Skip it and:</b> your customers become the test suite. You will find the failure mode, but you will find it in public, in front of the person you least wanted to show it to.</div>
-      <div class="tools">Tools: <span>real historical inputs, adversarial cases written on purpose, a pass/fail gate that can actually block a release</span></div>
-    </div>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">06</span><h3>Ship</h3></div>
-      <p class="does">Goes live behind your brand — your domain, your voice, your logo. Nobody on the other end learns which tools you used, and they should not have to.</p>
-      <div class="cost"><b>Skip it and:</b> you are renting someone else's brand at your own customers. Every interaction quietly advertises the vendor instead of you, and you cannot move without starting over.</div>
-      <div class="tools">Tools: <span>your domain, your design system, your accounts — never ours</span></div>
-    </div>
-
-    <div class="stage">
-      <div class="stage-hd"><span class="stage-n">07</span><h3>Watch</h3></div>
-      <p class="does">Reports weekly, improves monthly. What did it handle, what did it escalate, what did it get wrong, and what changed as a result.</p>
-      <div class="cost"><b>Skip it and:</b> it decays invisibly. Models change, your offer changes, your customers' questions change — and a system nobody is watching keeps answering last quarter's questions with total confidence. The failure is silent, which is what makes it expensive.</div>
-      <div class="tools">Tools: <span>a weekly report a human actually reads, error-vs-empty checks, a monthly change log</span></div>
-    </div>
-  </section>
-
-  <div class="callout">
-    <h3>Why the gentleman?</h3>
+  <div class="why">
     <p>That engraving is John Kay, 1786. He drew and engraved his own portrait — his own hand, his own tools, his own receipts, sitting at his own bench with the cat.</p>
-    <p>Same job as ours. The tools changed; the standard did not.</p>
+    <p>Same job as ours. The tools changed; the standard did not. Most people stop at stage three, which is why their AI is a demo instead of a hire. The money is in stage four and stage seven — the wiring and the watching. Unwired AI is a party trick. Unwatched AI quietly gets worse.</p>
   </div>
+</section>
 
-  <section style="padding-top:20px">
-    <h2>The honest version</h2>
-    <p>You can run all seven of these yourself. Stage 1 and 2 need no software at all, and stage 3 is more accessible than it has ever been. If you have the time, take this page and go.</p>
-    <p>What people usually hire us for is stage 4 and stage 7 — the wiring and the watching. Not because those are clever, but because they are unglamorous, they never finish, and they are the two nobody gets around to.</p>
+<section id="inside" class="shell">
+  <div class="eyebrow">WHAT'S INSIDE</div>
+  <h2>The seven stages</h2>
+  <div class="grid" style="margin-top:32px">
 
-    <div class="cta-card">
-      <h3>Want us to build it instead?</h3>
-      <p>We run the whole seven on your business, ship it behind your brand, and keep watching it after launch. Quote-based — it depends on what you already have wired.</p>
-      <a class="cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a 30-minute call</a>
-      <p class="fineprint">Or email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a>. If your bottleneck turns out not to need AI, we will tell you that on the call — it happens more than you would think.</p>
+    <div class="card">
+      <div class="num">01</div><h3>Brief</h3>
+      <p class="does">Learns the business, the offer, and — the only part that matters — the bottleneck. Not "where could AI help" but "what breaks first when you get twice as busy."</p>
+      <div class="cost"><b>Skip it and:</b> you automate the wrong thing beautifully — a polished assistant answering questions nobody was asking, while the real constraint goes untouched.</div>
+      <div class="tools">Tools: a real conversation, the last 90 days of the inbox, whatever the owner complains about twice</div>
     </div>
-  </section>
 
-</div>
+    <div class="card">
+      <div class="num">02</div><h3>Research</h3>
+      <p class="does">Reads the market, the competitors, and your own data before writing a word. What your best customers have in common, what your rivals promise and fail to deliver.</p>
+      <div class="cost"><b>Skip it and:</b> the system speaks in your industry's generic voice — fluent, confident, indistinguishable from every competitor.</div>
+      <div class="tools">Tools: CRM export, competitor teardowns, primary-source search, review mining</div>
+    </div>
+
+    <div class="card">
+      <div class="num">03</div><h3>Build</h3>
+      <p class="does">Drafts the agent, the page, the funnel. The part everyone shows on social media, and genuinely the easy part now — a working draft takes hours, not weeks.</p>
+      <div class="cost"><b>Skip it and:</b> nothing, obviously — but this is where most projects <em>stop</em>. A build with no wiring behind it is a demo you show once and never open again.</div>
+      <div class="tools">Tools: Claude, structured prompts held in version control, a real front end — not a screenshot</div>
+    </div>
+
+    <div class="card">
+      <div class="num">04</div><h3>Wire</h3>
+      <p class="does">Connects it to the CRM, the calendar, the inbox, and payments. The system stops being something you visit and becomes something that happens while you sleep.</p>
+      <div class="cost"><b>Skip it and:</b> you've bought yourself a second job — every output copied somewhere by hand, done for a fortnight, then stopped. The single most common reason AI projects quietly die.</div>
+      <div class="tools">Tools: CRM APIs, webhooks, calendar and payment integrations, an idempotency rule so nothing fires twice</div>
+    </div>
+
+    <div class="card">
+      <div class="num">05</div><h3>Test</h3>
+      <p class="does">Runs it against real inputs until green. Not happy-path inputs — the angry email, the half-filled form, the message in Taglish, the attachment nobody expected.</p>
+      <div class="cost"><b>Skip it and:</b> your customers become the test suite — you'll find the failure mode, in public, in front of the person you least wanted to show it to.</div>
+      <div class="tools">Tools: real historical inputs, adversarial cases written on purpose, a pass/fail gate that can actually block a release</div>
+    </div>
+
+    <div class="card">
+      <div class="num">06</div><h3>Ship</h3>
+      <p class="does">Goes live behind your brand — your domain, your voice, your logo. Nobody on the other end learns which tools you used, and they shouldn't have to.</p>
+      <div class="cost"><b>Skip it and:</b> you're renting someone else's brand at your own customers — every interaction quietly advertises the vendor instead of you.</div>
+      <div class="tools">Tools: your domain, your design system, your accounts — never ours</div>
+    </div>
+
+    <div class="card">
+      <div class="num">07</div><h3>Watch</h3>
+      <p class="does">Reports weekly, improves monthly. What it handled, what it escalated, what it got wrong, and what changed as a result.</p>
+      <div class="cost"><b>Skip it and:</b> it decays invisibly — a system nobody is watching keeps answering last quarter's questions with total confidence. Silent, which is what makes it expensive.</div>
+      <div class="tools">Tools: a weekly report a human actually reads, error-vs-empty checks, a monthly change log</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="checklist" class="shell">
+  <div class="eyebrow">DO THIS NEXT</div>
+  <h2>The honest version</h2>
+  <p style="color:var(--mut);max-width:60ch">You can run all seven of these yourself. If you have the time, take this page and go. What people usually hire us for is stage 4 and stage 7 — not because they're clever, but because they're unglamorous, they never finish, and they're the two nobody gets around to.</p>
+  <ul>
+    <li>Run stage 1 and 2 yourself — no software needed, just the real conversation and the data you already have.</li>
+    <li>Draft stage 3 with Claude or whatever tool you already have open.</li>
+    <li>Get stage 4 (wire) and stage 7 (watch) covered before you call it done — this is where builds quietly die.</li>
+    <li>Want the whole seven run on your business, shipped behind your brand, watched after launch? Book the call below — quote-based, depends on what's already wired.</li>
+  </ul>
+  <p class="fineprint">Or email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a>. If your bottleneck turns out not to need AI, we'll tell you that on the call.</p>
+</section>
+
+<section id="author" class="shell">
+  <div class="card">
+    <div class="avatar" aria-hidden="true">JJ</div>
+    <div>
+      <div class="name">Jamz Jamorol</div>
+      <div class="role">Founder, JTL Growth</div>
+      <p class="bio">Filipino systems builder and electrical engineer based in Caloocan City, Metro Manila. Co-Founder of AVAS (Ayala Virtual Assistance Services).</p>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="shell">
+  <div class="kicker">To get it</div>
+  <div class="lock">
+    <span class="word">GROWTH</span>
+    <span class="tail">Comment the word.<br>The full build lands in your DMs. Free.</span>
+  </div>
+  <div class="foot"><span>jtlgrowth.com</span><span>Manila · Worldwide</span></div>
+</section>
+
 </main>
 
-<footer><div class="wrap">
+<nav id="progress-bar" aria-label="Section progress">
+  <a class="chip" href="#hook"><b>01</b>HOOK</a>
+  <a class="chip" href="#demo"><b>02</b>WHY</a>
+  <a class="chip" href="#inside"><b>03</b>STAGES</a>
+  <a class="chip" href="#checklist"><b>04</b>NEXT</a>
+  <a class="chip" href="#author"><b>05</b>AUTHOR</a>
+  <a class="chip" href="#cta"><b>06</b>GROWTH</a>
+</nav>
+
+<footer class="site"><div class="shell">
   <span>JTL Growth — AI and automation systems · Built in the Philippines</span>
   <span><a href="/">jtlgrowth.com</a> · <a href="/privacy/">Privacy</a></span>
 </div></footer>
@@ -200,5 +354,22 @@
 <script>
   if (window.veniceTrack) window.veniceTrack('magnet_view', {magnet:'ai-employee'}, 'ViewContent');
 </script>
+<script>
+(function(){
+  var chips = [].slice.call(document.querySelectorAll('#progress-bar .chip'));
+  if (!chips.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        chips.forEach(function(c){
+          c.classList.toggle('on', c.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+})();
+</script>
+<script src="/assets/v3-ui.js" defer></script>
 </body>
 </html>
