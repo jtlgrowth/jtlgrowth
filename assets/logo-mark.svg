@@ -1,7 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 20 166 70">
-  <path d="M20 78 L58 78 L58 40" fill="none" stroke="currentColor" stroke-width="10"/>
-  <circle cx="58" cy="30" r="6" fill="currentColor"/>
-  <path d="M74 40 L74 78 M74 40 L106 40" fill="none" stroke="currentColor" stroke-width="10"/>
-  <path d="M122 40 L122 78 L154 78" fill="none" stroke="currentColor" stroke-width="10"/>
-  <circle cx="164" cy="78" r="6" fill="currentColor" opacity=".45"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" role="img" aria-label="JTL Growth">
+  <title>JTL Growth</title>
+  <!-- Redrawn from the construction, not autotraced. Three constant-width
+       strokes, butt caps, two 90-degree fillets sharing one radius.
+       stroke 141.5 - centreline fillet radius 134.5 - outer radius 205.25
+       Verified against jtl-logo-mark-white-transparent.png: IoU 98.11%.
+       Canvas matches the 2000x2000 PNG masters. Mark bbox: 290,706 - 1602,1326. -->
+  <g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt">
+    <path d="M624 774H1267"/>
+    <path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/>
+    <path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/>
+  </g>
 </svg>

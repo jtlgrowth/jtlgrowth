@@ -1,10 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="18" fill="#111111"/>
-  <g transform="translate(8,16) scale(0.5)" stroke="#EDEDED" stroke-width="12" fill="none">
-    <path d="M20 78 L58 78 L58 40"/>
-    <circle cx="58" cy="28" r="7" fill="#EDEDED" stroke="none"/>
-    <path d="M74 40 L74 78 M74 40 L106 40"/>
-    <path d="M122 40 L122 78 L154 78"/>
-    <circle cx="165" cy="78" r="7" fill="#8A8A8A" stroke="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" role="img" aria-label="JTL Growth">
+  <rect width="2000" height="2000" rx="360" fill="#0A0A0A"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="141.5" stroke-linecap="butt">
+    <path d="M624 774H1267"/>
+    <path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/>
+    <path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/>
   </g>
 </svg>
