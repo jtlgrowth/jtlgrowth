@@ -1,4 +1,4 @@
-// v4 clean-filmstrip probe — structure, scroll maps, island, palette, a11y basics
+// v4.1 quiet-hero probe — structure, scroll maps, half-pill, MENU, a11y basics
 import { chromium } from 'playwright';
 
 const BASE = process.env.BASE || 'http://localhost:8117/';
@@ -15,88 +15,72 @@ const browser = await chromium.launch();
   pg.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
   await pg.goto(BASE, { waitUntil: 'networkidle' });
   await pg.evaluate(() => sessionStorage.setItem('jtlboot', '1'));
-  await pg.waitForTimeout(1800); // boot screen clears
+  await pg.waitForTimeout(1800);
 
   const panels = await pg.$$eval('.panel:not(.panel-clone)', els => els.map(e => e.id));
-  ok('3 real panels', panels.length === 3, panels.join(','));
-  ok('panel order p1/pwork/p5', panels.join(',') === 'p1,pwork,p5', panels.join(','));
+  ok('3 real panels p1/pwork/p5', panels.join(',') === 'p1,pwork,p5', panels.join(','));
   ok('deleted panels gone', await pg.$$eval('#p2,#p3,#p4,#pstack,#pfounders', els => els.length) === 0);
   ok('clone present', !!(await pg.$('#p1clone')));
 
-  const markers = await pg.$$eval('#dots button', els => els.map(e => e.textContent.trim()));
-  ok('named markers', markers.join(',') === 'Hero,Proof,Contact', markers.join(','));
-  const mh = await pg.$eval('#dots button', e => e.getBoundingClientRect().height);
-  ok('marker target >=24px', mh >= 24, String(mh));
-  ok('counter 01/03', (await pg.$eval('#counter', e => e.textContent.trim())) === '01 / 03');
+  // v4.1: quiet hero
+  ok('floaters gone', await pg.$$eval('.floaters,.fcard', els => els.length) === 0);
+  ok('crystal gone', !(await pg.$('#crystal')));
+  const drift = await pg.$eval('#p1 .hero-glow', e => getComputedStyle(e).animationName);
+  ok('hero drift animating', drift === 'heroDrift', drift);
 
-  // island
-  const pill = await pg.$eval('#greetpill', e => ({ tag: e.tagName, txt: e.textContent }));
-  ok('island is a button', pill.tag === 'BUTTON');
-  ok('island greeting text', /GOOD|UP LATE/.test(pill.txt), pill.txt.slice(0, 40));
-  ok('island has ⌘K chip', pill.txt.includes('⌘K'));
+  // half-pill
+  const pill = await pg.$eval('#greetpill', e => ({ tag: e.tagName, hidden: e.getAttribute('aria-hidden'), top: e.getBoundingClientRect().top, radius: getComputedStyle(e).borderRadius, txt: e.textContent }));
+  ok('pill is decorative div', pill.tag === 'DIV' && pill.hidden === 'true');
+  ok('pill flush with top edge', pill.top === 0, String(pill.top));
+  ok('pill half-radius (flat top)', /^0px 0px 14px 14px$/.test(pill.radius), pill.radius);
+  ok('pill greeting text', /GOOD|UP LATE/.test(pill.txt), pill.txt.slice(0, 40));
+  ok('no ⌘K chip on pill', !pill.txt.includes('⌘K'));
 
-  // hub chips
-  const hubs = await pg.$$eval('.hub-chip', els => els.map(e => e.getAttribute('href')));
-  ok('4 hub chips', hubs.length === 4, hubs.join(' '));
-  ok('hub targets', ['/growth/', '/ai-employee/', '/inbox-scout/', '/jamz-jamorol/'].every(h => hubs.includes(h)));
+  // MENU disclosure
+  ok('menu button visible', !!(await pg.$('#menu-btn')));
+  await pg.click('#menu-btn'); await pg.waitForTimeout(200);
+  ok('menu opens', await pg.$eval('#menu-btn', e => e.getAttribute('aria-expanded')) === 'true');
+  const links = await pg.$$eval('#menu-panel a', els => els.map(e => e.getAttribute('href')));
+  ok('menu has 8 items', links.length === 8, String(links.length));
+  ok('menu page hrefs', ['/growth/', '/ai-employee/', '/inbox-scout/', '/robots-and-coffee/', '/jamz-jamorol/'].every(h => links.includes(h)));
+  ok('first item focused on open', await pg.evaluate(() => document.activeElement.closest('#menu-panel') !== null));
+  await pg.keyboard.press('ArrowDown');
+  ok('arrow moves focus', await pg.evaluate(() => document.activeElement.textContent.includes('Live proof')));
+  await pg.keyboard.press('Escape'); await pg.waitForTimeout(150);
+  ok('Esc closes menu + focus returns', await pg.$eval('#menu-btn', e => e.getAttribute('aria-expanded')) === 'false' && await pg.evaluate(() => document.activeElement.id === 'menu-btn'));
+  // section jump via menu
+  await pg.click('#menu-btn'); await pg.waitForTimeout(150);
+  await pg.click('#menu-panel a[data-go="1"]'); await pg.waitForTimeout(2200);
+  ok('menu section jump works', (await pg.$eval('#counter', e => e.textContent.trim())) === '02 / 03');
+  ok('menu closed after item click', await pg.$eval('#menu-panel', e => e.hidden));
 
-  // founders folded into CTA
-  ok('founder chips in p5', await pg.$$eval('#p5 .fchip', els => els.length) === 2);
-
-  // proof strip
-  ok('proof strip items', await pg.$$eval('.proof-strip .pi', els => els.length) >= 20);
-
-  // scroll to proof: island nav mode + bg dark + word reveal scrub
-  await pg.evaluate(() => document.querySelectorAll('#dots button')[1].click());
-  await pg.waitForTimeout(700);
+  // island nav readout
   const pillNav = await pg.$eval('#greetpill .gp-txt', e => e.textContent);
-  ok('island nav mode while moving', /02 \/ PROOF|01 \/ HERO/.test(pillNav), pillNav);
-  await pg.waitForTimeout(2500);
-  const bg = await pg.$eval('#viewport', e => getComputedStyle(e).backgroundColor);
-  ok('proof panel bg dark', /rgb\(1[0-9], ?1[0-9], ?1[0-9]\)/.test(bg), bg);
-  const pillBack = await pg.$eval('#greetpill .gp-txt', e => e.textContent);
-  ok('island settles back to greeting', /GOOD|UP LATE/.test(pillBack), pillBack);
+  ok('pill section readout', /02 \/ PROOF/.test(pillNav), pillNav);
+  await pg.waitForTimeout(2200);
+  ok('pill settles to greeting', /GOOD|UP LATE/.test(await pg.$eval('#greetpill .gp-txt', e => e.textContent)));
 
-  // hold zone: extra scroll scrubs word reveal
+  // word reveal scrub in hold
   await pg.mouse.wheel(0, 500); await pg.waitForTimeout(700);
-  const onWords = await pg.$$eval('.wreveal .w.on', els => els.length);
-  ok('word reveal scrubs in hold', onWords > 0, String(onWords));
+  ok('word reveal scrubs in hold', (await pg.$$eval('.wreveal .w.on', els => els.length)) > 0);
 
-  // continue to contact
+  // contact
   await pg.evaluate(() => document.querySelectorAll('#dots button')[2].click());
   await pg.waitForTimeout(2200);
-  const counter3 = await pg.$eval('#counter', e => e.textContent.trim());
-  ok('counter at contact 03/03', counter3 === '03 / 03', counter3);
-  const bgLight = await pg.$eval('#viewport', e => getComputedStyle(e).backgroundColor);
-  ok('contact bg light', bgLight === 'rgb(226, 226, 226)', bgLight);
+  ok('counter at contact', (await pg.$eval('#counter', e => e.textContent.trim())) === '03 / 03');
+  ok('4 hub chips', (await pg.$$eval('.hub-chip', els => els.length)) === 4);
+  ok('founder chips in p5', (await pg.$$eval('#p5 .fchip', els => els.length)) === 2);
 
-  // palette open via keyboard + via island click, Esc closes + focus returns
-  await pg.keyboard.press('Meta+k'); await pg.waitForTimeout(300);
-  ok('⌘K opens palette', await pg.$eval('#pal', e => e.classList.contains('open')));
-  const items = await pg.$$eval('#pal-ls li', els => els.map(e => e.textContent));
-  ok('palette has growth entry', items.some(t => /Growth software/.test(t)));
-  ok('palette has 3 sections only', !items.some(t => /How we work|Why trust us|The stack/.test(t)));
-  await pg.keyboard.press('Escape'); await pg.waitForTimeout(200);
+  // ⌘K palette still functional (no visible affordance)
+  await pg.keyboard.press('Meta+k'); await pg.waitForTimeout(250);
+  ok('⌘K still opens palette', await pg.$eval('#pal', e => e.classList.contains('open')));
+  await pg.keyboard.press('Escape'); await pg.waitForTimeout(150);
   ok('Esc closes palette', await pg.$eval('#pal', e => !e.classList.contains('open')));
-  await pg.evaluate(() => document.getElementById('greetpill').click());
-  await pg.waitForTimeout(300);
-  ok('island click opens palette', await pg.$eval('#pal', e => e.classList.contains('open')));
-  await pg.keyboard.press('Escape');
 
-  // easter egg: typing leak triggers burst
-  await pg.keyboard.type('leak'); await pg.waitForTimeout(400);
-  const burst = await pg.evaluate(() => true); // burst is internal; verify no error thrown
-  ok('typing leak throws no error', burst && errors.length === 0);
-
-  // keyboard nav
-  await pg.keyboard.press('ArrowLeft'); await pg.waitForTimeout(1500);
-  // skip link exists
   ok('skip link present', !!(await pg.$('.skip-link')));
-  ok('canvas aria-hidden', (await pg.$eval('#crystal', e => e.getAttribute('aria-hidden'))) === 'true');
-  ok('sections labelled', await pg.$$eval('.panel:not(.panel-clone)[aria-label]', els => els.length) === 3);
-
+  ok('sections labelled', (await pg.$$eval('.panel:not(.panel-clone)[aria-label]', els => els.length)) === 3);
   ok('no console/page errors (1280)', errors.length === 0, errors.slice(0, 3).join(' | '));
-  await pg.screenshot({ path: 'qa/v4-1280-hero.png' });
+  await pg.screenshot({ path: 'qa/v41-1280-hero.png' });
   await pg.close();
 }
 
@@ -107,12 +91,14 @@ const browser = await chromium.launch();
   pg.on('pageerror', e => errors.push(String(e)));
   await pg.goto(BASE, { waitUntil: 'networkidle' });
   await pg.waitForTimeout(600);
-  const scrollable = await pg.evaluate(() => document.documentElement.scrollHeight > innerHeight * 1.5);
-  ok('reduced-motion: vertical page', scrollable);
-  ok('reduced-motion: crystal hidden', await pg.$eval('#crystal', e => getComputedStyle(e).display) === 'none');
-  ok('reduced-motion: pill hidden', await pg.$eval('#greetpill', e => getComputedStyle(e).display) === 'none');
-  const anim = await pg.$eval('.proof-strip .ptrack', e => getComputedStyle(e).animationName);
-  ok('reduced-motion: marquee off', anim === 'none', anim);
+  ok('reduced: vertical page', await pg.evaluate(() => document.documentElement.scrollHeight > innerHeight * 1.5));
+  ok('reduced: pill hidden', await pg.$eval('#greetpill', e => getComputedStyle(e).display) === 'none');
+  ok('reduced: drift off', await pg.$eval('#p1 .hero-glow', e => getComputedStyle(e).animationName) === 'none');
+  ok('reduced: marquee off', await pg.$eval('.proof-strip .ptrack', e => getComputedStyle(e).animationName) === 'none');
+  // menu still operable
+  await pg.click('#menu-btn'); await pg.waitForTimeout(150);
+  ok('reduced: menu opens', await pg.$eval('#menu-btn', e => e.getAttribute('aria-expanded')) === 'true');
+  await pg.keyboard.press('Escape');
   ok('no errors (reduced)', errors.length === 0, errors.join(' | '));
   await pg.close();
 }
@@ -126,10 +112,12 @@ const browser = await chromium.launch();
   await pg.waitForTimeout(600);
   ok('mobile: vertical page', await pg.evaluate(() => document.documentElement.scrollHeight > innerHeight * 1.5));
   ok('mobile: clone hidden', await pg.$eval('#p1clone', e => getComputedStyle(e).display) === 'none');
-  const hWide = await pg.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2);
-  ok('mobile: no horizontal overflow', hWide, String(await pg.evaluate(() => document.documentElement.scrollWidth)));
+  ok('mobile: no horizontal overflow', await pg.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2));
+  await pg.click('#menu-btn'); await pg.waitForTimeout(150);
+  const panelBox = await pg.$eval('#menu-panel', e => e.getBoundingClientRect());
+  ok('mobile: menu opens on-screen', panelBox.left >= 0 && panelBox.right <= 377, JSON.stringify({ l: panelBox.left, r: panelBox.right }));
   ok('no errors (375)', errors.length === 0, errors.join(' | '));
-  await pg.screenshot({ path: 'qa/v4-375.png', fullPage: true });
+  await pg.screenshot({ path: 'qa/v41-375.png', fullPage: true });
   await pg.close();
 }
 

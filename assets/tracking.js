@@ -18,6 +18,10 @@
     metaPixel: '',              // Meta pixel id, or '' to disable
     googleAds: '',              // 'AW-XXXXXXXXX', or '' to disable
     googleAdsBookingLabel: '',  // conversion label for the booking action
+    // Microsoft Clarity project id, or '' to disable. Free heatmaps + session
+    // recordings. Owner setup (2 min): clarity.microsoft.com → sign in →
+    // "Add new project" → site jtlgrowth.com → copy the Project ID here.
+    clarity: '',
     // Consent default. 'granted' suits PH/US-only traffic. Flip to 'denied' and
     // wire a CMP update before running EU/UK traffic — see the consent-audit skill.
     consentDefault: 'granted',
@@ -68,6 +72,15 @@
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', CFG.metaPixel);
     fbq('track', 'PageView');
+  }
+
+  // ─── Microsoft Clarity (heatmaps + session recordings) ────────────────────
+  if (CFG.clarity) {
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CFG.clarity);
   }
 
   // ─── Unified event dispatch ───────────────────────────────────────────────
