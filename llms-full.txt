@@ -22,56 +22,188 @@ Entity page: https://jtlgrowth.com/jamz-jamorol/
 JTL Growth · AI & Automation Agency · Philippines
 
 **Hero.** "Growth, engineered." We design and install AI systems that run the repetitive
-half of your business, so you scale output without adding headcount. Headline numbers:
-₱475K+ closed in client contracts, 15+ AI agents running JTL Growth's own ops daily, and a
-live product library (Robots & Coffee).
+half of your business, so you scale output without adding headcount.
 
-**What we build — four systems that catch leaking leads and turn them into revenue:**
-- AI Employees — always-on team members that never sleep. Trained agents that answer,
-  qualify, and follow up inside your inbox, chat, and CRM, around the clock, on your
-  process.
-- Automation Systems — work that runs itself while you sleep. Tools wired together: a lead
-  triggers the sequence, the booking confirms itself, nothing slips.
-- Funnels & Websites — pages built to convert, not to win design awards. Engineered around
-  one question: does the visitor take the next step. Copy, flow, and tracking included.
-- Ops Portals — your whole operation visible from one screen. Team, tasks, and pipeline in
-  one place; AI seats handle intake and reporting.
+**About Me.** "He builds the systems he sells." I'm Jamz Jamorol. I run JTL Growth out of
+Caloocan with my co-founder Gwen — and with an AI workforce that handles the repetitive
+half of the work, so a two-person firm ships like a ten-person one. Since January 2025 I've
+been building AI, automation and CRM systems for coaches, agencies and small businesses:
+funnels, client portals, content engines, lead engines, and the operations underneath them.
+Clients in the Philippines, the US, Europe and Australia. Everything on this site runs on
+the same stack we install for you. We don't sell a system we don't run ourselves.
 
-**How we work — four steps, no mystery:**
-1. Discover — map the funnel, show exactly where the money leaks.
-2. Blueprint — plan, timeline, and one price before anything is built.
-3. Build — installed in weeks, tested on real work, watched going live.
-4. Run — monitored, tuned, and reported; gets sharper every month.
+Proof panel, "Live right now": the agency runs on its own product — one owner, an AI COO,
+and a real ledger behind every number. ₱475K+ client contracts closed, 15+ AI agents on
+duty daily, a 42-member platform built from zero, 34 paid customers from one funnel. Links
+out to the full founder profile and to /work/.
 
-No price list on the page: every business has a different funnel, stack, and leak — the
-work is scoped, then priced. No package deals, no surprise add-ons.
+Founders shown: Jamz Jamorol (Founder · systems) and Gwen (Co-founder · brand).
 
-**Why trust us.** JTL Growth runs its own agency on what it sells: leads, tasks, and
-reports run on the same AI stack installed for clients. Proof points: 42-member community
-platform built from zero (FWIB), ₱475K+ in client contracts closed, 34 paid customers from
-one funnel launch, a 6-page brand site built end to end for its sister company.
+**Contact.** "Find the leak." CTA card: "Revenue Leak Check" — a free 30-minute call
+reviewing the visitor's funnel and what the leaks cost. No pitch, no pressure. A free
+60-second AI audit prompt is offered as a gift before booking. Contact: hello@jtlgrowth.com,
+serving Philippines, US & EU. Hub links out to /services/, /products/, /workshop/, /work/.
 
-**The stack.** GoHighLevel, custom AI agents, Python automation, hand-coded web — the tool
-that solves the problem, not the one that looks good on a proposal. Models used: Claude,
-GPT-5, DeepSeek, Mistral, Gemini, GLM, Kimi. Tools: n8n, GoHighLevel, Playwright, FastAPI,
-Supabase.
+---
 
-**Shipped work, live right now:**
-- FWIB — 42-member community platform for Filipina founders.
-- JTL Growth site — this site, built and launched in one night, DNS to HTTPS.
-- AVAS Night Shift — six-page brand site for JTL Growth's sister agency, no template.
-- Robots & Coffee — digital products library: courses, workshops, AI resources.
+## /services/ — Services · The four-tier ladder
 
-**Founders.**
-- Jamz Jamorol, Founder — builds the systems, the AI, and the websites. Runs the agency on
-  the same multi-agent AI operations platform he sells to clients. Profile:
-  https://jtlgrowth.com/jamz-jamorol/
-- Gwen, Co-founder — runs marketing, brand, and creative. Founded AVAS, JTL Growth's
-  sister-agency and marketing partner.
+**Hero.** "Four tiers. Built in order." We install the same four layers we run our own firm
+on, in the order that makes each one pay for the next. You do not buy tier three before
+tier one works. Everything behind this page is the live memory of that system — every
+lesson, decision and note our AI workforce has accumulated, one point each.
 
-**CTA.** "Revenue Leak Check" — a free 30-minute call reviewing the visitor's funnel and
-what the leaks cost. No pitch, no pressure. A free 60-second AI audit prompt is offered as
-a gift before booking. Contact: hello@jtlgrowth.com. Serves Philippines, US, and EU.
+**The ladder.** "Each tier only works because the one under it does." A funnel with no
+automation leaks. Automation with no AI seat still needs a human in the loop at 2am. An AI
+seat with no portal is invisible to your team. The summit — a business that runs itself —
+stays locked, on purpose. We build to four, not to a fantasy. Built by hand on Claude,
+GPT-5, n8n, GoHighLevel, Supabase, FastAPI and Playwright. No template, no page builder, no
+drag-and-drop.
+
+**Tier 1 — Funnels & Websites.** Pages engineered around one question: does the visitor
+take the next step? Copy, flow and tracking included — not bolted on after launch.
+Landing pages and full sites, hand-coded, no builder lock-in; copy written against the
+offer, not around it; analytics and conversion events wired at build time, behind consent;
+speed, accessibility and search visibility treated as requirements.
+
+**Tier 2 — Automation Systems.** Your tools, wired together. A lead triggers the sequence,
+the booking confirms itself, nothing slips — while you sleep. CRM and pipeline automation
+on GoHighLevel or a custom backend; lead capture, routing, follow-up and reminder
+sequences; tool-to-tool plumbing so data stops being retyped; failure paths designed in —
+retries, alerts, and a human fallback.
+
+**Tier 3 — AI Employees.** Trained agents that answer, qualify and follow up inside your
+inbox, chat and CRM. Around the clock, on your process — not a generic chatbot. An agent
+per job, with a written job description and real tools; trained on your process, your
+voice and your edge cases; automated replies that disclose they are automated, by policy;
+a review loop, so the agent gets corrected instead of trusted blindly.
+
+**Tier 4 — Ops Portals.** Your team, tasks and pipeline on one screen. AI seats handle the
+intake and the reporting; the humans handle the calls. One dashboard for people, work in
+flight and revenue; agent seats reporting into the same board your team reads;
+client-facing portals where that is the product; built on the same stack we run our own
+operations on daily.
+
+**CTA.** "You name the outcome. We quote the build." Thirty minutes, no pitch. We look at
+your funnel together and show you what the leaks cost. If your bottleneck turns out not to
+need AI, we will tell you that on the call.
+
+---
+
+## /products/ — Products · what you can get or install today
+
+**Hero.** "Things you can get today." No brief, no build queue, no invoice. Everything on
+this page is something you can open, download, or install right now. For work built for
+you, see /services/ instead.
+
+**The AI Employee (free).** The seven-stage build JTL Growth runs to put an AI system to
+work in a business — brief, research, build, wire, test, ship, watch. All seven stages laid
+out plainly, nothing gated. Links to /ai-employee/.
+
+**Inbox Scout (free tool).** Paste your unanswered emails and get every reply drafted in
+your voice. Works inside any AI chat window you already have — no install, no account.
+Links to /inbox-scout/.
+
+**Growth software (demo).** The AI operations HQ JTL Growth runs on — an animated office
+where every AI employee has a desk, work moves through a visible pipeline, and the whole
+org fits on one screen. Watch it, don't just read about it; demo only, not a self-serve
+product yet. Links to /growth/.
+
+**JTL AgentKit (open source).** A curated set of agents and skills for Claude Code,
+distilled from the open-source ruflo project — read line by line, kept only what survived
+that read. Installs with two lines typed inside Claude Code itself. Agents, skills, and two
+standalone scripts; MIT licensed, free to fork or resell. Links to
+https://github.com/jtlgrowth/agentkit.
+
+**Scout packs (downloadable).** Small, single-job tools built to install and run: Design
+Scout, Inbox Scout, Onboarding Scout, Proposal Scout, SOP Scout, and Lead Scout. Each one
+does one job on your machine — nothing broad, nothing bundled you don't need.
+
+**Robots & Coffee (off-site).** Our digital products library — courses, workshops, and AI
+resources. It lives off our own domain, on its own storefront at
+ayalavirtualassistance.site.
+
+**Get the AgentKit archive.** AgentKit is already public on GitHub — you can clone or
+install it right now without following anything below. The page offers a follow gate as a
+courtesy ask, not a wall: open our profiles and it hands over a direct zip download
+instead. Same kit either way — GitHub or the zip; following just saves the extra click.
+
+---
+
+## /workshop/ — Founder AI Workshop — From Operator to Orchestrator
+
+**Hero.** "From operator to orchestrator." Two days, hands-on. Day one you build a working
+AI employee for your own business and put it live on the internet. Day two you give it a UI
+system so it stops looking like every other AI page.
+
+**What this solves.** Most founders have used AI to write a message or summarize a doc.
+Few have used it to build and ship a real tool — something with a live link, running on
+their own laptop, doing a job. This workshop closes that gap in a room, not a video. You
+leave with software you built yourself, deployed, and yours. It does not replace your
+team — it takes the repetitive work none of them should be doing off their plate.
+
+**Day 1 — Building an AI employee.** The difference between a tool and an employee — a job,
+instructions, tools, and a place to work; set up Claude Code on your own machine (Mac and
+Windows commands, walked through live); write the build prompt for your own business; build
+a single-page tool, no setup and no accounts for the person using it; ship it live with a
+public link before the session ends.
+
+**Day 2 — Your own UI system.** Why every AI-built page looks AI-made — same fonts, same
+gradients, same cards; what a UI system actually is: fonts, colors, spacing, and rules you
+never break; install the JTL AgentKit inside Claude Code (two commands); write your system
+down as a DESIGN.md file your AI must follow on every page; apply it to yesterday's tool,
+have the reviewer agent judge it against your own rules, and re-publish before and after.
+
+**What you walk out with.** A working AI employee you built yourself, live on the internet;
+a design system in a file, not in your head, reusable on your next build; a repeatable
+process for turning a business problem into shipped software.
+
+**Preview.** A follow-gated download offers a short preview of what the two days actually
+cover, before booking.
+
+**Already attended?** Links to a setup page with the commands and code from the attendee's
+room.
+
+**CTA.** "Book a call" — talk through whether this workshop fits your team before you
+commit. Links to booking, /services/, /products/.
+
+---
+
+## /work/ — Work
+
+**Hero.** "Everything here is live." Real client systems and our own products, built by
+hand on the stack below. We run our agency on the same systems we sell — no mockups, no
+staging demos, just what's actually running.
+
+**Shipped work — four systems, in production right now.** Four builds, four different
+problems; every screen shown is a live URL, not a mockup. FWIB — 42-member community
+platform for Filipina founders, live and growing. JTL Growth site — this site, built and
+launched in one night, DNS to HTTPS. AVAS Night Shift — six-page brand site for our sister
+agency, no template, with a live ops dashboard behind it. Robots & Coffee — digital products
+library: courses, workshops, and AI resources, learn it, buy it, run it yourself. Proof
+strip: ₱475K+ closed, 42-member community, 34 paid customers, 15+ agents on duty; stack
+shown — Claude, GPT-5, Gemini, n8n, GoHighLevel, Supabase, FastAPI, Playwright.
+
+**The write-ups — what each one actually does.**
+- FWIB — a community platform for Filipina Women in Business: a directory, member
+  profiles, and the connective tissue that lets 42 founders find and support each other.
+  Built on GoHighLevel with a custom front end, live and growing as new members join. What
+  it does: hosts the member directory, onboarding, and community touchpoints in one place.
+- JTL Growth site — this site, built and launched in a single night, from buying the domain
+  to a live HTTPS deploy. The homepage runs a horizontal filmstrip; this page and the rest
+  of the site run on the same vertical shell. What it does: is the agency's own storefront —
+  services, products, workshop, and proof, all in one build.
+- AVAS Night Shift — a six-page brand site for AVAS, our sister agency, built without a
+  template — custom layout, custom motion, its own visual language. Ships with a live ops
+  dashboard behind it, not just a marketing shell. What it does: presents the AVAS brand
+  publicly while running real operations data underneath.
+- Robots & Coffee — our digital products library — courses, workshops, and AI resources,
+  sold direct. The storefront for everything we've packaged from running the agency, now
+  hosted at ayalavirtualassistance.site. What it does: lets people learn the system, buy the
+  kit, and run it themselves.
+
+**CTA.** "Want something like this, live?" We build the same way for clients — real
+systems, shipped, not slides. Links to /services/.
 
 ---
 

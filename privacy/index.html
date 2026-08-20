@@ -120,6 +120,11 @@
   tr:last-child td{border-bottom:none}
   footer{border-top:1px solid var(--line);padding:28px 0 60px;font-size:13.5px;color:var(--gray)}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* v6 (Owner 2026-08-20): the [ NN / LABEL ] bracket chip is retired site-wide.
+   The label survives as a plain eyebrow; the ornament and the index number do not. */
+.kicker::before,.kicker::after{content:none!important}
+.kicker .ki{display:none!important}
 </style>
 </head>
 <body>
@@ -183,6 +188,23 @@
       <h3>Deleting your data</h3>
       <p style="margin-bottom:8px">Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> from any address, or send a direct message to <a href="https://www.instagram.com/jtlgrowth/">@jtlgrowth</a>, and say you want your data removed. Include your Instagram username so we can find it.</p>
       <p style="margin-bottom:0">We delete everything we hold about you and confirm within 30 days. There is nothing to appeal and no retention we argue for — the only thing we store is a comment ID that expires on its own within 8 days anyway. You can also revoke our app's access at any time from Instagram: <em>Settings → Apps and Websites</em>.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The follow gate on Products and Workshop</h2>
+    <p>Some downloads on <a href="/products/">/products/</a> and <a href="/workshop/">/workshop/</a> are offered behind a follow gate: you're asked to follow us on a platform, then given the file.</p>
+
+    <h3>What we collect</h3>
+    <p>If you submit an email to unlock a download, we store that email so we can send you the file and our build notes. You can unsubscribe at any time.</p>
+
+    <h3>What we don't collect</h3>
+    <p>Which social accounts you were asked to follow is recorded only as a flag in your own browser's <code>localStorage</code> (keys named <code>jtl-follow-*</code>). That flag never leaves your browser — it is not sent to us — and it clears whenever you clear your site data.</p>
+    <p>We cannot and do not check whether you actually followed. No platform exposes that information to a website, so the gate takes your word for it.</p>
+
+    <div class="box">
+      <h3>Deleting your data</h3>
+      <p style="margin-bottom:0">Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> from any address, or send a direct message to <a href="https://www.instagram.com/jtlgrowth/">@jtlgrowth</a>, and say you want your data removed.</p>
     </div>
   </section>
 

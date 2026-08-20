@@ -34,6 +34,11 @@
   button:hover{background:var(--wood)}
   .err{display:none;color:#8A2B2B;font:400 12.5px 'Space Mono',monospace;margin-top:12px}
   .err.on{display:block}
+
+/* v6 (Owner 2026-08-20): the [ NN / LABEL ] bracket chip is retired site-wide.
+   The label survives as a plain eyebrow; the ornament and the index number do not. */
+.kicker::before,.kicker::after{content:none!important}
+.kicker .ki{display:none!important}
 </style>
 </head>
 <body>

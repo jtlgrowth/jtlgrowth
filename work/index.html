@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<!-- template: v6 page shell — vertical-scroll subpage, extracted from the homepage
+     register (mono cement + Fraunces/Archivo/Space Mono) per the standing rule:
+     new slugs extract from the homepage, never the retired apple-gray/warm-paper
+     registers. Chips: the [ NN / LABEL ] bracket ornament is retired site-wide
+     (Owner, 2026-08-20) — .eyebrow is the plain replacement. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/assets/tracking.js"></script>
+<script>
+/* theme boot — pre-paint, no flash */
+(function(){try{var t=localStorage.getItem('jtl-theme');
+if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<title>Work — JTL Growth</title>
+<meta name="description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee.">
+<link rel="canonical" href="https://jtlgrowth.com/work/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#121212">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work — JTL Growth">
+<meta property="og:description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee.">
+<meta property="og:url" content="https://jtlgrowth.com/work/">
+<meta property="og:image" content="https://jtlgrowth.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,650;1,9..144,650&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* v2.2 (2026-07-23): brown removed entirely. --wood/--wood-warm still carry every
+     accent touchpoint in the file (h1 accent, cta hover, dots, kicker brackets,
+     stats, tags) but are now neutral black/silver/gray, no warm hues anywhere */
+  --cement:#E2E2E2;      /* white cement base */
+  --cement-deep:#D5D5D5;
+  --navy:#181818;        /* ink: dark surfaces + text on light */
+  --navy-deep:#121212;
+  --blue:#575757;        /* satin: kickers, support accents on light */
+  --blue-soft:#9E9E9E;   /* mist: text accents on dark */
+  --wood:#1A1A1A;        /* mono accent: near-black */
+  --wood-deep:#0D0D0D;   /* mono accent deep: gradient stop, deep panel tint */
+  --wood-warm:#B9B9B9;   /* silver accent: rare thread, dark-context accents, hover glow */
+  --ink:#121212;
+  --gray:#616161;   /* v4 a11y: was #838383 (3.2:1 on cement) -> 4.9:1 AA */
+  --gray-light:#AFAFAF;
+  --line:rgba(24,24,24,.14);
+  --brown-glow:rgba(255,255,255,.06);
+  /* v5 ladder ramp — grayscale, no hue (draft's blue ramp discarded) */
+  --t1:#C9C9C9; --t2:#969696; --t3:#616161; --t4:#181818;
+  /* v5 panel grounds — the JS bg morph reads these (theme-aware) */
+  --bg-hero:#E2E2E2; --bg-about:#DBDBDB; --bg-contact:#E2E2E2;
+}
+/* v5 dark register: same mono system, inverted. Dark-panel chrome (.on-dark,
+   menu panel, phone, boot, gift box) is constant-dark and stays literal. */
+[data-theme="dark"]{
+  --cement:#121212;
+  --cement-deep:#1A1A1A;
+  --navy:#E2E2E2;
+  --navy-deep:#EDEDED;
+  --blue:#9E9E9E;
+  --blue-soft:#8A8A8A;
+  --wood:#D5D5D5;
+  --wood-deep:#FFFFFF;
+  --ink:#E2E2E2;
+  --gray:#A6A6A6;
+  --gray-light:#5A5A5A;
+  --line:rgba(226,226,226,.15);
+  --t1:#2E2E2E; --t2:#555555; --t3:#8F8F8F; --t4:#E2E2E2;
+  --bg-hero:#121212; --bg-about:#171717; --bg-contact:#121212;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Archivo',sans-serif;background:var(--cement);color:var(--navy);-webkit-font-smoothing:antialiased;line-height:1.6}
+::selection{background:var(--navy);color:var(--cement)}
+.wrap{width:min(1240px,90vw);margin:0 auto}
+.eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--blue)}
+h1,h2,h3.disp{font-family:'Fraunces',Georgia,serif;font-weight:650;line-height:1.05;letter-spacing:-.01em}
+h1 .accent,h2 .accent{font-style:italic;color:inherit}
+h1{font-size:clamp(42px,6vw,88px)}
+h2{font-size:clamp(30px,3.8vw,56px)}
+.lead{font-size:clamp(16px,1.3vw,19px);line-height:1.65;color:var(--gray);max-width:56ch}
+a{color:inherit}
+
+/* ---------- header (same chrome as the homepage) ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px min(5vw,68px);background:color-mix(in srgb,var(--cement) 86%,transparent);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+.logo .lmark{height:22px;width:auto;display:inline-block;color:inherit}
+.logo{display:inline-flex;align-items:center;color:var(--navy);text-decoration:none}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.nav-row{display:flex;align-items:center;gap:clamp(14px,1.9vw,30px);margin-left:clamp(20px,3vw,52px);margin-right:auto}
+.nav-row a{font:700 11px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:border-color .25s,opacity .25s;opacity:.72}
+.nav-row a:hover,.nav-row a:focus-visible,.nav-row a[aria-current="page"]{opacity:1;border-bottom-color:currentColor}
+.nav-cta{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cement);background:var(--navy);border:none;padding:12px 22px;cursor:pointer;transition:background .3s;font-family:inherit;text-decoration:none}
+.nav-cta:hover{background:var(--wood)}
+.menu-wrap{position:relative}
+.menu-btn{display:inline-flex;align-items:center;gap:9px;font:700 11px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;background:transparent;border:1px solid rgba(24,24,24,.35);color:var(--navy);padding:11px 16px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.menu-btn:hover,.menu-btn[aria-expanded="true"]{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+.menu-btn .mcaret{font-size:9px;transition:transform .25s}
+.menu-btn[aria-expanded="true"] .mcaret{transform:rotate(180deg)}
+[data-theme="dark"] .menu-btn{border-color:rgba(226,226,226,.4)}
+.tgl{width:39px;height:39px;border:1px solid rgba(24,24,24,.35);background:transparent;color:var(--navy);cursor:pointer;display:inline-grid;place-items:center;transition:background .25s,color .25s,border-color .25s;padding:0}
+.tgl svg{width:16px;height:16px}
+.tgl:hover{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+[data-theme="dark"] .tgl{border-color:rgba(226,226,226,.4)}
+.tgl .moon{display:none}
+[data-theme="dark"] .tgl .sun{display:none}
+[data-theme="dark"] .tgl .moon{display:block}
+.menu-panel{position:absolute;top:calc(100% + 10px);right:0;min-width:min(300px,86vw);background:#121212;border:1px solid rgba(226,226,226,.16);box-shadow:0 24px 64px rgba(0,0,0,.45);padding:10px;z-index:130}
+.menu-panel .mlabel{font:700 9px 'Space Mono',monospace;letter-spacing:.24em;text-transform:uppercase;color:#A3A3A3;padding:8px 12px 6px}
+.menu-panel a{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:11px 12px;color:#D6D6D6;font:500 14px/1.3 'Archivo',sans-serif;text-decoration:none;transition:background .18s,color .18s}
+.menu-panel a:hover,.menu-panel a:focus-visible{background:rgba(226,226,226,.1);color:#FFF}
+.menu-panel .mk{font:700 9.5px 'Space Mono',monospace;letter-spacing:.14em;color:#9E9E9E}
+.mgroup + .mgroup{border-top:1px solid rgba(226,226,226,.14);margin-top:8px;padding-top:8px}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--navy);color:var(--cement);padding:12px 18px;z-index:200;font:700 11px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+.skip-link:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--wood);outline-offset:3px}
+
+/* ---------- page shell ---------- */
+main{padding-top:clamp(120px,13vh,168px)}
+section{padding:clamp(56px,7vw,110px) 0}
+section + section{border-top:1px solid var(--line)}
+.page-hero{padding-top:0}
+.page-hero h1{margin-top:16px}
+.page-hero .lead{margin-top:26px}
+
+/* ---------- reveal on scroll (vertical pages; CSS-forced under reduced motion) ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.07s}.rv.d2{transition-delay:.15s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.34s}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* ---------- chips + footer (ported from the homepage) ---------- */
+.hub-row{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+.hub-chip{display:inline-flex;align-items:center;gap:14px;border:1px solid rgba(24,24,24,.25);padding:14px 20px;text-decoration:none;color:var(--navy);font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s;will-change:transform}
+.hub-chip .arr{font-family:'Archivo',sans-serif;font-weight:400;transition:transform .3s}
+.hub-chip:hover{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+.hub-chip:hover .arr{transform:translate(3px,-3px)}
+[data-theme="dark"] .hub-chip{border-color:rgba(226,226,226,.3)}
+.footline{border-top:1px solid var(--line);padding:34px 0 44px;margin-top:clamp(40px,6vw,90px)}
+.footline .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+.footline a{color:var(--gray);text-decoration:none;border-bottom:1px solid transparent}
+.footline a:hover{color:var(--navy);border-bottom-color:var(--wood-warm)}
+@media (max-width:860px){
+  .nav-row{display:none}
+  header{padding:14px 5vw}
+  .menu-panel{position:fixed;left:5vw;right:5vw;top:62px;min-width:0}
+  .hub-chip{width:100%;justify-content:space-between}
+}
+
+/* ================= WORK PAGE CSS ================= */
+
+/* ---- .band-dark: constant-dark band in BOTH themes. Every color here is a
+   literal, never a var() — the dark-theme token swap inverts --cement/--navy
+   and would flip this band unreadable (real bug hit on v5). ---- */
+.band-dark{background:#101010;color:#E2E2E2;border-top:1px solid rgba(228,228,228,.1);border-bottom:1px solid rgba(228,228,228,.1)}
+.band-dark::after{content:"";display:block}
+.band-dark .inner{width:min(1380px,92vw);margin:0 auto;text-align:center}
+.band-dark .eyebrow{color:#9E9E9E}
+.band-dark h2{color:#E2E2E2}
+.band-dark .lead{color:rgba(228,228,228,.7);margin:20px auto 0}
+
+.portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,1.8vw,30px);margin:44px auto 0;align-items:start;max-width:1340px;text-align:left}
+.lap-card{display:flex;flex-direction:column;gap:20px}
+.laptop3d{width:100%;perspective:1200px}
+.laptop3d .lid{position:relative;background:linear-gradient(160deg,#2c2c2c,#100f0d);border-radius:12px 12px 3px 3px;padding:9px 9px 0;box-shadow:0 30px 60px -24px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.06) inset}
+.laptop3d .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:22%;height:8px;background:#100f0d;border-radius:0 0 8px 8px;z-index:2}
+.laptop3d .screen{aspect-ratio:16/10.2;border-radius:5px;overflow:hidden;background:#000}
+.laptop3d .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.laptop3d .deck{position:relative;height:14px;margin-top:-1px;background:linear-gradient(180deg,#3a3a3a,#151515);transform:perspective(500px) rotateX(55deg);transform-origin:top;border-radius:0 0 9px 9px;box-shadow:0 26px 34px -16px rgba(0,0,0,.65)}
+.laptop3d .deck::after{content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:14%;height:5px;background:#0a0a0a;border-radius:0 0 4px 4px}
+.laptop3d .refl{height:40px;margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.06),transparent);filter:blur(3px);opacity:.55;border-radius:50%;transform:scaleY(-.32) scaleX(.88);mask-image:linear-gradient(to bottom,black,transparent)}
+.lap-name{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;color:#E2E2E2}
+.lap-desc{font-size:13px;line-height:1.55;color:rgba(228,228,228,.72);margin-top:6px}
+.lap-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.lap-tags span{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#B9B9B9;border:1px solid rgba(185,185,185,.35);padding:5px 9px;border-radius:3px}
+
+.proof-strip{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);border-top:1px solid rgba(228,228,228,.1);border-bottom:1px solid rgba(228,228,228,.1);margin-top:38px}
+.proof-strip .ptrack{display:flex;width:max-content;align-items:center;animation:marquee-left 46s linear infinite}
+.proof-strip:hover .ptrack{animation-play-state:paused}
+@keyframes marquee-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.proof-strip .pi{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,228,228,.72);border-right:1px solid rgba(228,228,228,.08);white-space:nowrap}
+.proof-strip .pi img{height:20px;width:auto;filter:grayscale(1) brightness(1.7);opacity:.8}
+.proof-strip .pi b{color:#B9B9B9;font-weight:700}
+@media(prefers-reduced-motion:reduce){.proof-strip .ptrack{animation:none}}
+
+/* ---- write-ups (light section) ---- */
+.writeup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,48px);margin-top:44px}
+.writeup{border-top:1px solid var(--line);padding-top:22px}
+.writeup h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;margin-bottom:10px}
+.writeup p{color:var(--gray);font-size:14.5px;line-height:1.65;max-width:52ch}
+.writeup .does{margin-top:10px;font:700 10.5px 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+@media (max-width:760px){.writeup-grid{grid-template-columns:1fr}}
+
+/* ---- mobile: 4-up grid becomes a horizontal snap-scroller ---- */
+@media (max-width:860px){
+  .portfolio-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;gap:18px;padding-bottom:6px;margin-left:calc(-5vw + (100vw - min(1340px,92vw))/2 * -1)}
+  .portfolio-grid{margin-left:0;padding-left:5vw;padding-right:5vw}
+  .lap-card{flex:0 0 82vw;scroll-snap-align:start}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="hdr">
+  <a class="logo" href="/" aria-label="JTL Growth — home"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
+  <nav class="nav-row" aria-label="Primary">
+    <a href="/services/">Services</a>
+    <a href="/products/">Products</a>
+    <a href="/workshop/">Workshop</a>
+    <a href="/work/">Work</a>
+  </nav>
+  <div class="hdr-right">
+    <button class="tgl" id="tgl" type="button" aria-label="Toggle dark mode">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+    <nav class="menu-wrap" aria-label="Site menu">
+      <button class="menu-btn magnet" id="menu-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="menu-panel">Menu <span class="mcaret" aria-hidden="true">&#9662;</span></button>
+      <div class="menu-panel" id="menu-panel" hidden>
+        <div class="mgroup"><div class="mlabel">Pages</div>
+          <a href="/">Home <span class="mk">&#8599;</span></a>
+          <a href="/services/">Services <span class="mk">&#8599;</span></a>
+          <a href="/products/">Products <span class="mk">&#8599;</span></a>
+          <a href="/workshop/">Workshop <span class="mk">&#8599;</span></a>
+          <a href="/work/">Work <span class="mk">&#8599;</span></a>
+        </div>
+        <div class="mgroup"><div class="mlabel">Explore</div>
+          <a href="/growth/">Growth software &middot; demo <span class="mk">&#8599;</span></a>
+          <a href="/ai-employee/">The AI Employee <span class="mk">&#8599;</span></a>
+          <a href="/inbox-scout/">Inbox Scout <span class="mk">&#8599;</span></a>
+          <a href="/robots-and-coffee/">Robots &amp; Coffee <span class="mk">&#8599;</span></a>
+          <a href="/jamz-jamorol/">Jamz Jamorol <span class="mk">&#8599;</span></a>
+        </div>
+      </div>
+    </nav>
+    <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow rv">Live proof</p>
+      <h1 class="rv d1">Everything here is <em class="accent">live.</em></h1>
+      <p class="lead rv d2">Real client systems and our own products, built by hand on the stack below. We run our agency on the same systems we sell — no mockups, no staging demos, just what's actually running.</p>
+    </div>
+  </section>
+
+  <section class="band-dark">
+    <div class="inner">
+      <p class="eyebrow rv">Shipped work</p>
+      <h2 class="rv d1">Four systems, in production right now.</h2>
+      <p class="lead rv d2">Four builds, four different problems. Every screen below is a live URL, not a mockup.</p>
+      <div class="portfolio-grid" tabindex="0" role="region" aria-label="Shipped work gallery">
+        <div class="lap-card rv d1">
+          <div class="laptop3d">
+            <div class="lid"><div class="notch"></div>
+              <div class="screen"><img src="/shots/fwib.png" alt="Filipina Women in Business, live site screenshot" loading="lazy"></div>
+            </div>
+            <div class="deck"></div>
+            <div class="refl"></div>
+          </div>
+          <div class="lap-name">FWIB</div>
+          <div class="lap-desc">42-member community platform for Filipina founders. Live and growing.</div>
+          <div class="lap-tags"><span>Community</span><span>42-Member Directory</span><span>Live</span></div>
+        </div>
+        <div class="lap-card rv d2">
+          <div class="laptop3d">
+            <div class="lid"><div class="notch"></div>
+              <div class="screen"><img src="/shots/jtlgrowth.png" alt="JTL Growth, live site screenshot" loading="lazy"></div>
+            </div>
+            <div class="deck"></div>
+            <div class="refl"></div>
+          </div>
+          <div class="lap-name">JTL Growth site</div>
+          <div class="lap-desc">This site. Built and launched in one night, DNS to HTTPS.</div>
+          <div class="lap-tags"><span>Agency Site</span><span>Horizontal Scroll</span><span>Live</span></div>
+        </div>
+        <div class="lap-card rv d3">
+          <div class="laptop3d">
+            <div class="lid"><div class="notch"></div>
+              <div class="screen"><img src="/shots/avas-nightshift.png" alt="AVAS Night Shift, live site screenshot" loading="lazy"></div>
+            </div>
+            <div class="deck"></div>
+            <div class="refl"></div>
+          </div>
+          <div class="lap-name">AVAS Night Shift</div>
+          <div class="lap-desc">Six-page brand site for our sister agency. No template.</div>
+          <div class="lap-tags"><span>Brand Site</span><span>Live Ops Dashboard</span><span>Live</span></div>
+        </div>
+        <div class="lap-card rv d3">
+          <div class="laptop3d">
+            <div class="lid"><div class="notch"></div>
+              <div class="screen"><img src="/shots/rnc.png" alt="Robots and Coffee, live storefront screenshot" loading="lazy"></div>
+            </div>
+            <div class="deck"></div>
+            <div class="refl"></div>
+          </div>
+          <div class="lap-name">Robots &amp; Coffee</div>
+          <div class="lap-desc">Our digital products library: courses, workshops, and AI resources. Learn it, buy it, run it yourself.</div>
+          <div class="lap-tags"><span>Storefront</span><span>Product Library</span><span>Live</span></div>
+        </div>
+      </div>
+      <div class="proof-strip rv d3" aria-label="Numbers and stack">
+        <div class="ptrack">
+          <span class="pi"><b>&#8369;475K+</b> closed</span>
+          <span class="pi"><img src="/assets/logos/claude.svg" alt="">Claude</span>
+          <span class="pi"><b>42</b>-member community</span>
+          <span class="pi">GPT&#8209;5</span>
+          <span class="pi"><b>34</b> paid customers</span>
+          <span class="pi"><img src="/assets/logos/googlegemini.svg" alt="">Gemini</span>
+          <span class="pi"><b>15+</b> agents on duty</span>
+          <span class="pi"><img src="/assets/logos/n8n.svg" alt="">n8n</span>
+          <span class="pi">GoHighLevel</span>
+          <span class="pi"><img src="/assets/logos/supabase.svg" alt="">Supabase</span>
+          <span class="pi"><img src="/assets/logos/fastapi.svg" alt="">FastAPI</span>
+          <span class="pi">Playwright</span>
+          <span class="pi" aria-hidden="true"><b>&#8369;475K+</b> closed</span>
+          <span class="pi" aria-hidden="true"><img src="/assets/logos/claude.svg" alt="">Claude</span>
+          <span class="pi" aria-hidden="true"><b>42</b>-member community</span>
+          <span class="pi" aria-hidden="true">GPT&#8209;5</span>
+          <span class="pi" aria-hidden="true"><b>34</b> paid customers</span>
+          <span class="pi" aria-hidden="true"><img src="/assets/logos/googlegemini.svg" alt="">Gemini</span>
+          <span class="pi" aria-hidden="true"><b>15+</b> agents on duty</span>
+          <span class="pi" aria-hidden="true"><img src="/assets/logos/n8n.svg" alt="">n8n</span>
+          <span class="pi" aria-hidden="true">GoHighLevel</span>
+          <span class="pi" aria-hidden="true"><img src="/assets/logos/supabase.svg" alt="">Supabase</span>
+          <span class="pi" aria-hidden="true"><img src="/assets/logos/fastapi.svg" alt="">FastAPI</span>
+          <span class="pi" aria-hidden="true">Playwright</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow rv">The write-ups</p>
+      <h2 class="rv d1" style="margin-top:16px">What each one actually does.</h2>
+      <div class="writeup-grid">
+        <div class="writeup rv d1">
+          <h3>FWIB</h3>
+          <p>A community platform for Filipina Women in Business — a directory, member profiles, and the connective tissue that lets 42 founders find and support each other. Built on GoHighLevel with a custom front end, live and growing as new members join.</p>
+          <p class="does">What it does — hosts the member directory, onboarding, and community touchpoints in one place.</p>
+        </div>
+        <div class="writeup rv d2">
+          <h3>JTL Growth site</h3>
+          <p>This site. Built and launched in a single night, from buying the domain to a live HTTPS deploy. The homepage runs a horizontal filmstrip; this page and the rest of the site run on the same vertical shell.</p>
+          <p class="does">What it does — is the agency's own storefront: services, products, workshop, and proof, all in one build.</p>
+        </div>
+        <div class="writeup rv d3">
+          <h3>AVAS Night Shift</h3>
+          <p>A six-page brand site for AVAS, our sister agency, built without a template — custom layout, custom motion, its own visual language. It ships with a live ops dashboard behind it, not just a marketing shell.</p>
+          <p class="does">What it does — presents the AVAS brand publicly while running real operations data underneath.</p>
+        </div>
+        <div class="writeup rv d3">
+          <h3>Robots &amp; Coffee</h3>
+          <p>Our digital products library — courses, workshops, and AI resources, sold direct. It's the storefront for everything we've packaged from running the agency, now hosted at ayalavirtualassistance.site.</p>
+          <p class="does">What it does — lets people learn the system, buy the kit, and run it themselves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="rv">Want something like this, live?</h2>
+      <p class="lead rv d1" style="margin-top:20px">We build the same way for clients — real systems, shipped, not slides.</p>
+      <div class="hub-row rv d2">
+        <a class="hub-chip" href="/services/">Services <span class="arr">&#8599;</span></a>
+        <a class="hub-chip" href="/products/">Products <span class="arr">&#8599;</span></a>
+        <a class="hub-chip" href="/workshop/">Workshop <span class="arr">&#8599;</span></a>
+        <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footline">
+  <div class="wrap">
+    <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
+    <span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></span>
+  </div>
+</footer>
+
+<script>
+/* v5 theme toggle (ported from v31-light): persists to localStorage, updates
+   meta theme-color, fires jtl-theme so the bg morph + canvas re-read the vars */
+(function(){
+  var meta=document.querySelector('meta[name="theme-color"]');
+  function apply(t,init){
+    document.documentElement.setAttribute('data-theme',t);
+    if(!init){try{localStorage.setItem('jtl-theme',t)}catch(e){}}
+    meta.setAttribute('content',t==='dark'?'#121212':'#E2E2E2');
+    dispatchEvent(new Event('jtl-theme'));
+  }
+  apply(document.documentElement.getAttribute('data-theme')||'light',true);
+  window.jtlToggleTheme=function(){
+    apply(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+  };
+  document.getElementById('tgl').addEventListener('click',window.jtlToggleTheme);
+})();
+</script>
+<script>
+/* v4.1 MENU disclosure: visible nav, keyboard-complete.
+   Esc closes + returns focus, outside click closes, ArrowUp/Down walk items. */
+(function(){
+  var btn=document.getElementById('menu-btn'),panel=document.getElementById('menu-panel');
+  if(!btn||!panel)return;
+  function items(){return [].slice.call(panel.querySelectorAll('a'))}
+  function setOpen(o){
+    btn.setAttribute('aria-expanded',o?'true':'false');
+    panel.hidden=!o;
+    if(o){var f=items()[0];if(f)f.focus()}
+  }
+  function isOpen(){return btn.getAttribute('aria-expanded')==='true'}
+  btn.addEventListener('click',function(){setOpen(!isOpen())});
+  document.addEventListener('keydown',function(e){
+    if(!isOpen())return;
+    if(e.key==='Escape'){setOpen(false);btn.focus();return}
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      e.preventDefault();e.stopPropagation();
+      var ls=items(),i=ls.indexOf(document.activeElement);
+      var n=e.key==='ArrowDown'?Math.min(ls.length-1,i+1):Math.max(0,i-1);
+      ls[n].focus();
+    }
+    if(e.key==='Tab'){ /* leaving the panel closes it on next tick */
+      setTimeout(function(){if(!panel.contains(document.activeElement)&&document.activeElement!==btn)setOpen(false)},0);
+    }
+  },true);
+  document.addEventListener('click',function(e){
+    if(isOpen()&&!panel.contains(e.target)&&!btn.contains(e.target))setOpen(false);
+  });
+  panel.addEventListener('click',function(e){
+    if(e.target.closest('a'))setOpen(false); /* section jumps + page links both close it */
+  });
+})();
+</script>
+<script>
+/* v4 magnetic buttons: nav CTA + hub chips pull gently toward the cursor.
+   pointer:fine only, disabled under prefers-reduced-motion */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer: fine)').matches)return;
+  var els=[].slice.call(document.querySelectorAll('.nav-cta,.hub-chip,.fchip,.menu-btn'));
+  els.forEach(function(el){
+    el.style.transition='transform .3s cubic-bezier(.34,1.56,.64,1)';
+    el.addEventListener('mousemove',function(e){
+      var r=el.getBoundingClientRect();
+      var x=(e.clientX-r.left-r.width/2)/r.width, y=(e.clientY-r.top-r.height/2)/r.height;
+      el.style.transform='translate('+(x*10)+'px,'+(y*8)+'px)';
+    });
+    el.addEventListener('mouseleave',function(){el.style.transform=''});
+    el.addEventListener('mousedown',function(){el.style.transform+=' scale(.96)'});
+    el.addEventListener('mouseup',function(){el.style.transform=el.style.transform.replace(' scale(.96)','')});
+  });
+})();
+</script>
+<script>
+/* reveal on scroll — vertical pages. Reduced motion is handled in CSS (.rv forced
+   visible), so the observer never needs to run there. */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.rv').forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{rootMargin:'0px 0px -12% 0px',threshold:.06});
+  document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+  // mark the current page in the primary nav
+  var here=location.pathname.replace(/\/+$/,'/')||'/';
+  document.querySelectorAll('.nav-row a').forEach(function(a){
+    if(a.getAttribute('href')===here)a.setAttribute('aria-current','page');});
+})();
+</script>
+</body>
+</html>

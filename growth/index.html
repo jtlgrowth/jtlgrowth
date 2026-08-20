@@ -65,6 +65,11 @@ h1 .accent{font-style:italic}
 .footline .inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
 :focus-visible{outline:2px solid #575757;outline-offset:3px}
 @media (max-width:860px){.clips{grid-template-columns:1fr}.facts{grid-template-columns:1fr}}
+
+/* v6 (Owner 2026-08-20): the [ NN / LABEL ] bracket chip is retired site-wide.
+   The label survives as a plain eyebrow; the ornament and the index number do not. */
+.kicker::before,.kicker::after{content:none!important}
+.kicker .ki{display:none!important}
 </style>
 </head>
 <body>

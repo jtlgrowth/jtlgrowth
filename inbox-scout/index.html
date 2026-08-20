@@ -233,6 +233,11 @@ html[data-progress] body{padding-bottom:56px}
 @media(max-width:640px){
   #demo pre{font-size:12px;padding:16px}
 }
+
+/* v6 (Owner 2026-08-20): the [ NN / LABEL ] bracket chip is retired site-wide.
+   The label survives as a plain eyebrow; the ornament and the index number do not. */
+.kicker::before,.kicker::after{content:none!important}
+.kicker .ki{display:none!important}
 </style>
 </head>
 <body>

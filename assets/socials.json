@@ -1,0 +1,13 @@
+{
+  "_doc": "Accounts shown in the follow-gate. Adding an account is a data edit — assets/follow-gate.js reads this file and builds the buttons. Order is display order.",
+  "_source": "Copied from ~/Venice/company/socials.json, which is the truth for every official account. Edit there first, then mirror the gate subset here. LinkedIn is deliberately out (personal profile, not a company page). The old vanity facebook.com/ayalavirtualassistance is DEAD (Owner-confirmed 2026-08-21) and must never come back.",
+  "_updated": "2026-08-21",
+  "accounts": [
+    { "slug": "ig-jtl",   "brand": "JTL Growth",       "platform": "Instagram", "handle": "@jtlgrowth",              "url": "https://www.instagram.com/jtlgrowth/" },
+    { "slug": "fb-jtl",   "brand": "JTL Growth",       "platform": "Facebook",  "handle": "/jtlgrowth",              "url": "https://www.facebook.com/jtlgrowth" },
+    { "slug": "ig-avas",  "brand": "AVAS",             "platform": "Instagram", "handle": "@ayalavirtualassistance", "url": "https://www.instagram.com/ayalavirtualassistance/" },
+    { "slug": "fb-avas",  "brand": "AVAS",             "platform": "Facebook",  "handle": "Ayala Virtual Assistance","url": "https://www.facebook.com/profile.php?id=61585924568133" },
+    { "slug": "ig-rnc",   "brand": "Robots & Coffee",  "platform": "Instagram", "handle": "@robots_and_coffee",      "url": "https://www.instagram.com/robots_and_coffee/" },
+    { "slug": "fb-rnc",   "brand": "Robots & Coffee",  "platform": "Facebook",  "handle": "Robots & Coffee",         "url": "https://www.facebook.com/people/Robots-Coffee/61592292412856/" }
+  ]
+}

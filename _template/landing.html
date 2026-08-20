@@ -168,6 +168,11 @@ html:not([data-progress]) #progress-bar{display:none}
 #progress-bar .chip.on{background:var(--ink);color:#fff}
 #progress-bar .chip:hover:not(.on){border-color:var(--line)}
 html[data-progress] body{padding-bottom:56px}
+
+/* v6 (Owner 2026-08-20): the [ NN / LABEL ] bracket chip is retired site-wide.
+   The label survives as a plain eyebrow; the ornament and the index number do not. */
+.kicker::before,.kicker::after{content:none!important}
+.kicker .ki{display:none!important}
 </style>
 </head>
 <body>

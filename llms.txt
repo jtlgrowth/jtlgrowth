@@ -8,9 +8,13 @@
 - Registered: DTI Business Name No. 8378934 (legal name: JTLGROWTH COMPUTER PROGRAMMING SERVICES), Philippines, 2026
 - Facebook: https://www.facebook.com/jtlgrowth
 - Instagram: https://www.instagram.com/jtlgrowth
+- Homepage: hero, an About Me section on the founder, and a contact/booking section — links out to every page below.
+- Services (https://jtlgrowth.com/services/): the four-tier ladder, built in order — Tier 1 Funnels & Websites, Tier 2 Automation Systems, Tier 3 AI Employees, Tier 4 Ops Portals.
+- Products (https://jtlgrowth.com/products/): things you can get or install today — Inbox Scout, The AI Employee, the Growth software demo, JTL AgentKit, Scout packs, and Robots & Coffee (off-site storefront).
+- Workshop (https://jtlgrowth.com/workshop/): a two-day, hands-on founder AI workshop — build a working AI employee and give it a UI system.
+- Work (https://jtlgrowth.com/work/): case studies of shipped, live systems — FWIB, this site, AVAS Night Shift, Robots & Coffee.
 - Growth software demo: https://jtlgrowth.com/growth/ — screen recordings of the AI operations HQ the agency runs on.
 - What we do: custom AI and automation systems (AI agents, workflow automation, CRM automation, business process systems, websites and landing pages), quote-based pricing.
-- Service ladder (built in order): Tier 1 Funnels & Websites · Tier 2 Automation Systems · Tier 3 AI Employees · Tier 4 Ops Portals.
 - Contact: booking via the site's main call-to-action.
 
 ## Jamz Jamorol (founder)
@@ -33,5 +37,6 @@ Note: JTL Growth is an independent Philippine agency. It is not affiliated with 
 ## Full text of this site
 
 - [Every page in plain text](https://jtlgrowth.com/llms-full.txt) — the complete content of
-  every indexed page (home, founder profile, Inbox Scout, The AI Employee, privacy policy),
-  quoted close to verbatim, for crawlers and language models that don't execute JavaScript.
+  every indexed page (home, founder profile, Services, Products, Workshop, Work, Inbox
+  Scout, The AI Employee, privacy policy), quoted close to verbatim, for crawlers and
+  language models that don't execute JavaScript.
