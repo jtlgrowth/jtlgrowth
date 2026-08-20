@@ -445,15 +445,12 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <body>
 <div id="boot" aria-hidden="true">
   <div class="boot-wrap">
-  <svg class="boot-mark" viewBox="8 16 178 78" width="196" height="86">
-    <path class="bt bt1" d="M20 78 L58 78 L58 40" fill="none" stroke="#EDEDED" stroke-width="11" pathLength="100"/>
-    <circle class="bn bn1" cx="58" cy="29" r="6.5" fill="#EDEDED"/>
-    <path class="bt bt2" d="M74 78 L74 40 M74 40 L106 40" fill="none" stroke="#EDEDED" stroke-width="11" pathLength="100"/>
-    <path class="bt bt3" d="M122 40 L122 78 L154 78" fill="none" stroke="#EDEDED" stroke-width="11" pathLength="100"/>
-    <circle class="bn bn2" cx="164" cy="78" r="6.5" fill="#B9B9B9"/>
-    <path class="bp bp1" d="M20 78 L58 78 L58 40" fill="none" stroke="#FFFFFF" stroke-width="11" pathLength="100"/>
-    <path class="bp bp2" d="M74 78 L74 40 M74 40 L106 40" fill="none" stroke="#FFFFFF" stroke-width="11" pathLength="100"/>
-    <path class="bp bp3" d="M122 40 L122 78 L154 78" fill="none" stroke="#FFFFFF" stroke-width="11" pathLength="100"/>
+  <svg class="boot-mark" viewBox="288 703 1315 626" width="196" height="94">
+    <g fill="none" stroke="#EDEDED" stroke-width="141.5" stroke-linecap="butt">
+      <path class="bt bt1" d="M624 774H1267" pathLength="100"/>
+      <path class="bt bt2" d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122" pathLength="100"/>
+      <path class="bt bt3" d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602" pathLength="100"/>
+    </g>
   </svg>
   </div>
   <div class="boot-line"><span></span></div>
@@ -461,28 +458,19 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <style>
 #boot{position:fixed;inset:0;z-index:9999;background:#121212;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:transform .62s cubic-bezier(.83,0,.17,1);will-change:transform}
 #boot.off{transform:translateX(-100%)}
-#boot .bt{stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:square}
+#boot .bt{stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:butt}
 #boot .bt1{animation:bootdraw .38s cubic-bezier(.6,0,.3,1) .12s forwards}
 #boot .bt2{animation:bootdraw .38s cubic-bezier(.6,0,.3,1) .34s forwards}
 #boot .bt3{animation:bootdraw .38s cubic-bezier(.6,0,.3,1) .56s forwards}
-#boot .bn{opacity:0;transform-origin:center;transform-box:fill-box}
-#boot .bn1{animation:bootnode .3s ease .5s forwards}
-#boot .bn2{animation:bootnode .3s ease .94s forwards,bootpulse 1.1s ease 1.24s infinite}
 #boot .boot-line{width:196px;height:2px;background:#2A2A2A;overflow:hidden}
 #boot .boot-line span{display:block;height:100%;width:100%;background:#B9B9B9;transform:translateX(-100%);animation:bootfill 1.05s cubic-bezier(.4,0,.2,1) .15s forwards}
 @keyframes bootdraw{to{stroke-dashoffset:0}}
-@keyframes bootnode{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
-@keyframes bootpulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes bootfill{to{transform:translateX(0)}}
 #boot .boot-wrap{position:relative;overflow:hidden;padding:14px 18px;margin:-14px -18px}
 #boot .boot-wrap::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-40%;width:34%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.16) 45%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.16) 55%,transparent);transform:skewX(-18deg) translateX(0);animation:bootglint 1.5s cubic-bezier(.6,0,.3,1) 1.05s infinite;pointer-events:none}
 #boot .boot-mark{filter:drop-shadow(0 0 0px rgba(237,237,237,0));animation:bootglow 2.2s ease 1s infinite}
-#boot .bp{stroke-dasharray:9 91;stroke-dashoffset:9;opacity:0;stroke-linecap:square;animation:bootcurrent 1.4s linear 1.15s infinite}
-#boot .bp2{animation-delay:1.35s}
-#boot .bp3{animation-delay:1.55s}
 @keyframes bootglint{0%{transform:skewX(-18deg) translateX(0)}55%,100%{transform:skewX(-18deg) translateX(560%)}}
 @keyframes bootglow{0%,100%{filter:drop-shadow(0 0 2px rgba(237,237,237,.12))}50%{filter:drop-shadow(0 0 9px rgba(237,237,237,.38))}}
-@keyframes bootcurrent{0%{stroke-dashoffset:9;opacity:0}8%{opacity:.9}60%{stroke-dashoffset:-100;opacity:.9}68%,100%{stroke-dashoffset:-100;opacity:0}}
 @media (prefers-reduced-motion:reduce){#boot{display:none}}
 </style>
 <script>
@@ -498,7 +486,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
 <div id="greetpill" aria-hidden="true"></div>
 <header id="hdr">
-  <a class="logo" href="#" data-go="0"><svg class="lmark" viewBox="12 20 166 70" aria-hidden="true"><path d="M20 78 L58 78 L58 40" fill="none" stroke="currentColor" stroke-width="11"/><circle cx="58" cy="29" r="6.5" fill="currentColor"/><path d="M74 40 L74 78 M74 40 L106 40" fill="none" stroke="currentColor" stroke-width="11"/><path d="M122 40 L122 78 L154 78" fill="none" stroke="currentColor" stroke-width="11"/><circle cx="164" cy="78" r="6.5" fill="currentColor" opacity=".45"/></svg></a>
+  <a class="logo" href="#" data-go="0"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
   <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
 </header>
 
