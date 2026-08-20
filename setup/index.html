@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- template: W-26-lite · setup slug.
+     Tokens + components extracted from the live homepage (jtlgrowth.com), not
+     invented: --ink/--cement/--navy/--wood/--gray/--blue, Fraunces + Archivo +
+     Space Mono, .kicker section label, .nav-cta, and the .gift copy-command
+     component (dark register) ported verbatim from the FINAL CTA panel. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/assets/tracking.js"></script>
+<title>Set up Claude Code · one command · JTL Growth</title>
+<meta name="description" content="One command installs the Claude Code CLI, its prerequisites, and the hire skill — on Mac, Windows or Linux. Copy, paste, done.">
+<link rel="canonical" href="https://jtlgrowth.com/setup/">
+<meta property="og:title" content="Set up Claude Code · one command">
+<meta property="og:description" content="One command installs the Claude Code CLI, its prerequisites, and the hire skill. Copy, paste, done.">
+<meta property="og:url" content="https://jtlgrowth.com/setup/">
+<meta property="og:image" content="https://jtlgrowth.com/og-image.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,650;1,9..144,650&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#121212;--navy:#181818;--navy-deep:#121212;--wood:#1A1A1A;--wood-warm:#B9B9B9;
+    --cement:#E2E2E2;--cement-deep:#D5D5D5;--gray:#838383;--gray-light:#AFAFAF;
+    --blue:#575757;--blue-soft:#9E9E9E;--line:rgba(24,24,24,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:'Archivo',sans-serif;background:var(--cement);color:var(--navy);
+       line-height:1.6;-webkit-font-smoothing:antialiased}
+  .shell{max-width:920px;margin:0 auto;padding:0 5vw}
+  a{color:inherit}
+
+  /* header — same lockup as the homepage */
+  header{display:flex;align-items:center;justify-content:space-between;
+         padding:26px 5vw;max-width:1280px;margin:0 auto}
+  .logo{display:inline-flex;align-items:center;font-family:'Archivo Expanded',sans-serif;
+        font-weight:700;font-size:17px;letter-spacing:.02em;color:var(--navy);text-decoration:none}
+  .logo .lmark{height:22px;width:auto;display:inline-block;color:inherit}
+  .nav-cta{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;
+           text-transform:uppercase;color:var(--cement);background:var(--navy);border:none;
+           padding:13px 26px;cursor:pointer;transition:background .3s;text-decoration:none}
+  .nav-cta:hover{background:var(--wood)}
+
+  /* section label */
+  .kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;
+          text-transform:uppercase;font-weight:700;color:var(--blue);
+          display:inline-flex;align-items:baseline}
+  .kicker .ki{color:var(--wood-warm);font-weight:700}
+  .kicker .ki::after{content:"\00a0/\00a0";color:var(--blue);font-weight:400}
+
+  /* hero */
+  .hero{padding:34px 0 6px}
+  h1{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:clamp(44px,8vw,88px);
+     line-height:.95;letter-spacing:-.02em;margin:20px 0 0}
+  h1 em{font-style:italic}
+  .lede{font-size:18px;color:var(--blue);max-width:52ch;margin-top:22px}
+  .lede b{color:var(--navy);font-weight:600}
+
+  section{padding:44px 0 0}
+  h2{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:clamp(26px,3.4vw,34px);
+     letter-spacing:-.015em;line-height:1.1;margin:18px 0 6px;color:var(--navy)}
+
+  /* copy-command — ported from the homepage FINAL CTA panel */
+  .gift{margin:0 0 22px;max-width:100%}
+  .gift .glabel{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.2em;
+                text-transform:uppercase;color:var(--blue);font-weight:400;margin-bottom:10px}
+  .gift .box{display:flex;align-items:flex-start;gap:12px;background:#141414;border:1px solid #3A3A3A;
+             border-radius:13px;padding:13px 13px 13px 17px;
+             box-shadow:0 14px 34px -18px rgba(0,0,0,.4)}
+  .gift .cmd{font-family:'Space Mono',ui-monospace,monospace;color:#E3E3E3;font-size:12px;
+             line-height:1.7;flex:1;min-width:0;
+             white-space:pre-wrap;overflow-wrap:anywhere}
+  .gift .cmd .d{color:#8A8A8A}
+  .gift .copy{display:flex;align-items:center;gap:6px;background:#3A3A3A;color:#EDEDED;border:0;
+              border-radius:8px;padding:9px 13px;font:600 10.5px 'Archivo';letter-spacing:.08em;
+              text-transform:uppercase;cursor:pointer;transition:.18s;flex-shrink:0;
+              position:sticky;top:0}
+  .gift .copy:hover{background:#555}
+  .gift .copy.done{color:#CBCBCB}
+  .oslabel{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.2em;
+           text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+  .oslabel b{color:var(--navy);font-weight:700}
+
+  /* steps */
+  ol.steps{list-style:none;counter-reset:s;margin-top:20px;max-width:56ch}
+  ol.steps li{counter-increment:s;position:relative;padding-left:38px;margin-bottom:13px;
+              font-size:16px;color:var(--blue)}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;
+       font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--wood-warm);
+       border:1px solid var(--line);border-radius:50%;width:24px;height:24px;
+       display:flex;align-items:center;justify-content:center}
+  ol.steps b{color:var(--navy);font-weight:600}
+  code{font-family:'Space Mono',ui-monospace,monospace;font-size:.9em;
+       background:var(--cement-deep);border-radius:4px;padding:2px 6px;color:var(--navy)}
+
+  /* troubleshooting */
+  .fix{border-top:1px solid var(--line);padding:18px 0}
+  .fix p{font-size:15.5px;color:var(--blue);margin-top:6px;max-width:60ch}
+  .fix h3{font-size:15px;font-weight:600;color:var(--navy)}
+  .more{margin-top:22px;font-size:15.5px;color:var(--blue)}
+  .more a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+
+  footer{margin-top:72px;border-top:1px solid var(--line);padding:26px 0 60px}
+  .footline{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+            font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;
+            text-transform:uppercase;color:var(--gray-light)}
+
+  @media(max-width:640px){
+    header{padding:18px 5vw}
+    .nav-cta{padding:11px 18px;font-size:11.5px}
+    .gift .box{flex-direction:column;align-items:stretch;gap:10px}
+    .gift .copy{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/" aria-label="JTL Growth home"><svg class="lmark" viewBox="12 20 166 70" aria-hidden="true"><path d="M20 78 L58 78 L58 40" fill="none" stroke="currentColor" stroke-width="11"/><circle cx="58" cy="29" r="6.5" fill="currentColor"/><path d="M74 40 L74 78 M74 40 L106 40" fill="none" stroke="currentColor" stroke-width="11"/><path d="M122 40 L122 78 L154 78" fill="none" stroke="currentColor" stroke-width="11"/><circle cx="164" cy="78" r="6.5" fill="currentColor" opacity=".45"/></svg></a>
+  <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
+</header>
+
+<main class="shell">
+
+  <div class="hero">
+    <div class="kicker"><span class="ki">01</span>Setup</div>
+    <h1>One command.<br><em>That’s the setup.</em></h1>
+    <p class="lede">It installs the Claude Code CLI, the tools it needs, and our
+      <b>hire</b> skill — then checks the result actually works. Copy the line for your
+      computer, paste it into the terminal, press Enter.</p>
+  </div>
+
+  <section>
+    <div class="gift">
+      <div class="oslabel"><b>Mac</b> &middot; or Linux</div>
+      <div class="glabel">Open Terminal — press ⌘ Space, type "Terminal", press Enter</div>
+      <div class="box">
+        <span class="cmd" id="cmd-mac"><span class="d">$</span> curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.sh | CCI_SKILLS=hire bash</span>
+        <button class="copy" data-for="cmd-mac">Copy ⧉</button>
+      </div>
+    </div>
+
+    <div class="gift">
+      <div class="oslabel"><b>Windows</b></div>
+      <div class="glabel">Open PowerShell — press the Windows key, type "PowerShell", press Enter</div>
+      <div class="box">
+        <span class="cmd" id="cmd-win"><span class="d">&gt;</span> $env:CCI_SKILLS='hire'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex</span>
+        <button class="copy" data-for="cmd-win">Copy ⧉</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker"><span class="ki">02</span>Then</div>
+    <h2>Four steps and you’re working.</h2>
+    <ol class="steps">
+      <li><b>Close the terminal and open a new one.</b> Not optional — the new window is
+        what picks up the command that was just installed.</li>
+      <li>Type <code>claude</code> and press Enter.</li>
+      <li>Type <code>/login</code> and sign in.</li>
+      <li>Type <code>/hire</code> to check the skill loaded.</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="kicker"><span class="ki">03</span>If it doesn’t work</div>
+    <h2>Three things go wrong. All three are quick.</h2>
+
+    <div class="fix">
+      <h3><code>claude: command not found</code></h3>
+      <p>You’re in the terminal window you had open before installing. Close it, open a
+        new one, try again.</p>
+    </div>
+
+    <div class="fix">
+      <h3>Windows says running scripts is disabled</h3>
+      <p>Paste <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>
+        first, press Enter, then paste the install command again. It applies to that one
+        window only.</p>
+    </div>
+
+    <div class="fix">
+      <h3>It finished, but <code>/hire</code> isn’t there</h3>
+      <p>The skill needs Node. Install the LTS build from
+        <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>, open a
+        new terminal, then run
+        <code>npx skills add https://github.com/jtlgrowth/hire --skill hire</code>.</p>
+    </div>
+
+    <p class="more">Anything else — the full manual walkthrough, every step separately, is
+      <a href="https://jtlgrowth.github.io/claude-code-installer/">here</a>. Or send us the
+      last 20 lines of the output at
+      <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> — the error text is the
+      useful part, a screenshot of the whole window isn’t.</p>
+  </section>
+
+  <section>
+    <div class="kicker"><span class="ki">04</span>What you just ran</div>
+    <h2>Nothing hidden.</h2>
+    <p class="lede">Both scripts are open source, MIT, and short enough to read before you
+      run them:
+      <a href="https://github.com/jtlgrowth/claude-code-installer" target="_blank" rel="noopener"><b>the installer</b></a>
+      and <a href="https://github.com/jtlgrowth/hire" target="_blank" rel="noopener"><b>the hire skill</b></a>.
+      The installer doesn’t download Claude Code itself — it calls Anthropic’s own
+      installer, which fetches a checksum-verified binary. Running the command again later
+      is safe: it updates what’s out of date and leaves everything you’ve set up alone.</p>
+  </section>
+
+  <footer>
+    <div class="footline">
+      <span>© 2026 JTL Growth · Caloocan, Metro Manila, PH</span>
+      <span>AI &amp; Automation Systems</span>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', async function(){
+      var el = document.getElementById(btn.dataset.for);
+      // strip the leading prompt glyph — it is decoration, not part of the command
+      var text = el.textContent.replace(/^\s*[$>]\s*/, '').trim();
+      try { await navigator.clipboard.writeText(text); }
+      catch(e){
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+        try { document.execCommand('copy'); } catch(_){}
+      }
+      btn.classList.add('done'); btn.textContent = 'Copied ✓';
+      if (window.gtag) gtag('event','copy_install_command',{os: btn.dataset.for === 'cmd-mac' ? 'mac' : 'windows'});
+      setTimeout(function(){ btn.classList.remove('done'); btn.textContent = 'Copy ⧉'; }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
