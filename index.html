@@ -11,8 +11,18 @@
      visible MENU dropdown replaces the hidden ⌘K affordance (palette still
      works for keyboard users), MS Clarity loader in tracking.js. WCAG 2.2 AA
      held (reduced-motion = vertical fallback). History: git + drafts/. -->
+<!-- v5 (2026-08-20, Owner directive): v31-light draft absorbed — ladder pyramid
+     panel (02 WHAT WE BUILD), dark mode toggle, mind-atlas background canvas.
+     Draft's blue system discarded; everything recolored to the mono register.
+     drafts/v31-light.html deleted after absorb (git history keeps it). -->
 <!-- Tracking: GA4 + consent default + conversion events. See deliverables/tracking/ -->
 <script src="/assets/tracking.js"></script>
+<script>
+/* theme boot — pre-paint, no flash */
+(function(){try{var t=localStorage.getItem('jtl-theme');
+if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
 
 <title>JTL Growth · AI & Automation Agency · Philippines</title>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -52,7 +62,17 @@
       ],
       "areaServed": ["Philippines", "Worldwide"],
       "knowsAbout": ["AI automation", "business process automation", "AI agents", "workflow systems", "CRM automation", "web development"],
-      "priceRange": "Quote-based"
+      "priceRange": "Quote-based",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "The JTL growth ladder",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Funnels & Websites", "description": "Pages engineered around one question: does the visitor take the next step? Copy, flow, and tracking included." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automation Systems", "description": "Your tools, wired together. A lead triggers the sequence, the booking confirms itself, nothing slips." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Employees", "description": "Trained agents that answer, qualify, and follow up inside your inbox, chat, and CRM. Around the clock, on your process." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ops Portals", "description": "Your team, tasks, and pipeline on one screen. AI seats handle the intake and the reporting." } }
+        ]
+      }
     },
     {
       "@type": "Person",
@@ -114,6 +134,28 @@
   --gray-light:#AFAFAF;
   --line:rgba(24,24,24,.14);
   --brown-glow:rgba(255,255,255,.06);
+  /* v5 ladder ramp — grayscale, no hue (draft's blue ramp discarded) */
+  --t1:#C9C9C9; --t2:#969696; --t3:#616161; --t4:#181818;
+  /* v5 panel grounds — the JS bg morph reads these (theme-aware) */
+  --bg-hero:#E2E2E2; --bg-build:#DBDBDB; --bg-proof:#101010; --bg-contact:#E2E2E2;
+}
+/* v5 dark register: same mono system, inverted. Dark-panel chrome (.on-dark,
+   menu panel, phone, boot, gift box) is constant-dark and stays literal. */
+[data-theme="dark"]{
+  --cement:#121212;
+  --cement-deep:#1A1A1A;
+  --navy:#E2E2E2;
+  --navy-deep:#EDEDED;
+  --blue:#9E9E9E;
+  --blue-soft:#8A8A8A;
+  --wood:#D5D5D5;
+  --wood-deep:#FFFFFF;
+  --ink:#E2E2E2;
+  --gray:#A6A6A6;
+  --gray-light:#5A5A5A;
+  --line:rgba(226,226,226,.15);
+  --t1:#2E2E2E; --t2:#555555; --t3:#8F8F8F; --t4:#E2E2E2;
+  --bg-hero:#121212; --bg-build:#171717; --bg-proof:#1E1E1E; --bg-contact:#121212;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--cement)}
@@ -148,8 +190,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-conte
 .logo span{color:var(--wood)}
 .nav-cta{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cement);background:var(--navy);border:none;padding:13px 26px;cursor:pointer;transition:background .3s,color .5s;font-family:inherit;text-decoration:none}
 .nav-cta:hover{background:var(--wood)}
-header.on-dark .logo,header.on-dark .logo span{color:var(--cement)}
-header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
+header.on-dark .logo,header.on-dark .logo span{color:#E2E2E2}
+header.on-dark .nav-cta{background:#E2E2E2;color:#181818}
 /* ---- v4.1 visible MENU (Windows-friendly, replaces the hidden ⌘K affordance) ---- */
 .hdr-right{display:flex;align-items:center;gap:12px}
 .menu-wrap{position:relative}
@@ -157,8 +199,23 @@ header.on-dark .nav-cta{background:var(--cement);color:var(--navy)}
 .menu-btn:hover,.menu-btn[aria-expanded="true"]{background:var(--navy);color:var(--cement);border-color:var(--navy)}
 .menu-btn .mcaret{font-size:9px;transition:transform .25s}
 .menu-btn[aria-expanded="true"] .mcaret{transform:rotate(180deg)}
-header.on-dark .menu-btn{color:var(--cement);border-color:rgba(226,226,226,.4)}
-header.on-dark .menu-btn:hover,header.on-dark .menu-btn[aria-expanded="true"]{background:var(--cement);color:var(--navy);border-color:var(--cement)}
+header.on-dark .menu-btn{color:#E2E2E2;border-color:rgba(226,226,226,.4)}
+header.on-dark .menu-btn:hover,header.on-dark .menu-btn[aria-expanded="true"]{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
+/* v5 dark-theme chrome on light-token rules that hardcode ink rgba */
+[data-theme="dark"] .menu-btn{color:var(--navy);border-color:rgba(226,226,226,.4)}
+[data-theme="dark"] #dots button.active{border-color:rgba(226,226,226,.3)}
+[data-theme="dark"] .hub-chip{border-color:rgba(226,226,226,.3)}
+[data-theme="dark"] .fchip{background:rgba(255,255,255,.06);border-color:rgba(226,226,226,.25)}
+[data-theme="dark"] a.fchip:hover{border-color:#E2E2E2;background:rgba(255,255,255,.1)}
+/* v5 theme toggle */
+.tgl{width:41px;height:41px;border:1px solid rgba(24,24,24,.35);background:transparent;color:var(--navy);cursor:pointer;display:inline-grid;place-items:center;transition:background .25s,color .25s,border-color .25s;padding:0}
+.tgl svg{width:16px;height:16px}
+.tgl:hover{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+[data-theme="light"] .tgl .moon{display:none}
+[data-theme="dark"] .tgl .sun{display:none}
+[data-theme="dark"] .tgl{border-color:rgba(226,226,226,.4)}
+header.on-dark .tgl{color:#E2E2E2;border-color:rgba(226,226,226,.4)}
+header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 .menu-panel{position:absolute;top:calc(100% + 10px);right:0;min-width:min(300px,86vw);background:#121212;border:1px solid rgba(226,226,226,.16);box-shadow:0 24px 64px rgba(0,0,0,.45);padding:10px;z-index:130}
 .menu-panel .mlabel{font:700 9px 'Space Mono',monospace;letter-spacing:.24em;text-transform:uppercase;color:#A3A3A3;padding:8px 12px 6px}
 .menu-panel a{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:11px 12px;color:#D6D6D6;font:500 14px/1.3 'Archivo',sans-serif;text-decoration:none;transition:background .18s,color .18s}
@@ -228,6 +285,51 @@ header.on-dark .menu-btn:hover,header.on-dark .menu-btn[aria-expanded="true"]{ba
 .hero-meta .m b{display:block;font-family:'Archivo Expanded',sans-serif;font-size:15px;font-weight:600;letter-spacing:.02em}
 .hero-meta .m span{font-size:12.5px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
 
+/* ================= P2 BUILD (v5): four-tier ladder, ported from v31-light, mono ramp ================= */
+#build{background:transparent}
+.split{display:grid;gap:clamp(24px,3.5vw,56px);align-items:center;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.statrow{display:flex;flex-wrap:wrap;gap:10px 34px;margin:clamp(14px,2vw,24px) 0 clamp(20px,2.6vw,34px)}
+.statrow b{font-family:'Archivo Expanded',sans-serif;font-size:clamp(1.2rem,.9rem + 1vw,1.7rem);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.statrow span span{display:block;font:700 9.5px/1.4 'Space Mono',monospace;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.grid.two{display:grid;gap:clamp(12px,1.4vw,18px);grid-template-columns:repeat(2,minmax(0,1fr))}
+.tcard{border:1px solid rgba(24,24,24,.22);padding:clamp(18px,2vw,26px);background:transparent;transition:border-color .3s}
+.tcard:hover{border-color:var(--navy)}
+[data-theme="dark"] .tcard{border-color:rgba(226,226,226,.22)}
+[data-theme="dark"] .tcard:hover{border-color:#E2E2E2}
+.tcard h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;margin-bottom:8px}
+.tcard p{color:var(--blue);font-size:13.5px;line-height:1.55}
+.tcard .n{font:700 10px 'Space Mono',monospace;color:var(--blue);letter-spacing:.14em;display:flex;align-items:center;gap:8px;margin-bottom:14px;text-transform:uppercase}
+.tcard .n .sw,.ladder-key .sw{width:10px;height:10px;display:inline-block;flex:none;border:1px solid rgba(24,24,24,.25)}
+[data-theme="dark"] .tcard .n .sw,[data-theme="dark"] .ladder-key .sw{border-color:rgba(226,226,226,.25)}
+.ladder-key{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:clamp(14px,2vw,22px);font:700 10px/1.5 'Space Mono',monospace;letter-spacing:.12em;color:var(--blue)}
+.ladder-key span{display:inline-flex;align-items:center;gap:6px}
+.growth-ladder{max-width:330px;height:auto}
+.tier{opacity:0;transform:translateY(18px)}
+.panel.in .tier{animation:rise .7s cubic-bezier(.2,0,0,1) forwards}
+.panel.in .tier:nth-of-type(1){animation-delay:.15s}
+.panel.in .tier:nth-of-type(2){animation-delay:.33s}
+.panel.in .tier:nth-of-type(3){animation-delay:.51s}
+.panel.in .tier:nth-of-type(4){animation-delay:.69s}
+.cap{opacity:0}
+.panel.in .cap{animation:capIn .9s ease-out 1s forwards}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+@keyframes capIn{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .tier,.cap{opacity:1;transform:none;animation:none!important}
+}
+@media (max-width:960px){.split{grid-template-columns:1fr}}
+@media (max-width:520px){.grid.two{grid-template-columns:1fr}}
+
+/* ================= v5 mind-atlas canvas: far background, under the panels ================= */
+#universe{position:absolute;inset:0;z-index:0;pointer-events:none}
+#track{position:relative;z-index:1}
+@media (max-width:860px), (prefers-reduced-motion: reduce){
+  #universe{display:none} /* vertical fallback: solid panel grounds, no field */
+  #build{background:var(--cement-deep)}
+  /* vertical mode never adds .in (reveals are CSS-forced there) — force tiers too */
+  .tier,.cap{opacity:1;transform:none;animation:none!important}
+}
+
 /* ================= PROOF STRIP (v4): stack logos + shipped numbers, one marquee ================= */
 .proof-strip{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);border-top:1px solid rgba(228,228,228,.1);border-bottom:1px solid rgba(228,228,228,.1);margin-top:38px}
 .proof-strip .ptrack{display:flex;width:max-content;align-items:center;animation:marquee-left 46s linear infinite}
@@ -282,6 +384,7 @@ header.on-dark .menu-btn:hover,header.on-dark .menu-btn[aria-expanded="true"]{ba
   header .logo,header .logo span,header.on-dark .logo,header.on-dark .logo span{color:#E2E2E2}
   header .nav-cta,header.on-dark .nav-cta{background:#E2E2E2;color:#111;padding:10px 16px;font-size:11px}
   .menu-btn,header.on-dark .menu-btn{color:#E2E2E2;border-color:rgba(226,226,226,.5);padding:10px 14px;font-size:10px}
+  .tgl,header.on-dark .tgl{color:#E2E2E2;border-color:rgba(226,226,226,.5);width:37px;height:37px}
   #greetpill{display:none!important} /* !important: the island rule is declared later and would win otherwise */
   #p1 .hero-glow,#p1clone .hero-glow{animation:none}
   #p1,#p5{background:var(--cement)}
@@ -366,6 +469,17 @@ a.fchip:hover{border-color:var(--navy);background:rgba(255,255,255,.6)}
 .phone:hover .p-accept{background:#fff}
 .p-decline{font-size:10.5px;color:rgba(228,228,228,.62)}
 @media (max-width:860px){.phone-stage{margin:0 auto}}
+/* v5: short desktop viewports — shrink the phone + tighten so the footline
+   clears the hub chips (pre-existing v4 overlap at ~800px heights) */
+@media (min-width:861px) and (max-height:900px){
+  .phone{width:min(40vw,270px)}
+  .p-screen{min-height:380px;padding:42px 22px 22px;gap:9px}
+  .p-avatar{width:76px;height:76px}
+  .hub-row{margin-top:26px}
+  .cta-copycol h2{font-size:clamp(40px,4.6vw,72px);margin-bottom:22px}
+  .cta-copycol .gift{margin-bottom:24px}
+  .footline{bottom:84px}
+}
 /* ---- v2.2 finale bento (wide, Tarsi-style) ---- */
 .cta-bento{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;max-width:1080px;margin:44px auto 0;text-align:left}
 .bento-cta{display:block;background:var(--navy);color:var(--cement);padding:38px 40px;border-radius:0;text-decoration:none;transition:background .3s,transform .3s}
@@ -390,6 +504,7 @@ a.fchip:hover{border-color:var(--navy);background:rgba(255,255,255,.6)}
    stats rotate on hover. Not interactive. ---- */
 #greetpill{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:99;display:inline-flex;align-items:center;font:700 10px 'Space Mono',monospace;letter-spacing:.26em;padding:10px 30px 11px;background:#111;color:#EEE;border-radius:0 0 14px 14px;white-space:nowrap;text-transform:uppercase;box-shadow:0 12px 28px -14px rgba(0,0,0,.45);transition:background .3s;-webkit-user-select:none;user-select:none}
 #greetpill:hover{background:#000}
+[data-theme="dark"] #greetpill{border:1px solid rgba(226,226,226,.18);border-top:0}
 #greetpill .gp-txt{transition:opacity .22s;pointer-events:none}
 #greetpill.swap .gp-txt{opacity:0}
 .skip-link{position:fixed;top:-60px;left:16px;z-index:200;background:var(--navy);color:var(--cement);padding:12px 18px;font:600 12px 'Archivo',sans-serif;letter-spacing:.06em;text-decoration:none;transition:top .2s}
@@ -446,13 +561,18 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <header id="hdr">
   <a class="logo" href="#" data-go="0" aria-label="JTL Growth — back to the start"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
   <div class="hdr-right">
+    <button class="tgl" id="tgl" type="button" aria-label="Toggle dark mode">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
     <nav class="menu-wrap" aria-label="Site menu">
       <button class="menu-btn magnet" id="menu-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="menu-panel">Menu <span class="mcaret" aria-hidden="true">&#9662;</span></button>
       <div class="menu-panel" id="menu-panel" hidden>
         <div class="mgroup"><div class="mlabel">Sections</div>
           <a href="#" data-go="0">Hero <span class="mk">01</span></a>
-          <a href="#" data-go="1">Live proof <span class="mk">02</span></a>
-          <a href="#" data-go="2">Contact <span class="mk">03</span></a>
+          <a href="#" data-go="1">What we build <span class="mk">02</span></a>
+          <a href="#" data-go="2">Live proof <span class="mk">03</span></a>
+          <a href="#" data-go="3">Contact <span class="mk">04</span></a>
         </div>
         <div class="mgroup"><div class="mlabel">Explore</div>
           <a href="/growth/">Growth software &middot; demo <span class="mk">&#8599;</span></a>
@@ -468,6 +588,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </header>
 
 <div id="viewport">
+<canvas id="universe" aria-hidden="true"></canvas>
 <div id="track">
 
   <!-- 1 · HERO -->
@@ -488,10 +609,80 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     </div>
   </section>
 
-  <!-- 2 · PROOF (v4): shipped work + stack strip, the one dark panel -->
+  <!-- 2 · BUILD (v5): four-tier ladder, absorbed from drafts/v31-light, mono ramp -->
+  <section class="panel" id="build" aria-label="What we build — the four-tier ladder">
+    <div class="inner split">
+      <div>
+        <div class="kicker rv"><span class="ki">02</span>WHAT WE BUILD</div>
+        <h2 class="rv d1" style="margin-top:24px;font-size:clamp(32px,3.8vw,58px)">Four tiers.<br>Built in <em class="accent">order.</em></h2>
+        <div class="statrow rv d2">
+          <span><b>&#8369;475K+</b><span>Contracts closed</span></span>
+          <span><b>15+</b><span>Agents in our ops</span></span>
+          <span><b>42</b><span>Member platform</span></span>
+          <span><b>34</b><span>Sales, one funnel</span></span>
+        </div>
+        <!-- E-01 levels-pyramid, compact, mono ramp -->
+        <svg class="growth-ladder rv d3" viewBox="-130 110 720 370" role="img"
+          aria-label="The JTL growth ladder: four stacked tiers under a locked self-driving summit">
+          <g class="tier">
+            <path d="M 230.0,462.0 L -118.0,330.0 L -62.9,296.0 L 230.0,407.1 Z" fill="var(--t1)" style="filter:brightness(.96)"/>
+            <path d="M 230.0,462.0 L 578.0,330.0 L 522.9,296.0 L 230.0,407.1 Z" fill="var(--t1)" style="filter:brightness(.87)"/>
+            <path d="M 230.0,407.1 L 522.9,296.0 L 230.0,184.9 L -62.9,296.0 Z" fill="var(--t1)" style="filter:brightness(1.05)"/>
+          </g>
+          <g class="tier">
+            <path d="M 230.0,394.7 L -51.3,288.0 L 3.8,256.0 L 230.0,341.8 Z" fill="var(--t2)" style="filter:brightness(.96)"/>
+            <path d="M 230.0,394.7 L 511.3,288.0 L 456.2,256.0 L 230.0,341.8 Z" fill="var(--t2)" style="filter:brightness(.87)"/>
+            <path d="M 230.0,341.8 L 456.2,256.0 L 230.0,170.2 L 3.8,256.0 Z" fill="var(--t2)" style="filter:brightness(1.05)"/>
+          </g>
+          <g class="tier">
+            <path d="M 230.0,329.4 L 15.4,248.0 L 67.6,218.0 L 230.0,279.6 Z" fill="var(--t3)" style="filter:brightness(.96)"/>
+            <path d="M 230.0,329.4 L 444.6,248.0 L 392.4,218.0 L 230.0,279.6 Z" fill="var(--t3)" style="filter:brightness(.87)"/>
+            <path d="M 230.0,279.6 L 392.4,218.0 L 230.0,156.4 L 67.6,218.0 Z" fill="var(--t3)" style="filter:brightness(1.05)"/>
+          </g>
+          <g class="tier">
+            <path d="M 230.0,267.2 L 79.2,210.0 L 125.6,184.0 L 230.0,223.6 Z" fill="var(--t4)" style="filter:brightness(.96)"/>
+            <path d="M 230.0,267.2 L 380.8,210.0 L 334.4,184.0 L 230.0,223.6 Z" fill="var(--t4)" style="filter:brightness(.84)"/>
+            <path d="M 230.0,223.6 L 334.4,184.0 L 230.0,144.4 L 125.6,184.0 Z" fill="var(--t4)" style="filter:brightness(1.07)"/>
+          </g>
+          <g class="cap">
+            <g fill="var(--cement)" fill-opacity=".5" stroke="var(--t3)" stroke-width="1.4" stroke-dasharray="5 4">
+              <path d="M 230.0,209.2 L 137.2,174.0 L 230.0,120 Z"/>
+              <path d="M 230.0,209.2 L 322.8,174.0 L 230.0,120 Z"/>
+            </g>
+            <g transform="translate(230,172)">
+              <rect x="-9" y="-4" width="18" height="14" rx="2.5" fill="var(--navy)"/>
+              <path d="M -5.5 -4 v-4 a5.5 5.5 0 0 1 11 0 v4" fill="none" stroke="var(--navy)" stroke-width="2.4"/>
+            </g>
+          </g>
+        </svg>
+        <div class="ladder-key rv d4">
+          <span><span class="sw" style="background:var(--t4)"></span>OPS PORTALS</span>
+          <span><span class="sw" style="background:var(--t3)"></span>AI EMPLOYEES</span>
+          <span><span class="sw" style="background:var(--t2)"></span>AUTOMATIONS</span>
+          <span><span class="sw" style="background:var(--t1)"></span>SITE &amp; FUNNEL</span>
+        </div>
+      </div>
+      <div class="grid two">
+        <div class="tcard rv d2"><span class="n"><span class="sw" style="background:var(--t1)"></span>Tier 1</span>
+          <h3>Funnels &amp; Websites</h3>
+          <p>Pages engineered around one question: does the visitor take the next step? Copy, flow, and tracking included.</p></div>
+        <div class="tcard rv d3"><span class="n"><span class="sw" style="background:var(--t2)"></span>Tier 2</span>
+          <h3>Automation Systems</h3>
+          <p>Your tools, wired together. A lead triggers the sequence, the booking confirms itself, nothing slips — while you sleep.</p></div>
+        <div class="tcard rv d4"><span class="n"><span class="sw" style="background:var(--t3)"></span>Tier 3</span>
+          <h3>AI Employees</h3>
+          <p>Trained agents that answer, qualify, and follow up inside your inbox, chat, and CRM. Around the clock, on your process.</p></div>
+        <div class="tcard rv d5"><span class="n"><span class="sw" style="background:var(--t4)"></span>Tier 4</span>
+          <h3>Ops Portals</h3>
+          <p>Your team, tasks, and pipeline on one screen. AI seats handle the intake and the reporting.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · PROOF (v4): shipped work + stack strip, the one dark panel -->
   <section class="panel" id="pwork" aria-label="Live proof — shipped work and stack">
     <div class="inner">
-      <div class="kicker rv"><span class="ki">02</span>LIVE PROOF</div>
+      <div class="kicker rv"><span class="ki">03</span>LIVE PROOF</div>
       <h2 class="rv d1 wreveal" data-accent="live." style="margin-top:24px">Everything here is live.</h2>
       <p class="lead rv d2">Real client systems and our own products, built by hand on the stack below. We run our agency on the same systems we sell.</p>
       <div class="portfolio-grid" tabindex="0" role="region" aria-label="Shipped work gallery">
@@ -593,7 +784,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
           </a>
         </div>
         <div class="cta-copycol">
-          <div class="kicker rv"><span class="ki">03</span>FINAL CTA</div>
+          <div class="kicker rv"><span class="ki">04</span>FINAL CTA</div>
           <h2 style="margin-top:22px">Find the <em class="accent">leak.</em></h2>
           <div class="gift">
             <div class="glabel">A gift before you go</div>
@@ -647,7 +838,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </div>
 
 <nav id="dots" aria-label="Sections"></nav>
-<div id="counter">01 / 03</div>
+<div id="counter">01 / 04</div>
 <div id="hint"><span>Scroll</span><span class="arrow">→</span></div>
 
 <script>
@@ -659,8 +850,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   const hint=document.getElementById('hint');
   const hdr=document.getElementById('hdr');
   const N=panels.length;
-  const darkPanels=[1]; // v4: proof is the one dark panel
-  const LABELS=['Hero','Proof','Contact'];
+  const darkPanels=[2]; // v5: proof is the one dark panel (now index 2)
+  const LABELS=['Hero','Build','Proof','Contact'];
   let target=0,current=0,idx=0,raf=null,moved=false;
   // static mode = small screens OR prefers-reduced-motion; mirrors the CSS media list
   const mobile=()=>matchMedia('(max-width:860px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -677,7 +868,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   // virtual scroll map: transit segments slide the track, HOLD segments pin the
   // panel while extra scrolling scrubs its inner effect (words, phone feeds)
-  const HOLD={1:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
+  const HOLD={2:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
   // LOOP: extend the transit map one extra segment past the last real panel (i=N)
   // to arrive at the clone of panel 0 appended after it in the DOM. Forward-only:
   // scrolling past the clone wraps back to real position 0 (see loop()); scrolling
@@ -715,7 +906,19 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   // scroll-driven background morph (stolen: bg-color-morph-scroll), direct
   // per-frame backgroundColor set, no CSS transition, lerped between stops)
   const viewport=document.getElementById('viewport');
-  const STOPS=[[226,226,226],[16,16,16],[226,226,226],[226,226,226]]; // v4: light / dark proof / light / loop-wrap stop (clone == panel 0)
+  // v5: stops read from CSS vars so the dark register repaints them; last stop
+  // is the loop-wrap stop (clone == panel 0)
+  const STOP_VARS=['--bg-hero','--bg-build','--bg-proof','--bg-contact','--bg-hero'];
+  let STOPS=[];
+  function hex2rgb(h){h=h.trim().replace('#','');
+    if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    const n=parseInt(h,16);return [n>>16,(n>>8)&255,n&255];}
+  function readStops(){
+    const cs=getComputedStyle(document.documentElement);
+    STOPS=STOP_VARS.map(v=>hex2rgb(cs.getPropertyValue(v)));
+  }
+  readStops();
+  addEventListener('jtl-theme',()=>{readStops();paintBg(current>0?mapU(current/innerWidth).xu*innerWidth:0)});
   const lerp=(a,b,t)=>a+(b-a)*t;
   function paintBg(x){
     const p=Math.max(0,Math.min(N,x/innerWidth)); // N (not N-1): STOPS carries one extra wrap-stop for the clone
@@ -835,11 +1038,76 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 })();
 </script>
 <script>
+/* v5 theme toggle (ported from v31-light): persists to localStorage, updates
+   meta theme-color, fires jtl-theme so the bg morph + canvas re-read the vars */
+(function(){
+  var meta=document.querySelector('meta[name="theme-color"]');
+  function apply(t,init){
+    document.documentElement.setAttribute('data-theme',t);
+    if(!init){try{localStorage.setItem('jtl-theme',t)}catch(e){}}
+    meta.setAttribute('content',t==='dark'?'#121212':'#E2E2E2');
+    dispatchEvent(new Event('jtl-theme'));
+  }
+  apply(document.documentElement.getAttribute('data-theme')||'light',true);
+  window.jtlToggleTheme=function(){
+    apply(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+  };
+  document.getElementById('tgl').addEventListener('click',window.jtlToggleTheme);
+})();
+</script>
+<script>
+/* v5 mind-atlas field (absorbed from v31-light's universe canvas, recolored
+   mono): faint drifting nodes + near-neighbor links, far background under the
+   panels. DPR-aware, draws only while the tab is visible; hidden entirely in
+   the vertical fallback (mobile / prefers-reduced-motion) via CSS + JS guard. */
+(function(){
+  var cv=document.getElementById('universe');if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var off=function(){return matchMedia('(max-width:860px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches};
+  var DPR=Math.min(2,window.devicePixelRatio||1),W=0,H=0,P=[],NP=0;
+  var NODE='24,24,24',LINK='24,24,24';
+  function palette(){
+    var dark=document.documentElement.getAttribute('data-theme')==='dark';
+    NODE=dark?'226,226,226':'24,24,24';
+    LINK=NODE;
+  }
+  palette();addEventListener('jtl-theme',palette);
+  function fit(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    NP=Math.min(80,Math.max(36,Math.round(W*H/30000)));
+    while(P.length<NP)P.push({x:Math.random()*1000,y:Math.random()*1000,
+      v:.05+Math.random()*.10,s:Math.random()<.15?1.9:1.2});
+    P.length=NP;}
+  fit();addEventListener('resize',fit);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var i,j,p,q,dx,dy,d;
+    for(i=0;i<NP;i++){p=P[i];p.x+=p.v;p.y-=p.v*.55;
+      if(p.x>1000)p.x-=1000;if(p.y<0)p.y+=1000;
+      p.sx=p.x/1000*W;p.sy=p.y/1000*H;}
+    ctx.lineWidth=1;ctx.strokeStyle='rgba('+LINK+',1)';
+    for(i=0;i<NP;i++){p=P[i];
+      for(j=i+1;j<NP;j++){q=P[j];dx=p.sx-q.sx;dy=p.sy-q.sy;d=dx*dx+dy*dy;
+        if(d<10500){ctx.globalAlpha=.06*(1-d/10500);
+          ctx.beginPath();ctx.moveTo(p.sx,p.sy);ctx.lineTo(q.sx,q.sy);ctx.stroke();}}}
+    ctx.globalAlpha=1;
+    ctx.fillStyle='rgba('+NODE+',1)';
+    for(i=0;i<NP;i++){p=P[i];ctx.globalAlpha=.16;
+      ctx.beginPath();ctx.arc(p.sx,p.sy,p.s,0,6.2832);ctx.fill();}
+    ctx.globalAlpha=1;
+  }
+  (function tick(){
+    if(document.visibilityState==='visible'&&!off())draw();
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+<script>
   // v4 Dynamic Island: greeting at rest, section readout while scrolling,
   // rotating live stats on hover, click opens the \u2318K palette
   (function(){
     const el=document.getElementById('greetpill'),txt=el.querySelector('.gp-txt');
-    const LBL=['HERO','PROOF','CONTACT'];
+    const LBL=['HERO','BUILD','PROOF','CONTACT'];
     const STATS=['\u20b1475K+ IN CLIENT CONTRACTS CLOSED','15+ AI AGENTS ON DUTY RIGHT NOW','42-MEMBER COMMUNITY \u00b7 BUILT FROM ZERO','34 PAID CUSTOMERS FROM ONE FUNNEL'];
     let mode='greet',hoverT=null,idleT=null,lastU=0,si=0;
     function greet(){
@@ -857,7 +1125,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     function render(){
       if(mode==='hover')put(STATS[si%STATS.length]);
       else if(mode==='nav'){
-        const i=Math.round(Math.max(0,Math.min(3,window.__xu||0)))%3;
+        const i=Math.round(Math.max(0,Math.min(4,window.__xu||0)))%4;
         put('[ 0'+(i+1)+' / '+LBL[i]+' ]');
       }else put(greet());
     }
@@ -980,8 +1248,10 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   function dot(i){var d=document.querySelectorAll('#dots button')[i];if(d)d.click()}
   var ACTIONS=[
     {t:'Hero — Growth, engineered',k:'01',f:function(){dot(0)}},
-    {t:'Live proof — shipped work + stack',k:'02',f:function(){dot(1)}},
-    {t:'Find the leak — contact',k:'03',f:function(){dot(2)}},
+    {t:'The ladder — what we build',k:'02',f:function(){dot(1)}},
+    {t:'Live proof — shipped work + stack',k:'03',f:function(){dot(2)}},
+    {t:'Find the leak — contact',k:'04',f:function(){dot(3)}},
+    {t:'Toggle dark / light',k:'◐',f:function(){if(window.jtlToggleTheme)window.jtlToggleTheme()}},
     {t:'Copy the 60-second audit prompt',k:'⧉',f:function(){var g=document.getElementById('giftcopy');if(g)g.click()}},
     {t:'Growth software — watch the demo',k:'↗',f:function(){location.href='/growth/'}},
     {t:'Free build: The AI Employee',k:'↗',f:function(){location.href='/ai-employee/'}},
