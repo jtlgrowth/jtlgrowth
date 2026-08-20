@@ -47,7 +47,30 @@ async function walk(pg) { // fire every IntersectionObserver, then settle
   ok('hero stats strip gone (both copies)', (await pg.$$eval('.hero-meta', e => e.length)) === 0);
   ok('ladder panel gone from home', !(await pg.$('#build')));
   ok('proof panel gone from home', !(await pg.$('#pwork')));
-  ok('about panel has one proof card', (await pg.$$eval('.proof-card', e => e.length)) === 1);
+  // v6.1: the proof card and the small round portrait were removed (the face was on
+  // this panel three times); the founder chips became tabs that swap copy AND portrait
+  ok('proof card removed', (await pg.$$eval('.proof-card', e => e.length)) === 0);
+  ok('duplicate small portrait removed', (await pg.$$eval('.about-por', e => e.length)) === 0);
+  ok('two founder tabs', (await pg.$$eval('.who-tabs [role="tab"]', e => e.length)) === 2);
+  ok('jamz selected by default', (await pg.$eval('#tab-jamz', e => e.getAttribute('aria-selected'))) === 'true');
+  ok('only jamz portrait visible', (await pg.$$eval('.about-face .face', e =>
+    e.filter(x => parseFloat(getComputedStyle(x).opacity) > 0.5).map(x => x.id))).join() === 'face-jamz');
+  await pg.evaluate(() => document.querySelectorAll('#dots button')[1].click());
+  await pg.waitForTimeout(1400);
+  await pg.click('#tab-gwen');
+  await pg.waitForTimeout(800);
+  ok('clicking Gwen swaps the copy', (await pg.$$eval('.pane', e => e.filter(x => !x.hidden).map(x => x.id))).join() === 'pane-gwen');
+  ok('clicking Gwen swaps the portrait', (await pg.$$eval('.about-face .face', e =>
+    e.filter(x => parseFloat(getComputedStyle(x).opacity) > 0.5).map(x => x.id))).join() === 'face-gwen');
+  ok('Gwen copy is actually visible, not left at opacity 0',
+    parseFloat(await pg.$eval('#pane-gwen h2', e => getComputedStyle(e).opacity)) > 0.95);
+  ok('tab roving tabindex is correct',
+    (await pg.$eval('#tab-jamz', e => e.tabIndex)) === -1 && (await pg.$eval('#tab-gwen', e => e.tabIndex)) === 0);
+  await pg.keyboard.press('ArrowLeft');
+  await pg.waitForTimeout(500);
+  ok('arrow keys move between tabs', (await pg.$eval('#tab-jamz', e => e.getAttribute('aria-selected'))) === 'true');
+  await pg.evaluate(() => document.querySelectorAll('#dots button')[0].click());
+  await pg.waitForTimeout(1200);
   ok('bg morph stops match panel count', await pg.evaluate(() =>
     getComputedStyle(document.documentElement).getPropertyValue('--bg-about').trim() !== ''));
   const nav = await pg.$$eval('.nav-row a', e => e.map(x => x.getAttribute('href')).join(','));
@@ -71,6 +94,41 @@ for (const p of ALL) {
     return r;
   });
   ok(`no bracket chip ${p}`, bad.length === 0, bad.join(','));
+  await pg.close();
+}
+
+// ---------- 3b. house style: no em dashes in copy, anywhere ----------
+// Owner rule, 2026-08-21. Asserted against RENDERED text plus the attributes and
+// meta a visitor or a crawler actually reads, so a dash cannot sneak back in via
+// an alt tag, a JSON-LD description, or a JS-built string. Comments and CSS are
+// not copy and are not checked.
+for (const p of ALL) {
+  const pg = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  await pg.goto(BASE + p, { waitUntil: 'networkidle' });
+  await pg.waitForTimeout(700);
+  const found = await pg.evaluate(() => {
+    const hits = [];
+    const dash = /\u2014/;
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (n.parentElement && /^(SCRIPT|STYLE)$/.test(n.parentElement.tagName)) continue;
+      if (dash.test(n.nodeValue)) hits.push('text: ' + n.nodeValue.trim().slice(0, 60));
+    }
+    document.querySelectorAll('[alt],[title],[aria-label],[placeholder]').forEach(el => {
+      ['alt', 'title', 'aria-label', 'placeholder'].forEach(a => {
+        const v = el.getAttribute(a);
+        if (v && dash.test(v)) hits.push(a + ': ' + v.slice(0, 60));
+      });
+    });
+    document.querySelectorAll('meta[name="description"],meta[property^="og:"],meta[name^="twitter:"]').forEach(m => {
+      if (dash.test(m.content || '')) hits.push('meta: ' + m.content.slice(0, 60));
+    });
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(s => {
+      if (dash.test(s.textContent || '')) hits.push('json-ld: ' + (s.textContent.match(/.{0,50}\u2014.{0,30}/) || [''])[0]);
+    });
+    return hits;
+  });
+  ok(`no em dash in copy ${p}`, found.length === 0, found.slice(0, 3).join(' | '));
   await pg.close();
 }
 

@@ -101,7 +101,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       "@id": "https://jtlgrowth.com/#website",
       "url": "https://jtlgrowth.com/",
       "name": "JTL Growth",
-      "description": "JTL Growth — AI and automation agency site: services (the four-tier ladder), products, workshop, shipped work, founder profile, and free tools (Inbox Scout, The AI Employee).",
+      "description": "JTL Growth, an AI and automation agency. Site sections: services (the four-tier ladder), products, workshop, shipped work, founder profile, and free tools (Inbox Scout, The AI Employee).",
       "publisher": { "@id": "https://jtlgrowth.com/#organization" },
       "inLanguage": "en"
     }
@@ -205,8 +205,6 @@ header.on-dark .menu-btn:hover,header.on-dark .menu-btn[aria-expanded="true"]{ba
 [data-theme="dark"] .menu-btn{color:var(--navy);border-color:rgba(226,226,226,.4)}
 [data-theme="dark"] #dots button.active{border-color:rgba(226,226,226,.3)}
 [data-theme="dark"] .hub-chip{border-color:rgba(226,226,226,.3)}
-[data-theme="dark"] .fchip{background:rgba(255,255,255,.06);border-color:rgba(226,226,226,.25)}
-[data-theme="dark"] a.fchip:hover{border-color:#E2E2E2;background:rgba(255,255,255,.1)}
 /* v5 theme toggle */
 .tgl{width:41px;height:41px;border:1px solid rgba(24,24,24,.35);background:transparent;color:var(--navy);cursor:pointer;display:inline-grid;place-items:center;transition:background .25s,color .25s,border-color .25s;padding:0}
 .tgl svg{width:16px;height:16px}
@@ -258,7 +256,7 @@ header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 
 /* ---------- reveals ---------- */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.panel.in .rv{opacity:1;transform:none}
+.panel.in .rv,.rv.shown{opacity:1;transform:none}
 .panel.in .rv.d1{transition-delay:.08s}.panel.in .rv.d2{transition-delay:.18s}.panel.in .rv.d3{transition-delay:.28s}.panel.in .rv.d4{transition-delay:.4s}.panel.in .rv.d5{transition-delay:.52s}
 
 /* panel backgrounds are painted by the JS color morph on #viewport;
@@ -281,29 +279,38 @@ header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 .split{display:grid;gap:clamp(24px,3.5vw,56px);align-items:center;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
 @media (max-width:960px){.split{grid-template-columns:1fr}}
 
-/* ================= v6 ABOUT ME: the middle panel. One proof asset, not a stat strip
-   (sahni discipline: reuse one strong artifact rather than diluting across many). ================= */
+/* ================= v6.1 ABOUT: two founders, one panel. The proof card and the
+   small round portrait are gone (Owner: the face was on this panel three times).
+   The founder chips are now real tabs — click Gwen and the copy AND the portrait
+   swap to Gwen. ================= */
 #about{background:transparent}
-#about .split{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center}
-#about h2{font-size:clamp(32px,3.8vw,58px);margin-top:8px}
-.about-por{width:78px;height:78px;border-radius:50%;object-fit:cover;object-position:top;filter:grayscale(1);border:1px solid rgba(24,24,24,.2);display:block}
-.about-copy .lead{margin-top:18px;max-width:54ch}
-.about-links{margin-top:clamp(22px,2.6vw,36px);justify-content:flex-start}
-.proof-card{border:1px solid rgba(24,24,24,.22);background:rgba(255,255,255,.3);padding:clamp(22px,2.4vw,34px)}
-.pc-head{display:flex;align-items:center;gap:9px;font:700 10px 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
-.pc-dot{width:7px;height:7px;border-radius:50%;background:var(--wood);animation:pcPulse 2.4s ease-in-out infinite}
-@keyframes pcPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
-.pc-line{margin-top:14px;font-size:15px;line-height:1.6;color:var(--navy);max-width:42ch}
-.pc-figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 26px;margin-top:clamp(22px,2.4vw,32px)}
-.pc-figs dt{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:clamp(1.35rem,1rem + 1.1vw,1.9rem);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.pc-figs dd{margin-top:5px;font:700 9.5px/1.45 'Space Mono',monospace;letter-spacing:.11em;text-transform:uppercase;color:var(--blue)}
-.pc-cta{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(22px,2.4vw,30px);font:700 10.5px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm);padding-bottom:4px;transition:gap .3s,border-color .3s}
-.pc-cta:hover{gap:16px;border-color:var(--navy)}
-.pc-cta .arr{font-family:'Archivo',sans-serif;font-weight:400}
-[data-theme="dark"] .proof-card{background:rgba(255,255,255,.045);border-color:rgba(226,226,226,.2)}
-[data-theme="dark"] .about-por{border-color:rgba(226,226,226,.22)}
-@media (max-width:960px){#about .split{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.pc-dot{animation:none}}
+#about .split{grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);align-items:center}
+#about h2{font-size:clamp(30px,3.6vw,54px);margin-top:8px}
+.about-copy .lead{margin-top:16px;max-width:52ch}
+.about-links{margin-top:clamp(20px,2.4vw,32px);justify-content:flex-start}
+
+/* the two founder tabs — same pill the chips used, now interactive */
+.who-tabs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:clamp(18px,2.2vw,28px)}
+.who{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(24,24,24,.22);border-radius:999px;padding:8px 18px 8px 9px;background:rgba(255,255,255,.35);color:var(--navy);font:inherit;text-align:left;cursor:pointer;transition:border-color .3s,background .3s,opacity .3s;opacity:.55}
+.who img{width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:top;filter:grayscale(1);flex:none}
+.who .fm b{display:block;font:600 13px 'Archivo',sans-serif;letter-spacing:.01em}
+.who .fm span{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+.who:hover{opacity:.85;border-color:rgba(24,24,24,.45)}
+.who[aria-selected="true"]{opacity:1;border-color:var(--navy);background:rgba(255,255,255,.62)}
+[data-theme="dark"] .who{background:rgba(255,255,255,.06);border-color:rgba(226,226,226,.22)}
+[data-theme="dark"] .who[aria-selected="true"]{border-color:#E2E2E2;background:rgba(255,255,255,.12)}
+.pane:focus-visible{outline:2px solid var(--wood);outline-offset:8px}
+
+/* the portrait — one face, big, whoever is selected */
+.about-face{position:relative;aspect-ratio:4/5;width:min(100%,430px);margin-left:auto;border:1px solid rgba(24,24,24,.16)}
+[data-theme="dark"] .about-face{border-color:rgba(226,226,226,.16)}
+.about-face .face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;filter:grayscale(1) contrast(1.04);opacity:0;transition:opacity .5s cubic-bezier(.2,.7,.2,1)}
+.about-face .face.is-on{opacity:1}
+@media (prefers-reduced-motion:reduce){.about-face .face{transition:none}}
+@media (max-width:960px){
+  #about .split{grid-template-columns:1fr}
+  .about-face{width:min(100%,330px);margin:0 0 clamp(22px,4vw,34px);order:-1}
+}
 
 /* ---- v6 visible primary nav (sahni.ai shape). MENU stays for the long tail;
      this row hides at the mobile breakpoint where MENU takes over. ---- */
@@ -356,20 +363,12 @@ header.on-dark .nav-row a{color:#E2E2E2}
   .footline{position:static;margin-top:70px}
   #p1 .bignum{font-size:24vh}
   .wreveal .w{color:inherit}
-  .founder-mini,.hub-row{justify-content:center}
+  .hub-row{justify-content:center}
 }
 @media (max-width:860px){
   .hub-chip{width:100%;justify-content:space-between}
   .menu-panel{position:fixed;left:5vw;right:5vw;top:64px;min-width:0}
 }
-
-/* ---- v4 founders mini chips (folded into contact panel) ---- */
-.founder-mini{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
-.fchip{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(24,24,24,.22);border-radius:999px;padding:8px 18px 8px 9px;text-decoration:none;color:var(--navy);background:rgba(255,255,255,.35);transition:border-color .3s,background .3s}
-a.fchip:hover{border-color:var(--navy);background:rgba(255,255,255,.6)}
-.fchip img{width:38px;height:38px;border-radius:50%;object-fit:cover;filter:grayscale(1)}
-.fchip .fm b{display:block;font:600 13px 'Archivo',sans-serif;letter-spacing:.01em}
-.fchip .fm span{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
 
 /* ---- v4 hub chips: buttons out to the landing pages ---- */
 .hub-row{display:flex;gap:14px;margin-top:48px;flex-wrap:wrap;justify-content:center}
@@ -511,7 +510,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <a class="skip-link" href="#p5">Skip to contact</a>
 <div id="greetpill" aria-hidden="true"><span class="gp-txt"></span></div>
 <header id="hdr">
-  <a class="logo" href="#" data-go="0" aria-label="JTL Growth — back to the start"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
+  <a class="logo" href="#" data-go="0" aria-label="JTL Growth, back to the start"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
   <nav class="nav-row" aria-label="Primary">
     <a href="/services/">Services</a>
     <a href="/products/">Products</a>
@@ -555,7 +554,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <div id="track">
 
   <!-- 1 · HERO -->
-  <section class="panel in" id="p1" aria-label="JTL Growth — AI and automation agency">
+  <section class="panel in" id="p1" aria-label="JTL Growth, AI and automation agency">
     <div class="grid-lines"></div>
     <div class="hero-glow"></div>
     <div class="inner hero-center">
@@ -566,37 +565,56 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     </div>
   </section>
 
-  <!-- 2 · ABOUT ME (v6): the Owner's own section. sahni.ai shape - hero, about,
-       one proof asset, CTA. The four-tier ladder that lived here moved to /services/. -->
-  <section class="panel" id="about" aria-label="About Jamz Jamorol, founder">
-    <div class="inner split">
+  <!-- 2 · ABOUT (v6.1, Owner ask): the proof card and the small round portrait are
+       gone — the face was showing three times on one panel. One big portrait, and the
+       two founder chips became TABS: click Gwen and the panel is about Gwen.
+       Public-name rule (company/profile.md:26): first names + photos only. -->
+  <section class="panel" id="about" aria-label="About the founders">
+    <div class="inner split about-split">
       <div class="about-copy">
-        <img class="about-por rv" src="assets/jamz.png" alt="Jamz Jamorol" width="96" height="96" loading="lazy">
-        <h2 class="rv d1">He builds the systems <em class="accent">he sells.</em></h2>
-        <p class="lead rv d2">I&rsquo;m Jamz Jamorol. I run JTL Growth out of Caloocan with my co-founder Gwen &mdash; and with an AI workforce that handles the repetitive half of the work, so a two-person firm ships like a ten-person one.</p>
-        <p class="lead rv d3">Since January 2025 I&rsquo;ve been building AI, automation and CRM systems for coaches, agencies and small businesses: funnels, client portals, content engines, lead engines, and the operations underneath them. Clients in the Philippines, the US, Europe and Australia.</p>
-        <p class="lead rv d3">Everything on this site runs on the same stack we install for you. We don&rsquo;t sell a system we don&rsquo;t run ourselves.</p>
-        <div class="hub-row about-links rv d4">
-          <a class="hub-chip magnet" href="/jamz-jamorol/">Full profile <span class="arr">↗</span></a>
-          <a class="hub-chip magnet" href="/work/">What we&rsquo;ve shipped <span class="arr">↗</span></a>
+        <div class="who-tabs" role="tablist" aria-label="Choose a founder">
+          <button class="who" type="button" role="tab" id="tab-jamz" aria-controls="pane-jamz" aria-selected="true" data-who="jamz">
+            <img src="assets/portrait-jamz.jpg" alt="" width="38" height="38">
+            <span class="fm"><b>Jamz Jamorol</b><span>Founder &middot; systems</span></span>
+          </button>
+          <button class="who" type="button" role="tab" id="tab-gwen" aria-controls="pane-gwen" aria-selected="false" tabindex="-1" data-who="gwen">
+            <img src="assets/portrait-gwen.jpg" alt="" width="38" height="38">
+            <span class="fm"><b>Gwen Ayala</b><span>Co-founder &middot; OBM + strategy</span></span>
+          </button>
+        </div>
+
+        <div class="pane" id="pane-jamz" role="tabpanel" aria-labelledby="tab-jamz" tabindex="0">
+          <h2 class="rv d1">He builds the systems <em class="accent">he sells.</em></h2>
+          <p class="lead rv d2">I&rsquo;m Jamz Jamorol. I run JTL Growth out of Caloocan with my co-founder Gwen, and with an AI workforce that handles the repetitive half of the work, so a two-person firm ships like a ten-person one.</p>
+          <p class="lead rv d3">Since January 2025 I&rsquo;ve been building AI, automation and CRM systems for coaches, agencies and small businesses: funnels, client portals, content engines, lead engines, and the operations underneath them. Clients in the Philippines, the US, Europe and Australia.</p>
+          <p class="lead rv d3">Everything on this site runs on the same stack we install for you. We don&rsquo;t sell a system we don&rsquo;t run ourselves.</p>
+          <div class="hub-row about-links rv d4">
+            <a class="hub-chip magnet" href="/jamz-jamorol/">Full profile <span class="arr">↗</span></a>
+            <a class="hub-chip magnet" href="/work/">What we&rsquo;ve shipped <span class="arr">↗</span></a>
+          </div>
+        </div>
+
+        <!-- Gwen's copy follows her own bio bible (VeniceCorp/gwen/knowledge/gwen-bio.md):
+             her one-liner as the headline, her stated ventures, the locked "5 years"
+             figure. Two rules from that file are honoured here: NO EM DASHES in her
+             voice, and AVAS is written as "runs" rather than founder/co-founder,
+             because her bio says founder and proposals she signed say co-founder and
+             that conflict is hers to settle, not ours to paper over. -->
+        <div class="pane" id="pane-gwen" role="tabpanel" aria-labelledby="tab-gwen" tabindex="0" hidden>
+          <h2 class="rv d1">She helps founders stop being the <em class="accent">bottleneck.</em></h2>
+          <p class="lead rv d2">Gwen Ayala is an Online Business Manager and Marketing Strategist, and co-founder of JTL Growth. She runs Ayala Virtual Assistance Services, founded Filipina Women in Business, and co-founded Robots &amp; Coffee.</p>
+          <p class="lead rv d3">Five years in the digital space. She started at 18 as a working student and a VA with no experience and no resume, landed international clients, and built her own agency. She now helps coaches, creatives and CEOs clean up their operations, launch with clarity, and scale with strategy.</p>
+          <p class="lead rv d3">On this side of the house she owns the part clients actually meet: the messaging, the content, and the conversation. That is why the call you book is hers.</p>
+          <div class="hub-row about-links rv d4">
+            <a class="hub-chip magnet" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book the call with Gwen <span class="arr">↗</span></a>
+            <a class="hub-chip magnet" href="https://ayalavirtualassistance.site/" target="_blank" rel="noopener">AVAS <span class="arr">↗</span></a>
+          </div>
         </div>
       </div>
-      <div class="about-proof">
-        <div class="proof-card rv d2">
-          <div class="pc-head"><span class="pc-dot" aria-hidden="true"></span>Live right now</div>
-          <p class="pc-line">The agency runs on its own product. One owner, an AI COO, and a real ledger behind every number below.</p>
-          <dl class="pc-figs">
-            <div><dt>&#8369;475K+</dt><dd>Client contracts closed</dd></div>
-            <div><dt>15+</dt><dd>AI agents on duty daily</dd></div>
-            <div><dt>42</dt><dd>Member platform, built from zero</dd></div>
-            <div><dt>34</dt><dd>Paid customers, one funnel</dd></div>
-          </dl>
-          <a class="pc-cta" href="/growth/">Watch the system run <span class="arr">↗</span></a>
-        </div>
-        <div class="founder-mini rv d3">
-          <a class="fchip" href="/jamz-jamorol/"><img src="assets/jamz.png" alt="Jamz Jamorol"><span class="fm"><b>Jamz Jamorol</b><span>Founder · systems</span></span></a>
-          <span class="fchip"><img src="assets/gwen.jpg" alt="Gwen"><span class="fm"><b>Gwen</b><span>Co-founder · brand</span></span></span>
-        </div>
+
+      <div class="about-face rv d2">
+        <img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async">
+        <img class="face" id="face-gwen" src="assets/portrait-gwen.jpg" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
       </div>
     </div>
   </section>
@@ -989,6 +1007,43 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   })();
 </script>
 <script>
+/* v6.1 founder tabs: the two chips on the About panel are a real tablist — the copy
+   pane AND the big portrait swap together. Arrow keys move between them (WAI-ARIA
+   tabs pattern), and the panel's own reveal classes are re-armed on the incoming
+   pane so a switch never lands on invisible text. */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.who-tabs .who'));
+  if(tabs.length<2)return;
+  function select(who,focus){
+    tabs.forEach(function(t){
+      var on=t.dataset.who===who;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      if(on&&focus)t.focus();
+      var pane=document.getElementById('pane-'+t.dataset.who);
+      if(pane){
+        pane.hidden=!on;
+        // the panel already fired its reveal; the incoming pane must not start hidden
+        if(on)[].slice.call(pane.querySelectorAll('.rv')).forEach(function(e){e.classList.add('shown')});
+      }
+      var face=document.getElementById('face-'+t.dataset.who);
+      if(face){face.classList.toggle('is-on',on);face.setAttribute('aria-hidden',on?'false':'true');}
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t.dataset.who,false)});
+    t.addEventListener('keydown',function(e){
+      var k=e.key,n=null;
+      if(k==='ArrowRight'||k==='ArrowDown')n=tabs[(i+1)%tabs.length];
+      else if(k==='ArrowLeft'||k==='ArrowUp')n=tabs[(i-1+tabs.length)%tabs.length];
+      else if(k==='Home')n=tabs[0];
+      else if(k==='End')n=tabs[tabs.length-1];
+      if(n){e.preventDefault();select(n.dataset.who,true)}
+    });
+  });
+})();
+</script>
+<script>
 /* v4.1 MENU disclosure: visible nav, keyboard-complete.
    Esc closes + returns focus, outside click closes, ArrowUp/Down walk items. */
 (function(){
@@ -1028,7 +1083,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
    pointer:fine only, disabled under prefers-reduced-motion */
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer: fine)').matches)return;
-  var els=[].slice.call(document.querySelectorAll('.nav-cta,.hub-chip,.fchip,.menu-btn'));
+  var els=[].slice.call(document.querySelectorAll('.nav-cta,.hub-chip,.who,.menu-btn'));
   els.forEach(function(el){
     el.style.transition='transform .3s cubic-bezier(.34,1.56,.64,1)';
     el.addEventListener('mousemove',function(e){
@@ -1071,19 +1126,19 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   var inp=document.getElementById('pal-in'),ls=document.getElementById('pal-ls');
   function dot(i){var d=document.querySelectorAll('#dots button')[i];if(d)d.click()}
   var ACTIONS=[
-    {t:'Hero — Growth, engineered',k:'01',f:function(){dot(0)}},
-    {t:'About — he builds the systems he sells',k:'02',f:function(){dot(1)}},
-    {t:'Find the leak — contact',k:'03',f:function(){dot(2)}},
-    {t:'Services — the four-tier ladder',k:'↗',f:function(){location.href='/services/'}},
-    {t:'Products — tools you can install today',k:'↗',f:function(){location.href='/products/'}},
-    {t:'Workshop — the founder AI workshop',k:'↗',f:function(){location.href='/workshop/'}},
-    {t:'Work — what we have shipped',k:'↗',f:function(){location.href='/work/'}},
+    {t:'Hero: Growth, engineered',k:'01',f:function(){dot(0)}},
+    {t:'About: he builds the systems he sells',k:'02',f:function(){dot(1)}},
+    {t:'Find the leak: contact',k:'03',f:function(){dot(2)}},
+    {t:'Services: the four-tier ladder',k:'↗',f:function(){location.href='/services/'}},
+    {t:'Products: tools you can install today',k:'↗',f:function(){location.href='/products/'}},
+    {t:'Workshop: the founder AI workshop',k:'↗',f:function(){location.href='/workshop/'}},
+    {t:'Work: what we have shipped',k:'↗',f:function(){location.href='/work/'}},
     {t:'Toggle dark / light',k:'◐',f:function(){if(window.jtlToggleTheme)window.jtlToggleTheme()}},
     {t:'Copy the 60-second audit prompt',k:'⧉',f:function(){var g=document.getElementById('giftcopy');if(g)g.click()}},
-    {t:'Growth software — watch the demo',k:'↗',f:function(){location.href='/growth/'}},
+    {t:'Growth software: watch the demo',k:'↗',f:function(){location.href='/growth/'}},
     {t:'Free build: The AI Employee',k:'↗',f:function(){location.href='/ai-employee/'}},
     {t:'Free build: Inbox Scout',k:'↗',f:function(){location.href='/inbox-scout/'}},
-    {t:'Founder — Jamz Jamorol',k:'↗',f:function(){location.href='/jamz-jamorol/'}}];
+    {t:'Founder: Jamz Jamorol',k:'↗',f:function(){location.href='/jamz-jamorol/'}}];
   var view=[],sel=0;
   function render(q){q=(q||'').toLowerCase();
     view=ACTIONS.filter(function(x){return !q||x.t.toLowerCase().indexOf(q)>-1});

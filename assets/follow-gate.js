@@ -122,8 +122,8 @@
 
     var fine = document.createElement('p');
     fine.className = 'jgate-fine';
-    fine.textContent = 'We can’t check follows from here — no platform lets a website do that. ' +
-      'This runs on trust. Your email gets the file and our build notes; unsubscribe any time.';
+    fine.textContent = 'We can’t check follows from here. No platform lets a website do that, so this runs on trust. ' +
+      'Your email gets the file and our build notes; unsubscribe any time.';
     box.appendChild(fine);
 
     var out = document.createElement('a');
@@ -176,7 +176,7 @@
       out.href = file;
       out.hidden = false;
       form.hidden = true;
-      msg.textContent = isRestore ? 'Unlocked. The link is below.' : 'Unlocked — the link is below, and a copy is on its way to ' + email + '.';
+      msg.textContent = isRestore ? 'Unlocked. The link is below.' : 'Unlocked. The link is below, and a copy is on its way to ' + email + '.';
       if (!isRestore) track('follow_gate_unlock', { gate: id, accounts: total });
     }
 
