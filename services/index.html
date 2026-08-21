@@ -125,6 +125,59 @@ section + section{border-top:1px solid var(--line)}
 .page-hero{padding-top:0}
 .page-hero h1{margin-top:16px}
 .page-hero .lead{margin-top:26px}
+/* ---- v6.2 centred hero (variant B, Owner pick 2026-08-21) ------------------
+   The fold is the composition, not a leftover: the section is sized to the
+   viewport so it closes on its own bottom edge instead of trailing off. Every
+   colour is a literal — this page is constant-dark and the token swap would
+   invert it. ------------------------------------------------------------- */
+.page-hero{
+  min-height:calc(100svh - clamp(150px,16vh,208px));
+  display:grid;place-items:center;padding-bottom:clamp(36px,5vw,72px);
+}
+.hero-mon{position:relative;max-width:1000px;margin:0 auto;text-align:center}
+.hero-mon h1{margin-top:20px;font-size:clamp(42px,6.4vw,92px)}
+.hero-mon .lead{margin-left:auto;margin-right:auto;max-width:58ch}
+.hero-mon .hub-row{justify-content:center}
+.hub-chip.solid{background:#E2E2E2;color:#101010;border-color:#E2E2E2}
+.hub-chip.solid:hover{background:#FFF;color:#101010;border-color:#FFF}
+
+/* the orbit: four tier chips at uneven radii. Even spacing reads as a grid,
+   which is the one thing an orbit must not look like. */
+.orbits{display:contents}  /* NOTE: display:contents has no layout box, so an
+   IntersectionObserver never fires on it — the reveal class lives on each .orb,
+   never on this wrapper. Putting rv here silently left the chips at opacity:0. */
+.orb{
+  position:absolute;display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(226,226,226,.24);background:rgba(11,11,12,.72);
+  padding:9px 14px;font:700 10px 'Space Mono',monospace;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(226,226,226,.86);white-space:nowrap;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.orb .on{color:#6E6E6E}
+.orb .sw{width:10px;height:10px;flex:none;border:1px solid rgba(226,226,226,.3)}
+.orb.o1{left:-5.8%;top:13%}
+.orb.o2{right:-5.8%;top:8%}
+.orb.o3{left:-1.4%;top:34%}
+.orb.o4{right:-1.4%;top:39%}
+
+/* lead two is a note about the background, not a second lead — it sits under a
+   rule so it stops competing with the headline. */
+.hero-note{margin-top:38px;padding-top:20px;border-top:1px solid rgba(226,226,226,.14);display:inline-block}
+.hero-note .hnl{font:700 9.5px 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:#6E6E6E;display:block;margin-bottom:7px}
+.hero-note p{margin:0;font-size:13.5px;line-height:1.6;color:rgba(226,226,226,.5);max-width:74ch}
+
+@media (max-width:1080px){
+  /* below this the chips would collide with the headline: they leave orbit and
+     become one centred row. */
+  .orbits{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:26px}
+  .orb{position:static}
+  .orb.o1,.orb.o2,.orb.o3,.orb.o4{inset:auto}
+}
+@media (max-width:860px){
+  .page-hero{min-height:0;padding-bottom:clamp(28px,7vw,48px)}
+  .hero-mon .hub-row{justify-content:stretch}
+}
+
 
 /* ---------- reveal on scroll (vertical pages; CSS-forced under reduced motion) ---------- */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -179,12 +232,14 @@ section + section{border-top:1px solid rgba(226,226,226,.1)}
 /* ---- the atlas layer: fixed, behind everything, pointer-transparent ---- */
 #atlas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 1.4s ease}
 #atlas.lit{opacity:1}
-/* scrim: the atlas must never fight the copy. Left column gets the heaviest
-   cover because that is where every h2 and lead paragraph lands. */
+/* scrim: the atlas must never fight the copy. v6.2 — the hero is now CENTRED,
+   so the old left-heavy cover would have lit one side of a symmetric headline
+   and shaded the other. Symmetric now: a soft well under the centre, matched
+   edge falloff, and the vertical caps that keep header and footer readable. */
 #atlas::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(11,11,12,.94) 0%,rgba(11,11,12,.82) 26%,rgba(11,11,12,.34) 48%,rgba(11,11,12,.2) 100%),
-  radial-gradient(ellipse 76% 60% at 58% 46%,transparent 40%,rgba(11,11,12,.66) 100%),
-  linear-gradient(180deg,rgba(11,11,12,.6),transparent 22%,transparent 76%,rgba(11,11,12,.76))}
+  radial-gradient(ellipse 44% 42% at 50% 46%,rgba(11,11,12,.9) 0%,rgba(11,11,12,.62) 54%,rgba(11,11,12,.24) 100%),
+  linear-gradient(90deg,rgba(11,11,12,.56) 0%,rgba(11,11,12,.2) 24%,rgba(11,11,12,.2) 76%,rgba(11,11,12,.56) 100%),
+  linear-gradient(180deg,rgba(11,11,12,.72),transparent 24%,transparent 72%,rgba(11,11,12,.82))}
 @media (max-width:1100px){#atlas::after{background:rgba(11,11,12,.86)}}
 body>header,main,footer{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){#atlas{transition:none}}
@@ -263,14 +318,23 @@ body>header,main,footer{position:relative;z-index:1}
 
 <main id="main">
   <section class="page-hero">
-    <div class="wrap">
+    <div class="wrap hero-mon">
+      <div class="orbits" aria-hidden="true">
+        <span class="orb o1 rv d2"><span class="on">01</span><span class="sw" style="background:#3A3A3A"></span>Site &amp; funnel</span>
+        <span class="orb o2 rv d3"><span class="on">02</span><span class="sw" style="background:#5E5E5E"></span>Automations</span>
+        <span class="orb o3 rv d3"><span class="on">03</span><span class="sw" style="background:#8F8F8F"></span>AI employees</span>
+        <span class="orb o4 rv d4"><span class="on">04</span><span class="sw" style="background:#E2E2E2"></span>Ops portals</span>
+      </div>
       <p class="eyebrow rv">Services</p>
       <h1 class="rv d1">Four tiers.<br>Built in <em class="accent">order.</em></h1>
       <p class="lead rv d2">We install the same four layers we run our own firm on, in the order that makes each one pay for the next. You do not buy tier three before tier one works.</p>
-      <p class="lead rv d3" style="margin-top:14px">Everything behind this page is the live memory of that system: every lesson, decision and note our AI workforce has accumulated, one point each.</p>
-      <div class="hub-row rv d4">
-        <a class="hub-chip magnet" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
+      <div class="hub-row rv d3">
+        <a class="hub-chip magnet solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
         <a class="hub-chip magnet" href="/work/">See it shipped <span class="arr">&#8599;</span></a>
+      </div>
+      <div class="hero-note rv d4">
+        <span class="hnl">About the background</span>
+        <p>Everything behind this page is the live memory of that system: every lesson, decision and note our AI workforce has accumulated, one point each.</p>
       </div>
     </div>
   </section>
