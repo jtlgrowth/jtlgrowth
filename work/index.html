@@ -205,6 +205,10 @@ section + section{border-top:1px solid var(--line)}
 .writeup{border-top:1px solid var(--line);padding-top:22px}
 .writeup h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;margin-bottom:10px}
 .writeup p{color:var(--gray);font-size:14.5px;line-height:1.65;max-width:52ch}
+.cs-link{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--navy);border-bottom:1px solid transparent;transition:border-color .25s}
+.cs-link:hover{border-bottom-color:var(--wood)}
+.cs-link .arr{transition:transform .3s}
+.cs-link:hover .arr{transform:translate(3px,-3px)}
 .writeup .does{margin-top:10px;font:700 10.5px 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
 @media (max-width:760px){.writeup-grid{grid-template-columns:1fr}}
 
@@ -280,8 +284,8 @@ section + section{border-top:1px solid var(--line)}
             <div class="refl"></div>
           </div>
           <div class="lap-name">FWIB</div>
-          <div class="lap-desc">42-member community platform for Filipina founders. Live and growing.</div>
-          <div class="lap-tags"><span>Community</span><span>42-Member Directory</span><span>Live</span></div>
+          <div class="lap-desc">Community platform for Filipina founders. Live and growing.</div>
+          <div class="lap-tags"><span>Community</span><span>Member Directory</span><span>Live</span></div>
         </a>
         <a class="lap-card rv d2" href="/" aria-label="JTL Growth site: open the page">
           <div class="laptop3d">
@@ -305,7 +309,7 @@ section + section{border-top:1px solid var(--line)}
           </div>
           <div class="lap-name">AVAS Night Shift</div>
           <div class="lap-desc">Six-page brand site for our sister agency. No template.</div>
-          <div class="lap-tags"><span>Brand Site</span><span>Live Ops Dashboard</span><span>Live</span></div>
+          <div class="lap-tags"><span>Brand Site</span><span>Custom Motion</span><span>Live</span></div>
         </a>
         <a class="lap-card rv d3" href="/robots-and-coffee/" aria-label="Robots and Coffee: open the page">
           <div class="laptop3d">
@@ -332,27 +336,19 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-tags"><span>Event Page</span><span>Seat Counter</span><span>Live</span></div>
         </a>
       </div>
-      <div class="proof-strip rv d3" aria-label="Numbers and stack">
+      <div class="proof-strip rv d3" aria-label="The stack we build on">
         <div class="ptrack">
-          <span class="pi"><b>&#8369;475K+</b> closed &middot; as of Aug 2026</span>
           <span class="pi"><img src="/assets/logos/claude.svg" alt="">Claude</span>
-          <span class="pi"><b>42</b>-member community</span>
           <span class="pi">GPT&#8209;5</span>
-          <span class="pi"><b>34</b> paid customers</span>
           <span class="pi"><img src="/assets/logos/googlegemini.svg" alt="">Gemini</span>
-          <span class="pi"><b>15+</b> agents on duty</span>
           <span class="pi"><img src="/assets/logos/n8n.svg" alt="">n8n</span>
           <span class="pi">GoHighLevel</span>
           <span class="pi"><img src="/assets/logos/supabase.svg" alt="">Supabase</span>
           <span class="pi"><img src="/assets/logos/fastapi.svg" alt="">FastAPI</span>
           <span class="pi">Playwright</span>
-          <span class="pi" aria-hidden="true"><b>&#8369;475K+</b> closed</span>
           <span class="pi" aria-hidden="true"><img src="/assets/logos/claude.svg" alt="">Claude</span>
-          <span class="pi" aria-hidden="true"><b>42</b>-member community</span>
           <span class="pi" aria-hidden="true">GPT&#8209;5</span>
-          <span class="pi" aria-hidden="true"><b>34</b> paid customers</span>
           <span class="pi" aria-hidden="true"><img src="/assets/logos/googlegemini.svg" alt="">Gemini</span>
-          <span class="pi" aria-hidden="true"><b>15+</b> agents on duty</span>
           <span class="pi" aria-hidden="true"><img src="/assets/logos/n8n.svg" alt="">n8n</span>
           <span class="pi" aria-hidden="true">GoHighLevel</span>
           <span class="pi" aria-hidden="true"><img src="/assets/logos/supabase.svg" alt="">Supabase</span>
@@ -370,23 +366,27 @@ section + section{border-top:1px solid var(--line)}
       <div class="writeup-grid">
         <div class="writeup rv d1">
           <h3>FWIB</h3>
-          <p>A community platform for Filipina Women in Business: a directory, member profiles, and the connective tissue that lets 42 founders find and support each other. Built on GoHighLevel with a custom front end, live and growing as new members join.</p>
+          <p>A community platform for Filipina Women in Business: a directory, member profiles, and the connective tissue that lets founders find and support each other. Built on GoHighLevel with a custom front end, live and growing as new members join.</p>
           <p class="does">What it does: hosts the member directory, onboarding, and community touchpoints in one place.</p>
+          <a class="cs-link" href="/work/fwib/">Read the build <span class="arr">&#8599;</span></a>
         </div>
         <div class="writeup rv d2">
           <h3>JTL Growth site</h3>
           <p>This site. Built and launched in a single night, from buying the domain to a live HTTPS deploy. The homepage runs a horizontal filmstrip; this page and the rest of the site run on the same vertical shell.</p>
           <p class="does">What it does: it is the agency's own storefront, services, products, workshop, and proof, all in one build.</p>
+          <a class="cs-link" href="/work/jtl-growth/">Read the build <span class="arr">&#8599;</span></a>
         </div>
         <div class="writeup rv d3">
           <h3>AVAS Night Shift</h3>
-          <p>A six-page brand site for AVAS, our sister agency, built without a template: custom layout, custom motion, its own visual language. It ships with a live ops dashboard behind it, not just a marketing shell.</p>
-          <p class="does">What it does: presents the AVAS brand publicly while running real operations data underneath.</p>
+          <p>A six-page brand site for AVAS, our sister agency, built without a template: custom layout, custom motion, its own visual language. The same client also runs an ops portal we built, on its own stack, so this is a brand surface with real operations work beside it rather than a marketing shell on its own.</p>
+          <p class="does">What it does: presents the AVAS brand publicly, with its own layout, motion and visual language rather than a template.</p>
+          <a class="cs-link" href="/work/avas-night-shift/">Read the build <span class="arr">&#8599;</span></a>
         </div>
         <div class="writeup rv d3">
           <h3>Robots &amp; Coffee</h3>
           <p>Our digital products library: courses, workshops, and AI resources, sold direct. It's the storefront for everything we've packaged from running the agency, now hosted at <a href="https://ayalavirtualassistance.site/robots-and-coffee" target="_blank" rel="noopener">ayalavirtualassistance.site</a>.</p>
           <p class="does">What it does: lets people learn the system, buy the kit, and run it themselves.</p>
+          <a class="cs-link" href="/work/robots-and-coffee/">Read the build <span class="arr">&#8599;</span></a>
         </div>
         <div class="writeup rv d4">
           <h3>AVAS AI Workshop</h3>

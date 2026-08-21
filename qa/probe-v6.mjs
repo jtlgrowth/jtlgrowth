@@ -10,13 +10,20 @@ const ALL = PAGES.concat(['/jamz-jamorol/', '/privacy/', '/growth/', '/setup/', 
 
 const browser = await chromium.launch();
 
-async function walk(pg) { // fire every IntersectionObserver, then settle
+async function walk(pg) { // fire every IntersectionObserver, then WAIT for the result
   const h = await pg.evaluate(() => document.body.scrollHeight);
   for (let y = 0; y < h; y += 600) { await pg.evaluate(v => scrollTo(0, v), y); await pg.waitForTimeout(90); }
-  // the last revealed element is still mid-transition at 900ms (.8s ease + .24s
-  // delay). Settling short here reads a live animation as a failed reveal — the
-  // same race that bit the v5 screenshots.
-  await pg.waitForTimeout(1800);
+  // A fixed settle is a race, not a wait. 1800ms was tuned to .8s ease + .24s
+  // delay and still read a live animation as a failed reveal on a loaded machine,
+  // twice. Poll for the actual condition instead and cap it, so a slow run costs
+  // time rather than a false failure, and a genuinely stuck reveal still fails.
+  const DEADLINE = 9000, STEP = 150;
+  for (let waited = 0; waited < DEADLINE; waited += STEP) {
+    const hidden = await pg.$$eval('.rv', els =>
+      els.filter(e => parseFloat(getComputedStyle(e).opacity) < 0.9).length);
+    if (hidden === 0) { await pg.waitForTimeout(120); return; }
+    await pg.waitForTimeout(STEP);
+  }
 }
 
 // ---------- 1. routes resolve ----------
@@ -232,27 +239,88 @@ for (const p of PAGES) {
   await pg.close();
 }
 
-// ---------- 8. the gates are GONE, and must stay gone ----------
-// Removed 2026-08-21. follow-gate.js shipped with `var WEBHOOK = ''`, so every
-// email a visitor typed was discarded while the gate promised it would be used,
-// and the workshop gate's data-file pointed at /downloads/… which never existed:
-// it unlocked into a 404. Both are now plain links. These assertions stop either
-// from creeping back in without a working endpoint behind it.
+// ---------- 8. the follow gate: locked, honest, and actually openable ----------
+// Rebuilt 2026-08-21 after the Owner asked for the follow-before-the-freebie
+// mechanic back, with a visible lock. The original shipped `var WEBHOOK = ''`
+// and binned every email it collected; it is now follow-only until a real
+// endpoint exists, and these assertions keep both halves honest.
 {
-  const pg = await browser.newPage();
-  for (const slug of ['/products/', '/workshop/']) {
-    await pg.goto(BASE + slug, { waitUntil: 'networkidle' });
-    await pg.waitForTimeout(400);
-    ok(`${slug} has no follow gate`, (await pg.locator('[data-follow-gate], .jgate').count()) === 0);
-    ok(`${slug} loads no follow-gate.js`, (await pg.locator('script[src*="follow-gate"]').count()) === 0);
-    const dead = await pg.$$eval('a[href]', as => as.filter(a => (a.getAttribute('href') || '').startsWith('/downloads/')).length);
-    ok(`${slug} offers no /downloads/ file`, dead === 0);
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const pg = await ctx.newPage();
+  await pg.goto(BASE + '/products/', { waitUntil: 'networkidle' });
+  await pg.waitForTimeout(1000);
+
+  ok('gate rendered', (await pg.locator('.jgate').count()) === 1);
+  ok('the reward is visible but locked', (await pg.locator('.jgate-vault').count()) === 1);
+  ok('the lock badge is showing', await pg.locator('.jgate-vault .jv-lock').isVisible());
+  const blurred = await pg.$eval('.jv-body', el => getComputedStyle(el).filter);
+  ok('the reward starts blurred', /blur\(/.test(blurred), blurred);
+
+  // the v6 bug: .jgate-out{display:block} beat the UA [hidden] rule, so the file
+  // was reachable before unlocking and the gate silently did nothing.
+  ok('download starts hidden', await pg.locator('.jgate-out').isHidden());
+  ok('hidden is real, not just the attribute',
+     (await pg.$eval('.jgate-out', el => getComputedStyle(el).display)) === 'none');
+
+  // no endpoint means no email field. A form that bins what you type is the bug.
+  const webhookSet = await pg.evaluate(() =>
+    fetch('/assets/follow-gate.js').then(r => r.text()).then(t => !/var WEBHOOK = '';/.test(t)));
+  const hasEmail = (await pg.locator('.jgate-form input').count()) > 0;
+  ok('email field exists only when there is somewhere to send it', hasEmail === webhookSet,
+     `field:${hasEmail} webhook:${webhookSet}`);
+  if (!webhookSet) {
+    const fine = await pg.locator('.jgate-fine').innerText();
+    ok('with no endpoint the page says it collects nothing', /nothing is collected/i.test(fine), fine.slice(0, 80));
   }
-  // the AgentKit link the products gate used to hide behind
-  await pg.goto(BASE + '/products/', { waitUntil: 'domcontentloaded' });
-  const kit = await pg.$$eval('a[href]', as => as.some(a => /github\.com\/jtlgrowth\/agentkit/.test(a.getAttribute('href') || '')));
-  ok('AgentKit is reachable as a plain link', kit);
-  await pg.close();
+
+  ok('submit is disabled until every profile is opened', await pg.locator('.jgate-form button').isDisabled());
+  ok('counter is aria-live', (await pg.locator('.jgate-count').getAttribute('aria-live')) === 'polite');
+  ok('the counter says opened, not followed',
+     /profiles opened/i.test(await pg.locator('.jgate-count').innerText()));
+
+  // asserted against the data file, not a hardcoded number: adding an account is
+  // a data edit and the probe must follow it rather than fail on it
+  const n = await pg.locator('.jgate-b').count();
+  const declared = await pg.evaluate(() => fetch('/assets/socials.json').then(r => r.json()).then(d => d.accounts.length));
+  ok('one button per account in socials.json', n === declared, `${n} buttons vs ${declared} declared`);
+
+  for (let i = 0; i < n; i++) {
+    const [popup] = await Promise.all([ctx.waitForEvent('page').catch(() => null), pg.locator('.jgate-b').nth(i).click()]);
+    if (popup) await popup.close();
+    await pg.waitForTimeout(120);
+  }
+  ok('all opened -> submit enabled', !(await pg.locator('.jgate-form button').isDisabled()));
+  await pg.click('.jgate-form button');
+  await pg.waitForTimeout(700);
+  ok('unlocking reveals the download', await pg.locator('.jgate-out').isVisible());
+  ok('unlocking lifts the blur', (await pg.$eval('.jv-body', el => getComputedStyle(el).filter)) === 'none');
+  ok('the download points at a real file',
+     /^https?:\/\//.test(await pg.locator('.jgate-out').getAttribute('href')));
+  await pg.reload({ waitUntil: 'networkidle' }); await pg.waitForTimeout(900);
+  ok('unlock survives a reload', await pg.locator('.jgate-out').isVisible());
+  await ctx.close();
+
+  const fresh = await browser.newContext();
+  const fp = await fresh.newPage();
+  await fp.goto(BASE + '/products/', { waitUntil: 'networkidle' }); await fp.waitForTimeout(900);
+  ok('a fresh visitor is locked again', await fp.locator('.jgate-out').isHidden());
+  await fresh.close();
+
+  const nojs = await browser.newContext({ javaScriptEnabled: false });
+  const np = await nojs.newPage();
+  await np.goto(BASE + '/products/', { waitUntil: 'domcontentloaded' });
+  ok('degrades to a plain link with JS off', (await np.locator('noscript').count()) > 0);
+  await nojs.close();
+
+  // /workshop/ still has no gate, because it still has no file to give away
+  const wp = await browser.newPage();
+  await wp.goto(BASE + '/workshop/', { waitUntil: 'networkidle' });
+  await wp.waitForTimeout(400);
+  ok('/workshop/ has no gate while it has no file',
+     (await wp.locator('[data-follow-gate], .jgate').count()) === 0);
+  const dead = await wp.$$eval('a[href]', as => as.filter(a => (a.getAttribute('href') || '').startsWith('/downloads/')).length);
+  ok('/workshop/ offers no /downloads/ file', dead === 0);
+  await wp.close();
 }
 
 // ---------- 8b. the live-URL claim on /work/ is actually clickable ----------

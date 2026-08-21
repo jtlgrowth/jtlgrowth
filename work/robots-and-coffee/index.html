@@ -15,17 +15,17 @@
 if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
-<title>The group · JTL Growth, AVAS, Robots &amp; Coffee, FWIB</title>
-<meta name="description" content="JTL Growth, Ayala Virtual Assistance Services, Robots &amp; Coffee and Filipina Women in Business: four businesses run by the same two founders on the same AI operations system. What each one is, and where to find it.">
-<link rel="canonical" href="https://jtlgrowth.com/group/">
+<title>Robots &amp; Coffee case study &middot; the storefront · JTL Growth</title>
+<meta name="description" content="The storefront for everything we packaged from running the agency: courses, workshops and AI resources, sold direct under its own brand.">
+<link rel="canonical" href="https://jtlgrowth.com/work/robots-and-coffee/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
-<meta property="og:title" content="The group · JTL Growth, AVAS, Robots &amp; Coffee, FWIB">
-<meta property="og:description" content="JTL Growth, Ayala Virtual Assistance Services, Robots &amp; Coffee and Filipina Women in Business: four businesses run by the same two founders on the same AI operations system. What each one is, and where to find it.">
-<meta property="og:url" content="https://jtlgrowth.com/group/">
-<meta property="og:image" content="https://jtlgrowth.com/og-image.png">
+<meta property="og:title" content="Robots &amp; Coffee case study &middot; the storefront · JTL Growth">
+<meta property="og:description" content="The storefront for everything we packaged from running the agency: courses, workshops and AI resources, sold direct under its own brand.">
+<meta property="og:url" content="https://jtlgrowth.com/work/robots-and-coffee/">
+<meta property="og:image" content="https://jtlgrowth.com/shots/rnc.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,6 +167,28 @@ section + section{border-top:1px solid var(--line)}
 #get-the-kit .wrap{max-width:820px}
 #get-the-kit h2{margin-top:14px}
 #get-the-kit .lead{margin-top:18px}
+
+/* ---------- case study ---------- */
+.cs-shot{margin-top:clamp(30px,4vw,52px);border:1px solid var(--line);background:var(--cement-deep);display:block}
+.cs-shot img{width:100%;height:auto;display:block}
+.cs-shot{text-decoration:none;position:relative;overflow:hidden}
+.cs-shot::after{content:attr(data-open);position:absolute;inset:0;display:grid;place-items:center;background:rgba(18,18,18,.72);color:#E2E2E2;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:0;transition:opacity .3s}
+.cs-shot:hover::after,.cs-shot:focus-visible::after{opacity:1}
+.cs-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.cs-tags span{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);border:1px solid var(--line);padding:5px 9px}
+.cs-step{display:grid;grid-template-columns:minmax(0,.34fr) minmax(0,.66fr);gap:clamp(20px,3vw,52px);align-items:start}
+.cs-step + .cs-step{margin-top:clamp(36px,4.5vw,68px);border-top:1px solid var(--line);padding-top:clamp(30px,4vw,54px)}
+.cs-step h2{font-size:clamp(24px,2.6vw,38px)}
+.cs-step .no{font:700 10.5px 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:12px}
+.cs-body p{color:var(--gray);font-size:15.5px;line-height:1.7;max-width:64ch}
+.cs-body p + p{margin-top:14px}
+.cs-note{border:1px solid var(--line);padding:clamp(22px,3vw,36px);margin-top:clamp(36px,4.5vw,68px)}
+.cs-note h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em}
+.cs-note p{margin-top:12px;color:var(--gray);font-size:15px;line-height:1.7;max-width:72ch}
+.cs-nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:clamp(40px,5vw,80px);padding-top:24px}
+.cs-nav a{font:700 11px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid transparent}
+.cs-nav a:hover{border-bottom-color:var(--wood)}
+@media (max-width:820px){.cs-step{grid-template-columns:1fr;gap:14px}}
 </style>
 </head>
 <body>
@@ -177,7 +199,7 @@ section + section{border-top:1px solid var(--line)}
     <a href="/services/">Services</a>
     <a href="/products/">Products</a>
     <a href="/workshop/">Workshop</a>
-    <a href="/work/">Work</a>
+    <a href="/work/" aria-current="page">Work</a>
   </nav>
   <div class="hdr-right">
     <button class="tgl" id="tgl" type="button" aria-label="Toggle dark mode">
@@ -200,7 +222,7 @@ section + section{border-top:1px solid var(--line)}
           <a href="/inbox-scout/">Inbox Scout <span class="mk">&#8599;</span></a>
           <a href="/robots-and-coffee/">Robots &amp; Coffee <span class="mk">&#8599;</span></a>
           <a href="/jamz-jamorol/">Jamz Jamorol <span class="mk">&#8599;</span></a>
-          <a href="/group/" aria-current="page">The group <span class="mk">&#8599;</span></a>
+          <a href="/group/">The group <span class="mk">&#8599;</span></a>
           <a href="/apps/">Apps <span class="mk">&#8599;</span></a>
         </div>
       </div>
@@ -211,79 +233,64 @@ section + section{border-top:1px solid var(--line)}
 
 <main id="main">
 <section class="page-hero wrap">
-  <p class="eyebrow rv">The group</p>
-  <h1 class="rv d1">Four businesses,<br>one <em class="accent">operating system.</em></h1>
-  <p class="lead rv d2">JTL Growth is not the whole picture. Gwen and Jamz run four things that
-    share one AI operations system, one stack, and one set of standards. Every one of them is
-    live, and every one of them is linked below, so you can go and look.</p>
+  <p class="eyebrow rv">Case study &middot; storefront</p>
+  <h1 class="rv d1">Learn it, buy it,<br>run it <em class="accent">yourself.</em></h1>
+  <p class="lead rv d2">Not every business wants an agency. Robots &amp; Coffee is the shelf for the ones who would rather run it themselves.</p>
+  <div class="cs-tags rv d2"><span>Storefront</span><span>Product library</span><span>Live</span></div>
+  <div class="hub-row rv d3">
+    <a class="hub-chip" href="https://ayalavirtualassistance.site/robots-and-coffee" target="_blank" rel="noopener">Open the storefront <span class="arr">↗</span></a>
+    <a class="hub-chip" href="/work/">All shipped work <span class="arr">↗</span></a>
+  </div>
+  <a class="cs-shot rv d4" href="https://ayalavirtualassistance.site/robots-and-coffee" target="_blank" rel="noopener" data-open="Open the storefront ↗" aria-label="Robots and Coffee: open the storefront">
+    <img src="/shots/rnc.png" alt="Robots and Coffee, live storefront screenshot" loading="lazy">
+  </a>
 </section>
 
 <section class="wrap">
-  <div class="p-grid">
-    <div class="p-card rv">
-      <span class="p-tag">The agency</span>
-      <h3>JTL Growth</h3>
-      <p class="p-desc">AI and automation systems, installed. Funnels, automations, AI employees
-        and ops portals, built in that order because each tier pays for the next. Registered in
-        Caloocan as DTI BN 8378934.</p>
-      <ul class="p-list">
-        <li>Run by Jamz Jamorol and Gwen Ayala</li>
-        <li>Every system is run in production here first</li>
-      </ul>
-      <a class="p-link" href="/services/">What we install <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv d1">
-      <span class="p-tag">Sister agency</span>
-      <h3>AVAS</h3>
-      <p class="p-desc">Ayala Virtual Assistance Services. The people side of the same operation:
-        trained virtual assistants and online business management for founders who need hands
-        before they need automation. Gwen runs it.</p>
-      <ul class="p-list">
-        <li>Six-page brand site plus a live client portal</li>
-        <li>Hosts the two-day AI workshop in Manila</li>
-      </ul>
-      <a class="p-link" href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">Open the AVAS site <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv">
-      <span class="p-tag">Products</span>
-      <h3>Robots &amp; Coffee</h3>
-      <p class="p-desc">The digital products library: courses, workshops and AI resources, sold
-        direct. Everything we packaged from running the agency, so you can learn the system, buy
-        the kit, and run it yourself.</p>
-      <ul class="p-list">
-        <li>Co-founded by Gwen Ayala</li>
-        <li>Storefront hosted on the AVAS domain</li>
-      </ul>
-      <a class="p-link" href="/robots-and-coffee/">Open the storefront <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv d1">
-      <span class="p-tag">Community</span>
-      <h3>Filipina Women in Business</h3>
-      <p class="p-desc">A community platform for Filipina founders: a directory, member
-        profiles, and the connective tissue that lets them find and support each other. Gwen
-        founded it. We built the platform.</p>
-      <ul class="p-list">
-        <li>Live and growing as new members join</li>
-        <li>Built on GoHighLevel with a custom front end</li>
-      </ul>
-      <a class="p-link" href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">Open the community <span class="arr">↗</span></a>
+  <div class="cs-step rv">
+    <div><span class="no">01</span><h2>Why it exists</h2></div>
+    <div class="cs-body">
+            <p>Running the agency produces things worth keeping: prompts, systems, workflows, the way we onboard a client, the way an AI employee gets built.</p>
+            <p>Most of that only ever reaches the handful of businesses who hire us. Packaged properly, the same material is useful to someone who will never book a call.</p>
+            <p>So the group needed a surface that sells the knowledge rather than the labour, without confusing the two.</p>
     </div>
   </div>
+  <div class="cs-step rv">
+    <div><span class="no">02</span><h2>What we built</h2></div>
+    <div class="cs-body">
+            <p>A storefront built around a shelf: digital products you buy and run yourself, seats to the live two day workshop, and mentorship calls.</p>
+            <p>A free weekly update as the front door, so the brand earns attention before it asks for money.</p>
+            <p>A deliberate boundary in the language. Robots &amp; Coffee sells things you run yourself. Anything done for you routes to JTL Growth and gets quoted. The words consultation and audit belong to the agency and are never used here, which keeps two brands in the same family from competing with each other.</p>
+    </div>
+  </div>
+  <div class="cs-step rv">
+    <div><span class="no">03</span><h2>What it does now</h2></div>
+    <div class="cs-body">
+            <p>The storefront is live and selling, hosted on the AVAS domain alongside the rest of the group.</p>
+            <p>Products have been bought without being promoted, which is the useful signal: the shelf works when nobody is standing in front of it.</p>
+            <p>The workshop sells seats through the same surface.</p>
+    </div>
+  </div>
+
+  <div class="cs-note rv">
+    <h3>The decision worth knowing</h3>
+    <p>The interesting engineering here is not a technique, it is a boundary. Three brands in one group can quietly cannibalise each other if their language overlaps, so the split was written down before the copy was: this brand teaches, the agency builds, and no page is allowed to blur the two. It is a rule about words, enforced like a rule about code.</p>
+  </div>
+
+  <nav class="cs-nav" aria-label="Other case studies">
+    <a href="/work/avas-night-shift/">← AVAS Night Shift</a>
+    <a href="/work/fwib/">FWIB →</a>
+  </nav>
 </section>
 
 <section class="wrap">
-  <p class="eyebrow rv">What connects them</p>
-  <h2 class="rv d1" style="margin-top:16px">The same system runs all four.</h2>
-  <p class="lead rv d2">One AI workforce handles the repetitive half across every business:
-    the same agents, the same task queue, the same ops portal. That is why a two-person firm
-    can carry four brands, and it is the same system we install for clients.</p>
-  <nav class="hub-row rv d3" aria-label="See the system">
-    <a class="hub-chip" href="/growth/">See the software <span class="arr">↗</span></a>
-    <a class="hub-chip" href="/work/">What we have shipped <span class="arr">↗</span></a>
+  <p class="eyebrow rv">Your turn</p>
+  <h2 class="rv d1" style="margin-top:16px">We build the same way<br>for <em class="accent">clients.</em></h2>
+  <p class="lead rv d2">Real systems, shipped, with the same standards you just read. Thirty minutes, no pitch.</p>
+  <nav class="hub-row rv d3" aria-label="Next steps">
     <a class="hub-chip" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">↗</span></a>
+    <a class="hub-chip" href="/services/">What we install <span class="arr">↗</span></a>
+    <a class="hub-chip" href="/work/">All shipped work <span class="arr">↗</span></a>
   </nav>
 </section>
 </main>

@@ -64,6 +64,19 @@
       '.jgate-msg{margin-top:12px;font:400 12.5px "Archivo",sans-serif;color:var(--gray,#616161);min-height:1.2em}',
       '.jgate-out{display:block;margin-top:18px;padding:15px 22px;background:var(--navy,#181818);color:var(--cement,#E2E2E2);text-decoration:none;font-family:"Space Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-align:center}',
       '.jgate-out[hidden]{display:none}',  /* display:block above beats the UA [hidden] rule — without this the gate never actually locks */
+      /* the vault: the reward is visible but blurred behind a lock, so the visitor
+         can see there is something real here before deciding to follow */
+      '.jgate-vault{position:relative;margin-top:22px;border:1px solid rgba(24,24,24,.18);padding:26px 22px;overflow:hidden;text-align:center}',
+      '[data-theme="dark"] .jgate-vault{border-color:rgba(226,226,226,.2)}',
+      '.jgate-vault .jv-body{filter:blur(7px);opacity:.5;transition:filter .55s ease,opacity .55s ease;pointer-events:none;user-select:none}',
+      '.jgate-vault .jv-name{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:clamp(18px,2vw,26px);letter-spacing:-.01em}',
+      '.jgate-vault .jv-sub{margin-top:8px;font:400 13px "Archivo",sans-serif;color:var(--gray,#616161)}',
+      '.jgate-vault .jv-lock{position:absolute;inset:0;display:grid;place-items:center;gap:10px;align-content:center;transition:opacity .45s ease}',
+      '.jgate-vault .jv-lock svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.7;opacity:.75}',
+      '.jgate-vault .jv-lock span{font:700 9.5px "Space Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--gray,#616161)}',
+      '.jgate-vault.open .jv-body{filter:none;opacity:1;pointer-events:auto;user-select:auto}',
+      '.jgate-vault.open .jv-lock{opacity:0;pointer-events:none}',
+      '@media (prefers-reduced-motion:reduce){.jgate-vault .jv-body,.jgate-vault .jv-lock{transition:none}}',
       '@media (prefers-reduced-motion:reduce){.jgate-b,.jgate-form button{transition:none}}'
     ].join('\n');
     document.head.appendChild(s);
@@ -100,6 +113,29 @@
     count.setAttribute('aria-live', 'polite');
     box.appendChild(count);
 
+    /* the vault sits between the buttons and the counter: the reward, blurred,
+       with a lock over it. Asked for by the Owner 2026-08-21 — a gate with no
+       visible lock does not read as a gate at all. */
+    var vault = document.createElement('div');
+    vault.className = 'jgate-vault';
+    var vbody = document.createElement('div');
+    vbody.className = 'jv-body';
+    var vname = document.createElement('div');
+    vname.className = 'jv-name';
+    vname.textContent = box.getAttribute('data-reward') || label;
+    var vsub = document.createElement('div');
+    vsub.className = 'jv-sub';
+    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours as soon as the profiles are open.';
+    vbody.appendChild(vname); vbody.appendChild(vsub);
+    var vlock = document.createElement('div');
+    vlock.className = 'jv-lock';
+    vlock.setAttribute('aria-hidden', 'true');
+    vlock.innerHTML = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">' +
+      '<rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect>' +
+      '<path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg><span>Locked</span>';
+    vault.appendChild(vbody); vault.appendChild(vlock);
+    box.appendChild(vault);
+
     var form = document.createElement('form');
     form.className = 'jgate-form';
     form.noValidate = true;
@@ -111,8 +147,11 @@
     input.autocomplete = 'email';
     var submit = document.createElement('button');
     submit.type = 'submit';
-    submit.textContent = 'Unlock';
-    form.appendChild(input);
+    submit.textContent = 'Unlock the download';
+    /* No webhook means nowhere to send an email, and a form that quietly bins
+       what you type is the exact bug this file shipped with. So while WEBHOOK is
+       empty the field is not rendered at all and the gate is follow-only. */
+    if (WEBHOOK) form.appendChild(input);
     form.appendChild(submit);
     box.appendChild(form);
 
@@ -122,8 +161,11 @@
 
     var fine = document.createElement('p');
     fine.className = 'jgate-fine';
-    fine.textContent = 'We can’t check follows from here. No platform lets a website do that, so this runs on trust. ' +
-      'Your email gets the file and our build notes; unsubscribe any time.';
+    fine.textContent = WEBHOOK
+      ? 'We can’t check follows from here. No platform lets a website do that, so this runs on trust. ' +
+        'Your email gets the file and our build notes; unsubscribe any time.'
+      : 'We can’t check follows from here. No platform lets a website do that, so this runs on trust. ' +
+        'We are not asking for your email, and nothing is collected on this page.';
     box.appendChild(fine);
 
     var out = document.createElement('a');
@@ -131,6 +173,7 @@
     out.hidden = true;
     out.textContent = label;
     out.setAttribute('download', '');
+    if (/^https?:/.test(file)) { out.target = '_blank'; out.rel = 'noopener'; }
     box.appendChild(out);
 
     function followed() {
@@ -141,7 +184,7 @@
 
     function paint() {
       var got = followed();
-      count.textContent = got + ' of ' + total + ' followed';
+      count.textContent = got + ' of ' + total + ' profiles opened';
       submit.disabled = got < total;
       return got;
     }
@@ -176,13 +219,17 @@
       out.href = file;
       out.hidden = false;
       form.hidden = true;
-      msg.textContent = isRestore ? 'Unlocked. The link is below.' : 'Unlocked. The link is below, and a copy is on its way to ' + email + '.';
+      vault.classList.add('open');
+      msg.textContent = isRestore ? 'Unlocked. The link is below.'
+        : (email ? 'Unlocked. The link is below, and a copy is on its way to ' + email + '.'
+                 : 'Unlocked. The link is below.');
       if (!isRestore) track('follow_gate_unlock', { gate: id, accounts: total });
     }
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       if (paint() < total) { msg.textContent = 'Open all ' + total + ' profiles first.'; return; }
+      if (!WEBHOOK) { unlock('', false); return; }
       var email = input.value.trim();
       if (!RE_EMAIL.test(email)) { msg.textContent = 'That email doesn’t look right.'; input.focus(); return; }
       try { localStorage.setItem(EMAIL_KEY, email); } catch (e) {}
@@ -198,7 +245,7 @@
 
     var known = null;
     try { known = localStorage.getItem(EMAIL_KEY); } catch (e) {}
-    if (known && paint() === total) unlock(known, true); else paint();
+    if (paint() === total && (known || !WEBHOOK)) unlock(known || '', true); else paint();
   }
 
   function init() {
@@ -225,6 +272,7 @@
           a.href = file;
           a.textContent = label;
           a.setAttribute('download', '');
+          if (/^https?:/.test(file)) { a.target = '_blank'; a.rel = 'noopener'; }
           b.appendChild(a);
         });
         try { console.warn('[follow-gate] open fallback:', e.message); } catch (x) {}

@@ -302,9 +302,23 @@ section + section{border-top:1px solid var(--line)}
   <div class="wrap">
     <p class="eyebrow rv">Free download</p>
     <h2 class="rv d1">Get the AgentKit archive.</h2>
-    <p class="lead rv d2">AgentKit is public on GitHub. Clone the repo or grab the zip
-      directly, both give you the same kit.</p>
-    <a class="hub-chip rv d3" href="https://github.com/jtlgrowth/agentkit/archive/refs/heads/main.zip" target="_blank" rel="noopener">Download AgentKit <span class="arr">↗</span></a>
+    <p class="lead rv d2">Follow us on the way in and the zip is yours. We are not pretending
+      it is secret: the repo is public on GitHub and you can clone it without us. Following is
+      just how you say thanks for something we gave away.</p>
+
+    <div class="rv d3" data-follow-gate
+         data-gate-id="agentkit"
+         data-file="https://github.com/jtlgrowth/agentkit/archive/refs/heads/main.zip"
+         data-label="Download AgentKit"
+         data-reward="AgentKit, the full archive"
+         data-reward-note="Agent definitions, prompts and the wiring we run ourselves."
+         data-note="Open each profile below, then the download unlocks."></div>
+
+    <noscript>
+      <p class="lead" style="margin-top:18px">JavaScript is off, so the follow panel cannot
+        load. Here is the file anyway, and the repo is public either way.</p>
+      <a class="hub-chip" href="https://github.com/jtlgrowth/agentkit/archive/refs/heads/main.zip" target="_blank" rel="noopener">Download AgentKit <span class="arr">↗</span></a>
+    </noscript>
   </div>
 </section>
 
@@ -417,5 +431,6 @@ section + section{border-top:1px solid var(--line)}
     if(a.getAttribute('href')===here)a.setAttribute('aria-current','page');});
 })();
 </script>
+<script src="/assets/follow-gate.js" defer></script>
 </body>
 </html>

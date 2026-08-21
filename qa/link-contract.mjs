@@ -6,6 +6,7 @@ import fs from 'fs';
 const BASE = process.argv[2] || 'http://127.0.0.1:8117';
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const PAGES = ['/','/services/','/products/','/workshop/','/work/','/group/','/apps/','/apps/oras/',
+               '/work/fwib/','/work/jtl-growth/','/work/avas-night-shift/','/work/robots-and-coffee/',
                '/growth/','/ai-employee/','/inbox-scout/','/jamz-jamorol/','/setup/','/privacy/',
                '/404.html'];
 let pass=0, fail=[];
@@ -23,12 +24,15 @@ for (const path of PAGES) {
   const links = await p.$$eval('a', as => as.map(a=>({
     href:a.getAttribute('href'), target:a.getAttribute('target'), rel:a.getAttribute('rel')||'',
     text:(a.textContent||'').trim().slice(0,50), hasImg:!!a.querySelector('img'),
+    // a locked follow-gate link has no href yet, on purpose: the destination is
+    // written at unlock. It is hidden until then, so it is not a dead link.
+    gated:a.classList.contains('jgate-out') && a.hidden,
   })));
   ok(perr.length===0, `${path} page errors: ${perr.join(' | ')}`);
 
   for (const l of links) {
     const h = l.href;
-    ok(h!==null && h!=='', `${path}: <a> with no href ("${l.text}")`);
+    ok(l.gated || (h!==null && h!==''), `${path}: <a> with no href ("${l.text}")`);
     if (!h) continue;
     if (h === '#') {
       // only allowed if JS binds it; homepage logo uses data-go
@@ -64,9 +68,22 @@ for (const path of PAGES) {
   await p.close();
 }
 // no page may still reference the removed gate or the dead download
-for (const f of ['products/index.html','workshop/index.html']) {
-  const src = fs.readFileSync(ROOT+'/'+f,'utf8');
-  ok(!/follow-gate|\/downloads\//.test(src), `${f} still references the removed follow gate`);
+// The gate is back by Owner request, but the rule that killed the old one still
+// stands: never ask for something you have nowhere to put. If a page ships the
+// gate, follow-gate.js must either have a real endpoint or render no email field.
+{
+  const gate = fs.readFileSync(ROOT+'/assets/follow-gate.js','utf8');
+  const webhook = !/var WEBHOOK = '';/.test(gate);
+  ok(/if \(WEBHOOK\) form\.appendChild\(input\);/.test(gate) || webhook,
+     'follow-gate renders an email field with nowhere to send it');
+  ok(/nothing is collected on this page/.test(gate) || webhook,
+     'follow-gate does not say what it does with an absent endpoint');
+}
+// /workshop/ has no file to give away, so it must not pretend otherwise
+{
+  const src = fs.readFileSync(ROOT+'/workshop/index.html','utf8');
+  ok(!/\/downloads\//.test(src), 'workshop still offers a /downloads/ file that does not exist');
+  ok(!/data-follow-gate/.test(src), 'workshop ships a gate with no file behind it');
 }
 // the R&C stub: a redirect we own, pointing at a site we do not. Assert the stub,
 // never crawl through it, or the contract starts auditing someone else's markup.
