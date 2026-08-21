@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- template: v6 page shell + v6.3 centred hero (variant A, qa/workshop-hero-studies.html) — vertical-scroll subpage, extracted from the homepage
+<!-- template: v6 page shell + v6.4 timeline fold (variant D, qa/workshop-hero-studies.html) — vertical-scroll subpage, extracted from the homepage
      register (mono cement + Fraunces/Archivo/Space Mono) per the standing rule:
      new slugs extract from the homepage, never the retired apple-gray/warm-paper
      registers. Chips: the [ NN / LABEL ] bracket ornament is retired site-wide
@@ -125,47 +125,41 @@ section + section{border-top:1px solid var(--line)}
 .page-hero{padding-top:0}
 .page-hero h1{margin-top:16px}
 .page-hero .lead{margin-top:26px}
-/* ---- v6.3 centred hero (variant A, Owner pick 2026-08-21) ------------------
-   The fold is the composition, not a leftover: sized to the viewport so it
-   closes on its own bottom edge. Theme-aware: every colour is a token, the
+/* ---- v6.4 timeline fold (variant D, Owner pick 2026-08-21, after A) --------
+   Centred headline and lead, then the two days pulled into the fold as a
+   full-width track. Theme-aware: every colour is a token, the
    dark register inverts the same composition. ------------------------------ */
 .page-hero{
   min-height:calc(100svh - clamp(150px,16vh,208px));
-  display:grid;place-items:center;padding-bottom:clamp(36px,5vw,72px);
+  display:flex;flex-direction:column;padding-bottom:clamp(36px,5vw,72px);
 }
-.hero-mon{position:relative;width:min(1000px,90vw);margin:0 auto;text-align:center}
-.hero-mon h1{margin-top:20px;font-size:clamp(42px,6.4vw,92px)}
-.hero-mon .lead{margin-left:auto;margin-right:auto;max-width:56ch}
+.hero-mon{position:relative;width:min(1240px,90vw);margin:0 auto;text-align:center}
+.hero-mon h1{margin-top:20px;font-size:clamp(40px,5.4vw,74px)}
+.hero-mon .lead{margin-left:auto;margin-right:auto;max-width:56ch;font-size:clamp(16px,1.25vw,17px)}
 .hero-mon .hub-row{justify-content:center}
 .hub-chip.solid{background:var(--navy);color:var(--cement);border-color:var(--navy)}
 .hub-chip.solid:hover{background:var(--wood);border-color:var(--wood)}
-/* the orbit: four chips at uneven radii. Even spacing reads as a grid,
-   which is the one thing an orbit must not look like. */
-.orbits{display:contents}  /* no layout box: the reveal class lives on each .orb,
-   never on this wrapper (an IntersectionObserver never fires on display:contents). */
-.orb{
-  position:absolute;display:inline-flex;align-items:center;gap:10px;
-  border:1px solid var(--line);background:color-mix(in srgb,var(--cement) 82%,transparent);
-  padding:9px 14px;font:700 10px 'Space Mono',monospace;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--navy);white-space:nowrap;
-  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
-}
-.orb .on{color:var(--gray)}
-.orb .sw{width:10px;height:10px;flex:none;border:1px solid var(--line)}
-.orb.o1{left:-4.8%;top:15%}
-.orb.o2{right:-7.2%;top:8%}
-.orb.o3{left:-.6%;top:43%}
-.orb.o4{right:-2%;top:50%}
-/* the footnote sits under a rule so it stops competing with the headline */
-.hero-note{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);display:inline-block}
-.hero-note .hnl{font:700 9.5px 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:7px}
-.hero-note p{margin:0;font-size:13.5px;line-height:1.6;color:var(--gray);max-width:74ch}
-@media (max-width:1080px){
-  /* below this the chips would collide with the headline: they leave orbit and
-     become one centred row. */
-  .orbits{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:26px}
-  .orb{position:static}
-  .orb.o1,.orb.o2,.orb.o3,.orb.o4{inset:auto}
+/* the track: the two days pulled up into the fold as one line with three
+   stations and two wide cells under it. The agenda fills the fold's width. */
+.hero-mon{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:clamp(16px,3vh,48px)}
+.hero-mon .hub-row{margin-top:30px}
+.wk-track{width:100%;margin-top:auto;padding-top:clamp(40px,6vh,72px);text-align:left}
+.wk-trail{position:relative;height:1px;background:var(--line);margin:0 0 26px}
+.wk-trail i{position:absolute;top:-4px;width:9px;height:9px;background:var(--cement);border:1px solid var(--gray)}
+.wk-trail i.n1{left:0}
+.wk-trail i.n2{left:calc(50% - 4px);background:var(--navy);border-color:var(--navy)}
+.wk-trail i.n3{right:0}
+.wk-trail .lab{position:absolute;top:-28px;font:700 9.5px 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--gray)}
+.wk-trail .lab.l1{left:0}
+.wk-trail .lab.l2{left:50%;transform:translateX(-50%)}
+.wk-trail .lab.l3{right:0}
+.wk-cells{display:grid;grid-template-columns:1fr 44px 1fr;gap:0 28px;align-items:start}
+.wk-cell .wk-daytag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.wk-cell h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:clamp(18px,1.7vw,21px);margin-top:10px;letter-spacing:-.01em}
+.wk-cell ul{margin-top:14px;display:flex;flex-direction:column;gap:8px;padding-left:0;list-style:none}
+.wk-cell li{font-size:14px;line-height:1.5;color:var(--gray);padding-left:20px;position:relative}
+.wk-cell li::before{content:"\2013";position:absolute;left:0;color:var(--wood-warm)}
+.wk-arrow{align-self:center;text-align:center;font-family:'Archivo',sans-serif;font-size:28px;color:var(--gray);padding-top:20px}
 }
 
 /* ---------- reveal on scroll (vertical pages; CSS-forced under reduced motion) ---------- */
@@ -213,6 +207,10 @@ section + section{border-top:1px solid var(--line)}
   .wk-days{grid-template-columns:1fr}
   .wk-pair{grid-template-columns:1fr;gap:40px}
   .page-hero{min-height:0;padding-bottom:clamp(28px,7vw,48px)}
+  .wk-trail .lab{display:none}
+  .wk-trail{margin-bottom:22px}
+  .wk-cells{grid-template-columns:1fr;gap:22px}
+  .wk-arrow{transform:rotate(90deg);padding:0;line-height:1}
   .hero-mon .hub-row{justify-content:stretch}
 }
 </style>
@@ -258,22 +256,39 @@ section + section{border-top:1px solid var(--line)}
 <main id="main">
 <section class="page-hero">
   <div class="wrap hero-mon">
-    <div class="orbits" aria-hidden="true">
-      <span class="orb o1 rv d2"><span class="on">01</span><span class="sw" style="background:var(--t2)"></span>Day 1 &middot; AI employee</span>
-      <span class="orb o2 rv d3"><span class="on">02</span><span class="sw" style="background:var(--t3)"></span>Day 2 &middot; UI system</span>
-      <span class="orb o3 rv d3"><span class="sw" style="background:var(--t4)"></span>Live link</span>
-      <span class="orb o4 rv d4"><span class="sw" style="background:var(--t1)"></span>DESIGN.md</span>
-    </div>
     <p class="eyebrow rv">Workshop</p>
-    <h1 class="rv d1">From operator<br>to <em class="accent">orchestrator.</em></h1>
+    <h1 class="rv d1">From operator to <em class="accent">orchestrator.</em></h1>
     <p class="lead rv d2">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
     <div class="hub-row rv d3">
       <a class="hub-chip solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
       <a class="hub-chip" href="#preview">Download the preview <span class="arr">&#8599;</span></a>
     </div>
-    <div class="hero-note rv d4">
-      <span class="hnl">What you walk out with</span>
-      <p>A working AI employee you built yourself, live on the internet. A design system in a file, not in your head. A repeatable process for turning a business problem into shipped software.</p>
+    <div class="wk-track rv d4">
+      <div class="wk-trail" aria-hidden="true">
+        <span class="lab l1">Day 1 &middot; morning</span><span class="lab l2">Live link</span><span class="lab l3">Day 2 &middot; re-publish</span>
+        <i class="n1"></i><i class="n2"></i><i class="n3"></i>
+      </div>
+      <div class="wk-cells">
+        <div class="wk-cell">
+          <p class="wk-daytag">Day 1</p>
+          <h3>Building an AI employee</h3>
+          <ul>
+            <li>Set up Claude Code on your own machine (Mac and Windows commands, walked through live)</li>
+            <li>Write the build prompt for your own business: what you sell, who buys it, what the tool should do</li>
+            <li>Ship it live with a public link before the session ends</li>
+          </ul>
+        </div>
+        <div class="wk-arrow" aria-hidden="true">&#8594;</div>
+        <div class="wk-cell">
+          <p class="wk-daytag">Day 2</p>
+          <h3>Your own UI system</h3>
+          <ul>
+            <li>What a UI system actually is: fonts, colors, spacing, and rules you never break</li>
+            <li>Write your system down as a DESIGN.md file your AI must follow on every page</li>
+            <li>Apply it to yesterday's tool, have the reviewer agent judge it against your own rules, and re-publish before and after</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
