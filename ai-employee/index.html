@@ -206,7 +206,11 @@ footer.site a{color:var(--mut)}
   max-width:calc(100vw - 2*var(--fm));
   background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(8px);
   border:1px solid var(--line);border-radius:999px;display:flex;gap:6px;padding:8px 10px;
-  overflow-x:auto;z-index:10;box-shadow:0 14px 34px -18px rgba(29,29,31,.3)}
+  overflow-x:auto;z-index:10;box-shadow:0 14px 34px -18px rgba(29,29,31,.3);
+  opacity:1;pointer-events:auto;transition:opacity .2s var(--e)}
+/* it sits on top of body copy at rest, not just mid-scroll (DEFECT-1, Lene v41) ->
+   fade out whenever its own rect actually overlaps a paragraph, see script below */
+#progress-bar.is-obscuring{opacity:.12;pointer-events:none}
 html:not([data-progress]) #progress-bar{display:none}
 #progress-bar .chip{flex:0 0 auto;font:600 11px/1 var(--mono);letter-spacing:.1em;
   color:var(--mut);text-decoration:none;padding:8px 12px;border-radius:999px;
@@ -392,6 +396,27 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
     });
   }, { rootMargin: '-45% 0px -45% 0px' });
   document.querySelectorAll('main section[id]').forEach(function(s){ io.observe(s); });
+})();
+(function(){
+  var bar = document.getElementById('progress-bar');
+  if (!bar) return;
+  var targets = [].slice.call(document.querySelectorAll('main p, main .does, main .cost, main .bio, main .lede'));
+  if (!targets.length) return;
+  var ticking = false;
+  function check(){
+    ticking = false;
+    var b = bar.getBoundingClientRect();
+    var hit = targets.some(function(t){
+      var r = t.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return false;
+      return !(r.bottom < b.top || r.top > b.bottom || r.right < b.left || r.left > b.right);
+    });
+    bar.classList.toggle('is-obscuring', hit);
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking) { ticking = true; requestAnimationFrame(check); }
+  }, { passive: true });
+  check();
 })();
 </script>
 <script src="/assets/v3-ui.js" defer></script>
