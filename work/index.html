@@ -162,12 +162,26 @@ section + section{border-top:1px solid var(--line)}
 .band-dark h2{color:#E2E2E2}
 .band-dark .lead{color:rgba(228,228,228,.7);margin:20px auto 0}
 
-.portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,1.8vw,30px);margin:44px auto 0;align-items:start;max-width:1340px;text-align:left}
-.lap-card{display:flex;flex-direction:column;gap:20px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.4vw,24px);margin:44px auto 0;align-items:start;max-width:1340px;text-align:left}
+/* v6.2 — the whole card is a link now. The page claims every screen is a live
+   URL; before this you could not click through to check. Colours stay literals:
+   this band is constant-dark in both themes. */
+.lap-card{display:flex;flex-direction:column;gap:20px;text-decoration:none;color:inherit}
+.lap-card .laptop3d{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.lap-card:hover .laptop3d,.lap-card:focus-visible .laptop3d{transform:translateY(-7px)}
+/* the lift lives on .laptop3d, never on .lap-card: .rv animates transform on the
+   card itself and a hover transform there would fight the reveal. */
+.lap-card:focus-visible{outline:2px solid #E2E2E2;outline-offset:8px;border-radius:4px}
+.lap-card .screen::after{content:attr(data-open);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:8px;background:rgba(12,12,12,.74);color:#E2E2E2;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:0;transition:opacity .3s;pointer-events:none}
+.lap-card:hover .screen::after,.lap-card:focus-visible .screen::after{opacity:1}
+.lap-card:hover .lap-name,.lap-card:focus-visible .lap-name{text-decoration:underline;text-underline-offset:4px}
+@media (max-width:1240px){.portfolio-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:1000px){.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
+@media (hover:none){.lap-card .screen::after{opacity:1;background:linear-gradient(180deg,transparent 55%,rgba(12,12,12,.88));place-items:end center;padding-bottom:10px}}
 .laptop3d{width:100%;perspective:1200px}
 .laptop3d .lid{position:relative;background:linear-gradient(160deg,#2c2c2c,#100f0d);border-radius:12px 12px 3px 3px;padding:9px 9px 0;box-shadow:0 30px 60px -24px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.06) inset}
 .laptop3d .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:22%;height:8px;background:#100f0d;border-radius:0 0 8px 8px;z-index:2}
-.laptop3d .screen{aspect-ratio:16/10.2;border-radius:5px;overflow:hidden;background:#000}
+.laptop3d .screen{position:relative;aspect-ratio:16/10.2;border-radius:5px;overflow:hidden;background:#000}
 .laptop3d .screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
 .laptop3d .deck{position:relative;height:14px;margin-top:-1px;background:linear-gradient(180deg,#3a3a3a,#151515);transform:perspective(500px) rotateX(55deg);transform-origin:top;border-radius:0 0 9px 9px;box-shadow:0 26px 34px -16px rgba(0,0,0,.65)}
 .laptop3d .deck::after{content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:14%;height:5px;background:#0a0a0a;border-radius:0 0 4px 4px}
@@ -233,6 +247,8 @@ section + section{border-top:1px solid var(--line)}
           <a href="/inbox-scout/">Inbox Scout <span class="mk">&#8599;</span></a>
           <a href="/robots-and-coffee/">Robots &amp; Coffee <span class="mk">&#8599;</span></a>
           <a href="/jamz-jamorol/">Jamz Jamorol <span class="mk">&#8599;</span></a>
+          <a href="/group/">The group <span class="mk">&#8599;</span></a>
+          <a href="/apps/">Apps <span class="mk">&#8599;</span></a>
         </div>
       </div>
     </nav>
@@ -252,13 +268,13 @@ section + section{border-top:1px solid var(--line)}
   <section class="band-dark">
     <div class="inner">
       <p class="eyebrow rv">Shipped work</p>
-      <h2 class="rv d1">Four systems, in production right now.</h2>
-      <p class="lead rv d2">Four builds, four different problems. Every screen below is a live URL, not a mockup.</p>
-      <div class="portfolio-grid" tabindex="0" role="region" aria-label="Shipped work gallery">
-        <div class="lap-card rv d1">
+      <h2 class="rv d1">Five systems, in production right now.</h2>
+      <p class="lead rv d2">Five builds, five different problems. Every screen below is a live URL you can open, not a mockup.</p>
+      <div class="portfolio-grid" role="region" aria-label="Shipped work gallery">
+        <a class="lap-card rv d1" href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener" aria-label="FWIB: open the live site">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
-              <div class="screen"><img src="/shots/fwib.png" alt="Filipina Women in Business, live site screenshot" loading="lazy"></div>
+              <div class="screen" data-open="Open live site &#8599;"><img src="/shots/fwib.png" alt="Filipina Women in Business, live site screenshot" loading="lazy"></div>
             </div>
             <div class="deck"></div>
             <div class="refl"></div>
@@ -266,11 +282,11 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-name">FWIB</div>
           <div class="lap-desc">42-member community platform for Filipina founders. Live and growing.</div>
           <div class="lap-tags"><span>Community</span><span>42-Member Directory</span><span>Live</span></div>
-        </div>
-        <div class="lap-card rv d2">
+        </a>
+        <a class="lap-card rv d2" href="/" aria-label="JTL Growth site: open the page">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
-              <div class="screen"><img src="/shots/jtlgrowth.png" alt="JTL Growth, live site screenshot" loading="lazy"></div>
+              <div class="screen" data-open="You are on it &#8599;"><img src="/shots/jtlgrowth.png" alt="JTL Growth, live site screenshot" loading="lazy"></div>
             </div>
             <div class="deck"></div>
             <div class="refl"></div>
@@ -278,11 +294,11 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-name">JTL Growth site</div>
           <div class="lap-desc">This site. Built and launched in one night, DNS to HTTPS.</div>
           <div class="lap-tags"><span>Agency Site</span><span>Horizontal Scroll</span><span>Live</span></div>
-        </div>
-        <div class="lap-card rv d3">
+        </a>
+        <a class="lap-card rv d3" href="https://ayalavirtualassistance.site" target="_blank" rel="noopener" aria-label="AVAS Night Shift: open the live site">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
-              <div class="screen"><img src="/shots/avas-nightshift.png" alt="AVAS Night Shift, live site screenshot" loading="lazy"></div>
+              <div class="screen" data-open="Open live site &#8599;"><img src="/shots/avas-nightshift.png" alt="AVAS Night Shift, live site screenshot" loading="lazy"></div>
             </div>
             <div class="deck"></div>
             <div class="refl"></div>
@@ -290,11 +306,11 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-name">AVAS Night Shift</div>
           <div class="lap-desc">Six-page brand site for our sister agency. No template.</div>
           <div class="lap-tags"><span>Brand Site</span><span>Live Ops Dashboard</span><span>Live</span></div>
-        </div>
-        <div class="lap-card rv d3">
+        </a>
+        <a class="lap-card rv d3" href="/robots-and-coffee/" aria-label="Robots and Coffee: open the page">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
-              <div class="screen"><img src="/shots/rnc.png" alt="Robots and Coffee, live storefront screenshot" loading="lazy"></div>
+              <div class="screen" data-open="Open the storefront &#8599;"><img src="/shots/rnc.png" alt="Robots and Coffee, live storefront screenshot" loading="lazy"></div>
             </div>
             <div class="deck"></div>
             <div class="refl"></div>
@@ -302,11 +318,23 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-name">Robots &amp; Coffee</div>
           <div class="lap-desc">Our digital products library: courses, workshops, and AI resources. Learn it, buy it, run it yourself.</div>
           <div class="lap-tags"><span>Storefront</span><span>Product Library</span><span>Live</span></div>
-        </div>
+        </a>
+        <a class="lap-card rv d4" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener" aria-label="AVAS AI Workshop: open the live event page">
+          <div class="laptop3d">
+            <div class="lid"><div class="notch"></div>
+              <div class="screen" data-open="Open live site &#8599;"><img src="/shots/avas-ai-workshop.png" alt="AVAS AI Workshop, live event page screenshot" loading="lazy"></div>
+            </div>
+            <div class="deck"></div>
+            <div class="refl"></div>
+          </div>
+          <div class="lap-name">AVAS AI Workshop</div>
+          <div class="lap-desc">Live event page for the two-day workshop in Manila, seats, countdown and checkout on one page.</div>
+          <div class="lap-tags"><span>Event Page</span><span>Seat Counter</span><span>Live</span></div>
+        </a>
       </div>
       <div class="proof-strip rv d3" aria-label="Numbers and stack">
         <div class="ptrack">
-          <span class="pi"><b>&#8369;475K+</b> closed</span>
+          <span class="pi"><b>&#8369;475K+</b> closed &middot; as of Aug 2026</span>
           <span class="pi"><img src="/assets/logos/claude.svg" alt="">Claude</span>
           <span class="pi"><b>42</b>-member community</span>
           <span class="pi">GPT&#8209;5</span>
@@ -357,8 +385,13 @@ section + section{border-top:1px solid var(--line)}
         </div>
         <div class="writeup rv d3">
           <h3>Robots &amp; Coffee</h3>
-          <p>Our digital products library: courses, workshops, and AI resources, sold direct. It's the storefront for everything we've packaged from running the agency, now hosted at ayalavirtualassistance.site.</p>
+          <p>Our digital products library: courses, workshops, and AI resources, sold direct. It's the storefront for everything we've packaged from running the agency, now hosted at <a href="https://ayalavirtualassistance.site/robots-and-coffee" target="_blank" rel="noopener">ayalavirtualassistance.site</a>.</p>
           <p class="does">What it does: lets people learn the system, buy the kit, and run it themselves.</p>
+        </div>
+        <div class="writeup rv d4">
+          <h3>AVAS AI Workshop</h3>
+          <p>The event page for <a href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener">From Operator to Orchestrator</a>, the two-day workshop we run in Manila with <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a>. Seat counter, early-bird countdown and checkout all on one page, so the page closes the sale instead of pointing at a form.</p>
+          <p class="does">What it does: sells seats and holds the date, live, with no funnel builder underneath it.</p>
         </div>
       </div>
     </div>
@@ -381,7 +414,8 @@ section + section{border-top:1px solid var(--line)}
 <footer class="footline">
   <div class="wrap">
     <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
-    <span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></span>
+    <span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span>
+    <span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span>
   </div>
 </footer>
 
@@ -443,7 +477,7 @@ section + section{border-top:1px solid var(--line)}
    pointer:fine only, disabled under prefers-reduced-motion */
 (function(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer: fine)').matches)return;
-  var els=[].slice.call(document.querySelectorAll('.nav-cta,.hub-chip,.fchip,.menu-btn'));
+  var els=[].slice.call(document.querySelectorAll('.nav-cta,.hub-chip,.menu-btn'));
   els.forEach(function(el){
     el.style.transition='transform .3s cubic-bezier(.34,1.56,.64,1)';
     el.addEventListener('mousemove',function(e){

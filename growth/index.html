@@ -31,10 +31,24 @@
 body{background:var(--cement);color:var(--navy);font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--navy);color:var(--cement)}
 .inner{width:min(1180px,90vw);margin:0 auto}
-header{display:flex;justify-content:space-between;align-items:center;padding:28px min(5vw,68px)}
+header{display:flex;justify-content:space-between;align-items:center;padding:28px min(5vw,68px);gap:24px;flex-wrap:wrap}
 .logo .lmark{height:22px;width:auto;color:var(--navy)}
+.header-left{display:flex;align-items:center;gap:clamp(16px,3vw,36px);min-width:0}
+.nav{display:flex;gap:clamp(12px,2vw,26px);list-style:none;min-width:0}
+/* the four nav items do not fit beside the logo on a phone. This page has no
+   menu button and its footer does not repeat them, so hiding the row would strand
+   the visitor: wrap it onto its own line instead. */
+@media (max-width:640px){
+  .header-left{flex-wrap:wrap;gap:12px 18px;width:100%}
+  .nav{flex-wrap:wrap;gap:10px 16px;font-size:12px}
+}
+.nav a{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--navy);text-decoration:none;transition:color .3s}
+.nav a:hover{color:var(--blue)}
 .nav-cta{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cement);background:var(--navy);padding:13px 26px;text-decoration:none;transition:background .3s}
 .nav-cta:hover{background:var(--wood)}
+.clip-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:8px 0 0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.clip-links a{color:var(--blue);text-decoration:none}
+.clip-links a:hover{color:var(--navy)}
 .kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--blue)}
 .kicker::before{content:"[ ";color:var(--blue)}
 .kicker::after{content:" ]";color:var(--blue)}
@@ -61,8 +75,10 @@ h1 .accent{font-style:italic}
 .btn:hover{background:var(--navy);color:var(--cement)}
 .btn.solid{background:var(--navy);color:var(--cement)}
 .btn.solid:hover{background:#000}
-.footline{padding:60px 0 30px}
-.footline .inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+.footline{padding:40px 0 30px;border-top:1px solid var(--line);margin-top:20px}
+.footline .inner{display:flex;flex-direction:column;gap:10px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--gray)}
+.footline a{color:var(--gray);text-decoration:none}
+.footline a:hover{color:var(--navy)}
 :focus-visible{outline:2px solid #575757;outline-offset:3px}
 @media (max-width:860px){.clips{grid-template-columns:1fr}.facts{grid-template-columns:1fr}}
 
@@ -74,7 +90,15 @@ h1 .accent{font-style:italic}
 </head>
 <body>
 <header>
-  <a class="logo" href="/" aria-label="JTL Growth home"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
+  <div class="header-left">
+    <a class="logo" href="/" aria-label="JTL Growth home"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
+    <ul class="nav">
+      <li><a href="/services/">Services</a></li>
+      <li><a href="/products/">Products</a></li>
+      <li><a href="/workshop/">Workshop</a></li>
+      <li><a href="/work/">Work</a></li>
+    </ul>
+  </div>
   <a class="nav-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call</a>
 </header>
 
@@ -100,10 +124,15 @@ h1 .accent{font-style:italic}
     </div>
   </section>
 
+  <div class="clip-links">
+    <a href="/work/">See the live systems &rarr;</a>
+    <a href="/services/">See the services &rarr;</a>
+  </div>
+
   <section class="facts" aria-label="What the software does">
     <div class="fact"><b>AI employees, not chat tabs</b><span>Named agents with jobs, tool scopes, and schedules (finance, engineering, copy, research, QA) each visible at its desk.</span></div>
     <div class="fact"><b>Work you can watch</b><span>Tasks flow through a visible pipeline: queued, working, waiting on you. Nothing disappears into a black box.</span></div>
-    <div class="fact"><b>Installed on your process</b><span>We scope it to your funnel and stack, install it in weeks, and you watch it go live on real work.</span></div>
+    <div class="fact"><b>Installed on your process</b><span>We scope it to your funnel and stack, install it in weeks, and you watch it go live on real work. See <a href="/services/" style="color:var(--navy)">the services</a>.</span></div>
   </section>
 
   <section class="cta">
@@ -115,7 +144,11 @@ h1 .accent{font-style:italic}
   </section>
 </main>
 
-<div class="footline"><div class="inner"><span>© 2026 JTL Growth · Caloocan, Metro Manila, PH · DTI BN 8378934</span><span>AI &amp; Automation Systems</span></div></div>
+<div class="footline"><div class="inner">
+  <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
+  <span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span>
+  <span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span>
+</div></div>
 
 <script src="/assets/v3-ui.js" defer></script>
 <script>

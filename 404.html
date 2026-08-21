@@ -23,10 +23,17 @@ h1{font:600 clamp(1.5rem,4vw,2.2rem)/1.25 'Archivo',sans-serif;letter-spacing:-.
 p{color:var(--gray);max-width:420px}
 a.back{font:700 12px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);background:var(--cement);padding:14px 28px;text-decoration:none;transition:background .3s}
 a.back:hover{background:var(--silver)}
+.onward{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+a.onward-link{font:700 11px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s}
+a.onward-link:hover{color:var(--cement)}
+.foot{margin-top:10px;padding-top:20px;border-top:1px solid rgba(226,226,226,.14);font:400 11px 'Space Mono',monospace;letter-spacing:.06em;color:var(--gray);display:flex;flex-direction:column;gap:8px;align-items:center}
+.foot a{color:var(--gray);text-decoration:none}
+.foot a:hover{color:var(--cement)}
 :focus-visible{outline:2px solid #8A8A8A;outline-offset:3px}
 </style>
 </head>
 <body>
+<a class="logo" href="/" aria-label="JTL Growth: home">
 <svg class="mark" viewBox="288 703 1315 626" aria-hidden="true">
   <g fill="none" stroke="#EDEDED" stroke-width="141.5" stroke-linecap="butt">
     <path d="M624 774H1267"/>
@@ -34,10 +41,22 @@ a.back:hover{background:var(--silver)}
     <path class="dead" d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/>
   </g>
 </svg>
+</a>
 <div class="code">[ 404 / open circuit ]</div>
 <h1>This trace doesn't connect to anything.</h1>
 <p>The page you're after moved or never existed. The main line still runs.</p>
 <a class="back" href="/">Back to the board</a>
+<nav class="onward" aria-label="Other pages">
+  <a class="onward-link" href="/services/">Services</a>
+  <a class="onward-link" href="/work/">Work</a>
+  <a class="onward-link" href="/products/">Products</a>
+  <a class="onward-link" href="/workshop/">Workshop</a>
+</nav>
+<div class="foot">
+  <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
+  <span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span>
+  <span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span>
+</div>
 <script src="/assets/v3-ui.js" defer></script>
 </body>
 </html>

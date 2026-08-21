@@ -232,48 +232,50 @@ for (const p of PAGES) {
   await pg.close();
 }
 
-// ---------- 8. follow gate ----------
+// ---------- 8. the gates are GONE, and must stay gone ----------
+// Removed 2026-08-21. follow-gate.js shipped with `var WEBHOOK = ''`, so every
+// email a visitor typed was discarded while the gate promised it would be used,
+// and the workshop gate's data-file pointed at /downloads/… which never existed:
+// it unlocked into a 404. Both are now plain links. These assertions stop either
+// from creeping back in without a working endpoint behind it.
 {
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
-  const pg = await ctx.newPage();
-  await pg.goto(BASE + '/products/', { waitUntil: 'networkidle' });
-  await pg.waitForTimeout(900);
-  ok('gate rendered', (await pg.locator('.jgate').count()) === 1);
-  ok('gate starts locked', await pg.locator('.jgate-out').isHidden());
-  ok('submit disabled until every profile is opened', await pg.locator('.jgate-form button').isDisabled());
-  ok('counter is aria-live', (await pg.locator('.jgate-count').getAttribute('aria-live')) === 'polite');
-  const n = await pg.locator('.jgate-b').count();
-  // asserted against the file, not a hardcoded number — adding an account is a
-  // data edit and the probe must follow it rather than fail on it
-  const declared = await pg.evaluate(() => fetch('/assets/socials.json').then(r => r.json()).then(d => d.accounts.length));
-  ok('one button per account in socials.json', n === declared, `${n} buttons vs ${declared} declared`);
-  for (let i = 0; i < n; i++) {
-    const [popup] = await Promise.all([ctx.waitForEvent('page').catch(() => null), pg.locator('.jgate-b').nth(i).click()]);
-    if (popup) await popup.close();
-    await pg.waitForTimeout(120);
+  const pg = await browser.newPage();
+  for (const slug of ['/products/', '/workshop/']) {
+    await pg.goto(BASE + slug, { waitUntil: 'networkidle' });
+    await pg.waitForTimeout(400);
+    ok(`${slug} has no follow gate`, (await pg.locator('[data-follow-gate], .jgate').count()) === 0);
+    ok(`${slug} loads no follow-gate.js`, (await pg.locator('script[src*="follow-gate"]').count()) === 0);
+    const dead = await pg.$$eval('a[href]', as => as.filter(a => (a.getAttribute('href') || '').startsWith('/downloads/')).length);
+    ok(`${slug} offers no /downloads/ file`, dead === 0);
   }
-  ok('all opened -> submit enabled', !(await pg.locator('.jgate-form button').isDisabled()));
-  await pg.fill('.jgate-form input', 'nope');
-  await pg.click('.jgate-form button'); await pg.waitForTimeout(200);
-  ok('invalid email keeps it locked', await pg.locator('.jgate-out').isHidden());
-  await pg.fill('.jgate-form input', 'probe@example.com');
-  await pg.click('.jgate-form button'); await pg.waitForTimeout(300);
-  ok('valid email unlocks', await pg.locator('.jgate-out').isVisible());
-  await pg.reload({ waitUntil: 'networkidle' }); await pg.waitForTimeout(800);
-  ok('unlock survives reload', await pg.locator('.jgate-out').isVisible());
-  await ctx.close();
+  // the AgentKit link the products gate used to hide behind
+  await pg.goto(BASE + '/products/', { waitUntil: 'domcontentloaded' });
+  const kit = await pg.$$eval('a[href]', as => as.some(a => /github\.com\/jtlgrowth\/agentkit/.test(a.getAttribute('href') || '')));
+  ok('AgentKit is reachable as a plain link', kit);
+  await pg.close();
+}
 
-  const fresh = await browser.newContext();
-  const fp = await fresh.newPage();
-  await fp.goto(BASE + '/products/', { waitUntil: 'networkidle' }); await fp.waitForTimeout(800);
-  ok('a fresh visitor is locked', await fp.locator('.jgate-out').isHidden());
-  await fresh.close();
-
-  const nojs = await browser.newContext({ javaScriptEnabled: false });
-  const np = await nojs.newPage();
-  await np.goto(BASE + '/products/', { waitUntil: 'domcontentloaded' });
-  ok('degrades to a plain link with JS off', (await np.locator('noscript').count()) > 0);
-  await nojs.close();
+// ---------- 8b. the live-URL claim on /work/ is actually clickable ----------
+// The page says "Every screen below is a live URL". Before 2026-08-21 not one of
+// those screenshots was inside an <a>, so the claim could not be checked by a
+// visitor. This asserts the claim and the markup agree.
+{
+  const pg = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await pg.goto(BASE + '/work/', { waitUntil: 'networkidle' });
+  await pg.waitForTimeout(600);
+  const cards = await pg.$$eval('a.lap-card', as => as.map(a => ({
+    href: a.getAttribute('href'), target: a.getAttribute('target'),
+    rel: a.getAttribute('rel') || '', label: a.getAttribute('aria-label') || '',
+  })));
+  ok('every shipped-work card is a link', cards.length === 5, `${cards.length} linked cards`);
+  ok('no shipped-work screenshot sits outside a link',
+     (await pg.$$eval('.lap-card img', is => is.filter(i => !i.closest('a')).length)) === 0);
+  ok('every card carries an aria-label', cards.every(c => c.label.length > 0));
+  ok('external cards open in a new tab with noopener',
+     cards.filter(c => /^https?:/.test(c.href)).every(c => c.target === '_blank' && /noopener/.test(c.rel)));
+  ok('the fold copy matches the card count',
+     (await pg.locator('.band-dark .lead').first().innerText()).toLowerCase().includes('five'));
+  await pg.close();
 }
 
 // ---------- 9. no dead internal links ----------

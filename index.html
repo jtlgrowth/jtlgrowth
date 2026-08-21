@@ -239,11 +239,6 @@ header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 #hint .arrow{display:inline-block;animation:nudge 2.2s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
 
-/* ---------- word reveal (stolen: word-reveal-scroll-accent) ---------- */
-.wreveal .w{color:rgba(228,228,228,.16);transition:color .45s}
-.wreveal .w.on{color:var(--cement)}
-.wreveal .w.on.tl{color:#FFFFFF}
-
 /* ---------- gift copy box (stolen: copy-command) ---------- */
 .gift{margin-top:56px;max-width:430px;opacity:.85}
 .gift .glabel{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:400;margin-bottom:12px}
@@ -331,9 +326,6 @@ header.on-dark .nav-row a{color:#E2E2E2}
 #p5 .inner{text-align:left}
 #p5 h2{font-size:clamp(46px,6.6vw,104px)}
 .contact-row{display:flex;align-items:flex-end;justify-content:space-between;gap:6vw;flex-wrap:wrap}
-.big-cta{display:inline-flex;align-items:center;gap:22px;margin-top:56px;background:var(--navy);color:var(--cement);text-decoration:none;font-family:'Archivo Expanded',sans-serif;font-weight:600;font-size:clamp(17px,1.5vw,22px);padding:28px 44px;transition:background .35s,gap .35s}
-.big-cta:hover{background:var(--wood);gap:34px}
-.big-cta .arr{font-family:'Archivo',sans-serif;font-weight:400}
 .cta-micro{margin-top:16px;font-size:12.5px;letter-spacing:.02em;color:var(--gray);max-width:44ch}
 .contact-side{font-size:13.5px;line-height:2;color:var(--gray);letter-spacing:.03em}
 .contact-side a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm)}
@@ -362,7 +354,6 @@ header.on-dark .nav-row a{color:#E2E2E2}
   #dots,#counter,#hint{display:none}
   .footline{position:static;margin-top:70px}
   #p1 .bignum{font-size:24vh}
-  .wreveal .w{color:inherit}
   .hub-row{justify-content:center}
 }
 @media (max-width:860px){
@@ -376,8 +367,6 @@ header.on-dark .nav-row a{color:#E2E2E2}
 .hub-chip .arr{font-family:'Archivo',sans-serif;font-weight:400;transition:transform .3s}
 .hub-chip:hover{background:var(--navy);color:var(--cement);border-color:var(--navy)}
 .hub-chip:hover .arr{transform:translate(3px,-3px)}
-.hub-chip.hero-chip{border-style:solid;background:var(--navy);color:var(--cement)}
-.hub-chip.hero-chip:hover{background:var(--wood)}
 
 
 
@@ -431,21 +420,6 @@ header.on-dark .nav-row a{color:#E2E2E2}
   .cta-copycol .gift{margin-bottom:24px}
   .footline{bottom:84px}
 }
-/* ---- v2.2 finale bento (wide, Tarsi-style) ---- */
-.cta-bento{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;max-width:1080px;margin:44px auto 0;text-align:left}
-.bento-cta{display:block;background:var(--navy);color:var(--cement);padding:38px 40px;border-radius:0;text-decoration:none;transition:background .3s,transform .3s}
-.bento-cta:hover{background:#000;transform:translateY(-3px)}
-.bc-label{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(228,228,228,.55)}
-.bc-title{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:clamp(22px,2.2vw,32px);margin:14px 0 14px}
-.bc-title .arr{display:inline-block;transition:transform .3s}
-.bento-cta:hover .bc-title .arr{transform:translateX(8px)}
-.bc-body{font-size:14.5px;line-height:1.65;color:rgba(228,228,228,.65);max-width:46ch}
-.bento-side{display:flex;flex-direction:column;gap:20px}
-.bento-card{flex:1;background:transparent;border:1px solid rgba(24,24,24,.2);border-radius:0;padding:24px 26px;display:flex;flex-direction:column;justify-content:center}
-.bento-card .gift{margin:0;max-width:none;opacity:1}
-.bento-contact{gap:8px;font-size:14.5px;color:var(--gray)}
-.bento-contact a{color:var(--navy)}
-@media (max-width:860px){.cta-bento{grid-template-columns:1fr}}
 /* ---- v2 DRAFT overrides (2026-07-23): centered finale ---- */
 #p5 .contact-row{flex-direction:column;align-items:center;justify-content:center;gap:40px}
 #p5 .contact-side{text-align:center}
@@ -542,6 +516,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
           <a href="/inbox-scout/">Inbox Scout <span class="mk">&#8599;</span></a>
           <a href="/robots-and-coffee/">Robots &amp; Coffee <span class="mk">&#8599;</span></a>
           <a href="/jamz-jamorol/">Jamz Jamorol <span class="mk">&#8599;</span></a>
+          <a href="/group/">The group <span class="mk">&#8599;</span></a>
+          <a href="/apps/">Apps <span class="mk">&#8599;</span></a>
         </div>
       </div>
     </nav>
@@ -602,7 +578,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
              that conflict is hers to settle, not ours to paper over. -->
         <div class="pane" id="pane-gwen" role="tabpanel" aria-labelledby="tab-gwen" tabindex="0" hidden>
           <h2 class="rv d1">She helps founders stop being the <em class="accent">bottleneck.</em></h2>
-          <p class="lead rv d2">Gwen Ayala is an Online Business Manager and Marketing Strategist, and co-founder of JTL Growth. She runs Ayala Virtual Assistance Services, founded Filipina Women in Business, and co-founded Robots &amp; Coffee.</p>
+          <p class="lead rv d2">Gwen Ayala is an Online Business Manager and Marketing Strategist, and co-founder of JTL Growth. She runs <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">Ayala Virtual Assistance Services</a>, founded <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">Filipina Women in Business</a>, and co-founded <a href="/robots-and-coffee/">Robots &amp; Coffee</a>.</p>
           <p class="lead rv d3">Five years in the digital space. She started at 18 as a working student and a VA with no experience and no resume, landed international clients, and built her own agency. She now helps coaches, creatives and CEOs clean up their operations, launch with clarity, and scale with strategy.</p>
           <p class="lead rv d3">On this side of the house she owns the part clients actually meet: the messaging, the content, and the conversation. That is why the call you book is hers.</p>
           <div class="hub-row about-links rv d4">
@@ -613,7 +589,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       </div>
 
       <div class="about-face rv d2">
-        <img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async">
+        <a href="/jamz-jamorol/" aria-label="Jamz Jamorol: founder profile"><img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async"></a>
         <img class="face" id="face-gwen" src="assets/portrait-gwen.jpg" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
       </div>
     </div>
@@ -646,7 +622,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
             </div>
           </div>
           <div class="cta-contact">
-            <div>hello@jtlgrowth.com</div>
+            <div><a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></div>
             <div>Philippines, serving PH, US &amp; EU</div>
           </div>
         </div>
@@ -658,7 +634,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
         <a class="hub-chip magnet" href="/work/">Work <span class="arr">↗</span></a>
       </nav>
     </div>
-    <div class="footline"><div class="inner"><span>© 2026 JTL Growth · Caloocan, Metro Manila, PH · DTI BN 8378934</span><span>AI &amp; Automation Systems</span></div></div>
+    <div class="footline"><div class="inner"><span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span><span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span><span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span></div></div>
   </section>
 
   <!-- LOOP CLONE: exact duplicate of panel 1, appended so forward-scroll past the
@@ -990,6 +966,9 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     el.addEventListener('mouseleave',function(){
       clearInterval(hoverT);mode='greet';render();
     });
+    el.addEventListener('click',function(){
+      if(window.jtlOpenPalette)window.jtlOpenPalette();
+    });
   })();
 </script>
 <script>
@@ -1148,6 +1127,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   var lastFocus=null;
   function open(){lastFocus=document.activeElement;pal.classList.add('open');inp.value='';sel=0;render('');inp.focus()}
   function close(){pal.classList.remove('open');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+  window.jtlOpenPalette=open; // exposed so the greetpill click (wired elsewhere) can open it
   addEventListener('keydown',function(e){
     if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();
       pal.classList.contains('open')?close():open();return}

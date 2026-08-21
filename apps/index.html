@@ -15,16 +15,16 @@
 if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
-<title>Products · what you can get or install today · JTL Growth</title>
-<meta name="description" content="The AI Employee, Inbox Scout, the Growth software demo, the open-source AgentKit, the scout packs, and Robots & Coffee: everything JTL Growth ships that you can use today, not a done-for-you build.">
-<link rel="canonical" href="https://jtlgrowth.com/products/">
+<title>Apps · JTL Growth</title>
+<meta name="description" content="Apps built and shipped by JTL Growth. Oras: retainer-first invoicing for people who bill the same clients every month.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Products · what you can get or install today · JTL Growth">
-<meta property="og:description" content="The AI Employee, Inbox Scout, the Growth software demo, the open-source AgentKit, the scout packs, and Robots & Coffee: everything JTL Growth ships that you can use today, not a done-for-you build.">
-<meta property="og:url" content="https://jtlgrowth.com/products/">
+<meta property="og:title" content="Apps · JTL Growth">
+<meta property="og:description" content="Apps built and shipped by JTL Growth. Oras: retainer-first invoicing for people who bill the same clients every month.">
+<meta property="og:url" content="https://jtlgrowth.com/apps/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -201,7 +201,7 @@ section + section{border-top:1px solid var(--line)}
           <a href="/robots-and-coffee/">Robots &amp; Coffee <span class="mk">&#8599;</span></a>
           <a href="/jamz-jamorol/">Jamz Jamorol <span class="mk">&#8599;</span></a>
           <a href="/group/">The group <span class="mk">&#8599;</span></a>
-          <a href="/apps/">Apps <span class="mk">&#8599;</span></a>
+          <a href="/apps/" aria-current="page">Apps <span class="mk">&#8599;</span></a>
         </div>
       </div>
     </nav>
@@ -211,113 +211,40 @@ section + section{border-top:1px solid var(--line)}
 
 <main id="main">
 <section class="page-hero wrap">
-  <p class="eyebrow rv">Products</p>
-  <h1 class="rv d1">Things you can <em class="accent">get today.</em></h1>
-  <p class="lead rv d2">No brief, no build queue, no invoice. Everything on this page is
-    something you can open, download, or install right now. For work we build for you,
-    see <a href="/services/">Services</a> instead.</p>
+  <p class="eyebrow rv">Apps</p>
+  <h1 class="rv d1">Small tools,<br>shipped <em class="accent">properly.</em></h1>
+  <p class="lead rv d2">Apps we built for a problem we had ourselves, then finished to the
+    standard we would hand a client. Each one carries its own privacy and support pages,
+    because a shipped app needs both.</p>
 </section>
 
 <section class="wrap">
-  <div class="p-grid">
+  <div class="p-grid" style="grid-template-columns:1fr">
     <div class="p-card rv">
-      <span class="p-tag">Free</span>
-      <h3>The AI Employee</h3>
-      <p class="p-desc">The seven-stage build JTL Growth runs to put an AI system to work
-        in a business: brief, research, build, wire, test, ship, watch. What each stage
-        does, what skipping it costs you, and the tools behind it.</p>
+      <span class="p-tag">iOS</span>
+      <h3>Oras</h3>
+      <p class="p-desc">Retainer-first invoicing for people who bill the same clients every
+        month. Built because month-end invoicing is the most repetitive hour in an agency and
+        every general invoicing app treats the retainer as an afterthought.</p>
       <ul class="p-list">
-        <li>All seven stages, laid out plainly</li>
-        <li>Nothing gated, read the whole thing</li>
+        <li>Privacy policy and support page, both live</li>
+        <li>Built and shipped in house</li>
       </ul>
-      <a class="p-link" href="/ai-employee/">See the seven stages <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv d1">
-      <span class="p-tag">Free tool</span>
-      <h3>Inbox Scout</h3>
-      <p class="p-desc">Paste your unanswered emails and get every reply drafted in your
-        voice. Works inside any AI chat window you already have, no install, no account.</p>
-      <ul class="p-list">
-        <li>Drafts replies that sound like you</li>
-        <li>Runs in an existing AI chat window</li>
-      </ul>
-      <a class="p-link" href="/inbox-scout/">Try Inbox Scout <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv">
-      <span class="p-tag">Demo</span>
-      <h3>Growth software</h3>
-      <p class="p-desc">The AI operations HQ JTL Growth runs on: an animated office where
-        every AI employee has a desk, work moves through a visible pipeline, and the whole
-        org fits on one screen. Watch it, don't just read about it.</p>
-      <ul class="p-list">
-        <li>Watch the system run, no sign-up</li>
-        <li>Demo only, not a self-serve product yet</li>
-      </ul>
-      <a class="p-link" href="/growth/">Watch the demo <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv d1">
-      <span class="p-tag">Open source</span>
-      <h3>JTL AgentKit</h3>
-      <p class="p-desc">A curated set of agents and skills for Claude Code, distilled from
-        the open-source ruflo project, read line by line, kept only what survived that
-        read. Installs with two lines typed inside Claude Code itself.</p>
-      <ul class="p-list">
-        <li>Agents, skills, and two standalone scripts</li>
-        <li>MIT licensed, free to fork or resell</li>
-      </ul>
-      <a class="p-link" href="https://github.com/jtlgrowth/agentkit" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv">
-      <span class="p-tag">Downloadable</span>
-      <h3>Scout packs</h3>
-      <p class="p-desc">Small, single-job tools built to install and run: Design Scout,
-        Inbox Scout, Onboarding Scout, Proposal Scout, SOP Scout, and Lead Scout. Each one
-        does one job on your machine: nothing broad, nothing bundled you don't need.</p>
-      <ul class="p-list">
-        <li>Design · Inbox · Onboarding · Proposal · SOP · Lead Scout</li>
-        <li>Install the one that matches the job</li>
-      </ul>
-      <a class="p-link" href="/inbox-scout/">Start with Inbox Scout <span class="arr">↗</span></a>
-    </div>
-
-    <div class="p-card rv d1">
-      <span class="p-tag">Off-site</span>
-      <h3>Robots &amp; Coffee</h3>
-      <p class="p-desc">Our digital products library: courses, workshops, and AI
-        resources. It lives off our own domain, on its own storefront.</p>
-      <ul class="p-list">
-        <li>Courses, workshops, and AI resources</li>
-        <li>Hosted at <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">ayalavirtualassistance.site</a></li>
-      </ul>
-      <a class="p-link" href="https://ayalavirtualassistance.site/robots-and-coffee" target="_blank" rel="noopener">Visit Robots &amp; Coffee <span class="arr">↗</span></a>
+      <a class="p-link" href="/apps/oras/">Open Oras <span class="arr">↗</span></a>
     </div>
   </div>
 </section>
 
-<section id="get-the-kit">
-  <div class="wrap">
-    <p class="eyebrow rv">Free download</p>
-    <h2 class="rv d1">Get the AgentKit archive.</h2>
-    <p class="lead rv d2">AgentKit is public on GitHub. Clone the repo or grab the zip
-      directly, both give you the same kit.</p>
-    <a class="hub-chip rv d3" href="https://github.com/jtlgrowth/agentkit/archive/refs/heads/main.zip" target="_blank" rel="noopener">Download AgentKit <span class="arr">↗</span></a>
-  </div>
-</section>
-
 <section class="wrap">
-  <h2 class="rv">Want something built for you instead?</h2>
-  <p class="lead rv d1">These are the tools you run yourself. If you'd rather JTL Growth
-    build and wire the system for your business, start with Services.</p>
-  <div class="hub-row rv d2">
+  <p class="eyebrow rv">More from us</p>
+  <h2 class="rv d1" style="margin-top:16px">The rest of what we ship.</h2>
+  <p class="lead rv d2">Apps are the smallest thing we make. The systems we install for
+    clients, and the tools you can run yourself, live elsewhere on this site.</p>
+  <nav class="hub-row rv d3" aria-label="More from JTL Growth">
+    <a class="hub-chip" href="/products/">Products <span class="arr">↗</span></a>
+    <a class="hub-chip" href="/work/">Shipped work <span class="arr">↗</span></a>
     <a class="hub-chip" href="/services/">Services <span class="arr">↗</span></a>
-    <a class="hub-chip" href="/workshop/">Workshop <span class="arr">↗</span></a>
-    <a class="hub-chip" href="/work/">Work <span class="arr">↗</span></a>
-    <a class="hub-chip" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">↗</span></a>
-  </div>
+  </nav>
 </section>
 </main>
 

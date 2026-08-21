@@ -189,6 +189,14 @@ footer.site a{color:var(--mut)}
 #cta .word{display:inline-block;background:var(--white);color:var(--ink);
   font:700 34px/1 var(--sans);letter-spacing:.16em;padding:9px 22px 10px}
 #cta .tail{font-size:16px;color:#B9BEC9;line-height:1.4;max-width:32ch}
+#cta .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+/* #cta is a dark block, and .btn-primary/.btn-ghost are both authored for the
+   light page: primary is ink-on-ink and ghost is ink text on ink. Invert them
+   here or the two buttons render invisible. */
+#cta .actions .btn-primary{background:var(--white);color:var(--ink)}
+#cta .actions .btn-primary:hover{background:#fff}
+#cta .actions .btn-ghost{color:var(--white);border-color:rgba(255,255,255,.42)}
+#cta .actions .btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.08)}
 #cta .foot{display:flex;justify-content:space-between;align-items:baseline;
   font:12.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
   color:#9BA0AC;padding-top:20px;margin-top:20px;border-top:1px solid #2A2E38}
@@ -320,7 +328,7 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
     <li>Run stage 1 and 2 yourself: no software needed, just the real conversation and the data you already have.</li>
     <li>Draft stage 3 with Claude or whatever tool you already have open.</li>
     <li>Get stage 4 (wire) and stage 7 (watch) covered before you call it done: this is where builds quietly die.</li>
-    <li>Want the whole seven run on your business, shipped behind your brand, watched after launch? Book the call below, quote-based, depends on what's already wired.</li>
+    <li>Want the whole seven run on your business, shipped behind your brand, watched after launch? <a href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book the call</a>, quote-based, depends on what's already wired.</li>
   </ul>
   <p class="fineprint">Or email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a>. If your bottleneck turns out not to need AI, we'll tell you that on the call.</p>
 </section>
@@ -329,9 +337,9 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
   <div class="card">
     <div class="avatar" aria-hidden="true">JJ</div>
     <div>
-      <div class="name">Jamz Jamorol</div>
+      <div class="name"><a href="/jamz-jamorol/">Jamz Jamorol</a></div>
       <div class="role">Founder, JTL Growth</div>
-      <p class="bio">Filipino systems builder and electrical engineer based in Caloocan City, Metro Manila. Co-Founder of AVAS (Ayala Virtual Assistance Services).</p>
+      <p class="bio">Filipino systems builder and electrical engineer based in Caloocan City, Metro Manila. Co-Founder of <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS (Ayala Virtual Assistance Services)</a>.</p>
     </div>
   </div>
 </section>
@@ -342,7 +350,11 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
     <span class="word">GROWTH</span>
     <span class="tail">Comment the word.<br>The full build lands in your DMs. Free.</span>
   </div>
-  <div class="foot"><span>jtlgrowth.com</span><span>Manila · Worldwide</span></div>
+  <div class="actions" style="margin-top:24px">
+    <a class="btn btn-primary" href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Comment on Instagram</a>
+    <a class="btn btn-ghost" href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Comment on Facebook</a>
+  </div>
+  <div class="foot"><span><a href="/">jtlgrowth.com</a></span><span>Manila · Worldwide</span></div>
 </section>
 
 </main>
@@ -356,9 +368,10 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
   <a class="chip" href="#cta"><b>06</b>GROWTH</a>
 </nav>
 
-<footer class="site"><div class="shell">
-  <span>JTL Growth, AI and automation systems · Built in the Philippines</span>
-  <span><a href="/">jtlgrowth.com</a> · <a href="/privacy/">Privacy</a></span>
+<footer class="site"><div class="shell" style="flex-direction:column;gap:8px">
+  <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
+  <span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span>
+  <span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span>
 </div></footer>
 </div><!-- /.frame -->
 
