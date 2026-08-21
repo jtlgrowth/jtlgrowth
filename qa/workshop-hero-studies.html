@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Page Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,650;1,9..144,650&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+/* ------------------------------------------------------------------
+   Single-register on purpose. The subject, jtlgrowth.com/workshop/, is
+   theme-aware, but the Owner's screenshot is the dark register, so every
+   mockup below is painted in the dark literals from workshop/index.html
+   ([data-theme="dark"]: ground #121212, ink #E2E2E2, eyebrow #9E9E9E,
+   body grey #A6A6A6, line rgba(226,226,226,.15)). Nothing is inherited
+   from the host ground.
+   ------------------------------------------------------------------ */
+:root{
+  --ground:#0C0C0C;      /* doc ground: one step under the site's */
+  --site:#121212;        /* the live dark ground, literal */
+  --ink:#E2E2E2;
+  --ink-soft:rgba(226,226,226,.66);
+  --ink-faint:rgba(226,226,226,.44);
+  --mono:#9E9E9E;
+  --line:rgba(226,226,226,.15);
+  --line-soft:rgba(226,226,226,.07);
+  --disp:'Fraunces',Georgia,'Times New Roman',serif;
+  --body:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --wide:'Archivo Expanded','Archivo',sans-serif;
+  --mach:'Space Mono','SFMono-Regular',Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid #B9B9B9;outline-offset:3px}
+
+.doc{width:min(1180px,92vw);margin:0 auto;padding:clamp(48px,7vw,96px) 0 120px}
+
+/* ---------- doc typography ---------- */
+.kick{font-family:var(--mach);font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mono);margin:0}
+h1.doc-title{
+  font-family:var(--disp);font-weight:650;line-height:1.02;letter-spacing:-.015em;
+  font-size:clamp(38px,5.4vw,68px);margin:18px 0 0;text-wrap:balance;color:var(--ink);
+}
+h1.doc-title em{font-style:italic}
+.doc-lead{max-width:62ch;margin:26px 0 0;color:var(--ink-soft);font-size:clamp(15.5px,1.15vw,18px)}
+.doc-lead + .doc-lead{margin-top:14px}
+
+hr.rule{border:0;border-top:1px solid var(--line);margin:clamp(48px,6vw,84px) 0}
+
+/* ---------- diagnosis table ---------- */
+.diag-wrap{overflow-x:auto;margin-top:30px;border:1px solid var(--line)}
+table.diag{border-collapse:collapse;width:100%;min-width:660px;font-size:14.5px}
+table.diag th,table.diag td{text-align:left;vertical-align:top;padding:14px 18px;border-bottom:1px solid var(--line-soft)}
+table.diag tr:last-child td{border-bottom:0}
+table.diag th{
+  font-family:var(--mach);font-size:10px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mono);background:rgba(226,226,226,.035);
+  border-bottom:1px solid var(--line);
+}
+table.diag td:first-child,table.diag th:first-child{width:52px;font-family:var(--mach);font-size:12px;color:var(--mono);font-variant-numeric:tabular-nums}
+table.diag td:last-child{color:var(--ink-faint);font-family:var(--mach);font-size:11.5px;line-height:1.7}
+table.diag td b{font-weight:600;color:var(--ink)}
+
+/* ---------- variant block ---------- */
+.variant{margin-top:clamp(56px,7vw,96px)}
+.vhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px;margin-bottom:6px}
+.vtag{
+  font-family:var(--mach);font-size:11px;font-weight:700;letter-spacing:.2em;
+  border:1px solid var(--line);padding:5px 11px;color:var(--ink);flex:none;
+}
+.vtag.rec{background:var(--ink);color:#101010;border-color:var(--ink)}
+.vname{font-family:var(--disp);font-weight:650;font-size:clamp(24px,2.6vw,34px);letter-spacing:-.01em;line-height:1.15;margin:0}
+.vkills{font-family:var(--mach);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mono);margin-left:auto}
+.vsub{max-width:74ch;color:var(--ink-soft);font-size:15px;margin:10px 0 22px}
+
+.frame{
+  position:relative;overflow-x:auto;overflow-y:hidden;border:1px solid var(--line);
+  background:var(--site);
+}
+/* the sizer: gives the scroll container the width/height of the SCALED stage,
+   because a CSS transform never changes an element's layout box. */
+.frame::after{content:"";display:block;width:var(--sw,1280px);height:var(--sh,1240px)}
+.stage{
+  width:1280px;height:1240px;transform-origin:0 0;
+  position:absolute;top:0;left:0;overflow:hidden;background:var(--site);
+}
+.frame-note{display:none;margin-top:9px;font-family:var(--mach);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mono)}
+@media (max-width:820px){.frame-note{display:block}}
+
+.vfoot{display:grid;gap:16px;grid-template-columns:1fr 1fr;margin-top:18px}
+@media (max-width:760px){.vfoot{grid-template-columns:1fr}}
+.vfoot h4{
+  font-family:var(--mach);font-size:10px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mono);margin:0 0 7px;
+}
+.vfoot p{margin:0;font-size:14px;color:var(--ink-soft);line-height:1.6}
+
+/* ==================================================================
+   THE STAGE. Everything below is scoped under .stage and copies the
+   live page's dark literals. No tokens.
+   ================================================================== */
+.stage .chrome{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 40px;background:rgba(18,18,18,.9);
+  border-bottom:1px solid rgba(226,226,226,.15);
+  height:86px;position:relative;z-index:2;
+}
+.stage .chrome .lmark{height:22px;width:auto;color:#E2E2E2;display:block}
+.stage .chrome .navr{display:flex;align-items:center;gap:30px;margin-left:52px;margin-right:auto}
+.stage .chrome .navr span{
+  font:700 11px var(--mach);letter-spacing:.16em;text-transform:uppercase;color:#E2E2E2;opacity:.72;
+  padding:6px 0;border-bottom:1px solid transparent;
+}
+.stage .chrome .navr span.cur{opacity:1;border-bottom-color:currentColor}
+.stage .chrome .right{display:flex;align-items:center;gap:12px}
+.stage .chrome .tgl{width:39px;height:39px;border:1px solid rgba(226,226,226,.4);display:grid;place-items:center;color:#E2E2E2}
+.stage .chrome .tgl svg{width:16px;height:16px}
+.stage .chrome .mbtn{
+  font:700 11px var(--mach);letter-spacing:.18em;text-transform:uppercase;color:#E2E2E2;
+  border:1px solid rgba(226,226,226,.4);padding:11px 16px;display:inline-flex;gap:9px;align-items:center;
+}
+.stage .chrome .mbtn i{font-style:normal;font-size:9px}
+.stage .chrome .cta{
+  font:600 12.5px var(--body);letter-spacing:.08em;text-transform:uppercase;
+  background:#E2E2E2;color:#101010;padding:12px 22px;
+}
+
+.stage .fold{height:738px;position:relative}
+.stage .wrap{width:1152px;margin:0 auto;height:100%}
+.stage .body{border-top:1px solid rgba(226,226,226,.15);padding:64px 0 0;height:416px}
+.stage .body .wrap{height:auto}
+
+.stage .eyebrow{font:700 11px var(--mach);letter-spacing:.16em;text-transform:uppercase;color:#9E9E9E;margin:0}
+.stage h1{
+  font-family:var(--disp);font-weight:650;font-size:78px;line-height:1.05;letter-spacing:-.01em;
+  color:#E2E2E2;margin:16px 0 0;
+}
+.stage h1 em{font-style:italic}
+.stage .lead{font-size:18px;line-height:1.65;color:rgba(226,226,226,.68);max-width:56ch;margin:26px 0 0}
+.stage .chips{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+.stage .chip{
+  display:inline-flex;align-items:center;gap:14px;border:1px solid rgba(226,226,226,.3);
+  padding:14px 20px;color:#E2E2E2;font:700 11px var(--mach);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+}
+.stage .chip .arr{font-family:var(--body);font-weight:400}
+.stage .chip.solid{background:#E2E2E2;color:#101010;border-color:#E2E2E2}
+
+/* body copy, shared */
+.stage .solves p{font-size:16px;line-height:1.7;color:#A6A6A6;margin:0}
+.stage .solves p + p{margin-top:16px}
+.stage .walk{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.stage .walk li{font-size:16px;line-height:1.5;color:#E2E2E2;padding-left:30px;position:relative}
+.stage .walk li::before{content:"\2713";position:absolute;left:0;color:#B9B9B9;font-weight:700}
+.stage .daytag{font:700 11px var(--mach);letter-spacing:.16em;text-transform:uppercase;color:#9E9E9E;margin:0}
+.stage h3{font-family:var(--wide);font-weight:700;font-size:22px;letter-spacing:-.01em;color:#E2E2E2;margin:10px 0 0}
+.stage .bul{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:10px}
+.stage .bul li{font-size:14.5px;line-height:1.5;color:#A6A6A6;padding-left:20px;position:relative}
+.stage .bul li::before{content:"\2013";position:absolute;left:0;color:#B9B9B9}
+.stage .floor{
+  width:1152px;margin:0 auto;border-top:1px solid rgba(226,226,226,.14);
+  display:flex;justify-content:space-between;align-items:center;padding:20px 0 0;
+  font:700 10.5px var(--mach);letter-spacing:.2em;text-transform:uppercase;color:#7C7C7C;
+}
+.stage .floor .sc{display:inline-flex;align-items:center;gap:10px}
+.stage .floor .sc .bar{display:inline-block;width:1px;height:26px;background:linear-gradient(180deg,rgba(226,226,226,.5),transparent)}
+.stage .pair{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.stage .pair > div > .solves,.stage .pair > div > .walk{margin-top:22px}
+
+/* ---- A: centred monument ---- */
+#stage-a .fold{display:grid;place-items:center;padding-bottom:40px}
+#stage-a .mon{position:relative;width:1000px;margin:0 auto;text-align:center}
+#stage-a h1{margin-top:20px;font-size:88px}
+#stage-a .lead{margin-left:auto;margin-right:auto}
+#stage-a .chips{justify-content:center}
+#stage-a .orb{
+  position:absolute;display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(226,226,226,.24);background:rgba(18,18,18,.8);
+  padding:9px 14px;font:700 10px var(--mach);letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(226,226,226,.86);white-space:nowrap;
+}
+#stage-a .orb .no{color:#6E6E6E}
+#stage-a .orb .sw{width:10px;height:10px;flex:none;border:1px solid rgba(226,226,226,.3)}
+#stage-a .o1{left:-48px;top:86px}
+#stage-a .o2{right:-72px;top:44px}
+#stage-a .o3{left:-6px;top:236px}
+#stage-a .o4{right:-20px;top:276px}
+#stage-a .foot{margin-top:38px;padding-top:20px;border-top:1px solid rgba(226,226,226,.14);display:inline-block}
+#stage-a .foot .fl{font:700 9.5px var(--mach);letter-spacing:.22em;text-transform:uppercase;color:#6E6E6E;display:block;margin-bottom:7px}
+#stage-a .foot p{margin:0;font-size:13.5px;line-height:1.6;color:rgba(226,226,226,.5);max-width:74ch}
+
+/* ---- B: split axis, agenda right ---- */
+#stage-b .fold{display:flex;flex-direction:column}
+#stage-b .cols{
+  width:1152px;margin:0 auto;flex:1;display:grid;
+  grid-template-columns:minmax(0,1fr) 430px;gap:80px;align-items:start;padding-top:70px;
+}
+#stage-b h1{font-size:72px}
+#stage-b .idx{border-top:1px solid rgba(226,226,226,.22);margin-top:10px}
+#stage-b .idx .ihead{font:700 10px var(--mach);letter-spacing:.22em;text-transform:uppercase;color:#7C7C7C;padding:14px 0 4px;display:flex;justify-content:space-between}
+#stage-b .irow{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-top:1px solid rgba(226,226,226,.11)}
+#stage-b .irow:first-of-type{border-top:0}
+#stage-b .irow .no{font:700 11px var(--mach);letter-spacing:.14em;color:#9E9E9E;padding-top:3px}
+#stage-b .irow h3{font-size:17px;margin:0}
+#stage-b .irow .bul{margin-top:10px;gap:6px}
+#stage-b .irow .bul li{font-size:13px;line-height:1.45}
+#stage-b .floor{padding-bottom:30px}
+#stage-b .rail{width:1152px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:start}
+#stage-b .rail .solves{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px}
+#stage-b .rail .solves p{margin:0}
+#stage-b .rail .solves p.big{grid-column:1/-1;font-size:22px;line-height:1.45;color:#E2E2E2;max-width:none;margin-bottom:8px}
+
+/* ---- C: editorial rule grid ---- */
+#stage-c .fold{display:flex;flex-direction:column}
+#stage-c .cols{
+  position:relative;flex:1;width:100%;padding:56px 64px 0;
+  display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;
+  grid-template-rows:auto auto minmax(0,1fr);align-content:start;
+}
+#stage-c .vlines{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;padding:0 64px;pointer-events:none}
+#stage-c .vlines i{border-left:1px solid rgba(226,226,226,.055);display:block;height:100%}
+#stage-c .vlines i:last-child{border-right:1px solid rgba(226,226,226,.055)}
+#stage-c .gut{grid-column:1/2;grid-row:1/3;padding-top:8px}
+#stage-c .gut .eyebrow{writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.3em}
+#stage-c .head{grid-column:2/13;grid-row:1}
+#stage-c h1{font-size:112px;margin:0;line-height:.98;letter-spacing:-.02em}
+#stage-c .mini{grid-column:2/7;grid-row:2;padding-top:34px}
+#stage-c .mini .ml{font:700 9.5px var(--mach);letter-spacing:.22em;text-transform:uppercase;color:#6E6E6E;padding-bottom:12px;border-bottom:1px solid rgba(226,226,226,.18);margin-bottom:4px}
+#stage-c .mrow{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid rgba(226,226,226,.08);align-items:baseline}
+#stage-c .mrow .no{font:700 11px var(--mach);letter-spacing:.14em;color:#9E9E9E}
+#stage-c .mrow .nm{font:700 11.5px var(--mach);letter-spacing:.15em;text-transform:uppercase;color:#E2E2E2}
+#stage-c .mrow .nm b{display:block;font:400 13px/1.5 var(--body);letter-spacing:0;text-transform:none;color:rgba(226,226,226,.5);margin-top:4px}
+#stage-c .deck{grid-column:8/13;grid-row:2;padding-top:34px}
+#stage-c .deck .lead{font-size:17px;margin:0;max-width:none}
+#stage-c .deck .chips{margin-top:30px}
+#stage-c .actbar{
+  margin-top:auto;border-top:1px solid rgba(226,226,226,.2);padding:22px 64px;
+  display:flex;align-items:center;justify-content:space-between;gap:30px;
+}
+#stage-c .readout{
+  font:700 11px var(--mach);letter-spacing:.16em;text-transform:uppercase;color:#8F8F8F;
+  display:inline-flex;align-items:center;gap:12px;font-variant-numeric:tabular-nums;
+}
+#stage-c .readout .dot{width:7px;height:7px;background:#E2E2E2;display:inline-block;flex:none}
+#stage-c .body{padding:0}
+#stage-c .bgrid{
+  position:relative;width:100%;padding:56px 64px 0;
+  display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;height:100%;
+}
+#stage-c .b1{grid-column:1/2}
+#stage-c .b2{grid-column:2/7}
+#stage-c .b3{grid-column:8/13}
+#stage-c .bgrid .solves,#stage-c .bgrid .walk{margin-top:22px}
+
+/* ---- D: timeline fold ---- */
+#stage-d .fold{display:flex;flex-direction:column}
+#stage-d .top{width:1152px;margin:0 auto;text-align:center;padding-top:54px}
+#stage-d h1{font-size:70px}
+#stage-d .lead{margin-left:auto;margin-right:auto;font-size:17px}
+#stage-d .chips{justify-content:center;margin-top:30px}
+#stage-d .track{width:1152px;margin:auto auto 0;padding-bottom:34px}
+#stage-d .trail{position:relative;height:1px;background:rgba(226,226,226,.18);margin:0 0 26px}
+#stage-d .trail i{position:absolute;top:-4px;width:9px;height:9px;background:#121212;border:1px solid rgba(226,226,226,.6)}
+#stage-d .trail i.n1{left:0}
+#stage-d .trail i.n2{left:calc(50% - 4px);background:#E2E2E2}
+#stage-d .trail i.n3{right:0}
+#stage-d .trail .lab{position:absolute;top:-28px;font:700 9.5px var(--mach);letter-spacing:.22em;text-transform:uppercase;color:#6E6E6E}
+#stage-d .trail .lab.l1{left:0}
+#stage-d .trail .lab.l2{left:50%;transform:translateX(-50%)}
+#stage-d .trail .lab.l3{right:0}
+#stage-d .cells{display:grid;grid-template-columns:1fr 44px 1fr;gap:0 28px;align-items:start}
+#stage-d .cell h3{font-size:21px}
+#stage-d .cell .bul{margin-top:14px;gap:8px}
+#stage-d .cell .bul li{font-size:14px}
+#stage-d .arrow{align-self:center;text-align:center;font-family:var(--body);font-size:28px;color:#6E6E6E;padding-top:20px}
+
+/* ---------- closing ---------- */
+.pick{margin-top:clamp(56px,7vw,92px);border:1px solid var(--line);padding:clamp(26px,3.4vw,44px)}
+.pick h3{font-family:var(--disp);font-weight:650;font-size:clamp(22px,2.4vw,30px);margin:12px 0 0;letter-spacing:-.01em}
+.pick p{margin:14px 0 0;color:var(--ink-soft);max-width:70ch;font-size:15px}
+.pick ol{margin:18px 0 0;padding-left:20px;color:var(--ink-soft);font-size:15px}
+.pick ol li{margin-bottom:7px}
+.pick ol li b{color:var(--ink);font-weight:600}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <p class="kick">jtlgrowth.com &middot; /workshop/ &middot; page study &middot; 21 aug 2026</p>
+  <h1 class="doc-title">Four ways to close the <em>workshop</em> page.</h1>
+  <p class="doc-lead">The live page is one left-hand column, top to bottom: a 56-character lead under the headline, then three 62-character paragraphs, every section starting at the same left edge inside a 1240px container. The right half of the screen is bare from the fold down. Four directions below, all using the same headline, the same lead, the same agenda and the same body copy. Only the composition changes.</p>
+  <p class="doc-lead">Every mockup is rendered at 1280&times;1240 in the page's real dark colours and real typefaces: the fold, then the first body section, so the rhythm below the hero is visible too. The page is theme-aware; the light register inverts the same composition.</p>
+
+  <hr class="rule">
+
+  <p class="kick">What is actually wrong</p>
+  <div class="diag-wrap">
+    <table class="diag">
+      <thead>
+        <tr><th>#</th><th>Defect</th><th>Where it comes from</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td><b>The hero is a 56-character column in a 1240px box.</b> Headline, lead, nothing else is placed. The eye finds no second anchor on the right.</td>
+          <td>.wrap = min(1240px,90vw) &middot; .lead max-width:56ch</td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td><b>No floor under the fold.</b> The hero is sized by its content, so the space under the lead is leftover, not composed, and the next section arrives after a rule with nothing between.</td>
+          <td>.page-hero{padding-top:0} &middot; section{padding:7vw 0}</td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td><b>Every body section repeats the same left column.</b> "What this solves", "What you walk out with", the preview gate: all 60-62ch, all flush left. The gap on the right runs the full page.</td>
+          <td>.wk-solves max-width:62ch &middot; .wk-check max-width:60ch</td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td><b>The two days are below the fold.</b> The agenda is the product, and it is the third section down.</td>
+          <td>.wk-days is section three</td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td><b>No call to action in the hero.</b> The first button is the preview gate four sections down; "Book a call" only exists in the header.</td>
+          <td>.page-hero has no .hub-row</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================= A ============================= -->
+  <section class="variant">
+    <div class="vhead">
+      <span class="vtag rec">A &middot; Recommended</span>
+      <h2 class="vname">Centred monument</h2>
+      <span class="vkills">kills 01 &middot; 02 &middot; 03 &middot; 05</span>
+    </div>
+    <p class="vsub">The same composition you picked for /services/. Headline on the centre line, four chips orbiting it at uneven radii (the two days and the two things you leave with), solid "Book a call" next to the preview link, and a labelled footnote under a hairline. Below the fold, "What this solves" and "What you walk out with" sit side by side so no section is a lone column.</p>
+
+    <div class="frame">
+      <div class="stage" id="stage-a">
+        <div class="chrome" data-chrome></div>
+        <div class="fold">
+          <div class="mon">
+            <span class="orb o1"><span class="no">01</span><span class="sw" style="background:#5E5E5E"></span>Day 1 &middot; AI employee</span>
+            <span class="orb o2"><span class="no">02</span><span class="sw" style="background:#8F8F8F"></span>Day 2 &middot; UI system</span>
+            <span class="orb o3"><span class="sw" style="background:#E2E2E2"></span>Live link</span>
+            <span class="orb o4"><span class="sw" style="background:#3A3A3A"></span>DESIGN.md</span>
+            <p class="eyebrow">Workshop</p>
+            <h1>From operator<br>to <em>orchestrator.</em></h1>
+            <p class="lead">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+            <div class="chips">
+              <span class="chip solid">Book a call <span class="arr">&#8599;</span></span>
+              <span class="chip">Download the preview <span class="arr">&#8599;</span></span>
+            </div>
+            <div class="foot">
+              <span class="fl">What you walk out with</span>
+              <p>A working AI employee you built yourself, live on the internet. A design system in a file, not in your head. A repeatable process for turning a business problem into shipped software.</p>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="wrap pair">
+            <div>
+              <p class="eyebrow">What this solves</p>
+              <div class="solves">
+                <p>Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
+                <p>This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
+                <p>It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+              </div>
+            </div>
+            <div>
+              <p class="eyebrow">What you walk out with</p>
+              <ul class="walk">
+                <li>A working AI employee you built yourself, live on the internet</li>
+                <li>A design system in a file, not in your head, reusable on your next build</li>
+                <li>A repeatable process for turning a business problem into shipped software</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="frame-note">Drag the mockup sideways to see the full 1280px fold</p>
+
+    <div class="vfoot">
+      <div><h4>What changed</h4><p>Hero sized to the viewport and centred, so there is no "other side" left over by construction. The orbit reuses the .orb rules already shipped on /services/. Hero gains the two CTAs it never had. Body sections pair up two-across at 1152px; "The two days" keeps its existing two-card grid.</p></div>
+      <div><h4>Under 1080px / 860px</h4><p>Chips leave orbit and become one centred row above the eyebrow (same breakpoint rule as /services/). Under 860px the pair stacks and the CTAs go full width. Nothing new to write for mobile beyond what /services/ already has.</p></div>
+    </div>
+  </section>
+
+  <!-- ============================= B ============================= -->
+  <section class="variant">
+    <div class="vhead">
+      <span class="vtag">B</span>
+      <h2 class="vname">Split axis, agenda on the right</h2>
+      <span class="vkills">kills 01 &middot; 02 &middot; 03 &middot; 04 &middot; 05</span>
+    </div>
+    <p class="vsub">Closest to what is there. The copy keeps its left column; the empty right half becomes the two-day agenda, the actual product, stacked as an index with its bullets. The hero runs to the fold and closes on a rule with a scroll cue. Every body section below switches to a label rail: the eyebrow in a 240px left column, the content in the wider right column, with the first paragraph pulled up as a deck.</p>
+
+    <div class="frame">
+      <div class="stage" id="stage-b">
+        <div class="chrome" data-chrome></div>
+        <div class="fold">
+          <div class="cols">
+            <div>
+              <p class="eyebrow">Workshop</p>
+              <h1>From operator<br>to <em>orchestrator.</em></h1>
+              <p class="lead">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+              <div class="chips">
+                <span class="chip solid">Book a call <span class="arr">&#8599;</span></span>
+                <span class="chip">Download the preview <span class="arr">&#8599;</span></span>
+              </div>
+            </div>
+            <div class="idx">
+              <div class="ihead"><span>The two days</span><span>Hands-on</span></div>
+              <div class="irow">
+                <span class="no">Day 1</span>
+                <div>
+                  <h3>Building an AI employee</h3>
+                  <ul class="bul">
+                    <li>The difference between a tool and an employee: a job, instructions, tools, and a place to work</li>
+                    <li>Set up Claude Code on your own machine (Mac and Windows commands, walked through live)</li>
+                    <li>Write the build prompt for your own business: what you sell, who buys it, what the tool should do</li>
+                    <li>Ship it live with a public link before the session ends</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="irow">
+                <span class="no">Day 2</span>
+                <div>
+                  <h3>Your own UI system</h3>
+                  <ul class="bul">
+                    <li>Why every AI-built page looks AI-made: same fonts, same gradients, same cards</li>
+                    <li>Install the JTL AgentKit inside Claude Code (two commands)</li>
+                    <li>Write your system down as a DESIGN.md file your AI must follow on every page</li>
+                    <li>Apply it to yesterday's tool, have the reviewer agent judge it against your own rules, and re-publish before and after</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="floor">
+            <span>Two days &middot; Metro Manila &middot; in a room, not a video</span>
+            <span class="sc">Scroll <span class="bar"></span></span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="rail">
+            <p class="eyebrow">What this solves</p>
+            <div class="solves">
+              <p class="big">Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
+              <p>This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
+              <p>It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="frame-note">Drag the mockup sideways to see the full 1280px fold</p>
+
+    <div class="vfoot">
+      <div><h4>What changed</h4><p>Right column gains the two-day index (four of five bullets each; the full list stays in the cards below). Hero stretches to the fold and ends on a hairline with a scroll cue. Body sections adopt a 240px label rail with the content at a wider measure, first paragraph promoted to a 22px deck and the remaining two side by side.</p></div>
+      <div><h4>Under 860px</h4><p>Index drops under the buttons as a single column; label rail collapses to eyebrow-over-content, which is the live mobile layout already, so nothing regresses.</p></div>
+    </div>
+  </section>
+
+  <!-- ============================= C ============================= -->
+  <section class="variant">
+    <div class="vhead">
+      <span class="vtag">C</span>
+      <h2 class="vname">Editorial rule grid</h2>
+      <span class="vkills">kills 01 &middot; 02 &middot; 03 &middot; 04 &middot; 05</span>
+    </div>
+    <p class="vsub">Twelve visible hairline columns, the headline across all of them at poster size, and the content deliberately right-weighted: lead and buttons in the right five columns, a two-row agenda index in the left five, the eyebrow turned vertical in the gutter. The fold closes on an action bar with a readout. The body keeps the same grid, with "What this solves" left and "What you walk out with" right.</p>
+
+    <div class="frame">
+      <div class="stage" id="stage-c">
+        <div class="chrome" data-chrome></div>
+        <div class="fold">
+          <div class="cols">
+            <div class="vlines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="gut"><p class="eyebrow">Workshop</p></div>
+            <div class="head"><h1>From operator<br>to <em>orchestrator.</em></h1></div>
+            <div class="mini">
+              <div class="ml">The two days</div>
+              <div class="mrow"><span class="no">Day 1</span><span class="nm">Building an AI employee<b>Set up Claude Code on your own machine, write the build prompt for your business, ship it live with a public link before the session ends.</b></span></div>
+              <div class="mrow"><span class="no">Day 2</span><span class="nm">Your own UI system<b>Install the JTL AgentKit, write your system down as a DESIGN.md file, apply it to yesterday's tool and re-publish before and after.</b></span></div>
+            </div>
+            <div class="deck">
+              <p class="lead">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+              <div class="chips">
+                <span class="chip solid">Book a call <span class="arr">&#8599;</span></span>
+                <span class="chip">Download the preview <span class="arr">&#8599;</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="actbar">
+            <span class="readout"><span class="dot"></span>2 days &middot; hands-on &middot; live link by the end of day one</span>
+            <span class="readout">Already attended? Get your setup page &#8599;</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="bgrid">
+            <div class="vlines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="b1"></div>
+            <div class="b2">
+              <p class="eyebrow">What this solves</p>
+              <div class="solves">
+                <p>Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
+                <p>This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
+                <p>It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+              </div>
+            </div>
+            <div class="b3">
+              <p class="eyebrow">What you walk out with</p>
+              <ul class="walk">
+                <li>A working AI employee you built yourself, live on the internet</li>
+                <li>A design system in a file, not in your head, reusable on your next build</li>
+                <li>A repeatable process for turning a business problem into shipped software</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="frame-note">Drag the mockup sideways to see the full 1280px fold</p>
+
+    <div class="vfoot">
+      <div><h4>What changed</h4><p>Headline grows to 112px across the full grid; the reader's eye has to cross the axis to reach the lead, so both halves are in use. The gutter eyebrow, the vertical rails and the action bar are new chrome. The agenda is summarised in two rows in the hero and kept in full below.</p></div>
+      <div><h4>Under 860px</h4><p>The rails hide, the eyebrow goes horizontal, the headline drops to clamp(42px,11vw,64px) and every grid cell stacks in source order: head, agenda, lead, buttons.</p></div>
+    </div>
+  </section>
+
+  <!-- ============================= D ============================= -->
+  <section class="variant">
+    <div class="vhead">
+      <span class="vtag">D</span>
+      <h2 class="vname">Timeline fold</h2>
+      <span class="vkills">kills 01 &middot; 02 &middot; 03 &middot; 04 &middot; 05</span>
+    </div>
+    <p class="vsub">Centred headline and lead, shorter, and then the two days pulled up into the fold as a full-width track: one line with three stations (start, overnight, ship), two wide cells under it with the tag, the title and three bullets each, and an arrow between them. The agenda fills the fold's width instead of waiting two sections down. The body pairs up below, same as A.</p>
+
+    <div class="frame">
+      <div class="stage" id="stage-d">
+        <div class="chrome" data-chrome></div>
+        <div class="fold">
+          <div class="top">
+            <p class="eyebrow">Workshop</p>
+            <h1>From operator to <em>orchestrator.</em></h1>
+            <p class="lead">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+            <div class="chips">
+              <span class="chip solid">Book a call <span class="arr">&#8599;</span></span>
+              <span class="chip">Download the preview <span class="arr">&#8599;</span></span>
+            </div>
+          </div>
+          <div class="track">
+            <div class="trail" aria-hidden="true">
+              <span class="lab l1">Day 1 &middot; morning</span><span class="lab l2">Live link</span><span class="lab l3">Day 2 &middot; re-publish</span>
+              <i class="n1"></i><i class="n2"></i><i class="n3"></i>
+            </div>
+            <div class="cells">
+              <div class="cell">
+                <p class="daytag">Day 1</p>
+                <h3>Building an AI employee</h3>
+                <ul class="bul">
+                  <li>Set up Claude Code on your own machine (Mac and Windows commands, walked through live)</li>
+                  <li>Write the build prompt for your own business: what you sell, who buys it, what the tool should do</li>
+                  <li>Ship it live with a public link before the session ends</li>
+                </ul>
+              </div>
+              <div class="arrow">&#8594;</div>
+              <div class="cell">
+                <p class="daytag">Day 2</p>
+                <h3>Your own UI system</h3>
+                <ul class="bul">
+                  <li>What a UI system actually is: fonts, colors, spacing, and rules you never break</li>
+                  <li>Write your system down as a DESIGN.md file your AI must follow on every page</li>
+                  <li>Apply it to yesterday's tool, have the reviewer agent judge it against your own rules, and re-publish before and after</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="wrap pair">
+            <div>
+              <p class="eyebrow">What this solves</p>
+              <div class="solves">
+                <p>Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
+                <p>This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
+                <p>It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+              </div>
+            </div>
+            <div>
+              <p class="eyebrow">What you walk out with</p>
+              <ul class="walk">
+                <li>A working AI employee you built yourself, live on the internet</li>
+                <li>A design system in a file, not in your head, reusable on your next build</li>
+                <li>A repeatable process for turning a business problem into shipped software</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="frame-note">Drag the mockup sideways to see the full 1280px fold</p>
+
+    <div class="vfoot">
+      <div><h4>What changed</h4><p>"The two days" moves into the fold as a track with three stations and two cells (three bullets each; the full five-bullet cards stay below). Headline sits on one line at 70px. Body pairs up two-across like A. The old third section shrinks to the bullets not shown in the fold.</p></div>
+      <div><h4>Under 860px</h4><p>Track labels hide, the trail becomes a short vertical rule between two stacked cells, arrow rotates to point down. Pair stacks.</p></div>
+    </div>
+  </section>
+
+  <!-- ============================= pick ============================= -->
+  <div class="pick">
+    <p class="kick">Recommendation</p>
+    <h3>A, the centred monument.</h3>
+    <p>It is the composition you already picked for /services/ and the only one that removes the empty half by construction rather than by filling it. It also costs the least: the orbit, the solid chip and the fold sizing are CSS already shipped on the services page, so the port is a copy, not a build. B is the runner-up if you want the agenda above the fold; its label rail is the nicest body rhythm of the four and could be grafted onto A.</p>
+    <ol>
+      <li><b>Pick a letter</b> (or "A with B's body").</li>
+      <li><b>Port</b> into workshop/index.html, both themes, probe-v6 green, em-dash check green.</li>
+      <li><b>Deploy</b> and screenshot live at 1280 and 375.</li>
+    </ol>
+  </div>
+
+</div>
+
+<template id="chrome-tpl">
+  <a class="logo" href="#" aria-hidden="true" tabindex="-1" style="display:inline-flex;align-items:center;text-decoration:none">
+    <svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg>
+  </a>
+  <div class="navr"><span>Services</span><span>Products</span><span class="cur">Workshop</span><span>Work</span></div>
+  <div class="right">
+    <span class="tgl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+    <span class="mbtn">Menu <i>&#9660;</i></span>
+    <span class="cta">Book a call</span>
+  </div>
+</template>
+
+<script>
+(function(){
+  'use strict';
+  var W = 1280, H = 1240;
+
+  /* ---- chrome: one template, cloned into every stage ---- */
+  var tpl = document.getElementById('chrome-tpl');
+  document.querySelectorAll('[data-chrome]').forEach(function(slot){
+    slot.appendChild(tpl.content.cloneNode(true));
+  });
+
+  /* ---- fit each 1280px stage into its frame ---- */
+  var frames = [].slice.call(document.querySelectorAll('.frame'));
+  function fitAll(){
+    frames.forEach(function(f){
+      var stage = f.querySelector('.stage');
+      /* fit to the frame, but never shrink a 1280px mockup below a legible
+         floor; under that, the frame scrolls sideways instead. */
+      var floor = f.clientWidth < 820 ? 0.56 : 0;
+      var s = Math.max(floor, Math.min(1, f.clientWidth / W));
+      stage.style.transform = 'scale(' + s + ')';
+      f.style.setProperty('--sw', Math.round(W * s) + 'px');
+      f.style.setProperty('--sh', Math.round(H * s) + 'px');
+    });
+  }
+  fitAll();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  var t;
+  window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(fitAll, 120); });
+})();
+</script>
+</body>
+</html>

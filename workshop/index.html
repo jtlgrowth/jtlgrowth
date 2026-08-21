@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- template: v6 page shell — vertical-scroll subpage, extracted from the homepage
+<!-- template: v6 page shell + v6.3 centred hero (variant A, qa/workshop-hero-studies.html) — vertical-scroll subpage, extracted from the homepage
      register (mono cement + Fraunces/Archivo/Space Mono) per the standing rule:
      new slugs extract from the homepage, never the retired apple-gray/warm-paper
      registers. Chips: the [ NN / LABEL ] bracket ornament is retired site-wide
@@ -125,6 +125,48 @@ section + section{border-top:1px solid var(--line)}
 .page-hero{padding-top:0}
 .page-hero h1{margin-top:16px}
 .page-hero .lead{margin-top:26px}
+/* ---- v6.3 centred hero (variant A, Owner pick 2026-08-21) ------------------
+   The fold is the composition, not a leftover: sized to the viewport so it
+   closes on its own bottom edge. Theme-aware: every colour is a token, the
+   dark register inverts the same composition. ------------------------------ */
+.page-hero{
+  min-height:calc(100svh - clamp(150px,16vh,208px));
+  display:grid;place-items:center;padding-bottom:clamp(36px,5vw,72px);
+}
+.hero-mon{position:relative;width:min(1000px,90vw);margin:0 auto;text-align:center}
+.hero-mon h1{margin-top:20px;font-size:clamp(42px,6.4vw,92px)}
+.hero-mon .lead{margin-left:auto;margin-right:auto;max-width:56ch}
+.hero-mon .hub-row{justify-content:center}
+.hub-chip.solid{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+.hub-chip.solid:hover{background:var(--wood);border-color:var(--wood)}
+/* the orbit: four chips at uneven radii. Even spacing reads as a grid,
+   which is the one thing an orbit must not look like. */
+.orbits{display:contents}  /* no layout box: the reveal class lives on each .orb,
+   never on this wrapper (an IntersectionObserver never fires on display:contents). */
+.orb{
+  position:absolute;display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--line);background:color-mix(in srgb,var(--cement) 82%,transparent);
+  padding:9px 14px;font:700 10px 'Space Mono',monospace;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--navy);white-space:nowrap;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.orb .on{color:var(--gray)}
+.orb .sw{width:10px;height:10px;flex:none;border:1px solid var(--line)}
+.orb.o1{left:-4.8%;top:15%}
+.orb.o2{right:-7.2%;top:8%}
+.orb.o3{left:-.6%;top:43%}
+.orb.o4{right:-2%;top:50%}
+/* the footnote sits under a rule so it stops competing with the headline */
+.hero-note{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);display:inline-block}
+.hero-note .hnl{font:700 9.5px 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:7px}
+.hero-note p{margin:0;font-size:13.5px;line-height:1.6;color:var(--gray);max-width:74ch}
+@media (max-width:1080px){
+  /* below this the chips would collide with the headline: they leave orbit and
+     become one centred row. */
+  .orbits{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:26px}
+  .orb{position:static}
+  .orb.o1,.orb.o2,.orb.o3,.orb.o4{inset:auto}
+}
 
 /* ---------- reveal on scroll (vertical pages; CSS-forced under reduced motion) ---------- */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -150,6 +192,8 @@ section + section{border-top:1px solid var(--line)}
   .hub-chip{width:100%;justify-content:space-between}
 }
 /* ---------- workshop page ---------- */
+.wk-pair{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:0}
+.wk-pair .wk-solves,.wk-pair .wk-check{margin-top:22px}
 .wk-solves{display:flex;flex-direction:column;gap:16px;max-width:62ch}
 .wk-solves p{font-size:16px;line-height:1.7;color:var(--gray)}
 .wk-days{display:grid;grid-template-columns:1fr 1fr;gap:28px}
@@ -167,6 +211,9 @@ section + section{border-top:1px solid var(--line)}
 .wk-attended a.wk-setup-link{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm);padding-bottom:3px}
 @media (max-width:860px){
   .wk-days{grid-template-columns:1fr}
+  .wk-pair{grid-template-columns:1fr;gap:40px}
+  .page-hero{min-height:0;padding-bottom:clamp(28px,7vw,48px)}
+  .hero-mon .hub-row{justify-content:stretch}
 }
 </style>
 </head>
@@ -209,18 +256,46 @@ section + section{border-top:1px solid var(--line)}
 </header>
 
 <main id="main">
-<section class="page-hero wrap">
-  <p class="eyebrow rv">Workshop</p>
-  <h1 class="rv d1">From operator<br>to <em class="accent">orchestrator.</em></h1>
-  <p class="lead rv d2">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+<section class="page-hero">
+  <div class="wrap hero-mon">
+    <div class="orbits" aria-hidden="true">
+      <span class="orb o1 rv d2"><span class="on">01</span><span class="sw" style="background:var(--t2)"></span>Day 1 &middot; AI employee</span>
+      <span class="orb o2 rv d3"><span class="on">02</span><span class="sw" style="background:var(--t3)"></span>Day 2 &middot; UI system</span>
+      <span class="orb o3 rv d3"><span class="sw" style="background:var(--t4)"></span>Live link</span>
+      <span class="orb o4 rv d4"><span class="sw" style="background:var(--t1)"></span>DESIGN.md</span>
+    </div>
+    <p class="eyebrow rv">Workshop</p>
+    <h1 class="rv d1">From operator<br>to <em class="accent">orchestrator.</em></h1>
+    <p class="lead rv d2">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+    <div class="hub-row rv d3">
+      <a class="hub-chip solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
+      <a class="hub-chip" href="#preview">Download the preview <span class="arr">&#8599;</span></a>
+    </div>
+    <div class="hero-note rv d4">
+      <span class="hnl">What you walk out with</span>
+      <p>A working AI employee you built yourself, live on the internet. A design system in a file, not in your head. A repeatable process for turning a business problem into shipped software.</p>
+    </div>
+  </div>
 </section>
 
 <section class="wrap">
-  <p class="eyebrow rv">What this solves</p>
-  <div class="wk-solves" style="margin-top:22px">
-    <p class="rv d1">Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
-    <p class="rv d2">This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
-    <p class="rv d3">It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+  <div class="wk-pair">
+    <div>
+      <p class="eyebrow rv">What this solves</p>
+      <div class="wk-solves">
+        <p class="rv d1">Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
+        <p class="rv d2">This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
+        <p class="rv d3">It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow rv d1">What you walk out with</p>
+      <ul class="wk-check rv d2">
+        <li>A working AI employee you built yourself, live on the internet</li>
+        <li>A design system in a file, not in your head, reusable on your next build</li>
+        <li>A repeatable process for turning a business problem into shipped software</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -252,16 +327,7 @@ section + section{border-top:1px solid var(--line)}
   </div>
 </section>
 
-<section class="wrap">
-  <p class="eyebrow rv">What you walk out with</p>
-  <ul class="wk-check rv d1">
-    <li>A working AI employee you built yourself, live on the internet</li>
-    <li>A design system in a file, not in your head, reusable on your next build</li>
-    <li>A repeatable process for turning a business problem into shipped software</li>
-  </ul>
-</section>
-
-<section class="wrap">
+<section class="wrap" id="preview">
   <p class="eyebrow rv">Preview</p>
   <div data-follow-gate
        data-gate-id="workshop-preview"
