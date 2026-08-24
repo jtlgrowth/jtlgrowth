@@ -186,6 +186,11 @@ section + section{border-top:1px solid var(--line)}
   .hub-chip{width:100%;justify-content:space-between}
 }
 /* ---------- workshop page ---------- */
+.wk-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:26px}
+.wk-gallery:empty{display:none}
+.wk-photo{margin:0;border:1px solid var(--line)}
+.wk-photo img{display:block;width:100%;height:auto}
+.wk-photo figcaption{font:400 11px 'Space Mono',monospace;letter-spacing:.06em;color:var(--gray);padding:10px 12px}
 .wk-pair{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:0}
 .wk-pair .wk-solves,.wk-pair .wk-check{margin-top:22px}
 .wk-solves{display:flex;flex-direction:column;gap:16px;max-width:62ch}
@@ -355,13 +360,23 @@ section + section{border-top:1px solid var(--line)}
 </section>
 
 <section class="wrap">
-  <p class="eyebrow rv">Running now, across the group</p>
-  <p class="lead rv d1" style="margin-top:18px">AVAS is running its own two-day AI workshop
-    this week: "From Operator to Orchestrator," Aug 22 to 23 at Novel Hotel BGC, led by Gwen
-    Ayala, Faith Natividad and Jamz Jamorol. 50 seats.</p>
+  <p class="eyebrow rv">Latest run</p>
+  <p class="lead rv d1" style="margin-top:18px">The most recent run happened across the group:
+    AVAS hosted "From Operator to Orchestrator" on Aug 22 to 23 at Novel Hotel BGC, led by Gwen
+    Ayala, Faith Natividad and Jamz Jamorol. 50 seats, two build days, every attendee left with
+    software they shipped themselves.</p>
   <div class="hub-row rv d2">
     <a class="hub-chip" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener">See the AVAS workshop <span class="arr">&#8599;</span></a>
   </div>
+</section>
+
+<section class="wrap" id="photos">
+  <p class="eyebrow rv">Photos and recap</p>
+  <p class="lead rv d1" style="margin-top:18px">Photos and the full recap from the Aug 22 to 23
+    run are on their way. This page updates the moment they land.</p>
+  <!-- photo gallery slot: drop <figure class="wk-photo"><img src="..." alt="..."><figcaption>...</figcaption></figure>
+       items into .wk-gallery when the event photos arrive. Grid styles are live below. -->
+  <div class="wk-gallery rv d2" aria-label="Workshop photos, coming soon"></div>
 </section>
 
 <section class="wrap">
