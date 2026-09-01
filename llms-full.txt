@@ -109,12 +109,6 @@ where every AI employee has a desk, work moves through a visible pipeline, and t
 org fits on one screen. Watch it, don't just read about it; demo only, not a self-serve
 product yet. Links to /growth/.
 
-**JTL AgentKit (open source).** A curated set of agents and skills for Claude Code,
-distilled from the open-source ruflo project: read line by line, kept only what survived
-that read. Installs with two lines typed inside Claude Code itself. Agents, skills, and two
-standalone scripts; MIT licensed, free to fork or resell. Links to
-https://github.com/jtlgrowth/agentkit.
-
 **Scout packs (downloadable).** Small, single-job tools built to install and run: Design
 Scout, Inbox Scout, Onboarding Scout, Proposal Scout, SOP Scout, and Lead Scout. Each one
 does one job on your machine: nothing broad, nothing bundled you don't need.
@@ -123,9 +117,10 @@ does one job on your machine: nothing broad, nothing bundled you don't need.
 resources. It lives off our own domain, on its own storefront at
 ayalavirtualassistance.site.
 
-**Get the AgentKit archive.** AgentKit is already public on GitHub: you can clone or
-install it right now without following anything below. The page offers a follow gate as a
-courtesy ask, not a wall: open our profiles and it hands over a direct zip download
+**Get the AgentKit archive.** A curated set of agents and skills for Claude Code,
+distilled from the open-source ruflo project: read line by line, kept only what survived
+that read. The page offers a follow gate as a courtesy ask, not a wall: open our profiles
+and it hands over a direct zip download
 instead. Same kit either way: GitHub or the zip; following just saves the extra click.
 
 ---
@@ -150,7 +145,7 @@ public link before the session ends.
 
 **Day 2: Your own UI system.** Why every AI-built page looks AI-made: same fonts, same
 gradients, same cards; what a UI system actually is: fonts, colors, spacing, and rules you
-never break; install the JTL AgentKit inside Claude Code (two commands); write your system
+never break; install the JTL AgentKit inside Claude Code (two commands, https://jtlgrowth.com/skills/); write your system
 down as a DESIGN.md file your AI must follow on every page; apply it to yesterday's tool,
 have the reviewer agent judge it against your own rules, and re-publish before and after.
 
