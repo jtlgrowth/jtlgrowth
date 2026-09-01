@@ -7,6 +7,16 @@
    OPENED each profile, not that they followed. It is an honour gate with
    tracking, which is what every "follow to unlock" panel on the web actually is.
 
+   IN-PAGE FOLLOW: tested 2026-09-02 against our three real Facebook pages and
+   rejected. Meta's compact Like Button plugin is dead (0x0 iframe for all six
+   URL forms, the clean vanity URL included). The Page Plugin does render a real
+   "Follow Page" CTA at 280x130 (Robots & Coffee only via its numeric id, not the
+   /people/ URL), but clicking that CTA produced Facebook's own error page and
+   the follower count never moved, and no edge.create fired from the embed. So a
+   profile tile opens a centred popup instead: the visitor never loses this page,
+   which was the actual complaint. Do not re-add the SDK without re-testing the
+   click, not just the render.
+
    Markup contract — the page declares only the container:
      <div data-follow-gate
           data-gate-id="agentkit"
@@ -184,7 +194,7 @@
 
     function paint() {
       var got = followed();
-      count.textContent = got + ' of ' + total + ' profiles opened';
+      count.textContent = got + ' of ' + total + ' profiles visited';
       submit.disabled = got < total;
       return got;
     }
@@ -206,11 +216,24 @@
       b.appendChild(t);
       b.appendChild(tick);
       try { if (localStorage.getItem(KEY(a.slug)) === '1') b.classList.add('done'); } catch (e) {}
-      b.addEventListener('click', function () {
+      b.addEventListener('click', function (ev) {
         try { localStorage.setItem(KEY(a.slug), '1'); } catch (e) {}
         b.classList.add('done');
         paint();
         track('follow_gate_click', { gate: id, account: a.slug, platform: a.platform });
+        // Keep this page on screen: a centred popup means the gate is still
+        // sitting behind the profile, so closing it lands them back on the
+        // download rather than on a stranded tab. Falls through to the normal
+        // target=_blank navigation if the popup is blocked.
+        var w = 480, h = 700;
+        var x = Math.max(0, ((screen.width || 1200) - w) / 2);
+        var y = Math.max(0, ((screen.height || 800) - h) / 2);
+        var win;
+        try {
+          win = window.open(a.url, 'jtlfollow-' + a.slug,
+            'noopener,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
+        } catch (e) { win = null; }
+        if (win) { ev.preventDefault(); try { win.focus(); } catch (e) {} }
       });
       grid.appendChild(b);
     });

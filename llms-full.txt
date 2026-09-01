@@ -120,8 +120,9 @@ ayalavirtualassistance.site.
 **Get the AgentKit archive.** A curated set of agents and skills for Claude Code,
 distilled from the open-source ruflo project: read line by line, kept only what survived
 that read. The page asks visitors to follow JTL Growth, AVAS and Robots & Coffee on
-Instagram and Facebook first: open each profile and the zip download unlocks. It is the
-only route to the archive from the site.
+Instagram and Facebook first: each tile opens that profile in a popup over the page, and
+once all six are visited the zip download unlocks. It is the only route to the archive
+from the site.
 
 ---
 
