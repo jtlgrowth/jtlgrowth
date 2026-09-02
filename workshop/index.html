@@ -3,7 +3,9 @@
      register (mono cement + Fraunces/Archivo/Space Mono) per the standing rule:
      new slugs extract from the homepage, never the retired apple-gray/warm-paper
      registers. Chips: the [ NN / LABEL ] bracket ornament is retired site-wide
-     (Owner, 2026-08-20) — .eyebrow is the plain replacement. -->
+     (Owner, 2026-08-20) — .eyebrow is the plain replacement.
+     2026-09-03: Batch 1 recap. Booking lives on the AVAS page; this page is the record of the
+     Aug 22 to 23 run: room clip, curated photos, founders, sponsors (Owner decisions, 2026-09-02). -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -15,15 +17,15 @@
 if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
-<title>Founder AI Workshop: From Operator to Orchestrator · JTL Growth</title>
-<meta name="description" content="A two-day, hands-on workshop where founders build a working AI employee on day one and their own UI system on day two.">
+<title>Founder AI Workshop, Batch 1 recap: From Operator to Orchestrator · JTL Growth</title>
+<meta name="description" content="Aug 22 to 23, 2026 at Novel Hotel BGC. Two build days where founders built a working AI employee, put it live, and gave it a UI system of their own. The room, the photos, the record.">
 <link rel="canonical" href="https://jtlgrowth.com/workshop/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Founder AI Workshop: From Operator to Orchestrator · JTL Growth">
-<meta property="og:description" content="A two-day, hands-on workshop where founders build a working AI employee on day one and their own UI system on day two.">
+<meta property="og:title" content="Founder AI Workshop, Batch 1 recap: From Operator to Orchestrator · JTL Growth">
+<meta property="og:description" content="Aug 22 to 23, 2026 at Novel Hotel BGC. Two build days where founders built a working AI employee, put it live, and gave it a UI system of their own. The room, the photos, the record.">
 <meta property="og:url" content="https://jtlgrowth.com/workshop/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,15 +203,29 @@ section + section{border-top:1px solid var(--line)}
 .wk-day h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:clamp(20px,2vw,26px);margin-top:12px;letter-spacing:-.01em}
 .wk-day ul{margin-top:20px;display:flex;flex-direction:column;gap:12px;padding-left:0;list-style:none}
 .wk-day li{font-size:15px;line-height:1.55;color:var(--gray);padding-left:20px;position:relative}
-.wk-day li::before{content:"—";position:absolute;left:0;color:var(--wood-warm)}
+.wk-day li::before{content:"\2013";position:absolute;left:0;color:var(--wood-warm)}
 .wk-check{margin-top:24px;max-width:60ch;display:flex;flex-direction:column;gap:12px;list-style:none;padding-left:0}
 .wk-check li{font-size:16px;color:var(--navy);padding-left:30px;position:relative;line-height:1.5}
 .wk-check li::before{content:"✓";position:absolute;left:0;color:var(--wood-warm);font-weight:700}
 .wk-attended{border:1px solid var(--line);padding:clamp(22px,2.4vw,32px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
 .wk-attended p{font-size:15px;color:var(--gray);max-width:44ch}
+.wk-photo.wide{grid-column:1/-1}
+.wk-photo img{aspect-ratio:3/2;object-fit:cover}
+.wk-photo.wide img{aspect-ratio:16/9}
+#wins .wk-gallery{grid-template-columns:1fr 2fr;align-items:start}
+#wins .wk-photo img{aspect-ratio:auto}
+.wk-days.three{grid-template-columns:repeat(3,1fr)}
+.wk-day p.wk-role{margin-top:14px;font-size:15px;line-height:1.55;color:var(--gray)}
+/* room clip: ported from /growth/ .clip-card. Constant-dark card, literal colours on purpose. */
+.clip-card{background:#141414;border:1px solid rgba(24,24,24,.3);overflow:hidden}
+.clip-card video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover;background:#0c0c0c}
+.clip-card .cap{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 20px;color:#E2E2E2}
+.clip-card .cap b{font-family:'Archivo Expanded',sans-serif;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.clip-card .cap span{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,228,228,.65)}
 .wk-attended a.wk-setup-link{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm);padding-bottom:3px}
 @media (max-width:860px){
-  .wk-days{grid-template-columns:1fr}
+  .wk-days,.wk-days.three{grid-template-columns:1fr}
+  #wins .wk-gallery{grid-template-columns:1fr}
   .wk-pair{grid-template-columns:1fr;gap:40px}
   .page-hero{min-height:0;padding-bottom:clamp(28px,7vw,48px)}
   .wk-trail .lab{display:none}
@@ -263,12 +279,12 @@ section + section{border-top:1px solid var(--line)}
 <main id="main">
 <section class="page-hero">
   <div class="wrap hero-mon">
-    <p class="eyebrow rv">Workshop</p>
-    <h1 class="rv d1">From operator to <em class="accent">orchestrator.</em></h1>
-    <p class="lead rv d2">Two days, hands-on. Day one you build a working AI employee for your own business and put it live on the internet. Day two you give it a UI system so it stops looking like every other AI page.</p>
+    <p class="eyebrow rv">Workshop &middot; Batch 1 &middot; Aug 22 to 23, 2026 &middot; Novel Hotel BGC</p>
+    <h1 class="rv d1">From operator to <em class="accent">orchestrator.</em> Shipped.</h1>
+    <p class="lead rv d2">Two build days in BGC with Gwen Ayala, Faith Natividad and Jamz Jamorol. Day one every founder built an AI employee for their own business and put it live on the internet. Day two they gave it a UI system of their own and published again.</p>
     <div class="hub-row rv d3">
-      <a class="hub-chip solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
-      <a class="hub-chip" href="#preview">See the two days <span class="arr">&#8599;</span></a>
+      <a class="hub-chip solid" href="#room">See the room <span class="arr">&#8599;</span></a>
+      <a class="hub-chip" href="#photos">The photos <span class="arr">&#8599;</span></a>
     </div>
     <div class="wk-track rv d4">
       <div class="wk-trail" aria-hidden="true">
@@ -300,39 +316,48 @@ section + section{border-top:1px solid var(--line)}
   </div>
 </section>
 
+<section class="wrap" id="room">
+  <p class="eyebrow rv">Inside the room</p>
+  <div class="clip-card rv d1" style="margin-top:26px">
+    <video src="room.mp4" poster="room-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="Inside the Batch 1 workshop room on Day 1, founders building at their laptops"></video>
+    <div class="cap"><b>Inside the Batch 1 room</b><span>12 seconds &middot; Day 1</span></div>
+  </div>
+</section>
+
 <section class="wrap">
   <div class="wk-pair">
     <div>
-      <p class="eyebrow rv">What this solves</p>
+      <p class="eyebrow rv">What this was</p>
       <div class="wk-solves">
-        <p class="rv d1">Most founders have used AI to write a message or summarize a doc. Few have used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
-        <p class="rv d2">This workshop closes that gap in a room, not a video. You leave with software you built yourself, deployed, and yours.</p>
-        <p class="rv d3">It does not replace your team. It takes the repetitive work none of them should be doing: the same reply forty times, the message at 11pm, off their plate.</p>
+        <p class="rv d1">Most founders had used AI to write a message or summarize a document. Few had used it to build and ship a real tool: something with a live link, running on their own laptop, doing a job.</p>
+        <p class="rv d2">This room closed that gap in two days. Every founder left with software they built themselves, deployed, and theirs.</p>
+        <p class="rv d3">None of it replaced a team. It took the repetitive work off the team's plate: the same reply forty times, the message at 11pm.</p>
       </div>
     </div>
     <div>
-      <p class="eyebrow rv d1">What you walk out with</p>
+      <p class="eyebrow rv d1">The record</p>
       <ul class="wk-check rv d2">
-        <li>A working AI employee you built yourself, live on the internet</li>
-        <li>A design system in a file, not in your head, reusable on your next build</li>
-        <li>A repeatable process for turning a business problem into shipped software</li>
+        <li>Two build days, Aug 22 and 23, 2026, at Novel Hotel BGC</li>
+        <li>Three founders on the floor the whole time: Gwen, Faith and Jamz</li>
+        <li>Sponsor booths lining the room both days</li>
+        <li>Every builder shipped a live link before Day 1 ended</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section class="wrap">
-  <p class="eyebrow rv">The two days</p>
+<section class="wrap" id="days">
+  <p class="eyebrow rv">What happened, day by day</p>
   <div class="wk-days" style="margin-top:26px">
     <div class="wk-day rv d1">
       <p class="wk-daytag">Day 1</p>
       <h3>Building an AI employee</h3>
       <ul>
         <li>The difference between a tool and an employee: a job, instructions, tools, and a place to work</li>
-        <li>Set up Claude Code on your own machine (Mac and Windows commands, walked through live)</li>
-        <li>Write the build prompt for your own business: what you sell, who buys it, what the tool should do</li>
-        <li>Build a single-page tool, no setup and no accounts for the person using it</li>
-        <li>Ship it live with a public link before the session ends</li>
+        <li>Claude Code set up on every founder's own machine, Mac and Windows, walked through live</li>
+        <li>A build prompt written for each business: what it sells, who buys it, what the tool should do</li>
+        <li>A single-page tool built, no setup and no accounts for the person using it</li>
+        <li>Shipped live with a public link before the session ended</li>
       </ul>
     </div>
     <div class="wk-day rv d2">
@@ -341,59 +366,107 @@ section + section{border-top:1px solid var(--line)}
       <ul>
         <li>Why every AI-built page looks AI-made: same fonts, same gradients, same cards</li>
         <li>What a UI system actually is: fonts, colors, spacing, and rules you never break</li>
-        <li>Install the <a href="/skills/">JTL AgentKit</a> inside Claude Code (two commands)</li>
-        <li>Write your system down as a DESIGN.md file your AI must follow on every page</li>
-        <li>Apply it to yesterday's tool, have the reviewer agent judge it against your own rules, and re-publish before and after</li>
+        <li>The <a href="/skills/">JTL AgentKit</a> installed inside Claude Code, two commands</li>
+        <li>Each system written down as a DESIGN.md file the AI must follow on every page</li>
+        <li>Applied to Day 1's tool, judged by the reviewer agent against the founder's own rules, and published again</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section class="wrap" id="preview">
-  <p class="eyebrow rv">Book a seat</p>
-  <p class="lead rv d1" style="margin-top:18px">Talk through the two days before you commit,
-    or email us directly if you'd rather skip the call.</p>
-  <div class="hub-row rv d2">
-    <a class="hub-chip solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
-    <a class="hub-chip" href="mailto:hello@jtlgrowth.com?subject=Workshop%20preview">Email us <span class="arr">&#8599;</span></a>
-  </div>
-</section>
-
-<section class="wrap">
-  <p class="eyebrow rv">Latest run</p>
-  <p class="lead rv d1" style="margin-top:18px">The most recent run happened across the group:
-    AVAS hosted "From Operator to Orchestrator" on Aug 22 to 23 at Novel Hotel BGC, led by Gwen
-    Ayala, Faith Natividad and Jamz Jamorol. 50 seats, two build days, every attendee left with
-    software they shipped themselves.</p>
-  <div class="hub-row rv d2">
-    <a class="hub-chip" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener">See the AVAS workshop <span class="arr">&#8599;</span></a>
-  </div>
-</section>
-
 <section class="wrap" id="photos">
-  <p class="eyebrow rv">Photos and recap</p>
-  <p class="lead rv d1" style="margin-top:18px">Photos and the full recap from the Aug 22 to 23
-    run are on their way. This page updates the moment they land.</p>
-  <!-- photo gallery slot: drop <figure class="wk-photo"><img src="..." alt="..."><figcaption>...</figcaption></figure>
-       items into .wk-gallery when the event photos arrive. Grid styles are live below. -->
-  <div class="wk-gallery rv d2" aria-label="Workshop photos, coming soon"></div>
+  <p class="eyebrow rv">Photos</p>
+  <p class="lead rv d1" style="margin-top:18px">Two days inside the room, no stock photos. Photos by Atalia Studios.</p>
+  <div class="wk-gallery rv d2" aria-label="Photos from the Batch 1 workshop">
+    <figure class="wk-photo wide"><img src="photos/01-graduation.webp" alt="Graduation. One room, two days, every link live." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Graduation. One room, two days, every link live.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/02-title-slide.webp" alt="Doors open, Day 1. The title slide up before the room fills." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Doors open, Day 1. The title slide up before the room fills.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/03-room-set.webp" alt="Novel Hotel BGC, set for a build day." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Novel Hotel BGC, set for a build day.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/04-lobby-booths.webp" alt="Registration and the sponsor booths in the lobby." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Registration and the sponsor booths in the lobby.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/05-greeting-sponsors.webp" alt="Founders greeting sponsors in the Novel Hotel lobby." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Founders greeting sponsors in the Novel Hotel lobby.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/06-check-in.webp" alt="Check-in, Day 1 morning." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Check-in, Day 1 morning.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/07-gencys-prime-booth.webp" alt="Gencys Group and Prime booth." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Gencys Group and Prime booth.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/08-on-stage-day-1.webp" alt="On stage, Day 1: build the system." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>On stage, Day 1: build the system.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/09-first-session.webp" alt="First session, Day 1." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>First session, Day 1.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/10-room-fills.webp" alt="The room fills. Laptops open." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>The room fills. Laptops open.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/11-pairing.webp" alt="Pairing on a build." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Pairing on a build.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/12-stations.webp" alt="Founders at their stations." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Founders at their stations.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/13-huddle.webp" alt="Working through a build together." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Working through a build together.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/14-teaching-from-the-floor.webp" alt="A founder teaching from the floor." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>A founder teaching from the floor.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/15-page-on-screen.webp" alt="A founder&#x27;s page goes up on the big screen." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>A founder&#x27;s page goes up on the big screen.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/16-building.webp" alt="Building at the laptops." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Building at the laptops.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/17-peer-help.webp" alt="Peer help across the table." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Peer help across the table.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/18-floor-support.webp" alt="Floor support at the tables." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Floor support at the tables.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/19-live-support.webp" alt="Live floor support, one build at a time." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Live floor support, one build at a time.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/20-hands-up.webp" alt="Hands up in the room." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Hands up in the room.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/21-mid-session.webp" alt="The room, mid-session." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>The room, mid-session.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/22-discern.webp" alt="Discern before you build, on the whiteboard." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Discern before you build, on the whiteboard.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/23-five-paths.webp" alt="The five paths, on the board." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>The five paths, on the board.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/24-the-stack.webp" alt="The stack on screen: twelve tools, one workflow." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>The stack on screen: twelve tools, one workflow.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/25-kraftina-booth.webp" alt="Kraftina booth." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Kraftina booth.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/26-every-laptop-open.webp" alt="Every laptop open." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Every laptop open.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/27-debugging.webp" alt="Debugging with the floor team." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Debugging with the floor team.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/28-something-worked.webp" alt="Something worked." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Something worked.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/29-applause.webp" alt="Applause." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Applause.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/30-brand-not-logo.webp" alt="Your brand is not your logo. Day 2 opener." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Your brand is not your logo. Day 2 opener.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/31-design-system-live.webp" alt="Creating your design system, live on screen." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Creating your design system, live on screen.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/32-reviewing-a-build.webp" alt="Reviewing a build." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Reviewing a build.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/33-working-lunch.webp" alt="Working lunch break." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Working lunch break.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/34-jamz-walks-the-room.webp" alt="Jamz walks the room through a build." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Jamz walks the room through a build.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/35-certificate-handover.webp" alt="Certificate handover, Day 2." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Certificate handover, Day 2.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/36-certificates.webp" alt="Certificates in hand." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Certificates in hand.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" id="wins">
+  <p class="eyebrow rv">Wall of Wins</p>
+  <p class="lead rv d1" style="margin-top:18px">The wall where founders posted what they shipped, as it stood at the end of the two days.</p>
+  <div class="wk-gallery rv d2" aria-label="The Wall of Wins">
+    <figure class="wk-photo"><img src="photos/37-wall-of-wins-sheet.webp" alt="The Wall of Wins sheet, Day 2." width="1600" height="2400" loading="lazy" decoding="async"><figcaption>The Wall of Wins sheet, Day 2.</figcaption></figure>
+    <figure class="wk-photo"><img src="photos/38-reading-the-wall.webp" alt="Reading the Wall of Wins." width="1600" height="1067" loading="lazy" decoding="async"><figcaption>Reading the Wall of Wins.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" id="founders">
+  <p class="eyebrow rv">Who taught it</p>
+  <div class="wk-days three rv d1" style="margin-top:26px">
+    <div class="wk-day">
+      <p class="wk-daytag">Speaker 01</p>
+      <h3>Gwen Ayala</h3>
+      <p class="wk-role">Marketing with AI, systems and the lead engine. Founder, Ayala Virtual Assistance and Filipina Women in Business. Co-founder, Robots and Coffee.</p>
+    </div>
+    <div class="wk-day">
+      <p class="wk-daytag">Speaker 02</p>
+      <h3>Faith Natividad</h3>
+      <p class="wk-role">AI strategy and keynote. Founder, Faith Works Ecosystem.</p>
+    </div>
+    <div class="wk-day">
+      <p class="wk-daytag">Speaker 03</p>
+      <h3>Jamz Jamorol</h3>
+      <p class="wk-role">AI employees, build and tech, with live floor support all the way through. Founder, JTL Growth. Co-founder, Ayala Virtual Assistance and Robots and Coffee.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="sponsors">
+  <p class="eyebrow rv">Booths in the room</p>
+  <p class="lead rv d1" style="margin-top:18px">Biyahe Ko, Gencys Group, Prime, Valenin Technologies, Digital GrowthScale, Faith Works and Kraftina had booths in the room across the two days.</p>
+</section>
+
+<section class="wrap" id="next">
+  <p class="eyebrow rv">Next run</p>
+  <p class="lead rv d1" style="margin-top:18px">Batch 2 is run by AVAS on Sept 19 to 20, 2026, same venue. Everything about it lives on their page.</p>
+  <div class="hub-row">
+    <a class="hub-chip rv d2" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener">Details on the AVAS page <span class="arr">&#8599;</span></a>
+    <a class="hub-chip rv d2" href="/services/">Services <span class="arr">&#8599;</span></a>
+    <a class="hub-chip rv d3" href="/products/">Products <span class="arr">&#8599;</span></a>
+    <a class="hub-chip rv d3" href="/work/">Work <span class="arr">&#8599;</span></a>
+  </div>
 </section>
 
 <section class="wrap">
   <div class="wk-attended rv">
     <p>Already attended? Your access page has the commands and the code from your room.</p>
     <a class="wk-setup-link" href="/setup/">Get your setup page <span aria-hidden="true">&#8599;</span></a>
-  </div>
-</section>
-
-<section class="wrap">
-  <h2 class="rv">Book a call</h2>
-  <p class="lead rv d1" style="margin-top:18px">Talk through whether this workshop fits your team before you commit.</p>
-  <div class="hub-row">
-    <a class="hub-chip rv d2" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
-    <a class="hub-chip rv d2" href="/services/">Services <span class="arr">&#8599;</span></a>
-    <a class="hub-chip rv d3" href="/products/">Products <span class="arr">&#8599;</span></a>
-    <a class="hub-chip rv d3" href="/work/">Work <span class="arr">&#8599;</span></a>
   </div>
 </section>
 </main>
@@ -476,6 +549,20 @@ section + section{border-top:1px solid var(--line)}
     el.addEventListener('mousedown',function(){el.style.transform+=' scale(.96)'});
     el.addEventListener('mouseup',function(){el.style.transform=el.style.transform.replace(' scale(.96)','')});
   });
+})();
+</script>
+<script>
+/* room clip: play the muted loop only while on screen; never under reduced motion (ported from /growth/) */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var vids=[].slice.call(document.querySelectorAll('.clip-card video'));
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){e.target.play().catch(function(){})}
+      else e.target.pause();
+    });
+  },{threshold:.4});
+  vids.forEach(function(v){io.observe(v)});
 })();
 </script>
 <script>
