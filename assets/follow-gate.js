@@ -26,8 +26,8 @@
    Everything inside is built here, so every gate on the site behaves identically.
    With JS off the <noscript> block the page ships is what shows.
 
-   RECOMMENDATION GATE (Owner, 2026-09-02): the ask is one Facebook
-   recommendation on the JTL Growth Page, not six follows. GATE below is the
+   RECOMMENDATION GATE (Owner, 2026-09-02): the ask is a Facebook
+   recommendation on the JTL Growth Page and on Robots & Coffee, not six follows. GATE below is the
    card list the gate counts; socials.json still loads, but only for the
    optional "Also follow us" row underneath. Visitors who unlocked under the
    old six-follow keys stay unlocked (LEGACY). */
@@ -42,7 +42,9 @@
   var SRC = '/assets/socials.json';
   var GATE = [
     { slug: 'jtlgrowth-recommend', brand: 'JTL Growth', platform: 'Facebook',
-      handle: 'Recommend us', url: 'https://www.facebook.com/jtlgrowth/reviews' }
+      handle: 'Recommend us', url: 'https://www.facebook.com/jtlgrowth/reviews' },
+    { slug: 'rnc-recommend', brand: 'Robots & Coffee', platform: 'Facebook',
+      handle: 'Recommend us', url: 'https://www.facebook.com/profile.php?id=61592292412856&sk=reviews' }
   ];
   var LEGACY = ['ig-jtl', 'fb-jtl', 'ig-avas', 'fb-avas', 'ig-rnc', 'fb-rnc'];
   var KEY = function (slug) { return 'jtl-recommend-' + slug; };
@@ -123,7 +125,7 @@
 
     var h = document.createElement('div');
     h.className = 'jgate-h';
-    h.textContent = 'Leave a recommendation, then it’s yours.';
+    h.textContent = 'Leave us a recommendation, then it’s yours.';
     box.appendChild(h);
 
     if (note) {
@@ -154,7 +156,7 @@
     vname.textContent = box.getAttribute('data-reward') || label;
     var vsub = document.createElement('div');
     vsub.className = 'jv-sub';
-    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours as soon as the recommendation is in.';
+    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours as soon as both recommendations are in.';
     vbody.appendChild(vname); vbody.appendChild(vsub);
     var vlock = document.createElement('div');
     vlock.className = 'jv-lock';
@@ -296,7 +298,7 @@
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      if (paint() < total && !legacyUnlocked()) { msg.textContent = 'Leave the recommendation first.'; return; }
+      if (paint() < total && !legacyUnlocked()) { msg.textContent = 'Leave both recommendations first.'; return; }
       if (!WEBHOOK) { unlock('', false); return; }
       var email = input.value.trim();
       if (!RE_EMAIL.test(email)) { msg.textContent = 'That email doesn’t look right.'; input.focus(); return; }
