@@ -26,11 +26,11 @@
    Everything inside is built here, so every gate on the site behaves identically.
    With JS off the <noscript> block the page ships is what shows.
 
-   RECOMMENDATION GATE (Owner, 2026-09-02): the ask is a Facebook
-   recommendation on the JTL Growth Page and on Robots & Coffee, not six follows. GATE below is the
-   card list the gate counts; socials.json still loads, but only for the
-   optional "Also follow us" row underneath. Visitors who unlocked under the
-   old six-follow keys stay unlocked (LEGACY). */
+   RECOMMEND + FOLLOW GATE (Owner, 2026-09-02): step 1 is a Facebook
+   recommendation on JTL Growth and on Robots & Coffee (GATE below), step 2 is
+   a follow on each account in socials.json, step 3 opens by itself once every
+   card in steps 1 and 2 is ticked. Follow ticks use the same localStorage keys
+   as the old six-follow gate, so earlier visitors keep that progress. */
 (function () {
   'use strict';
 
@@ -46,14 +46,9 @@
     { slug: 'rnc-recommend', brand: 'Robots & Coffee', platform: 'Facebook',
       handle: 'Recommend us', url: 'https://www.facebook.com/profile.php?id=61592292412856&sk=reviews' }
   ];
-  var LEGACY = ['ig-jtl', 'fb-jtl', 'ig-avas', 'fb-avas', 'ig-rnc', 'fb-rnc'];
   var KEY = function (slug) { return 'jtl-recommend-' + slug; };
-  var LEGACY_KEY = function (slug) { return 'jtl-follow-' + slug; };
-  function legacyUnlocked() {
-    try {
-      return LEGACY.every(function (s) { return localStorage.getItem(LEGACY_KEY(s)) === '1'; });
-    } catch (e) { return false; }
-  }
+  var FOLLOW_KEY = function (slug) { return 'jtl-follow-' + slug; };
+  function has(k) { try { return localStorage.getItem(k) === '1'; } catch (e) { return false; } }
   var EMAIL_KEY = 'jtl-gate-email';
   var RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -75,7 +70,7 @@
       '.jgate-h{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:clamp(17px,1.6vw,21px);letter-spacing:-.01em}',
       '.jgate-note{margin-top:10px;font-size:14px;line-height:1.6;color:var(--gray,#616161);max-width:52ch}',
       '.jgate-fine{margin-top:14px;font:400 11.5px/1.6 "Space Mono",monospace;color:var(--gray,#616161);max-width:60ch}',
-      '.jgate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:22px}',
+      '.jgate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:18px}',
       '.jgate-b{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border:1px solid rgba(24,24,24,.25);background:transparent;color:inherit;font-family:"Space Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;cursor:pointer;text-align:left;transition:background .25s,color .25s,border-color .25s}',
       '[data-theme="dark"] .jgate-b{border-color:rgba(226,226,226,.28)}',
       '.jgate-b:hover{background:var(--navy,#181818);color:var(--cement,#E2E2E2);border-color:var(--navy,#181818)}',
@@ -85,8 +80,15 @@
       '[data-theme="dark"] .jgate-b.done{border-color:var(--navy,#E2E2E2)}',
       '.jgate-b.done .jb-tick{opacity:1;background:var(--navy,#181818);color:var(--cement,#E2E2E2);border-color:var(--navy,#181818)}',
       '.jgate-count{margin-top:16px;font:700 10.5px "Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--blue,#575757)}',
-      '.jgate-also{margin-top:26px;font:700 10.5px "Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--gray,#616161)}',
-      '.jgate-also-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:10px}',
+      '.jstep{margin-top:28px;padding-top:24px;border-top:1px solid var(--line,rgba(24,24,24,.14))}',
+      '.jstep:first-of-type{margin-top:0;padding-top:0;border-top:0}',
+      '[data-theme="dark"] .jstep{border-color:rgba(226,226,226,.18)}',
+      '.jstep-h{display:flex;align-items:center;gap:14px;flex-wrap:wrap}',
+      '.jstep-n{flex:none;width:28px;height:28px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;font:700 11px "Space Mono",monospace}',
+      '.jstep-done .jstep-n{background:var(--navy,#181818);color:var(--cement,#E2E2E2);border-color:var(--navy,#181818)}',
+      '[data-theme="dark"] .jstep-done .jstep-n{background:var(--cement,#E2E2E2);color:var(--navy,#181818);border-color:var(--cement,#E2E2E2)}',
+      '.jstep-t{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:clamp(17px,1.5vw,21px);letter-spacing:-.01em}',
+      '.jstep-tag{font:700 9.5px "Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--gray,#616161)}',
       '.jgate-form{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}',
       '.jgate-form input{flex:1 1 220px;min-width:0;padding:13px 15px;border:1px solid rgba(24,24,24,.25);background:transparent;color:inherit;font:400 14px "Archivo",sans-serif}',
       '[data-theme="dark"] .jgate-form input{border-color:rgba(226,226,226,.28)}',
@@ -117,136 +119,46 @@
     var id = box.getAttribute('data-gate-id') || 'file';
     var file = box.getAttribute('data-file') || '';
     var label = box.getAttribute('data-label') || 'Download';
-    var note = box.getAttribute('data-note') || '';
-    var total = accounts.length;
+    var need1 = accounts.length;
+    var need2 = (socials || []).length;
+    var unlockedOnce = false;
 
     box.textContent = '';
     box.className = (box.className ? box.className + ' ' : '') + 'jgate';
 
-    var h = document.createElement('div');
-    h.className = 'jgate-h';
-    h.textContent = 'Leave us a recommendation, then it’s yours.';
-    box.appendChild(h);
-
-    if (note) {
-      var n = document.createElement('p');
-      n.className = 'jgate-note';
-      n.textContent = note;
-      box.appendChild(n);
+    function step(n, title, tag) {
+      var s = document.createElement('div');
+      s.className = 'jstep';
+      var h = document.createElement('div');
+      h.className = 'jstep-h';
+      var num = document.createElement('span');
+      num.className = 'jstep-n';
+      num.textContent = n;
+      var tt = document.createElement('span');
+      tt.className = 'jstep-t';
+      tt.textContent = title;
+      var tg = document.createElement('span');
+      tg.className = 'jstep-tag';
+      tg.textContent = tag;
+      h.appendChild(num); h.appendChild(tt); h.appendChild(tg);
+      s.appendChild(h);
+      box.appendChild(s);
+      return s;
     }
 
-    var grid = document.createElement('div');
-    grid.className = 'jgate-grid';
-    box.appendChild(grid);
-
-    var count = document.createElement('p');
-    count.className = 'jgate-count';
-    count.setAttribute('aria-live', 'polite');
-    box.appendChild(count);
-
-    /* the vault sits between the buttons and the counter: the reward, blurred,
-       with a lock over it. Asked for by the Owner 2026-08-21 — a gate with no
-       visible lock does not read as a gate at all. */
-    var vault = document.createElement('div');
-    vault.className = 'jgate-vault';
-    var vbody = document.createElement('div');
-    vbody.className = 'jv-body';
-    var vname = document.createElement('div');
-    vname.className = 'jv-name';
-    vname.textContent = box.getAttribute('data-reward') || label;
-    var vsub = document.createElement('div');
-    vsub.className = 'jv-sub';
-    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours as soon as both recommendations are in.';
-    vbody.appendChild(vname); vbody.appendChild(vsub);
-    var vlock = document.createElement('div');
-    vlock.className = 'jv-lock';
-    vlock.setAttribute('aria-hidden', 'true');
-    vlock.innerHTML = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">' +
-      '<rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect>' +
-      '<path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg><span>Locked</span>';
-    vault.appendChild(vbody); vault.appendChild(vlock);
-    box.appendChild(vault);
-
-    var form = document.createElement('form');
-    form.className = 'jgate-form';
-    form.noValidate = true;
-    var input = document.createElement('input');
-    input.type = 'email';
-    input.required = true;
-    input.placeholder = 'you@company.com';
-    input.setAttribute('aria-label', 'Your email address');
-    input.autocomplete = 'email';
-    var submit = document.createElement('button');
-    submit.type = 'submit';
-    submit.textContent = 'Unlock the download';
-    /* No webhook means nowhere to send an email, and a form that quietly bins
-       what you type is the exact bug this file shipped with. So while WEBHOOK is
-       empty the field is not rendered at all and the gate is follow-only. */
-    if (WEBHOOK) form.appendChild(input);
-    form.appendChild(submit);
-    box.appendChild(form);
-
-    var msg = document.createElement('p');
-    msg.className = 'jgate-msg';
-    box.appendChild(msg);
-
-    var fine = document.createElement('p');
-    fine.className = 'jgate-fine';
-    fine.textContent = WEBHOOK
-      ? 'We can’t check recommendations from here. No platform lets a website do that, so this runs on trust. ' +
-        'Your email gets the file and our build notes; unsubscribe any time.'
-      : 'We can’t check recommendations from here. No platform lets a website do that, so this runs on trust. ' +
-        'We are not asking for your email, and nothing is collected on this page.';
-    box.appendChild(fine);
-
-    var out = document.createElement('a');
-    out.className = 'jgate-out';
-    out.hidden = true;
-    out.textContent = label;
-    out.setAttribute('download', '');
-    if (/^https?:/.test(file)) { out.target = '_blank'; out.rel = 'noopener'; }
-    box.appendChild(out);
-
-    /* Optional row: the six official accounts, plain links, nothing counted. */
-    if (socials && socials.length) {
-      var alsoH = document.createElement('p');
-      alsoH.className = 'jgate-also';
-      alsoH.textContent = 'Also follow us';
-      box.appendChild(alsoH);
-      var alsoGrid = document.createElement('div');
-      alsoGrid.className = 'jgate-also-grid';
-      socials.forEach(function (s) {
-        var l = document.createElement('a');
-        l.className = 'jgate-b';
-        l.href = s.url; l.target = '_blank'; l.rel = 'noopener';
-        var lt = document.createElement('span');
-        lt.innerHTML = '<span class="jb-brand"></span>';
-        lt.firstChild.textContent = s.brand;
-        lt.appendChild(document.createTextNode(s.platform + ' · ' + s.handle));
-        l.appendChild(lt);
-        l.addEventListener('click', function () {
-          track('follow_gate_click', { gate: id, account: s.slug, platform: s.platform, optional: true });
-        });
-        alsoGrid.appendChild(l);
-      });
-      box.appendChild(alsoGrid);
+    function status(s) {
+      var c = document.createElement('p');
+      c.className = 'jgate-count';
+      c.setAttribute('aria-live', 'polite');
+      s.appendChild(c);
+      return c;
     }
 
-    function followed() {
-      return accounts.filter(function (a) {
-        try { return localStorage.getItem(KEY(a.slug)) === '1'; } catch (e) { return false; }
-      }).length;
-    }
-
-    function paint() {
-      var got = followed();
-      var ok = got >= total || legacyUnlocked();
-      count.textContent = ok ? total + ' of ' + total + ' done' : got + ' of ' + total + ' done';
-      submit.disabled = !ok;
-      return got;
-    }
-
-    accounts.forEach(function (a) {
+    /* One card maker for both steps: click ticks the card, opens the profile
+       in a centred popup, and repaints. The tick is on the click, not the
+       follow or the review: no platform tells a website either, and the fine
+       print says so. */
+    function card(a, key, ask) {
       var b = document.createElement('a');
       b.className = 'jgate-b';
       b.href = a.url;
@@ -262,60 +174,149 @@
       tick.textContent = '✓';
       b.appendChild(t);
       b.appendChild(tick);
-      try { if (localStorage.getItem(KEY(a.slug)) === '1') b.classList.add('done'); } catch (e) {}
+      if (has(key)) b.classList.add('done');
       b.addEventListener('click', function (ev) {
-        try { localStorage.setItem(KEY(a.slug), '1'); } catch (e) {}
+        try { localStorage.setItem(key, '1'); } catch (e) {}
         b.classList.add('done');
-        paint();
-        track('follow_gate_click', { gate: id, account: a.slug, platform: a.platform, ask: 'recommend' });
-        // Keep this page on screen: a centred popup means the gate is still
-        // sitting behind the profile, so closing it lands them back on the
-        // download rather than on a stranded tab. Falls through to the normal
-        // target=_blank navigation if the popup is blocked.
+        paint(true);
+        track('follow_gate_click', { gate: id, account: a.slug, platform: a.platform, ask: ask });
         var w = 480, h = 700;
         var x = Math.max(0, ((screen.width || 1200) - w) / 2);
         var y = Math.max(0, ((screen.height || 800) - h) / 2);
         var win;
         try {
-          win = window.open(a.url, 'jtlrecommend-' + a.slug,
+          win = window.open(a.url, 'jtl-' + ask + '-' + a.slug,
             'noopener,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
         } catch (e) { win = null; }
         if (win) { ev.preventDefault(); try { win.focus(); } catch (e) {} }
       });
-      grid.appendChild(b);
-    });
+      return b;
+    }
+
+    var s1 = step('1', 'Recommend us', 'Two Pages, a minute each');
+    var grid1 = document.createElement('div');
+    grid1.className = 'jgate-grid';
+    s1.appendChild(grid1);
+    accounts.forEach(function (a) { grid1.appendChild(card(a, KEY(a.slug), 'recommend')); });
+    var count1 = status(s1);
+
+    var s2 = step('2', 'Follow us', need2 ? 'All ' + need2 + ' accounts' : 'Profiles are in the footer');
+    var grid2 = document.createElement('div');
+    grid2.className = 'jgate-grid';
+    s2.appendChild(grid2);
+    (socials || []).forEach(function (a) { grid2.appendChild(card(a, FOLLOW_KEY(a.slug), 'follow')); });
+    var count2 = status(s2);
+
+    var s3 = step('3', 'Download', 'Opens when steps 1 and 2 are done');
+    var vault = document.createElement('div');
+    vault.className = 'jgate-vault';
+    var vbody = document.createElement('div');
+    vbody.className = 'jv-body';
+    var vname = document.createElement('div');
+    vname.className = 'jv-name';
+    vname.textContent = box.getAttribute('data-reward') || label;
+    var vsub = document.createElement('div');
+    vsub.className = 'jv-sub';
+    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours the moment steps 1 and 2 are done.';
+    vbody.appendChild(vname); vbody.appendChild(vsub);
+    var vlock = document.createElement('div');
+    vlock.className = 'jv-lock';
+    vlock.setAttribute('aria-hidden', 'true');
+    vlock.innerHTML = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">' +
+      '<rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect>' +
+      '<path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg><span>Locked until steps 1 and 2 are done</span>';
+    vault.appendChild(vbody); vault.appendChild(vlock);
+    s3.appendChild(vault);
+
+    var form = null, input = null, submit = null;
+    if (WEBHOOK) {
+      form = document.createElement('form');
+      form.className = 'jgate-form';
+      form.noValidate = true;
+      input = document.createElement('input');
+      input.type = 'email';
+      input.required = true;
+      input.placeholder = 'you@company.com';
+      input.setAttribute('aria-label', 'Your email address');
+      input.autocomplete = 'email';
+      submit = document.createElement('button');
+      submit.type = 'submit';
+      submit.textContent = 'Send me the download';
+      form.appendChild(input);
+      form.appendChild(submit);
+      s3.appendChild(form);
+    }
+
+    var msg = document.createElement('p');
+    msg.className = 'jgate-msg';
+    s3.appendChild(msg);
+
+    var out = document.createElement('a');
+    out.className = 'jgate-out';
+    out.hidden = true;
+    out.textContent = label;
+    out.setAttribute('download', '');
+    if (/^https?:/.test(file)) { out.target = '_blank'; out.rel = 'noopener'; }
+    s3.appendChild(out);
+
+    var fine = document.createElement('p');
+    fine.className = 'jgate-fine';
+    fine.textContent = WEBHOOK
+      ? 'We can’t check follows or recommendations from here. No platform lets a website do that, so this runs on trust. ' +
+        'Your email gets the file and our build notes; unsubscribe any time.'
+      : 'We can’t check follows or recommendations from here. No platform lets a website do that, so this runs on trust. ' +
+        'We are not asking for your email, and nothing is collected on this page.';
+    box.appendChild(fine);
+
+    function done1() { return accounts.filter(function (a) { return has(KEY(a.slug)); }).length; }
+    function done2() { return (socials || []).filter(function (a) { return has(FOLLOW_KEY(a.slug)); }).length; }
 
     function unlock(email, isRestore) {
       out.href = file;
       out.hidden = false;
-      form.hidden = true;
+      if (form) form.hidden = true;
       vault.classList.add('open');
+      s3.classList.add('jstep-done');
       msg.textContent = isRestore ? 'Unlocked. The link is below.'
         : (email ? 'Unlocked. The link is below, and a copy is on its way to ' + email + '.'
                  : 'Unlocked. The link is below.');
-      if (!isRestore) track('follow_gate_unlock', { gate: id, accounts: total, ask: 'recommend' });
+      if (!isRestore && !unlockedOnce) track('follow_gate_unlock', { gate: id, accounts: need1 + need2, ask: 'recommend+follow' });
+      unlockedOnce = true;
     }
 
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      if (paint() < total && !legacyUnlocked()) { msg.textContent = 'Leave both recommendations first.'; return; }
-      if (!WEBHOOK) { unlock('', false); return; }
-      var email = input.value.trim();
-      if (!RE_EMAIL.test(email)) { msg.textContent = 'That email doesn’t look right.'; input.focus(); return; }
-      try { localStorage.setItem(EMAIL_KEY, email); } catch (e) {}
-      if (WEBHOOK) {
+    function paint(fromClick) {
+      var d1 = done1(), d2 = done2();
+      var ok1 = d1 >= need1, ok2 = d2 >= need2;
+      count1.textContent = ok1 ? 'Both done.' : d1 + ' of ' + need1 + ' done. Open each Page, leave a recommendation, come back.';
+      count2.textContent = ok2 ? (need2 ? 'All ' + need2 + ' followed.' : '') : d2 + ' of ' + need2 + ' followed.';
+      s1.classList.toggle('jstep-done', ok1);
+      s2.classList.toggle('jstep-done', ok2);
+      var ok = ok1 && ok2;
+      if (ok && !WEBHOOK && !unlockedOnce) unlock('', !fromClick);
+      if (submit) submit.disabled = !ok;
+      return ok;
+    }
+
+    if (form) {
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        if (!paint(false)) { msg.textContent = 'Finish steps 1 and 2 first.'; return; }
+        var email = input.value.trim();
+        if (!RE_EMAIL.test(email)) { msg.textContent = 'That email doesn’t look right.'; input.focus(); return; }
+        try { localStorage.setItem(EMAIL_KEY, email); } catch (e) {}
         fetch(WEBHOOK, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email, gate: id, file: file, source: location.pathname })
         }).catch(function () { /* the unlock never depends on the capture */ });
-      }
-      unlock(email, false);
-    });
+        unlock(email, false);
+      });
+    }
 
     var known = null;
     try { known = localStorage.getItem(EMAIL_KEY); } catch (e) {}
-    if ((paint() >= total || legacyUnlocked()) && (known || !WEBHOOK)) unlock(known || '', true); else paint();
+    var ready = paint(false);
+    if (WEBHOOK && known && ready) unlock(known, true);
   }
 
   function init() {
