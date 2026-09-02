@@ -24,7 +24,13 @@
           data-label="Download the kit"
           data-note="optional line under the title"></div>
    Everything inside is built here, so every gate on the site behaves identically.
-   With JS off the <noscript> block the page ships is what shows. */
+   With JS off the <noscript> block the page ships is what shows.
+
+   RECOMMENDATION GATE (Owner, 2026-09-02): the ask is one Facebook
+   recommendation on the JTL Growth Page, not six follows. GATE below is the
+   card list the gate counts; socials.json still loads, but only for the
+   optional "Also follow us" row underneath. Visitors who unlocked under the
+   old six-follow keys stay unlocked (LEGACY). */
 (function () {
   'use strict';
 
@@ -34,7 +40,18 @@
   var WEBHOOK = '';
 
   var SRC = '/assets/socials.json';
-  var KEY = function (slug) { return 'jtl-follow-' + slug; };
+  var GATE = [
+    { slug: 'jtlgrowth-recommend', brand: 'JTL Growth', platform: 'Facebook',
+      handle: 'Recommend us', url: 'https://www.facebook.com/jtlgrowth/reviews' }
+  ];
+  var LEGACY = ['ig-jtl', 'fb-jtl', 'ig-avas', 'fb-avas', 'ig-rnc', 'fb-rnc'];
+  var KEY = function (slug) { return 'jtl-recommend-' + slug; };
+  var LEGACY_KEY = function (slug) { return 'jtl-follow-' + slug; };
+  function legacyUnlocked() {
+    try {
+      return LEGACY.every(function (s) { return localStorage.getItem(LEGACY_KEY(s)) === '1'; });
+    } catch (e) { return false; }
+  }
   var EMAIL_KEY = 'jtl-gate-email';
   var RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -66,6 +83,8 @@
       '[data-theme="dark"] .jgate-b.done{border-color:var(--navy,#E2E2E2)}',
       '.jgate-b.done .jb-tick{opacity:1;background:var(--navy,#181818);color:var(--cement,#E2E2E2);border-color:var(--navy,#181818)}',
       '.jgate-count{margin-top:16px;font:700 10.5px "Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--blue,#575757)}',
+      '.jgate-also{margin-top:26px;font:700 10.5px "Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--gray,#616161)}',
+      '.jgate-also-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:10px}',
       '.jgate-form{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}',
       '.jgate-form input{flex:1 1 220px;min-width:0;padding:13px 15px;border:1px solid rgba(24,24,24,.25);background:transparent;color:inherit;font:400 14px "Archivo",sans-serif}',
       '[data-theme="dark"] .jgate-form input{border-color:rgba(226,226,226,.28)}',
@@ -92,7 +111,7 @@
     document.head.appendChild(s);
   }
 
-  function build(box, accounts) {
+  function build(box, accounts, socials) {
     var id = box.getAttribute('data-gate-id') || 'file';
     var file = box.getAttribute('data-file') || '';
     var label = box.getAttribute('data-label') || 'Download';
@@ -104,7 +123,7 @@
 
     var h = document.createElement('div');
     h.className = 'jgate-h';
-    h.textContent = 'Follow us, then it’s yours.';
+    h.textContent = 'Leave a recommendation, then it’s yours.';
     box.appendChild(h);
 
     if (note) {
@@ -135,7 +154,7 @@
     vname.textContent = box.getAttribute('data-reward') || label;
     var vsub = document.createElement('div');
     vsub.className = 'jv-sub';
-    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours as soon as the profiles are open.';
+    vsub.textContent = box.getAttribute('data-reward-note') || 'Yours as soon as the recommendation is in.';
     vbody.appendChild(vname); vbody.appendChild(vsub);
     var vlock = document.createElement('div');
     vlock.className = 'jv-lock';
@@ -172,9 +191,9 @@
     var fine = document.createElement('p');
     fine.className = 'jgate-fine';
     fine.textContent = WEBHOOK
-      ? 'We can’t check follows from here. No platform lets a website do that, so this runs on trust. ' +
+      ? 'We can’t check recommendations from here. No platform lets a website do that, so this runs on trust. ' +
         'Your email gets the file and our build notes; unsubscribe any time.'
-      : 'We can’t check follows from here. No platform lets a website do that, so this runs on trust. ' +
+      : 'We can’t check recommendations from here. No platform lets a website do that, so this runs on trust. ' +
         'We are not asking for your email, and nothing is collected on this page.';
     box.appendChild(fine);
 
@@ -186,6 +205,31 @@
     if (/^https?:/.test(file)) { out.target = '_blank'; out.rel = 'noopener'; }
     box.appendChild(out);
 
+    /* Optional row: the six official accounts, plain links, nothing counted. */
+    if (socials && socials.length) {
+      var alsoH = document.createElement('p');
+      alsoH.className = 'jgate-also';
+      alsoH.textContent = 'Also follow us';
+      box.appendChild(alsoH);
+      var alsoGrid = document.createElement('div');
+      alsoGrid.className = 'jgate-also-grid';
+      socials.forEach(function (s) {
+        var l = document.createElement('a');
+        l.className = 'jgate-b';
+        l.href = s.url; l.target = '_blank'; l.rel = 'noopener';
+        var lt = document.createElement('span');
+        lt.innerHTML = '<span class="jb-brand"></span>';
+        lt.firstChild.textContent = s.brand;
+        lt.appendChild(document.createTextNode(s.platform + ' · ' + s.handle));
+        l.appendChild(lt);
+        l.addEventListener('click', function () {
+          track('follow_gate_click', { gate: id, account: s.slug, platform: s.platform, optional: true });
+        });
+        alsoGrid.appendChild(l);
+      });
+      box.appendChild(alsoGrid);
+    }
+
     function followed() {
       return accounts.filter(function (a) {
         try { return localStorage.getItem(KEY(a.slug)) === '1'; } catch (e) { return false; }
@@ -194,8 +238,9 @@
 
     function paint() {
       var got = followed();
-      count.textContent = got + ' of ' + total + ' profiles visited';
-      submit.disabled = got < total;
+      var ok = got >= total || legacyUnlocked();
+      count.textContent = ok ? total + ' of ' + total + ' done' : got + ' of ' + total + ' done';
+      submit.disabled = !ok;
       return got;
     }
 
@@ -220,7 +265,7 @@
         try { localStorage.setItem(KEY(a.slug), '1'); } catch (e) {}
         b.classList.add('done');
         paint();
-        track('follow_gate_click', { gate: id, account: a.slug, platform: a.platform });
+        track('follow_gate_click', { gate: id, account: a.slug, platform: a.platform, ask: 'recommend' });
         // Keep this page on screen: a centred popup means the gate is still
         // sitting behind the profile, so closing it lands them back on the
         // download rather than on a stranded tab. Falls through to the normal
@@ -230,7 +275,7 @@
         var y = Math.max(0, ((screen.height || 800) - h) / 2);
         var win;
         try {
-          win = window.open(a.url, 'jtlfollow-' + a.slug,
+          win = window.open(a.url, 'jtlrecommend-' + a.slug,
             'noopener,width=' + w + ',height=' + h + ',left=' + x + ',top=' + y);
         } catch (e) { win = null; }
         if (win) { ev.preventDefault(); try { win.focus(); } catch (e) {} }
@@ -246,12 +291,12 @@
       msg.textContent = isRestore ? 'Unlocked. The link is below.'
         : (email ? 'Unlocked. The link is below, and a copy is on its way to ' + email + '.'
                  : 'Unlocked. The link is below.');
-      if (!isRestore) track('follow_gate_unlock', { gate: id, accounts: total });
+      if (!isRestore) track('follow_gate_unlock', { gate: id, accounts: total, ask: 'recommend' });
     }
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      if (paint() < total) { msg.textContent = 'Open all ' + total + ' profiles first.'; return; }
+      if (paint() < total && !legacyUnlocked()) { msg.textContent = 'Leave the recommendation first.'; return; }
       if (!WEBHOOK) { unlock('', false); return; }
       var email = input.value.trim();
       if (!RE_EMAIL.test(email)) { msg.textContent = 'That email doesn’t look right.'; input.focus(); return; }
@@ -268,22 +313,24 @@
 
     var known = null;
     try { known = localStorage.getItem(EMAIL_KEY); } catch (e) {}
-    if (paint() === total && (known || !WEBHOOK)) unlock(known || '', true); else paint();
+    if ((paint() >= total || legacyUnlocked()) && (known || !WEBHOOK)) unlock(known || '', true); else paint();
   }
 
   function init() {
     var boxes = [].slice.call(document.querySelectorAll('[data-follow-gate]'));
     if (!boxes.length) return;
     css();
+    /* The gate no longer depends on socials.json: it only feeds the optional
+       row, so a missing file means no row, never a missing gate. */
     fetch(SRC, { cache: 'no-cache' })
-      .then(function (r) { if (!r.ok) throw new Error('socials ' + r.status); return r.json(); })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .catch(function () { return {}; })
       .then(function (d) {
-        var accounts = (d && d.accounts) || [];
-        if (!accounts.length) throw new Error('no accounts');
-        boxes.forEach(function (b) { build(b, accounts); });
+        var socials = (d && d.accounts) || [];
+        boxes.forEach(function (b) { build(b, GATE, socials); });
       })
       .catch(function (e) {
-        /* Fail OPEN, loudly. A broken data file must never bury a download the
+        /* Fail OPEN, loudly. A render error must never bury a download the
            Owner meant to give away. */
         boxes.forEach(function (b) {
           var file = b.getAttribute('data-file') || '';
