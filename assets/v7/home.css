@@ -273,3 +273,24 @@
 #p1 .kb-laptop,#p1clone .kb-laptop{margin-left:clamp(-22px,-1.4vw,0px)}
 @media (min-width:1920px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
 @media (max-width:1100px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
+
+/* round 4: sample 03, fitted to one screen. Headline over the stage, laptop below, everything inside 100vh. */
+#p1 .kb-hero-03,#p1clone .kb-hero-03{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:none;margin:0;padding:84px 0 64px;min-height:100vh;gap:0}
+#p1 .kb-hero-03 .kb-copy,#p1clone .kb-hero-03 .kb-copy{text-align:center;max-width:none;padding:0;display:flex;flex-direction:column;align-items:center}
+#p1 .kb-hero-03 h1,#p1clone .kb-hero-03 h1{font-size:clamp(36px,3.6vw,64px);line-height:1.02}
+#p1 .kb-hero-03 .lead,#p1clone .kb-hero-03 .lead{margin:10px auto 0;max-width:40ch;font-size:clamp(16px,1.15vw,18px)}
+#p1 .kb-hero-03 .kb-ctas,#p1clone .kb-hero-03 .kb-ctas{flex-direction:row;align-items:center;justify-content:center;gap:22px;margin-top:16px}
+#p1 .kb-hero-03 .kb-laptop,#p1clone .kb-hero-03 .kb-laptop{width:min(64vw,calc((100vh - 400px) * 1.6));max-width:none;margin:28px 0 0;justify-self:auto}
+/* chassis: lid, notch, a 14px lip, no deck */
+.kb-base.kb-lip{height:14px;padding:0;gap:0;border-radius:0 0 14px 14px;background:#151515;border-top:1px solid #262626}
+.kb-screen{position:relative}
+/* jtlboard-sized mini keyboard (278x103 at 1x, scaled 1.25x): shows only while typing */
+.kb-mini{position:absolute;right:18px;bottom:18px;width:348px;height:129px;padding:7px;border-radius:12px;background:rgba(26,26,28,.96);border:.5px solid rgba(51,51,51,.5);box-shadow:0 18px 50px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateY(6px);transition:opacity .28s ease,transform .28s ease;pointer-events:none;z-index:5}
+.kb-mini.show{opacity:1;transform:none}
+.kb-mini .kb-row{display:flex;gap:2px}
+.kb-mini .kb-key{flex:var(--w,1) 0 0;height:21px;font:8px 'Space Mono',monospace;border-radius:3px;background:#2A2A2C;border:1px solid #333;color:#8A8A8A;display:flex;align-items:center;justify-content:center;transition:background .06s,color .06s}
+.kb-mini .kb-key.on{background:#E2E2E2;color:#111;border-color:#E2E2E2}
+.kb-mini .kb-deck-mark{position:absolute;left:50%;top:50%;width:30%;transform:translate(-50%,-50%);opacity:.08;color:#E2E2E2;pointer-events:none}
+.kb-mini .kb-deck-mark svg{width:100%}
+@media (max-width:1100px){#p1 .kb-hero-03 .kb-laptop,#p1clone .kb-hero-03 .kb-laptop{width:92vw}}
+@media (max-width:860px), (prefers-reduced-motion: reduce){.kb-mini{display:none}#p1 .kb-hero-03,#p1clone .kb-hero-03{min-height:0;padding:24px 0 40px}#p1 .kb-hero-03 .kb-ctas,#p1clone .kb-hero-03 .kb-ctas{flex-direction:column;gap:14px}}

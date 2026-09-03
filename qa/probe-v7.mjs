@@ -14,7 +14,6 @@ mkdirSync(SHOTS, { recursive: true });
 const fails = [];
 const ok = (c, m) => { if (c) console.log('  ok   ' + m); else { fails.push(m); console.log('  FAIL ' + m); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const innerWidthSafe = g => g.lapLeft <= 0; // at 1920 and up the bleed is 0 by design, so left edge at 0 counts
 // wait until the terminal finished typing its current answer (no caret, queue idle)
 const settle = async (page) => { for (let i = 0; i < 200; i++) { const busy = await page.evaluate(() => !!document.querySelector('#p1 .kb-caret') || (window.JTLTerm && window.JTLTerm.busy && window.JTLTerm.busy())); if (!busy) break; await sleep(150); } await sleep(200); };
 
@@ -54,21 +53,29 @@ try {
   const acState = await page.evaluate(() => window.JTLSound.state.ctx && window.JTLSound.state.ctx.state);
   ok(acState === 'running', `AudioContext running after typing (${acState})`);
   ok(plays0 > 0, `sound engine played ${plays0} samples while typing`);
+  // round 4: no deck under the laptop, a jtlboard-sized mini keyboard inside the screen while typing
+  ok(await page.locator('.kb-deck').count() === 0 && await page.locator('.kb-base .kb-key').count() === 0, 'no keyboard deck under the laptop');
+  ok(await page.locator('#p1 .kb-mini.show').count() === 1, 'mini keyboard visible while typing');
   const litA = await page.evaluate(async () => {
     const inp = document.querySelector('#p1 .kb-input'); inp.focus();
     inp.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyA', key: 'a', bubbles: true }));
     await new Promise(r => setTimeout(r, 30));
-    const on = document.querySelector('#p1 [data-deck] [data-code="KeyA"].on') != null;
+    const on = document.querySelector('#p1 .kb-mini [data-code="KeyA"].on') != null;
     inp.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyA', key: 'a', bubbles: true }));
     return on;
   });
-  ok(litA, 'deck lights KeyA on keydown');
-  const cloneLit = await page.locator('#p1clone [data-deck] .kb-key.on').count();
-  ok(cloneLit === 0, 'clone deck stays dark');
+  ok(litA, 'mini keyboard lights KeyA on keydown');
+  const mb = await page.locator('#p1 .kb-mini').boundingBox();
+  ok(mb && Math.round(mb.width) === 348 && Math.round(mb.height) === 129, `mini keyboard is jtlboard sized (${mb && Math.round(mb.width)}x${mb && Math.round(mb.height)})`);
+  const cloneLit = await page.locator('#p1clone .kb-mini .kb-key.on').count() + await page.locator('#p1clone .kb-mini.show').count();
+  ok(cloneLit === 0, 'clone mini keyboard stays dark and hidden');
+  await page.screenshot({ path: path.join(SHOTS, 'hero-typing.png') });
   await input.press('Enter');
   let priced = false;
   try { await page.locator('#p1 .kb-line-ai', { hasText: 'Quote-based' }).waitFor({ timeout: 15000 }); priced = true; } catch {}
   ok(priced, 'typed "price" gets the quote-based answer');
+  await sleep(1900);
+  ok(await page.locator('#p1 .kb-mini.show').count() === 0, 'mini keyboard gone 1.6 s after the last key');
   await input.type(' ', { delay: 20 });
   await sleep(400);
   const xu1 = await page.evaluate(() => window.__xu || 0);
@@ -100,6 +107,11 @@ try {
   ok((await mute.getAttribute('aria-pressed')) === 'false', 'mute toggle turns sound off');
   await mute.click();
   ok((await mute.getAttribute('aria-pressed')) === 'true', 'mute toggle turns sound back on');
+  ok(await page.locator('#p1 .kb-eyebrow, #p1clone .kb-eyebrow').count() === 0, 'hero: no eyebrow');
+  const ctaText = await page.locator('#p1 .kb-cta').innerText();
+  ok(!/gwen/i.test(ctaText) && ctaText.trim().length > 4, `hero: CTA reads "${ctaText.trim()}"`);
+  const fit = async (pg, w, h) => { const g = await pg.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapTop: Math.round(l.top), lapBottom: Math.round(l.bottom), lapLeft: Math.round(l.left), lapRight: Math.round(l.right), copyBottom: Math.round(c.bottom), copyTop: Math.round(c.top) }; }); ok(g.lapBottom <= h - 60 && g.lapTop >= 80 && g.copyBottom < g.lapTop && g.copyTop >= 60 && g.lapLeft >= 0 && g.lapRight <= w, `fit ${w}x${h}: copy ${g.copyTop} to ${g.copyBottom}, laptop ${g.lapTop} to ${g.lapBottom} (x ${g.lapLeft} to ${g.lapRight}), dots at ${h - 60}`); };
+  await fit(page, 1440, 900);
   await page.locator('#p1').screenshot({ path: path.join(SHOTS, 'p1-hero.png') });
 
   // ---- morph stops and dark chrome ----
@@ -182,27 +194,28 @@ try {
   await sp.locator('#services').screenshot({ path: path.join(SHOTS, 'services-cards.png') });
   await ctx.close();
 
-  // ---- wide screen: laptop left and bleeding, copy right, services clamped ----
-  const wctx = await browser.newContext({ viewport: { width: 2000, height: 1100 }, timezoneId: 'Asia/Manila' });
-  const wp = await wctx.newPage();
-  await wp.goto(URL_, { waitUntil: 'networkidle' });
-  await wp.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
-  await sleep(700);
-  const geo = await wp.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapLeft: Math.round(l.left), lapRight: Math.round(l.right), lapBottom: Math.round(l.bottom), copyCx: Math.round(c.left + c.width / 2) }; });
-  ok(geo.lapLeft <= 0 || innerWidthSafe(geo), `wide: laptop starts at the left edge (left ${geo.lapLeft}px, right ${geo.lapRight}px)`);
-  ok(geo.copyCx > 1300, `wide: copy centred on the right (centre x ${geo.copyCx})`);
-  const h1r = await wp.evaluate(() => document.querySelector('#p1 .kb-copy h1').getBoundingClientRect().right);
-  ok(h1r <= 2000, `wide: headline stays inside the viewport (right ${Math.round(h1r)})`);
-  const ctaLines = await wp.evaluate(() => Math.round(document.querySelector('#p1 .kb-cta').getBoundingClientRect().height));
-  ok(ctaLines <= 56, `wide: CTA on one line (${ctaLines}px tall)`);
-  ok(geo.lapBottom <= 1100 - 60, `wide: laptop clears the dots (bottom ${geo.lapBottom} of 1100)`);
-  await wp.screenshot({ path: path.join(SHOTS, 'wide-hero.png') });
-  await wp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
-  await wp.locator('#services').scrollIntoViewIfNeeded(); await sleep(900);
-  const sw = await wp.evaluate(() => Math.round(document.querySelector('#services .kb-cards-inner').getBoundingClientRect().width));
-  ok(sw <= 1240, `wide: services section clamped (${sw}px)`);
-  await wp.locator('#services').screenshot({ path: path.join(SHOTS, 'wide-services.png') });
-  await wctx.close();
+  // ---- wide screens: the whole hero fits one viewport, services clamped ----
+  for (const [w, h] of [[1920, 1080], [2000, 1100]]) {
+    const wctx = await browser.newContext({ viewport: { width: w, height: h }, timezoneId: 'Asia/Manila' });
+    const wp = await wctx.newPage();
+    await wp.goto(URL_, { waitUntil: 'networkidle' });
+    await wp.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
+    await sleep(900);
+    await fit(wp, w, h);
+    const h1r = await wp.evaluate(() => document.querySelector('#p1 .kb-copy h1').getBoundingClientRect());
+    ok(h1r.right <= w && h1r.height <= 80, `${w}: headline on one line inside the viewport (right ${Math.round(h1r.right)}, ${Math.round(h1r.height)}px tall)`);
+    const ctaLines = await wp.evaluate(() => Math.round(document.querySelector('#p1 .kb-cta').getBoundingClientRect().height));
+    ok(ctaLines <= 56, `${w}: CTA on one line (${ctaLines}px tall)`);
+    await wp.screenshot({ path: path.join(SHOTS, `hero-${w}.png`) });
+    if (w === 2000) {
+      await wp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
+      await wp.locator('#services').scrollIntoViewIfNeeded(); await sleep(900);
+      const sw = await wp.evaluate(() => Math.round(document.querySelector('#services .kb-cards-inner').getBoundingClientRect().width));
+      ok(sw <= 1240, `wide: services section clamped (${sw}px)`);
+      await wp.locator('#services').screenshot({ path: path.join(SHOTS, 'wide-services.png') });
+    }
+    await wctx.close();
+  }
 
   // ---- reduced motion ----
   const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce', timezoneId: 'Asia/Manila' });
@@ -225,7 +238,10 @@ try {
   await sleep(800);
   const overflow = await mp.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   ok(overflow <= 1, `mobile: no horizontal overflow (${overflow}px)`);
-  ok(await mp.locator('#p1 .kb-deck').isHidden(), 'mobile: deck hidden');
+  ok(await mp.locator('#p1 .kb-deck').count() === 0, 'mobile: no deck');
+  ok(await mp.locator('#p1 .kb-mini').isHidden(), 'mobile: mini keyboard never shows');
+  const mcta = await mp.evaluate(() => { const r = document.querySelector('#p1 .kb-cta').getBoundingClientRect(); const l = document.querySelector('#p1 .kb-link').getBoundingClientRect(); return [Math.round(r.left + r.width / 2), Math.round(l.left + l.width / 2), r.left >= 0, l.top >= r.bottom]; });
+  ok(Math.abs(mcta[0] - 195) <= 4 && Math.abs(mcta[1] - 195) <= 4 && mcta[2] && mcta[3], `mobile: CTA and link centred and stacked (centres x ${mcta[0]}, ${mcta[1]})`);
   await mp.locator('#p1 .kb-term').click();
   await mp.locator('#p1 .kb-input').fill('where');
   await mp.locator('#p1 .kb-input').press('Enter');

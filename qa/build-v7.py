@@ -64,27 +64,24 @@ def laptop(static):
               </div>
             </div>
           </div>
+          <div class="kb-mini" data-deck data-float aria-hidden="true"></div>
         </div>
         <div class="kb-notch" aria-hidden="true"></div>
       </div>
-      <div class="kb-base">
-        <div class="kb-deck" data-deck aria-hidden="true"></div>
-        <div class="kb-trackpad" aria-hidden="true"></div>
-      </div>
+      <div class="kb-base kb-lip" aria-hidden="true"></div>
     </div>'''
 
 def hero(static):
+    click = '' if static else ' data-click'
     return f'''<div class="grid-lines"></div>
     <div class="hero-glow"></div>
-    <div class="kb-hero">
-      {laptop(static)}
-      <div class="kb-copy">
-        <p class="kb-eyebrow rv d1">AI and automation agency &middot; Caloocan</p>
-        <h1 class="rv d2">Growth, <em class="accent">engineered.</em></h1>
-        <p class="lead rv d3">AI systems that run the repetitive half of your business.</p>
-        <div class="kb-ctas rv d4"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener"{'' if static else ' data-click'}>Book the call with Gwen</a><a class="kb-link" href="/ai-employee/"{'' if static else ' data-click'}>See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
-        <p class="kb-note rv d5">Or just type in the laptop.</p>
+    <div class="kb-hero kb-hero-03">
+      <div class="kb-copy rv d1">
+        <h1>Growth, <em class="accent">engineered.</em></h1>
+        <p class="lead">AI systems that run the repetitive half of your business.</p>
+        <div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener"{click}>Put AI to work for me</a><a class="kb-link" href="/ai-employee/"{click}>See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
       </div>
+      {laptop(static)}
     </div>'''
 
 HERO = f'<section class="panel in" id="p1" aria-label="JTL Growth, AI and automation agency">\n    {hero(False)}\n  </section>'
@@ -163,6 +160,13 @@ clone = re.search(r'<section class="panel in panel-clone".*?</section>', html, r
 must(p1.count("<input"), 1, "one input in the hero")
 must(clone.count("<input"), 0, "no input in the clone")
 must(clone.count("data-term"), 0, "clone terminal is inert")
+# round 4: sample 03, no eyebrow, no Gwen, no deck, mini keyboard in hero and clone
+must(p1.count("kb-eyebrow") + clone.count("kb-eyebrow"), 0, "no eyebrow in the hero")
+must(p1.count("Gwen") + clone.count("Gwen"), 0, "no Gwen in the hero CTA")
+must(html.count("kb-deck"), 0, "no keyboard deck")
+must(html.count("data-float"), 2, "mini keyboard in hero and clone")
+must(html.count('class="kb-mini"'), 2, "kb-mini in hero and clone")
+must(html.count('class="kb-base kb-lip"'), 2, "14px lip on both laptops")
 must(html.count("data-globe"), 1, "one globe")
 must(html.count("data-cards"), 0, "no card grid on the home")
 must(html.count('name="robots" content="noindex"'), 1, "noindex")
