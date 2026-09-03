@@ -32,8 +32,8 @@ try {
 
   // ---- panels, dots, labels ----
   const labels = await page.$$eval('#dots button', bs => bs.map(b => b.textContent.trim()));
-  ok(labels.join(',') === 'Hero,About,Globe,Services,Contact', `dots: ${labels.join(', ')}`);
-  ok(await page.locator('.panel:not(.panel-clone)').count() === 5, '5 real panels');
+  ok(labels.join(',') === 'Hero,About,Globe,Contact', `dots: ${labels.join(', ')}`);
+  ok(await page.locator('.panel:not(.panel-clone)').count() === 4, '4 real panels');
   ok(await page.locator('#p1clone[data-static]').count() === 1, 'clone panel present and static');
   ok(await page.locator('#p1 input.kb-input').count() === 1 && await page.locator('#p1clone input').count() === 0, 'one input in the hero, none in the clone');
 
@@ -103,8 +103,8 @@ try {
 
   // ---- morph stops and dark chrome ----
   const rgb = s => s.replace(/\s/g, '');
-  const expect = ['rgb(226,226,226)', 'rgb(219,219,219)', 'rgb(16,16,16)', 'rgb(226,226,226)', 'rgb(226,226,226)'];
-  for (let i = 0; i < 5; i++) {
+  const expect = ['rgb(226,226,226)', 'rgb(219,219,219)', 'rgb(16,16,16)', 'rgb(226,226,226)'];
+  for (let i = 0; i < 4; i++) {
     await page.evaluate(n => window.__goTo(n), i);
     await sleep(1800);
     const bg = rgb(await page.evaluate(() => getComputedStyle(document.getElementById('viewport')).backgroundColor));
@@ -151,24 +151,34 @@ try {
       ok(await page.locator('#globe canvas.dragging').count() === 1, 'globe drag engages');
       await mv; await page.mouse.up();
     }
-    if (i === 3) {
-      ok(await page.locator('#services .jp-card').count() === 8, '8 service cards');
-      const anims = await page.locator('#services .jp-cards').evaluate(e => e.getAnimations({ subtree: true }).filter(a => a.playState === 'running').length);
-      ok(anims >= 8, `card loops running (${anims})`);
-      const g = page.locator('#services [data-follow-grid]');
-      const gb = await g.boundingBox();
-      await page.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2, { steps: 4 });
-      await sleep(250);
-      ok((await g.locator('i.lit').count()) > 0, 'cursor-follow grid lights');
-    }
   }
   // ---- loop wrap ----
-  await page.evaluate(() => window.__goTo(5));
+  await page.evaluate(() => window.__goTo(4));
   await sleep(2600);
   const xuWrap = await page.evaluate(() => window.__xu);
   const idxWrap = await page.$$eval('#dots button', bs => bs.findIndex(b => b.classList.contains('active')));
   ok(xuWrap === 0 && idxWrap === 0, `loop wraps back to the hero (xu ${xuWrap}, dot ${idxWrap})`);
   ok(errors.length === 0, `0 console errors (got ${errors.length})${errors.length ? '\n    ' + errors.slice(0, 6).join('\n    ') : ''}`);
+  // ---- services page v7: the card grid replaces the ladder ----
+  const sp = await ctx.newPage();
+  const serr = [];
+  sp.on('pageerror', e => serr.push('pageerror: ' + e.message));
+  sp.on('console', m => { if (m.type() === 'error') serr.push('console: ' + m.text()); });
+  await sp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
+  ok(await sp.locator('#ladder').count() === 0, 'services: ladder gone');
+  await sp.locator('#services').scrollIntoViewIfNeeded();
+  await sleep(600);
+  ok(await sp.locator('#services .jp-card').count() === 8, 'services: 8 cards');
+  const sanims = await sp.locator('#services .jp-cards').evaluate(e => e.getAnimations({ subtree: true }).filter(a => a.playState === 'running').length);
+  ok(sanims >= 8, `services: card loops running (${sanims})`);
+  const sg = sp.locator('#services [data-follow-grid]');
+  const sgb = await sg.boundingBox();
+  await sp.mouse.move(sgb.x + sgb.width / 2, sgb.y + sgb.height / 2, { steps: 4 });
+  await sleep(250);
+  ok((await sg.locator('i.lit').count()) > 0, 'services: cursor-follow grid lights');
+  ok(await sp.locator('#t1, #t2, #t3, #t4').count() === 4, 'services: the four tier sections stay');
+  ok(serr.length === 0, `services: 0 console errors (got ${serr.length})${serr.length ? ' ' + serr.slice(0, 3).join(' | ') : ''}`);
+  await sp.locator('#services').screenshot({ path: path.join(SHOTS, 'services-cards.png') });
   await ctx.close();
 
   // ---- reduced motion ----

@@ -234,3 +234,8 @@
   .kb-mb-item{display:none!important}
   .kb-screen{aspect-ratio:auto!important;min-height:340px}
 }
+
+/* the satellite is a satellite: a Lucide glyph in silver, no tile behind it */
+#globe .jp-sat{width:26px;height:26px;margin:-13px 0 0 -13px;background:transparent;border-radius:0;color:#E2E2E2;filter:drop-shadow(0 0 6px rgba(226,226,226,.35))}
+#globe .jp-sat svg{width:22px;height:22px;color:#E2E2E2}
+#globe .jp-sat-ghost{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%}

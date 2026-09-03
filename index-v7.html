@@ -147,7 +147,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   /* v5 ladder ramp — grayscale, no hue (draft's blue ramp discarded) */
   --t1:#C9C9C9; --t2:#969696; --t3:#616161; --t4:#181818;
   /* v5 panel grounds — the JS bg morph reads these (theme-aware) */
-  --bg-hero:#E2E2E2; --bg-about:#DBDBDB; --bg-globe:#101010; --bg-cards:#E2E2E2; --bg-contact:#E2E2E2;
+  --bg-hero:#E2E2E2; --bg-about:#DBDBDB; --bg-globe:#101010; --bg-contact:#E2E2E2;
 }
 /* v5 dark register: same mono system, inverted. Dark-panel chrome (.on-dark,
    menu panel, phone, boot, gift box) is constant-dark and stays literal. */
@@ -165,7 +165,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   --gray-light:#5A5A5A;
   --line:rgba(226,226,226,.15);
   --t1:#2E2E2E; --t2:#555555; --t3:#8F8F8F; --t4:#E2E2E2;
-  --bg-hero:#121212; --bg-about:#171717; --bg-globe:#101010; --bg-cards:#171717; --bg-contact:#121212;
+  --bg-hero:#121212; --bg-about:#171717; --bg-globe:#101010; --bg-contact:#121212;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--cement)}
@@ -347,7 +347,7 @@ header.on-dark .nav-row a{color:#E2E2E2}
   .tgl,header.on-dark .tgl{color:#E2E2E2;border-color:rgba(226,226,226,.5);width:37px;height:37px}
   #greetpill{display:none!important} /* !important: the island rule is declared later and would win otherwise */
   #p1 .hero-glow,#p1clone .hero-glow{animation:none}
-  #p1,#about,#services,#p5{background:var(--cement)}
+  #p1,#about,#p5{background:var(--cement)}
   #globe{background:#101010}
   #viewport{position:static;overflow:visible}
   #track{display:block;width:100%;transform:none!important}
@@ -445,8 +445,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <link rel="stylesheet" href="assets/v7/home.css">
 <style id="v7-glue">
 /* v7 glue: panels stay transparent on desktop so the viewport morph shows through; static mode paints them */
-#globe,#services{background:transparent}
-@media (max-width:860px), (prefers-reduced-motion: reduce){#globe{background:#101010}#services{background:var(--cement)}}
+#globe{background:transparent}
+@media (max-width:860px), (prefers-reduced-motion: reduce){#globe{background:#101010}}
 </style>
 </head>
 <body>
@@ -532,8 +532,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
           <a href="#" data-go="0">Hero <span class="mk">01</span></a>
           <a href="#" data-go="1">About <span class="mk">02</span></a>
           <a href="#" data-go="2">Globe <span class="mk">03</span></a>
-          <a href="#" data-go="3">Services <span class="mk">04</span></a>
-          <a href="#" data-go="4">Contact <span class="mk">05</span></a>
+          <a href="#" data-go="3">Contact <span class="mk">04</span></a>
         </div>
         <div class="mgroup"><div class="mlabel">Pages</div>
           <a href="/services/">Services <span class="mk">&#8599;</span></a>
@@ -673,14 +672,6 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       </div>
     </div>
   </section>
-  <section class="panel" id="services" aria-label="Services">
-    <div class="inner kb-cards-inner">
-      <p class="kb-eyebrow rv d1">Services &middot; the four tiers, plus the proofs</p>
-      <h2 class="rv d2">Each tier only works <em class="accent">because the one under it does.</em></h2>
-      <p class="lead rv d3">We install the same four layers we run our own firm on, in the order that makes each one pay for the next.</p>
-      <div class="jp-cards rv d4" data-cards data-layout="grid" data-follow="1"></div>
-    </div>
-  </section>
   <section class="panel" id="p5" aria-label="Contact and booking">
     <div class="inner">
       <div class="cta-split rv d1">
@@ -788,7 +779,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   const hdr=document.getElementById('hdr');
   const N=panels.length;
   const darkPanels=[2];  // v7: the globe panel is the one dark stop on the home
-  const LABELS=['Hero','About','Globe','Services','Contact'];
+  const LABELS=['Hero','About','Globe','Contact'];
   let target=0,current=0,idx=0,raf=null,moved=false;
   // static mode = small screens OR prefers-reduced-motion; mirrors the CSS media list
   const mobile=()=>matchMedia('(max-width:860px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -805,7 +796,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   // virtual scroll map: transit segments slide the track, HOLD segments pin the
   // panel while extra scrolling scrubs its inner effect (words, phone feeds)
-  const HOLD={4:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
+  const HOLD={3:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
   // LOOP: extend the transit map one extra segment past the last real panel (i=N)
   // to arrive at the clone of panel 0 appended after it in the DOM. Forward-only:
   // scrolling past the clone wraps back to real position 0 (see loop()); scrolling
@@ -846,7 +837,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   const viewport=document.getElementById('viewport');
   // v5: stops read from CSS vars so the dark register repaints them; last stop
   // is the loop-wrap stop (clone == panel 0)
-  const STOP_VARS=['--bg-hero','--bg-about','--bg-globe','--bg-cards','--bg-contact','--bg-hero'];
+  const STOP_VARS=['--bg-hero','--bg-about','--bg-globe','--bg-contact','--bg-hero'];
   let STOPS=[];
   function hex2rgb(h){h=h.trim().replace('#','');
     if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
@@ -1269,7 +1260,6 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <script src="assets/v7/keys.js"></script>
 <script src="assets/v7/term.js"></script>
 <script src="assets/v7/globe.js"></script>
-<script src="assets/v7/cards.js"></script>
 <script>(function(){function t(){var d=new Date(),s=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');document.querySelectorAll('[data-clock]').forEach(function(e){e.textContent=s});}t();setInterval(t,30000);})();</script>
 </body>
 </html>

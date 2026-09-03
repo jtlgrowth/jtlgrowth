@@ -264,7 +264,7 @@
     }
     if (target.type === 'contact') {
       this.appendSys('Sliding to the booking panel …');
-      if (window.__goTo) window.__goTo(4); else location.hash = '#p5';
+      if (window.__goTo) window.__goTo(3); else location.hash = '#p5';
     } else if (window.__goTo) { window.__goTo(0); } else { location.href = '/'; }
     cb();
   };
