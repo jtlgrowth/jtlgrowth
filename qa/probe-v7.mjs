@@ -191,9 +191,14 @@ try {
   const geo = await wp.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapLeft: Math.round(l.left), lapRight: Math.round(l.right), lapBottom: Math.round(l.bottom), copyCx: Math.round(c.left + c.width / 2) }; });
   ok(geo.lapLeft <= 0 || innerWidthSafe(geo), `wide: laptop starts at the left edge (left ${geo.lapLeft}px, right ${geo.lapRight}px)`);
   ok(geo.copyCx > 1300, `wide: copy centred on the right (centre x ${geo.copyCx})`);
+  const h1r = await wp.evaluate(() => document.querySelector('#p1 .kb-copy h1').getBoundingClientRect().right);
+  ok(h1r <= 2000, `wide: headline stays inside the viewport (right ${Math.round(h1r)})`);
+  const ctaLines = await wp.evaluate(() => Math.round(document.querySelector('#p1 .kb-cta').getBoundingClientRect().height));
+  ok(ctaLines <= 56, `wide: CTA on one line (${ctaLines}px tall)`);
   ok(geo.lapBottom <= 1100 - 60, `wide: laptop clears the dots (bottom ${geo.lapBottom} of 1100)`);
   await wp.screenshot({ path: path.join(SHOTS, 'wide-hero.png') });
   await wp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
+  await wp.locator('#services').scrollIntoViewIfNeeded(); await sleep(900);
   const sw = await wp.evaluate(() => Math.round(document.querySelector('#services .kb-cards-inner').getBoundingClientRect().width));
   ok(sw <= 1240, `wide: services section clamped (${sw}px)`);
   await wp.locator('#services').screenshot({ path: path.join(SHOTS, 'wide-services.png') });

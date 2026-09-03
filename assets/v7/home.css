@@ -260,3 +260,12 @@
   #p1 .kb-hero,#p1clone .kb-hero{display:block;width:100%}
   #p1 .kb-laptop,#p1clone .kb-laptop{margin:0 0 28px}
 }
+/* round 2 fixes after the wide render: the copy column measures in its own 16px ch, so 34ch was 306px and the
+   headline overflowed; the bleed hid the cockpit sidebar at 1440; the laptop base touched the dots at 900 tall */
+#p1 .kb-copy,#p1clone .kb-copy{max-width:min(100%,560px);padding:0 4vw 0 2vw}
+#p1 .kb-copy h1,#p1clone .kb-copy h1{font-size:clamp(44px,4.4vw,84px)}
+#p1 .kb-copy .lead,#p1clone .kb-copy .lead{max-width:36ch}
+#p1 .kb-cta,#p1clone .kb-cta{white-space:nowrap}
+#p1 .kb-laptop,#p1clone .kb-laptop{max-width:calc((100vh - 200px) * 1.1);margin-left:-3vw}
+@media (min-width:1920px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
+@media (max-width:1100px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0;max-width:100%}#p1 .kb-copy,#p1clone .kb-copy{max-width:100%;padding:0}}
