@@ -269,3 +269,7 @@
 #p1 .kb-laptop,#p1clone .kb-laptop{max-width:calc((100vh - 200px) * 1.1);margin-left:-3vw}
 @media (min-width:1920px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
 @media (max-width:1100px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0;max-width:100%}#p1 .kb-copy,#p1clone .kb-copy{max-width:100%;padding:0}}
+/* the bleed hides only the bezel, never the cockpit sidebar (Keeby hides its bezel edge, nothing more) */
+#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:clamp(-22px,-1.4vw,0px)}
+@media (min-width:1920px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
+@media (max-width:1100px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
