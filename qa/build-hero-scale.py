@@ -54,26 +54,35 @@ def laptop(window=False):
       <div class="kb-base kb-lip" aria-hidden="true"></div>
     </div>'''
 
-def copy(two_lines=False):
+def ctas(extra=""):
+    return (f'<div class="kb-ctas{extra}"><a class="kb-cta" href="{CAL}" target="_blank" rel="noopener" data-click>Put AI to work for me</a>'
+            '<a class="kb-link" href="/ai-employee/" data-click>See the seven stages <span aria-hidden="true">&#8599;</span></a></div>')
+
+def copy(two_lines=False, cta=True):
     h1 = '<h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1>' if two_lines else '<h1>Growth, <em class="accent">engineered.</em></h1>'
     return ('<div class="kb-copy">' + h1 +
-            '<p class="lead">AI systems that run the repetitive half of your business.</p>'
-            f'<div class="kb-ctas"><a class="kb-cta" href="{CAL}" target="_blank" rel="noopener" data-click>Put AI to work for me</a>'
-            '<a class="kb-link" href="/ai-employee/" data-click>See the seven stages <span aria-hidden="true">&#8599;</span></a></div></div>')
+            '<p class="lead">AI systems that run the repetitive half of your business.</p>' + (ctas() if cta else '') + '</div>')
+
+# the real home keeps its dot row 28px off the bottom: shown on every stage so the bottom band is honest
+DOTS = '<div class="hs-dots" aria-hidden="true"><i class="on"></i>Hero <i></i>About <i></i>Globe <i></i>Contact</div>'
 
 V = [
   dict(id=1, name="Same frame, everything inside it bigger", tag="01 &middot; Recommended",
        sub="Your pick, untouched in layout. The headline goes from 64 to 96 px on a 2000 wide screen, the line to 22 px, the button to 52 px tall. The laptop keeps the same box (one screen is one screen at 16:10) but the app inside it renders at 1.3x: 16 px terminal text instead of 12.5, a 218 px sidebar, taller chips. What your eyes read gets 30 to 50 percent bigger; nothing moves.",
-       html=lambda: f'<div class="hs hs-s1">{copy()}{laptop()}</div>',
+       html=lambda: f'<div class="hs hs-s1">{copy()}{laptop()}{DOTS}</div>',
        a="Headline 96 px, line 22 px, button 52 px. All 1.5x the fitted version.", b="Same laptop box as today (about 1120 px wide at 1100 tall), interior at 1.3x.", c="Nothing. Layout, order and fit are unchanged."),
   dict(id=2, name="Wide window", tag="02",
        sub="Sample 04's chassis-less app window, now cut for a wide screen: 2:1 instead of 16:10, so at the same height it is a third wider. About 1460 px across at 1100 tall, the interior at 1.3x. Same big headline above. The lid, notch and lip go; the app is a real window with a shadow, sitting on the page.",
-       html=lambda: f'<div class="hs hs-s2">{copy()}{laptop(window=True)}</div>',
+       html=lambda: f'<div class="hs hs-s2">{copy()}{laptop(window=True)}{DOTS}</div>',
        a="Same type as 01.", b="Window about 1460 x 730 px at 2000 x 1100, a third wider than today's screen, interior at 1.3x.", c="The laptop chassis. It becomes a window (your 04 bias)."),
   dict(id=3, name="Big app, copy beside", tag="03",
        sub="Sample 01's geometry with the new type. The copy moves to the right column, so the laptop is no longer height-bound by the words above it: 66 percent of the width, about 1320 px at 2000 wide, the biggest laptop that still fits one screen. Headline on two lines at 88 px, interior at 1.2x. Eyes hit the app first, the words back it up.",
-       html=lambda: f'<div class="hs hs-s3">{laptop()}{copy(two_lines=True)}</div>',
+       html=lambda: f'<div class="hs hs-s3">{laptop()}{copy(two_lines=True)}{DOTS}</div>',
        a="Headline 88 px on two lines, line 20 px, button 52 px.", b="Laptop about 1320 px wide, 18 percent bigger than today, interior at 1.2x.", c="Headline over the stage. The copy returns to the side column."),
+  dict(id=4, name="Button under the laptop", tag="04 &middot; Owner question",
+       sub="01 with the button row moved below the laptop: headline and the one line above, the app, then the button and the link. Reading order becomes see it, try it, act. The laptop is the same size as 01 (the row costs the same 72 px above or below). What changes is where the button lands: on a 1100 tall screen it sits in the bottom band with the dot row, the scroll hint and the page counter, and it is the first thing to leave the fold on a shorter screen.",
+       html=lambda: f'<div class="hs hs-s4">{copy(cta=False)}{laptop()}{ctas(" kb-ctas-under")}{DOTS}</div>',
+       a="Same type as 01.", b="Same laptop as 01.", c="The button leaves the headline and joins the dot row at the bottom edge."),
 ]
 
 CSS = r"""
@@ -86,6 +95,9 @@ CSS = r"""
 .hero-stage .kb-ctas{flex-direction:row;align-items:center;justify-content:center;gap:24px;margin-top:20px}
 /* interior zoom: the app inside the screen renders bigger, the screen box does not change */
 .hero-stage .kb-cockpit,.hero-stage .kb-menubar{zoom:var(--kz,1.3)}
+.hero-stage .hs-dots{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;align-items:center;gap:22px;font:700 10px var(--mach);letter-spacing:.2em;text-transform:uppercase;color:#616161;pointer-events:none}
+.hero-stage .hs-dots i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#AFAFAF;margin-right:9px;vertical-align:1px}
+.hero-stage .hs-dots i.on{background:#181818}
 /* ---- 01 same frame ---- */
 .hs-s1{--kz:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .hs-s1 .kb-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
@@ -97,6 +109,11 @@ CSS = r"""
 .hs-s2 .kb-window .kb-lid{padding:0;background:transparent;box-shadow:none;border-radius:0}
 .hs-s2 .kb-window .kb-screen{aspect-ratio:2/1;border-radius:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.45);border:1px solid rgba(24,24,24,.12)}
 .hs-s2 .kb-window .kb-notch,.hs-s2 .kb-window .kb-base{display:none}
+/* ---- 04 button under the laptop (01's sizes) ---- */
+.hs-s4{--kz:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hs-s4 .kb-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+.hs-s4 .kb-laptop{width:min(60vw,calc((100vh - 400px) * 1.6));margin-top:24px}
+.hs-s4 .kb-ctas-under{margin-top:20px}
 /* ---- 03 big app, copy beside ---- */
 .hero-stage .hs-s3{--kz:1.2;display:grid;grid-template-columns:66vw 1fr;align-items:center;gap:0;padding-left:64px} /* 64px keeps the studies rail off the bezel; the site has no rail */
 .hs-s3 .kb-laptop{width:100%;max-width:calc((100vh - 150px) * 1.5);margin-left:0}
@@ -106,7 +123,7 @@ CSS = r"""
 .hs-s3 .kb-ctas{flex-direction:column;gap:16px;margin-top:24px}
 @media (max-width:1100px){
   .hero-stage .kb-cockpit,.hero-stage .kb-menubar{zoom:1}
-  .hs-s1 .kb-laptop,.hs-s2 .kb-laptop{width:92vw}
+  .hs-s1 .kb-laptop,.hs-s2 .kb-laptop,.hs-s4 .kb-laptop{width:92vw}
   .hero-stage .hs-s3{grid-template-columns:1fr;padding-left:0}
   .hs-s3 .kb-laptop{margin:0 auto;max-width:92vw}
   .hs-s3 .kb-copy{padding:28px 4vw 40px;max-width:none}
@@ -156,20 +173,20 @@ html = f'''<!DOCTYPE html>
 <body>
 <a class="skip" href="#v1">Skip to the samples</a>
 <nav class="rail-nav" aria-label="Samples">
-  <a href="#v1" data-r="v1">01</a><a href="#v2" data-r="v2">02</a><a href="#v3" data-r="v3">03</a>
+  <a href="#v1" data-r="v1">01</a><a href="#v2" data-r="v2">02</a><a href="#v3" data-r="v3">03</a><a href="#v4" data-r="v4">04</a>
   <a href="#top" class="top" aria-label="Back to top">&#8593;</a>
 </nav>
 <div class="doc" id="top">
   <p class="kick">jtlgrowth.com &middot; home v7 hero &middot; three scales &middot; 3 sep 2026</p>
   <h1 class="doc-title">Three scales for the fitted hero, <em>none of them small.</em></h1>
   <p class="doc-lead">The fitted 03 strains the eyes: 64 px headline, 12.5 px terminal text, on a 2000 px screen. Every stage below is bigger where you read, and each still lands inside one screen. The three differ in what they give up to get there: 01 gives up nothing and scales the inside, 02 gives up the chassis and goes wide, 03 gives up the headline-on-top and puts the copy beside the biggest laptop that fits.</p>
-  <p class="doc-lead">Every stage is live at real viewport size. Type in each one. Use the rail on the left, or press 1 to 3.</p>
+  <p class="doc-lead">Every stage is live at real viewport size. Type in each one. Use the rail on the left, or press 1 to 4. The dot row at the bottom of each stage is the real one from the home, so you see what the bottom band holds.</p>
 </div>
 {variants}
 <footer class="doc-end">
   <hr class="rule">
   <h2 class="sec">Pick one, or point</h2>
-  <p>01 is the recommendation: it is your pick with the reading sizes fixed, and it goes into index-v7 as one CSS block. 02 if the app should own the width. 03 if the laptop should be the biggest thing on the page. Say the number.</p>
+  <p>01 is the recommendation: it is your pick with the reading sizes fixed, and it goes into index-v7 as one CSS block. 02 if the app should own the width. 03 if the laptop should be the biggest thing on the page. 04 answers the question of the button under the laptop: same laptop as 01, the button moves into the bottom band. Say the number.</p>
 </footer>
 <script src="../assets/v7/sound.js" data-base="../assets/sounds/"></script>
 <script src="../assets/v7/keys.js"></script>
@@ -183,7 +200,7 @@ html = f'''<!DOCTYPE html>
   vs.forEach(function(v){{ vio.observe(v); }});
   addEventListener('keydown', function(e){{
     if (e.target && /input|textarea/i.test(e.target.tagName)) return;
-    var n = parseInt(e.key, 10); if (n >= 1 && n <= 3) {{ var v = document.getElementById('v' + n); if (v) v.scrollIntoView({{ behavior: reduce.matches ? 'auto' : 'smooth' }}); }}
+    var n = parseInt(e.key, 10); if (n >= 1 && n <= 4) {{ var v = document.getElementById('v' + n); if (v) v.scrollIntoView({{ behavior: reduce.matches ? 'auto' : 'smooth' }}); }}
   }});
   function t(){{ var d = new Date(), s = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); document.querySelectorAll('[data-clock]').forEach(function(e){{ e.textContent = s; }}); }}
   t(); setInterval(t, 30000);
@@ -192,15 +209,16 @@ html = f'''<!DOCTYPE html>
 </body>
 </html>
 '''
-must(html.count('class="variant"'), 3, "variants")
-must(html.count("data-float"), 3, "mini keyboards")
-must(html.count("data-term"), 3, "terminals")
+must(html.count('class="variant"'), 4, "variants")
+must(html.count("data-float"), 4, "mini keyboards")
+must(html.count("data-term"), 4, "terminals")
 must(html.count("kb-eyebrow"), 0, "no eyebrow")
 must(html.count("Gwen"), 0, "no Gwen in copy")
 must(html.count('class="kb-deck"'), 0, "no deck")
-must(html.count("Put AI to work for me"), 3, "CTA on all three")
+must(html.count("Put AI to work for me"), 4, "CTA on all four")
+must(html.count('class="hs-dots"'), 4, "dot row on every stage")
 must(html.count("—") + html.count("–"), 0, "no dashes")
 for bad in ("venice-edit", "data-token"):
     must(html.count(bad), 0, f"{bad} absent")
 OUT.write_text(html, encoding="utf-8")
-print(f"OK {OUT} {len(html.encode())} B; 3 stages, 3 mini keyboards, 0 eyebrows, 0 Gwen, 0 decks")
+print(f"OK {OUT} {len(html.encode())} B; 4 stages, 4 mini keyboards, 0 eyebrows, 0 Gwen, 0 decks")

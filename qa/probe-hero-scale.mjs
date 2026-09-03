@@ -29,21 +29,23 @@ try {
     await page.goto(URL_, { waitUntil: 'networkidle' });
     await page.evaluate(() => { window.JTLTerm.navigate = () => {}; });
     console.log(`viewport ${vp.w}x${vp.h}`);
-    ok(await page.locator('section.variant').count() === 3, '3 samples present');
-    for (let i = 1; i <= 3; i++) {
+    ok(await page.locator('section.variant').count() === 4, '4 samples present');
+    for (let i = 1; i <= 4; i++) {
       const v = page.locator(`#v${i}`);
       await page.evaluate(n => document.querySelector(`#v${n} .hero-stage`).scrollIntoView({ block: 'start', behavior: 'instant' }), i);
       await sleep(500);
       if (vp.w !== 1920) await page.screenshot({ path: path.join(SHOTS, `s${i}-${vp.w}.png`) });
       console.log(`sample 0${i}`);
       ok(await v.locator('.kb-eyebrow').count() === 0 && await v.locator('.kb-deck').count() === 0, 'no eyebrow, no deck');
-      const g = await page.evaluate(n => { const q = s => document.querySelector(`#v${n} ` + s).getBoundingClientRect(); const st = q('.hero-stage'), l = q('.kb-laptop'), c = q('.kb-copy'), h1 = q('h1'), inp = q('.kb-input'), log = q('.kb-log'); const fs = Math.round(document.querySelector(`#v${n} .kb-chip`).getBoundingClientRect().height * 10) / 10; return { stH: Math.round(st.height), lap: [Math.round(l.left), Math.round(l.right), Math.round(l.top - st.top), Math.round(l.bottom - st.top)], copy: [Math.round(c.top - st.top), Math.round(c.bottom - st.top), Math.round(c.left), Math.round(c.right)], h1: [Math.round(h1.height), Math.round(parseFloat(getComputedStyle(document.querySelector(`#v${n} h1`)).fontSize))], inp: Math.round(inp.bottom - st.top), termFs: fs, logW: Math.round(log.width) }; }, i);
+      const g = await page.evaluate(n => { const q = s => document.querySelector(`#v${n} ` + s).getBoundingClientRect(); const st = q('.hero-stage'), l = q('.kb-laptop'), c = q('.kb-copy'), h1 = q('h1'), inp = q('.kb-input'), log = q('.kb-log'), ct = q('.kb-ctas'), dots = q('.hs-dots'); const fs = Math.round(document.querySelector(`#v${n} .kb-chip`).getBoundingClientRect().height * 10) / 10; return { stH: Math.round(st.height), lap: [Math.round(l.left), Math.round(l.right), Math.round(l.top - st.top), Math.round(l.bottom - st.top)], copy: [Math.round(c.top - st.top), Math.round(c.bottom - st.top), Math.round(c.left), Math.round(c.right)], h1: [Math.round(h1.height), Math.round(parseFloat(getComputedStyle(document.querySelector(`#v${n} h1`)).fontSize))], inp: Math.round(inp.bottom - st.top), termFs: fs, logW: Math.round(log.width), ctas: [Math.round(ct.top - st.top), Math.round(ct.bottom - st.top)], dotsTop: Math.round(dots.top - st.top) }; }, i);
       ok(g.stH <= vp.h + 1, `stage is one screen tall (${g.stH} of ${vp.h})`);
       ok(g.lap[0] >= -40 && g.lap[1] <= vp.w + 1, `laptop inside the width (x ${g.lap[0]} to ${g.lap[1]})`);
       ok(g.lap[2] >= 60 && g.lap[3] <= vp.h - DOTS, `laptop clears the header and the dot row (y ${g.lap[2]} to ${g.lap[3]}, floor ${vp.h - DOTS})`);
       ok(g.inp <= vp.h - DOTS, `terminal input inside the screen (bottom ${g.inp})`);
       if (i !== 3) ok(g.copy[1] <= g.lap[2] && g.copy[0] >= 60, `copy sits above the laptop (y ${g.copy[0]} to ${g.copy[1]})`);
       else ok(g.copy[2] >= g.lap[1] - 2, `copy sits beside the laptop (copy left ${g.copy[2]}, laptop right ${g.lap[1]})`);
+      if (i === 4) ok(g.ctas[0] >= g.lap[3] && g.ctas[1] <= g.dotsTop - 4, `button row under the laptop and above the dots (y ${g.ctas[0]} to ${g.ctas[1]}, dots at ${g.dotsTop})`);
+      ok(g.lap[3] <= g.dotsTop - 4, `laptop clears the dot row (laptop bottom ${g.lap[3]}, dots at ${g.dotsTop})`);
       ok(g.h1[1] >= 48 && g.h1[0] <= g.h1[1] * (i === 3 ? 2.1 : 1.15), `headline ${g.h1[1]}px, ${g.h1[0]}px tall`);
       ok(g.termFs >= 30, `interior zoomed: chip ${g.termFs}px tall (26 at 1x), log ${g.logW}px wide`);
       const input = v.locator('.kb-input');
