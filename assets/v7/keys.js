@@ -48,8 +48,26 @@
     }
   }
 
+  /* float mode: a [data-deck][data-float] board (jtlboard-sized mini keyboard inside the screen)
+     is hidden until the first key, stays while typing, and goes 1400 ms after the last key */
+  var floatTimer = null;
+  function showFloat(){
+    var decks = document.querySelectorAll('[data-deck][data-float]');
+    for (var i = 0; i < decks.length; i++){
+      if (decks[i].hasAttribute('data-static') || (decks[i].closest && decks[i].closest('[data-static]'))) continue;
+      decks[i].classList.add('show');
+    }
+    if (floatTimer) clearTimeout(floatTimer);
+    floatTimer = setTimeout(function(){
+      var d = document.querySelectorAll('[data-deck][data-float].show');
+      for (var j = 0; j < d.length; j++) d[j].classList.remove('show');
+      floatTimer = null;
+    }, 1400);
+  }
+
   function press(code){
     if (!code) return;
+    showFloat();
     eachTarget(code, function(node){ node.classList.add('on'); });
     if (timers[code]) clearTimeout(timers[code]);
     timers[code] = setTimeout(function(){ release(code); }, 900);
