@@ -14,6 +14,7 @@ mkdirSync(SHOTS, { recursive: true });
 const fails = [];
 const ok = (c, m) => { if (c) console.log('  ok   ' + m); else { fails.push(m); console.log('  FAIL ' + m); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const innerWidthSafe = g => g.lapLeft <= 0; // at 1920 and up the bleed is 0 by design, so left edge at 0 counts
 // wait until the terminal finished typing its current answer (no caret, queue idle)
 const settle = async (page) => { for (let i = 0; i < 200; i++) { const busy = await page.evaluate(() => !!document.querySelector('#p1 .kb-caret') || (window.JTLTerm && window.JTLTerm.busy && window.JTLTerm.busy())); if (!busy) break; await sleep(150); } await sleep(200); };
 
@@ -180,6 +181,23 @@ try {
   ok(serr.length === 0, `services: 0 console errors (got ${serr.length})${serr.length ? ' ' + serr.slice(0, 3).join(' | ') : ''}`);
   await sp.locator('#services').screenshot({ path: path.join(SHOTS, 'services-cards.png') });
   await ctx.close();
+
+  // ---- wide screen: laptop left and bleeding, copy right, services clamped ----
+  const wctx = await browser.newContext({ viewport: { width: 2000, height: 1100 }, timezoneId: 'Asia/Manila' });
+  const wp = await wctx.newPage();
+  await wp.goto(URL_, { waitUntil: 'networkidle' });
+  await wp.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
+  await sleep(700);
+  const geo = await wp.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapLeft: Math.round(l.left), lapRight: Math.round(l.right), lapBottom: Math.round(l.bottom), copyCx: Math.round(c.left + c.width / 2) }; });
+  ok(geo.lapLeft <= 0 || innerWidthSafe(geo), `wide: laptop starts at the left edge (left ${geo.lapLeft}px, right ${geo.lapRight}px)`);
+  ok(geo.copyCx > 1300, `wide: copy centred on the right (centre x ${geo.copyCx})`);
+  ok(geo.lapBottom <= 1100 - 60, `wide: laptop clears the dots (bottom ${geo.lapBottom} of 1100)`);
+  await wp.screenshot({ path: path.join(SHOTS, 'wide-hero.png') });
+  await wp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
+  const sw = await wp.evaluate(() => Math.round(document.querySelector('#services .kb-cards-inner').getBoundingClientRect().width));
+  ok(sw <= 1240, `wide: services section clamped (${sw}px)`);
+  await wp.locator('#services').screenshot({ path: path.join(SHOTS, 'wide-services.png') });
+  await wctx.close();
 
   // ---- reduced motion ----
   const rctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce', timezoneId: 'Asia/Manila' });

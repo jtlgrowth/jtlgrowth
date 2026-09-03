@@ -239,3 +239,24 @@
 #globe .jp-sat{width:26px;height:26px;margin:-13px 0 0 -13px;background:transparent;border-radius:0;color:#E2E2E2;filter:drop-shadow(0 0 6px rgba(226,226,226,.35))}
 #globe .jp-sat svg{width:22px;height:22px;color:#E2E2E2}
 #globe .jp-sat-ghost{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%}
+
+/* review round 2: laptop left (eyes read left first), copy right as the backup. Geometry from the Keeby hero DOM:
+   laptop 65% wide, bleeds 6.5vw off the left edge under 1920px, capped by viewport height; copy narrow and centred. */
+#p1 .kb-hero,#p1clone .kb-hero{width:100%;max-width:none;margin:0;display:grid;grid-template-columns:62% 38%;gap:0;align-items:center;padding:70px 0 0}
+#p1 .kb-laptop,#p1clone .kb-laptop{width:100%;max-width:calc((100vh - 170px) * 1.12);justify-self:start;margin-left:-6vw}
+@media (min-width:1920px){#p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0}}
+#p1 .kb-copy,#p1clone .kb-copy{justify-self:center;text-align:center;max-width:34ch;padding:0 5vw 0 3vw}
+#p1 .kb-copy .lead,#p1clone .kb-copy .lead{margin:16px auto 0;max-width:30ch}
+#p1 .kb-ctas,#p1clone .kb-ctas{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:26px}
+#p1 .kb-link,#p1clone .kb-link{font:700 11px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid rgba(24,24,24,.35);padding-bottom:3px}
+#p1 .kb-link:hover,#p1clone .kb-link:hover{border-color:var(--navy)}
+#p1 .kb-note,#p1clone .kb-note{margin-top:22px}
+@media (max-width:1100px){
+  #p1 .kb-hero,#p1clone .kb-hero{grid-template-columns:1fr;width:min(1380px,90vw);margin:0 auto}
+  #p1 .kb-laptop,#p1clone .kb-laptop{margin-left:0;max-width:100%;justify-self:stretch}
+  #p1 .kb-copy,#p1clone .kb-copy{margin-top:28px;padding:0}
+}
+@media (max-width:860px){
+  #p1 .kb-hero,#p1clone .kb-hero{display:block;width:100%}
+  #p1 .kb-laptop,#p1clone .kb-laptop{margin:0 0 28px}
+}
