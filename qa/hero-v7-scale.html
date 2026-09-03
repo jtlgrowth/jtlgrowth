@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!-- template: W-28 jtl-page-v6 (register: jtl-mono) -->
+<!-- doc shell: qa/hero-v7-proposals.html, the house studies pattern -->
+<!-- engine: assets/v7 (term, sound, keys in float mode), the same one index-v7.html runs -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Hero v7: three scales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,650;1,9..144,650&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="../assets/v7/home.css">
+<style>
+
+
+/* ==================================================================
+   Redesign proposals, five of them, each LIVE at real viewport size.
+   Three components per proposal, harvested from getkeeby.com and
+   reshaped for JTL: hero with an AI-employee chat (product in the
+   hero), a dotted globe with city pings (cobe), a feature-card grid
+   with directional micro-loops. Owner answers 2026-09-03: globe is
+   home panel 3, pings from cities on record, chat is scripted plus
+   click prompts, cards replace the services ladder.
+   Doc chrome is constant dark (#0C0C0C / #E2E2E2). Every stage
+   paints its own register with literals.
+   ================================================================== */
+:root{
+  --ground:#0C0C0C; --ink:#E2E2E2; --ink-soft:rgba(226,226,226,.68); --ink-faint:rgba(226,226,226,.46);
+  --mono:#9E9E9E; --line:rgba(226,226,226,.15); --line-soft:rgba(226,226,226,.07);
+  --disp:'Fraunces',Georgia,'Times New Roman',serif;
+  --body:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --wide:'Archivo Expanded','Archivo',sans-serif;
+  --mach:'Space Mono','SFMono-Regular',Menlo,monospace;
+  --col:min(1380px, calc(100% - 36px));
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.58;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid #B9B9B9;outline-offset:3px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:99;background:#E2E2E2;color:#101010;padding:12px 18px}
+.doc{width:var(--col);margin:0 auto;padding:72px 0 40px}
+.kick{font:700 10.5px var(--mach);letter-spacing:.2em;text-transform:uppercase;color:var(--mono);margin:0 0 22px}
+.doc-title{font:650 clamp(34px,4.6vw,64px)/1.02 var(--disp);letter-spacing:-.015em;margin:0 0 26px;max-width:22ch}
+.doc-title em{font-style:italic;color:var(--mono)}
+.doc-lead{font-size:clamp(16px,1.25vw,19px);color:var(--ink-soft);max-width:70ch;margin:0 0 14px}
+.rule{border:0;border-top:1px solid var(--line);margin:44px 0}
+.sec{font:700 11px var(--mach);letter-spacing:.22em;text-transform:uppercase;color:var(--mono);margin:0 0 18px}
+.diag-wrap{overflow-x:auto}
+.diag{width:100%;border-collapse:collapse;font-size:15px}
+.diag th,.diag td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-top:1px solid var(--line-soft)}
+.diag th{font:700 10px var(--mach);letter-spacing:.18em;text-transform:uppercase;color:var(--mono);border-top:0}
+.diag td:first-child{font:700 12px var(--mach);color:var(--mono);width:48px}
+.diag td:last-child{color:var(--ink-faint);font-family:var(--mach);font-size:12.5px;width:34%}
+.diag b{color:var(--ink)}
+.rail-nav{position:fixed;left:14px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:6px}
+.rail-nav a{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:rgba(12,12,12,.7);backdrop-filter:blur(8px);color:var(--ink-soft);font:700 11px var(--mach);text-decoration:none;transition:background .25s,color .25s,border-color .25s}
+.rail-nav a.on,.rail-nav a:hover{background:#E2E2E2;color:#101010;border-color:#E2E2E2}
+.rail-nav a.top{margin-top:8px}
+@media (max-width:900px){.rail-nav{display:none}}
+@media (min-width:901px){:root{--col:min(1380px, calc(100% - 144px))}} /* room for the rail on the left */
+.variant{margin:0 0 80px}
+.vhead{width:var(--col);margin:0 auto;padding:34px 0 10px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.vtag{font:700 10.5px var(--mach);letter-spacing:.2em;text-transform:uppercase;color:var(--mono);border:1px solid var(--line);padding:7px 11px;border-radius:999px}
+.vtag.rec{background:#E2E2E2;color:#101010;border-color:#E2E2E2}
+.vname{font:650 clamp(28px,3.4vw,44px)/1.05 var(--disp);letter-spacing:-.012em;margin:0}
+.vsub{width:var(--col);margin:0 auto 22px;color:var(--ink-soft);max-width:78ch;font-size:16.5px}
+.vfoot{width:var(--col);margin:18px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.vfoot h4{font:700 10.5px var(--mach);letter-spacing:.2em;text-transform:uppercase;color:var(--mono);margin:0 0 6px}
+.vfoot p{margin:0;color:var(--ink-soft);font-size:15px}
+@media (max-width:820px){.vfoot{grid-template-columns:1fr}}
+.doc-end{width:var(--col);margin:0 auto;padding:0 0 96px}
+.doc-end p{color:var(--ink-soft);max-width:80ch;font-size:16.5px}
+
+
+/* ---- stages share the site's light tokens, literal, so home.css rules that read var(--navy) resolve ---- */
+.hero-stage{--cement:#E2E2E2;--navy:#181818;--gray:#616161;--gray-light:#AFAFAF;--line:rgba(24,24,24,.14);--wood:#1A1A1A;--blue:#575757;
+  position:relative;min-height:100vh;background:#E2E2E2;color:#121212;overflow:hidden;font-family:var(--body);font-size:16px;line-height:1.55}
+.hero-stage .hs{position:relative;min-height:100vh;padding-top:80px}
+.hero-stage h1{font-family:var(--disp);font-weight:650;line-height:1.02;letter-spacing:-.012em;margin:0;font-size:clamp(44px,4.4vw,84px);color:#121212}
+.hero-stage h1 .accent{color:#1A1A1A;font-style:italic}
+.hero-stage h1 .l{display:block}
+.hero-stage .lead{font-size:clamp(16px,1.25vw,19px);line-height:1.55;color:#616161;margin:16px 0 0;max-width:36ch}
+.hero-stage .kb-ctas{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:26px}
+.hero-stage .kb-cta{display:inline-flex;align-items:center;min-height:44px;padding:0 22px;background:#181818;color:#E2E2E2;font:700 11px var(--mach);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.hero-stage .kb-link{font:700 11px var(--mach);letter-spacing:.18em;text-transform:uppercase;color:#181818;text-decoration:none;border-bottom:1px solid rgba(24,24,24,.35);padding-bottom:3px}
+.hero-stage .kb-note{font:400 10.5px var(--mach);letter-spacing:.16em;text-transform:uppercase;color:#616161;margin:22px 0 0}
+/* chassis: lid, notch, a 14px lip for a base, no deck */
+.hero-stage .kb-laptop{max-width:none;justify-self:auto;margin:0}
+.hero-stage .kb-base.kb-lip{height:14px;padding:0;gap:0;border-radius:0 0 14px 14px;background:#151515;border-top:1px solid #262626}
+.hero-stage .kb-base.kb-lip .kb-trackpad{display:none}
+.hero-stage .kb-screen{position:relative}
+/* the jtlboard-sized mini keyboard: 278x103 at 1x scaled 1.25x, radius 10, ground rgba(26,26,28,.96), border .5px rgba(51,51,51,.5), shadow 0 18px 50px rgba(0,0,0,.35) */
+.hero-stage .kb-mini{position:absolute;right:18px;bottom:18px;width:348px;height:129px;padding:7px;border-radius:12px;background:rgba(26,26,28,.96);border:.5px solid rgba(51,51,51,.5);box-shadow:0 18px 50px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateY(6px);transition:opacity .28s ease,transform .28s ease;pointer-events:none;z-index:5}
+.hero-stage .kb-mini.show{opacity:1;transform:none}
+.hero-stage .kb-mini .kb-row{display:flex;gap:2px}
+.hero-stage .kb-mini .kb-key{flex:var(--w,1) 0 0;height:21px;font:8px var(--mach);border-radius:3px;background:#2A2A2C;border:1px solid #333;color:#8A8A8A;display:flex;align-items:center;justify-content:center;transition:background .06s,color .06s}
+.hero-stage .kb-mini .kb-key.on{background:#E2E2E2;color:#111;border-color:#E2E2E2}
+.hero-stage .kb-mini .kb-deck-mark{position:absolute;left:50%;top:50%;width:30%;transform:translate(-50%,-50%);opacity:.08;color:#E2E2E2;pointer-events:none}
+.hero-stage .kb-mini .kb-deck-mark svg{width:100%}
+
+
+/* ---- shared scale: bigger type on every stage ---- */
+.hero-stage .hs{padding:76px 0 56px;min-height:100vh}
+.hero-stage h1{font-size:clamp(48px,4.8vw,96px);line-height:1.0}
+.hero-stage .lead{font-size:clamp(18px,1.2vw,22px);max-width:44ch;margin-top:12px}
+.hero-stage .kb-cta{min-height:52px;padding:0 28px;font-size:12.5px}
+.hero-stage .kb-link{font-size:12.5px}
+.hero-stage .kb-ctas{flex-direction:row;align-items:center;justify-content:center;gap:24px;margin-top:20px}
+/* interior zoom: the app inside the screen renders bigger, the screen box does not change */
+.hero-stage .kb-cockpit,.hero-stage .kb-menubar{zoom:var(--kz,1.3)}
+/* ---- 01 same frame ---- */
+.hs-s1{--kz:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hs-s1 .kb-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+.hs-s1 .kb-laptop{width:min(60vw,calc((100vh - 400px) * 1.6));margin-top:24px}
+/* ---- 02 wide window (2:1) ---- */
+.hs-s2{--kz:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hs-s2 .kb-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+.hs-s2 .kb-laptop{width:min(80vw,calc((100vh - 372px) * 2));margin-top:24px}
+.hs-s2 .kb-window .kb-lid{padding:0;background:transparent;box-shadow:none;border-radius:0}
+.hs-s2 .kb-window .kb-screen{aspect-ratio:2/1;border-radius:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.45);border:1px solid rgba(24,24,24,.12)}
+.hs-s2 .kb-window .kb-notch,.hs-s2 .kb-window .kb-base{display:none}
+/* ---- 03 big app, copy beside ---- */
+.hero-stage .hs-s3{--kz:1.2;display:grid;grid-template-columns:66vw 1fr;align-items:center;gap:0;padding-left:64px} /* 64px keeps the studies rail off the bezel; the site has no rail */
+.hs-s3 .kb-laptop{width:100%;max-width:calc((100vh - 150px) * 1.5);margin-left:0}
+.hs-s3 .kb-copy{justify-self:center;text-align:center;max-width:min(100%,600px);padding:0 3vw 0 1vw}
+.hs-s3 h1{font-size:clamp(44px,4.4vw,88px);line-height:.98}
+.hs-s3 .lead{margin-left:auto;margin-right:auto;max-width:34ch}
+.hs-s3 .kb-ctas{flex-direction:column;gap:16px;margin-top:24px}
+@media (max-width:1100px){
+  .hero-stage .kb-cockpit,.hero-stage .kb-menubar{zoom:1}
+  .hs-s1 .kb-laptop,.hs-s2 .kb-laptop{width:92vw}
+  .hero-stage .hs-s3{grid-template-columns:1fr;padding-left:0}
+  .hs-s3 .kb-laptop{margin:0 auto;max-width:92vw}
+  .hs-s3 .kb-copy{padding:28px 4vw 40px;max-width:none}
+}
+@media (max-width:860px), (prefers-reduced-motion: reduce){
+  .hero-stage .hs{padding:24px 0 40px;min-height:0}
+  .hero-stage .kb-ctas{flex-direction:column;gap:14px}
+  .hero-stage .kb-mini{display:none}
+  .hero-stage .kb-mini,.hero-stage .kb-mini *{transition:none!important}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#v1">Skip to the samples</a>
+<nav class="rail-nav" aria-label="Samples">
+  <a href="#v1" data-r="v1">01</a><a href="#v2" data-r="v2">02</a><a href="#v3" data-r="v3">03</a>
+  <a href="#top" class="top" aria-label="Back to top">&#8593;</a>
+</nav>
+<div class="doc" id="top">
+  <p class="kick">jtlgrowth.com &middot; home v7 hero &middot; three scales &middot; 3 sep 2026</p>
+  <h1 class="doc-title">Three scales for the fitted hero, <em>none of them small.</em></h1>
+  <p class="doc-lead">The fitted 03 strains the eyes: 64 px headline, 12.5 px terminal text, on a 2000 px screen. Every stage below is bigger where you read, and each still lands inside one screen. The three differ in what they give up to get there: 01 gives up nothing and scales the inside, 02 gives up the chassis and goes wide, 03 gives up the headline-on-top and puts the copy beside the biggest laptop that fits.</p>
+  <p class="doc-lead">Every stage is live at real viewport size. Type in each one. Use the rail on the left, or press 1 to 3.</p>
+</div>
+
+<!-- ============================ 01 ============================ -->
+<section class="variant" id="v1">
+  <div class="vhead"><span class="vtag rec">01 &middot; Recommended</span><h2 class="vname">Same frame, everything inside it bigger</h2></div>
+  <p class="vsub">Your pick, untouched in layout. The headline goes from 64 to 96 px on a 2000 wide screen, the line to 22 px, the button to 52 px tall. The laptop keeps the same box (one screen is one screen at 16:10) but the app inside it renders at 1.3x: 16 px terminal text instead of 12.5, a 218 px sidebar, taller chips. What your eyes read gets 30 to 50 percent bigger; nothing moves.</p>
+  <div class="hero-stage" data-stage="1"><div class="hs hs-s1"><div class="kb-copy"><h1>Growth, <em class="accent">engineered.</em></h1><p class="lead">AI systems that run the repetitive half of your business.</p><div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener" data-click>Put AI to work for me</a><a class="kb-link" href="/ai-employee/" data-click>See the seven stages <span aria-hidden="true">&#8599;</span></a></div></div><div class="kb-laptop" data-laptop>
+      <div class="kb-lid">
+        <div class="kb-screen">
+          <div class="kb-menubar"><span class="kb-mb-app">Growth</span><span class="kb-mb-item">File</span><span class="kb-mb-item">Edit</span><span class="kb-mb-item">View</span><span class="kb-mb-spacer"></span><button type="button" class="kb-mute" data-mute aria-pressed="true" aria-label="Mute key sounds"><svg class="kb-ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg><svg class="kb-ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg></button><span class="kb-mb-clock" data-clock>16:00</span></div>
+          <div class="kb-cockpit">
+            <aside class="kb-side" aria-hidden="true">
+              <div class="kb-side-brand">Growth</div>
+              <ul class="kb-side-nav"><li>Tasks</li><li class="on">Venice HQ <b>5</b></li><li>Automations</li><li>Agent Dashboard <i class="dot"></i></li><li>Agents <b>1</b></li><li>Growth Mobile</li></ul>
+              <div class="kb-side-label">Usage</div>
+              <div class="kb-usage"><span>5h</span><span class="bar"><i style="--p:26%"></i></span></div>
+              <div class="kb-usage"><span>wk</span><span class="bar"><i style="--p:51%"></i></span></div>
+              <div class="kb-side-label">Employees</div>
+              <ul class="kb-side-emp"><li><i class="dot"></i>Lene</li><li><i class="dot"></i>Bingbong</li><li><i class="dot"></i>Venice</li><li><i class="dot"></i>Janitor</li><li><i class="dot"></i>Dex</li><li><i class="dot"></i>Belze</li><li><i class="dot"></i>Bruno</li><li><i class="dot"></i>Vann</li><li><i class="dot"></i>Rain</li><li><i class="dot"></i>Wren</li><li><i class="dot"></i>Amara</li><li><i class="dot"></i>Cael</li><li><i class="dot"></i>Lauren</li><li><i class="dot"></i>Aurel</li><li><i class="dot"></i>Lysander</li></ul>
+            </aside>
+            <div class="kb-main">
+              <div class="kb-tabs"><span class="kb-tab on"><i class="dot"></i>Venice hq &middot; session</span><span class="kb-tab-plus">+</span></div>
+              <div class="kb-term" data-term>
+                <div class="kb-log" data-log aria-live="polite"></div>
+                <form class="kb-prompt" data-form autocomplete="off"><span class="kb-prompt-mark" aria-hidden="true">&rsaquo;</span><input class="kb-input" data-input type="text" name="q" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ask the AI employee" placeholder="ask anything, or type: go to services"></form>
+                <div class="kb-chips" data-chips><button type="button" class="kb-chip" data-cmd="services" data-click>services</button><button type="button" class="kb-chip" data-cmd="price" data-click>price</button><button type="button" class="kb-chip" data-cmd="ai employee" data-click>ai employee</button><button type="button" class="kb-chip" data-cmd="book a call" data-click>book a call</button><button type="button" class="kb-chip" data-cmd="help" data-click>help</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="kb-mini" data-deck data-float aria-hidden="true"></div>
+        </div>
+        <div class="kb-notch" aria-hidden="true"></div>
+      </div>
+      <div class="kb-base kb-lip" aria-hidden="true"></div>
+    </div></div></div>
+  <div class="vfoot"><div><h4>Type</h4><p>Headline 96 px, line 22 px, button 52 px. All 1.5x the fitted version.</p></div><div><h4>App</h4><p>Same laptop box as today (about 1120 px wide at 1100 tall), interior at 1.3x.</p></div><div><h4>What gives way</h4><p>Nothing. Layout, order and fit are unchanged.</p></div></div>
+</section>
+<!-- ============================ 02 ============================ -->
+<section class="variant" id="v2">
+  <div class="vhead"><span class="vtag">02</span><h2 class="vname">Wide window</h2></div>
+  <p class="vsub">Sample 04's chassis-less app window, now cut for a wide screen: 2:1 instead of 16:10, so at the same height it is a third wider. About 1460 px across at 1100 tall, the interior at 1.3x. Same big headline above. The lid, notch and lip go; the app is a real window with a shadow, sitting on the page.</p>
+  <div class="hero-stage" data-stage="2"><div class="hs hs-s2"><div class="kb-copy"><h1>Growth, <em class="accent">engineered.</em></h1><p class="lead">AI systems that run the repetitive half of your business.</p><div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener" data-click>Put AI to work for me</a><a class="kb-link" href="/ai-employee/" data-click>See the seven stages <span aria-hidden="true">&#8599;</span></a></div></div><div class="kb-laptop kb-window" data-laptop>
+      <div class="kb-lid">
+        <div class="kb-screen">
+          <div class="kb-menubar"><span class="kb-mb-app">Growth</span><span class="kb-mb-item">File</span><span class="kb-mb-item">Edit</span><span class="kb-mb-item">View</span><span class="kb-mb-spacer"></span><button type="button" class="kb-mute" data-mute aria-pressed="true" aria-label="Mute key sounds"><svg class="kb-ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg><svg class="kb-ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg></button><span class="kb-mb-clock" data-clock>16:00</span></div>
+          <div class="kb-cockpit">
+            <aside class="kb-side" aria-hidden="true">
+              <div class="kb-side-brand">Growth</div>
+              <ul class="kb-side-nav"><li>Tasks</li><li class="on">Venice HQ <b>5</b></li><li>Automations</li><li>Agent Dashboard <i class="dot"></i></li><li>Agents <b>1</b></li><li>Growth Mobile</li></ul>
+              <div class="kb-side-label">Usage</div>
+              <div class="kb-usage"><span>5h</span><span class="bar"><i style="--p:26%"></i></span></div>
+              <div class="kb-usage"><span>wk</span><span class="bar"><i style="--p:51%"></i></span></div>
+              <div class="kb-side-label">Employees</div>
+              <ul class="kb-side-emp"><li><i class="dot"></i>Lene</li><li><i class="dot"></i>Bingbong</li><li><i class="dot"></i>Venice</li><li><i class="dot"></i>Janitor</li><li><i class="dot"></i>Dex</li><li><i class="dot"></i>Belze</li><li><i class="dot"></i>Bruno</li><li><i class="dot"></i>Vann</li><li><i class="dot"></i>Rain</li><li><i class="dot"></i>Wren</li><li><i class="dot"></i>Amara</li><li><i class="dot"></i>Cael</li><li><i class="dot"></i>Lauren</li><li><i class="dot"></i>Aurel</li><li><i class="dot"></i>Lysander</li></ul>
+            </aside>
+            <div class="kb-main">
+              <div class="kb-tabs"><span class="kb-tab on"><i class="dot"></i>Venice hq &middot; session</span><span class="kb-tab-plus">+</span></div>
+              <div class="kb-term" data-term>
+                <div class="kb-log" data-log aria-live="polite"></div>
+                <form class="kb-prompt" data-form autocomplete="off"><span class="kb-prompt-mark" aria-hidden="true">&rsaquo;</span><input class="kb-input" data-input type="text" name="q" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ask the AI employee" placeholder="ask anything, or type: go to services"></form>
+                <div class="kb-chips" data-chips><button type="button" class="kb-chip" data-cmd="services" data-click>services</button><button type="button" class="kb-chip" data-cmd="price" data-click>price</button><button type="button" class="kb-chip" data-cmd="ai employee" data-click>ai employee</button><button type="button" class="kb-chip" data-cmd="book a call" data-click>book a call</button><button type="button" class="kb-chip" data-cmd="help" data-click>help</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="kb-mini" data-deck data-float aria-hidden="true"></div>
+        </div>
+        <div class="kb-notch" aria-hidden="true"></div>
+      </div>
+      <div class="kb-base kb-lip" aria-hidden="true"></div>
+    </div></div></div>
+  <div class="vfoot"><div><h4>Type</h4><p>Same type as 01.</p></div><div><h4>App</h4><p>Window about 1460 x 730 px at 2000 x 1100, a third wider than today's screen, interior at 1.3x.</p></div><div><h4>What gives way</h4><p>The laptop chassis. It becomes a window (your 04 bias).</p></div></div>
+</section>
+<!-- ============================ 03 ============================ -->
+<section class="variant" id="v3">
+  <div class="vhead"><span class="vtag">03</span><h2 class="vname">Big app, copy beside</h2></div>
+  <p class="vsub">Sample 01's geometry with the new type. The copy moves to the right column, so the laptop is no longer height-bound by the words above it: 66 percent of the width, about 1320 px at 2000 wide, the biggest laptop that still fits one screen. Headline on two lines at 88 px, interior at 1.2x. Eyes hit the app first, the words back it up.</p>
+  <div class="hero-stage" data-stage="3"><div class="hs hs-s3"><div class="kb-laptop" data-laptop>
+      <div class="kb-lid">
+        <div class="kb-screen">
+          <div class="kb-menubar"><span class="kb-mb-app">Growth</span><span class="kb-mb-item">File</span><span class="kb-mb-item">Edit</span><span class="kb-mb-item">View</span><span class="kb-mb-spacer"></span><button type="button" class="kb-mute" data-mute aria-pressed="true" aria-label="Mute key sounds"><svg class="kb-ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg><svg class="kb-ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg></button><span class="kb-mb-clock" data-clock>16:00</span></div>
+          <div class="kb-cockpit">
+            <aside class="kb-side" aria-hidden="true">
+              <div class="kb-side-brand">Growth</div>
+              <ul class="kb-side-nav"><li>Tasks</li><li class="on">Venice HQ <b>5</b></li><li>Automations</li><li>Agent Dashboard <i class="dot"></i></li><li>Agents <b>1</b></li><li>Growth Mobile</li></ul>
+              <div class="kb-side-label">Usage</div>
+              <div class="kb-usage"><span>5h</span><span class="bar"><i style="--p:26%"></i></span></div>
+              <div class="kb-usage"><span>wk</span><span class="bar"><i style="--p:51%"></i></span></div>
+              <div class="kb-side-label">Employees</div>
+              <ul class="kb-side-emp"><li><i class="dot"></i>Lene</li><li><i class="dot"></i>Bingbong</li><li><i class="dot"></i>Venice</li><li><i class="dot"></i>Janitor</li><li><i class="dot"></i>Dex</li><li><i class="dot"></i>Belze</li><li><i class="dot"></i>Bruno</li><li><i class="dot"></i>Vann</li><li><i class="dot"></i>Rain</li><li><i class="dot"></i>Wren</li><li><i class="dot"></i>Amara</li><li><i class="dot"></i>Cael</li><li><i class="dot"></i>Lauren</li><li><i class="dot"></i>Aurel</li><li><i class="dot"></i>Lysander</li></ul>
+            </aside>
+            <div class="kb-main">
+              <div class="kb-tabs"><span class="kb-tab on"><i class="dot"></i>Venice hq &middot; session</span><span class="kb-tab-plus">+</span></div>
+              <div class="kb-term" data-term>
+                <div class="kb-log" data-log aria-live="polite"></div>
+                <form class="kb-prompt" data-form autocomplete="off"><span class="kb-prompt-mark" aria-hidden="true">&rsaquo;</span><input class="kb-input" data-input type="text" name="q" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ask the AI employee" placeholder="ask anything, or type: go to services"></form>
+                <div class="kb-chips" data-chips><button type="button" class="kb-chip" data-cmd="services" data-click>services</button><button type="button" class="kb-chip" data-cmd="price" data-click>price</button><button type="button" class="kb-chip" data-cmd="ai employee" data-click>ai employee</button><button type="button" class="kb-chip" data-cmd="book a call" data-click>book a call</button><button type="button" class="kb-chip" data-cmd="help" data-click>help</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="kb-mini" data-deck data-float aria-hidden="true"></div>
+        </div>
+        <div class="kb-notch" aria-hidden="true"></div>
+      </div>
+      <div class="kb-base kb-lip" aria-hidden="true"></div>
+    </div><div class="kb-copy"><h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1><p class="lead">AI systems that run the repetitive half of your business.</p><div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener" data-click>Put AI to work for me</a><a class="kb-link" href="/ai-employee/" data-click>See the seven stages <span aria-hidden="true">&#8599;</span></a></div></div></div></div>
+  <div class="vfoot"><div><h4>Type</h4><p>Headline 88 px on two lines, line 20 px, button 52 px.</p></div><div><h4>App</h4><p>Laptop about 1320 px wide, 18 percent bigger than today, interior at 1.2x.</p></div><div><h4>What gives way</h4><p>Headline over the stage. The copy returns to the side column.</p></div></div>
+</section>
+<footer class="doc-end">
+  <hr class="rule">
+  <h2 class="sec">Pick one, or point</h2>
+  <p>01 is the recommendation: it is your pick with the reading sizes fixed, and it goes into index-v7 as one CSS block. 02 if the app should own the width. 03 if the laptop should be the biggest thing on the page. Say the number.</p>
+</footer>
+<script src="../assets/v7/sound.js" data-base="../assets/sounds/"></script>
+<script src="../assets/v7/keys.js"></script>
+<script src="../assets/v7/term.js"></script>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  var rail = document.querySelectorAll('.rail-nav a[data-r]');
+  var vs = [].slice.call(document.querySelectorAll('.variant'));
+  var vio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) rail.forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-r') === e.target.id); }); }); }, { rootMargin: '-40% 0px -55% 0px' });
+  vs.forEach(function(v){ vio.observe(v); });
+  addEventListener('keydown', function(e){
+    if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+    var n = parseInt(e.key, 10); if (n >= 1 && n <= 3) { var v = document.getElementById('v' + n); if (v) v.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' }); }
+  });
+  function t(){ var d = new Date(), s = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); document.querySelectorAll('[data-clock]').forEach(function(e){ e.textContent = s; }); }
+  t(); setInterval(t, 30000);
+})();
+</script>
+</body>
+</html>
