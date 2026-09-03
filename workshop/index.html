@@ -6,10 +6,13 @@
      (Owner, 2026-08-20) — .eyebrow is the plain replacement.
      2026-09-03: Batch 1 recap. Booking lives on the AVAS page; this page is the record of the
      Aug 22 to 23 run: room clip, curated photos, founders, sponsors (Owner decisions, 2026-09-02).
-     2026-09-03 hero v2: the clip IS the hero. Sticky 200svh stage, three.js halftone of the
-     footage (workshop/room-hero.js, three r167 from /assets/globe), pointer lens, scroll dissolve,
-     pause control per design-standards. Reference measured with refkit (Apple Events page, hero
-     93.9% x 86.9% of frame, centre 50,53; Active Theory refused headless Chromium). -->
+     2026-09-03 hero v3 (Owner pick from qa/workshop-hero-v3-proposals.html, variant 05):
+     card orbit. Symmetric centre axis, real Batch 1 frames floating at the margins, the clip
+     reduced to one inset. Replaces the v2 halftone stage, which set the headline inside a 12px
+     dot lattice: the field beat against the pixel grid and the type had no rest area. The v3
+     hero is plain DOM with no canvas, so it rides --cement/--navy and is theme aware instead of
+     pinning dark literals. Motion is one monotonic rise on scroll plus pointer parallax, with a
+     pause control per design-standards. workshop/room-hero.js and its three.js import are gone. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -185,55 +188,54 @@ section + section{border-top:1px solid var(--line)}
 .wk-days.three{grid-template-columns:repeat(3,1fr)}
 .wk-day p.wk-role{margin-top:14px;font-size:15px;line-height:1.55;color:var(--gray)}
 .wk-attended a.wk-setup-link{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm);padding-bottom:3px}
-/* ---------- room hero v2: the clip is the hero (2026-09-03) ----------
-   Sticky stage in a 200svh track. Constant-dark chrome in both themes (literal
-   colours on purpose, like the menu panel). Motion is scroll, pointer and the
-   footage only; nothing drifts. Reduced motion: poster, no loop, no autoplay. */
-.rh-track{height:200svh;padding:0;margin-top:calc(-1 * clamp(120px,13vh,168px))}
-.rh-track,section + .rh-track{border-top:0}
-.rh-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#121212;color:#E2E2E2}
-.rh-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
-.rh-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s ease}
-.rh-canvas.lit{opacity:1}
-.rh-stage.plain .rh-canvas{display:none}
-/* scrim (stolen from /services/ #atlas::after): plain fallback only, the halftone carries its own contrast */
-.rh-scrim{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s;background:radial-gradient(ellipse 44% 42% at 50% 46%,rgba(11,11,12,.9) 0%,rgba(11,11,12,.62) 54%,rgba(11,11,12,.24) 100%),linear-gradient(90deg,rgba(11,11,12,.56) 0%,rgba(11,11,12,.2) 24%,rgba(11,11,12,.2) 76%,rgba(11,11,12,.56) 100%),linear-gradient(180deg,rgba(11,11,12,.72),transparent 24%,transparent 72%,rgba(11,11,12,.82))}
-.rh-stage.plain .rh-scrim{opacity:1}
-/* a soft well under the copy so light dots never fight the headline (services scrim geometry) */
-.rh-well{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 46% 44% at 50% 53%,rgba(18,18,18,.78) 0%,rgba(18,18,18,.42) 55%,rgba(18,18,18,0) 100%)}
-.rh-copy{position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:6vh 6vw 0;transform:translateY(calc(var(--p,0) * -40vh));opacity:calc(1 - var(--p,0) * 1.6)}
-.rh-copy .eyebrow{color:#9E9E9E}
-.rh-copy h1{margin-top:16px;font-size:clamp(40px,5.4vw,74px);color:#E2E2E2}
-.rh-copy .lead{margin:26px auto 0;max-width:56ch;color:#B9B9B9;font-size:clamp(16px,1.25vw,17px)}
-.rh-cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font:700 9.5px 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:#9E9E9E;transition:opacity .4s}
-.rh-cue i{position:relative;display:block;width:1px;height:56px;background:rgba(226,226,226,.28);overflow:hidden}
-.rh-cue i::after{content:"";position:absolute;left:-2px;top:-6px;width:5px;height:5px;background:#E2E2E2;animation:rh-drop 1.6s cubic-bezier(.2,.7,.2,1) infinite}
-@keyframes rh-drop{from{transform:translateY(0)}to{transform:translateY(62px)}}
-.rh-cue.gone{opacity:0}
-.rh-pause{position:absolute;right:5vw;bottom:28px;width:39px;height:39px;border:1px solid rgba(226,226,226,.4);background:rgba(18,18,18,.5);color:#E2E2E2;display:inline-grid;place-items:center;cursor:pointer;padding:0;transition:background .25s,color .25s,border-color .25s}
-.rh-pause:hover,.rh-pause:focus-visible{background:#E2E2E2;color:#121212;border-color:#E2E2E2}
-.rh-pause svg{width:16px;height:16px}
-.rh-pause .ic-play{display:none}
-.rh-pause[aria-pressed="true"] .ic-pause{display:none}
-.rh-pause[aria-pressed="true"] .ic-play{display:block}
+/* ---------- room hero v3: card orbit (Owner pick, 2026-09-03) ----------
+   Symmetric centre axis on the page ground, real Batch 1 frames floating at the
+   margins, the clip down to one inset. Theme aware on purpose: no canvas here, so
+   the stage rides --cement/--navy rather than pinning literals the way the v2
+   halftone stage had to. Motion is one monotonic rise on scroll plus pointer
+   parallax; nothing drifts. Reduced motion: everything still, poster on the clip. */
+.oh-track{height:180svh;padding:0;margin-top:calc(-1 * clamp(120px,13vh,168px))}
+.oh-track,section + .oh-track{border-top:0}
+.oh-stage{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center;isolation:isolate;background:var(--cement)}
+.oh-orbit{position:absolute;inset:0;z-index:1;pointer-events:none}
+.oh-card{position:absolute;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--cement-deep);box-shadow:0 18px 44px rgba(18,18,18,.14);transform:translate3d(calc(var(--mx,0) * var(--d) * 1px),calc(var(--my,0) * var(--d) * 1px + var(--p,0) * var(--rise) * 1vh),0);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.oh-card img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03)}
+.oh-copy{position:relative;z-index:3;width:min(760px,86vw);text-align:center;transform:translateY(calc(var(--p,0) * -12vh))}
+.oh-copy h1{margin-top:16px;font-size:clamp(40px,5.4vw,74px)}
+.oh-copy .lead{margin:24px auto 0;max-width:56ch;font-size:clamp(16px,1.25vw,17px)}
+/* the clip keeps its place in the fold at about a tenth of the area, never under a word */
+.oh-inset{position:absolute;left:50%;bottom:clamp(24px,5vh,60px);transform:translateX(-50%);width:clamp(190px,17vw,250px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#121212;z-index:3;box-shadow:0 18px 44px rgba(18,18,18,.18)}
+.oh-inset video{width:100%;height:100%;object-fit:cover;filter:grayscale(1);display:block}
+.oh-cue{position:absolute;left:5vw;bottom:26px;display:flex;flex-direction:column;align-items:center;gap:10px;font:700 9.5px 'Space Mono',monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);transition:opacity .4s;z-index:3}
+.oh-cue i{position:relative;display:block;width:1px;height:52px;background:var(--line);overflow:hidden}
+.oh-cue i::after{content:"";position:absolute;left:-2px;top:-6px;width:5px;height:5px;background:var(--navy);animation:oh-drop 1.6s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes oh-drop{from{transform:translateY(0)}to{transform:translateY(58px)}}
+.oh-cue.gone{opacity:0}
+.oh-pause{position:absolute;right:5vw;bottom:26px;width:44px;height:44px;border:1px solid var(--navy);background:transparent;color:var(--navy);display:inline-grid;place-items:center;cursor:pointer;padding:0;z-index:4;transition:background .25s,color .25s}
+.oh-pause:hover,.oh-pause:focus-visible{background:var(--navy);color:var(--cement)}
+.oh-pause svg{width:16px;height:16px}
+.oh-pause .ic-play{display:none}
+.oh-pause[aria-pressed="true"] .ic-pause{display:none}
+.oh-pause[aria-pressed="true"] .ic-play{display:block}
 /* gallery: native scroll-driven settle per tile, no JS; .rv on the container stays the base */
 @supports (animation-timeline: view()){
   .wk-photo{animation:wk-in linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
   @keyframes wk-in{from{opacity:.25;transform:translateY(18px)}to{opacity:1;transform:none}}
 }
 @media (prefers-reduced-motion:reduce){
-  .rh-copy{transform:none!important;opacity:1!important}
-  .rh-cue i::after{animation:none}
-  .rh-canvas{display:none}
-  .rh-scrim{opacity:1}
+  .oh-copy{transform:none!important}
+  .oh-card{transform:none!important;transition:none}
+  .oh-cue i::after{animation:none}
   .wk-photo{animation:none!important}
 }
 @media (max-width:860px){
-  .rh-track{height:100svh}
-  .rh-stage{position:relative}
-  .rh-copy{transform:none;opacity:1;padding-top:8vh}
-  .rh-copy h1{font-size:clamp(34px,9vw,48px)}
-  .rh-pause{right:16px;bottom:18px}
+  .oh-track{height:100svh}
+  .oh-stage{position:relative}
+  .oh-orbit{display:none}
+  .oh-copy{transform:none;padding-top:6vh}
+  .oh-copy h1{font-size:clamp(34px,9vw,48px)}
+  .oh-pause{right:16px;bottom:18px}
+  .oh-cue{left:16px;bottom:18px}
   .wk-days,.wk-days.three{grid-template-columns:1fr}
   #wins .wk-gallery{grid-template-columns:1fr}
   .wk-pair{grid-template-columns:1fr;gap:40px}
@@ -281,19 +283,26 @@ section + section{border-top:1px solid var(--line)}
 </header>
 
 <main id="main">
-<section class="rh-track" id="room" aria-label="Inside the Batch 1 room">
-  <div class="rh-stage" id="rh-stage">
-    <video class="rh-video" id="rh-video" src="room.mp4" poster="room-poster.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
-    <canvas class="rh-canvas" id="rh-canvas" aria-hidden="true"></canvas>
-    <div class="rh-scrim" aria-hidden="true"></div>
-    <div class="rh-well" aria-hidden="true"></div>
-    <div class="rh-copy" id="rh-copy">
+<section class="oh-track" id="room" aria-label="Inside the Batch 1 room">
+  <div class="oh-stage" id="oh-stage">
+    <div class="oh-orbit" id="oh-orbit" aria-hidden="true">
+      <div class="oh-card" style="left:4vw;top:14vh;width:clamp(150px,15vw,220px);aspect-ratio:4/3;--d:14;--rise:-9"><img src="photos/13-huddle.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="oh-card" style="left:9vw;top:44vh;width:clamp(130px,12vw,180px);aspect-ratio:3/4;--d:22;--rise:-14"><img src="photos/16-building.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="oh-card" style="left:3vw;top:72vh;width:clamp(120px,11vw,165px);aspect-ratio:4/3;--d:9;--rise:-6"><img src="photos/34-jamz-walks-the-room.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="oh-card" style="right:4vw;top:16vh;width:clamp(150px,15vw,215px);aspect-ratio:4/3;--d:-16;--rise:-11"><img src="photos/29-applause.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="oh-card" style="right:9vw;top:44vh;width:clamp(130px,12vw,180px);aspect-ratio:3/4;--d:-24;--rise:-16"><img src="photos/23-five-paths.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="oh-card" style="right:3vw;top:73vh;width:clamp(120px,11vw,160px);aspect-ratio:4/3;--d:-10;--rise:-7"><img src="photos/36-certificates.webp" alt="" loading="lazy" decoding="async"></div>
+    </div>
+    <div class="oh-copy" id="oh-copy">
       <p class="eyebrow">Workshop &middot; Batch 1 &middot; Aug 22 to 23, 2026 &middot; Novel Hotel BGC</p>
       <h1>From operator to <em class="accent">orchestrator.</em> Shipped.</h1>
       <p class="lead">Two build days in BGC with Gwen Ayala, Faith Natividad and Jamz Jamorol. Day one every founder built an AI employee for their own business and put it live on the internet. Day two they gave it a UI system of their own and published again.</p>
     </div>
-    <div class="rh-cue" id="rh-cue" aria-hidden="true"><i></i><span>Scroll</span></div>
-    <button class="rh-pause" id="rh-pause" type="button" aria-pressed="false" aria-label="Pause the room clip"><svg class="ic-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg><svg class="ic-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></button>
+    <div class="oh-inset">
+      <video id="oh-video" src="room.mp4" poster="room-poster.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    </div>
+    <div class="oh-cue" id="oh-cue" aria-hidden="true"><i></i><span>Scroll</span></div>
+    <button class="oh-pause" id="oh-pause" type="button" aria-pressed="false" aria-label="Pause the room clip"><svg class="ic-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg><svg class="ic-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></button>
   </div>
 </section>
 
@@ -525,42 +534,66 @@ section + section{border-top:1px solid var(--line)}
 })();
 </script>
 <script>
-/* room hero, plain layer: pause control (design-standards: a looping hero needs one),
-   fallback flags. The WebGL layer boots from the module script below. */
+/* room hero v3, card orbit. Three jobs: the scroll rise, the pointer parallax and
+   the pause control (design-standards: a looping clip needs one). No canvas, no
+   library, no module import. Reduced motion stops all three and leaves the poster. */
 (function(){
-  var stage=document.getElementById('rh-stage'),video=document.getElementById('rh-video'),
-      btn=document.getElementById('rh-pause'),cue=document.getElementById('rh-cue');
-  if(!stage||!video||!btn)return;
+  var track=document.getElementById('room'),stage=document.getElementById('oh-stage'),
+      orbit=document.getElementById('oh-orbit'),video=document.getElementById('oh-video'),
+      btn=document.getElementById('oh-pause'),cue=document.getElementById('oh-cue');
+  if(!track||!stage)return;
   var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var small=matchMedia('(max-width:860px)').matches;
-  function pressed(p){btn.setAttribute('aria-pressed',p?'true':'false');btn.setAttribute('aria-label',p?'Play the room clip':'Pause the room clip')}
-  if(reduced){stage.classList.add('plain');pressed(true);}
-  else if(small||!window.WebGL2RenderingContext){stage.classList.add('plain');video.play().catch(function(){});}
-  btn.addEventListener('click',function(){
-    if(video.paused){video.play().catch(function(){});pressed(false)}else{video.pause();pressed(true)}
-  });
-  video.addEventListener('pause',function(){pressed(true)});
-  video.addEventListener('play',function(){pressed(false)});
-  if(cue){addEventListener('scroll',function once(){cue.classList.add('gone');removeEventListener('scroll',once)},{passive:true});}
-})();
-</script>
-<script type="module">
-/* room hero, WebGL layer: skipped on small screens, under reduced motion, or without
-   WebGL2 (the plain layer above already handles those). Any failure removes the
-   canvas and leaves the plain mono clip: never a black hole. */
-(async function(){
-  var stage=document.getElementById('rh-stage'),video=document.getElementById('rh-video'),
-      canvas=document.getElementById('rh-canvas'),track=document.getElementById('room'),
-      copy=document.getElementById('rh-copy'),cue=document.getElementById('rh-cue');
-  if(!stage||!canvas||stage.classList.contains('plain'))return;
-  function plain(){ if(canvas.parentNode)canvas.remove(); stage.classList.add('plain'); video.play().catch(function(){}); }
-  var cell=12; /* Owner pick, gate 2, 2026-09-03 */
-  try{
-    var mod=await import('/workshop/room-hero.js');
-    var h=mod.initRoomHero({stage:stage,video:video,canvas:canvas,track:track,copy:copy,cue:cue,cell:cell,onFail:plain});
-    if(!h){plain();return;}
-    window.__roomHero=h;
-  }catch(e){ plain(); try{console.warn('[room-hero] skipped:',e.message)}catch(x){} }
+  var held=false;
+
+  function pressed(p){
+    if(!btn)return;
+    btn.setAttribute('aria-pressed',p?'true':'false');
+    btn.setAttribute('aria-label',p?'Play the room clip':'Pause the room clip');
+  }
+  if(video&&btn){
+    btn.addEventListener('click',function(){
+      if(video.paused){held=false;video.play().catch(function(){})}else{held=true;video.pause()}
+    });
+    video.addEventListener('pause',function(){pressed(true)});
+    video.addEventListener('play',function(){pressed(false)});
+  }
+
+  if(reduced){ if(video){video.pause();pressed(true)} return; }
+
+  /* the clip runs only while the fold is on screen */
+  if(video&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting&&!held){video.play().catch(function(){})}else{video.pause()}
+      });
+    },{threshold:0.15}).observe(video);
+  }
+
+  /* one monotonic rise, written as --p and read by the copy and every card */
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var r=track.getBoundingClientRect(),total=track.offsetHeight-innerHeight;
+    var p=total>0?Math.min(1,Math.max(0,-r.top/total)):(r.top<=0?1:0);
+    stage.style.setProperty('--p',p.toFixed(4));
+    if(cue)cue.classList.toggle('gone',p>0.02);
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(frame)} }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll,{passive:true});
+  frame();
+
+  /* pointer parallax, fine pointers only: the cards move at different depths */
+  if(orbit&&matchMedia('(pointer: fine)').matches){
+    stage.addEventListener('pointermove',function(e){
+      var r=stage.getBoundingClientRect();
+      orbit.style.setProperty('--mx',(((e.clientX-r.left)/r.width)-0.5).toFixed(3));
+      orbit.style.setProperty('--my',(((e.clientY-r.top)/r.height)-0.5).toFixed(3));
+    },{passive:true});
+    stage.addEventListener('pointerleave',function(){
+      orbit.style.setProperty('--mx','0');orbit.style.setProperty('--my','0');
+    });
+  }
 })();
 </script>
 <script>
