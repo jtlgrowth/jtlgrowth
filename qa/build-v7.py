@@ -75,13 +75,13 @@ def hero(static):
     click = '' if static else ' data-click'
     return f'''<div class="grid-lines"></div>
     <div class="hero-glow"></div>
-    <div class="kb-hero kb-hero-03">
+    <div class="kb-hero kb-hero-r5">
+      {laptop(static)}
       <div class="kb-copy rv d1">
-        <h1>Growth, <em class="accent">engineered.</em></h1>
+        <h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1>
         <p class="lead">AI systems that run the repetitive half of your business.</p>
         <div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener"{click}>Put AI to work for me</a><a class="kb-link" href="/ai-employee/"{click}>See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
       </div>
-      {laptop(static)}
     </div>'''
 
 HERO = f'<section class="panel in" id="p1" aria-label="JTL Growth, AI and automation agency">\n    {hero(False)}\n  </section>'

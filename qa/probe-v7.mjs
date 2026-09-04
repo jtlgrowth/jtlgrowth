@@ -110,7 +110,7 @@ try {
   ok(await page.locator('#p1 .kb-eyebrow, #p1clone .kb-eyebrow').count() === 0, 'hero: no eyebrow');
   const ctaText = await page.locator('#p1 .kb-cta').innerText();
   ok(!/gwen/i.test(ctaText) && ctaText.trim().length > 4, `hero: CTA reads "${ctaText.trim()}"`);
-  const fit = async (pg, w, h) => { const g = await pg.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapTop: Math.round(l.top), lapBottom: Math.round(l.bottom), lapLeft: Math.round(l.left), lapRight: Math.round(l.right), copyBottom: Math.round(c.bottom), copyTop: Math.round(c.top) }; }); ok(g.lapBottom <= h - 60 && g.lapTop >= 80 && g.copyBottom < g.lapTop && g.copyTop >= 60 && g.lapLeft >= 0 && g.lapRight <= w, `fit ${w}x${h}: copy ${g.copyTop} to ${g.copyBottom}, laptop ${g.lapTop} to ${g.lapBottom} (x ${g.lapLeft} to ${g.lapRight}), dots at ${h - 60}`); };
+  const fit = async (pg, w, h) => { const g = await pg.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapTop: Math.round(l.top), lapBottom: Math.round(l.bottom), lapLeft: Math.round(l.left), lapRight: Math.round(l.right), copyBottom: Math.round(c.bottom), copyTop: Math.round(c.top) }; }); const c2 = await pg.evaluate(() => { const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return [Math.round(c.left), Math.round(c.right)]; }); ok(g.lapBottom <= h - 60 && g.lapTop >= 80 && c2[0] >= g.lapRight - 2 && c2[1] <= w && g.lapLeft >= -24 && g.lapRight <= w, `fit ${w}x${h}: laptop ${g.lapTop} to ${g.lapBottom} (x ${g.lapLeft} to ${g.lapRight}), copy beside (x ${c2[0]} to ${c2[1]}), dots at ${h - 60}`); };
   await fit(page, 1440, 900);
   await page.locator('#p1').screenshot({ path: path.join(SHOTS, 'p1-hero.png') });
 
@@ -203,7 +203,9 @@ try {
     await sleep(900);
     await fit(wp, w, h);
     const h1r = await wp.evaluate(() => document.querySelector('#p1 .kb-copy h1').getBoundingClientRect());
-    ok(h1r.right <= w && h1r.height <= 80, `${w}: headline on one line inside the viewport (right ${Math.round(h1r.right)}, ${Math.round(h1r.height)}px tall)`);
+    ok(h1r.right <= w && h1r.height <= 190 && h1r.height >= 120, `${w}: headline on two lines inside the viewport (right ${Math.round(h1r.right)}, ${Math.round(h1r.height)}px tall)`);
+    const zoomed = await wp.evaluate(() => Math.round(document.querySelector('#p1 .kb-chip').getBoundingClientRect().height * 10) / 10);
+    ok(zoomed >= 30, `${w}: app interior at 1.2x (chip ${zoomed}px tall, 26 at 1x)`);
     const ctaLines = await wp.evaluate(() => Math.round(document.querySelector('#p1 .kb-cta').getBoundingClientRect().height));
     ok(ctaLines <= 56, `${w}: CTA on one line (${ctaLines}px tall)`);
     await wp.screenshot({ path: path.join(SHOTS, `hero-${w}.png`) });

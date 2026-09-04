@@ -294,3 +294,26 @@
 .kb-mini .kb-deck-mark svg{width:100%}
 @media (max-width:1100px){#p1 .kb-hero-03 .kb-laptop,#p1clone .kb-hero-03 .kb-laptop{width:92vw}}
 @media (max-width:860px), (prefers-reduced-motion: reduce){.kb-mini{display:none}#p1 .kb-hero-03,#p1clone .kb-hero-03{min-height:0;padding:24px 0 40px}#p1 .kb-hero-03 .kb-ctas,#p1clone .kb-hero-03 .kb-ctas{flex-direction:column;gap:14px}}
+
+/* round 5 (Owner pick from the scale study, sample 03): big app left, copy beside, everything bigger.
+   Laptop 66% wide, height-capped so the base clears the dot row; copy centred in the right column;
+   the app interior renders at 1.2x on desktop (zoom: Chrome, Safari, Edge, Firefox 126+; older Firefox shows 1x). */
+#p1 .kb-hero-r5,#p1clone .kb-hero-r5{display:grid;grid-template-columns:66% 34%;align-items:center;gap:0;width:100%;max-width:none;margin:0;padding:70px 0 0;min-height:0}
+#p1 .kb-hero-r5 .kb-laptop,#p1clone .kb-hero-r5 .kb-laptop{width:100%;max-width:calc((100vh - 150px) * 1.5);margin:0 0 0 clamp(-22px,-1.4vw,0px);justify-self:start}
+#p1 .kb-hero-r5 .kb-copy,#p1clone .kb-hero-r5 .kb-copy{justify-self:center;text-align:center;max-width:min(100%,600px);padding:0 3vw 0 1vw;display:block}
+#p1 .kb-hero-r5 h1,#p1clone .kb-hero-r5 h1{font-size:clamp(44px,4.4vw,88px);line-height:.98}
+#p1 .kb-hero-r5 h1 .l,#p1clone .kb-hero-r5 h1 .l{display:block}
+#p1 .kb-hero-r5 .lead,#p1clone .kb-hero-r5 .lead{font-size:clamp(18px,1.2vw,22px);max-width:34ch;margin:12px auto 0}
+#p1 .kb-hero-r5 .kb-ctas,#p1clone .kb-hero-r5 .kb-ctas{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:24px}
+#p1 .kb-hero-r5 .kb-cta,#p1clone .kb-hero-r5 .kb-cta{min-height:52px;padding:0 28px;font-size:12.5px}
+#p1 .kb-hero-r5 .kb-link,#p1clone .kb-hero-r5 .kb-link{font-size:12.5px}
+@media (min-width:1101px){#p1 .kb-cockpit,#p1 .kb-menubar,#p1clone .kb-cockpit,#p1clone .kb-menubar{zoom:1.2}}
+@media (max-width:1100px){
+  #p1 .kb-hero-r5,#p1clone .kb-hero-r5{grid-template-columns:1fr;width:min(1380px,90vw);margin:0 auto}
+  #p1 .kb-hero-r5 .kb-laptop,#p1clone .kb-hero-r5 .kb-laptop{max-width:100%;margin:0;justify-self:stretch}
+  #p1 .kb-hero-r5 .kb-copy,#p1clone .kb-hero-r5 .kb-copy{margin-top:28px;padding:0;max-width:100%}
+}
+@media (max-width:860px){
+  #p1 .kb-hero-r5,#p1clone .kb-hero-r5{display:block;width:100%;padding:24px 0 40px}
+  #p1 .kb-hero-r5 .kb-laptop,#p1clone .kb-hero-r5 .kb-laptop{margin:0 0 28px}
+}
