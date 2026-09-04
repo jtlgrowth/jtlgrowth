@@ -146,7 +146,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   /* v5 ladder ramp — grayscale, no hue (draft's blue ramp discarded) */
   --t1:#C9C9C9; --t2:#969696; --t3:#616161; --t4:#181818;
   /* v5 panel grounds — the JS bg morph reads these (theme-aware) */
-  --bg-hero:#E2E2E2; --bg-about:#DBDBDB; --bg-contact:#E2E2E2;
+  --bg-hero:#E2E2E2; --bg-about:#DBDBDB; --bg-globe:#101010; --bg-contact:#E2E2E2;
 }
 /* v5 dark register: same mono system, inverted. Dark-panel chrome (.on-dark,
    menu panel, phone, boot, gift box) is constant-dark and stays literal. */
@@ -164,7 +164,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
   --gray-light:#5A5A5A;
   --line:rgba(226,226,226,.15);
   --t1:#2E2E2E; --t2:#555555; --t3:#8F8F8F; --t4:#E2E2E2;
-  --bg-hero:#121212; --bg-about:#171717; --bg-contact:#121212;
+  --bg-hero:#121212; --bg-about:#171717; --bg-globe:#101010; --bg-contact:#121212;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--cement)}
@@ -347,6 +347,7 @@ header.on-dark .nav-row a{color:#E2E2E2}
   #greetpill{display:none!important} /* !important: the island rule is declared later and would win otherwise */
   #p1 .hero-glow,#p1clone .hero-glow{animation:none}
   #p1,#about,#p5{background:var(--cement)}
+  #globe{background:#101010}
   #viewport{position:static;overflow:visible}
   #track{display:block;width:100%;transform:none!important}
   .panel-clone{display:none}
@@ -439,6 +440,13 @@ header.on-dark .nav-row a{color:#E2E2E2}
 :focus-visible{outline:2px solid #8A8A8A;outline-offset:3px;border-radius:0}
 header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/v7/home.css">
+<style id="v7-glue">
+/* v7 glue: panels stay transparent on desktop so the viewport morph shows through; static mode paints them */
+#globe{background:transparent}
+@media (max-width:860px), (prefers-reduced-motion: reduce){#globe{background:#101010}}
+</style>
 </head>
 <body>
 <div id="boot" aria-hidden="true">
@@ -522,7 +530,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
         <div class="mgroup"><div class="mlabel">Sections</div>
           <a href="#" data-go="0">Hero <span class="mk">01</span></a>
           <a href="#" data-go="1">About <span class="mk">02</span></a>
-          <a href="#" data-go="2">Contact <span class="mk">03</span></a>
+          <a href="#" data-go="2">Globe <span class="mk">03</span></a>
+          <a href="#" data-go="3">Contact <span class="mk">04</span></a>
         </div>
         <div class="mgroup"><div class="mlabel">Pages</div>
           <a href="/services/">Services <span class="mk">&#8599;</span></a>
@@ -553,11 +562,43 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   <section class="panel in" id="p1" aria-label="JTL Growth, AI and automation agency">
     <div class="grid-lines"></div>
     <div class="hero-glow"></div>
-    <div class="inner hero-center">
-      <h1>
-        <span class="rv d1">Growth, <em class="accent">engineered.</em></span>
-      </h1>
-      <p class="lead rv d3" style="margin-top:32px">We design and install AI systems that run the repetitive half of your business, so you scale output without adding headcount.</p>
+    <div class="kb-hero kb-hero-r5" data-arrow>
+      <div class="kb-laptop rv d2" data-laptop>
+      <div class="kb-lid">
+        <div class="kb-screen">
+          <div class="kb-menubar"><span class="kb-mb-app">Growth</span><span class="kb-mb-item">File</span><span class="kb-mb-item">Edit</span><span class="kb-mb-item">View</span><span class="kb-mb-spacer"></span><button type="button" class="kb-mute" data-mute aria-pressed="true" aria-label="Mute key sounds"><svg class="kb-ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg><svg class="kb-ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg></button><span class="kb-mb-clock" data-clock>14:41</span></div>
+          <div class="kb-cockpit">
+            <aside class="kb-side" aria-hidden="true">
+              <div class="kb-side-brand">Growth</div>
+              <ul class="kb-side-nav"><li>Tasks</li><li class="on">Venice HQ <b>5</b></li><li>Automations</li><li>Agent Dashboard <i class="dot"></i></li><li>Agents <b>1</b></li><li>Growth Mobile</li></ul>
+              <div class="kb-side-label">Usage</div>
+              <div class="kb-usage"><span>5h</span><span class="bar"><i style="--p:26%"></i></span></div>
+              <div class="kb-usage"><span>wk</span><span class="bar"><i style="--p:51%"></i></span></div>
+              <div class="kb-side-label">Employees</div>
+              <ul class="kb-side-emp"><li><i class="dot"></i>Lene</li><li><i class="dot"></i>Bingbong</li><li><i class="dot"></i>Venice</li><li><i class="dot"></i>Janitor</li><li><i class="dot"></i>Dex</li><li><i class="dot"></i>Belze</li><li><i class="dot"></i>Bruno</li><li><i class="dot"></i>Vann</li><li><i class="dot"></i>Rain</li><li><i class="dot"></i>Wren</li><li><i class="dot"></i>Amara</li><li><i class="dot"></i>Cael</li><li><i class="dot"></i>Lauren</li><li><i class="dot"></i>Aurel</li><li><i class="dot"></i>Lysander</li></ul>
+            </aside>
+            <div class="kb-main">
+              <div class="kb-tabs"><span class="kb-tab on"><i class="dot"></i>Venice hq &middot; session</span><span class="kb-tab-plus">+</span></div>
+              <div class="kb-term" data-term>
+                <div class="kb-log" data-log aria-live="polite"></div>
+                <form class="kb-prompt" data-form autocomplete="off"><span class="kb-prompt-mark" aria-hidden="true">&rsaquo;</span><input class="kb-input" data-input type="text" name="q" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ask the AI employee" placeholder="ask anything, or type: go to services"></form>
+                <div class="kb-chips" data-chips><button type="button" class="kb-chip" data-cmd="services" data-click>services</button><button type="button" class="kb-chip" data-cmd="price" data-click>price</button><button type="button" class="kb-chip" data-cmd="ai employee" data-click>ai employee</button><button type="button" class="kb-chip" data-cmd="book a call" data-click>book a call</button><button type="button" class="kb-chip" data-cmd="help" data-click>help</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="kb-mini" data-deck data-float aria-hidden="true"></div>
+        </div>
+        <div class="kb-notch" aria-hidden="true"></div>
+      </div>
+      <div class="kb-base kb-lip" aria-hidden="true"></div>
+    </div>
+      <div class="kb-copy rv d1">
+        <h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1>
+        <p class="lead">AI systems that run the repetitive half of your business.</p>
+        <div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener" data-click>Put AI to work for me</a><a class="kb-link" href="/ai-employee/" data-click>See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
+        <p class="kb-hint" data-hint>Or ask Venice. It answers what we build, what it costs, how fast, and who runs it.</p>
+      </div>
+      <svg class="kb-arrow" aria-hidden="true"><defs><filter id="kb-rough-hero" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.032" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.8" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb-rough2-hero" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g class="kb-arrow-ink" filter="url(#kb-rough-hero)"><path class="kb-arrow-path" d=""/><path class="kb-arrow-head" d=""/></g><g class="kb-arrow-ink kb-arrow-ink2" filter="url(#kb-rough2-hero)"><path class="kb-arrow-path ghost" d=""/></g><text class="kb-arrow-label" x="0" y="0">type here</text></svg>
     </div>
   </section>
 
@@ -616,6 +657,18 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   </section>
 
   <!-- 3 · CONTACT (v6): CTA + founders folded in + hub chips out to the landing pages -->
+  <section class="panel" id="globe" aria-label="Where it runs">
+    <div class="inner kb-globe-inner">
+      <div class="kb-globe-copy">
+        <p class="kb-eyebrow rv d1">Panel three &middot; where it runs</p>
+        <h2 class="rv d2">Systems running <em class="accent">around the world.</em></h2>
+        <p class="lead rv d3">Every ping is a system doing its job. Cities on record only. Type in the laptop and your own city lights up. Drag the globe to look around.</p>
+      </div>
+      <div class="kb-globe-stage rv d2">
+        <div class="jp-globe" data-globe data-dark="1" data-counter="1"></div>
+      </div>
+    </div>
+  </section>
   <section class="panel" id="p5" aria-label="Contact and booking">
     <div class="inner">
       <div class="cta-split rv d1">
@@ -661,14 +714,46 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
        final CTA wraps seamlessly back into the hero. Excluded from dots/counter/
        reveal wiring via .panel-clone; hidden entirely on mobile (vertical mode
        has no loop). See #track wrap logic in the script below. -->
-  <section class="panel in panel-clone" id="p1clone" aria-hidden="true">
+  <section class="panel in panel-clone" id="p1clone" aria-hidden="true" data-static>
     <div class="grid-lines"></div>
     <div class="hero-glow"></div>
-    <div class="inner hero-center">
-      <h1>
-        <span class="rv d1">Growth, <em class="accent">engineered.</em></span>
-      </h1>
-      <p class="lead rv d3" style="margin-top:32px">We design and install AI systems that run the repetitive half of your business, so you scale output without adding headcount.</p>
+    <div class="kb-hero kb-hero-r5" data-arrow>
+      <div class="kb-laptop rv d2" data-laptop>
+      <div class="kb-lid">
+        <div class="kb-screen">
+          <div class="kb-menubar"><span class="kb-mb-app">Growth</span><span class="kb-mb-item">File</span><span class="kb-mb-item">Edit</span><span class="kb-mb-item">View</span><span class="kb-mb-spacer"></span><span class="kb-mute" aria-hidden="true"><svg class="kb-ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg><svg class="kb-ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg></span><span class="kb-mb-clock" data-clock>14:41</span></div>
+          <div class="kb-cockpit">
+            <aside class="kb-side" aria-hidden="true">
+              <div class="kb-side-brand">Growth</div>
+              <ul class="kb-side-nav"><li>Tasks</li><li class="on">Venice HQ <b>5</b></li><li>Automations</li><li>Agent Dashboard <i class="dot"></i></li><li>Agents <b>1</b></li><li>Growth Mobile</li></ul>
+              <div class="kb-side-label">Usage</div>
+              <div class="kb-usage"><span>5h</span><span class="bar"><i style="--p:26%"></i></span></div>
+              <div class="kb-usage"><span>wk</span><span class="bar"><i style="--p:51%"></i></span></div>
+              <div class="kb-side-label">Employees</div>
+              <ul class="kb-side-emp"><li><i class="dot"></i>Lene</li><li><i class="dot"></i>Bingbong</li><li><i class="dot"></i>Venice</li><li><i class="dot"></i>Janitor</li><li><i class="dot"></i>Dex</li><li><i class="dot"></i>Belze</li><li><i class="dot"></i>Bruno</li><li><i class="dot"></i>Vann</li><li><i class="dot"></i>Rain</li><li><i class="dot"></i>Wren</li><li><i class="dot"></i>Amara</li><li><i class="dot"></i>Cael</li><li><i class="dot"></i>Lauren</li><li><i class="dot"></i>Aurel</li><li><i class="dot"></i>Lysander</li></ul>
+            </aside>
+            <div class="kb-main">
+              <div class="kb-tabs"><span class="kb-tab on"><i class="dot"></i>Venice hq &middot; session</span><span class="kb-tab-plus">+</span></div>
+              <div class="kb-term">
+                <div class="kb-log" data-log aria-live="polite"></div>
+                <div class="kb-prompt"><span class="kb-prompt-mark" aria-hidden="true">&rsaquo;</span><span class="kb-input kb-input-static"></span></div>
+                <div class="kb-chips" data-chips><button type="button" class="kb-chip" data-cmd="services">services</button><button type="button" class="kb-chip" data-cmd="price">price</button><button type="button" class="kb-chip" data-cmd="ai employee">ai employee</button><button type="button" class="kb-chip" data-cmd="book a call">book a call</button><button type="button" class="kb-chip" data-cmd="help">help</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="kb-mini" data-deck data-float aria-hidden="true"></div>
+        </div>
+        <div class="kb-notch" aria-hidden="true"></div>
+      </div>
+      <div class="kb-base kb-lip" aria-hidden="true"></div>
+    </div>
+      <div class="kb-copy rv d1">
+        <h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1>
+        <p class="lead">AI systems that run the repetitive half of your business.</p>
+        <div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Put AI to work for me</a><a class="kb-link" href="/ai-employee/">See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
+        <p class="kb-hint" data-hint>Or ask Venice. It answers what we build, what it costs, how fast, and who runs it.</p>
+      </div>
+      <svg class="kb-arrow" aria-hidden="true"><defs><filter id="kb-rough-clone" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.032" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.8" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb-rough2-clone" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g class="kb-arrow-ink" filter="url(#kb-rough-clone)"><path class="kb-arrow-path" d=""/><path class="kb-arrow-head" d=""/></g><g class="kb-arrow-ink kb-arrow-ink2" filter="url(#kb-rough2-clone)"><path class="kb-arrow-path ghost" d=""/></g><text class="kb-arrow-label" x="0" y="0">type here</text></svg>
     </div>
   </section>
 
@@ -688,8 +773,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   const hint=document.getElementById('hint');
   const hdr=document.getElementById('hdr');
   const N=panels.length;
-  const darkPanels=[];  // v6: the dark proof panel moved to /work/; home is light in both registers
-  const LABELS=['Hero','About','Contact'];
+  const darkPanels=[2];  // v7: the globe panel is the one dark stop on the home
+  const LABELS=['Hero','About','Globe','Contact'];
   let target=0,current=0,idx=0,raf=null,moved=false;
   // static mode = small screens OR prefers-reduced-motion; mirrors the CSS media list
   const mobile=()=>matchMedia('(max-width:860px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -706,7 +791,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   // virtual scroll map: transit segments slide the track, HOLD segments pin the
   // panel while extra scrolling scrubs its inner effect (words, phone feeds)
-  const HOLD={2:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
+  const HOLD={3:0.7}; // panel idx -> extra scroll depth in viewport-widths (word-reveal panels only)
   // LOOP: extend the transit map one extra segment past the last real panel (i=N)
   // to arrive at the clone of panel 0 appended after it in the DOM. Forward-only:
   // scrolling past the clone wraps back to real position 0 (see loop()); scrolling
@@ -727,6 +812,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   }
   function maxX(){return vlen*innerWidth}
   function goTo(i){i=Math.max(0,Math.min(N,i));target=arriveV[i]*innerWidth;kick()} // N (not N-1): lets ArrowRight/PageDown from the last panel reach the loop clone; dot buttons never pass i>N-1
+  window.__goTo=goTo; // v7: the laptop terminal slides to panels
   document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();if(mobile()){panels[+el.dataset.go].scrollIntoView({behavior:'smooth'})}else{goTo(+el.dataset.go)}}));
 
   function setUI(i){
@@ -746,7 +832,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   const viewport=document.getElementById('viewport');
   // v5: stops read from CSS vars so the dark register repaints them; last stop
   // is the loop-wrap stop (clone == panel 0)
-  const STOP_VARS=['--bg-hero','--bg-about','--bg-contact','--bg-hero'];
+  const STOP_VARS=['--bg-hero','--bg-about','--bg-globe','--bg-contact','--bg-hero'];
   let STOPS=[];
   function hex2rgb(h){h=h.trim().replace('#','');
     if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
@@ -836,6 +922,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   // wheel → horizontal
   addEventListener('wheel',e=>{
+    if(e.target&&e.target.closest&&e.target.closest('.kb-term'))return; // v7: the terminal log scrolls itself
     if(mobile())return;
     e.preventDefault();
     const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;
@@ -846,6 +933,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   // keys
   addEventListener('keydown',e=>{
+    if(document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.kb-term'))return; // v7: typing never slides the page
     if(mobile())return;
     if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')goTo(idx+1);
     if(e.key==='ArrowLeft'||e.key==='PageUp')goTo(idx-1);
@@ -1163,5 +1251,11 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   pal.addEventListener('click',function(e){if(e.target===pal)close()});
 })();
 </script>
+<script src="assets/v7/sound.js"></script>
+<script src="assets/v7/keys.js"></script>
+<script src="assets/v7/term.js"></script>
+<script src="assets/v7/globe.js"></script>
+<script src="assets/v7/hint.js"></script>
+<script>(function(){function t(){var d=new Date(),s=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');document.querySelectorAll('[data-clock]').forEach(function(e){e.textContent=s});}t();setInterval(t,30000);})();</script>
 </body>
 </html>

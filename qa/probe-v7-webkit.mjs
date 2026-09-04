@@ -1,10 +1,11 @@
-// WebKit (Safari engine) phone check for index-v7.html: what an iPhone runs. Chromium is qa/probe-v7.mjs.
+// WebKit (Safari engine) phone check for the v7 home (index.html): what an iPhone runs. Chromium is qa/probe-v7.mjs.
 // node qa/probe-v7-webkit.mjs   (needs: npx playwright install webkit)
 import { webkit } from 'playwright';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const URL_ = 'http://127.0.0.1:8119/index-v7.html';
+const bi = process.argv.indexOf('--base');
+const URL_ = (bi > -1 ? process.argv[bi + 1].replace(/\/$/, '') : 'http://127.0.0.1:8119') + '/index.html';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let server = null;
 try { const r = await fetch(URL_); if (!r.ok) throw 0; } catch { server = spawn('python3', ['-m', 'http.server', '8119', '--bind', '127.0.0.1'], { cwd: ROOT, stdio: 'ignore' }); await sleep(700); }

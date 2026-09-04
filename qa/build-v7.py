@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Assemble index-v7.html from the live index.html: new laptop hero (and its loop
+"""HISTORY. v7 was promoted into index.html on 2026-09-04 by qa/promote-v7.py; re-running this builder
+against the promoted index.html fails its first gate on purpose. Kept as the record of how v7 was assembled.
+
+Assemble index-v7.html from the live index.html: new laptop hero (and its loop
 clone), two new panels (globe dark, services light), engine constants, input
 guards, v7 assets. Every step has a count gate. Exit 1 on any miss."""
 import pathlib, re, sys

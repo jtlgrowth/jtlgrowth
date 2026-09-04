@@ -279,6 +279,8 @@ body>header,main,footer{position:relative;z-index:1}
 @media (max-width:900px){.ladder-wrap,.tier-row{grid-template-columns:1fr}}
 
 </style>
+<link rel="stylesheet" href="/assets/v7/home.css">
+<style id="v7-glue">#services .kb-cards-inner{width:min(1240px,90vw);margin:0 auto;max-height:none;overflow:visible;padding:clamp(56px,8vw,110px) 0}#services .kb-eyebrow{margin-bottom:14px}#services h2{margin:0 0 12px}#services .lead{margin:0 0 28px}</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -344,55 +346,12 @@ body>header,main,footer{position:relative;z-index:1}
     </div>
   </section>
 
-  <section id="ladder">
-    <div class="wrap ladder-wrap">
-      <div>
-        <svg class="growth-ladder rv d2" viewBox="-130 110 720 370" role="img"
-          aria-label="The JTL growth ladder: four stacked tiers under a locked self-driving summit">
-          <g class="tier">
-            <path d="M 230.0,462.0 L -118.0,330.0 L -62.9,296.0 L 230.0,407.1 Z" fill="var(--t1)" style="filter:brightness(.96)"/>
-            <path d="M 230.0,462.0 L 578.0,330.0 L 522.9,296.0 L 230.0,407.1 Z" fill="var(--t1)" style="filter:brightness(.87)"/>
-            <path d="M 230.0,407.1 L 522.9,296.0 L 230.0,184.9 L -62.9,296.0 Z" fill="var(--t1)" style="filter:brightness(1.05)"/>
-          </g>
-          <g class="tier">
-            <path d="M 230.0,394.7 L -51.3,288.0 L 3.8,256.0 L 230.0,341.8 Z" fill="var(--t2)" style="filter:brightness(.96)"/>
-            <path d="M 230.0,394.7 L 511.3,288.0 L 456.2,256.0 L 230.0,341.8 Z" fill="var(--t2)" style="filter:brightness(.87)"/>
-            <path d="M 230.0,341.8 L 456.2,256.0 L 230.0,170.2 L 3.8,256.0 Z" fill="var(--t2)" style="filter:brightness(1.05)"/>
-          </g>
-          <g class="tier">
-            <path d="M 230.0,329.4 L 15.4,248.0 L 67.6,218.0 L 230.0,279.6 Z" fill="var(--t3)" style="filter:brightness(.96)"/>
-            <path d="M 230.0,329.4 L 444.6,248.0 L 392.4,218.0 L 230.0,279.6 Z" fill="var(--t3)" style="filter:brightness(.87)"/>
-            <path d="M 230.0,279.6 L 392.4,218.0 L 230.0,156.4 L 67.6,218.0 Z" fill="var(--t3)" style="filter:brightness(1.05)"/>
-          </g>
-          <g class="tier">
-            <path d="M 230.0,267.2 L 79.2,210.0 L 125.6,184.0 L 230.0,223.6 Z" fill="var(--t4)" style="filter:brightness(.96)"/>
-            <path d="M 230.0,267.2 L 380.8,210.0 L 334.4,184.0 L 230.0,223.6 Z" fill="var(--t4)" style="filter:brightness(.84)"/>
-            <path d="M 230.0,223.6 L 334.4,184.0 L 230.0,144.4 L 125.6,184.0 Z" fill="var(--t4)" style="filter:brightness(1.07)"/>
-          </g>
-          <g class="cap">
-            <g fill="var(--cement)" fill-opacity=".5" stroke="var(--t3)" stroke-width="1.4" stroke-dasharray="5 4">
-              <path d="M 230.0,209.2 L 137.2,174.0 L 230.0,120 Z"/>
-              <path d="M 230.0,209.2 L 322.8,174.0 L 230.0,120 Z"/>
-            </g>
-            <g transform="translate(230,172)">
-              <rect x="-9" y="-4" width="18" height="14" rx="2.5" fill="var(--navy)"/>
-              <path d="M -5.5 -4 v-4 a5.5 5.5 0 0 1 11 0 v4" fill="none" stroke="var(--navy)" stroke-width="2.4"/>
-            </g>
-          </g>
-        </svg>
-        <div class="ladder-key rv d4">
-          <span><span class="sw" style="background:var(--t4)"></span>OPS PORTALS</span>
-          <span><span class="sw" style="background:var(--t3)"></span>AI EMPLOYEES</span>
-          <span><span class="sw" style="background:var(--t2)"></span>AUTOMATIONS</span>
-          <span><span class="sw" style="background:var(--t1)"></span>SITE &amp; FUNNEL</span>
-        </div>
-      </div>
-      <div>
-        <p class="eyebrow rv">The ladder</p>
-        <h2 class="rv d1" style="margin-top:14px">Each tier only works<br>because the one under it <em class="accent">does.</em></h2>
-        <p class="lead rv d2">A funnel with no automation leaks. Automation with no AI seat still needs a human in the loop at 2am. An AI seat with no portal is invisible to your team. The summit (a business that runs itself) stays locked, on purpose. We build to four, not to a fantasy.</p>
-        <p class="stack-note rv d3">Built by hand on Claude, GPT&#8209;5, n8n, GoHighLevel, Supabase, FastAPI and Playwright. No template, no page builder, no drag-and-drop.</p>
-      </div>
+  <section id="services" class="kb-cards-page" aria-label="Services, the four tiers plus the proofs">
+    <div class="inner kb-cards-inner">
+      <p class="kb-eyebrow rv d1">Services &middot; the four tiers, plus the proofs</p>
+      <h2 class="rv d2">Each tier only works <em class="accent">because the one under it does.</em></h2>
+      <p class="lead rv d3">We install the same four layers we run our own firm on, in the order that makes each one pay for the next. Move your cursor over card three.</p>
+      <div class="jp-cards rv d4" data-cards data-layout="grid" data-follow="1"></div>
     </div>
   </section>
 
@@ -597,5 +556,6 @@ body>header,main,footer{position:relative;z-index:1}
   }
 })();
 </script>
+<script src="/assets/v7/cards.js"></script>
 </body>
 </html>

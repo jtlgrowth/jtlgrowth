@@ -1,5 +1,5 @@
-// Refuter for index-v7.html (staged home v7). Re-runs every claim from disk.
-// node qa/probe-v7.mjs [--shots DIR]   serves the repo on 127.0.0.1:8119
+// Refuter for the v7 home (index.html, promoted 2026-09-04). Re-runs every claim from disk, or live.
+// node qa/probe-v7.mjs [--shots DIR] [--base https://jtlgrowth.com]   (no --base: serves the repo on 127.0.0.1:8119)
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
@@ -7,7 +7,10 @@ import path from 'node:path';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const PORT = 8119;
-const URL_ = `http://127.0.0.1:${PORT}/index-v7.html`;
+const bi = process.argv.indexOf('--base');
+const BASE = bi > -1 ? process.argv[bi + 1].replace(/\/$/, '') : `http://127.0.0.1:${PORT}`;
+const URL_ = `${BASE}/index.html`;
+const SERVICES = `${BASE}/services/index.html`;
 const si = process.argv.indexOf('--shots');
 const SHOTS = si > -1 ? process.argv[si + 1] : path.join(ROOT, 'qa', '.shots-v7');
 mkdirSync(SHOTS, { recursive: true });
@@ -17,7 +20,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 // wait until the terminal finished typing its current answer (no caret, queue idle)
 const settle = async (page) => { for (let i = 0; i < 200; i++) { const busy = await page.evaluate(() => !!document.querySelector('#p1 .kb-caret') || (window.JTLTerm && window.JTLTerm.busy && window.JTLTerm.busy())); if (!busy) break; await sleep(150); } await sleep(200); };
 
-const server = spawn('python3', ['-m', 'http.server', String(PORT), '--bind', '127.0.0.1'], { cwd: ROOT, stdio: 'ignore' });
+const server = bi > -1 ? null : spawn('python3', ['-m', 'http.server', String(PORT), '--bind', '127.0.0.1'], { cwd: ROOT, stdio: 'ignore' });
 await sleep(700);
 const browser = await chromium.launch().catch(() => chromium.launch({ channel: 'chrome' }));
 try {
@@ -29,6 +32,8 @@ try {
   await page.goto(URL_, { waitUntil: 'networkidle' });
   await page.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
   await sleep(600);
+  ok(await page.locator('meta[name="robots"][content*="noindex"]').count() === 0, 'no noindex on the home');
+  ok(!/v7 staged/.test(await page.title()), `title reads "${await page.title()}"`);
 
   // ---- panels, dots, labels ----
   const labels = await page.$$eval('#dots button', bs => bs.map(b => b.textContent.trim()));
@@ -130,9 +135,11 @@ try {
   // ---- morph stops and dark chrome ----
   const rgb = s => s.replace(/\s/g, '');
   const expect = ['rgb(226,226,226)', 'rgb(219,219,219)', 'rgb(16,16,16)', 'rgb(226,226,226)'];
+  // the track lerps at .085 a frame; on a loaded machine 1.8 s is not always enough, so wait for it to settle
+  const settled = async (pg, n) => { try { await pg.waitForFunction(t => Math.abs((window.__xu || 0) - t) < 0.002, n, { timeout: 9000 }); } catch {} await sleep(250); };
   for (let i = 0; i < 4; i++) {
     await page.evaluate(n => window.__goTo(n), i);
-    await sleep(1800);
+    await settled(page, i);
     const bg = rgb(await page.evaluate(() => getComputedStyle(document.getElementById('viewport')).backgroundColor));
     ok(bg === expect[i], `panel ${i + 1} ground ${bg} (want ${expect[i]})`);
     const dark = await page.evaluate(() => document.getElementById('hdr').classList.contains('on-dark'));
@@ -180,7 +187,7 @@ try {
   }
   // ---- loop wrap ----
   await page.evaluate(() => window.__goTo(4));
-  await sleep(2600);
+  await settled(page, 0);
   const xuWrap = await page.evaluate(() => window.__xu);
   const idxWrap = await page.$$eval('#dots button', bs => bs.findIndex(b => b.classList.contains('active')));
   ok(xuWrap === 0 && idxWrap === 0, `loop wraps back to the hero (xu ${xuWrap}, dot ${idxWrap})`);
@@ -190,7 +197,8 @@ try {
   const serr = [];
   sp.on('pageerror', e => serr.push('pageerror: ' + e.message));
   sp.on('console', m => { if (m.type() === 'error') serr.push('console: ' + m.text()); });
-  await sp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
+  await sp.goto(SERVICES, { waitUntil: 'networkidle' });
+  ok(await sp.locator('meta[name="robots"][content*="noindex"]').count() === 0, 'services: no noindex');
   ok(await sp.locator('#ladder').count() === 0, 'services: ladder gone');
   await sp.locator('#services').scrollIntoViewIfNeeded();
   await sleep(600);
@@ -225,7 +233,7 @@ try {
     ok(ctaLines <= 56, `${w}: CTA on one line (${ctaLines}px tall)`);
     await wp.screenshot({ path: path.join(SHOTS, `hero-${w}.png`) });
     if (w === 2000) {
-      await wp.goto(`http://127.0.0.1:${PORT}/services/index-v7.html`, { waitUntil: 'networkidle' });
+      await wp.goto(SERVICES, { waitUntil: 'networkidle' });
       await wp.locator('#services').scrollIntoViewIfNeeded(); await sleep(900);
       const sw = await wp.evaluate(() => Math.round(document.querySelector('#services .kb-cards-inner').getBoundingClientRect().width));
       ok(sw <= 1240, `wide: services section clamped (${sw}px)`);
@@ -288,7 +296,7 @@ try {
   }
 } finally {
   await browser.close();
-  server.kill();
+  if (server) server.kill();
 }
 console.log(fails.length ? `\n${fails.length} FAIL` : '\nALL GREEN');
 console.log('shots: ' + SHOTS);
