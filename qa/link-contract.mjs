@@ -73,11 +73,23 @@ for (const path of PAGES) {
 // gate, follow-gate.js must either have a real endpoint or render no email field.
 {
   const gate = fs.readFileSync(ROOT+'/assets/follow-gate.js','utf8');
-  const webhook = !/var WEBHOOK = '';/.test(gate);
-  ok(/if \(WEBHOOK\) form\.appendChild\(input\);/.test(gate) || webhook,
-     'follow-gate renders an email field with nowhere to send it');
-  ok(/nothing is collected on this page/.test(gate) || webhook,
-     'follow-gate does not say what it does with an absent endpoint');
+  // The endpoint is resolved per gate now (data-webhook), with the module-level
+  // WEBHOOK as the site-wide default. Assert the behaviour, not the old line:
+  // fields are built only inside the branch that has somewhere to send them.
+  ok(/var hook = \(box\.getAttribute\('data-webhook'\) \|\| WEBHOOK \|\| ''\)/.test(gate),
+     'follow-gate no longer resolves its endpoint per gate');
+  ok(/if \(hook\) \{[\s\S]{0,400}?form = document\.createElement\('form'\)/.test(gate),
+     'follow-gate builds form fields outside the endpoint check');
+  ok(/nothing is collected on this page/.test(gate),
+     'follow-gate lost the line it shows when it has no endpoint');
+  // and every page that ships a gate must either name an endpoint or ask for nothing
+  for (const rel of ['products/index.html']) {
+    const src = fs.readFileSync(ROOT+'/'+rel,'utf8');
+    if (!/data-follow-gate/.test(src)) continue;
+    const named = /data-webhook="\s*https?:/.test(src);
+    const asks  = /data-capture="/.test(src);
+    ok(named || !asks, `${rel}: gate declares data-capture with no data-webhook to send it to`);
+  }
 }
 // /workshop/ has no file to give away, so it must not pretend otherwise
 {

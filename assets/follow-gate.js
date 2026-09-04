@@ -34,10 +34,32 @@
 (function () {
   'use strict';
 
-  /* Owner/Aurel fill-in: GoHighLevel inbound-webhook URL for the gate email.
-     Empty string = capture is skipped and the unlock still works, so nothing on
-     the site is blocked waiting for it. */
+  /* Site-wide default endpoint for gate capture. Empty means no page captures
+     anything unless it says so itself.
+
+     A gate overrides it with data-webhook="<url>", and that is the shape to
+     prefer: the endpoint then lives on the page that uses it, not in this
+     shared file, so one page turning capture on cannot turn it on for another.
+     /starter-pack/ carries its own GoHighLevel inbound webhook that way.
+
+     Either way the rule holds: no endpoint, no fields, and the fine print says
+     nothing is collected. Never ask for something you have nowhere to put. */
   var WEBHOOK = '';
+
+  /* Fields a gate may ask for, via data-capture="name,email,country,review".
+     Absent means email alone, which is what every gate did before this existed.
+     `key` is the JSON key sent to the endpoint. */
+  var FIELDS = {
+    name:    { tag: 'input',  type: 'text',  key: 'first_name',  required: true,
+               label: 'Your name', ph: 'Your name', ac: 'given-name' },
+    email:   { tag: 'input',  type: 'email', key: 'email',       required: true,
+               label: 'Your email address', ph: 'you@company.com', ac: 'email' },
+    country: { tag: 'select', key: 'country', required: true, label: 'Your country',
+               ph: 'Your country',
+               opts: ['Malaysia', 'Vietnam', 'Thailand', 'Philippines', 'Other'] },
+    review:  { tag: 'input',  type: 'text',  key: 'review_link', required: false,
+               label: 'Link to your review', ph: 'Link to your review (optional)' }
+  };
 
   var SRC = '/assets/socials.json';
   var GATE = [
@@ -90,8 +112,12 @@
       '.jstep-t{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:clamp(17px,1.5vw,21px);letter-spacing:-.01em}',
       '.jstep-tag{font:700 9.5px "Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--gray,#616161)}',
       '.jgate-form{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}',
-      '.jgate-form input{flex:1 1 220px;min-width:0;padding:13px 15px;border:1px solid rgba(24,24,24,.25);background:transparent;color:inherit;font:400 14px "Archivo",sans-serif}',
-      '[data-theme="dark"] .jgate-form input{border-color:rgba(226,226,226,.28)}',
+      '.jgate-form input,.jgate-form select{flex:1 1 220px;min-width:0;padding:13px 15px;border:1px solid rgba(24,24,24,.25);background:transparent;color:inherit;font:400 14px "Archivo",sans-serif}',
+      '[data-theme="dark"] .jgate-form input,[data-theme="dark"] .jgate-form select{border-color:rgba(226,226,226,.28)}',
+      '[data-theme="dark"] .jgate-form select option{background:#181818;color:#E2E2E2}',
+      '.jgate-form.multi{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}',
+      '.jgate-form.multi button{grid-column:1/-1}',
+      '.jgate-form .jf-bad{border-color:#8A2B2B}',
       '.jgate-form button{padding:13px 24px;border:none;background:var(--navy,#181818);color:var(--cement,#E2E2E2);font:600 11.5px "Archivo",sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .3s,opacity .3s}',
       '.jgate-form button[disabled]{opacity:.4;cursor:not-allowed}',
       '.jgate-msg{margin-top:12px;font:400 12.5px "Archivo",sans-serif;color:var(--gray,#616161);min-height:1.2em}',
@@ -132,6 +158,12 @@
     }
     /* a blob: URL saves under a junk name unless the download attr carries one */
     var filename = box.getAttribute('data-filename') || '';
+    /* endpoint resolves per gate first, then the site-wide default */
+    var hook = (box.getAttribute('data-webhook') || WEBHOOK || '').trim();
+    var want = (box.getAttribute('data-capture') || 'email')
+      .split(/[,\s]+/).filter(function (k) { return FIELDS[k]; });
+    if (!want.length) want = ['email'];
+    var event = box.getAttribute('data-event') || '';
     var need1 = accounts.length;
     var need2 = (socials || []).length;
     var unlockedOnce = false;
@@ -241,21 +273,36 @@
     vault.appendChild(vbody); vault.appendChild(vlock);
     s3.appendChild(vault);
 
-    var form = null, input = null, submit = null;
-    if (WEBHOOK) {
+    var form = null, submit = null, controls = {};
+    if (hook) {
       form = document.createElement('form');
-      form.className = 'jgate-form';
-      form.noValidate = true;
-      input = document.createElement('input');
-      input.type = 'email';
-      input.required = true;
-      input.placeholder = 'you@company.com';
-      input.setAttribute('aria-label', 'Your email address');
-      input.autocomplete = 'email';
+      form.className = 'jgate-form' + (want.length > 1 ? ' multi' : '');
+      form.noValidate = true;   /* the messages below are ours, not the browser's */
+      want.forEach(function (k) {
+        var f = FIELDS[k], el = document.createElement(f.tag);
+        if (f.tag === 'select') {
+          var ph = document.createElement('option');
+          ph.value = ''; ph.textContent = f.ph; ph.disabled = true; ph.selected = true;
+          el.appendChild(ph);
+          f.opts.forEach(function (o) {
+            var op = document.createElement('option');
+            op.value = o; op.textContent = o; el.appendChild(op);
+          });
+        } else {
+          el.type = f.type;
+          el.placeholder = f.ph;
+          if (f.ac) el.autocomplete = f.ac;
+        }
+        el.required = !!f.required;
+        el.setAttribute('aria-label', f.label);
+        el.addEventListener('input', function () { el.classList.remove('jf-bad'); });
+        el.addEventListener('change', function () { el.classList.remove('jf-bad'); });
+        form.appendChild(el);
+        controls[k] = el;
+      });
       submit = document.createElement('button');
       submit.type = 'submit';
-      submit.textContent = 'Send me the download';
-      form.appendChild(input);
+      submit.textContent = box.getAttribute('data-submit') || 'Send me the download';
       form.appendChild(submit);
       s3.appendChild(form);
     }
@@ -274,7 +321,7 @@
 
     var fine = document.createElement('p');
     fine.className = 'jgate-fine';
-    fine.textContent = WEBHOOK
+    fine.textContent = hook
       ? 'We can’t check follows or recommendations from here. No platform lets a website do that, so this runs on trust. ' +
         'Your email gets the file and our build notes; unsubscribe any time.'
       : 'We can’t check follows or recommendations from here. No platform lets a website do that, so this runs on trust. ' +
@@ -306,7 +353,7 @@
       s1.classList.toggle('jstep-done', ok1);
       s2.classList.toggle('jstep-done', ok2);
       var ok = ok1 && ok2;
-      if (ok && !WEBHOOK && !unlockedOnce) unlock('', !fromClick);
+      if (ok && !hook && !unlockedOnce) unlock('', !fromClick);
       if (submit) submit.disabled = !ok;
       return ok;
     }
@@ -315,22 +362,45 @@
       form.addEventListener('submit', function (ev) {
         ev.preventDefault();
         if (!paint(false)) { msg.textContent = 'Finish steps 1 and 2 first.'; return; }
-        var email = input.value.trim();
-        if (!RE_EMAIL.test(email)) { msg.textContent = 'That email doesn’t look right.'; input.focus(); return; }
-        try { localStorage.setItem(EMAIL_KEY, email); } catch (e) {}
-        fetch(WEBHOOK, {
+
+        var values = {}, bad = null, why = '';
+        for (var i = 0; i < want.length; i++) {
+          var k = want[i], el = controls[k], v = (el.value || '').trim();
+          el.classList.remove('jf-bad');
+          if (FIELDS[k].required && !v) {
+            bad = el; why = k === 'country' ? 'Pick your country.' : 'Fill in your ' + k + '.'; break;
+          }
+          if (k === 'email' && v && !RE_EMAIL.test(v)) {
+            bad = el; why = 'That email doesn’t look right.'; break;
+          }
+          values[FIELDS[k].key] = v;
+        }
+        if (bad) {
+          bad.classList.add('jf-bad'); msg.textContent = why;
+          try { bad.focus(); } catch (e) {}
+          return;
+        }
+
+        if (values.email) { try { localStorage.setItem(EMAIL_KEY, values.email); } catch (e) {} }
+        var payload = { gate: id, file: file, source: location.pathname };
+        if (event) payload.event = event;
+        for (var key in values) if (values[key]) payload[key] = values[key];
+        fetch(hook, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, gate: id, file: file, source: location.pathname })
+          body: JSON.stringify(payload)
         }).catch(function () { /* the unlock never depends on the capture */ });
-        unlock(email, false);
+        track('follow_gate_capture', { gate: id, fields: want.join('+') });
+        /* unlock fires now, not in a .then: an endpoint being down at 7PM must
+           never cost someone the file they earned */
+        unlock(values.email || '', false);
       });
     }
 
     var known = null;
     try { known = localStorage.getItem(EMAIL_KEY); } catch (e) {}
     var ready = paint(false);
-    if (WEBHOOK && known && ready) unlock(known, true);
+    if (hook && known && ready) unlock(known, true);
   }
 
   function init() {
