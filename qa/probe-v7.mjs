@@ -250,28 +250,42 @@ try {
   ok(ra.d && ra.off === 0, `reduced motion: arrow simply there (offset ${ra.off})`);
   await rctx.close();
 
-  // ---- mobile ----
-  const mctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, timezoneId: 'Asia/Manila' });
-  const mp = await mctx.newPage();
-  await mp.goto(URL_, { waitUntil: 'networkidle' });
-  await mp.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
-  await sleep(800);
-  const overflow = await mp.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-  ok(overflow <= 1, `mobile: no horizontal overflow (${overflow}px)`);
-  ok(await mp.locator('#p1 .kb-deck').count() === 0, 'mobile: no deck');
-  ok(await mp.locator('#p1 .kb-mini').isHidden(), 'mobile: mini keyboard never shows');
-  ok(await mp.locator('#p1 .kb-arrow').isHidden() && await mp.locator('#p1 .kb-hint').isVisible(), 'mobile: arrow hidden, hint line stays');
-  const mcta = await mp.evaluate(() => { const r = document.querySelector('#p1 .kb-cta').getBoundingClientRect(); const l = document.querySelector('#p1 .kb-link').getBoundingClientRect(); return [Math.round(r.left + r.width / 2), Math.round(l.left + l.width / 2), r.left >= 0, l.top >= r.bottom]; });
-  ok(Math.abs(mcta[0] - 195) <= 4 && Math.abs(mcta[1] - 195) <= 4 && mcta[2] && mcta[3], `mobile: CTA and link centred and stacked (centres x ${mcta[0]}, ${mcta[1]})`);
-  await mp.locator('#p1 .kb-term').click();
-  await mp.locator('#p1 .kb-input').fill('where');
-  await mp.locator('#p1 .kb-input').press('Enter');
-  let mob = false;
-  try { await mp.locator('#p1 .kb-line-ai', { hasText: 'Caloocan' }).waitFor({ timeout: 15000 }); mob = true; } catch {}
-  ok(mob, 'mobile: terminal answers');
-  await mp.locator('#p1').screenshot({ path: path.join(SHOTS, 'mobile-hero.png') });
-  await mp.locator('#globe').screenshot({ path: path.join(SHOTS, 'mobile-globe.png') });
-  await mctx.close();
+  // ---- mobile: three phone widths, console errors captured, static mode, terminal answers ----
+  for (const [mw, mh, name] of [[390, 844, 'iPhone 15'], [360, 780, 'Android'], [430, 932, 'iPhone Pro Max']]) {
+    const mctx = await browser.newContext({ viewport: { width: mw, height: mh }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, timezoneId: 'Asia/Manila' });
+    const mp = await mctx.newPage();
+    const merr = [];
+    mp.on('pageerror', e => merr.push('pageerror: ' + e.message));
+    mp.on('console', m => { if (m.type() === 'error') merr.push('console: ' + m.text()); });
+    await mp.goto(URL_, { waitUntil: 'networkidle' });
+    await mp.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
+    await sleep(800);
+    console.log(`mobile ${name} ${mw}x${mh}`);
+    const overflow = await mp.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    ok(overflow <= 1, `mobile: no horizontal overflow (${overflow}px)`);
+    ok(await mp.evaluate(() => getComputedStyle(document.getElementById('track')).display === 'block'), 'mobile: vertical static mode (media query active)');
+    ok(await mp.locator('#p1 .kb-deck').count() === 0, 'mobile: no deck');
+    ok(await mp.locator('#p1 .kb-mini').isHidden(), 'mobile: mini keyboard never shows');
+    ok(await mp.locator('#p1 .kb-arrow').isHidden() && await mp.locator('#p1 .kb-hint').isVisible(), 'mobile: arrow hidden, hint line stays');
+    const zoomed = await mp.evaluate(() => Math.round(document.querySelector('#p1 .kb-chip').getBoundingClientRect().height));
+    ok(zoomed <= 27, `mobile: app interior at 1x (chip ${zoomed}px)`);
+    const mcta = await mp.evaluate(() => { const r = document.querySelector('#p1 .kb-cta').getBoundingClientRect(); const l = document.querySelector('#p1 .kb-link').getBoundingClientRect(); return [Math.round(r.left + r.width / 2), Math.round(l.left + l.width / 2), r.left >= 0, l.top >= r.bottom, r.right <= innerWidth]; });
+    ok(Math.abs(mcta[0] - mw / 2) <= 4 && Math.abs(mcta[1] - mw / 2) <= 4 && mcta[2] && mcta[3] && mcta[4], `mobile: CTA and link centred and stacked (centres x ${mcta[0]}, ${mcta[1]} of ${mw})`);
+    const lapW = await mp.evaluate(() => Math.round(document.querySelector('#p1 .kb-laptop').getBoundingClientRect().width));
+    ok(lapW <= mw && lapW >= mw * 0.85, `mobile: laptop spans the width (${lapW} of ${mw})`);
+    await mp.locator('#p1 .kb-term').tap();
+    await mp.locator('#p1 .kb-input').fill('where');
+    await mp.locator('#p1 .kb-input').press('Enter');
+    let mob = false;
+    try { await mp.locator('#p1 .kb-line-ai', { hasText: 'Caloocan' }).waitFor({ timeout: 15000 }); mob = true; } catch {}
+    ok(mob, 'mobile: terminal answers');
+    const inputFs = await mp.evaluate(() => parseFloat(getComputedStyle(document.querySelector('#p1 .kb-input')).fontSize));
+    ok(inputFs >= 16, `mobile: input at ${inputFs}px (16 floor, no iOS zoom-in)`);
+    for (const sel of ['#about', '#globe', '#p5']) { await mp.locator(sel).scrollIntoViewIfNeeded(); await sleep(500); }
+    ok(merr.length === 0, `mobile: 0 console errors across the page (got ${merr.length})${merr.length ? '\n    ' + merr.slice(0, 5).join('\n    ') : ''}`);
+    if (mw === 390) { await mp.locator('#p1').screenshot({ path: path.join(SHOTS, 'mobile-hero.png') }); await mp.locator('#globe').screenshot({ path: path.join(SHOTS, 'mobile-globe.png') }); }
+    await mctx.close();
+  }
 } finally {
   await browser.close();
   server.kill();
