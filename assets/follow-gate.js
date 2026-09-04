@@ -273,6 +273,15 @@
     vault.appendChild(vbody); vault.appendChild(vlock);
     s3.appendChild(vault);
 
+    /* The gate knows two moments no page can compute for itself. It announces
+       them and stays out of the reaction: /starter-pack/ listens for the first
+       one to unblur its locked pack, /products/ listens for neither. */
+    var stepsAnnounced = false;
+    function announce(name, detail) {
+      try { box.dispatchEvent(new CustomEvent(name, { bubbles: true, detail: detail || {} })); }
+      catch (e) {}
+    }
+
     var form = null, submit = null, controls = {};
     if (hook) {
       form = document.createElement('form');
@@ -341,6 +350,7 @@
         : (email ? 'Unlocked. The link is below, and a copy is on its way to ' + email + '.'
                  : 'Unlocked. The link is below.');
       if (!isRestore && !unlockedOnce) track('follow_gate_unlock', { gate: id, accounts: need1 + need2, ask: 'recommend+follow' });
+      announce('jtl-gate-unlocked', { gate: id, restored: !!isRestore });
       unlockedOnce = true;
     }
 
@@ -353,6 +363,12 @@
       s1.classList.toggle('jstep-done', ok1);
       s2.classList.toggle('jstep-done', ok2);
       var ok = ok1 && ok2;
+      if (ok && !stepsAnnounced) {
+        stepsAnnounced = true;
+        /* restored: the visitor did this on a previous visit, so a page reacting
+           to it should appear already open rather than animate open again */
+        announce('jtl-gate-steps', { gate: id, restored: !fromClick });
+      }
       if (ok && !hook && !unlockedOnce) unlock('', !fromClick);
       if (submit) submit.disabled = !ok;
       return ok;
