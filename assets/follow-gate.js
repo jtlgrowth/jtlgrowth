@@ -119,6 +119,19 @@
     var id = box.getAttribute('data-gate-id') || 'file';
     var file = box.getAttribute('data-file') || '';
     var label = box.getAttribute('data-label') || 'Download';
+    /* data-recommend="rnc" narrows step 1 to one Page. Absent = every Page in
+       GATE, which is what /products/ has always shown. Gwen's brief: one review
+       ask converts better than two, so a single-brand page can opt down. */
+    var pick = (box.getAttribute('data-recommend') || '').trim();
+    if (pick) {
+      var want = pick.split(/[,\s]+/);
+      accounts = accounts.filter(function (a) {
+        return want.indexOf(a.slug.replace(/-recommend$/, '')) !== -1;
+      });
+      if (!accounts.length) accounts = GATE;   /* a typo must never empty step 1 */
+    }
+    /* a blob: URL saves under a junk name unless the download attr carries one */
+    var filename = box.getAttribute('data-filename') || '';
     var need1 = accounts.length;
     var need2 = (socials || []).length;
     var unlockedOnce = false;
@@ -193,7 +206,7 @@
       return b;
     }
 
-    var s1 = step('1', 'Recommend us', 'Two Pages, a minute each');
+    var s1 = step('1', 'Recommend us', need1 === 1 ? 'One Page, a minute' : need1 === 2 ? 'Two Pages, a minute each' : need1 + ' Pages, a minute each');
     var grid1 = document.createElement('div');
     grid1.className = 'jgate-grid';
     s1.appendChild(grid1);
@@ -255,7 +268,7 @@
     out.className = 'jgate-out';
     out.hidden = true;
     out.textContent = label;
-    out.setAttribute('download', '');
+    out.setAttribute('download', filename);
     if (/^https?:/.test(file)) { out.target = '_blank'; out.rel = 'noopener'; }
     s3.appendChild(out);
 
@@ -287,7 +300,8 @@
     function paint(fromClick) {
       var d1 = done1(), d2 = done2();
       var ok1 = d1 >= need1, ok2 = d2 >= need2;
-      count1.textContent = ok1 ? 'Both done.' : d1 + ' of ' + need1 + ' done. Open each Page, leave a recommendation, come back.';
+      count1.textContent = ok1 ? (need1 === 1 ? 'Done.' : 'Both done.')
+        : d1 + ' of ' + need1 + ' done. Open ' + (need1 === 1 ? 'the Page' : 'each Page') + ', leave a recommendation, come back.';
       count2.textContent = ok2 ? (need2 ? 'All ' + need2 + ' followed.' : '') : d2 + ' of ' + need2 + ' followed.';
       s1.classList.toggle('jstep-done', ok1);
       s2.classList.toggle('jstep-done', ok2);
@@ -344,7 +358,7 @@
           a.className = 'jgate-out';
           a.href = file;
           a.textContent = label;
-          a.setAttribute('download', '');
+          a.setAttribute('download', b.getAttribute('data-filename') || '');
           if (/^https?:/.test(file)) { a.target = '_blank'; a.rel = 'noopener'; }
           b.appendChild(a);
         });
