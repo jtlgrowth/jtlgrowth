@@ -98,6 +98,12 @@ try {
   const nav2 = await page.evaluate(() => window.__nav.length);
   ok(nav2 === 1, `bare "services" explains instead of navigating (nav calls ${nav2})`);
   await settle(page);
+  await input.fill('go to starter pack'); await input.press('Enter');
+  await sleep(1800);
+  const nav3 = await page.evaluate(() => window.__nav);
+  ok(nav3.length === 2 && nav3[1] === '/starter-pack/', `"go to starter pack" routes to /starter-pack/ (got ${JSON.stringify(nav3)})`);
+  ok(await page.locator('#menu a[href="/starter-pack/"], a[href="/starter-pack/"]').count() >= 1, 'menu overlay links the starter pack');
+  await settle(page);
   await input.fill('help'); await input.press('Enter');
   let helped = false;
   try { await page.locator('#p1 .kb-line-ai', { hasText: 'Or navigate' }).waitFor({ timeout: 25000 }); helped = true; } catch {}

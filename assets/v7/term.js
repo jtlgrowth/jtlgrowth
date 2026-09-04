@@ -13,7 +13,8 @@
     'group': '/group/', 'the group': '/group/',
     'growth': '/growth/', 'growth software': '/growth/', 'demo': '/growth/',
     'inbox scout': '/inbox-scout/', 'inbox': '/inbox-scout/',
-    'jamz': '/jamz-jamorol/'
+    'jamz': '/jamz-jamorol/',
+    'starter pack': '/starter-pack/', 'starter-pack': '/starter-pack/', 'starterpack': '/starter-pack/', 'pack': '/starter-pack/'
   };
   var HOME_WORDS = { 'home': 1, 'start': 1, 'top': 1 };
   var CONTACT_WORDS = { 'book': 1, 'book a call': 1, 'call': 1, 'contact': 1, 'gwen': 1 };
@@ -38,6 +39,8 @@
       a: 'Founder AI Workshop, Batch 1: From Operator to Orchestrator. Two build days in BGC, every founder shipped an AI employee for their own business. Type go to workshop for the recap.' },
     { name: 'products', kws: ['products', 'product', 'software', 'app', 'apps', 'download', 'install'],
       a: 'What you can get or install today lives at /products/: the Growth software demo, Inbox Scout, the Claude Code setup. Type go to products.' },
+    { name: 'starterpack', kws: ['starter pack', 'starter-pack', 'starterpack'],
+      a: 'The AI Employee Starter Pack: five job descriptions, the memory checklist and the seven day plan, from the Robots and Coffee session. It opens with the password from that session. Type go to starter pack.' },
     { name: 'skills', kws: ['skills', 'skill', 'access code'],
       a: 'The JTL skills ship with an access code. Type go to skills.' },
     { name: 'speed', kws: ['how fast', 'how long', 'timeline', 'turnaround', 'when', 'days', 'weeks'],
@@ -51,7 +54,7 @@
     { name: 'thanks', kws: ['thanks', 'thank you', 'salamat', 'cheers'],
       a: 'Anytime. Type book when you are ready.' },
     { name: 'help', kws: ['help', 'commands', 'what can i type'],
-      a: 'Try: services, price, ai employee, automation, workshop, products, where, who. Or navigate: go to services, go to products, go to skills, go to workshop, book.' },
+      a: 'Try: services, price, ai employee, automation, workshop, products, where, who. Or navigate: go to services, go to products, go to skills, go to workshop, go to starter pack, book.' },
     { name: 'clear', kws: ['clear', 'cls', 'reset'], a: null }
   ];
   var GREETING = 'Venice here, the AI employee that runs this firm’s repetitive half. Ask what we build, what it costs, or type go to services.';
