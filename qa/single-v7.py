@@ -19,6 +19,9 @@ for f in ("sound", "keys", "term", "globe", "hint", "cards"):
                         "var BASE = ''; var INLINE = " + repr(wavs).replace("'", '"') + ";")
         js = js.replace("fetch(BASE + f)", "fetch(INLINE[f] || (BASE + f))")
         assert "INLINE[f]" in js
+    if f == "globe":
+        js = js.replace("import('/assets/vendor/cobe-0.6.3.esm.js')", "import('https://jtlgrowth.com/assets/vendor/cobe-0.6.3.esm.js')")
+        assert "jtlgrowth.com/assets/vendor" in js
     h, n = re.subn(rf'<script src="assets/v7/{f}\.js"></script>', lambda m: "<script>" + js.replace("</script>", "<\\/script>") + "</script>", h); assert n == (0 if f == "cards" else 1), f
 h = h.replace('href="assets/', 'href="https://jtlgrowth.com/assets/').replace('src="assets/', 'src="https://jtlgrowth.com/assets/').replace("src=\"/assets/", "src=\"https://jtlgrowth.com/assets/")
 h = h.replace('href="/', 'href="https://jtlgrowth.com/')

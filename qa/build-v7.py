@@ -195,6 +195,12 @@ for f in ("home.css", "term.js", "keys.js", "sound.js", "globe.js", "cards.js", 
     p = SITE / "assets/v7" / f
     if not p.is_file() or p.stat().st_size < 1500:
         sys.exit(f"FAIL asset {f} missing or tiny")
+for f, floor in (("cobe-0.6.3.esm.js", 6000), ("phenomenon-1.6.0.esm.js", 5000)):
+    p = SITE / "assets/vendor" / f
+    if not p.is_file() or p.stat().st_size < floor:
+        sys.exit(f"FAIL vendored {f} missing or tiny")
+must((SITE / "assets/vendor/cobe-0.6.3.esm.js").read_text().count('from"/npm/'), 0, "vendored cobe imports its sibling, not the CDN")
+must((SITE / "assets/v7/globe.js").read_text().count("import('/assets/vendor/cobe-0.6.3.esm.js')"), 1, "globe loads the vendored cobe first")
 OUT.write_text(html, encoding="utf-8")
 print(f"OK {OUT} {len(html.encode())} B; panels 4 + clone, stops 5, wavs {len(wavs)}, assets 7")
 

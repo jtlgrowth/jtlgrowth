@@ -147,7 +147,10 @@
 
     function boot() {
       if (booted) return; booted = true;
-      import('https://cdn.jsdelivr.net/npm/cobe@0.6.3/+esm').then(function (m) { start(m.default); }).catch(function () {
+      /* cobe is vendored (assets/vendor, phenomenon alongside) so the public home has no CDN at runtime and
+         WebKit stops re-requesting cobe's dependency against our origin; the CDN is the fallback for the
+         single-file copies that run from disk */
+      import('/assets/vendor/cobe-0.6.3.esm.js').catch(function () { return import('https://cdn.jsdelivr.net/npm/cobe@0.6.3/+esm'); }).then(function (m) { start(m.default); }).catch(function () {
         var note = document.createElement('div'); note.className = 'jp-globe-fallback';
         note.textContent = 'The globe needs network access to load cobe.';
         canvas.remove(); night.remove(); el.appendChild(note);
