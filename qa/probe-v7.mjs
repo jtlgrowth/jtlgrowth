@@ -112,6 +112,19 @@ try {
   ok(!/gwen/i.test(ctaText) && ctaText.trim().length > 4, `hero: CTA reads "${ctaText.trim()}"`);
   const fit = async (pg, w, h) => { const g = await pg.evaluate(() => { const l = document.querySelector('#p1 .kb-laptop').getBoundingClientRect(); const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return { lapTop: Math.round(l.top), lapBottom: Math.round(l.bottom), lapLeft: Math.round(l.left), lapRight: Math.round(l.right), copyBottom: Math.round(c.bottom), copyTop: Math.round(c.top) }; }); const c2 = await pg.evaluate(() => { const c = document.querySelector('#p1 .kb-copy').getBoundingClientRect(); return [Math.round(c.left), Math.round(c.right)]; }); ok(g.lapBottom <= h - 60 && g.lapTop >= 80 && c2[0] >= g.lapRight - 2 && c2[1] <= w && g.lapLeft >= -24 && g.lapRight <= w, `fit ${w}x${h}: laptop ${g.lapTop} to ${g.lapBottom} (x ${g.lapLeft} to ${g.lapRight}), copy beside (x ${c2[0]} to ${c2[1]}), dots at ${h - 60}`); };
   await fit(page, 1440, 900);
+  // round 5 hint: the mono line and the curve, measured in the .kb-hero frame (the svg's containing block)
+  const arrow = async (pg, sel) => pg.evaluate(sel => { const hs = document.querySelector(sel); const p = hs.querySelector('.kb-arrow-path'); const d = p.getAttribute('d'); if (!d) return { d: '' }; const r = hs.getBoundingClientRect(), lap = hs.querySelector('.kb-laptop').getBoundingClientRect(), inp = hs.querySelector('.kb-input, .kb-input-static').getBoundingClientRect(), hint = hs.querySelector('[data-hint]').getBoundingClientRect(); const L = p.getTotalLength(), end = p.getPointAtLength(L), start = p.getPointAtLength(0); return { d, L: Math.round(L), end: [Math.round(end.x), Math.round(end.y)], wantEnd: [Math.round(lap.right - r.left + 10), Math.round(inp.top - r.top + inp.height / 2)], start: [Math.round(start.x), Math.round(start.y)], wantStart: [Math.round(hint.left - r.left - 12), Math.round(hint.top - r.top + hint.height / 2)], off: parseFloat(getComputedStyle(p).strokeDashoffset), head: getComputedStyle(hs.querySelector('.kb-arrow-head')).opacity }; }, sel);
+  const hintText = await page.locator('#p1 .kb-hint').innerText();
+  ok(/ask venice/i.test(hintText) && /what it costs/i.test(hintText), `hint line reads "${hintText.trim()}"`);
+  const a1 = await arrow(page, '#p1 .kb-hero');
+  ok(a1.L > 60 && Math.abs(a1.end[0] - a1.wantEnd[0]) <= 3 && Math.abs(a1.end[1] - a1.wantEnd[1]) <= 3, `arrow lands on the laptop edge at the prompt line (end ${a1.end}, want ${a1.wantEnd}, ${a1.L}px)`);
+  ok(Math.abs(a1.start[0] - a1.wantStart[0]) <= 3 && Math.abs(a1.start[1] - a1.wantStart[1]) <= 3, `arrow starts at the hint line (start ${a1.start}, want ${a1.wantStart})`);
+  ok(a1.off === 0 && a1.head === '1', `arrow fully drawn and headed (offset ${a1.off}, head ${a1.head})`);
+  const lab = await page.evaluate(() => { const t = document.querySelector('#p1 .kb-arrow-label'); const cs = getComputedStyle(t); return { text: t.textContent, op: cs.opacity, font: cs.fontFamily, loaded: document.fonts.check('600 27px Caveat'), x: parseFloat(t.getAttribute('x')), rough: document.querySelectorAll('#p1 .kb-arrow g[filter]').length, ghost: !!document.querySelector('#p1 .kb-arrow-path.ghost').getAttribute('d') }; });
+  ok(lab.text === 'type here' && lab.op === '1' && /Caveat/.test(lab.font) && lab.loaded && lab.x > 0, `handwritten label "${lab.text}" visible in ${lab.font.split(',')[0]} (loaded ${lab.loaded})`);
+  ok(lab.rough === 2 && lab.ghost, `pen look: ${lab.rough} wobble passes, ghost stroke drawn`);
+  const a2 = await arrow(page, '#p1clone .kb-hero');
+  ok(a2.d && a2.off === 0 && Math.abs(a2.end[1] - a2.wantEnd[1]) <= 3, `clone carries the same curve, drawn without animation (end ${a2.end}, want ${a2.wantEnd})`);
   await page.locator('#p1').screenshot({ path: path.join(SHOTS, 'p1-hero.png') });
 
   // ---- morph stops and dark chrome ----
@@ -200,8 +213,10 @@ try {
     const wp = await wctx.newPage();
     await wp.goto(URL_, { waitUntil: 'networkidle' });
     await wp.evaluate(() => { const b = document.getElementById('boot'); if (b) b.remove(); });
-    await sleep(900);
+    await sleep(3400);
     await fit(wp, w, h);
+    const aw = await arrow(wp, '#p1 .kb-hero');
+    ok(aw.L > 60 && Math.abs(aw.end[0] - aw.wantEnd[0]) <= 3 && Math.abs(aw.end[1] - aw.wantEnd[1]) <= 3 && aw.off === 0, `${w}: arrow on the prompt line (end ${aw.end}, want ${aw.wantEnd}, ${aw.L}px, offset ${aw.off})`);
     const h1r = await wp.evaluate(() => document.querySelector('#p1 .kb-copy h1').getBoundingClientRect());
     ok(h1r.right <= w && h1r.height <= 190 && h1r.height >= 120, `${w}: headline on two lines inside the viewport (right ${Math.round(h1r.right)}, ${Math.round(h1r.height)}px tall)`);
     const zoomed = await wp.evaluate(() => Math.round(document.querySelector('#p1 .kb-chip').getBoundingClientRect().height * 10) / 10);
@@ -230,6 +245,9 @@ try {
   ok(runningList.length === 0, `reduced motion: 0 running animations (got ${runningList.length}${runningList.length ? ': ' + runningList.join('; ') : ''})`);
   const vertical = await rp.evaluate(() => getComputedStyle(document.getElementById('track')).display === 'block');
   ok(vertical, 'reduced motion: vertical static mode');
+  await sleep(1200);
+  const ra = await arrow(rp, '#p1 .kb-hero');
+  ok(ra.d && ra.off === 0, `reduced motion: arrow simply there (offset ${ra.off})`);
   await rctx.close();
 
   // ---- mobile ----
@@ -242,6 +260,7 @@ try {
   ok(overflow <= 1, `mobile: no horizontal overflow (${overflow}px)`);
   ok(await mp.locator('#p1 .kb-deck').count() === 0, 'mobile: no deck');
   ok(await mp.locator('#p1 .kb-mini').isHidden(), 'mobile: mini keyboard never shows');
+  ok(await mp.locator('#p1 .kb-arrow').isHidden() && await mp.locator('#p1 .kb-hint').isVisible(), 'mobile: arrow hidden, hint line stays');
   const mcta = await mp.evaluate(() => { const r = document.querySelector('#p1 .kb-cta').getBoundingClientRect(); const l = document.querySelector('#p1 .kb-link').getBoundingClientRect(); return [Math.round(r.left + r.width / 2), Math.round(l.left + l.width / 2), r.left >= 0, l.top >= r.bottom]; });
   ok(Math.abs(mcta[0] - 195) <= 4 && Math.abs(mcta[1] - 195) <= 4 && mcta[2] && mcta[3], `mobile: CTA and link centred and stacked (centres x ${mcta[0]}, ${mcta[1]})`);
   await mp.locator('#p1 .kb-term').click();

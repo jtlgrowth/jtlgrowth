@@ -75,13 +75,15 @@ def hero(static):
     click = '' if static else ' data-click'
     return f'''<div class="grid-lines"></div>
     <div class="hero-glow"></div>
-    <div class="kb-hero kb-hero-r5">
+    <div class="kb-hero kb-hero-r5" data-arrow>
       {laptop(static)}
       <div class="kb-copy rv d1">
         <h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1>
         <p class="lead">AI systems that run the repetitive half of your business.</p>
         <div class="kb-ctas"><a class="kb-cta" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener"{click}>Put AI to work for me</a><a class="kb-link" href="/ai-employee/"{click}>See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
+        <p class="kb-hint" data-hint>Or ask Venice. It answers what we build, what it costs, how fast, and who runs it.</p>
       </div>
+      <svg class="kb-arrow" aria-hidden="true"><defs><filter id="kb-rough-{'clone' if static else 'hero'}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.032" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.8" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb-rough2-{'clone' if static else 'hero'}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g class="kb-arrow-ink" filter="url(#kb-rough-{'clone' if static else 'hero'})"><path class="kb-arrow-path" d=""/><path class="kb-arrow-head" d=""/></g><g class="kb-arrow-ink kb-arrow-ink2" filter="url(#kb-rough2-{'clone' if static else 'hero'})"><path class="kb-arrow-path ghost" d=""/></g><text class="kb-arrow-label" x="0" y="0">type here</text></svg>
     </div>'''
 
 HERO = f'<section class="panel in" id="p1" aria-label="JTL Growth, AI and automation agency">\n    {hero(False)}\n  </section>'
@@ -134,6 +136,7 @@ sub1(r'<a href="#" data-go="2">Contact <span class="mk">03</span></a>',
 # ---- head and scripts ----
 sub1(r"<title>([^<]*)</title>", lambda m: f"<title>{m.group(1)} &middot; v7 staged</title>", "title")
 GLUE = '''<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap">
 <link rel="stylesheet" href="assets/v7/home.css">
 <style id="v7-glue">
 /* v7 glue: panels stay transparent on desktop so the viewport morph shows through; static mode paints them */
@@ -146,6 +149,7 @@ SCRIPTS = '''<script src="assets/v7/sound.js"></script>
 <script src="assets/v7/keys.js"></script>
 <script src="assets/v7/term.js"></script>
 <script src="assets/v7/globe.js"></script>
+<script src="assets/v7/hint.js"></script>
 <script>(function(){function t(){var d=new Date(),s=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');document.querySelectorAll('[data-clock]').forEach(function(e){e.textContent=s});}t();setInterval(t,30000);})();</script>
 </body>'''
 sub1(r"</body>", SCRIPTS, "scripts")
@@ -167,6 +171,13 @@ must(html.count("kb-deck"), 0, "no keyboard deck")
 must(html.count("data-float"), 2, "mini keyboard in hero and clone")
 must(html.count('class="kb-mini"'), 2, "kb-mini in hero and clone")
 must(html.count('class="kb-base kb-lip"'), 2, "14px lip on both laptops")
+# round 5 hint (Owner pick, hint study 01): the mono line and the curve on the hero and its clone
+must(html.count(" data-hint>"), 2, "hint line on hero and clone")
+must(html.count('class="kb-arrow"'), 2, "arrow svg on hero and clone")
+must(html.count("data-arrow"), 2, "arrow stages")
+must(html.count('class="kb-arrow-label"'), 2, "handwritten label on hero and clone")
+must(html.count('id="kb-rough-hero"') + html.count('id="kb-rough-clone"'), 2, "one rough filter per stage")
+must(html.count("family=Caveat"), 1, "handwriting face loaded")
 must(html.count("data-globe"), 1, "one globe")
 must(html.count("data-cards"), 0, "no card grid on the home")
 must(html.count('name="robots" content="noindex"'), 1, "noindex")
@@ -180,12 +191,12 @@ must(len(wavs), 12, "12 wav samples")
 for w in wavs:
     if w.stat().st_size < 5000:
         sys.exit(f"FAIL {w.name} under 5 KB")
-for f in ("home.css", "term.js", "keys.js", "sound.js", "globe.js", "cards.js"):
+for f in ("home.css", "term.js", "keys.js", "sound.js", "globe.js", "cards.js", "hint.js"):
     p = SITE / "assets/v7" / f
     if not p.is_file() or p.stat().st_size < 1500:
         sys.exit(f"FAIL asset {f} missing or tiny")
 OUT.write_text(html, encoding="utf-8")
-print(f"OK {OUT} {len(html.encode())} B; panels 4 + clone, stops 5, wavs {len(wavs)}, assets 6")
+print(f"OK {OUT} {len(html.encode())} B; panels 4 + clone, stops 5, wavs {len(wavs)}, assets 7")
 
 # ---------------- services page: the card grid replaces the ladder ----------------
 SSRC = SITE / "services/index.html"; SOUT = SITE / "services/index-v7.html"

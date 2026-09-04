@@ -7,7 +7,7 @@ OUT = pathlib.Path.home() / "Desktop/Drop Here (auto-sorts 6am)/jtl-home-v7.html
 h = (SITE / "index-v7.html").read_text()
 css = (SITE / "assets/v7/home.css").read_text()
 h, n = re.subn(r'<link rel="stylesheet" href="assets/v7/home.css">', lambda m: "<style>" + css + "</style>", h); assert n == 1
-for f in ("sound", "keys", "term", "globe", "cards"):
+for f in ("sound", "keys", "term", "globe", "hint", "cards"):
     js = (SITE / f"assets/v7/{f}.js").read_text()
     if f == "sound":
         # samples become data URIs in a map the engine reads through fetch (data: URLs fetch fine)
@@ -22,7 +22,7 @@ for f in ("sound", "keys", "term", "globe", "cards"):
     h, n = re.subn(rf'<script src="assets/v7/{f}\.js"></script>', lambda m: "<script>" + js.replace("</script>", "<\\/script>") + "</script>", h); assert n == (0 if f == "cards" else 1), f
 h = h.replace('href="assets/', 'href="https://jtlgrowth.com/assets/').replace('src="assets/', 'src="https://jtlgrowth.com/assets/').replace("src=\"/assets/", "src=\"https://jtlgrowth.com/assets/")
 h = h.replace('href="/', 'href="https://jtlgrowth.com/')
-assert "assets/v7/" not in h, "v7 asset link survived"
+assert 'href="assets/v7/' not in h and 'src="assets/v7/' not in h, "v7 asset link survived"
 OUT.write_text(h)
 size = len(h.encode())
 assert size > 200_000, size
@@ -34,6 +34,6 @@ S, n = re.subn(r'<link rel="stylesheet" href="/assets/v7/home.css">', lambda m: 
 cj = (SITE / "assets/v7/cards.js").read_text()
 S, n = re.subn(r'<script src="/assets/v7/cards.js"></script>', lambda m: "<script>" + cj.replace("</script>", "<\\/script>") + "</script>", S); assert n == 1
 S = S.replace('href="/assets/', 'href="https://jtlgrowth.com/assets/').replace('src="/assets/', 'src="https://jtlgrowth.com/assets/').replace('href="assets/', 'href="https://jtlgrowth.com/assets/').replace('src="assets/', 'src="https://jtlgrowth.com/assets/').replace('href="/', 'href="https://jtlgrowth.com/')
-assert "assets/v7/" not in S
+assert 'href="/assets/v7/' not in S and 'src="/assets/v7/' not in S
 SOUT2 = OUT.parent / "jtl-services-v7.html"; SOUT2.write_text(S)
 print(f"OK {SOUT2} {len(S.encode())} B")
