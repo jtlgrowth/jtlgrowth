@@ -104,12 +104,6 @@
 .jp-ping::after{content:"";position:absolute;inset:-6px;border-radius:12px;border:1.5px solid #E2E2E2;opacity:0}
 .jp-ping.live::after{animation:jpRing 1.4s cubic-bezier(.2,.8,.2,1) 1}
 
-.jp-counter{display:inline-flex;align-items:baseline;gap:.35em;font:700 clamp(28px,3.4vw,44px)/1 'Space Mono',monospace;color:#E2E2E2;letter-spacing:-.02em}
-.jp-counter .digit{position:relative;display:inline-flex;width:.66em;height:1em;overflow:hidden}
-.jp-counter .digit span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.jp-counter .digit .in{animation:jpSlideIn .3s cubic-bezier(.2,.8,.2,1) forwards}
-.jp-counter .digit .out{animation:jpSlideOut .3s cubic-bezier(.2,.8,.2,1) forwards}
-.jp-counter small{font:400 12px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#9E9E9E}
 
 /* hub arcs on a 2D overlay, pinned pill per city, arc label at each peak (cobe.vercel.app is the reference) */
 .jp-globe .jp-arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:1}
@@ -130,8 +124,6 @@
 .jp-globe[data-dark="0"] .jp-arc-label{background:#FFFFFF;color:#181818;border-color:rgba(24,24,24,.4)}
 .jp-globe[data-dark="0"] .jp-arc-label::after{background:#FFFFFF;border-color:rgba(24,24,24,.4)}
 @keyframes jpRing{0%{opacity:.7;transform:scale(.6)}100%{opacity:0;transform:scale(1.9)}}
-@keyframes jpSlideIn{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
-@keyframes jpSlideOut{from{transform:none;opacity:1}to{transform:translateY(-100%);opacity:0}}
 
 /* ============ SERVICES #services ============ */
 #services{--jp-bg:#E2E2E2;--jp-ink:#121212;--jp-sub:#616161;--jp-line:rgba(18,18,18,.16);--jp-card:#FFFFFF;--jp-accent:#181818;--jp-dot:#181818;--jp-glow:rgba(18,18,18,.10)}
@@ -197,7 +189,6 @@
   .kb-base{padding:8px 26px}
   .kb-caret{animation:none;opacity:1}
   .jp-ping.live::after{animation:none}
-  .jp-counter .digit .in,.jp-counter .digit .out{animation:none}
   .ill-funnels b,.ill-automation b,.ill-ai u,.ill-ai u::after,.ill-portal i::after,.ill-clock i,.ill-stack i,.ill-consent i,.ill-watch i{animation:none}
   .ill-ai u{width:110px}
   .ill-portal i:first-child::after{transform:none}

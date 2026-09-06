@@ -1,13 +1,12 @@
 /* v8 globe: cobe dotted globe (E-54b mechanics) with hub arcs from Manila to every
    city on the line, a pinned pill label per city and an arc label at each peak
-   (cobe.vercel.app is the reference), JTL ping tiles, a rolling counter (E-52b)
-   that counts the visitor's own keystrokes, ambient pings on the cities on the
+   (cobe.vercel.app is the reference), JTL ping tiles, ambient pings on the cities on the
    line, and a real day-and-night overlay from the sun position.
    The arcs are drawn on a 2D overlay with the same projection the pings use:
    cobe 2's own arcs are a quadratic bezier whose peak sits inside the globe once
    the pair is more than about 85 degrees apart (Manila to London is 105, to
    Boston 122), so the library cannot draw this route.
-   Listens: window 'jtl-keydown' (from term.js) -> ping the visitor's city, +1.
+   Listens: window 'jtl-keydown' (from term.js) -> ping the visitor's city.
    Boots when in view, renders only while visible. */
 (function () {
   'use strict';
@@ -77,31 +76,9 @@
     var lon = 180 - h * 15; while (lon > 180) lon -= 360; while (lon < -180) lon += 360;
     return vec(decl, lon);
   }
-  /* rolling counter, E-52b */
-  function counter(el, label) {
-    el.className = 'jp-counter'; el.innerHTML = '';
-    var value = 0, cells = [], box = document.createElement('span'); el.appendChild(box);
-    var small = document.createElement('small'); small.textContent = label; el.appendChild(small);
-    function render(n) {
-      var s = String(n).padStart(3, '0');
-      while (cells.length < s.length) { var c = document.createElement('span'); c.className = 'digit'; c.innerHTML = '<span>0</span>'; box.appendChild(c); cells.push(c); }
-      for (var i = 0; i < s.length; i++) {
-        var cell = cells[i], cur = cell.querySelector('span:last-child');
-        if (cur.textContent === s[i]) continue;
-        var nxt = document.createElement('span'); nxt.textContent = s[i];
-        if (reduce.matches) { cell.innerHTML = ''; cell.appendChild(nxt); continue; }
-        cur.className = 'out'; nxt.className = 'in'; cell.appendChild(nxt);
-        setTimeout(function (c, o) { return function () { if (o.parentNode === c) c.removeChild(o); }; }(cell, cur), 320);
-      }
-    }
-    render(0);
-    return { bump: function () { value++; render(value); }, get: function () { return value; } };
-  }
-
   function globe(el) {
     if (el.__globeInit) return; el.__globeInit = true;
     var dark = el.getAttribute('data-dark') !== '0';
-    var wantCounter = el.getAttribute('data-counter') === '1';
     var mode = REACH[el.getAttribute('data-reach')] ? el.getAttribute('data-reach') : 'core';
     var LINE = REACH[mode];
     var ink = dark ? '#E2E2E2' : '#181818';
@@ -128,8 +105,6 @@
          Peak height in globe radii: a short hop stays low, the long ones rise, capped so the peak stays inside the canvas */
       return { city: city, a: b, b: hubV, w: w, h: Math.min(0.2, 0.06 + 0.15 * (w / Math.PI)), born: Infinity, dies: Infinity, e: 0, alpha: 0, seen: false, lap: -1, el: lab, k: -1 };
     });
-    var cnt = null;
-    if (wantCounter) { var c = document.createElement('div'); el.parentNode.insertBefore(c, el.nextSibling); cnt = counter(c, 'keystrokes since you arrived'); }
     /* v8.1: the "Running in <city>" caption and the Caloocan clock line are gone (Owner, 2026-09-07:
        they collided with the panel nav). The pills name the cities now; the counter stays. */
     var booted = false, visible = false, timer = 0;
@@ -151,7 +126,6 @@
     }
     addEventListener('jtl-keydown', function (e) {
       if (e.detail && e.detail.repeat) return;
-      if (cnt) cnt.bump();
       land(VISITOR, true);
     });
 
