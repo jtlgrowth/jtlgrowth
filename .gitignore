@@ -5,3 +5,7 @@ qa/node_modules/
 qa/*.png
 qa/package*.json
 node_modules
+
+# studies and templates stay local; GitHub Pages serves only the site (Owner, 2026-09-06)
+qa/
+_template/
