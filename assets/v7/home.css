@@ -97,7 +97,8 @@
 .jp-globe canvas{width:100%;height:100%;opacity:0;transition:opacity .8s ease;contain:layout paint size;cursor:grab;touch-action:none;display:block}
 .jp-globe canvas.on{opacity:1}
 .jp-globe canvas.dragging{cursor:grabbing}
-.jp-night{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:50%;opacity:.9}
+/* the overlays are canvases too, so they must out-rank the cobe canvas rule above or they inherit its opacity:0 */
+.jp-globe .jp-night{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:50%;opacity:.9}
 .jp-ping{position:absolute;top:0;left:0;width:30px;height:30px;border-radius:8px;border:2px solid #101010;background:#E2E2E2;box-shadow:0 2px 8px rgba(0,0,0,.22);pointer-events:none;opacity:0;transform-origin:center;transition:opacity .35s ease;display:flex;align-items:center;justify-content:center}
 .jp-ping svg{width:18px;height:18px;color:#101010}
 .jp-ping::after{content:"";position:absolute;inset:-6px;border-radius:12px;border:1.5px solid #E2E2E2;opacity:0}
@@ -113,12 +114,24 @@
 .jp-globe-cap b{color:#E2E2E2;font-weight:600}
 .jp-clock{font:400 11px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#9E9E9E;margin-top:6px}
 
-/* orbit ring: one direction, passes behind the globe */
-.jp-orbit{position:absolute;inset:0;pointer-events:none;perspective:900px;z-index:0}
-.jp-orbit-ring{position:absolute;left:50%;top:50%;width:112%;aspect-ratio:1/1;transform:translate(-50%,-50%) rotateX(64deg);transform-style:preserve-3d;animation:jpOrbit 14s linear infinite}
-.jp-sat,.jp-sat-ghost{position:absolute;left:50%;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:5px;background:#E2E2E2}
-.jp-sat-ghost{opacity:calc(.5 - var(--k) * .07);transform:rotate(calc(var(--k) * -6deg)) translateY(0)}
-@keyframes jpOrbit{to{transform:translate(-50%,-50%) rotateX(64deg) rotateZ(360deg)}}
+/* hub arcs on a 2D overlay, pinned pill per city, arc label at each peak (cobe.vercel.app is the reference) */
+.jp-globe .jp-arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:1}
+.jp-pin,.jp-arc-label{position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;font:700 10px/1 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:6px 8px;border-radius:3px;opacity:0;will-change:transform,opacity}
+.jp-pin{background:#E2E2E2;color:#101010}
+.jp-pin::after{content:"";position:absolute;width:7px;height:7px;background:inherit;transform:rotate(45deg)}
+.jp-pin[data-side="n"]{translate:-50% calc(-100% - 9px)}
+.jp-pin[data-side="n"]::after{left:50%;bottom:-3px;margin-left:-3.5px}
+.jp-pin[data-side="s"]{translate:-50% 9px}
+.jp-pin[data-side="s"]::after{left:50%;top:-3px;margin-left:-3.5px}
+.jp-pin[data-side="e"]{translate:9px -50%}
+.jp-pin[data-side="e"]::after{top:50%;left:-3px;margin-top:-3.5px}
+.jp-pin[data-side="w"]{translate:calc(-100% - 9px) -50%}
+.jp-pin[data-side="w"]::after{top:50%;right:-3px;margin-top:-3.5px}
+.jp-arc-label{translate:-50% calc(-100% - 8px);background:#101010;color:#E2E2E2;border:1px solid rgba(226,226,226,.5)}
+.jp-arc-label::after{content:"";position:absolute;left:50%;bottom:-4px;width:6px;height:6px;margin-left:-3px;background:#101010;border-right:1px solid rgba(226,226,226,.5);border-bottom:1px solid rgba(226,226,226,.5);transform:rotate(45deg)}
+.jp-globe[data-dark="0"] .jp-pin{background:#181818;color:#E2E2E2}
+.jp-globe[data-dark="0"] .jp-arc-label{background:#FFFFFF;color:#181818;border-color:rgba(24,24,24,.4)}
+.jp-globe[data-dark="0"] .jp-arc-label::after{background:#FFFFFF;border-color:rgba(24,24,24,.4)}
 @keyframes jpRing{0%{opacity:.7;transform:scale(.6)}100%{opacity:0;transform:scale(1.9)}}
 @keyframes jpSlideIn{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
 @keyframes jpSlideOut{from{transform:none;opacity:1}to{transform:translateY(-100%);opacity:0}}
@@ -186,7 +199,6 @@
   .kb-deck{display:none}
   .kb-base{padding:8px 26px}
   .kb-caret{animation:none;opacity:1}
-  .jp-orbit-ring{animation:none}
   .jp-ping.live::after{animation:none}
   .jp-counter .digit .in,.jp-counter .digit .out{animation:none}
   .ill-funnels b,.ill-automation b,.ill-ai u,.ill-ai u::after,.ill-portal i::after,.ill-clock i,.ill-stack i,.ill-consent i,.ill-watch i{animation:none}
@@ -210,9 +222,6 @@
 @keyframes jpFallShort{0%{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(52px);opacity:0}}
 #services .ill-funnels{transform:scale(.8);transform-origin:center top}
 #services .ill-funnels b{animation-name:jpFallShort}
-/* orbit ring hugs the globe, not the stage: same width as .jp-globe, centred on it */
-#globe .jp-orbit{position:absolute;inset:auto;left:50%;top:0;width:min(640px,92vw);aspect-ratio:1/1;transform:translateX(-50%);pointer-events:none}
-#globe .jp-orbit-ring{width:112%;left:50%;top:50%}
 /* mobile: the hero copy and laptop never exceed the column */
 @media (max-width:860px){
   #p1 .kb-hero,#p1clone .kb-hero{display:block}
@@ -220,12 +229,6 @@
   #p1 .kb-copy .lead,#p1clone .kb-copy .lead{max-width:100%}
 }
 
-/* satellite is JS-driven: the orbit box keeps no stacking context so tiles can pass in front of or behind the globe */
-#globe .jp-orbit{z-index:auto;overflow:visible}
-#globe .jp-orbit-ring{display:none}
-#globe .jp-sat,#globe .jp-sat-ghost{position:absolute;left:0;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:5px;background:#E2E2E2;display:flex;align-items:center;justify-content:center;animation:none!important;will-change:transform,opacity;transform:translate(-999px,-999px)}
-#globe .jp-sat svg{width:12px;height:12px;color:#101010}
-#globe .jp-sat-ghost{width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:3px}
 #globe .jp-globe{position:relative;z-index:2}
 /* small screens: the cockpit drops its sidebar and menubar items so the terminal owns the screen */
 @media (max-width:600px){
@@ -234,11 +237,6 @@
   .kb-mb-item{display:none!important}
   .kb-screen{aspect-ratio:auto!important;min-height:340px}
 }
-
-/* the satellite is a satellite: a Lucide glyph in silver, no tile behind it */
-#globe .jp-sat{width:26px;height:26px;margin:-13px 0 0 -13px;background:transparent;border-radius:0;color:#E2E2E2;filter:drop-shadow(0 0 6px rgba(226,226,226,.35))}
-#globe .jp-sat svg{width:22px;height:22px;color:#E2E2E2}
-#globe .jp-sat-ghost{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%}
 
 /* review round 2: laptop left (eyes read left first), copy right as the backup. Geometry from the Keeby hero DOM:
    laptop 65% wide, bleeds 6.5vw off the left edge under 1920px, capped by viewport height; copy narrow and centred. */
