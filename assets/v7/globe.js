@@ -77,11 +77,6 @@
     var lon = 180 - h * 15; while (lon > 180) lon -= 360; while (lon < -180) lon += 360;
     return vec(decl, lon);
   }
-  function manilaTime() {
-    try { return new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit' }).format(new Date()); }
-    catch (e) { return ''; }
-  }
-
   /* rolling counter, E-52b */
   function counter(el, label) {
     el.className = 'jp-counter'; el.innerHTML = '';
@@ -135,18 +130,10 @@
     });
     var cnt = null;
     if (wantCounter) { var c = document.createElement('div'); el.parentNode.insertBefore(c, el.nextSibling); cnt = counter(c, 'keystrokes since you arrived'); }
-    var cap = document.createElement('div'); cap.className = 'jp-globe-cap';
-    cap.innerHTML = '<span>Running in </span><b data-city>' + VISITOR + '</b>';
-    var after = cnt ? el.nextSibling.nextSibling : el.nextSibling;
-    el.parentNode.insertBefore(cap, after);
-    var clock = document.createElement('div'); clock.className = 'jp-clock';
-    el.parentNode.insertBefore(clock, cap.nextSibling);
-    function tickClock() { var t = manilaTime(); clock.textContent = t ? 'It is ' + t + ' in Caloocan, the seats are on shift' : ''; }
-    tickClock(); setInterval(tickClock, 30000);
-    var capCity = cap.querySelector('[data-city]');
-
+    /* v8.1: the "Running in <city>" caption and the Caloocan clock line are gone (Owner, 2026-09-07:
+       they collided with the panel nav). The pills name the cities now; the counter stays. */
     var booted = false, visible = false, timer = 0;
-    var state = { phi: 0, theta: 0.25, c: 0, live: [] };
+    var state = { phi: 0, theta: 0.25, c: 0, live: [], last: VISITOR };
     var slot = 0, holdUntil = 0;
     var AMBIENT = ['Caloocan', 'Taguig'].concat(LINE);
     function land(city, hold) {
@@ -154,9 +141,9 @@
       state.live = state.live.filter(function (p) { return p.slot !== s; });
       state.live.push({ city: city, at: now, slot: s });
       var d = pings[s]; d.classList.remove('live'); void d.offsetWidth; d.classList.add('live');
-      /* the visitor's own ping owns the caption for a beat; ambient pings do not talk over it */
+      /* the visitor's own ping holds the ledger for a beat; ambient pings do not talk over it */
       if (hold) holdUntil = now + 2500;
-      if (hold || now >= holdUntil) capCity.textContent = city;
+      if (hold || now >= holdUntil) state.last = city;
     }
     function ambient() {
       if (visible) land(AMBIENT[Math.floor(Math.random() * AMBIENT.length)]);
