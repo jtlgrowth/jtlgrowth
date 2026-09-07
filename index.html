@@ -467,27 +467,27 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <style>
 #boot{position:fixed;inset:0;z-index:9999;background:#121212;display:flex;align-items:center;justify-content:center;will-change:transform,opacity}
 #boot .boot-stack{display:flex;flex-direction:column;align-items:center;gap:22px}
-#boot{transition:transform .62s cubic-bezier(.83,0,.17,1)}
-#boot.off{transform:translateX(-100%)}
+#boot{transition:transform .45s cubic-bezier(.83,0,.17,1)}
+#boot.off{transform:translateX(-100%);pointer-events:none}/* pointer-events: the panel keeps taking clicks for the whole slide-out, so for about half a second a visitor clicking the hero hits nothing. Found 2026-09-07 while checking why the browser hit test disagreed with the picture. */
 #boot .bt{stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:butt}
-#boot .bt1{animation:bootdraw .38s cubic-bezier(.6,0,.3,1) 0.12s forwards}
-#boot .bt2{animation:bootdraw .38s cubic-bezier(.6,0,.3,1) 0.34s forwards}
-#boot .bt3{animation:bootdraw .38s cubic-bezier(.6,0,.3,1) 0.56s forwards}
+#boot .bt1{animation:bootdraw .20s cubic-bezier(.6,0,.3,1) 0.04s forwards}
+#boot .bt2{animation:bootdraw .20s cubic-bezier(.6,0,.3,1) 0.16s forwards}
+#boot .bt3{animation:bootdraw .20s cubic-bezier(.6,0,.3,1) 0.28s forwards}
 #boot .boot-word{overflow:hidden;padding:2px 0;font:700 clamp(13px,1.5vw,19px)/1.1 "Archivo Expanded",Archivo,sans-serif;letter-spacing:.30em;color:#B9B9B9;white-space:nowrap}
-#boot .boot-word span{display:inline-block;transform:translateY(115%);animation:bootrise .55s cubic-bezier(.2,.7,.2,1) forwards}
+#boot .boot-word span{display:inline-block;transform:translateY(115%);animation:bootrise .34s cubic-bezier(.2,.7,.2,1) forwards}
 #boot .boot-word .sp{width:.55em}
-#boot .boot-word span:nth-child(1){animation-delay:1.000s}
-#boot .boot-word span:nth-child(2){animation-delay:1.045s}
-#boot .boot-word span:nth-child(3){animation-delay:1.090s}
-#boot .boot-word span:nth-child(4){animation-delay:1.135s}
-#boot .boot-word span:nth-child(5){animation-delay:1.180s}
-#boot .boot-word span:nth-child(6){animation-delay:1.225s}
-#boot .boot-word span:nth-child(7){animation-delay:1.270s}
-#boot .boot-word span:nth-child(8){animation-delay:1.315s}
-#boot .boot-word span:nth-child(9){animation-delay:1.360s}
-#boot .boot-word span:nth-child(10){animation-delay:1.405s}
+#boot .boot-word span:nth-child(1){animation-delay:0.420s}
+#boot .boot-word span:nth-child(2){animation-delay:0.442s}
+#boot .boot-word span:nth-child(3){animation-delay:0.464s}
+#boot .boot-word span:nth-child(4){animation-delay:0.486s}
+#boot .boot-word span:nth-child(5){animation-delay:0.508s}
+#boot .boot-word span:nth-child(6){animation-delay:0.530s}
+#boot .boot-word span:nth-child(7){animation-delay:0.552s}
+#boot .boot-word span:nth-child(8){animation-delay:0.574s}
+#boot .boot-word span:nth-child(9){animation-delay:0.596s}
+#boot .boot-word span:nth-child(10){animation-delay:0.618s}
 #boot .boot-line{width:196px;height:2px;background:#2A2A2A;overflow:hidden}
-#boot .boot-line span{display:block;height:100%;width:100%;background:#B9B9B9;transform:translateX(-100%);animation:bootfill 1.05s cubic-bezier(.4,0,.2,1) 1.25s forwards}
+#boot .boot-line span{display:block;height:100%;width:100%;background:#B9B9B9;transform:translateX(-100%);animation:bootfill .52s cubic-bezier(.4,0,.2,1) .42s forwards}
 @keyframes bootdraw{to{stroke-dashoffset:0}}
 @keyframes bootrise{to{transform:translateY(0)}}
 @keyframes bootfill{to{transform:translateX(0)}}
@@ -503,8 +503,12 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   var b=document.getElementById('boot');
   if(sessionStorage.getItem('jtlboot')){b.remove();return}
   var done=function(){b.classList.add('off');sessionStorage.setItem('jtlboot','1');setTimeout(function(){b.remove()},700)};
-  var min=new Promise(function(r){setTimeout(r,2400)});
-  var loaded=new Promise(function(r){window.addEventListener('load',r);setTimeout(r,3200)});
+  // 2026-09-07: the floor was 2400 ms and the load cap 3200 ms, so a first-time visitor
+  // saw the logo for 2.4 s minimum and the hero headline only around 3 s in. Five readers
+  // shown just that window all called it a loading screen and none named the business.
+  // The whole choreography above is compressed to finish under 1 s; these match it.
+  var min=new Promise(function(r){setTimeout(r,950)});
+  var loaded=new Promise(function(r){window.addEventListener('load',r);setTimeout(r,1400)});
   Promise.all([min,loaded]).then(done);
 })();
 </script>
@@ -515,6 +519,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   <a class="logo" href="#" data-go="0" aria-label="JTL Growth, back to the start"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
   <nav class="nav-row" aria-label="Primary">
     <a href="/services/">Services</a>
+    <a href="/pricing/">Pricing</a>
     <a href="/products/">Products</a>
     <a href="/workshop/">Workshop</a>
     <a href="/work/">Work</a>
@@ -535,6 +540,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
         </div>
         <div class="mgroup"><div class="mlabel">Pages</div>
           <a href="/services/">Services <span class="mk">&#8599;</span></a>
+          <a href="/pricing/">Pricing <span class="mk">&#8599;</span></a>
           <a href="/products/">Products <span class="mk">&#8599;</span></a>
           <a href="/workshop/">Workshop <span class="mk">&#8599;</span></a>
           <a href="/work/">Work <span class="mk">&#8599;</span></a>
@@ -708,7 +714,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
         <a class="hub-chip magnet" href="/work/">Work <span class="arr">↗</span></a>
       </nav>
     </div>
-    <div class="footline"><div class="inner"><span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span><span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span><span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span></div></div>
+    <div class="footline"><div class="inner"><span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span><span><a href="/group/">The group</a> &middot; <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a> &middot; <a href="/robots-and-coffee/">Robots &amp; Coffee</a> &middot; <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">FWIB</a></span><span><a href="/">Home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/privacy/#cookies">Cookies</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span></div></div>
   </section>
 
   <!-- LOOP CLONE: exact duplicate of panel 1, appended so forward-scroll past the
