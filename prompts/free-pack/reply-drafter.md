@@ -26,4 +26,4 @@ To check it worked: read the three drafts out loud. If none of them sound like s
 
 ## How to check it worked
 
-Read the three drafts out loud. If none of them sound like something you would actually type, tell Claude what is off (too stiff, too long, wrong greeting) and have it redo voice-notes.md before drafting again.
+read the three drafts out loud. If none of them sound like something you would actually type, tell Claude what is off (too stiff, too long, wrong greeting) and have it redo voice-notes.md before drafting again.

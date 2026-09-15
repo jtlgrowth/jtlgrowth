@@ -26,4 +26,4 @@ To check it worked: open the vault folder in Finder or Obsidian and confirm Dail
 
 ## How to check it worked
 
-Open the vault folder in Finder or Obsidian and confirm Daily, Clients, Inbox.md and today's dated note are all there.
+open the vault folder in Finder or Obsidian and confirm Daily, Clients, Inbox.md and today's dated note are all there.

@@ -26,4 +26,4 @@ To check it worked: open weekly-numbers.html in your browser and confirm the thi
 
 ## How to check it worked
 
-Open weekly-numbers.html in your browser and confirm the this-week and last-week totals actually match what you expected from your own memory of the week.
+open weekly-numbers.html in your browser and confirm the this-week and last-week totals actually match what you expected from your own memory of the week.

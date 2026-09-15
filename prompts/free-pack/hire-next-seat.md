@@ -22,4 +22,4 @@ To check it worked: ask the new employee (by name) to do that first real task, a
 
 ## How to check it worked
 
-Ask the new employee (by name) to do that first real task, and see whether the result is usable without you rewriting it.
+ask the new employee (by name) to do that first real task, and see whether the result is usable without you rewriting it.

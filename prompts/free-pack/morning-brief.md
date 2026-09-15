@@ -27,4 +27,4 @@ To check it worked: read the brief back and see if the three things to do first 
 
 ## How to check it worked
 
-Read the brief back and see if the three things to do first actually match what matters most to you today. If they do not, tell Claude what it got wrong so it can fix the rule for next time.
+read the brief back and see if the three things to do first actually match what matters most to you today. If they do not, tell Claude what it got wrong so it can fix the rule for next time.
