@@ -14,7 +14,12 @@
     'growth': '/growth/', 'growth software': '/growth/', 'demo': '/growth/',
     'inbox scout': '/inbox-scout/', 'inbox': '/inbox-scout/',
     'jamz': '/jamz-jamorol/',
-    'starter pack': '/starter-pack/', 'starter-pack': '/starter-pack/', 'starterpack': '/starter-pack/', 'pack': '/starter-pack/'
+    'starter pack': '/starter-pack/', 'starter-pack': '/starter-pack/', 'starterpack': '/starter-pack/', 'pack': '/starter-pack/',
+    'quote': '/quote/', 'request a quote': '/quote/', 'pricing': '/quote/',
+    'prompts': '/prompts/', 'prompt library': '/prompts/',
+    'setup codex': '/setup-codex/', 'codex': '/setup-codex/',
+    'privacy': '/privacy/', 'terms': '/terms/',
+    'built': '/workshop/#built', 'built after the room': '/workshop/#built'
   };
   var HOME_WORDS = { 'home': 1, 'start': 1, 'top': 1 };
   var CONTACT_WORDS = { 'book': 1, 'book a call': 1, 'call': 1, 'contact': 1, 'gwen': 1 };
@@ -26,7 +31,7 @@
     { name: 'services', kws: ['services', 'what you offer', 'offer', 'tiers', 'ladder'],
       a: 'Four tiers, installed in the order that makes each one pay for the next: Funnels and Websites, Automation Systems, AI Employees, Ops Portals. Each tier only works because the one under it does. Type go to services for the page.' },
     { name: 'price', kws: ['price', 'pricing', 'cost', 'how much', 'rate', 'budget', 'fee'],
-      a: 'Quote-based, it depends on what is already wired. Thirty minutes with Gwen, no pitch. If your bottleneck turns out not to need AI, we will tell you that on the call. Type book to slide to the booking panel.' },
+      a: 'Quote-based, it depends on what is already wired. There is no price list on the site any more: type go to quote and tell us the bottleneck, and you get a written quote in two business days. Or type book for thirty minutes with Gwen.' },
     { name: 'aiemployee', kws: ['ai employee', 'ai employees', 'agent', 'agents', 'chatbot', 'bot', 'assistant', 'venice'],
       a: 'A chat window is not an employee. An employee has a job, a process and receipts. Ours runs the intake and the reporting, the humans handle the calls. The seven-stage build is free, type go to ai employee.' },
     { name: 'automation', kws: ['automation', 'automations', 'automate', 'n8n', 'ghl', 'gohighlevel', 'highlevel', 'crm', 'zapier', 'workflow'],
@@ -54,7 +59,23 @@
     { name: 'thanks', kws: ['thanks', 'thank you', 'salamat', 'cheers'],
       a: 'Anytime. Type book when you are ready.' },
     { name: 'help', kws: ['help', 'commands', 'what can i type'],
-      a: 'Try: services, price, ai employee, automation, workshop, products, where, who. Or navigate: go to services, go to products, go to skills, go to workshop, go to starter pack, book.' },
+      a: 'Try: services, quote, ai employee, automation, workshop, work, products, where, who. Or navigate: go to services, go to quote, go to work, go to workshop, go to products, go to prompts, go to setup, book.' },
+    { name: 'quote', kws: ['quote', 'request a quote', 'proposal', 'estimate', 'scope', 'scoped', 'how do i start', 'get started'],
+      a: 'No public price list. Tell us the bottleneck, we read what is already wired, and you get a written quote in two business days: the count, where it stops, the timeline. Type go to quote to send the request, or book for thirty minutes with Gwen.' },
+    { name: 'work', kws: ['work', 'portfolio', 'case study', 'case studies', 'clients', 'examples', 'proof', 'live sites', 'what have you built'],
+      a: 'Six systems in production: FWIB, this site, AVAS Night Shift, Robots and Coffee, the AVAS workshop page and the Batch 1 workshop recap. Every screen is a live URL, not a mockup. Type go to work.' },
+    { name: 'built', kws: ['students', 'founders built', 'what they built', 'testimonials', 'results', 'after the room', 'batch 1 results', 'reviews'],
+      a: 'Within two weeks of the room, Batch 1 founders shipped their own headquarters, a catalog site, second brains and AI employees. Their clips and words sit on the workshop page under Built after the room. Type go to built.' },
+    { name: 'batch2', kws: ['batch 2', 'batch two', 'next workshop', 'next batch', 'join the workshop', 'sept 19', 'september 19', 'how do i join'],
+      a: 'Batch 2 runs September 19 to 20, 2026, same venue, run by AVAS. Seats and checkout live on their page: ayalavirtualassistance.site/ai-workshop.' },
+    { name: 'prompts', kws: ['prompts', 'prompt', 'prompt library', 'prompting'],
+      a: 'The prompts we run ourselves, exact wording included, live at /prompts/. Type go to prompts.' },
+    { name: 'setup', kws: ['setup', 'set up', 'claude code', 'install claude', 'how do i install'],
+      a: 'One command sets up Claude Code on a Mac or Windows machine, the same way the workshop room did it. Type go to setup. On Codex, type go to setup codex.' },
+    { name: 'privacy', kws: ['privacy', 'my data', 'cookies', 'consent', 'gdpr', 'tracking'],
+      a: 'Tracking runs behind consent and the policy is written in plain sentences. Type go to privacy.' },
+    { name: 'hire', kws: ['hire', 'hiring', 'careers', 'job', 'jobs', 'work with you'],
+      a: 'We are two people and an AI workforce; the seats we open are AI seats. If you are a founder who wants that model, the workshop is the door: type go to workshop.' },
     { name: 'clear', kws: ['clear', 'cls', 'reset'], a: null }
   ];
   var GREETING = 'Venice here, the AI employee that runs this firm’s repetitive half. Ask what we build, what it costs, or type go to services.';
@@ -223,6 +244,12 @@
     if (CONTACT_WORDS[t]) return { type: 'contact' };
     return null;
   }
+  function intentByName(name) {
+    for (var i = 0; i < INTENTS.length; i++) {
+      if (INTENTS[i].name === name) return INTENTS[i];
+    }
+    return null;
+  }
   TermUI.prototype.process = function (raw, cb) {
     var norm = normalize(raw);
     var lower = norm.toLowerCase();
@@ -246,7 +273,7 @@
     }
     // a bare page name navigates only when no intent claims the word: "services" explains, "go to services" opens
     if (bare && !best) { this.doNav(bare, cb); return; }
-    if (!best && lower.indexOf('?') !== -1) best = INTENTS[16];
+    if (!best && lower.indexOf('?') !== -1) best = intentByName('help');
     if (best) {
       if (best.name === 'clear') {
         this.log.innerHTML = '';

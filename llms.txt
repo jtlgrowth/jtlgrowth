@@ -10,6 +10,7 @@
 - Instagram: https://www.instagram.com/jtlgrowth
 - Homepage: hero, an About Me section on the founder, and a contact/booking section; links out to every page below.
 - Services (https://jtlgrowth.com/services/): the four-tier ladder, built in order: Tier 1 Funnels & Websites, Tier 2 Automation Systems, Tier 3 AI Employees, Tier 4 Ops Portals.
+- Quote (https://jtlgrowth.com/quote/): request a written quote, no public price list
 - Products (https://jtlgrowth.com/products/): things you can get or install today: Inbox Scout, The AI Employee, the Growth software demo, the AgentKit archive, Scout packs, and Robots & Coffee (off-site storefront).
 - Workshop (https://jtlgrowth.com/workshop/): a two-day, hands-on founder AI workshop: build a working AI employee and give it a UI system.
 - Work (https://jtlgrowth.com/work/): case studies of shipped, live systems: FWIB, this site, AVAS Night Shift, Robots & Coffee.
