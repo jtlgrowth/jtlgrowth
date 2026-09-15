@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,700&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
 <style>
   :root{
-    --ground:#17110D; --panel:#221A14; --line:rgba(245,238,228,.14); --line2:rgba(245,238,228,.30);
-    --cream:#F5EEE4; --dim:#D3C6B6; --dim2:#A3957F; --gold:#F2C43D; --gold-hover:#FFD75A; --gold-ink:#1A1206;
+    --ground:#F8F7F4; --panel:#FFFFFF; --line:rgba(26,26,26,.12); --line2:rgba(26,26,26,.30);
+    --cream:#1A1A1A; --dim:#55524C; --dim2:#7C7770; --gold:#8A6A2F; --gold-hover:#2E2E2E; --gold-ink:#FFFFFF;
     --water:#3B5C66; --wood:#9B7554;
     --display:'Fraunces',Georgia,'Times New Roman',serif;
     --body:'Space Grotesk','Helvetica Neue',Arial,sans-serif;
     --mono:'Space Mono','SFMono-Regular',Menlo,monospace;
   }
   *{box-sizing:border-box}
-  html{color-scheme:dark}
+  html{color-scheme:light}
   body{margin:0;background:var(--ground);color:var(--cream);font:400 17px/1.58 var(--body);padding-inline:20px}
   a{color:inherit}
   .wrap{width:min(1380px,100%);margin-inline:auto}
@@ -36,8 +36,9 @@
   .hdr-meta{font:400 13px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 
   .hero{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;padding-block:28px 40px}
-  .hero-vis{border:1px solid var(--line);background:#0E0B09;border-radius:6px;overflow:hidden;max-width:100%}
+  .hero-vis{border:1px solid var(--line);background:var(--panel);border-radius:6px;overflow:hidden;max-width:100%}
   .hero-vis svg{display:block;width:100%;height:auto}
+  .hero-vis img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:62% 38%}
   .hero-copy{display:grid;gap:22px}
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .fact b{display:block;font:500 22px/1.1 var(--body);font-variant-numeric:tabular-nums}
@@ -45,8 +46,8 @@
   .cta{display:grid;gap:12px}
   .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border:1px solid var(--line2);border-radius:4px;text-decoration:none;font:600 16px/1 var(--body);letter-spacing:.01em;transition:border-color .2s,background .2s,color .2s}
   .btn:hover{border-color:var(--cream)}
-  .btn.gold{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
-  .btn.gold:hover{background:var(--gold-hover);border-color:var(--gold-hover)}
+  .btn.gold{background:#1A1A1A;color:#FFFFFF;border-color:#1A1A1A}
+  .btn.gold:hover{background:#2E2E2E;border-color:#2E2E2E}
   .btn small{font:400 13px/1 var(--mono);letter-spacing:.06em;opacity:.85}
   .btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
@@ -60,11 +61,11 @@
   @media (min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
   @media (min-width:1024px){.gallery{grid-template-columns:repeat(3,1fr);gap:18px}}
   .plan{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
-  .plan-vis{border:1px solid var(--line);background:#0E0B09;border-radius:6px;overflow:hidden}
+  .plan-vis{border:1px solid var(--line);background:var(--panel);border-radius:6px;overflow:hidden}
   .plan-vis svg{display:block;width:100%;height:auto}
   .legend{display:grid;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .legend div{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 16px;border-top:1px solid var(--line);align-items:start}
-  .legend div:first-child{border-top:0}
+  .legend > div{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 16px;border-top:1px solid var(--line);align-items:start}
+  .legend > div:first-child{border-top:0}
   .legend b{display:block;font:600 16px/1.3 var(--body)}
   .legend span{font-size:16px;color:var(--dim)}
   .key{width:22px;height:22px;border-radius:3px;margin-top:2px}
@@ -151,12 +152,12 @@
 
 <section class="hero" style="border-top:0">
   <div class="hero-vis">
-    <img src="/mastermind/media/villa-night.jpg" alt="A private Tagaytay villa at night, windows lit, an outdoor screen glowing over the garden" width="1600" height="1200" style="display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover">
+    <img src="/mastermind/media/hero.jpg" alt="The villa from the road: a white gable house with black window frames, palms, and the Tagaytay ridge behind it" width="1440" height="960">
   </div>
   <div class="hero-copy">
-    <span class="eyebrow">Mastermind &middot; 8 seats &middot; one villa</span>
-    <h1>Arrive with a problem. Leave with your app on your phone.</h1>
-    <p class="dim">One table, one night, hosts on the floor until it runs. By Sunday noon your business has a private app it did not have on Saturday.</p>
+    <span class="eyebrow">Content and build mastermind &middot; 8 seats &middot; one villa</span>
+    <h1>Content by day. Your app by night.</h1>
+    <p class="dim">Arrive with one business problem and your phone. Shoot a month of content in the villa with Gwen by day, build your private app with Jamz by night. Sunday morning both are live.</p>
     <div class="facts">
       <div class="fact"><b>Oct 24 to 25</b><span class="label">Sat 1pm to Sun 3pm</span></div>
       <div class="fact"><b>Tagaytay</b><span class="label">Private villa, van from BGC</span></div>
@@ -172,69 +173,69 @@
 <section id="place">
   <div class="sec-head">
     <span class="eyebrow">The place</span>
-    <h2>A private villa in Tagaytay, an hour and a half from BGC.</h2>
-    <p class="dim">Dark wood, a heated pool, a long table under the lanai, four to six rooms for the night. The exact villa is revealed to enrollees.</p>
+    <h2>A white villa on the Tagaytay ridge, an hour and a half from BGC.</h2>
+    <p class="dim">White walls and black frames, a heated pool, a double-height living room, five rooms and six baths for the night. Every corner is a set by day and a build table by night. Pre-final: the address reaches enrollees a week before.</p>
   </div>
   <div class="gallery">
-    <figure><img src="/mastermind/media/villa-day.jpg" alt="Daytime photo of a private Tagaytay villa, pool and lawn" width="1600" height="1200" loading="lazy"><figcaption>The house and the pool</figcaption></figure>
-    <figure><img src="/mastermind/media/pool-night.jpg" alt="A heated pool lit at night" width="1200" height="1600" loading="lazy"><figcaption>The pool after the second build block</figcaption></figure>
-    <figure><img src="/mastermind/media/pool-wall.jpg" alt="A waterfall wall feature over the heated pool" width="1600" height="1200" loading="lazy"><figcaption>The waterfall wall</figcaption></figure>
-    <figure><img src="/mastermind/media/table.jpg" alt="A long dining table set for the group" width="1600" height="1066" loading="lazy"><figcaption>The table</figcaption></figure>
-    <figure><img src="/mastermind/media/coffee.jpg" alt="A coffee corner in the kitchen" width="1600" height="1142" loading="lazy"><figcaption>Coffee corner</figcaption></figure>
-    <figure><img src="/mastermind/media/room.jpg" alt="One of the bedrooms, twin share" width="1600" height="1200" loading="lazy"><figcaption>One of the rooms</figcaption></figure>
+    <figure><img src="/mastermind/media/pool-night.jpg" alt="The pool lit at night under string lights, bamboo fence behind" width="1200" height="1600" loading="lazy"><figcaption>The pool after the second build block</figcaption></figure>
+    <figure><img src="/mastermind/media/living.jpg" alt="The double-height living room: white walls, black stair rail, grey sofas around a wooden table" width="1440" height="960" loading="lazy"><figcaption>The living room, where the speaker corner goes</figcaption></figure>
+    <figure><img src="/mastermind/media/island.jpg" alt="The white kitchen island with black bar stools and pendant lights" width="1440" height="960" loading="lazy"><figcaption>The island, coffee bar all night</figcaption></figure>
+    <figure><img src="/mastermind/media/table.jpg" alt="The dining table by the window under a wire chandelier" width="1440" height="1080" loading="lazy"><figcaption>The table, before we join two of them</figcaption></figure>
+    <figure><img src="/mastermind/media/lanai.jpg" alt="The covered lanai with a sofa set opening onto the garden and pool" width="1200" height="1600" loading="lazy"><figcaption>The lanai, first build block</figcaption></figure>
+    <figure><img src="/mastermind/media/room.jpg" alt="A bedroom with a white bed, wood floor and a whitewashed brick wall" width="1200" height="1600" loading="lazy"><figcaption>One of five rooms</figcaption></figure>
   </div>
   <p class="note" style="margin:14px 0 28px">Photos: the villa's own listing.</p>
   <!-- Rate pending Gwen's quote; shortlist runs 10+ villas, chosen the night before the booking window closes. -->
   <div class="sec-head" style="margin-top:8px">
     <h3>Three zones. Nobody works alone.</h3>
-    <p class="dim">Plan view of the night. The table is where everything happens; the speaker corner and the pool are where you step away from it.</p>
+    <p class="dim">Plan view. The table is where the night happens; the living room is the shoot set by day and the speaker corner at dusk; the pool is where you step away from all of it.</p>
   </div>
   <div class="plan">
     <div class="plan-vis">
       <svg viewBox="0 0 720 500" role="img" aria-label="Floor plan: build table on the lanai, speaker corner, coffee bar, pool, bedrooms, kitchen, van drop-off">
-        <rect width="720" height="500" fill="#0E0B09"/>
-        <rect x="20" y="20" width="680" height="460" rx="4" fill="#1A2016" stroke="#3B4A33"/>
-        <rect x="20" y="400" width="130" height="80" fill="#2A2621"/>
-        <rect x="42" y="428" width="60" height="30" rx="5" fill="#3A2B21" stroke="#9B7554"/>
-        <text x="30" y="473" font-family="Space Mono, monospace" font-size="11" letter-spacing="1.5" fill="#D3C6B6">VAN 13:00 / 15:00</text>
-        <rect x="60" y="60" width="440" height="200" fill="#2B2019" stroke="#5A3E2B"/>
-        <g fill="#241C16" stroke="#5A3E2B">
+        <rect width="720" height="500" fill="#F8F7F4"/>
+        <rect x="20" y="20" width="680" height="460" rx="4" fill="#EEF1E8" stroke="#C9D1BE"/>
+        <rect x="20" y="400" width="130" height="80" fill="#E6E3DD"/>
+        <rect x="42" y="428" width="60" height="30" rx="5" fill="#FFFFFF" stroke="#8A6A2F"/>
+        <text x="30" y="473" font-family="Space Mono, monospace" font-size="11" letter-spacing="1.5" fill="#55524C">VAN 13:00 / 15:00</text>
+        <rect x="60" y="60" width="440" height="200" fill="#FFFFFF" stroke="#B9B2A6"/>
+        <g fill="#F3F1EC" stroke="#B9B2A6">
           <rect x="60" y="60" width="110" height="100"/><rect x="170" y="60" width="110" height="100"/><rect x="60" y="160" width="110" height="100"/><rect x="170" y="160" width="110" height="100"/>
         </g>
-        <g font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#A3957F">
+        <g font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#7C7770">
           <text x="72" y="118">BR 1</text><text x="182" y="118">BR 2</text><text x="72" y="218">BR 3</text><text x="182" y="218">BR 4</text>
           <text x="72" y="136" font-size="10" letter-spacing="1">SLEEP WHEN YOU WANT</text>
         </g>
-        <rect x="280" y="60" width="220" height="90" fill="#241C16" stroke="#5A3E2B"/>
-        <text x="292" y="88" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#A3957F">KITCHEN &middot; 4 MEALS</text>
-        <rect x="280" y="150" width="220" height="110" fill="#2B2019" stroke="#5A3E2B"/>
-        <rect x="300" y="170" width="70" height="16" rx="2" fill="#F2C43D"/>
-        <g fill="none" stroke="#D3C6B6" stroke-width="1.5">
+        <rect x="280" y="60" width="220" height="90" fill="#F3F1EC" stroke="#B9B2A6"/>
+        <text x="292" y="88" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#7C7770">KITCHEN &middot; 4 MEALS</text>
+        <rect x="280" y="150" width="220" height="110" fill="#FFFFFF" stroke="#B9B2A6"/>
+        <rect x="300" y="170" width="70" height="16" rx="2" fill="#8A6A2F"/>
+        <g fill="none" stroke="#55524C" stroke-width="1.5">
           <circle cx="410" cy="178" r="6"/><circle cx="432" cy="178" r="6"/><circle cx="454" cy="178" r="6"/><circle cx="476" cy="178" r="6"/>
           <circle cx="410" cy="200" r="6"/><circle cx="432" cy="200" r="6"/><circle cx="454" cy="200" r="6"/><circle cx="476" cy="200" r="6"/>
         </g>
-        <text x="300" y="246" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#F2C43D" font-weight="700">SPEAKER CORNER &middot; 18:00</text>
-        <rect x="60" y="260" width="440" height="130" fill="#3A2B21" stroke="#9B7554" stroke-dasharray="4 3"/>
-        <rect x="110" y="300" width="340" height="44" rx="4" fill="#9B7554"/>
-        <g fill="#F5EEE4"><rect x="130" y="288" width="22" height="8"/><rect x="170" y="288" width="22" height="8"/><rect x="210" y="288" width="22" height="8"/><rect x="250" y="288" width="22" height="8"/><rect x="290" y="288" width="22" height="8"/><rect x="330" y="288" width="22" height="8"/><rect x="370" y="288" width="22" height="8"/><rect x="410" y="288" width="22" height="8"/></g>
-        <g fill="#2B2019" stroke="#F2C43D" stroke-width="1.5"><rect x="130" y="272" width="22" height="12" rx="2"/><rect x="170" y="272" width="22" height="12" rx="2"/><rect x="210" y="272" width="22" height="12" rx="2"/><rect x="250" y="272" width="22" height="12" rx="2"/><rect x="290" y="272" width="22" height="12" rx="2"/><rect x="330" y="272" width="22" height="12" rx="2"/><rect x="370" y="272" width="22" height="12" rx="2"/><rect x="410" y="272" width="22" height="12" rx="2"/></g>
-        <g fill="#2B2019" stroke="#D3C6B6" stroke-width="1.5"><rect x="84" y="316" width="12" height="22" rx="2"/><rect x="464" y="316" width="12" height="22" rx="2"/></g>
-        <text x="110" y="377" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#F5EEE4" font-weight="700">THE TABLE &middot; 8 BUILDERS &middot; HOSTS AT BOTH ENDS</text>
-        <rect x="520" y="260" width="150" height="50" rx="3" fill="#2B2019" stroke="#9B7554"/>
-        <g fill="#F5EEE4"><rect x="536" y="274" width="12" height="12"/><rect x="556" y="274" width="12" height="12"/><rect x="576" y="274" width="12" height="12"/><rect x="596" y="274" width="12" height="12"/></g>
-        <text x="520" y="328" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#D3C6B6">COFFEE BAR &middot; ALL NIGHT</text>
-        <rect x="180" y="408" width="440" height="56" rx="12" fill="#3B5C66" stroke="#F5EEE4" stroke-opacity=".3"/>
-        <text x="196" y="442" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#F5EEE4">POOL &middot; FREE TIME FROM 19:30</text>
-        <path d="M540 360 C 600 340, 640 380, 660 420" fill="none" stroke="#F2C43D" stroke-dasharray="2 4"/>
-        <text x="596" y="352" font-family="Space Mono, monospace" font-size="10" letter-spacing="1" fill="#F2C43D">PHOTOGRAPHER ROAMS</text>
+        <text x="300" y="246" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#8A6A2F" font-weight="700">SPEAKER CORNER &middot; 18:00</text>
+        <rect x="60" y="260" width="440" height="130" fill="#F5EFE3" stroke="#B08968" stroke-dasharray="4 3"/>
+        <rect x="110" y="300" width="340" height="44" rx="4" fill="#B08968"/>
+        <g fill="#1A1A1A"><rect x="130" y="288" width="22" height="8"/><rect x="170" y="288" width="22" height="8"/><rect x="210" y="288" width="22" height="8"/><rect x="250" y="288" width="22" height="8"/><rect x="290" y="288" width="22" height="8"/><rect x="330" y="288" width="22" height="8"/><rect x="370" y="288" width="22" height="8"/><rect x="410" y="288" width="22" height="8"/></g>
+        <g fill="#FFFFFF" stroke="#8A6A2F" stroke-width="1.5"><rect x="130" y="272" width="22" height="12" rx="2"/><rect x="170" y="272" width="22" height="12" rx="2"/><rect x="210" y="272" width="22" height="12" rx="2"/><rect x="250" y="272" width="22" height="12" rx="2"/><rect x="290" y="272" width="22" height="12" rx="2"/><rect x="330" y="272" width="22" height="12" rx="2"/><rect x="370" y="272" width="22" height="12" rx="2"/><rect x="410" y="272" width="22" height="12" rx="2"/></g>
+        <g fill="#FFFFFF" stroke="#55524C" stroke-width="1.5"><rect x="84" y="316" width="12" height="22" rx="2"/><rect x="464" y="316" width="12" height="22" rx="2"/></g>
+        <text x="110" y="377" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#1A1A1A" font-weight="700">THE TABLE &middot; 8 BUILDERS &middot; HOSTS AT BOTH ENDS</text>
+        <rect x="520" y="260" width="150" height="50" rx="3" fill="#FFFFFF" stroke="#B08968"/>
+        <g fill="#1A1A1A"><rect x="536" y="274" width="12" height="12"/><rect x="556" y="274" width="12" height="12"/><rect x="576" y="274" width="12" height="12"/><rect x="596" y="274" width="12" height="12"/></g>
+        <text x="520" y="328" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#55524C">COFFEE BAR &middot; ALL NIGHT</text>
+        <rect x="180" y="408" width="440" height="56" rx="12" fill="#9CC9D6" stroke="#55524C" stroke-opacity=".5"/>
+        <text x="196" y="442" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#1A1A1A">POOL &middot; FREE TIME FROM 19:30</text>
+        <path d="M540 360 C 600 340, 640 380, 660 420" fill="none" stroke="#8A6A2F" stroke-dasharray="2 4"/>
+        <text x="596" y="352" font-family="Space Mono, monospace" font-size="10" letter-spacing="1" fill="#8A6A2F">PHOTOGRAPHER ROAMS</text>
       </svg>
     </div>
     <div class="legend">
-      <div><span class="key" style="background:#9B7554"></span><div><b>The table</b><span>One long table on the lanai. Eight builders, a host at each end, laptops open from 2pm. This is the mastermind: everyone sees everyone's build.</span></div></div>
-      <div><span class="key" style="background:#F2C43D"></span><div><b>Speaker corner</b><span>Stools in an arc. The Hermes talk at 6pm, then questions until dinner.</span></div></div>
-      <div><span class="key" style="background:#3B5C66"></span><div><b>Pool and free time</b><span>From 7:30pm the night is yours. Swim, sleep, or keep building with a host beside you.</span></div></div>
-      <div><span class="key" style="background:#241C16;border:1px solid #5A3E2B"></span><div><b>Bedrooms</b><span>Twin share, sleep whenever. Breakfast at 8.</span></div></div>
-      <div><span class="key" style="background:#2B2019;border:1px solid #9B7554"></span><div><b>Coffee bar</b><span>Robots &amp; Coffee beans, open all night. The photographer roams the whole 26 hours.</span></div></div>
+      <div><span class="key" style="background:#B08968"></span><div><b>The table</b><span>One long table. Eight builders, a host at each end, laptops open from 9pm. This is the mastermind: everyone sees everyone's build.</span></div></div>
+      <div><span class="key" style="background:#8A6A2F"></span><div><b>Shoot set and speaker corner</b><span>The living room. Content shoot from 3pm with the photographer, then stools in an arc for the Hermes talk at 6pm.</span></div></div>
+      <div><span class="key" style="background:#9CC9D6"></span><div><b>Pool and free time</b><span>From 7:30pm the night is yours. Swim, sleep, or keep building with a host beside you.</span></div></div>
+      <div><span class="key" style="background:#F3F1EC;border:1px solid #B9B2A6"></span><div><b>Bedrooms</b><span>Twin share, sleep whenever. Breakfast at 8.</span></div></div>
+      <div><span class="key" style="background:#FFFFFF;border:1px solid #B08968"></span><div><b>Coffee bar</b><span>The kitchen island. Robots &amp; Coffee beans, open all night. The photographer works the whole 26 hours.</span></div></div>
     </div>
   </div>
   <p class="note" style="margin-top:14px">The plan is representative; the booked villa differs in shape, not in zones. Budget line for the night: about &#8369;45,000, to be replaced by the host's quote.</p>
@@ -243,23 +244,23 @@
 <section id="hours">
   <div class="sec-head">
     <span class="eyebrow">The 26 hours</span>
-    <h2>Saturday you build. Sunday you demo.</h2>
+    <h2>Saturday you shoot, then you build. Sunday you demo.</h2>
   </div>
   <div class="sched">
     <div class="day">
       <h3>Saturday <small>Oct 24</small></h3>
       <div class="slot"><time>13:00</time><div><span class="hi">Arrive. Coffee, gift box, your seat at the table.</span></div></div>
-      <div class="slot"><time>14:00</time><div><span class="hi">One-table kickoff.</span><span>Pick the app your business needs. Scope it to one screen that earns.</span></div></div>
-      <div class="slot"><time>15:30</time><div><span class="hi">Build block 1.</span><span>Claude Code, the Overnight Build vault, hosts on the floor.</span></div></div>
+      <div class="slot"><time>14:00</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one app your business needs.</span></div></div>
+      <div class="slot"><time>15:00</time><div><span class="hi">Shoot block.</span><span>Talking heads and b-roll around the villa with the photographer, then captions drafted with the content prompts before dinner.</span></div></div>
       <div class="slot"><time>18:00</time><div><span class="hi">Guest speaker: the Hermes talk.</span><span>Agents that run on their own. Questions until dinner.</span></div></div>
       <div class="slot"><time>19:30</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
-      <div class="slot"><time>21:00</time><div><span class="hi">Build block 2, optional.</span><span>The table stays open. Hosts stay up.</span></div></div>
+      <div class="slot"><time>21:00</time><div><span class="hi">Build night with Jamz.</span><span>Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
     </div>
     <div class="day">
       <h3>Sunday <small>Oct 25</small></h3>
       <div class="slot"><time>08:00</time><div><span class="hi">Breakfast.</span></div></div>
       <div class="slot"><time>09:00</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
-      <div class="slot"><time>10:30</time><div><span class="hi">Demo day.</span><span>Eight apps, phone in hand, two minutes each. Photographer on.</span></div></div>
+      <div class="slot"><time>10:30</time><div><span class="hi">Demo day.</span><span>Eight apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
       <div class="slot"><time>12:00</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
       <div class="slot"><time>13:30</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
       <div class="slot"><time>15:00</time><div><span class="hi">Van back to BGC.</span></div></div>
@@ -270,7 +271,7 @@
 <section id="outcome">
   <div class="sec-head">
     <span class="eyebrow">What you leave with</span>
-    <h2>Your app, on your phone, and a team that keeps it shipping.</h2>
+    <h2>A month of content, your app on your phone, and a team that keeps it shipping.</h2>
   </div>
   <div class="outcome">
     <div class="phone">
@@ -295,7 +296,7 @@
       </svg>
     </div>
     <div class="steps">
-      <div class="step now"><span class="label">Sunday 9am</span><b>On your phone, from your own URL.</b><p class="dim">A browser app that installs to the home screen and works offline. Yours to keep, hosted on your own GitHub.</p></div>
+      <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your app on your phone from your own URL.</b><p class="dim">A browser app that installs to the home screen and works offline. Yours to keep, hosted on your own GitHub.</p></div>
       <div class="step"><span class="label">Within 14 days</span><b>On TestFlight, under the Robots &amp; Coffee developer account.</b><p class="dim">We wrap it and ship it. You get the TestFlight link, your team installs it like any app.</p></div>
       <div class="step"><span class="label">Every 90 days</span><b>Re-shipped, while you are in the alumni circle.</b><p class="dim">TestFlight builds expire. Ours do not, because we keep shipping them for you.</p></div>
     </div>
@@ -311,11 +312,12 @@
     <div><b>The villa night</b><span>Twin-share room, pool, the table, all of it.</span></div>
     <div><b>Every meal and the coffee bar</b><span>Merienda, dinner, breakfast, lunch. Beans all night.</span></div>
     <div><b>Van from BGC</b><span>Saturday 11:30 pickup, Sunday 3pm drop.</span></div>
+    <div><b>Content shoot</b><span>Photographer plus the villa as your set. A month of posts shot and drafted before dinner.</span></div>
     <div><b>Gift box</b><span>Robots &amp; Coffee kit at your seat.</span></div>
     <div><b>The Overnight Build vault</b><span>Ten prompts with a video each, from brief to demo day.</span></div>
     <div><b>Guest speaker</b><span>The Hermes talk, then questions.</span></div>
     <div><b>TestFlight wrap</b><span>Your app shipped under our developer account within 14 days.</span></div>
-    <div><b>Photographer</b><span>The whole 26 hours, edited set within a week.</span></div>
+    <div><b>Photographer</b><span>The whole 26 hours. Your edited set within a week.</span></div>
   </div>
   <div class="speaker">
     <div class="ph">TBA</div>
@@ -360,6 +362,7 @@
   <details><summary>What if my app is not done by Sunday noon?</summary><p>We finish it with you on a call that week. Nobody leaves the villa without a working app on their phone, and nobody leaves the month without one on TestFlight.</p></details>
   <details><summary>Do I need a Mac or an Apple developer account?</summary><p>No. Any laptop that runs Claude Code. The Sunday app is a browser app that installs to iPhone and Android. The TestFlight step runs under our account, not yours.</p></details>
   <details><summary>I did not attend the workshop. Can I come?</summary><p>If Claude Code is already running on your laptop and you have built one thing with it, yes. If not, Batch 2 on Sept 19 to 20 is the door.</p></details>
+  <details><summary>Do I need to be on camera?</summary><p>Only as much as you want. Gwen builds the plan around your format: talking head, voiceover over b-roll, or text on screen. The photographer shoots the villa either way.</p></details>
   <details><summary>Refunds?</summary><p>Seats are capacity, not stock. A seat can be transferred to another builder up to Oct 17. No refunds after booking.</p></details>
 </section>
 
