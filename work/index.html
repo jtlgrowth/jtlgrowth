@@ -16,14 +16,14 @@ if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Work: JTL Growth</title>
-<meta name="description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee.">
+<meta name="description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee, and the Batch 1 workshop.">
 <link rel="canonical" href="https://jtlgrowth.com/work/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Work: JTL Growth">
-<meta property="og:description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee.">
+<meta property="og:description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee, and the Batch 1 workshop.">
 <meta property="og:url" content="https://jtlgrowth.com/work/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -152,6 +152,28 @@ section + section{border-top:1px solid var(--line)}
 
 /* ================= WORK PAGE CSS ================= */
 
+/* ---- .stage: six-screen shelf, camera-driven scroll scene (work-gallery.js).
+   Constant-dark like .band-dark below it: literal colors, no var() flip. ---- */
+.stage{padding:0}
+.stage,section + .stage{border-top:0}
+.stage-track{height:320vh;position:relative}
+.stage-pin{position:sticky;top:0;height:100svh;overflow:hidden;background:#101010;isolation:isolate} /* constant dark like .band-dark: the captions are literal light */
+#stage-gl{position:absolute;inset:0;display:block;width:100%;height:100%}
+.stage-cap{position:absolute;left:5vw;bottom:30px;z-index:3;opacity:0;transition:opacity .4s;pointer-events:none}
+.stage-cap.in{opacity:1;pointer-events:auto}
+.stage-cap .stage-name{display:block;font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#E2E2E2}
+.stage-cap .stage-open{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#B9B9B9;text-decoration:none;border-bottom:1px solid rgba(185,185,185,.4)}
+.stage-rail{position:absolute;right:5vw;bottom:34px;z-index:3;display:flex;gap:9px}
+.stage-rail i{width:6px;height:6px;border-radius:50%;background:rgba(226,226,226,.3);display:block;transition:background .3s,transform .3s}
+.stage-rail i.cur{background:#E2E2E2;transform:scale(1.35)}
+.stage-toggle{position:absolute;right:5vw;top:26px;z-index:4;font:700 10.5px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid rgba(226,226,226,.4);color:#E2E2E2;padding:10px 15px;cursor:pointer;transition:background .25s,color .25s}
+.stage-toggle:hover,.stage-toggle:focus-visible{background:#E2E2E2;color:#101010}
+@media (max-width:720px){#stage{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .stage-track{height:100svh}
+  .stage-toggle{display:none}
+}
+
 /* ---- .band-dark: constant-dark band in BOTH themes. Every color here is a
    literal, never a var() — the dark-theme token swap inverts --cement/--navy
    and would flip this band unreadable (real bug hit on v5). ---- */
@@ -162,7 +184,7 @@ section + section{border-top:1px solid var(--line)}
 .band-dark h2{color:#E2E2E2}
 .band-dark .lead{color:rgba(228,228,228,.7);margin:20px auto 0}
 
-.portfolio-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(14px,1.4vw,24px);margin:44px auto 0;align-items:start;max-width:1340px;text-align:left}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.4vw,24px);margin:44px auto 0;align-items:start;max-width:1340px;text-align:left}
 /* v6.2 — the whole card is a link now. The page claims every screen is a live
    URL; before this you could not click through to check. Colours stay literals:
    this band is constant-dark in both themes. */
@@ -175,7 +197,6 @@ section + section{border-top:1px solid var(--line)}
 .lap-card .screen::after{content:attr(data-open);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:8px;background:rgba(12,12,12,.74);color:#E2E2E2;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:0;transition:opacity .3s;pointer-events:none}
 .lap-card:hover .screen::after,.lap-card:focus-visible .screen::after{opacity:1}
 .lap-card:hover .lap-name,.lap-card:focus-visible .lap-name{text-decoration:underline;text-underline-offset:4px}
-@media (max-width:1240px){.portfolio-grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:1000px){.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
 @media (hover:none){.lap-card .screen::after{opacity:1;background:linear-gradient(180deg,transparent 55%,rgba(12,12,12,.88));place-items:end center;padding-bottom:10px}}
 .laptop3d{width:100%;perspective:1200px}
@@ -226,7 +247,7 @@ section + section{border-top:1px solid var(--line)}
   <a class="logo" href="/" aria-label="JTL Growth: home"><svg class="lmark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></a>
   <nav class="nav-row" aria-label="Primary">
     <a href="/services/">Services</a>
-    <a href="/pricing/">Pricing</a>
+    <a href="/quote/">Quote</a>
     <a href="/products/">Products</a>
     <a href="/prompts/">Prompts</a>
     <a href="/workshop/">Workshop</a>
@@ -243,7 +264,7 @@ section + section{border-top:1px solid var(--line)}
         <div class="mgroup"><div class="mlabel">Pages</div>
           <a href="/">Home <span class="mk">&#8599;</span></a>
           <a href="/services/">Services <span class="mk">&#8599;</span></a>
-          <a href="/pricing/">Pricing <span class="mk">&#8599;</span></a>
+          <a href="/quote/">Quote <span class="mk">&#8599;</span></a>
           <a href="/products/">Products <span class="mk">&#8599;</span></a>
           <a href="/prompts/">Prompts <span class="mk">&#8599;</span></a>
           <a href="/workshop/">Workshop <span class="mk">&#8599;</span></a>
@@ -273,13 +294,30 @@ section + section{border-top:1px solid var(--line)}
     </div>
   </section>
 
-  <section class="band-dark">
+  <section class="stage" id="stage" data-motion="full" aria-label="Six live systems on one shelf">
+    <a class="skip-link" href="#grid">Skip the gallery</a>
+    <div class="stage-track">
+      <div class="stage-pin">
+        <canvas id="stage-gl" aria-hidden="true"></canvas>
+        <p class="stage-cap" id="stage-cap">
+          <span class="stage-name" id="stage-cap-name"></span>
+          <a class="stage-open" id="stage-cap-open" href="#fwib">Open <span aria-hidden="true">&#8599;</span></a>
+        </p>
+        <div class="stage-rail" id="stage-rail" aria-hidden="true">
+          <i class="cur"></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <button class="stage-toggle" id="stage-toggle" type="button" aria-pressed="false" aria-label="Calm motion">Calm motion</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-dark" id="grid">
     <div class="inner">
       <p class="eyebrow rv">Shipped work</p>
-      <h2 class="rv d1">Five systems, in production right now.</h2>
-      <p class="lead rv d2">Five builds, five different problems. Every screen below is a live URL you can open, not a mockup.</p>
+      <h2 class="rv d1">Six systems, in production right now.</h2>
+      <p class="lead rv d2">Six builds, six different problems. Every screen below is a live URL you can open, not a mockup.</p>
       <div class="portfolio-grid" role="region" aria-label="Shipped work gallery">
-        <a class="lap-card rv d1" href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener" aria-label="FWIB: open the live site">
+        <a class="lap-card rv d1" id="fwib" href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener" aria-label="FWIB: open the live site">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
               <div class="screen" data-open="Open live site &#8599;"><img src="/shots/fwib.png" alt="Filipina Women in Business, live site screenshot" loading="lazy"></div>
@@ -291,7 +329,7 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-desc">Community platform for Filipina founders. Live and growing.</div>
           <div class="lap-tags"><span>Community</span><span>Member Directory</span><span>Live</span></div>
         </a>
-        <a class="lap-card rv d2" href="/" aria-label="JTL Growth site: open the page">
+        <a class="lap-card rv d2" id="jtl" href="/" aria-label="JTL Growth site: open the page">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
               <div class="screen" data-open="You are on it &#8599;"><img src="/shots/jtlgrowth.png" alt="JTL Growth, live site screenshot" loading="lazy"></div>
@@ -303,7 +341,7 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-desc">This site. Built and launched in one night, DNS to HTTPS.</div>
           <div class="lap-tags"><span>Agency Site</span><span>Horizontal Scroll</span><span>Live</span></div>
         </a>
-        <a class="lap-card rv d3" href="https://ayalavirtualassistance.site" target="_blank" rel="noopener" aria-label="AVAS Night Shift: open the live site">
+        <a class="lap-card rv d3" id="nightshift" href="https://ayalavirtualassistance.site" target="_blank" rel="noopener" aria-label="AVAS Night Shift: open the live site">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
               <div class="screen" data-open="Open live site &#8599;"><img src="/shots/avas-nightshift.png" alt="AVAS Night Shift, live site screenshot" loading="lazy"></div>
@@ -315,7 +353,7 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-desc">Six-page brand site for our sister agency. No template.</div>
           <div class="lap-tags"><span>Brand Site</span><span>Custom Motion</span><span>Live</span></div>
         </a>
-        <a class="lap-card rv d3" href="/robots-and-coffee/" aria-label="Robots and Coffee: open the page">
+        <a class="lap-card rv d3" id="rnc" href="/robots-and-coffee/" aria-label="Robots and Coffee: open the page">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
               <div class="screen" data-open="Open the storefront &#8599;"><img src="/shots/rnc.png" alt="Robots and Coffee, live storefront screenshot" loading="lazy"></div>
@@ -327,7 +365,7 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-desc">Our digital products library: courses, workshops, and AI resources. Learn it, buy it, run it yourself.</div>
           <div class="lap-tags"><span>Storefront</span><span>Product Library</span><span>Live</span></div>
         </a>
-        <a class="lap-card rv d4" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener" aria-label="AVAS AI Workshop: open the live event page">
+        <a class="lap-card rv d4" id="avas-workshop" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener" aria-label="AVAS AI Workshop: open the live event page">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
               <div class="screen" data-open="Open live site &#8599;"><img src="/shots/avas-ai-workshop.png" alt="AVAS AI Workshop, live event page screenshot" loading="lazy"></div>
@@ -338,6 +376,18 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-name">AVAS AI Workshop</div>
           <div class="lap-desc">Live event page for the two-day workshop in Manila, seats, countdown and checkout on one page.</div>
           <div class="lap-tags"><span>Event Page</span><span>Seat Counter</span><span>Live</span></div>
+        </a>
+        <a class="lap-card rv d4" id="workshop" href="/workshop/" aria-label="Batch 1 workshop: open the recap">
+          <div class="laptop3d">
+            <div class="lid"><div class="notch"></div>
+              <div class="screen" data-open="Open the recap &#8599;"><img src="/shots/workshop.png" alt="From Operator to Orchestrator, Batch 1 recap page screenshot" loading="lazy"></div>
+            </div>
+            <div class="deck"></div>
+            <div class="refl"></div>
+          </div>
+          <div class="lap-name">Batch 1 Workshop</div>
+          <div class="lap-desc">From Operator to Orchestrator, Aug 22 to 23, BGC. Two build days, every founder shipped. The recap holds the room, the photos and what they built after.</div>
+          <div class="lap-tags"><span>Live Event</span><span>Recap</span><span>Live</span></div>
         </a>
       </div>
       <div class="proof-strip rv d3" aria-label="The stack we build on">
@@ -511,5 +561,6 @@ section + section{border-top:1px solid var(--line)}
     if(a.getAttribute('href')===here)a.setAttribute('aria-current','page');});
 })();
 </script>
+<script type="module" src="/assets/work-gallery.js"></script>
 </body>
 </html>
