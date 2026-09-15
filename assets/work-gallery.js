@@ -73,7 +73,8 @@ async function init() {
     group.position.set(xs[i], 0, 0);
     group.rotation.y = yaw;
 
-    var mat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55, metalness: 0 });
+    // screens are unlit: a display emits its picture, it does not reflect the key light
+    var mat = new THREE.MeshBasicMaterial({ map: tex });
     var mesh = new THREE.Mesh(new THREE.PlaneGeometry(planeW, planeH), mat);
     mesh.userData.id = SCREENS[i].id;
     group.add(mesh);
@@ -231,7 +232,8 @@ function readBg(el) {
   var s = getComputedStyle(el).backgroundColor;
   var m = s.match(/\d+/g);
   if (!m) return new THREE.Color(0x121212);
-  return new THREE.Color(m[0] / 255, m[1] / 255, m[2] / 255);
+  // the CSS value is sRGB; Color(r,g,b) would read it as linear and lift #101010 to a mid gray
+  return new THREE.Color().setRGB(m[0] / 255, m[1] / 255, m[2] / 255, THREE.SRGBColorSpace);
 }
 
 function shelf(totalW) {
@@ -267,7 +269,7 @@ function grainPass() {
       'float rnd(vec2 co){return fract(sin(dot(co,vec2(12.9898,78.233)))*43758.5453);}',
       'void main(){',
       '  float n = rnd(gl_FragCoord.xy + uT);',
-      '  gl_FragColor = vec4(vec3(n), 0.06);',
+      '  gl_FragColor = vec4(vec3(n), 0.035);',
       '}'
     ].join('\n')
   });
