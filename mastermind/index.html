@@ -1,394 +1,551 @@
 <!doctype html>
-<!-- template: none · reason: Robots & Coffee brand page built from the Owner-approved sample of 2026-09-15 -->
+<!-- QUICK SETTINGS
+  Everything a non-builder may change lives in two anchors: the token block between
+  PROJECT SETTINGS and END SETTINGS (:root) and the SETTINGS object right after </style>.
+  ground and ink        -> --cement --paper --navy --navy-deep (roles: --bg --surface --fg)
+  support text          -> --gray --gray-light --blue --blue-soft  (role: --muted is --gray)
+  hairlines             -> --line                                 (role: --border)
+  buttons               -> --navy on --paper, hover --wood         (roles: --accent --accent-on --accent-hover)
+  hero scrim            -> --scrim-top --scrim-bot (the gradient over the villa photo)
+  ladder ramp           -> --t1 --t2 --t3 --t4
+  fonts                 -> the fonts.googleapis.com <link> in <head> plus --font-display --font-body --font-mono
+  radius                -> --radius-sm --radius-md --radius-lg; pill is --radius-pill
+  page width            -> --container-max (feeds .wrap)
+  event dates and price -> SETTINGS.event (earlyBirdCloses drives the countdown bar and the seat swap)
+  header CTA text       -> SETTINGS.content.cta (bound by data-setting on .nav-cta)
+  animations on or off  -> SETTINGS.behavior.animations (false also stops the teaser autoplay)
+  analytics             -> SETTINGS.integration.analyticsId; site-wide IDs load from /assets/tracking.js
+  theme-color meta pins #121212 as a literal (constant chrome); that line carries the literal-ok marker
+-->
+<!-- template: none · reason: Robots & Coffee mastermind page, v2 2026-09-16. Structure mirrors the
+     AVAS ai-workshop hero (sticky nav, urgency bar, one-screen hero with a big centred headline and
+     one big button) in the JTL mono register: villa photo as the hero plate, Archivo + Fraunces italic
+     accent, black and white only, no bloom, no orbs. Owner: "less noise, still monochromic, Apple style". -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overnight Build &middot; Robots &amp; Coffee</title>
-<meta name="description" content="Ten business owners, one Tagaytay villa, one night. Arrive with a problem, leave with your app on your phone. Oct 24 to 25, 2026.">
+<meta name="description" content="Ten business owners, one Tagaytay villa, one night. Content by day with Gwen, your app by night with Jamz. Oct 24 to 25, 2026.">
+<link rel="canonical" href="https://jtlgrowth.com/mastermind/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Overnight Build · Robots &amp; Coffee">
+<meta property="og:description" content="Content by day. Your app by night. One Tagaytay villa, ten seats, Oct 24 to 25, 2026.">
+<meta property="og:image" content="https://jtlgrowth.com/mastermind/media/hero.jpg">
+<meta property="og:url" content="https://jtlgrowth.com/mastermind/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#121212"> <!-- settings: literal-ok (constant chrome) -->
+<link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,700&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,650&family=Space+Mono:wght@400;700&display=swap">
+<script src="/assets/tracking.js"></script>
 <style>
-  :root{
-    --ground:#F8F7F4; --panel:#FFFFFF; --line:rgba(26,26,26,.12); --line2:rgba(26,26,26,.30);
-    --cream:#1A1A1A; --dim:#55524C; --dim2:#7C7770; --gold:#8A6A2F; --gold-hover:#2E2E2E; --gold-ink:#FFFFFF;
-    --water:#3B5C66; --wood:#9B7554;
-    --display:'Fraunces',Georgia,'Times New Roman',serif;
-    --body:'Space Grotesk','Helvetica Neue',Arial,sans-serif;
-    --mono:'Space Mono','SFMono-Regular',Menlo,monospace;
-  }
-  *{box-sizing:border-box}
-  html{color-scheme:light}
-  body{margin:0;background:var(--ground);color:var(--cream);font:400 17px/1.58 var(--body);padding-inline:20px}
-  a{color:inherit}
-  .wrap{width:min(1380px,100%);margin-inline:auto}
-  .eyebrow{font:700 12px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-  .label{font:400 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim2)}
-  h1,h2,h3{font-family:var(--display);font-style:italic;font-weight:500;text-wrap:balance;margin:0}
-  h1{font-size:clamp(40px,10vw,56px);line-height:.98;letter-spacing:-.03em}
-  h2{font-size:clamp(32px,4.6vw,48px);line-height:1.06;letter-spacing:-.02em}
-  h3{font-size:24px;line-height:1.15}
-  p{margin:0;max-width:64ch}
-  .dim{color:var(--dim)}
-  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:20px;border-bottom:1px solid var(--line)}
-  .mark{display:flex;align-items:center;gap:12px;font:700 13px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase}
-  .mark i{width:30px;height:30px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-style:normal;color:var(--gold);font-size:13px}
-  .hdr-meta{font:400 13px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+/* PROJECT SETTINGS */
+:root{
+  --cement:#E2E2E2;       /* page ground, the JTL mono register */
+  --cement-deep:#D5D5D5;
+  --paper:#FFFFFF;        /* white panels and the hero button */
+  --navy:#181818;         /* ink */
+  --navy-deep:#121212;    /* dark panels: urgency bar, early bird tier, phone */
+  --blue:#575757;         /* support text on light */
+  --blue-soft:#9E9E9E;    /* support text on dark */
+  --wood:#2E2E2E;         /* button hover */
+  --wood-warm:#B9B9B9;
+  --gray:#616161;         /* 4.9:1 on cement */
+  --gray-light:#AFAFAF;
+  --line:rgba(24,24,24,.14);
+  --line-strong:rgba(24,24,24,.32);
+  --line-on-dark:rgba(255,255,255,.22);
+  --scrim-top:rgba(0,0,0,.30);
+  --scrim-bot:rgba(0,0,0,.74);
+  --glass:rgba(226,226,226,.72);
+  --t1:#C9C9C9; --t2:#969696; --t3:#616161; --t4:#181818;
+  --container-max:1240px;
+  /* Roles (venice-base names) */
+  --bg:var(--cement); --surface:var(--paper); --fg:var(--navy); --fg-2:var(--blue); --muted:var(--gray); --meta:var(--gray);
+  --border:var(--line); --border-soft:var(--line);
+  --accent:var(--navy); --accent-on:var(--paper); --accent-hover:var(--wood); --accent-active:var(--navy-deep);
+  --font-display:'Fraunces',Georgia,serif; --font-body:'Archivo','Helvetica Neue',Arial,sans-serif; --font-mono:'Space Mono','SFMono-Regular',Menlo,monospace;
+  --text-base:17px; --leading-body:1.55; --leading-tight:1.06; --tracking-display:-.035em;
+  --radius-sm:6px; --radius-md:14px; --radius-lg:24px; --radius-pill:999px;
+  --section-y-desktop:96px; --section-y-phone:64px;
+  --motion-base:.25s; --ease-standard:cubic-bezier(.2,.7,.2,1);
+}
+/* END SETTINGS */
+*{box-sizing:border-box}
+html{color-scheme:light;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--text-base)/var(--leading-body) var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+p{margin:0;max-width:62ch}
+h1,h2,h3{margin:0;text-wrap:balance}
+.wrap{width:min(var(--container-max),100% - 40px);margin-inline:auto}
+.eyebrow{font:700 12px/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.label{font:400 12px/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--meta)}
+.dim{color:var(--muted)}
+.serif{font-family:var(--font-display);font-style:italic;font-weight:650;letter-spacing:-.01em}
+h2{font:600 clamp(32px,4.4vw,56px)/1.04 var(--font-body);letter-spacing:-.03em}
+h3{font:600 22px/1.2 var(--font-body);letter-spacing:-.01em}
+.sec-head{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+.sec-head p{font-size:19px}
+section{padding-block:var(--section-y-desktop)}
+section.alt{background:var(--surface)}
+@media (max-width:720px){section{padding-block:var(--section-y-phone)} .sec-head{margin-bottom:28px}}
 
-  .hero{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;padding-block:28px 40px}
-  .hero-vis{border:1px solid var(--line);background:var(--panel);border-radius:6px;overflow:hidden;max-width:100%}
-  .hero-vis svg{display:block;width:100%;height:auto}
-  .hero-vis img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:62% 38%}
-  .hero-copy{display:grid;gap:22px}
-  .facts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .fact b{display:block;font:500 22px/1.1 var(--body);font-variant-numeric:tabular-nums}
-  .fact span{display:block;margin-top:5px}
-  .cta{display:grid;gap:12px}
-  .btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border:1px solid var(--line2);border-radius:4px;text-decoration:none;font:600 16px/1 var(--body);letter-spacing:.01em;transition:border-color .2s,background .2s,color .2s}
-  .btn:hover{border-color:var(--cream)}
-  .btn.gold{background:#1A1A1A;color:#FFFFFF;border-color:#1A1A1A}
-  .btn.gold:hover{background:#2E2E2E;border-color:#2E2E2E}
-  .btn small{font:400 13px/1 var(--mono);letter-spacing:.06em;opacity:.85}
-  .btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+/* ---- nav ---- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:20;background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 13px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.mark i{width:28px;height:28px;border:2px solid var(--fg);border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px}
+.nav-meta{font:400 12px/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center}
+.nav-cta{display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:var(--radius-pill);background:var(--accent);color:var(--accent-on);text-decoration:none;font:600 14px/1 var(--font-body);white-space:nowrap;transition:background var(--motion-base)}
+.nav-cta:hover{background:var(--accent-hover)}
+@media (max-width:860px){.nav-meta{display:none}}
 
-  section{padding-block:44px;border-top:1px solid var(--line)}
-  .sec-head{display:grid;gap:12px;margin-bottom:28px}
+/* ---- urgency bar ---- */
+.bar{margin-top:64px;background:var(--navy-deep);color:var(--paper);text-align:center;padding:12px 20px;font:400 14px/1.5 var(--font-body)}
+.bar b{font-weight:600}
+.bar .t{display:inline-flex;gap:6px;margin:0 6px;vertical-align:middle}
+.bar .t span{display:inline-block;min-width:44px;padding:4px 6px;border-radius:var(--radius-sm);background:var(--line-on-dark);font:700 13px/1 var(--font-mono);font-variant-numeric:tabular-nums}
+.bar .sep{opacity:.55;margin:0 8px}
+@media (max-width:600px){.bar{font-size:13px;padding:10px 16px} .bar .t span{min-width:38px} .bar .t span:last-child{display:none} .bar .only{display:none} .bar .sep{display:block;height:0;overflow:hidden}}
 
-  .gallery{display:grid;grid-template-columns:1fr;gap:14px}
-  .gallery figure{margin:0;display:grid;gap:8px}
-  .gallery img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
-  .gallery figcaption{font:400 13px/1.5 var(--mono);color:var(--dim2)}
-  @media (min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
-  @media (min-width:1024px){.gallery{grid-template-columns:repeat(3,1fr);gap:18px}}
-  .plan{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
-  .plan-vis{border:1px solid var(--line);background:var(--panel);border-radius:6px;overflow:hidden}
-  .plan-vis svg{display:block;width:100%;height:auto}
-  .legend{display:grid;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .legend > div{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 16px;border-top:1px solid var(--line);align-items:start}
-  .legend > div:first-child{border-top:0}
-  .legend b{display:block;font:600 16px/1.3 var(--body)}
-  .legend span{font-size:16px;color:var(--dim)}
-  .key{width:22px;height:22px;border-radius:3px;margin-top:2px}
+/* ---- hero ---- */
+.hero{position:relative;min-height:calc(100svh - 110px);display:grid;place-items:center;text-align:center;color:var(--paper);overflow:hidden;isolation:isolate;padding:64px 20px 48px}
+.hero-plate{position:absolute;inset:0;z-index:-2}
+.hero-plate img{width:100%;height:100%;object-fit:cover;object-position:58% 42%}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--scrim-top) 0%,rgba(0,0,0,.18) 32%,var(--scrim-bot) 100%)}
+.hero-in{display:grid;justify-items:center;gap:22px;max-width:980px}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--line-on-dark);border-radius:var(--radius-pill);background:rgba(0,0,0,.28);font:700 11px/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--paper)}
+h1{font:700 clamp(44px,6.6vw,92px)/var(--leading-tight) var(--font-body);letter-spacing:var(--tracking-display);text-shadow:0 2px 24px rgba(0,0,0,.35)}
+h1 .serif{font-weight:650;letter-spacing:-.015em}
+.hero-sub{font:650 clamp(22px,2.6vw,34px)/1.2 var(--font-display);font-style:italic;letter-spacing:-.01em;margin-top:-6px}
+.hero-lead{font:600 clamp(17px,1.5vw,21px)/1.4 var(--font-body)}
+.hero p.body{font-size:clamp(16px,1.2vw,18px);color:rgba(255,255,255,.82);max-width:58ch}
+.hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:6px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:52px;padding:14px 28px;border:1px solid var(--line-strong);border-radius:var(--radius-pill);text-decoration:none;font:600 16px/1 var(--font-body);letter-spacing:.005em;color:var(--fg);background:transparent;transition:background var(--motion-base),color var(--motion-base),border-color var(--motion-base),transform var(--motion-base)}
+.btn:hover{border-color:var(--fg)}
+.btn.solid{background:var(--accent);color:var(--accent-on);border-color:var(--accent)}
+.btn.solid:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+.btn.big{min-height:70px;padding:22px 48px;font-size:22px;border-radius:var(--radius-md)}
+.btn.big:hover{transform:translateY(-1px)}
+.btn.on-dark{color:var(--paper);border-color:var(--line-on-dark)}
+.btn.on-dark:hover{border-color:var(--paper)}
+.btn.on-dark.solid{background:var(--paper);color:var(--navy);border-color:var(--paper)}
+.btn.on-dark.solid:hover{background:var(--cement);border-color:var(--cement)}
+.btn small{font:400 13px/1 var(--font-mono);letter-spacing:.06em;opacity:.8}
+.hero-facts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:10px;font:400 13px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.hero-facts b{color:var(--paper);font-weight:700}
+@media (max-width:720px){
+  .hero{padding:40px 20px 32px;min-height:calc(100svh - 130px)}
+  .hero-in{gap:14px}
+  h1{font-size:clamp(40px,11vw,48px)}
+  .hero p.body,.pill .long{display:none}
+  .btn.big{min-height:60px;padding:18px 32px;font-size:18px;width:100%}
+  .hero-cta{width:100%;gap:10px}
+  .hero-facts{gap:6px 16px;font-size:11px}
+}
 
-  .sched{display:grid;grid-template-columns:1fr;gap:20px}
-  .day{border:1px solid var(--line);border-radius:6px;padding:22px 22px 8px;background:var(--panel)}
-  .day h3{margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-  .day h3 small{font:400 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim2);font-style:normal}
-  .slot{display:grid;grid-template-columns:58px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line);font-size:16px}
-  .slot:first-of-type{border-top:0}
-  .slot time{font:400 14px/1.6 var(--mono);color:var(--gold);font-variant-numeric:tabular-nums}
-  .slot .hi{color:var(--cream);font-weight:600}
-  .slot span{color:var(--dim);display:block}
+/* ---- teaser ---- */
+.teaser{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--navy-deep);aspect-ratio:16/9;box-shadow:0 30px 80px rgba(0,0,0,.18)}
+.teaser video{width:100%;height:100%;object-fit:cover}
+.teaser .ctrl{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--line-on-dark);border-radius:var(--radius-pill);background:rgba(0,0,0,.45);color:var(--paper);font:600 13px/1 var(--font-body);cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.teaser-cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:18px;font:400 13px/1.5 var(--font-mono);letter-spacing:.06em;color:var(--muted)}
+@media (max-width:720px){.teaser{border-radius:var(--radius-md)}}
 
-  .outcome{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
-  .phone{justify-self:center;width:min(100%,250px)}
-  .phone svg{display:block;width:100%;height:auto}
-  .steps{display:grid;border-left:2px solid var(--line2);margin-left:8px}
-  .step{position:relative;padding:0 0 26px 26px}
-  .step:last-child{padding-bottom:0}
-  .step::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--ground);border:2px solid var(--gold)}
-  .step.now::before{background:var(--gold)}
-  .step b{display:block;font:600 18px/1.3 var(--body)}
-  .step .label{display:block;margin-bottom:4px}
+/* ---- place ---- */
+.gallery{display:grid;grid-template-columns:1fr;gap:14px}
+.gallery figure{margin:0;display:grid;gap:8px}
+.gallery img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-md)}
+.gallery figcaption{font:400 13px/1.5 var(--font-mono);color:var(--muted)}
+@media (min-width:640px){.gallery{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.gallery{grid-template-columns:repeat(3,1fr);gap:18px}}
+.note{font:400 13px/1.6 var(--font-mono);color:var(--meta)}
+.plan{display:grid;grid-template-columns:1fr;gap:28px;align-items:start;margin-top:64px}
+.plan-vis{border-radius:var(--radius-md);overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.plan-vis svg{display:block;width:100%;height:auto}
+.legend{display:grid;border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;background:var(--surface)}
+.legend > div{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px 18px;border-top:1px solid var(--line);align-items:start}
+.legend > div:first-child{border-top:0}
+.legend b{display:block;font:600 16px/1.3 var(--font-body)}
+.legend span{font-size:15px;color:var(--muted)}
+.key{width:20px;height:20px;border-radius:5px;margin-top:2px;border:1px solid var(--line-strong)}
+.key.k-table{background:var(--t4)} .key.k-set{background:var(--t3)} .key.k-pool{background:var(--t1)} .key.k-room{background:var(--cement)} .key.k-bar{background:var(--paper)}
+@media (min-width:900px){.plan{grid-template-columns:1.4fr 1fr}}
+/* floor plan svg, mono */
+.pl-ground{fill:var(--cement)} .pl-lot{fill:var(--surface);stroke:var(--line-strong)} .pl-house{fill:var(--surface);stroke:var(--line-strong)}
+.pl-room{fill:var(--cement);stroke:var(--line-strong)} .pl-kitchen{fill:var(--cement);stroke:var(--line-strong)}
+.pl-set{fill:var(--surface);stroke:var(--line-strong)} .pl-set-mark{fill:var(--t3)} .pl-stool{fill:none;stroke:var(--t3);stroke-width:1.5}
+.pl-lanai{fill:var(--surface);stroke:var(--t3);stroke-dasharray:4 3} .pl-table{fill:var(--t4)} .pl-laptop{fill:var(--t2)} .pl-chair{fill:var(--surface);stroke:var(--t3);stroke-width:1.5}
+.pl-bar{fill:var(--surface);stroke:var(--t3)} .pl-bar-mark{fill:var(--t4)} .pl-pool{fill:var(--t1);stroke:var(--t3)} .pl-park{fill:var(--cement-deep)} .pl-car{fill:var(--surface);stroke:var(--t3)}
+.pl-path{fill:none;stroke:var(--t3);stroke-dasharray:2 4}
+.pl-t{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;fill:var(--muted)} .pl-t.ink{fill:var(--t4);font-weight:700} .pl-t.sm{font-size:10px;letter-spacing:1px}
 
-  .incl{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .incl div{background:var(--ground);padding:18px}
-  .incl b{display:block;font:600 16px/1.3 var(--body);margin-bottom:6px}
-  .incl span{font-size:16px;color:var(--dim)}
-  .speaker{margin-top:24px;display:grid;grid-template-columns:1fr;gap:18px;align-items:center;border:1px dashed var(--line2);border-radius:6px;padding:22px}
-  .speaker .ph{width:72px;height:72px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font:700 13px var(--mono);color:var(--dim2)}
+/* ---- hours ---- */
+.sched{display:grid;grid-template-columns:1fr;gap:20px}
+.day{border:1px solid var(--line);border-radius:var(--radius-md);padding:24px 24px 10px;background:var(--surface)}
+.day h3{margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.day h3 small{font:400 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--meta)}
+.slot{display:grid;grid-template-columns:58px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line);font-size:16px}
+.slot:first-of-type{border-top:0}
+.slot time{font:400 14px/1.6 var(--font-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.slot .hi{font-weight:600}
+.slot span{color:var(--muted);display:block}
+.slot span.hi{color:var(--fg)}
+@media (min-width:900px){.sched{grid-template-columns:1fr 1fr}}
 
-  .seats{display:grid;grid-template-columns:1fr;gap:20px}
-  .tier{border:1px solid var(--line);border-radius:6px;padding:26px;background:var(--panel);display:grid;gap:16px;align-content:start}
-  .tier.eb{border-color:var(--gold)}
-  .price{font:500 48px/1 var(--display);font-style:italic;font-variant-numeric:tabular-nums}
-  .price small{font:400 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);margin-left:10px;font-style:normal}
-  .chairs{display:flex;gap:8px}
-  .chair{width:26px;height:26px;border-radius:4px 4px 2px 2px;border:2px solid var(--gold)}
-  .chair.open{border-color:var(--line2)}
-  .tier ul{margin:0;padding-left:18px;color:var(--dim);font-size:16px;display:grid;gap:4px}
-  .note{font:400 13px/1.5 var(--mono);color:var(--dim2)}
+/* ---- outcome ---- */
+.outcome{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+.phone{justify-self:center;width:min(100%,250px)}
+.phone svg{width:100%;height:auto}
+.ph-body{fill:var(--navy-deep);stroke:var(--t3);stroke-width:3} .ph-screen{fill:var(--navy)} .ph-notch{fill:var(--navy-deep)} .ph-icon{fill:var(--t3)} .ph-you{fill:var(--paper)} .ph-dock{fill:var(--navy-deep);opacity:.7}
+.ph-t{font-family:var(--font-mono);font-size:10px;letter-spacing:1px;fill:var(--wood-warm);text-anchor:middle} .ph-t.you{fill:var(--paper);font-weight:700} .ph-r{font-family:var(--font-mono);font-size:16px;font-weight:700;fill:var(--navy);text-anchor:middle}
+.steps{display:grid;border-left:2px solid var(--line)}
+.step{position:relative;padding:8px 0 28px 28px}
+.step::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--cement);border:2px solid var(--t3)}
+.step.now::before{background:var(--t4);border-color:var(--t4)}
+.step b{display:block;font:600 20px/1.3 var(--font-body);letter-spacing:-.01em;margin:6px 0 8px}
+@media (min-width:900px){.outcome{grid-template-columns:280px 1fr;gap:64px}}
 
-  details{border-top:1px solid var(--line);padding:16px 0}
-  details:last-of-type{border-bottom:1px solid var(--line)}
-  summary{cursor:pointer;font:600 18px/1.3 var(--body);list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:44px;align-items:center}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";color:var(--gold);font-family:var(--mono)}
-  details[open] summary::after{content:"\2013"}
-  details p{margin-top:10px;color:var(--dim);font-size:16px}
+/* ---- included ---- */
+.incl{display:grid;grid-template-columns:1fr;gap:14px}
+.incl > div{border:1px solid var(--line);border-radius:var(--radius-md);padding:20px 22px;background:var(--surface);display:grid;gap:6px}
+.incl b{font:600 17px/1.3 var(--font-body)}
+.incl span{font-size:15px;color:var(--muted)}
+@media (min-width:640px){.incl{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.incl{grid-template-columns:repeat(4,1fr)}}
+.speaker{display:grid;grid-template-columns:72px 1fr;gap:20px;align-items:center;margin-top:24px;padding:22px;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
+.speaker .ph{width:72px;height:72px;border-radius:50%;background:var(--cement);display:grid;place-items:center;font:700 12px/1 var(--font-mono);letter-spacing:.1em;color:var(--muted)}
 
-  footer{padding-block:28px 40px;border-top:1px solid var(--line);display:grid;gap:8px;font:400 13px/1.6 var(--mono);color:var(--dim2)}
-  footer a{color:var(--dim)}
+/* ---- seats ---- */
+.seats{display:grid;grid-template-columns:1fr;gap:18px}
+.tier{border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px 30px;background:var(--surface);display:grid;gap:18px;align-content:start}
+.tier.eb{background:var(--navy-deep);color:var(--paper);border-color:var(--navy-deep)}
+.tier.eb .eyebrow,.tier.eb .note{color:var(--blue-soft)}
+.tier .price{font:600 clamp(40px,4.4vw,56px)/1 var(--font-body);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tier .price small{display:block;margin-top:8px;font:400 13px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--meta)}
+.tier.eb .price small{color:var(--blue-soft)}
+.chairs{display:flex;gap:8px}
+.chair{width:22px;height:22px;border-radius:6px;border:1.5px solid currentColor;opacity:.9}
+.tier ul{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-size:16px}
+.tier li{padding-left:18px;position:relative}
+.tier li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:currentColor;opacity:.6}
+.tier .btn{justify-self:start}
+.tier .note{margin-top:-6px}
+@media (min-width:900px){.seats{grid-template-columns:1fr 1fr}}
 
-  @media (prefers-reduced-motion: reduce){
-    *{transition-duration:.001ms !important}
-  }
+/* ---- faq ---- */
+details{border-top:1px solid var(--line);padding:18px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font:600 19px/1.3 var(--font-body);letter-spacing:-.01em;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 24px/1 var(--font-mono);color:var(--muted);flex:none}
+details[open] summary::after{content:"\2212"}
+details p{margin-top:12px;color:var(--muted);font-size:16px}
 
-  @media (min-width:640px){
-    .cta{grid-template-columns:auto auto;justify-content:start}
-    .facts{grid-template-columns:repeat(3,auto);gap:24px;justify-content:start}
-    .incl{grid-template-columns:1fr 1fr}
-    .speaker{grid-template-columns:auto 1fr;gap:22px}
-    .sched,.seats{grid-template-columns:1fr 1fr}
-  }
-  @media (min-width:1024px){
-    body{padding-inline:36px}
-    h1{font-size:clamp(52px,7.4vw,112px);letter-spacing:-.045em}
-    .hero{grid-template-columns:1.15fr 1fr;gap:48px;padding-block:44px 56px}
-    .plan{grid-template-columns:1.5fr 1fr;gap:32px}
-    .outcome{grid-template-columns:1fr 1.3fr;gap:48px}
-    .incl{grid-template-columns:repeat(4,1fr)}
-    section{padding-block:60px}
-  }
+/* ---- footer ---- */
+footer{border-top:1px solid var(--line);padding:36px 0 44px;display:grid;gap:10px;font:400 13px/1.7 var(--font-mono);color:var(--muted)}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
+.btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.hero .btn:focus-visible,.teaser .ctrl:focus-visible{outline-color:var(--paper)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .btn.big:hover{transform:none}}
 </style>
+<script>
+const SETTINGS = {
+  "brand": {"name": "Robots & Coffee", "logo": ""},
+  "content": {"cta": "Take a seat"},
+  "event": {"earlyBirdCloses": "2026-09-27T23:59:59+08:00", "earlyBirdPrice": "70,000", "regularPrice": "90,000", "earlyBirdSeats": 3},
+  "behavior": {"animations": true},
+  "integration": {"analyticsId": ""}
+};
+</script>
 </head>
 <body>
 
-<div class="wrap">
-<header>
-  <div class="mark"><i>R</i> Robots &amp; Coffee</div>
-  <div class="hdr-meta">Overnight Build &middot; Oct 24 to 25, 2026 &middot; Tagaytay</div>
+<nav class="nav" aria-label="Page">
+  <div class="wrap">
+    <a class="mark" href="/robots-and-coffee/"><i>R</i><span>Robots &amp; Coffee</span></a>
+    <div class="nav-meta">Overnight Build &middot; Oct 24 to 25, 2026 &middot; Tagaytay</div>
+    <a class="nav-cta" data-setting="content.cta" href="#seats">Take a seat</a>
+  </div>
+</nav>
+
+<div class="bar" id="bar" role="status" aria-live="off">
+  <span id="bar-open"><b>Early bird &#8369;70,000</b> ends in <span class="t" id="cd"><span>00d</span><span>00h</span><span>00m</span><span>00s</span></span><span class="sep">&middot;</span>then &#8369;90,000<span class="sep only">&middot;</span><span class="only">only 3 seats at this price</span></span>
+  <span id="bar-closed" hidden><b>Early bird closed Sept 27.</b><span class="sep">&middot;</span>Regular seats &#8369;90,000<span class="sep">&middot;</span>ten chairs, one villa</span>
+</div>
+
+<header class="hero">
+  <div class="hero-plate"><img src="/mastermind/media/hero.jpg" alt="The villa from the road: a white gable house with black window frames, palms, and the Tagaytay ridge behind it" width="1440" height="960" fetchpriority="high"></div>
+  <div class="hero-in">
+    <span class="pill">Content and build mastermind<span class="long"> &middot; 10 seats &middot; one villa</span></span>
+    <h1>Content by day.<br><span class="serif">Your app by night.</span></h1>
+    <p class="hero-sub">One villa. One night. Ten builders.</p>
+    <p class="hero-lead">Arrive with one business problem and your phone.</p>
+    <p class="body">Shoot a month of content in the villa with Gwen by day, build your private app with Jamz by night. Sunday morning both are live.</p>
+    <div class="hero-cta">
+      <a class="btn big on-dark solid" id="hero-eb-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat <small>&#8369;70,000</small></a>
+      <a class="btn on-dark" href="#teaser">Watch the villa</a>
+    </div>
+    <div class="hero-facts"><span><b>Oct 24 to 25</b> &middot; Sat 1pm to Sun 3pm</span><span><b>Tagaytay</b> &middot; 90 min from BGC</span><span><b>10 seats</b> &middot; alumni first</span></div>
+  </div>
 </header>
 
-<section class="hero" style="border-top:0">
-  <div class="hero-vis">
-    <img src="/mastermind/media/hero.jpg" alt="The villa from the road: a white gable house with black window frames, palms, and the Tagaytay ridge behind it" width="1440" height="960">
-  </div>
-  <div class="hero-copy">
-    <span class="eyebrow">Content and build mastermind &middot; 10 seats &middot; one villa</span>
-    <h1>Content by day. Your app by night.</h1>
-    <p class="dim">Arrive with one business problem and your phone. Shoot a month of content in the villa with Gwen by day, build your private app with Jamz by night. Sunday morning both are live.</p>
-    <div class="facts">
-      <div class="fact"><b>Oct 24 to 25</b><span class="label">Sat 1pm to Sun 3pm</span></div>
-      <div class="fact"><b>Tagaytay</b><span class="label">Private villa, 90 min from BGC</span></div>
-      <div class="fact"><b>10 seats</b><span class="label">Alumni first</span></div>
+<section id="teaser" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Before you decide</span>
+      <h2>Fifteen seconds of the villa.</h2>
+      <p class="dim">The house on the ridge, the table where the night happens, the pool you step out to. This is where the ten of you spend 26 hours.</p>
     </div>
-    <div class="cta">
-      <a class="btn gold" id="hero-eb-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat <small>&#8369;70,000</small></a>
-      <a class="btn" href="#included">See what is included</a>
+    <div class="teaser">
+      <video id="teaser-video" src="/mastermind/media/teaser.mp4" poster="/mastermind/media/teaser-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Teaser: the white villa on the Tagaytay ridge, the double-height living room, the long dining table, and the pool at night"></video>
+      <button class="ctrl" id="teaser-ctrl" type="button" aria-pressed="true">Pause</button>
     </div>
+    <div class="teaser-cap"><span>The villa, Oct 24 to 25 &middot; animated from the listing's own photos</span><span>Sound off by design</span></div>
   </div>
 </section>
 
 <section id="place">
-  <div class="sec-head">
-    <span class="eyebrow">The place</span>
-    <h2>A white villa on the Tagaytay ridge, an hour and a half from BGC.</h2>
-    <p class="dim">White walls and black frames, a heated pool, a double-height living room, five rooms and six baths for the night. Every corner is a set by day and a build table by night. Pre-final: the address reaches enrollees a week before.</p>
-  </div>
-  <div class="gallery">
-    <figure><img src="/mastermind/media/pool-night.jpg" alt="The pool lit at night under string lights, bamboo fence behind" width="1200" height="1600" loading="lazy"><figcaption>The pool after the second build block</figcaption></figure>
-    <figure><img src="/mastermind/media/living.jpg" alt="The double-height living room: white walls, black stair rail, grey sofas around a wooden table" width="1440" height="960" loading="lazy"><figcaption>The living room, where the speaker corner goes</figcaption></figure>
-    <figure><img src="/mastermind/media/island.jpg" alt="The white kitchen island with black bar stools and pendant lights" width="1440" height="960" loading="lazy"><figcaption>The island, coffee bar all night</figcaption></figure>
-    <figure><img src="/mastermind/media/table.jpg" alt="The dining table by the window under a wire chandelier" width="1440" height="1080" loading="lazy"><figcaption>The table, before we join two of them</figcaption></figure>
-    <figure><img src="/mastermind/media/lanai.jpg" alt="The covered lanai with a sofa set opening onto the garden and pool" width="1200" height="1600" loading="lazy"><figcaption>The lanai, first build block</figcaption></figure>
-    <figure><img src="/mastermind/media/room.jpg" alt="A bedroom with a white bed, wood floor and a whitewashed brick wall" width="1200" height="1600" loading="lazy"><figcaption>One of five rooms</figcaption></figure>
-  </div>
-  <p class="note" style="margin:14px 0 28px">Photos: the villa's own listing.</p>
-  <!-- Rate pending Gwen's quote; shortlist runs 10+ villas, chosen the night before the booking window closes. -->
-  <div class="sec-head" style="margin-top:8px">
-    <h3>Three zones. Nobody works alone.</h3>
-    <p class="dim">Plan view. The table is where the night happens; the living room is the shoot set by day and the speaker corner at dusk; the pool is where you step away from all of it.</p>
-  </div>
-  <div class="plan">
-    <div class="plan-vis">
-      <svg viewBox="0 0 720 500" role="img" aria-label="Floor plan: build table on the lanai, speaker corner, coffee bar, pool, bedrooms, kitchen, parking">
-        <rect width="720" height="500" fill="#F8F7F4"/>
-        <rect x="20" y="20" width="680" height="460" rx="4" fill="#EEF1E8" stroke="#C9D1BE"/>
-        <rect x="20" y="400" width="130" height="80" fill="#E6E3DD"/>
-        <rect x="42" y="428" width="60" height="30" rx="5" fill="#FFFFFF" stroke="#8A6A2F"/>
-        <text x="30" y="473" font-family="Space Mono, monospace" font-size="11" letter-spacing="1.5" fill="#55524C">PARKING · 8 CARS</text>
-        <rect x="60" y="60" width="440" height="200" fill="#FFFFFF" stroke="#B9B2A6"/>
-        <g fill="#F3F1EC" stroke="#B9B2A6">
-          <rect x="60" y="60" width="110" height="100"/><rect x="170" y="60" width="110" height="100"/><rect x="60" y="160" width="110" height="100"/><rect x="170" y="160" width="110" height="100"/>
-        </g>
-        <g font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#7C7770">
-          <text x="72" y="118">BR 1</text><text x="182" y="118">BR 2</text><text x="72" y="218">BR 3</text><text x="182" y="218">BR 4</text>
-          <text x="72" y="136" font-size="10" letter-spacing="1">SLEEP WHEN YOU WANT</text>
-        </g>
-        <rect x="280" y="60" width="220" height="90" fill="#F3F1EC" stroke="#B9B2A6"/>
-        <text x="292" y="88" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#7C7770">KITCHEN &middot; 4 MEALS</text>
-        <rect x="280" y="150" width="220" height="110" fill="#FFFFFF" stroke="#B9B2A6"/>
-        <rect x="300" y="170" width="70" height="16" rx="2" fill="#8A6A2F"/>
-        <g fill="none" stroke="#55524C" stroke-width="1.5">
-          <circle cx="410" cy="178" r="6"/><circle cx="432" cy="178" r="6"/><circle cx="454" cy="178" r="6"/><circle cx="476" cy="178" r="6"/>
-          <circle cx="410" cy="200" r="6"/><circle cx="432" cy="200" r="6"/><circle cx="454" cy="200" r="6"/><circle cx="476" cy="200" r="6"/>
-        </g>
-        <text x="300" y="246" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#8A6A2F" font-weight="700">SHOOT SET 15:00 &middot; SPEAKER 18:00</text>
-        <rect x="60" y="260" width="440" height="130" fill="#F5EFE3" stroke="#B08968" stroke-dasharray="4 3"/>
-        <rect x="110" y="300" width="340" height="44" rx="4" fill="#B08968"/>
-        <g fill="#1A1A1A"><rect x="122" y="288" width="20" height="8"/><rect x="154" y="288" width="20" height="8"/><rect x="186" y="288" width="20" height="8"/><rect x="218" y="288" width="20" height="8"/><rect x="250" y="288" width="20" height="8"/><rect x="282" y="288" width="20" height="8"/><rect x="314" y="288" width="20" height="8"/><rect x="346" y="288" width="20" height="8"/><rect x="378" y="288" width="20" height="8"/><rect x="410" y="288" width="20" height="8"/></g>
-        <g fill="#FFFFFF" stroke="#8A6A2F" stroke-width="1.5"><rect x="122" y="272" width="20" height="12" rx="2"/><rect x="154" y="272" width="20" height="12" rx="2"/><rect x="186" y="272" width="20" height="12" rx="2"/><rect x="218" y="272" width="20" height="12" rx="2"/><rect x="250" y="272" width="20" height="12" rx="2"/><rect x="282" y="272" width="20" height="12" rx="2"/><rect x="314" y="272" width="20" height="12" rx="2"/><rect x="346" y="272" width="20" height="12" rx="2"/><rect x="378" y="272" width="20" height="12" rx="2"/><rect x="410" y="272" width="20" height="12" rx="2"/></g>
-        <g fill="#FFFFFF" stroke="#55524C" stroke-width="1.5"><rect x="84" y="316" width="12" height="22" rx="2"/><rect x="464" y="316" width="12" height="22" rx="2"/></g>
-        <text x="110" y="377" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#1A1A1A" font-weight="700">THE TABLE &middot; 10 BUILDERS &middot; HOSTS AT BOTH ENDS</text>
-        <rect x="520" y="260" width="150" height="50" rx="3" fill="#FFFFFF" stroke="#B08968"/>
-        <g fill="#1A1A1A"><rect x="536" y="274" width="12" height="12"/><rect x="556" y="274" width="12" height="12"/><rect x="576" y="274" width="12" height="12"/><rect x="596" y="274" width="12" height="12"/></g>
-        <text x="520" y="328" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#55524C">COFFEE BAR &middot; ALL NIGHT</text>
-        <rect x="180" y="408" width="440" height="56" rx="12" fill="#9CC9D6" stroke="#55524C" stroke-opacity=".5"/>
-        <text x="196" y="442" font-family="Space Mono, monospace" font-size="11" letter-spacing="2" fill="#1A1A1A">POOL &middot; FREE TIME FROM 19:30</text>
-        <path d="M540 360 C 600 340, 640 380, 660 420" fill="none" stroke="#8A6A2F" stroke-dasharray="2 4"/>
-        <text x="596" y="352" font-family="Space Mono, monospace" font-size="10" letter-spacing="1" fill="#8A6A2F">PHOTOGRAPHER ROAMS</text>
-      </svg>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The place</span>
+      <h2>A white villa on the Tagaytay ridge, an hour and a half from BGC.</h2>
+      <p class="dim">White walls and black frames, a heated pool, a double-height living room, five rooms and six baths for the night. Every corner is a set by day and a build table by night. Pre-final: the address reaches enrollees a week before.</p>
     </div>
-    <div class="legend">
-      <div><span class="key" style="background:#B08968"></span><div><b>The table</b><span>One long table. Ten builders, a host at each end, laptops open from 9pm. This is the mastermind: everyone sees everyone's build.</span></div></div>
-      <div><span class="key" style="background:#8A6A2F"></span><div><b>Shoot set and speaker corner</b><span>The living room. Content shoot from 3pm with the photographer, then stools in an arc for the Hermes talk at 6pm.</span></div></div>
-      <div><span class="key" style="background:#9CC9D6"></span><div><b>Pool and free time</b><span>From 7:30pm the night is yours. Swim, sleep, or keep building with a host beside you.</span></div></div>
-      <div><span class="key" style="background:#F3F1EC;border:1px solid #B9B2A6"></span><div><b>Bedrooms</b><span>Twin share, sleep whenever. Breakfast at 8.</span></div></div>
-      <div><span class="key" style="background:#FFFFFF;border:1px solid #B08968"></span><div><b>Coffee bar</b><span>The kitchen island. Robots &amp; Coffee beans, open all night. The photographer works the whole 26 hours.</span></div></div>
+    <div class="gallery">
+      <figure><img src="/mastermind/media/pool-night.jpg" alt="The pool lit at night under string lights, bamboo fence behind" width="1200" height="1600" loading="lazy"><figcaption>The pool after the second build block</figcaption></figure>
+      <figure><img src="/mastermind/media/living.jpg" alt="The double-height living room: white walls, black stair rail, grey sofas around a wooden table" width="1440" height="960" loading="lazy"><figcaption>The living room, where the speaker corner goes</figcaption></figure>
+      <figure><img src="/mastermind/media/island.jpg" alt="The white kitchen island with black bar stools and pendant lights" width="1440" height="960" loading="lazy"><figcaption>The island, coffee bar all night</figcaption></figure>
+      <figure><img src="/mastermind/media/table.jpg" alt="The dining table by the window under a wire chandelier" width="1440" height="1080" loading="lazy"><figcaption>The table, before we join two of them</figcaption></figure>
+      <figure><img src="/mastermind/media/lanai.jpg" alt="The covered lanai with a sofa set opening onto the garden and pool" width="1200" height="1600" loading="lazy"><figcaption>The lanai, first build block</figcaption></figure>
+      <figure><img src="/mastermind/media/room.jpg" alt="A bedroom with a white bed, wood floor and a whitewashed brick wall" width="1200" height="1600" loading="lazy"><figcaption>One of five rooms</figcaption></figure>
     </div>
+    <p class="note" style="margin-top:14px">Photos: the villa's own listing.</p>
+    <!-- Rate pending Gwen's quote; shortlist runs 10+ villas, chosen the night before the booking window closes. -->
+    <div class="plan">
+      <div class="plan-vis">
+        <svg viewBox="0 0 720 500" role="img" aria-label="Floor plan: build table on the lanai, speaker corner, coffee bar, pool, bedrooms, kitchen, parking">
+          <rect class="pl-ground" width="720" height="500"/>
+          <rect class="pl-lot" x="20" y="20" width="680" height="460" rx="4"/>
+          <rect class="pl-park" x="20" y="400" width="130" height="80"/>
+          <rect class="pl-car" x="42" y="428" width="60" height="30" rx="5"/>
+          <text class="pl-t" x="30" y="473">PARKING · 8 CARS</text>
+          <rect class="pl-house" x="60" y="60" width="440" height="200"/>
+          <g class="pl-room">
+            <rect x="60" y="60" width="110" height="100"/><rect x="170" y="60" width="110" height="100"/><rect x="60" y="160" width="110" height="100"/><rect x="170" y="160" width="110" height="100"/>
+          </g>
+          <g class="pl-t">
+            <text x="72" y="118">BR 1</text><text x="182" y="118">BR 2</text><text x="72" y="218">BR 3</text><text x="182" y="218">BR 4</text>
+            <text class="pl-t sm" x="72" y="136">SLEEP WHEN YOU WANT</text>
+          </g>
+          <rect class="pl-kitchen" x="280" y="60" width="220" height="90"/>
+          <text class="pl-t" x="292" y="88">KITCHEN &middot; 4 MEALS</text>
+          <rect class="pl-set" x="280" y="150" width="220" height="110"/>
+          <rect class="pl-set-mark" x="300" y="170" width="70" height="16" rx="2"/>
+          <g class="pl-stool">
+            <circle cx="410" cy="178" r="6"/><circle cx="432" cy="178" r="6"/><circle cx="454" cy="178" r="6"/><circle cx="476" cy="178" r="6"/>
+            <circle cx="410" cy="200" r="6"/><circle cx="432" cy="200" r="6"/><circle cx="454" cy="200" r="6"/><circle cx="476" cy="200" r="6"/>
+          </g>
+          <text class="pl-t ink" x="300" y="246">SHOOT SET 15:00 &middot; SPEAKER 18:00</text>
+          <rect class="pl-lanai" x="60" y="260" width="440" height="130"/>
+          <rect class="pl-table" x="110" y="300" width="340" height="44" rx="4"/>
+          <g class="pl-laptop"><rect x="122" y="288" width="20" height="8"/><rect x="154" y="288" width="20" height="8"/><rect x="186" y="288" width="20" height="8"/><rect x="218" y="288" width="20" height="8"/><rect x="250" y="288" width="20" height="8"/><rect x="282" y="288" width="20" height="8"/><rect x="314" y="288" width="20" height="8"/><rect x="346" y="288" width="20" height="8"/><rect x="378" y="288" width="20" height="8"/><rect x="410" y="288" width="20" height="8"/></g>
+          <g class="pl-chair"><rect x="122" y="272" width="20" height="12" rx="2"/><rect x="154" y="272" width="20" height="12" rx="2"/><rect x="186" y="272" width="20" height="12" rx="2"/><rect x="218" y="272" width="20" height="12" rx="2"/><rect x="250" y="272" width="20" height="12" rx="2"/><rect x="282" y="272" width="20" height="12" rx="2"/><rect x="314" y="272" width="20" height="12" rx="2"/><rect x="346" y="272" width="20" height="12" rx="2"/><rect x="378" y="272" width="20" height="12" rx="2"/><rect x="410" y="272" width="20" height="12" rx="2"/></g>
+          <g class="pl-chair"><rect x="84" y="316" width="12" height="22" rx="2"/><rect x="464" y="316" width="12" height="22" rx="2"/></g>
+          <text class="pl-t ink" x="110" y="377">THE TABLE &middot; 10 BUILDERS &middot; HOSTS AT BOTH ENDS</text>
+          <rect class="pl-bar" x="520" y="260" width="150" height="50" rx="3"/>
+          <g class="pl-bar-mark"><rect x="536" y="274" width="12" height="12"/><rect x="556" y="274" width="12" height="12"/><rect x="576" y="274" width="12" height="12"/><rect x="596" y="274" width="12" height="12"/></g>
+          <text class="pl-t" x="520" y="328">COFFEE BAR &middot; ALL NIGHT</text>
+          <rect class="pl-pool" x="180" y="408" width="440" height="56" rx="12"/>
+          <text class="pl-t ink" x="196" y="442">POOL &middot; FREE TIME FROM 19:30</text>
+          <path class="pl-path" d="M540 360 C 600 340, 640 380, 660 420"/>
+          <text class="pl-t sm" x="560" y="352">PHOTOGRAPHER ROAMS</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <div><span class="key k-table"></span><div><b>The table</b><span>One long table. Ten builders, a host at each end, laptops open from 9pm. This is the mastermind: everyone sees everyone's build.</span></div></div>
+        <div><span class="key k-set"></span><div><b>Shoot set and speaker corner</b><span>The living room. Content shoot from 3pm with the photographer, then stools in an arc for the Hermes talk at 6pm.</span></div></div>
+        <div><span class="key k-pool"></span><div><b>Pool and free time</b><span>From 7:30pm the night is yours. Swim, sleep, or keep building with a host beside you.</span></div></div>
+        <div><span class="key k-room"></span><div><b>Bedrooms</b><span>Twin share, sleep whenever. Breakfast at 8.</span></div></div>
+        <div><span class="key k-bar"></span><div><b>Coffee bar</b><span>The kitchen island. Robots &amp; Coffee beans, open all night. The photographer works the whole 26 hours.</span></div></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:14px">The plan is representative; the booked villa differs in shape, not in zones.</p>
   </div>
-  <p class="note" style="margin-top:14px">The plan is representative; the booked villa differs in shape, not in zones. Budget line for the night: about &#8369;45,000, to be replaced by the host's quote.</p>
 </section>
 
-<section id="hours">
-  <div class="sec-head">
-    <span class="eyebrow">The 26 hours</span>
-    <h2>Saturday you shoot, then you build. Sunday you demo.</h2>
-  </div>
-  <div class="sched">
-    <div class="day">
-      <h3>Saturday <small>Oct 24</small></h3>
-      <div class="slot"><time>13:00</time><div><span class="hi">Arrive by car, 90 minutes from BGC. Coffee, gift box, your seat at the table.</span></div></div>
-      <div class="slot"><time>14:00</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one app your business needs.</span></div></div>
-      <div class="slot"><time>15:00</time><div><span class="hi">Shoot block.</span><span>Talking heads and b-roll around the villa with the photographer, then captions drafted with the content prompts before dinner.</span></div></div>
-      <div class="slot"><time>18:00</time><div><span class="hi">Guest speaker: the Hermes talk.</span><span>Agents that run on their own. Questions until dinner.</span></div></div>
-      <div class="slot"><time>19:30</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
-      <div class="slot"><time>21:00</time><div><span class="hi">Build night with Jamz.</span><span>Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
+<section id="hours" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The 26 hours</span>
+      <h2>Saturday you shoot, then you build. Sunday you demo.</h2>
     </div>
-    <div class="day">
-      <h3>Sunday <small>Oct 25</small></h3>
-      <div class="slot"><time>08:00</time><div><span class="hi">Breakfast.</span></div></div>
-      <div class="slot"><time>09:00</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
-      <div class="slot"><time>10:30</time><div><span class="hi">Demo day.</span><span>Ten apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
-      <div class="slot"><time>12:00</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
-      <div class="slot"><time>13:30</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
-      <div class="slot"><time>15:00</time><div><span class="hi">Home. Carpools sorted at the table the night before.</span></div></div>
+    <div class="sched">
+      <div class="day">
+        <h3>Saturday <small>Oct 24</small></h3>
+        <div class="slot"><time>13:00</time><div><span class="hi">Arrive by car, 90 minutes from BGC. Coffee, gift box, your seat at the table.</span></div></div>
+        <div class="slot"><time>14:00</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one app your business needs.</span></div></div>
+        <div class="slot"><time>15:00</time><div><span class="hi">Shoot block.</span><span>Talking heads and b-roll around the villa with the photographer, then captions drafted with the content prompts before dinner.</span></div></div>
+        <div class="slot"><time>18:00</time><div><span class="hi">Guest speaker: the Hermes talk.</span><span>Agents that run on their own. Questions until dinner.</span></div></div>
+        <div class="slot"><time>19:30</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
+        <div class="slot"><time>21:00</time><div><span class="hi">Build night with Jamz.</span><span>Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
+      </div>
+      <div class="day">
+        <h3>Sunday <small>Oct 25</small></h3>
+        <div class="slot"><time>08:00</time><div><span class="hi">Breakfast.</span></div></div>
+        <div class="slot"><time>09:00</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
+        <div class="slot"><time>10:30</time><div><span class="hi">Demo day.</span><span>Ten apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
+        <div class="slot"><time>12:00</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
+        <div class="slot"><time>13:30</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
+        <div class="slot"><time>15:00</time><div><span class="hi">Home. Carpools sorted at the table the night before.</span></div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="outcome">
-  <div class="sec-head">
-    <span class="eyebrow">What you leave with</span>
-    <h2>A month of content, your app on your phone, and a team that keeps it shipping.</h2>
-  </div>
-  <div class="outcome">
-    <div class="phone">
-      <svg viewBox="0 0 260 520" role="img" aria-label="Phone home screen with the attendee's own app icon">
-        <rect x="6" y="6" width="248" height="508" rx="38" fill="#0E0B09" stroke="#5A4A3C" stroke-width="3"/>
-        <rect x="18" y="18" width="224" height="484" rx="30" fill="#1D2A2F"/>
-        <rect x="92" y="26" width="76" height="20" rx="10" fill="#0E0B09"/>
-        <g font-family="Space Mono, monospace" font-size="10" letter-spacing="1" fill="#D3C6B6" text-anchor="middle">
-          <rect x="40" y="72" width="44" height="44" rx="11" fill="#2E3B40"/><text x="62" y="131">Calendar</text>
-          <rect x="108" y="72" width="44" height="44" rx="11" fill="#2E3B40"/><text x="130" y="131">Messages</text>
-          <rect x="176" y="72" width="44" height="44" rx="11" fill="#2E3B40"/><text x="198" y="131">GCash</text>
-          <rect x="40" y="150" width="44" height="44" rx="11" fill="#2E3B40"/><text x="62" y="209">Viber</text>
-          <rect x="108" y="150" width="44" height="44" rx="11" fill="#F2C43D"/><text x="130" y="209" fill="#F5EEE4" font-weight="700">Your app</text>
-          <rect x="176" y="150" width="44" height="44" rx="11" fill="#2E3B40"/><text x="198" y="209">Maps</text>
-          <rect x="40" y="228" width="44" height="44" rx="11" fill="#2E3B40"/><text x="62" y="287">Notes</text>
-          <rect x="108" y="228" width="44" height="44" rx="11" fill="#2E3B40"/><text x="130" y="287">Photos</text>
-          <rect x="176" y="228" width="44" height="44" rx="11" fill="#2E3B40"/><text x="198" y="287">Mail</text>
-        </g>
-        <text x="130" y="181" font-family="Space Mono, monospace" font-size="16" font-weight="700" fill="#1A1206" text-anchor="middle">R</text>
-        <rect x="34" y="430" width="192" height="52" rx="16" fill="#0E0B09" opacity=".6"/>
-        <g fill="#2E3B40"><rect x="52" y="438" width="36" height="36" rx="9"/><rect x="100" y="438" width="36" height="36" rx="9"/><rect x="148" y="438" width="36" height="36" rx="9"/></g>
-      </svg>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What you leave with</span>
+      <h2>A month of content, your app on your phone, and a team that keeps it shipping.</h2>
     </div>
-    <div class="steps">
-      <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your app on your phone from your own URL.</b><p class="dim">A browser app that installs to the home screen and works offline. Yours to keep, hosted on your own GitHub.</p></div>
-      <div class="step"><span class="label">Within 14 days</span><b>On TestFlight, under the Robots &amp; Coffee developer account.</b><p class="dim">We wrap it and ship it. You get the TestFlight link, your team installs it like any app.</p></div>
-      <div class="step"><span class="label">Every 90 days</span><b>Re-shipped, while you are in the alumni circle.</b><p class="dim">TestFlight builds expire. Ours do not, because we keep shipping them for you.</p></div>
+    <div class="outcome">
+      <div class="phone">
+        <svg viewBox="0 0 260 520" role="img" aria-label="Phone home screen with the attendee's own app icon">
+          <rect class="ph-body" x="6" y="6" width="248" height="508" rx="38"/>
+          <rect class="ph-screen" x="18" y="18" width="224" height="484" rx="30"/>
+          <rect class="ph-notch" x="92" y="26" width="76" height="20" rx="10"/>
+          <g>
+            <rect class="ph-icon" x="40" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="131">Calendar</text>
+            <rect class="ph-icon" x="108" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="130" y="131">Messages</text>
+            <rect class="ph-icon" x="176" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="131">GCash</text>
+            <rect class="ph-icon" x="40" y="150" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="209">Viber</text>
+            <rect class="ph-you" x="108" y="150" width="44" height="44" rx="11"/><text class="ph-t you" x="130" y="209">Your app</text>
+            <rect class="ph-icon" x="176" y="150" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="209">Maps</text>
+            <rect class="ph-icon" x="40" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="287">Notes</text>
+            <rect class="ph-icon" x="108" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="130" y="287">Photos</text>
+            <rect class="ph-icon" x="176" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="287">Mail</text>
+          </g>
+          <text class="ph-r" x="130" y="181">R</text>
+          <rect class="ph-dock" x="34" y="430" width="192" height="52" rx="16"/>
+          <g class="ph-icon"><rect x="52" y="438" width="36" height="36" rx="9"/><rect x="100" y="438" width="36" height="36" rx="9"/><rect x="148" y="438" width="36" height="36" rx="9"/></g>
+        </svg>
+      </div>
+      <div class="steps">
+        <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your app on your phone from your own URL.</b><p class="dim">A browser app that installs to the home screen and works offline. Yours to keep, hosted on your own GitHub.</p></div>
+        <div class="step"><span class="label">Within 14 days</span><b>On TestFlight, under the Robots &amp; Coffee developer account.</b><p class="dim">We wrap it and ship it. You get the TestFlight link, your team installs it like any app.</p></div>
+        <div class="step"><span class="label">Every 90 days</span><b>Re-shipped, while you are in the alumni circle.</b><p class="dim">TestFlight builds expire. Ours do not, because we keep shipping them for you.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="included">
-  <div class="sec-head">
-    <span class="eyebrow">Included</span>
-    <h2>Pay once. Nothing at the door.</h2>
-  </div>
-  <div class="incl">
-    <div><b>The villa night</b><span>A private room for early birds, a bunk in the builders' room for regular seats. Pool, table, all of it.</span></div>
-    <div><b>Every meal and the coffee bar</b><span>Merienda, dinner, breakfast, lunch. Beans all night.</span></div>
-        <div><b>Content shoot</b><span>Photographer plus the villa as your set. A month of posts shot and drafted before dinner.</span></div>
-    <div><b>Gift box</b><span>Robots &amp; Coffee kit at your seat.</span></div>
-    <div><b>The Overnight Build vault</b><span>Ten prompts with a video each, from brief to demo day.</span></div>
-    <div><b>Guest speaker</b><span>The Hermes talk, then questions.</span></div>
-    <div><b>TestFlight wrap</b><span>Your app shipped under our developer account within 14 days.</span></div>
-    <div><b>Photographer</b><span>The whole 26 hours. Your edited set within a week.</span></div>
-  </div>
-  <div class="speaker">
-    <div class="ph">TBA</div>
-    <div>
-      <span class="label">Guest speaker &middot; Saturday 6pm</span>
-      <h3 style="margin-top:6px">The Hermes talk</h3>
-      <p class="dim" style="margin-top:6px">Agents that wake up, do the job, and report, without a prompt from you. Speaker announced to enrollees.</p>
+<section id="included" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Included</span>
+      <h2>Pay once. Nothing at the door.</h2>
+    </div>
+    <div class="incl">
+      <div><b>The villa night</b><span>A private room for early birds, a bunk in the builders' room for regular seats. Pool, table, all of it.</span></div>
+      <div><b>Every meal and the coffee bar</b><span>Merienda, dinner, breakfast, lunch. Beans all night.</span></div>
+      <div><b>Content shoot</b><span>Photographer plus the villa as your set. A month of posts shot and drafted before dinner.</span></div>
+      <div><b>Gift box</b><span>Robots &amp; Coffee kit at your seat.</span></div>
+      <div><b>The Overnight Build vault</b><span>Ten prompts with a video each, from brief to demo day.</span></div>
+      <div><b>Guest speaker</b><span>The Hermes talk, then questions.</span></div>
+      <div><b>TestFlight wrap</b><span>Your app shipped under our developer account within 14 days.</span></div>
+      <div><b>Photographer</b><span>The whole 26 hours. Your edited set within a week.</span></div>
+    </div>
+    <div class="speaker">
+      <div class="ph">TBA</div>
+      <div>
+        <span class="label">Guest speaker &middot; Saturday 6pm</span>
+        <h3 style="margin-top:6px">The Hermes talk</h3>
+        <p class="dim" style="margin-top:6px">Agents that wake up, do the job, and report, without a prompt from you. Speaker announced to enrollees.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="seats">
-  <div class="sec-head">
-    <span class="eyebrow">Seats</span>
-    <h2>Ten chairs. Three of them early.</h2>
-    <p class="dim">Alumni of Batch 1 and Batch 2 book first. Early bird closes Sunday, Sept 27, or when the third chair goes. The three early birds take private rooms; the seven regular seats share the builders' room.</p>
-  </div>
-  <div class="seats">
-    <div class="tier eb">
-      <span class="eyebrow">Early bird &middot; 3 seats &middot; a private room each</span>
-      <div class="price">&#8369;70,000<small>pay once</small></div>
-      <div class="chairs" aria-label="3 early bird chairs, all open"><span class="chair"></span><span class="chair"></span><span class="chair"></span></div>
-      <ul><li>Your own queen room for the night</li><li>Everything included, no upgrade tier</li><li>Closes Sept 27 or at 3 sold</li><li>Batch 2 attendees: ask for the room code this weekend, &#8369;10,000 off, Sept 19 to 20 only</li></ul>
-      <a class="btn gold" id="eb-seat-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat</a>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Seats</span>
+      <h2>Ten chairs. Three of them early.</h2>
+      <p class="dim">Alumni of Batch 1 and Batch 2 book first. Early bird closes Sunday, Sept 27, or when the third chair goes. The three early birds take private rooms; the seven regular seats share the builders' room.</p>
     </div>
-    <div class="tier">
-      <span class="eyebrow">Regular &middot; seats 4 to 10 &middot; the builders' room</span>
-      <div class="price">&#8369;90,000<small>pay once</small></div>
-      <div class="chairs" aria-label="7 regular chairs, all open"><span class="chair open"></span><span class="chair open"></span><span class="chair open"></span><span class="chair open"></span><span class="chair open"></span><span class="chair open"></span><span class="chair open"></span></div>
-      <ul><li>Same table, same vault, same shoot</li><li>A bunk in the builders' room, eight bunks, its own bath</li><li>Opens Sept 28, closes when the tenth chair goes</li></ul>
-      <a class="btn" href="https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53" rel="noopener" target="_blank">Take a regular seat</a>
-      <span class="note">Prerequisite: Claude Code running on your laptop, or a Batch 1 / Batch 2 seat.</span>
+    <div class="seats">
+      <div class="tier eb">
+        <span class="eyebrow">Early bird &middot; 3 seats &middot; a private room each</span>
+        <div class="price">&#8369;70,000<small>pay once</small></div>
+        <div class="chairs" role="img" aria-label="3 early bird chairs, all open"><span class="chair"></span><span class="chair"></span><span class="chair"></span></div>
+        <ul><li>Your own queen room for the night</li><li>Everything included, no upgrade tier</li><li>Closes Sept 27 or at 3 sold</li><li>Batch 2 attendees: ask for the room code this weekend, &#8369;10,000 off, Sept 19 to 20 only</li></ul>
+        <a class="btn big on-dark solid" id="eb-seat-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat</a>
+      </div>
+      <div class="tier">
+        <span class="eyebrow">Regular &middot; seats 4 to 10 &middot; the builders' room</span>
+        <div class="price">&#8369;90,000<small>pay once</small></div>
+        <div class="chairs" role="img" aria-label="7 regular chairs, all open"><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span></div>
+        <ul><li>Same table, same vault, same shoot</li><li>A bunk in the builders' room, eight bunks, its own bath</li><li>Opens Sept 28, closes when the tenth chair goes</li></ul>
+        <a class="btn big solid" href="https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53" rel="noopener" target="_blank">Take a regular seat</a>
+        <span class="note">Prerequisite: Claude Code running on your laptop, or a Batch 1 / Batch 2 seat.</span>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="faq">
-  <div class="sec-head">
-    <span class="eyebrow">Questions</span>
-    <h2>Before you book.</h2>
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Before you book.</h2>
+    </div>
+    <details><summary>What if my app is not done by Sunday noon?</summary><p>We finish it with you on a call that week. Nobody leaves the villa without a working app on their phone, and nobody leaves the month without one on TestFlight.</p></details>
+    <details><summary>Do I need a Mac or an Apple developer account?</summary><p>No. Any laptop that runs Claude Code. The Sunday app is a browser app that installs to iPhone and Android. The TestFlight step runs under our account, not yours.</p></details>
+    <details><summary>I did not attend the workshop. Can I come?</summary><p>If Claude Code is already running on your laptop and you have built one thing with it, yes. If not, Batch 2 on Sept 19 to 20 is the door.</p></details>
+    <details><summary>Do I need to be on camera?</summary><p>Only as much as you want. Gwen builds the plan around your format: talking head, voiceover over b-roll, or text on screen. The photographer shoots the villa either way.</p></details>
+    <details><summary>Where do I sleep?</summary><p>Early bird seats get a private queen room. Regular seats share the builders' room: eight bunks and its own bath, the way a hackathon sleeps. Hosts and staff take the lanai. Most people build past midnight anyway.</p></details>
+    <details><summary>Refunds?</summary><p>Seats are capacity, not stock. A seat can be transferred to another builder up to Oct 17. No refunds after booking.</p></details>
   </div>
-  <details><summary>What if my app is not done by Sunday noon?</summary><p>We finish it with you on a call that week. Nobody leaves the villa without a working app on their phone, and nobody leaves the month without one on TestFlight.</p></details>
-  <details><summary>Do I need a Mac or an Apple developer account?</summary><p>No. Any laptop that runs Claude Code. The Sunday app is a browser app that installs to iPhone and Android. The TestFlight step runs under our account, not yours.</p></details>
-  <details><summary>I did not attend the workshop. Can I come?</summary><p>If Claude Code is already running on your laptop and you have built one thing with it, yes. If not, Batch 2 on Sept 19 to 20 is the door.</p></details>
-  <details><summary>Do I need to be on camera?</summary><p>Only as much as you want. Gwen builds the plan around your format: talking head, voiceover over b-roll, or text on screen. The photographer shoots the villa either way.</p></details>
-  <details><summary>Where do I sleep?</summary><p>Early bird seats get a private queen room. Regular seats share the builders' room: eight bunks and its own bath, the way a hackathon sleeps. Hosts and staff take the lanai. Most people build past midnight anyway.</p></details>
-  <details><summary>Refunds?</summary><p>Seats are capacity, not stock. A seat can be transferred to another builder up to Oct 17. No refunds after booking.</p></details>
 </section>
 
 <footer>
-  <span>Robots &amp; Coffee is a Gwen Ayala and Jamz Jamorol venture.</span>
-  <span><a href="/">JTL Growth home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/privacy/#cookies">Cookies</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span>
-  <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
+  <div class="wrap" style="display:grid;gap:10px">
+    <span>Robots &amp; Coffee is a Gwen Ayala and Jamz Jamorol venture.</span>
+    <span><a href="/">JTL Growth home</a> &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/privacy/#cookies">Cookies</a> &middot; <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> &middot; <a href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Facebook</a></span>
+    <span>&copy; 2026 JTL Growth &middot; Caloocan, Metro Manila, PH &middot; DTI BN 8378934</span>
+  </div>
 </footer>
-</div>
 
 <script>
 (function(){
-  var cutoff = new Date('2026-09-27T23:59:59+08:00').getTime();
-  if (Date.now() <= cutoff) return;
-  var ebBtn = document.getElementById('eb-seat-btn');
-  if (ebBtn) {
-    var note = document.createElement('p');
-    note.className = 'note';
-    note.textContent = 'Early bird closed Sept 27.';
-    ebBtn.replaceWith(note);
+  var ev = SETTINGS.event, cutoff = new Date(ev.earlyBirdCloses).getTime();
+  var cd = document.getElementById('cd'), open = document.getElementById('bar-open'), closed = document.getElementById('bar-closed');
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function tick(){
+    var left = cutoff - Date.now();
+    if (left <= 0) { open.hidden = true; closed.hidden = false; return false; }
+    var s = Math.floor(left / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+    var cells = cd.children;
+    cells[0].textContent = pad(d) + 'd'; cells[1].textContent = pad(h) + 'h'; cells[2].textContent = pad(m) + 'm'; cells[3].textContent = pad(s % 60) + 's';
+    return true;
   }
-  var heroBtn = document.getElementById('hero-eb-btn');
-  if (heroBtn) {
-    heroBtn.href = 'https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53';
-    heroBtn.innerHTML = 'Take a seat <small>₱90,000</small>';
+  if (tick()) { var timer = setInterval(function(){ if (!tick()) clearInterval(timer); }, 1000); }
+  else {
+    var ebBtn = document.getElementById('eb-seat-btn');
+    if (ebBtn) { var note = document.createElement('p'); note.className = 'note'; note.textContent = 'Early bird closed Sept 27.'; ebBtn.replaceWith(note); }
+    var heroBtn = document.getElementById('hero-eb-btn');
+    if (heroBtn) { heroBtn.href = 'https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53'; heroBtn.textContent = 'Take a seat '; var sm = document.createElement('small'); sm.textContent = '₱' + ev.regularPrice; heroBtn.appendChild(sm); }
   }
+  var v = document.getElementById('teaser-video'), ctrl = document.getElementById('teaser-ctrl');
+  var still = !SETTINGS.behavior.animations || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function setCtrl(playing){ ctrl.textContent = playing ? 'Pause' : 'Play'; ctrl.setAttribute('aria-pressed', playing ? 'true' : 'false'); }
+  if (still) { v.removeAttribute('autoplay'); v.pause(); setCtrl(false); }
+  ctrl.addEventListener('click', function(){ if (v.paused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function(){ setCtrl(false); }); } else { v.pause(); } });
+  v.addEventListener('play', function(){ setCtrl(true); }); v.addEventListener('pause', function(){ setCtrl(false); });
 })();
 </script>
 </body>
