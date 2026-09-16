@@ -188,12 +188,24 @@ section + section{border-top:1px solid var(--line)}
   .hub-chip{width:100%;justify-content:space-between}
 }
 /* ---------- quote page ---------- */
-.qt-hero{padding:0;min-height:calc(100svh - clamp(120px,13vh,168px));display:flex;align-items:center}
-.qt-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,80px);align-items:center;width:100%}
-.qt-clip{position:relative;border:1px solid var(--line);background:var(--cement-deep)}
-.qt-clip video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:var(--cement-deep)}
-.qt-copy h1{margin-top:16px}
-.qt-copy .lead{margin-top:22px}
+/* video hero: the clip fills the fold, the copy sits centred on a dark scrim (Owner, 2026-09-16).
+   Literal light ink on purpose: the ground is the footage, not the theme. */
+.qt-hero{position:relative;margin-top:calc(-1 * clamp(120px,13vh,168px));padding:clamp(120px,13vh,168px) 0 0;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#101010;isolation:isolate} /* runs under the translucent header like the workshop room clip */
+.qt-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;z-index:0}
+.qt-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(16,16,16,.55) 0%,rgba(16,16,16,.42) 45%,rgba(16,16,16,.78) 100%)}
+.qt-copy{position:relative;z-index:2;text-align:center;padding-top:clamp(48px,8vh,96px);padding-bottom:clamp(48px,8vh,96px)}
+.qt-copy .eyebrow{color:#C9C9C9}
+.qt-copy h1{margin-top:16px;color:#F2F2F2;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.qt-copy h1 .accent{color:#F2F2F2}
+.qt-copy .lead{margin:22px auto 0;color:#D6D6D6;max-width:52ch}
+.qt-copy .hub-row{justify-content:center}
+.qt-copy .hub-chip{color:#F2F2F2;border-color:rgba(242,242,242,.5)}
+.qt-copy .hub-chip:hover{background:#F2F2F2;color:#101010;border-color:#F2F2F2}
+.qt-copy .hub-chip.solid{background:#F2F2F2;color:#101010;border-color:#F2F2F2}
+.qt-copy .hub-chip.solid:hover{background:#D6D6D6;border-color:#D6D6D6}
+.qt-hero .oh-pause{position:absolute;right:5vw;bottom:26px;z-index:3;border-color:#F2F2F2;color:#F2F2F2;background:rgba(16,16,16,.5)}
+.qt-hero .oh-pause:hover,.qt-hero .oh-pause:focus-visible{background:#F2F2F2;color:#101010}
+@media (prefers-reduced-motion:reduce){.qt-bg{object-fit:cover}}
 .oh-pause{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border:1px solid var(--navy);background:var(--cement);color:var(--navy);display:inline-grid;place-items:center;cursor:pointer;padding:0;z-index:2;transition:background .25s,color .25s}
 .oh-pause:hover,.oh-pause:focus-visible{background:var(--navy);color:var(--cement)}
 .oh-pause svg{width:16px;height:16px}
@@ -249,7 +261,7 @@ section + section{border-top:1px solid var(--line)}
 .qt-tiers span{color:var(--gray);font-size:15px;line-height:1.55;flex:1 1 320px}
 
 @media (max-width:860px){
-  .qt-hero-grid{grid-template-columns:1fr;gap:24px}
+  .qt-hero .oh-pause{right:16px;bottom:18px}
   .qt-days{grid-template-columns:1fr}
   .qt-row2{grid-template-columns:1fr}
   .qt-tiers a{min-width:0}
@@ -315,25 +327,22 @@ addEventListener("DOMContentLoaded",function(){
 </header>
 
 <main id="main">
-<section class="page-hero qt-hero">
-  <div class="wrap qt-hero-grid">
-    <figure class="qt-clip">
-      <video id="qt-video" src="/quote/jamz-stage.mp4" poster="/quote/jamz-stage-poster.jpg" muted loop playsinline preload="metadata" aria-label="Jamz Jamorol on stage at the Batch 1 workshop"></video>
-      <button class="oh-pause" id="qt-pause" type="button" aria-pressed="false" aria-label="Pause the clip">
+<section class="page-hero qt-hero" aria-label="Request a quote">
+  <video id="qt-video" class="qt-bg" src="/quote/jamz-stage.mp4" poster="/quote/jamz-stage-poster.jpg" muted loop playsinline preload="metadata" aria-label="Jamz Jamorol on stage at the Batch 1 workshop"></video>
+  <div class="qt-scrim" aria-hidden="true"></div>
+  <div class="wrap qt-copy">
+    <p class="eyebrow">Request a quote</p>
+    <h1>Tell us the bottleneck.<br>We <em class="accent">quote the fix.</em></h1>
+    <p class="lead">No public price list. Every engagement is scoped from what is already wired in your business. You get a written quote: what it includes as a count you can check, where it stops, and the timeline. Two business days.</p>
+    <div class="hub-row">
+      <a class="hub-chip magnet solid" href="#form">Send the request <span class="arr">&#8599;</span></a>
+      <a class="hub-chip magnet" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
+    </div>
+  </div>
+  <button class="oh-pause" id="qt-pause" type="button" aria-pressed="false" aria-label="Pause the clip">
         <svg class="ic-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
         <svg class="ic-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
       </button>
-    </figure>
-    <div class="qt-copy">
-      <p class="eyebrow">Request a quote</p>
-      <h1>Tell us the bottleneck.<br>We <em class="accent">quote the fix.</em></h1>
-      <p class="lead">No public price list. Every engagement is scoped from what is already wired in your business. You get a written quote: what it includes as a count you can check, where it stops, and the timeline. Two business days.</p>
-      <div class="hub-row">
-        <a class="hub-chip magnet solid" href="#form">Send the request <span class="arr">&#8599;</span></a>
-        <a class="hub-chip magnet" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book a call <span class="arr">&#8599;</span></a>
-      </div>
-    </div>
-  </div>
 </section>
 
 <section class="wrap" id="how">
