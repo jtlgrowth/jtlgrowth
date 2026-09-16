@@ -97,7 +97,7 @@ section.alt{background:var(--surface)}
 .nav{position:fixed;inset:0 0 auto 0;z-index:20;background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 13px/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
-.mark i{width:28px;height:28px;border:2px solid var(--fg);border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px}
+.mark img{width:auto;height:30px}
 .nav-meta{font:400 12px/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center}
 .nav-cta{display:inline-flex;align-items:center;min-height:40px;padding:0 20px;border-radius:var(--radius-pill);background:var(--accent);color:var(--accent-on);text-decoration:none;font:600 14px/1 var(--font-body);white-space:nowrap;transition:background var(--motion-base)}
 .nav-cta:hover{background:var(--accent-hover)}
@@ -112,11 +112,12 @@ section.alt{background:var(--surface)}
 @media (max-width:600px){.bar{font-size:13px;padding:10px 16px} .bar .t span{min-width:38px} .bar .t span:last-child{display:none} .bar .only{display:none} .bar .sep{display:block;height:0;overflow:hidden}}
 
 /* ---- hero ---- */
-.hero{position:relative;min-height:calc(100svh - 110px);display:grid;place-items:center;text-align:center;color:var(--paper);overflow:hidden;isolation:isolate;padding:64px 20px 48px}
+.hero{position:relative;min-height:calc(100svh - 110px);display:grid;place-items:center;text-align:center;color:var(--paper);overflow:hidden;isolation:isolate;padding:48px 20px 40px}
 .hero-plate{position:absolute;inset:0;z-index:-2}
 .hero-plate img{width:100%;height:100%;object-fit:cover;object-position:58% 42%}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--scrim-top) 0%,rgba(0,0,0,.18) 32%,var(--scrim-bot) 100%)}
-.hero-in{display:grid;justify-items:center;gap:22px;max-width:980px}
+.hero-in{display:grid;justify-items:center;gap:18px;max-width:980px}
+.hero-logo{width:auto;height:clamp(96px,14vh,150px);margin-bottom:-4px;filter:drop-shadow(0 4px 18px rgba(0,0,0,.35))}
 .pill{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--line-on-dark);border-radius:var(--radius-pill);background:rgba(0,0,0,.28);font:700 11px/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--paper)}
 h1{font:700 clamp(44px,6.6vw,92px)/var(--leading-tight) var(--font-body);letter-spacing:var(--tracking-display);text-shadow:0 2px 24px rgba(0,0,0,.35)}
 h1 .serif{font-weight:650;letter-spacing:-.015em}
@@ -133,13 +134,19 @@ h1 .serif{font-weight:650;letter-spacing:-.015em}
 .btn.on-dark.solid{background:var(--paper);color:var(--navy);border-color:var(--paper)}
 .btn.on-dark.solid:hover{background:var(--cement);border-color:var(--cement)}
 .btn small{font:400 13px/1 var(--font-mono);letter-spacing:.06em;opacity:.8}
+.hero-price{font:400 14px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.88);margin-top:-6px}
+.hero-price s{color:rgba(255,255,255,.55);text-decoration-thickness:1.5px;margin-right:6px}
+.hero-price b{font-weight:700;color:var(--paper);font-size:16px;letter-spacing:.04em}
 .hero-facts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:10px;font:400 13px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78)}
 .hero-facts b{color:var(--paper);font-weight:700}
 @media (max-width:720px){
-  .hero{padding:40px 20px 32px;min-height:calc(100svh - 130px)}
-  .hero-in{gap:14px}
+  .hero{padding:28px 20px 24px;min-height:calc(100svh - 130px)}
+  .hero-in{gap:12px}
   h1{font-size:clamp(40px,11vw,48px)}
   .pill .long{display:none}
+  .hero-logo{height:76px}
+  .hide-phone,.pill{display:none}
+  .hero-price{font-size:12px}
   .btn.big{min-height:60px;padding:18px 32px;font-size:18px;width:100%}
   .hero-cta{width:100%;gap:10px}
   .hero-facts{gap:6px 16px;font-size:11px}
@@ -264,7 +271,7 @@ const SETTINGS = {
 
 <nav class="nav" aria-label="Page">
   <div class="wrap">
-    <a class="mark" href="/robots-and-coffee/"><i>R</i><span>Robots &amp; Coffee</span></a>
+    <a class="mark" href="/robots-and-coffee/"><img src="/mastermind/media/logo-mark-ink.png" alt="" width="90" height="96"><span>Robots &amp; Coffee</span></a>
     <div class="nav-meta">Overnight Build &middot; Oct 24 to 25, 2026 &middot; Tagaytay</div>
     <a class="nav-cta" data-setting="content.cta" href="#seats">Take a seat</a>
   </div>
@@ -278,13 +285,15 @@ const SETTINGS = {
 <header class="hero">
   <div class="hero-plate"><img src="/mastermind/media/hero.jpg" alt="The villa from the road: a white gable house with black window frames, palms, and the Tagaytay ridge behind it" width="1440" height="960" fetchpriority="high"></div>
   <div class="hero-in">
+    <img class="hero-logo" src="/mastermind/media/logo-lockup.png" alt="Robots and Coffee" width="357" height="480" fetchpriority="high">
     <span class="pill">Content and build mastermind<span class="long"> &middot; 10 seats &middot; one villa</span></span>
     <h1>Content by day.<br><span class="serif">Your app by night.</span></h1>
     <p class="hero-lead">Arrive with a problem. Leave with your app on your phone.</p>
     <div class="hero-cta">
-      <a class="btn big on-dark solid" id="hero-eb-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat <small>&#8369;70,000</small></a>
-      <a class="btn on-dark" href="#teaser">Watch the villa</a>
+      <a class="btn big on-dark solid" id="hero-eb-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat</a>
+      <a class="btn on-dark hide-phone" href="#teaser">Watch the villa</a>
     </div>
+    <p class="hero-price" id="hero-price"><s>&#8369;90,000</s> <b>&#8369;70,000</b> early bird<span class="hide-phone">, until Sept 27</span></p>
     <div class="hero-facts"><span><b>Oct 24 to 25</b> &middot; Sat 1pm to Sun 3pm</span><span><b>Tagaytay</b> &middot; 90 min from BGC</span><span><b>10 seats</b> &middot; alumni first</span></div>
   </div>
 </header>
@@ -534,7 +543,9 @@ const SETTINGS = {
     var ebBtn = document.getElementById('eb-seat-btn');
     if (ebBtn) { var note = document.createElement('p'); note.className = 'note'; note.textContent = 'Early bird closed Sept 27.'; ebBtn.replaceWith(note); }
     var heroBtn = document.getElementById('hero-eb-btn');
-    if (heroBtn) { heroBtn.href = 'https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53'; heroBtn.textContent = 'Take a seat '; var sm = document.createElement('small'); sm.textContent = '₱' + ev.regularPrice; heroBtn.appendChild(sm); }
+    if (heroBtn) { heroBtn.href = 'https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53'; heroBtn.textContent = 'Take a seat'; }
+    var price = document.getElementById('hero-price');
+    if (price) { price.textContent = '\u20B1' + ev.regularPrice + ' \u00b7 early bird closed Sept 27'; }
   }
   var v = document.getElementById('teaser-video'), ctrl = document.getElementById('teaser-ctrl');
   var still = !SETTINGS.behavior.animations || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
