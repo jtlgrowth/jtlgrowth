@@ -168,6 +168,27 @@ section + section{border-top:1px solid var(--line)}
 #get-the-kit [data-follow-gate]{margin-top:40px}
 #get-the-kit h2{margin-top:14px}
 #get-the-kit .lead{margin-top:18px}
+
+/* W-41 hero standard (Owner 2026-09-16, "all of our center based hero sections, ganyan ung size ng font"):
+   the centred-hero type scale and breather on the page hero. Spec: library/hero-center/w-41-hero-center.html,
+   registry W-41. Fraunces stays the JTL display face; the sizes, gaps and button are the standard's. */
+.page-hero .eyebrow,.oh-copy .eyebrow{font-size:12px;letter-spacing:.22em}
+.page-hero h1,.oh-copy h1{font-size:clamp(40px,6.3vw,92px);margin-top:32px}
+.page-hero .lead,.oh-copy .lead{font-size:20px;line-height:1.7;max-width:58ch;margin-top:32px}
+.page-hero:not(.qt-hero){padding-top:88px;padding-bottom:88px}
+.oh-copy{width:min(980px,86vw)}
+.page-hero .hub-row{margin-top:48px;gap:16px}
+.page-hero .hub-chip{font:600 22px/1 'Archivo',sans-serif;letter-spacing:0;text-transform:none;padding:24px 48px;min-height:70px;gap:16px}
+.page-hero .hub-chip .arr{font-size:18px}
+@media (max-width:760px){
+  .page-hero:not(.qt-hero){padding-top:48px;padding-bottom:64px}
+  .page-hero .eyebrow,.oh-copy .eyebrow{font-size:9.5px;letter-spacing:.14em}
+  .page-hero h1,.oh-copy h1{font-size:clamp(30px,8.4vw,40px);margin-top:24px}
+  .page-hero .lead,.oh-copy .lead{font-size:16px;line-height:1.7;margin-top:24px;max-width:42ch}
+  .page-hero .hub-row{margin-top:32px;gap:12px}
+  .page-hero .hub-chip{font-size:16px;padding:16px 28px;min-height:0;width:100%;max-width:330px;justify-content:center}
+}
+
 </style>
 </head>
 <body>
