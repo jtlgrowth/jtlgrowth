@@ -18,14 +18,14 @@ if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Prompts · the ones we run ourselves · JTL Growth</title>
-<meta name="description" content="The free pack, seven prompts, opens with a follow. The Overnight Build vault, ten prompts that take an idea to an app in one night, opens with a seat.">
+<meta name="description" content="The free pack, eight prompts, opens with a follow. The Overnight Build vault, ten prompts that take an idea to an app in one night, opens with a seat.">
 <link rel="canonical" href="https://jtlgrowth.com/prompts/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Prompts · the ones we run ourselves · JTL Growth">
-<meta property="og:description" content="The free pack, seven prompts, opens with a follow. The Overnight Build vault, ten prompts that take an idea to an app in one night, opens with a seat.">
+<meta property="og:description" content="The free pack, eight prompts, opens with a follow. The Overnight Build vault, ten prompts that take an idea to an app in one night, opens with a seat.">
 <meta property="og:url" content="https://jtlgrowth.com/prompts/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -157,6 +157,32 @@ section + section{border-top:1px solid var(--line)}
 .pr-card pre{font:400 12px/1.6 'Space Mono',monospace;color:var(--gray);background:rgba(24,24,24,.04);border:1px solid var(--line);padding:12px 14px;white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto}
 [data-theme="dark"] .pr-card pre{background:rgba(226,226,226,.04)}
 .pr-blurred{filter:blur(9px);opacity:.5;pointer-events:none;user-select:none;transition:filter .55s ease,opacity .55s ease}
+/* free pack: one prompt per row, the video gets room (Owner 2026-09-19: "each video and
+   prompt is more appreciated instead of that cramped design") */
+.pr-rows{margin-top:clamp(28px,4vw,48px);border-bottom:1px solid var(--line)}
+.pr-row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,4vw,64px);align-items:center;padding-block:clamp(36px,5vw,72px);border-top:1px solid var(--line)}
+.pr-row .pr-vid{aspect-ratio:16/10;border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(0,0,0,.45)}
+.pr-row .pr-vid video{object-fit:contain}
+.pr-num{font:700 12px/1 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+.pr-row h3{font-family:'Fraunces',Georgia,serif;font-weight:650;font-size:clamp(28px,3vw,40px);line-height:1.08;letter-spacing:-.02em;margin-top:14px}
+.pr-row .pr-does{font-size:18px;line-height:1.6;color:var(--gray);margin-top:16px;max-width:46ch}
+.pr-new{display:inline-block;margin-left:10px;padding:4px 8px;border:1px solid currentColor;font:700 10px/1 'Space Mono',monospace;letter-spacing:.16em;vertical-align:middle;color:var(--navy)}
+.pr-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;align-items:center}
+.pr-row .pr-copy{background:var(--navy);color:var(--cement);border-color:var(--navy);min-height:52px;padding:0 26px;font-size:11.5px}
+.pr-row .pr-copy:hover{background:var(--wood,#1A1A1A);border-color:var(--wood,#1A1A1A)}
+.pr-row details{margin-top:18px;border-top:1px solid var(--line)}
+.pr-row summary{cursor:pointer;min-height:48px;display:flex;align-items:center;gap:10px;font:700 11px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;list-style:none}
+.pr-row summary::-webkit-details-marker{display:none}
+.pr-row summary::before{content:"+";font:400 18px/1 'Archivo',sans-serif;width:14px}
+.pr-row details[open] summary::before{content:"\2212"}
+.pr-row summary:focus-visible{outline:2px solid var(--navy);outline-offset:3px}
+.pr-row details pre{font:400 13.5px/1.7 'Space Mono',monospace;color:var(--navy);background:rgba(24,24,24,.035);border:1px solid var(--line);padding:18px 20px;white-space:pre-wrap;word-break:break-word;max-width:72ch}
+[data-theme="dark"] .pr-row details pre{background:rgba(226,226,226,.04);color:var(--cement)}
+@media (max-width:860px){
+  .pr-row{grid-template-columns:1fr;gap:22px;padding-block:32px}
+  .pr-row .pr-does{font-size:16px}
+  .pr-row .pr-copy{width:100%}
+}
 @media (prefers-reduced-motion:reduce){.pr-blurred{transition:none}}
 
 .pr-vault-wrap{position:relative;margin-top:36px}
@@ -265,22 +291,22 @@ section h2 + .lead{margin-top:14px}
        data-gate-id="prompts-free"
        data-file="/prompts/free-pack.zip"
        data-label="Open the free pack"
-       data-reward="The free pack, 7 prompts"
+       data-reward="The free pack, 8 prompts"
        data-reward-note="Yours the moment steps 1 and 2 are done."
        data-submit="Open the pack"></div>
   <noscript>
     <p class="lead" style="margin-top:18px">JavaScript is off, so the pack and the panel
       cannot load. Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> and
-      we will send the seven prompts directly.</p>
+      we will send the eight prompts directly.</p>
   </noscript>
 </section>
 
 <section class="wrap" id="free-pack">
   <p class="eyebrow rv">Free pack</p>
   <h2 class="rv d1">The free pack.</h2>
-  <p class="lead rv d2">Seven prompts, each with a video of it running. Copy, paste, answer the
-    questions it asks, done.</p>
-  <div class="pr-grid pr-blurred" id="free-grid"></div>
+  <p class="lead rv d2">Eight prompts, each with a video. Copy one, paste it into Claude Code,
+    answer the questions it asks, done.</p>
+  <div class="pr-rows pr-blurred" id="free-grid"></div>
 </section>
 
 <section class="wrap" id="obv-vault">
@@ -327,6 +353,7 @@ section h2 + .lead{margin-top:14px}
 
 <script type="application/json" id="prompts-data">
 [
+{"id": "local-hq", "tier": "free", "title": "Your AI office in 3D", "does": "Sets up your team's office in 3D on your own laptop: one desk per AI employee, today's board, and whatever accessories you ask for. Say \"add a cat\" and watch it appear.", "prompt": "I want my AI team's office in 3D, running on my own laptop, built on the JTL HQ base (github.com/jtlgrowth/hq-base).\n\nAsk me three things first, all at once, with options:\n1. My company name and what we sell, in one line.\n2. Who is on my team. If this folder has a roster.json from the /hire skill, read it (and docs/team/) and show me who you found. If not, ask me for up to six names and a one-line job each.\n3. Which accessories to start with. Offer these and let me pick several: a coffee corner, a lounge set, plants by the desks, a bookshelf, a TV wall, a reading nook, an office cat, my logo on the wall.\n\nThen do this yourself, do not just tell me how:\n1. Get the base into a folder called \"hq\" here: git clone --depth 1 https://github.com/jtlgrowth/hq-base hq. Then read hq/CLAUDE.md and follow its rules. Never edit the base files.\n2. Write my company into hq/company.json. Write my team into hq/team.json, one desk each, or leave it as [] if you are reading roster.json.\n3. If there is a brief-*.md or today's daily note in this folder, put its top three to-dos on the board in hq/tasks.md as \"- [ ]\" lines. If not, ask me for three things I am doing today.\n4. Add the accessories I picked to hq/accessories.json, using only the ids in hq/ACCESSORIES.md. Place them with \"near\" (a teammate's name) or \"spot\" (lounge, pantry, entrance, back-left and so on).\n5. Start it in the background: node hq/server.mjs. Open the address it prints (usually http://127.0.0.1:4747) in my browser.\n\nWhen you are done, tell me the address, how to start it again tomorrow, and remember this rule: when I say \"add a ___ to the office\", you edit hq/accessories.json and I watch it appear.\n\nTo check it worked: the page opens, every teammate sits at a desk with their name over it, and the accessories I picked are in the room.\n", "isNew": true},
 {"id": "obsidian-second-brain", "tier": "free", "title": "Obsidian second brain setup", "does": "Creates an Obsidian vault folder with a daily note template, a clients folder, an inbox note, and wires your CLAUDE.md to read it.", "prompt": "I want a second brain in Obsidian (a free notes app, obsidian.md) that you can read and write to.\n\nAsk me two things first:\n1. Where should the vault folder live on my computer.\n2. What do I call the folder (a name like a business name or \"notes\" is fine).\n\nThen do this yourself, do not just tell me how:\n1. Create the folder, and inside it: a \"Daily\" folder, a \"Clients\" folder, and an \"Inbox.md\" file for anything I drop in without sorting it.\n2. Create \"Daily/template.md\" with a simple daily note shape: date, three priorities, notes, open loops.\n3. Create today's daily note from that template.\n4. Add a short section to my CLAUDE.md (or create one if I do not have one) that tells you this vault exists, where it lives, and that you should read the Inbox and today's daily note when I ask what is going on.\n\nWhen you are done, tell me the exact folder path, list the files you created, and tell me how to open the vault in the Obsidian app (I install Obsidian myself, you do not need to).\n\nTo check it worked: open the vault folder in Finder or Obsidian and confirm Daily, Clients, Inbox.md and today's dated note are all there.\n"},
 {"id": "morning-brief", "tier": "free", "title": "Morning brief from inbox and calendar", "does": "Reads today's calendar export or a pasted inbox dump and writes a 10-line brief with the three things to do first.", "prompt": "I want a morning brief.\n\nAsk me one thing first: do I want to paste in today's calendar (copy it from Google Calendar or your phone) and a rough dump of what is in my email inbox right now, or do I have a calendar export file (.ics or .csv) to point you to.\n\nOnce I give you that, read it and write a file called \"brief-[today's date].md\" with exactly this shape:\n1. A one-line summary of how full today is (light, normal, packed).\n2. The three things to do first, in order, and why those three over everything else.\n3. Every meeting today with the time and who it is with.\n4. Anything in the inbox dump that looks urgent or time-sensitive, each in one line.\n5. One thing I could cancel or move if today gets tight.\n\nKeep the whole file to about 10 lines of actual content, no filler.\n\nWhen it is done, print the brief in the chat as well as saving the file, and tell me the file path.\n\nTo check it worked: read the brief back and see if the three things to do first actually match what matters most to you today. If they do not, tell Claude what it got wrong so it can fix the rule for next time.\n"},
 {"id": "reply-drafter", "tier": "free", "title": "Reply drafter in your voice", "does": "Learns from three past replies you paste, then drafts three replies to a new message.", "prompt": "I want you to learn how I write and draft replies for me.\n\nAsk me for two things first:\n1. Three examples of real replies I have sent before (emails, chats, anything), pasted in full so you can see my actual voice.\n2. The new message I need to reply to right now.\n\nFrom the three examples, work out: how formal or casual I am, how long my replies usually run, whether I use exclamation points or emoji, and how I usually open and close a message. Do not ask me to describe my own voice, read it from the examples.\n\nThen write a file called \"voice-notes.md\" with what you learned in plain bullet points, so you do not have to re-learn it next time I ask.\n\nThen draft three replies to the new message: one safe and short, one warmer and longer, one that says no or pushes back if that fits the situation. Label each one clearly.\n\nWhen you are done, tell me which of the three you would send and why.\n\nTo check it worked: read the three drafts out loud. If none of them sound like something you would actually type, tell Claude what is off (too stiff, too long, wrong greeting) and have it redo voice-notes.md before drafting again.\n"},
@@ -365,9 +392,24 @@ section h2 + .lead{margin-top:14px}
       '<pre tabindex="0">' + esc(item.prompt) + '</pre>' +
       '</div>';
   }
+  function rowHTML(item, i, all){
+    var n = String(i + 1).padStart(2, '0') + ' / ' + String(all.length).padStart(2, '0');
+    return '<article class="pr-row">' +
+      '<div class="pr-vid"><span class="vid-ph">video coming</span>' +
+      '<video muted playsinline preload="metadata" controls poster="/prompts/media/' + item.id + '.jpg" aria-label="' + esc(item.title) + ': what it makes">' +
+      '<source src="/prompts/media/' + item.id + '.mp4" type="video/mp4"></video></div>' +
+      '<div class="pr-text">' +
+        '<p class="pr-num">' + n + '</p>' +
+        '<h3>' + esc(item.title) + (item.isNew ? '<span class="pr-new">New</span>' : '') + '</h3>' +
+        '<p class="pr-does">' + esc(item.does) + '</p>' +
+        '<div class="pr-actions"><button class="pr-copy" type="button">Copy the prompt</button></div>' +
+        '<details><summary>Show the prompt</summary><pre tabindex="0">' + esc(item.prompt) + '</pre></details>' +
+      '</div>' +
+      '</article>';
+  }
   var freeGrid = document.getElementById('free-grid');
   var vaultGrid = document.getElementById('vault-grid');
-  freeGrid.innerHTML = data.filter(function(d){ return d.tier === 'free'; }).map(cardHTML).join('');
+  freeGrid.innerHTML = data.filter(function(d){ return d.tier === 'free'; }).map(rowHTML).join('');
   vaultGrid.innerHTML = data.filter(function(d){ return d.tier === 'vault'; }).map(cardHTML).join('');
 
   // video 404 fallback: hide the <video>, the "video coming" plate shows through
@@ -375,30 +417,34 @@ section h2 + .lead{margin-top:14px}
     v.addEventListener('error', function(){ v.style.display = 'none'; }, true);
   });
 
-  // copy-to-clipboard, delegated: same execCommand-first pattern as /inbox-scout/
+  // copy-to-clipboard, delegated: clipboard API first, execCommand as the fallback
   document.addEventListener('click', function(e){
     var btn = e.target.closest ? e.target.closest('.pr-copy') : null;
     if (!btn) return;
-    var pre = btn.parentElement.querySelector('pre');
+    var holder = btn.closest('.pr-row, .pr-card');
+    var pre = holder ? holder.querySelector('pre') : null;
     if (!pre) return;
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
     function flash(label){
       btn.textContent = label; btn.classList.add('done');
-      setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 2200);
+      clearTimeout(btn._t);
+      btn._t = setTimeout(function(){ btn.textContent = btn.dataset.label; btn.classList.remove('done'); }, 2200);
     }
-    function selectPre(){
+    // Fallback: open the fold, select the text, execCommand; if that fails too, leave it selected.
+    function legacy(){
+      var d = pre.closest('details'); if (d) d.open = true;
       var sel = window.getSelection(), range = document.createRange();
       range.selectNodeContents(pre); sel.removeAllRanges(); sel.addRange(range);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      if (ok) { sel.removeAllRanges(); flash('Copied'); return; }
+      flash('Selected, press Ctrl+C or Cmd+C');
     }
-    selectPre();
-    var ok = false;
-    try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
-    if (ok) { window.getSelection().removeAllRanges(); flash('Copied'); return; }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(pre.innerText).then(function(){
-        window.getSelection().removeAllRanges(); flash('Copied');
-      }, function(){ flash('Selected, press Cmd+C'); });
+    // A prompt folded inside <details> cannot be selected, so the clipboard API goes first.
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      navigator.clipboard.writeText(pre.textContent).then(function(){ flash('Copied'); }, legacy);
     } else {
-      flash('Selected, press Cmd+C');
+      legacy();
     }
   });
 })();
