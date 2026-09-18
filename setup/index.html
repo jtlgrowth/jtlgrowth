@@ -105,6 +105,17 @@
   .more{margin-top:22px;font-size:15.5px;color:var(--blue)}
   .more a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
 
+  /* before you start */
+  .prep{margin-top:26px;border:1px solid var(--line);border-left:3px solid var(--navy);
+        background:rgba(255,255,255,.35);padding:16px 20px;max-width:60ch}
+  .prep .kicker{margin-bottom:8px}
+  .prep ul{list-style:none}
+  .prep li{font-size:15.5px;color:var(--blue);padding-left:18px;position:relative;margin-top:5px}
+  .prep li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;background:var(--navy)}
+  .prep b{color:var(--navy);font-weight:600}
+  .fix .os{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--navy);font-weight:700;margin-right:6px}
+
   footer{margin-top:72px;border-top:1px solid var(--line);padding:26px 0 60px}
   .footline{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
             font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;
@@ -130,9 +141,19 @@
   <div class="hero">
     <div class="kicker"><span class="ki">01</span>Setup</div>
     <h1>One command.<br><em>That’s the setup.</em></h1>
-    <p class="lede">It installs the Claude Code CLI and every tool it needs, then checks that the
-      result actually works. Copy the line for your computer, paste it into the terminal,
-      press Enter.</p>
+    <p class="lede">It installs the Claude Code CLI plus <b>Git and Node.js</b> (our setup and
+      hire skills run on Node), then checks that the result actually works. Copy the line for
+      your computer, paste it into the terminal, press Enter.</p>
+
+    <div class="prep">
+      <div class="kicker">Before you start</div>
+      <ul>
+        <li><b>A paid Claude plan</b> (Pro or higher). Free accounts cannot sign in to Claude Code.</li>
+        <li><b>Your laptop’s admin password.</b> The installer may ask for it once.</li>
+        <li><b>Laptop charged</b>, charger with you.</li>
+        <li><b>On a Mac, allow ten minutes:</b> Apple may download its developer tools first.</li>
+      </ul>
+    </div>
   </div>
 
   <section>
@@ -166,25 +187,44 @@
 
   <section>
     <div class="kicker"><span class="ki">02</span>Then</div>
-    <h2>Three steps and you’re working.</h2>
+    <h2>Six steps and it’s yours.</h2>
     <ol class="steps">
       <li><b>Close the terminal and open a new one.</b> Not optional: the new window is
-        what picks up the command that was just installed.</li>
+        what picks up what was just installed. On Windows, PowerShell or Command Prompt
+        both work from here.</li>
+      <li><b>Check Node:</b> type <code>node --version</code> and press Enter. It should say
+        <b>v20</b> or higher. Anything else: <a href="#fix-node">the fix is one line</a>.</li>
       <li>Type <code>claude</code> and press Enter.</li>
-      <li>Type <code>/login</code> and sign in. That is it: Claude Code is running.</li>
+      <li>Type <code>/login</code> and sign in. Claude Code is running.</li>
+      <li><b>Get the skills:</b> open <a href="/skills/">jtlgrowth.com/skills</a>, enter the
+        access code from the room, run the line for your computer.</li>
+      <li><b>Name it:</b> open a new window, type <code>claude</code>, then <code>/setup</code>.
+        It asks four questions. The last one is the word you type to open it, like
+        <code>ana</code>. From then on: new window, type <code>ana</code>, press Enter.</li>
     </ol>
-    <p class="more">Got an access code from us? Our <b>hire</b> and <b>setup</b> skills live at
-      <a href="/skills/">jtlgrowth.com/skills</a>.</p>
   </section>
 
-  <section>
+  <section id="fix">
     <div class="kicker"><span class="ki">03</span>If it doesn’t work</div>
-    <h2>Three things go wrong. All three are quick.</h2>
+    <h2>Seven things go wrong. All seven are quick.</h2>
 
     <div class="fix">
-      <h3><code>claude: command not found</code></h3>
+      <h3><code>claude: command not found</code> or <code>'claude' is not recognized</code></h3>
       <p>You’re in the terminal window you had open before installing. Close it, open a
-        new one, try again.</p>
+        new one, try again. Still there on Windows? Run the install line once more (it
+        saves the path for new windows), then open a new window.</p>
+    </div>
+
+    <div class="fix" id="fix-node">
+      <h3><code>node</code> is not recognized, not found, or older than v20</h3>
+      <p>Open a new window first: the install may have just put it there. Still missing?
+        Paste one line, then open a new window and check <code>node --version</code> again.</p>
+      <p><span class="os">Windows</span> PowerShell or Command Prompt:
+        <code>winget install OpenJS.NodeJS.LTS</code></p>
+      <p><span class="os">Mac</span> <code>brew install node</code></p>
+      <p>No winget or no Homebrew: download the LTS installer from
+        <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org</a>,
+        run it, open a new window.</p>
     </div>
 
     <div class="fix">
@@ -199,6 +239,24 @@
       <p>Paste <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>
         first, press Enter, then paste the install command again. It applies to that one
         window only. The Command Prompt box above already includes this.</p>
+    </div>
+
+    <div class="fix">
+      <h3>Mac: a popup asks to install the Command Line Tools</h3>
+      <p>Click <b>Install</b> and wait for it to finish (a few minutes on event wifi). Then
+        paste the install line again. It picks up where it stopped.</p>
+    </div>
+
+    <div class="fix">
+      <h3>It asks for a password and nothing shows when you type</h3>
+      <p>That is normal: the terminal hides passwords. Type your laptop login password and
+        press Enter.</p>
+    </div>
+
+    <div class="fix">
+      <h3>Typing your name (like <code>ana</code>) does nothing</h3>
+      <p>Open a new window. The name works in Terminal, PowerShell and Command Prompt, but
+        only in windows opened after <code>/setup</code> finished.</p>
     </div>
 
     <p class="more">Anything else: the full manual walkthrough, every step separately, is
@@ -232,11 +290,11 @@
   document.querySelectorAll('.copy').forEach(function(btn){
     btn.addEventListener('click', async function(){
       var el = document.getElementById(btn.dataset.for);
-      // strip the leading prompt glyph — it is decoration, not part of the command
+      // strip the leading prompt glyph: it is decoration, not part of the command
       var text = el.textContent.replace(/^\s*[$>]\s*/, '').trim();
       try { await navigator.clipboard.writeText(text); }
       catch(e){
-        // fallback must copy the stripped text too — selecting the node would
+        // fallback must copy the stripped text too, since selecting the node would
         // drag the prompt glyph into the clipboard and break the paste
         var ta = document.createElement('textarea'); ta.value = text;
         ta.style.position = 'fixed'; ta.style.opacity = '0';

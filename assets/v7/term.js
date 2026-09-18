@@ -42,12 +42,12 @@
       a: 'One dashboard for people, work in flight and revenue. Agent seats report into the same board your team reads. Client-facing portals where that is the product.' },
     { name: 'workshop', kws: ['workshop', 'training', 'batch', 'bgc'],
       a: 'Founder AI Workshop, Batch 1: From Operator to Orchestrator. Two build days in BGC, every founder shipped an AI employee for their own business. Type go to workshop for the recap.' },
-    { name: 'products', kws: ['products', 'product', 'software', 'app', 'apps', 'download', 'install'],
+    { name: 'products', kws: ['products', 'product', 'software', 'app', 'apps', 'download'],
       a: 'What you can get or install today lives at /products/: the Growth software demo, Inbox Scout, the Claude Code setup. Type go to products.' },
     { name: 'starterpack', kws: ['starter pack', 'starter-pack', 'starterpack'],
       a: 'The AI Employee Starter Pack: five job descriptions, the memory checklist and the seven day plan, from the Robots and Coffee session. It opens with the password from that session. Type go to starter pack.' },
-    { name: 'skills', kws: ['skills', 'skill', 'access code'],
-      a: 'The JTL skills ship with an access code. Type go to skills.' },
+    { name: 'skills', kws: ['skills', 'skill', 'access code', 'code', 'password', 'unlock', 'setup skill', 'hire skill', 'jtl skills'],
+      a: 'The hire and setup skills open with the access code from the room. Opening the skills page.', go: '/skills/' },
     { name: 'speed', kws: ['how fast', 'how long', 'timeline', 'turnaround', 'when', 'days', 'weeks'],
       a: 'A working draft takes hours, not weeks. Integration and the watch after launch are where the time goes. That is where builds quietly die, so we do not skip it.' },
     { name: 'stack', kws: ['stack', 'tools', 'tech', 'built on', 'claude', 'gpt', 'supabase', 'fastapi', 'playwright'],
@@ -59,19 +59,25 @@
     { name: 'thanks', kws: ['thanks', 'thank you', 'salamat', 'cheers'],
       a: 'Anytime. Type book when you are ready.' },
     { name: 'help', kws: ['help', 'commands', 'what can i type'],
-      a: 'Try: services, quote, ai employee, automation, workshop, work, products, where, who. Or navigate: go to services, go to quote, go to work, go to workshop, go to products, go to prompts, go to setup, book.' },
+      a: 'Setting up a laptop? Type setup, node, skills or stuck. Otherwise try: services, quote, ai employee, automation, workshop, work, products, where, who. Or navigate: go to services, go to quote, go to work, go to prompts, book.' },
     { name: 'quote', kws: ['quote', 'request a quote', 'proposal', 'estimate', 'scope', 'scoped', 'how do i start', 'get started'],
       a: 'No public price list. Tell us the bottleneck, we read what is already wired, and you get a written quote in two business days: the count, where it stops, the timeline. Type go to quote to send the request, or book for thirty minutes with Gwen.' },
     { name: 'work', kws: ['work', 'portfolio', 'case study', 'case studies', 'clients', 'examples', 'proof', 'live sites', 'what have you built'],
       a: 'Six systems in production: FWIB, this site, AVAS Night Shift, Robots and Coffee, the AVAS workshop page and the Batch 1 workshop recap. Every screen is a live URL, not a mockup. Type go to work.' },
     { name: 'built', kws: ['students', 'founders built', 'what they built', 'testimonials', 'results', 'after the room', 'batch 1 results', 'reviews'],
       a: 'Within two weeks of the room, Batch 1 founders shipped their own headquarters, a catalog site, second brains and AI employees. Their clips and words sit on the workshop page under Built after the room. Type go to built.' },
-    { name: 'batch2', kws: ['batch 2', 'batch two', 'next workshop', 'next batch', 'join the workshop', 'sept 19', 'september 19', 'how do i join'],
-      a: 'Batch 2 runs September 19 to 20, 2026, same venue, run by AVAS. Seats and checkout live on their page: ayalavirtualassistance.site/ai-workshop.' },
+    { name: 'batch2', kws: ['batch 2', 'batch2', 'batch two', 'next workshop', 'next batch', 'join the workshop', 'sept 19', 'september 19', 'how do i join'],
+      a: 'Batch 2 runs September 19 to 20, 2026, run by AVAS. In the room? Your laptop setup is one command: type setup. Seats for a later batch: ayalavirtualassistance.site/ai-workshop.' },
     { name: 'prompts', kws: ['prompts', 'prompt', 'prompt library', 'prompting'],
       a: 'The prompts we run ourselves, exact wording included, live at /prompts/. Type go to prompts.' },
-    { name: 'setup', kws: ['setup', 'set up', 'claude code', 'install claude', 'how do i install'],
-      a: 'One command sets up Claude Code on a Mac or Windows machine, the same way the workshop room did it. Type go to setup. On Codex, type go to setup codex.' },
+    { name: 'setup', kws: ['setup', 'set up', 'claude code', 'install', 'installer', 'install claude', 'how do i install', 'installation', 'powershell', 'command prompt', 'cmd', 'terminal', 'windows', 'mac', 'macbook', 'laptop', 'one command'],
+      a: 'One command installs Claude Code, Node.js and Git on Mac or Windows, PowerShell or Command Prompt. Opening the setup page.', go: '/setup/' },
+    { name: 'node', kws: ['node', 'nodejs', 'node.js', 'node js', 'npm', 'npx', 'node version'],
+      a: 'Node.js comes with the setup command. Check it in a new window: node --version should say v20 or higher. Missing? Opening the one-line fix.', go: '/setup/#fix' },
+    { name: 'stuck', kws: ['stuck', 'error', 'not working', 'doesnt work', 'does not work', 'not recognized', 'command not found', 'failed', 'problem', 'broken', 'irm', 'execution policy', 'scripts is disabled'],
+      a: 'Most fixes are one line. Opening the fix list on the setup page.', go: '/setup/#fix' },
+    { name: 'alias', kws: ['alias', 'shortcut', 'open it by name', 'type ana', 'ana'],
+      a: 'When you run /setup it asks what you want to type to open it, like ana. After that, open a new terminal, type the name, press Enter.' },
     { name: 'privacy', kws: ['privacy', 'my data', 'cookies', 'consent', 'gdpr', 'tracking'],
       a: 'Tracking runs behind consent and the policy is written in plain sentences. Type go to privacy.' },
     { name: 'hire', kws: ['hire', 'hiring', 'careers', 'job', 'jobs', 'work with you'],
@@ -280,10 +286,16 @@
         cb();
         return;
       }
+      if (best.go) {
+        // setup-night intents answer, then open the page: no second step to type
+        var dest = { type: 'path', path: best.go };
+        this.typeAnswer(best.a, function () { self.doNav(dest, cb); });
+        return;
+      }
       this.typeAnswer(best.a, cb);
       return;
     }
-    this.typeAnswer('I only know the firm. Try help, or type go to services.', cb);
+    this.typeAnswer('I only know the firm. Try setup, help, or go to services.', cb);
   };
   TermUI.prototype.doNav = function (target, cb) {
     if (target.type === 'path') {
