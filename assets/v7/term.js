@@ -72,6 +72,8 @@
       a: 'The prompts we run ourselves, exact wording included, live at /prompts/. Type go to prompts.' },
     { name: 'setup', kws: ['setup', 'set up', 'claude code', 'install', 'installer', 'install claude', 'how do i install', 'installation', 'powershell', 'command prompt', 'cmd', 'terminal', 'windows', 'mac', 'macbook', 'laptop', 'one command'],
       a: 'One command installs Claude Code, Node.js and Git on Mac or Windows, PowerShell or Command Prompt. Opening the setup page.', go: '/setup/' },
+    { name: 'codex', kws: ['codex', 'setup codex', 'set up codex', 'install codex', 'codex cli', 'openai', 'chatgpt', 'chat gpt'],
+      a: 'Codex gets the same one-command setup, PowerShell or Command Prompt on Windows, Terminal on Mac. Opening the Codex setup page.', go: '/setup-codex/' },
     { name: 'node', kws: ['node', 'nodejs', 'node.js', 'node js', 'npm', 'npx', 'node version'],
       a: 'Node.js comes with the setup command. Check it in a new window: node --version should say v20 or higher. Missing? Opening the one-line fix.', go: '/setup/#fix' },
     { name: 'stuck', kws: ['stuck', 'error', 'not working', 'doesnt work', 'does not work', 'not recognized', 'command not found', 'failed', 'problem', 'broken', 'irm', 'execution policy', 'scripts is disabled'],

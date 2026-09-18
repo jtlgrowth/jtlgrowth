@@ -268,23 +268,25 @@ section + section{border-top:1px solid var(--line)}
 
   <section aria-labelledby="next-title">
     <p class="eyebrow rv">Then</p>
-    <h2 class="rv d1" id="next-title">Three steps and you are working.</h2>
+    <h2 class="rv d1" id="next-title">Five steps and it is yours.</h2>
     <ol class="steps rv d2">
-      <li><span><strong>Close the terminal and open a new one.</strong> The new window loads the command that was just installed.</span></li>
+      <li><span><strong>Close the terminal and open a new one.</strong> The new window loads the command that was just installed. On Windows, PowerShell or Command Prompt both work from here.</span></li>
       <li><span>Type <span class="inline-code">codex login</span>, press Enter, and sign in with your ChatGPT account in the browser.</span></li>
-      <li><span>Type <span class="inline-code">codex</span> and press Enter. That is it: Codex is running.</span></li>
+      <li><span>Type <span class="inline-code">codex</span> and press Enter. Codex is running.</span></li>
+      <li><span><strong>Get the skills:</strong> open <a href="/skills/">jtlgrowth.com/skills</a>, enter the access code from the room, run the Codex line for your computer.</span></li>
+      <li><span><strong>Name it:</strong> open a new window, type <span class="inline-code">codex</span>, then <span class="inline-code">Use $setup to configure my AI chief of staff.</span> It asks four questions. The last one is the word you type to open it, like <span class="inline-code">ana</span>. From then on: new window, type <span class="inline-code">ana</span>, press Enter.</span></li>
     </ol>
-    <p class="source-note rv d3">Got an access code from us? Our <strong>setup</strong> and
-      <strong>hire</strong> skills live at <a href="/skills/">jtlgrowth.com/skills</a>.</p>
   </section>
 
-  <section aria-labelledby="fix-title">
+  <section aria-labelledby="fix-title" id="fix">
     <p class="eyebrow rv">If it does not work</p>
     <h2 class="rv d1" id="fix-title">The common fixes.</h2>
     <div class="fix-list rv d2">
       <div class="fix"><h3><span class="inline-code">codex: command not found</span></h3><p>Close the terminal, open a new one, and try again. The old window still has the PATH it started with.</p></div>
       <div class="fix"><h3>Windows says <span class="inline-code">'irm' is not recognized</span></h3><p>You are in Command Prompt. Use the Command Prompt box above. It starts PowerShell for the installation without changing your default terminal.</p></div>
       <div class="fix"><h3>Windows says scripts are disabled</h3><p>Use the Command Prompt box above. It applies the bypass to that one install command only.</p></div>
+      <div class="fix"><h3><span class="inline-code">node</span> or <span class="inline-code">npm</span> is not recognized</h3><p>Codex installs through Node. Open a new window and run the install line again. Still missing: on Windows, <span class="inline-code">winget install OpenJS.NodeJS.LTS</span> in PowerShell or Command Prompt; on a Mac, <span class="inline-code">brew install node</span>; or the LTS installer from <a href="https://nodejs.org/en/download" target="_blank" rel="noopener">nodejs.org</a>. Then a new window and the install line again.</p></div>
+      <div class="fix"><h3>Typing your name (like <span class="inline-code">ana</span>) does nothing</h3><p>Open a new window. The name works in Terminal, PowerShell and Command Prompt, but only in windows opened after setup finished. On Windows, closing it with Ctrl+C may ask <span class="inline-code">Terminate batch job (Y/N)?</span>: type <span class="inline-code">Y</span>, nothing is lost.</p></div>
     </div>
     <p class="source-note rv d3">The installer is open source. Read
       <a href="https://github.com/jtlgrowth/codex-cli-installer" target="_blank" rel="noopener">the installer</a>, or check the
