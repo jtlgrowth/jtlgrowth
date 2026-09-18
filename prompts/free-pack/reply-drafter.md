@@ -17,7 +17,7 @@ From the three examples, work out: how formal or casual I am, how long my replie
 
 Then write a file called "voice-notes.md" with what you learned in plain bullet points, so you do not have to re-learn it next time I ask.
 
-Then draft three replies to the new message: one safe and short, one warmer and longer, one that says no or pushes back if that fits the situation. Label each one clearly.
+Then draft three replies to the new message: one safe and short, one warmer and longer, one that says no or pushes back if that fits the situation. Label each one clearly, and save all three in a file called "replies-" plus today's date, like replies-2026-09-19.md, so I can copy from it later.
 
 When you are done, tell me which of the three you would send and why.
 
