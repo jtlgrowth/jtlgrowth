@@ -19,7 +19,7 @@ Then do this yourself, do not just tell me how:
 2. Write my company into hq/company.json. Write my team into hq/team.json, one desk each, or leave it as [] if you are reading roster.json.
 3. If there is a brief-*.md or today's daily note in this folder, put its top three to-dos on the board in hq/tasks.md as "- [ ]" lines. If not, ask me for three things I am doing today.
 4. Add the accessories I picked to hq/accessories.json, using only the ids in hq/ACCESSORIES.md. Place them with "near" (a teammate's name) or "spot" (lounge, pantry, entrance, back-left and so on).
-5. Start it in the background: node hq/server.mjs. Open the address it prints (usually http://127.0.0.1:4747) in my browser.
+5. Start it in the background: node hq/server.mjs, then open the address it prints in my browser.
 
 When you are done, tell me the address, how to start it again tomorrow, and remember this rule: when I say "add a ___ to the office", you edit hq/accessories.json and I watch it appear.
 
