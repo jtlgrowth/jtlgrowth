@@ -168,6 +168,16 @@ section + section{border-top:1px solid var(--line)}
 #get-the-kit [data-follow-gate]{margin-top:40px}
 #get-the-kit h2{margin-top:14px}
 #get-the-kit .lead{margin-top:18px}
+.kit-gate{margin-top:40px;max-width:640px}
+.kit-gate label{display:block;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+.kit-row{display:flex;flex-wrap:wrap;gap:10px}
+.kit-row input{flex:1 1 220px;min-width:0;padding:16px 18px;font:500 16px/1.2 'Archivo',sans-serif;color:var(--navy);background:transparent;border:1px solid var(--line);border-radius:0}
+.kit-row input:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.kit-row button{flex:0 0 auto;padding:16px 26px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cement);background:var(--navy);border:1px solid var(--navy);cursor:pointer}
+.kit-row button[disabled]{opacity:.55;cursor:progress}
+.kit-msg{min-height:22px;margin-top:14px;font-size:14px;color:var(--navy)}
+.kit-help{margin-top:6px;font-size:14px;color:var(--gray)}
+.kit-help a{color:var(--navy)}
 
 /* W-41 hero standard (Owner 2026-09-16, "all of our center based hero sections, ganyan ung size ng font"):
    the centred-hero type scale and breather on the page hero. Spec: library/hero-center/w-41-hero-center.html,
@@ -313,23 +323,25 @@ section + section{border-top:1px solid var(--line)}
 
 <section id="get-the-kit">
   <div class="wrap">
-    <p class="eyebrow rv">Free download</p>
+    <p class="eyebrow rv">Access code</p>
     <h2 class="rv d1">Get the AgentKit archive.</h2>
-    <p class="lead rv d2">Recommend us on Facebook, follow us, and it is yours, free. It is the
-      same kit we run ourselves and the same one our batch students get. Say what you built.</p>
+    <p class="lead rv d2">The same kit we run ourselves: agent definitions, prompts and the
+      wiring. It comes with our workshop batches and client builds. Enter your access code
+      and the download starts.</p>
 
-    <div class="rv d3" data-follow-gate
-         data-gate-id="agentkit"
-         data-file="https://github.com/jtlgrowth/agentkit/archive/refs/heads/main.zip"
-         data-label="Download AgentKit"
-         data-reward="AgentKit, the full archive"
-         data-reward-note="Agent definitions, prompts and the wiring we run ourselves."
-         data-note=""></div>
+    <form class="kit-gate rv d3" id="kit-gate" autocomplete="off">
+      <label for="kit-code">Access code</label>
+      <div class="kit-row">
+        <input id="kit-code" type="password" required autocapitalize="off" spellcheck="false" placeholder="Your code">
+        <button type="submit">Download AgentKit</button>
+      </div>
+      <p class="kit-msg" id="kit-msg" role="status" aria-live="polite"></p>
+      <p class="kit-help">No code yet? <a href="/workshop/">Join a workshop batch</a> or <a href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">book a call</a>.</p>
+    </form>
 
     <noscript>
-      <p class="lead" style="margin-top:18px">JavaScript is off, so the panel cannot
-        load. Here is the file anyway. Recommend and follow us on Facebook when you get a moment.</p>
-      <a class="hub-chip" href="https://github.com/jtlgrowth/agentkit/archive/refs/heads/main.zip" target="_blank" rel="noopener">Download AgentKit <span class="arr">↗</span></a>
+      <p class="lead" style="margin-top:18px">JavaScript is off, so the code box cannot
+        unlock the file. Turn it on and reload, or <a href="mailto:hello@jtlgrowth.com">email us</a>.</p>
     </noscript>
   </div>
 </section>
@@ -443,6 +455,31 @@ section + section{border-top:1px solid var(--line)}
     if(a.getAttribute('href')===here)a.setAttribute('aria-current','page');});
 })();
 </script>
-<script src="/assets/follow-gate.js" defer></script>
+<script>
+/* AgentKit access-code gate. The zip ships only as AES-256-GCM ciphertext (/products/agentkit.enc,
+   layout salt16|iv12|ct, PBKDF2-SHA256 300k); the typed code is the key, nothing is sent anywhere.
+   Rebuild: tools/setup-gate/file-gate-build.mjs in HQ. */
+(function(){
+  var f=document.getElementById('kit-gate'); if(!f) return;
+  var inp=document.getElementById('kit-code'), msg=document.getElementById('kit-msg'), btn=f.querySelector('button');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!(window.crypto&&crypto.subtle)){msg.textContent='This browser cannot unlock the file. Try a current Chrome, Safari or Firefox.';return;}
+    btn.disabled=true; msg.textContent='Checking your code...';
+    fetch('/products/agentkit.enc',{cache:'no-store'}).then(function(r){if(!r.ok) throw new Error('net'); return r.arrayBuffer();}).then(function(ab){
+      var b=new Uint8Array(ab);
+      return crypto.subtle.importKey('raw',new TextEncoder().encode(inp.value.trim()),'PBKDF2',false,['deriveKey']).then(function(km){
+        return crypto.subtle.deriveKey({name:'PBKDF2',salt:b.slice(0,16),iterations:300000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+      }).then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:b.slice(16,28)},k,b.slice(28));});
+    }).then(function(pt){
+      var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([pt],{type:'application/zip'}));
+      a.download='agentkit.zip'; document.body.appendChild(a); a.click(); a.remove();
+      msg.textContent='Unlocked. agentkit.zip is in your downloads.';
+    }).catch(function(err){
+      msg.textContent=(err&&err.message==='net')?'Could not reach the file. Check your connection and try again.':'That code did not open it. Check the spelling and try again.';
+    }).then(function(){btn.disabled=false;});
+  });
+})();
+</script>
 </body>
 </html>
