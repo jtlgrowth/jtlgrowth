@@ -16,14 +16,14 @@ if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Products · what you can get or install today · JTL Growth</title>
-<meta name="description" content="The AI Employee, Inbox Scout, the Growth software demo, the AgentKit archive, the scout packs, and Robots & Coffee: everything JTL Growth ships that you can use today, not a done-for-you build.">
+<meta name="description" content="The AI Employee, Inbox Scout, the Growth software demo, JTL Secret Agents, the scout packs, and Robots & Coffee: everything JTL Growth ships that you can use today, not a done-for-you build.">
 <link rel="canonical" href="https://jtlgrowth.com/products/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Products · what you can get or install today · JTL Growth">
-<meta property="og:description" content="The AI Employee, Inbox Scout, the Growth software demo, the AgentKit archive, the scout packs, and Robots & Coffee: everything JTL Growth ships that you can use today, not a done-for-you build.">
+<meta property="og:description" content="The AI Employee, Inbox Scout, the Growth software demo, JTL Secret Agents, the scout packs, and Robots & Coffee: everything JTL Growth ships that you can use today, not a done-for-you build.">
 <meta property="og:url" content="https://jtlgrowth.com/products/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -323,16 +323,17 @@ section + section{border-top:1px solid var(--line)}
 <section id="get-the-kit">
   <div class="wrap">
     <p class="eyebrow rv">Access code</p>
-    <h2 class="rv d1">Get the AgentKit archive.</h2>
-    <p class="lead rv d2">The same kit we run ourselves: agent definitions, prompts and the
-      wiring. It comes with our workshop batches and client builds. Enter your access code
-      and the download starts.</p>
+    <h2 class="rv d1">Get JTL Secret Agents.</h2>
+    <p class="lead rv d2">Thirteen audited agents, five skills and a memU memory layer for Claude
+      Code. Unzip it, drag START-HERE.md into Claude Code, and it installs itself. It comes
+      with our workshop batches and client builds. Enter your access code and the download
+      starts.</p>
 
     <form class="kit-gate rv d3" id="kit-gate" autocomplete="off">
       <label for="kit-code">Access code</label>
       <div class="kit-row">
         <input id="kit-code" type="password" required autocapitalize="off" spellcheck="false" placeholder="Your code">
-        <button type="submit">Download AgentKit</button>
+        <button type="submit">Download Secret Agents</button>
       </div>
       <p class="kit-msg" id="kit-msg" role="status" aria-live="polite"></p>
       <p class="kit-help">No code yet? <a href="/workshop/">Join a workshop batch</a> or <a href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">book a call</a>.</p>
@@ -455,7 +456,7 @@ section + section{border-top:1px solid var(--line)}
 })();
 </script>
 <script>
-/* AgentKit access-code gate. The zip ships only as AES-256-GCM ciphertext (/products/agentkit.enc,
+/* JTL Secret Agents access-code gate. The zip ships only as AES-256-GCM ciphertext (/products/secret-agents.enc,
    layout salt16|iv12|ct, PBKDF2-SHA256 300k); the typed code is the key, nothing is sent anywhere.
    Rebuild: tools/setup-gate/file-gate-build.mjs in HQ. */
 (function(){
@@ -465,15 +466,15 @@ section + section{border-top:1px solid var(--line)}
     e.preventDefault();
     if(!(window.crypto&&crypto.subtle)){msg.textContent='This browser cannot unlock the file. Try a current Chrome, Safari or Firefox.';return;}
     btn.disabled=true; msg.textContent='Checking your code...';
-    fetch('/products/agentkit.enc',{cache:'no-store'}).then(function(r){if(!r.ok) throw new Error('net'); return r.arrayBuffer();}).then(function(ab){
+    fetch('/products/secret-agents.enc',{cache:'no-store'}).then(function(r){if(!r.ok) throw new Error('net'); return r.arrayBuffer();}).then(function(ab){
       var b=new Uint8Array(ab);
       return crypto.subtle.importKey('raw',new TextEncoder().encode(inp.value.trim()),'PBKDF2',false,['deriveKey']).then(function(km){
         return crypto.subtle.deriveKey({name:'PBKDF2',salt:b.slice(0,16),iterations:300000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
       }).then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:b.slice(16,28)},k,b.slice(28));});
     }).then(function(pt){
       var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([pt],{type:'application/zip'}));
-      a.download='agentkit.zip'; document.body.appendChild(a); a.click(); a.remove();
-      msg.textContent='Unlocked. agentkit.zip is in your downloads.';
+      a.download='jtl-secret-agents.zip'; document.body.appendChild(a); a.click(); a.remove();
+      msg.textContent='Unlocked. jtl-secret-agents.zip is in your downloads.';
     }).catch(function(err){
       msg.textContent=(err&&err.message==='net')?'Could not reach the file. Check your connection and try again.':'That code did not open it. Check the spelling and try again.';
     }).then(function(){btn.disabled=false;});
