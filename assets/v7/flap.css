@@ -1,0 +1,9 @@
+/* v7 flap: split-flap preloader surface. The board itself is drawn in flap.js. */
+#boot{position:fixed;inset:0;z-index:9999;background:#0D0D0D;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;transition:transform .45s cubic-bezier(.83,0,.17,1)}
+#boot.off{transform:translateX(-100%);pointer-events:none}
+#boot canvas{display:block}
+#boot .flap-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#boot .flap-skip{position:absolute;right:18px;bottom:16px;font:12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#616161;background:none;border:0;padding:8px 10px;cursor:pointer}
+#boot .flap-skip:hover{color:#9E9E9E}
+#boot .flap-skip:focus-visible{outline:2px solid #C9C9C9;outline-offset:2px;color:#C9C9C9}
+@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}}

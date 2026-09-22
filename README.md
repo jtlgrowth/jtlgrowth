@@ -26,6 +26,7 @@ in flight and revenue on one screen.
 
 Built on Claude, GPT-5, n8n, GoHighLevel, Supabase, FastAPI and Playwright.
 No template, no page builder, no drag-and-drop.
+The homepage opens on a split-flap board (`assets/v7/flap.js`), drawn on a canvas by hand, no library.
 
 ### Live
 

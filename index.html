@@ -449,69 +449,11 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </style>
 </head>
 <body>
-<div id="boot" aria-hidden="true">
-  <div class="boot-stack">
-  <div class="boot-wrap">
-  <svg class="boot-mark" viewBox="288 703 1315 626" width="196" height="94">
-    <g fill="none" stroke="#EDEDED" stroke-width="141.5" stroke-linecap="butt">
-      <path class="bt bt1" d="M624 774H1267" pathLength="100"/>
-      <path class="bt bt2" d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122" pathLength="100"/>
-      <path class="bt bt3" d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602" pathLength="100"/>
-    </g>
-  </svg>
-  </div>
-  <div class="boot-word"><span>J</span><span>T</span><span>L</span><span class="sp"></span><span>G</span><span>R</span><span>O</span><span>W</span><span>T</span><span>H</span></div>
-  <div class="boot-line"><span></span></div>
-  </div>
-</div>
-<style>
-#boot{position:fixed;inset:0;z-index:9999;background:#121212;display:flex;align-items:center;justify-content:center;will-change:transform,opacity}
-#boot .boot-stack{display:flex;flex-direction:column;align-items:center;gap:22px}
-#boot{transition:transform .45s cubic-bezier(.83,0,.17,1)}
-#boot.off{transform:translateX(-100%);pointer-events:none}/* pointer-events: the panel keeps taking clicks for the whole slide-out, so for about half a second a visitor clicking the hero hits nothing. Found 2026-09-07 while checking why the browser hit test disagreed with the picture. */
-#boot .bt{stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:butt}
-#boot .bt1{animation:bootdraw .20s cubic-bezier(.6,0,.3,1) 0.04s forwards}
-#boot .bt2{animation:bootdraw .20s cubic-bezier(.6,0,.3,1) 0.16s forwards}
-#boot .bt3{animation:bootdraw .20s cubic-bezier(.6,0,.3,1) 0.28s forwards}
-#boot .boot-word{overflow:hidden;padding:2px 0;font:700 clamp(13px,1.5vw,19px)/1.1 "Archivo Expanded",Archivo,sans-serif;letter-spacing:.30em;color:#B9B9B9;white-space:nowrap}
-#boot .boot-word span{display:inline-block;transform:translateY(115%);animation:bootrise .34s cubic-bezier(.2,.7,.2,1) forwards}
-#boot .boot-word .sp{width:.55em}
-#boot .boot-word span:nth-child(1){animation-delay:0.420s}
-#boot .boot-word span:nth-child(2){animation-delay:0.442s}
-#boot .boot-word span:nth-child(3){animation-delay:0.464s}
-#boot .boot-word span:nth-child(4){animation-delay:0.486s}
-#boot .boot-word span:nth-child(5){animation-delay:0.508s}
-#boot .boot-word span:nth-child(6){animation-delay:0.530s}
-#boot .boot-word span:nth-child(7){animation-delay:0.552s}
-#boot .boot-word span:nth-child(8){animation-delay:0.574s}
-#boot .boot-word span:nth-child(9){animation-delay:0.596s}
-#boot .boot-word span:nth-child(10){animation-delay:0.618s}
-#boot .boot-line{width:196px;height:2px;background:#2A2A2A;overflow:hidden}
-#boot .boot-line span{display:block;height:100%;width:100%;background:#B9B9B9;transform:translateX(-100%);animation:bootfill .52s cubic-bezier(.4,0,.2,1) .42s forwards}
-@keyframes bootdraw{to{stroke-dashoffset:0}}
-@keyframes bootrise{to{transform:translateY(0)}}
-@keyframes bootfill{to{transform:translateX(0)}}
-#boot .boot-wrap{position:relative;overflow:hidden;padding:14px 18px;margin:-14px -18px}
-#boot .boot-wrap::after{content:"";position:absolute;top:-30%;bottom:-30%;left:-62%;width:34%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.16) 45%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.16) 55%,transparent);transform:skewX(-18deg) translateX(0);animation:bootglint 1.5s cubic-bezier(.6,0,.3,1) 1.90s infinite;pointer-events:none}
-#boot .boot-mark{filter:drop-shadow(0 0 0px rgba(237,237,237,0));animation:bootglow 2.2s ease 1s infinite}
-@keyframes bootglint{0%{transform:skewX(-18deg) translateX(0)}55%,100%{transform:skewX(-18deg) translateX(560%)}}
-@keyframes bootglow{0%,100%{filter:drop-shadow(0 0 2px rgba(237,237,237,.12))}50%{filter:drop-shadow(0 0 9px rgba(237,237,237,.38))}}
-@media (prefers-reduced-motion:reduce){#boot{display:none}}
-</style>
-<script>
-(function(){
-  var b=document.getElementById('boot');
-  if(sessionStorage.getItem('jtlboot')){b.remove();return}
-  var done=function(){b.classList.add('off');sessionStorage.setItem('jtlboot','1');setTimeout(function(){b.remove()},700)};
-  // 2026-09-07: the floor was 2400 ms and the load cap 3200 ms, so a first-time visitor
-  // saw the logo for 2.4 s minimum and the hero headline only around 3 s in. Five readers
-  // shown just that window all called it a loading screen and none named the business.
-  // The whole choreography above is compressed to finish under 1 s; these match it.
-  var min=new Promise(function(r){setTimeout(r,950)});
-  var loaded=new Promise(function(r){window.addEventListener('load',r);setTimeout(r,1400)});
-  Promise.all([min,loaded]).then(done);
-})();
-</script>
+<!-- v7 flap preloader (2026-09-23): split-flap board that settles on JTL / GROWTH,
+     measured from a Vestaboard reel; replaces the v4 logo-draw boot. Contract kept:
+     sessionStorage jtlboot, .off slide-left, node removed 700 ms later. -->
+<link rel="stylesheet" href="assets/v7/flap.css">
+<script src="assets/v7/flap.js"></script>
 
 <a class="skip-link" href="#p5">Skip to contact</a>
 <div id="greetpill" aria-hidden="true"><span class="gp-txt"></span></div>
