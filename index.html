@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- flap preloader surface, in the head so the overlay is styled at the first paint -->
+<style>
+/* v7 flap: split-flap preloader surface. The board itself is drawn in flap.js. */
+#boot{position:fixed;inset:0;z-index:9999;background:#0D0D0D;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;transition:transform .45s cubic-bezier(.83,0,.17,1)}
+#boot.off{transform:translateX(-100%);pointer-events:none}
+#boot canvas{display:block}
+#boot .flap-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#boot .flap-skip{position:absolute;right:18px;bottom:16px;font:12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#616161;background:none;border:0;padding:8px 10px;cursor:pointer}
+#boot .flap-skip:hover{color:#9E9E9E}
+#boot .flap-skip:focus-visible{outline:2px solid #C9C9C9;outline-offset:2px;color:#C9C9C9}
+@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}}
+</style>
 <!-- template: v2-mono (own, 2026-07-23) + v3.1 grafts + v4 "clean filmstrip"
      2026-08-20 (Owner directive, Saturday presentation): 8 panels -> 3
      (Hero / Proof / Contact), light with one dark accent panel. v4.1 quiet-hero
@@ -451,20 +463,11 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <body>
 <!-- v7 flap preloader (2026-09-23): split-flap board that settles on JTL / GROWTH,
      measured from a Vestaboard reel; replaces the v4 logo-draw boot. Contract kept:
-     sessionStorage jtlboot, .off slide-left, node removed 700 ms later. Inline on
-     purpose: as external files the board arrived ~500 ms after the HTML on a cold
-     load and the light body showed first (measured live 2026-09-23). -->
-<style>
-/* v7 flap: split-flap preloader surface. The board itself is drawn in flap.js. */
-#boot{position:fixed;inset:0;z-index:9999;background:#0D0D0D;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;transition:transform .45s cubic-bezier(.83,0,.17,1)}
-#boot.off{transform:translateX(-100%);pointer-events:none}
-#boot canvas{display:block}
-#boot .flap-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-#boot .flap-skip{position:absolute;right:18px;bottom:16px;font:12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#616161;background:none;border:0;padding:8px 10px;cursor:pointer}
-#boot .flap-skip:hover{color:#9E9E9E}
-#boot .flap-skip:focus-visible{outline:2px solid #C9C9C9;outline-offset:2px;color:#C9C9C9}
-@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}}
-</style>
+     sessionStorage jtlboot, .off slide-left, node removed 700 ms later. Static
+     markup + head CSS + inline script on purpose: as external files the board
+     arrived ~500 ms after the HTML on a cold load, and as a script-built node it
+     still landed one frame after the first paint (measured live 2026-09-23). -->
+<div id="boot"><canvas aria-hidden="true"></canvas><span class="flap-sr" role="status">JTL Growth</span><button class="flap-skip" type="button" aria-label="Skip intro">skip</button></div>
 <script>
 /* v7 flap: split-flap preloader. A 6 x 22 board (the Vestaboard shape) flips
    every tile through letters, symbols and digits; the nine word tiles lock on
@@ -482,7 +485,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
    Reduced motion: final frame at once, 0.4 s fade (flap.css). */
 (function () {
   'use strict';
-  try { if (sessionStorage.getItem('jtlboot')) return; } catch (e) {}
+  var existing = document.getElementById('boot');
+  try { if (sessionStorage.getItem('jtlboot')) { if (existing) existing.parentNode.removeChild(existing); return; } } catch (e) {}
 
   var ROWS = 6, COLS = 22;
   var WORDS = [{ row: 2, col: 9, text: 'JTL' }, { row: 3, col: 8, text: 'GROWTH' }];
@@ -495,10 +499,13 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   var KEYS = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL'];
 
   /* ---- DOM ---- */
-  var root = document.createElement('div');
-  root.id = 'boot';
-  root.innerHTML = '<canvas aria-hidden="true"></canvas><span class="flap-sr" role="status">JTL Growth</span><button class="flap-skip" type="button" aria-label="Skip intro">skip</button>';
-  document.body.appendChild(root);
+  var root = existing;
+  if (!root) {
+    root = document.createElement('div');
+    root.id = 'boot';
+    root.innerHTML = '<canvas aria-hidden="true"></canvas><span class="flap-sr" role="status">JTL Growth</span><button class="flap-skip" type="button" aria-label="Skip intro">skip</button>';
+    document.body.appendChild(root);
+  }
   var cv = root.querySelector('canvas'), ctx = cv.getContext('2d');
   var skipBtn = root.querySelector('.flap-skip');
 
