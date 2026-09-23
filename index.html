@@ -23,8 +23,16 @@
 #boot .kc .lg.blank{opacity:0}
 #boot .kc.bed,#boot .kc.down{transform:translateY(calc(var(--kc-u)*.05));box-shadow:0 calc(var(--kc-u)*.02) 0 #CACACA,0 calc(var(--kc-u)*.05) calc(var(--kc-u)*.07) calc(var(--kc-u)*-.04) rgba(0,0,0,.09)}
 #boot .kc.bed>.top{background:linear-gradient(180deg,#F6F6F6 0%,#EEEEEE 100%)}
+#boot .kc.rise::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  box-shadow:0 calc(var(--kc-u)*.07) 0 #C4C4C4,0 calc(var(--kc-u)*.07) 0 1px rgba(0,0,0,.05),0 calc(var(--kc-u)*.16) calc(var(--kc-u)*.22) calc(var(--kc-u)*-.05) rgba(0,0,0,.20);
+  animation:kcshadow .16s cubic-bezier(.2,.7,.2,1) var(--d) both}
+#boot .kc.rise{animation:kcrise .16s cubic-bezier(.2,.7,.2,1) var(--d) both}
+#boot .kc.rise .lg{animation:kclegend .07s linear var(--d) both}
+@keyframes kcrise{from{transform:translateY(calc(var(--kc-u)*.05))}to{transform:none}}
+@keyframes kcshadow{from{opacity:0}to{opacity:1}}
+@keyframes kclegend{from{opacity:0}to{opacity:1}}
 @media (max-width:600px){#boot .kc-grid{grid-template-columns:repeat(8,var(--kc-u))}#boot .kc.edge{display:none}}
-@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}#boot .kc,#boot .kc .lg{transition:none}}
+@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}#boot .kc,#boot .kc .lg{transition:none}#boot .kc.rise,#boot .kc.rise::after,#boot .kc.rise .lg{animation:none}}
 </style>
 <!-- template: v2-mono (own, 2026-07-23) + v3.1 grafts + v4 "clean filmstrip"
      2026-08-20 (Owner directive, Saturday presentation): 8 panels -> 3
@@ -479,7 +487,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
      ops/reports/jtl-keycap-preloader. -->
 <div id="boot"><div class="kc-grid" data-kc="bed"><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">J</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">T</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">L</span></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">G</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">R</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">O</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">W</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">T</span></div></div><div class="kc bed" data-kc="word"><div class="top"><span class="lg blank">H</span></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div><div class="kc bed edge"><div class="top"></div></div></div><span class="kc-sr" role="status">JTL Growth</span><button class="kc-skip" type="button" aria-label="Skip intro">skip</button></div>
 <script>
-/* v8 keycap preloader. The nine word keys rise left to right and show their letters by 1.1 s,
+/* v8 keycap preloader. The nine word keys rise left to right and show their letters by 1.2 s,
    the rest of the grid never moves; after that one quiet press wave crosses the word every
    2.4 s so the board is never static. Motion is one-directional on purpose: the v7 split-flap
    flipped every tile and read as dizzying (Owner, 2026-09-23). Lift-off: slide left at
@@ -528,21 +536,33 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   addEventListener('wheel', function () { if (!S.done) unlock(); }, { passive: true });
   var clock = setInterval(function () { S.t = performance.now() - t0; if (S.done && !root.parentNode) clearInterval(clock); }, 16);
   fit(); addEventListener('resize', fit);
-  window.KC = { state: S, done: done, word: function () { return keys.map(function (k) { var l = k.querySelector('.lg'); return l.classList.contains('blank') ? '_' : l.textContent; }).join(''); } };
+  window.KC = { state: S, done: done, word: function () { return keys.map(function (k) { var l = k.querySelector('.lg'); return parseFloat(getComputedStyle(l).opacity) > 0.5 ? l.textContent : '_'; }).join(''); } };
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     S.reduced = true; finalFrame(); S.phase = 'idle'; S.settledAt = 0;
     if (!S.hold) setTimeout(done, 400);
     return;
   }
-  keys.forEach(function (k, i) {
-    var lg = k.querySelector('.lg');
-    at(250 + i * 100, function () { k.classList.remove('bed'); lg.classList.remove('blank'); click('Key' + lg.textContent); });
-  });
-  at(1250, function () {
+  /* the rises are CSS animations that share one start, so a busy main thread (the site's own
+     startup scripts block ~60-90 ms here, measured live) cannot bunch them; each click fires on
+     its key's own animationstart, and the board settles on the last key's animationend. */
+  var settled = false;
+  function settle() {
+    if (settled) return; settled = true;
+    keys.forEach(function (k) { k.style.transition = 'none'; k.classList.remove('bed', 'rise'); k.querySelector('.lg').classList.remove('blank'); });
+    void root.offsetWidth;
+    keys.forEach(function (k) { k.style.transition = ''; });
     S.phase = 'idle'; S.settledAt = performance.now() - t0;
     var tick = function () { if (S.done) return; wave(); setTimeout(tick, 2400); };
     setTimeout(tick, 600);
+  }
+  keys.forEach(function (k, i) {
+    var lg = k.querySelector('.lg');
+    k.style.setProperty('--d', (250 + i * 100) + 'ms');
+    k.addEventListener('animationstart', function (e) { if (e.target === k && e.animationName === 'kcrise') click('Key' + lg.textContent); });
+    if (i === keys.length - 1) k.addEventListener('animationend', function (e) { if (e.target === k && e.animationName === 'kcrise') settle(); });
+    k.classList.add('rise');
   });
+  at(2000, settle);
   if (!S.hold) {
     var lift = function () { if (S.done) return; var t = performance.now() - t0; if (t >= 4000 || (t >= 2800 && S.loaded)) done(); else setTimeout(lift, 50); };
     at(2800, lift);
