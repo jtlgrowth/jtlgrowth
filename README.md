@@ -26,7 +26,7 @@ in flight and revenue on one screen.
 
 Built on Claude, GPT-5, n8n, GoHighLevel, Supabase, FastAPI and Playwright.
 No template, no page builder, no drag-and-drop.
-The homepage opens on a split-flap board, drawn on a canvas by hand inline in `index.html`, no library.
+The homepage opens on a grid of keycaps that types the name, plain CSS inline in `index.html`, no library.
 
 ### Live
 
