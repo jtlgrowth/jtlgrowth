@@ -288,6 +288,132 @@ section + section{border-top:1px solid var(--line)}
 }
 
 </style>
+<style>
+/* PROJECT SETTINGS */
+/* raw palette carries the w45- prefix so it never shadows a host token of the same name (a host --ink
+   went black inside the FWIB preview); hosts override the ROLE tokens below, never these. */
+.w45-root{
+  --w45-cement:#F5F5F7;       /* page ground, apple gray */
+  --w45-paper:#FFFFFF;        /* card, inputs */
+  --w45-ink:#0A0A0A;          /* near-black, never pure #000 */
+  --w45-ink-soft:#3F3F46;
+  --w45-gray:#6B6B70;         /* muted text, 4.6:1 on white */
+  --w45-gray-line:#E4E4E7;    /* borders */
+  --w45-gray-line-soft:#F0F0F2;
+  --chip-bg:#F5F5F7;
+  --chip-border:#DADADD;
+  --card-shadow:rgba(20,20,22,.10);
+  --w45-focus-blue:#1F6FEB;
+  --w45-ok-green:#1F7A4D;
+  --w45-warn-amber:#8A5A00;
+  --w45-danger-red:#B3261E;
+  /* Roles (venice-base names) */
+  --bg:var(--w45-cement); --surface:var(--w45-paper); --fg:var(--w45-ink); --fg-2:var(--w45-ink-soft);
+  --muted:var(--w45-gray); --meta:var(--w45-gray); --border:var(--w45-gray-line); --border-soft:var(--w45-gray-line-soft);
+  --accent:var(--w45-ink); --accent-on:var(--w45-paper); --accent-hover:color-mix(in oklab, var(--accent), white 14%);
+  --chip-on:color-mix(in oklab, var(--accent), var(--surface) 92%);
+  --success:var(--w45-ok-green); --warn:var(--w45-warn-amber); --danger:var(--w45-danger-red);
+  --font-display:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif;
+  --font-body:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif;
+  --font-mono:"SF Mono",ui-monospace,Menlo,monospace;
+  --radius-sm:8px; --radius-md:10px; --radius-lg:16px; --radius-pill:999px;
+  --container-max:560px;
+  --q-size-phone:24px; --q-size:30px;   /* the question; drop it under the host's section heading when embedded */
+  --focus:var(--w45-focus-blue);
+  --focus-ring:0 0 0 2px var(--surface), 0 0 0 4px var(--focus);
+  --motion-base:200ms; --ease-standard:cubic-bezier(.2,.7,.2,1);
+}
+/* END SETTINGS */
+body{margin:0}
+.w45-root{width:100%;max-width:var(--container-max);margin:0 auto;color:var(--fg);font:500 16px/1.5 var(--font-body);-webkit-font-smoothing:antialiased;text-align:left}
+.w45-root[data-standalone]{max-width:none;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:40px 16px;background:var(--bg);box-sizing:border-box}
+.w45-root[data-standalone] .w45-form{width:100%;max-width:var(--container-max)}
+.w45-root *,.w45-root *::before,.w45-root *::after{box-sizing:border-box}
+/* zero-specificity reset: a plain .w45-root legend{margin:0} outranked .w45-q and ate its 20px gap */
+:where(.w45-root) :where(legend,h2,p){margin:0}
+.w45-root button{font-family:inherit}
+.w45-root .w45-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 18px 40px -20px var(--card-shadow);padding:28px 24px 24px;overflow:hidden}
+.w45-root .w45-card[hidden]{display:none}
+@media (min-width:600px){.w45-root .w45-card{padding:36px 40px 32px}}
+.w45-root .w45-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.w45-root .w45-eyebrow{font:600 11px/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.w45-root .w45-count{font:600 12px/1 var(--font-mono);letter-spacing:.04em;color:var(--muted)}
+.w45-root .w45-progress{display:flex;gap:6px;margin-top:24px}
+.w45-root .w45-seg{flex:1;height:6px;border-radius:var(--radius-pill);background:var(--border);transition:background var(--motion-base) var(--ease-standard)}
+.w45-root .w45-seg[data-filled]{background:var(--accent)}
+.w45-root .w45-live{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.w45-root .w45-step{border:0;margin:0;padding:0;min-width:0}
+.w45-root .w45-step[hidden]{display:none}
+.w45-root .w45-q{display:block;padding:0;font:500 var(--q-size-phone)/1.25 var(--font-display);letter-spacing:-.022em;color:var(--fg);margin-bottom:20px}
+@media (min-width:600px){.w45-root .w45-q{font-size:var(--q-size)}}
+/* data-flat: the host already draws the card (a section panel), so W-45 draws none of its own.
+   Card-in-card squeezed the AVAS waitlist form to 264px on a 390 phone (2026-09-25 preview). */
+.w45-root[data-flat] .w45-card{background:transparent;border:0;box-shadow:none;padding:0;overflow:visible}
+.w45-root[data-flat] .w45-done{padding:8px 0}
+.w45-root .w45-input{display:block;width:100%;height:56px;padding:0 16px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);color:var(--fg);font:500 16px/1.4 var(--font-body);letter-spacing:-.01em;margin:0}
+.w45-root .w45-input::placeholder{color:var(--muted);opacity:1}
+.w45-root .w45-input:focus-visible{outline:none;box-shadow:var(--focus-ring);border-color:var(--accent)}
+.w45-root .w45-note{margin-top:12px;font:500 14px/1.5 var(--font-body);color:var(--muted)}
+/* opt-in consent rows (SMS A2P: separate, unticked, the carrier-approved wording verbatim) */
+.w45-root .w45-consent{display:flex;gap:12px;align-items:flex-start;margin-top:12px;min-height:44px;font:500 14px/1.5 var(--font-body);color:var(--muted);cursor:pointer}
+.w45-root .w45-consent input{flex:none;width:20px;height:20px;margin:2px 0 0;accent-color:var(--accent);cursor:pointer}
+.w45-root .w45-consent input:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:4px}
+.w45-root .w45-note a{color:var(--fg);text-decoration:underline}
+.w45-root .w45-chips{display:grid;gap:10px}
+@media (min-width:600px){.w45-root .w45-chips[data-cols="2"]{grid-template-columns:1fr 1fr}}
+.w45-root .w45-chip{position:relative}
+.w45-root .w45-chip input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.w45-root .w45-chip label{display:flex;align-items:center;min-height:56px;padding:14px 16px;border:1px solid var(--chip-border);border-radius:var(--radius-md);background:var(--chip-bg);color:var(--fg);font:500 16px/1.3 var(--font-body);letter-spacing:-.01em;cursor:pointer;transition:border-color var(--motion-base) var(--ease-standard),background var(--motion-base) var(--ease-standard)}
+.w45-root .w45-chip input:checked + label{border-color:var(--accent);background:var(--chip-on);font-weight:700}
+.w45-root .w45-chip input:focus-visible + label{outline:none;box-shadow:var(--focus-ring)}
+.w45-root .w45-error{margin-top:8px;font:600 14px/1.4 var(--font-body);color:var(--danger)}
+.w45-root .w45-error:empty{display:none}
+.w45-root .w45-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px;margin-top:24px}
+.w45-root .w45-back,.w45-root .w45-skip{appearance:none;background:none;border:0;padding:14px 4px;min-height:44px;font:600 15px/1 var(--font-body);color:var(--muted);cursor:pointer}
+.w45-root .w45-back{margin-right:auto}
+.w45-root .w45-back:focus-visible,.w45-root .w45-skip:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-sm)}
+.w45-root .w45-back[hidden],.w45-root .w45-skip[hidden]{display:none}
+.w45-root .w45-next{appearance:none;border:1px solid var(--accent);border-radius:var(--radius-md);background:var(--accent);color:var(--accent-on);min-height:52px;padding:14px 26px;font:700 16px/1 var(--font-body);letter-spacing:-.01em;cursor:pointer;transition:background var(--motion-base) var(--ease-standard)}
+/* phones: the main button never breaks its label and takes the whole row (thumb reach); desktop sizes to fit */
+.w45-root .w45-next{flex:1 0 auto;white-space:nowrap}
+@media (min-width:600px){.w45-root .w45-next{flex:0 0 auto}}
+.w45-root .w45-next:hover{background:var(--accent-hover)}
+.w45-root .w45-next:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.w45-root .w45-next:disabled{opacity:.6;cursor:default}
+.w45-root .w45-steps{position:relative}
+.w45-root .w45-anim{animation:w45-in var(--motion-base) var(--ease-standard)}
+@keyframes w45-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.w45-root .w45-anim{animation:none}.w45-root .w45-seg,.w45-root .w45-next,.w45-root .w45-chip label{transition:none}}
+.w45-root .w45-done{text-align:center;padding-top:32px;padding-bottom:32px}
+.w45-root .w45-check{width:56px;height:56px;border-radius:50%;background:var(--accent);color:var(--accent-on);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.w45-root .w45-done-title{font:500 26px/1.3 var(--font-display);letter-spacing:-.022em;color:var(--fg);margin-bottom:10px}
+.w45-root .w45-done-body{font:500 16px/1.5 var(--font-body);color:var(--muted)}
+.w45-root .w45-fallback{margin-top:16px;font:600 15px/1.5 var(--font-body);color:var(--fg)}
+.w45-root .w45-fallback a{color:var(--fg)}
+</style>
+<style>
+/* JTL quote page overrides: W-45 ROLE tokens only, every value sourced from this page's own
+   :root (see PROJECT SETTINGS above, lines ~60-92): --cement/--navy/--gray/--line/--wood plus
+   the Fraunces/Archivo font stack. Raw --w45-* names, radius and shadow tokens are untouched. */
+.w45-root{
+  --surface: var(--cement);
+  --fg: var(--navy);
+  --fg-2: var(--blue);
+  --muted: var(--gray);
+  --border: var(--line);
+  --chip-bg: var(--cement-deep);
+  --chip-border: var(--line);
+  --accent: var(--navy);
+  --accent-on: var(--cement);
+  --accent-hover: var(--wood);
+  --focus: var(--wood);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Archivo', sans-serif;
+  --q-size-phone: 26px;
+  --q-size: 34px;
+}
+.w45-root{ margin-top: 30px; max-width: 560px; }
+</style>
 <script>
 const SETTINGS = {
   "brand": {"name": "JTL Growth", "logo": ""},
@@ -389,67 +515,103 @@ addEventListener("DOMContentLoaded",function(){
 
 <section class="wrap" id="form">
   <p class="eyebrow rv">The request</p>
-  <form class="qt-form rv d1" id="qt-form">
-    <div class="qt-row2">
-      <div class="qt-field">
-        <label for="qt-name">Name</label>
-        <input type="text" id="qt-name" name="name" required autocomplete="name">
+  <div class="w45-root" id="qt-w45">
+  <form class="w45-form" data-lead-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-format="text" data-partial="on" novalidate>
+    <div class="w45-card" data-w45-card>
+      <div class="w45-top">
+        <span class="w45-eyebrow" data-eyebrow></span>
+        <span class="w45-count" data-progress-text>1 / 5</span>
       </div>
-      <div class="qt-field">
-        <label for="qt-business">Business</label>
-        <input type="text" id="qt-business" name="business" required autocomplete="organization">
+      <div class="w45-live" aria-live="polite" data-live></div>
+      <input type="text" name="company_website" tabindex="-1" autocomplete="off" hidden>
+
+      <div class="w45-steps" data-steps>
+        <fieldset class="w45-step" data-step="1" data-type="choice" data-name="layer" data-error="Pick one so we can scope the quote.">
+          <legend class="w45-q" id="w45-layer-q">What do you need built?</legend>
+          <div class="w45-chips" data-cols="2" role="radiogroup" aria-labelledby="w45-layer-q" aria-describedby="w45-layer-err">
+            <div class="w45-chip"><input type="radio" name="layer" id="w45-layer-0" value="Funnels &amp; websites"><label for="w45-layer-0">Funnels &amp; websites</label></div>
+            <div class="w45-chip"><input type="radio" name="layer" id="w45-layer-1" value="Automation systems"><label for="w45-layer-1">Automation systems</label></div>
+            <div class="w45-chip"><input type="radio" name="layer" id="w45-layer-2" value="AI employees"><label for="w45-layer-2">AI employees</label></div>
+            <div class="w45-chip"><input type="radio" name="layer" id="w45-layer-3" value="Ops portals"><label for="w45-layer-3">Ops portals</label></div>
+            <div class="w45-chip"><input type="radio" name="layer" id="w45-layer-4" value="Workshop or training"><label for="w45-layer-4">Workshop or training</label></div>
+          </div>
+          <p class="w45-error" id="w45-layer-err" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="w45-step" data-step="2" data-type="text" data-name="problem" data-error="Tell us what's slow so we can quote it." hidden>
+          <legend class="w45-q" id="w45-problem-q">What's slow right now?</legend>
+          <input class="w45-input" type="text" name="problem" aria-labelledby="w45-problem-q" aria-describedby="w45-problem-err" placeholder="What repeats, who does it, how long it takes." autocomplete="off">
+          <p class="w45-error" id="w45-problem-err" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="w45-step" data-step="3" data-type="text" data-name="first_name" data-error="Enter your first name." hidden>
+          <legend class="w45-q" id="w45-first_name-q">What's your first name?</legend>
+          <input class="w45-input" type="text" name="first_name" aria-labelledby="w45-first_name-q" aria-describedby="w45-first_name-err" autocomplete="given-name">
+          <p class="w45-error" id="w45-first_name-err" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="w45-step" data-step="4" data-type="email" data-name="email" data-error="Enter a valid email, like name@business.com." hidden>
+          <legend class="w45-q" id="w45-email-q">Best email for the quote?</legend>
+          <input class="w45-input" type="email" name="email" aria-labelledby="w45-email-q" aria-describedby="w45-email-err" autocomplete="email" inputmode="email">
+          <p class="w45-error" id="w45-email-err" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="w45-step" data-step="5" data-type="tel" data-name="whatsapp" data-optional data-error="Enter a number we can reach you on, like 0917 123 4567." hidden>
+          <legend class="w45-q" id="w45-whatsapp-q">WhatsApp, so we can reply faster?</legend>
+          <input class="w45-input" type="tel" name="whatsapp" aria-labelledby="w45-whatsapp-q" aria-describedby="w45-whatsapp-err w45-whatsapp-note" autocomplete="tel" inputmode="tel" placeholder="0917 123 4567">
+          <p class="w45-error" id="w45-whatsapp-err" role="alert"></p>
+          <p class="w45-note" id="w45-whatsapp-note">Optional. Skip if you'd rather we email you.</p>
+          <label class="w45-consent"><input type="checkbox" name="contact_consent"><span>I agree that JTL Growth may use these details to reply to this request. <a href="/privacy/" data-privacy-link>Privacy</a>.</span></label>
+        </fieldset>
+      </div>
+
+      <div class="w45-progress" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" data-progress>
+        <span class="w45-seg" data-seg></span>
+        <span class="w45-seg" data-seg></span>
+        <span class="w45-seg" data-seg></span>
+        <span class="w45-seg" data-seg></span>
+        <span class="w45-seg" data-seg></span>
+      </div>
+
+      <div class="w45-actions">
+        <button type="button" class="w45-back" data-back hidden>Back</button>
+        <button type="button" class="w45-skip" data-skip hidden>Skip</button>
+        <button type="button" class="w45-next" data-next>Next</button>
       </div>
     </div>
-    <div class="qt-row2">
-      <div class="qt-field">
-        <label for="qt-email">Email</label>
-        <input type="email" id="qt-email" name="email" required autocomplete="email">
+
+    <div class="w45-card w45-done" data-done hidden>
+      <div class="w45-check" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
-      <div class="qt-field">
-        <label for="qt-whatsapp">WhatsApp number</label>
-        <input type="tel" id="qt-whatsapp" name="whatsapp" autocomplete="tel">
-      </div>
-    </div>
-    <div class="qt-field">
-      <label for="qt-problem">What is slow right now</label>
-      <p class="qt-help" id="qt-problem-help">What repeats, who does it, how long it takes.</p>
-      <textarea id="qt-problem" name="problem" required minlength="40" aria-describedby="qt-problem-help"></textarea>
-    </div>
-    <div class="qt-field">
-      <label id="qt-layer-label">Which layer</label>
-      <div class="qt-chips" role="group" aria-labelledby="qt-layer-label">
-        <label class="qt-chip"><input type="checkbox" name="layer" value="Funnels and websites"><span>Funnels and websites</span></label>
-        <label class="qt-chip"><input type="checkbox" name="layer" value="Automation systems"><span>Automation systems</span></label>
-        <label class="qt-chip"><input type="checkbox" name="layer" value="AI employees"><span>AI employees</span></label>
-        <label class="qt-chip"><input type="checkbox" name="layer" value="Ops portals"><span>Ops portals</span></label>
-        <label class="qt-chip"><input type="checkbox" name="layer" value="Workshop or training"><span>Workshop or training</span></label>
-      </div>
-    </div>
-    <div class="qt-field">
-      <label for="qt-when">When</label>
-      <select id="qt-when" name="when">
-        <option value="" selected disabled>Choose one</option>
-        <option value="This month">This month</option>
-        <option value="Next quarter">Next quarter</option>
-        <option value="Not sure yet">Not sure yet</option>
-      </select>
-    </div>
-    <div class="qt-field">
-      <label class="qt-consent">
-        <input type="checkbox" id="qt-consent" name="consent" required>
-        <span>I agree that JTL Growth may use these details to reply to this request. <a href="/privacy/">Privacy</a>.</span>
-      </label>
-    </div>
-    <div class="qt-submit-row">
-      <button type="submit" class="qt-submit">Send the request</button>
-      <p class="qt-note">Sends from your mail app. Prefer talking? <a href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book the call</a>.</p>
+      <h2 class="w45-done-title" data-done-title>Request sent.</h2>
+      <p class="w45-done-body" data-done-body>We'll read what's already wired in your business and send a written quote within two business days.</p>
+      <p class="w45-fallback" data-done-fallback hidden></p>
     </div>
   </form>
-  <div class="qt-panel" id="qt-panel" hidden>
-    <p>Your mail app has the request. If it did not open, copy it:</p>
-    <textarea id="qt-mailbody" readonly aria-label="Composed quote request"></textarea>
-    <button type="button" class="qt-copybtn" id="qt-copybtn">Copy</button>
-  </div>
+
+  <script type="application/json" data-w45-settings>
+{
+  "leadForm": {"storageKey": "jtl-quote-w45"},
+  "content": {
+    "eyebrow": "",
+    "privacyUrl": "/privacy/",
+    "fallbackPhone": "",
+    "doneTitle": "Request sent.",
+    "doneBody": "We'll read what's already wired in your business and send a written quote within two business days.",
+    "submitLabel": "Send my request"
+  },
+  "questions": [
+    {"name": "layer", "label": "What do you need built?", "options": ["Funnels & websites", "Automation systems", "AI employees", "Ops portals", "Workshop or training"]},
+    {"name": "problem", "label": "What's slow right now?", "placeholder": "What repeats, who does it, how long it takes."},
+    {"name": "first_name", "label": "What's your first name?"},
+    {"name": "email", "label": "Best email for the quote?"},
+    {"name": "whatsapp", "label": "WhatsApp, so we can reply faster?", "placeholder": "0917 123 4567"}
+  ]
+}
+  </script>
+</div>
+<p class="qt-note">Prefer email? <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></p>
 </section>
 
 <section class="wrap" id="what">
@@ -589,49 +751,202 @@ addEventListener("DOMContentLoaded",function(){
 })();
 </script>
 <script>
-/* the request form: no backend. Native validation gates the submit event, then this
-   composes a mailto: and opens it, and shows the same text in a copyable panel in
-   case the mail client did not open. */
+/* W-45 engine v2: generic, scoped to every .w45-root on the page, wrapped so it can sit beside any host script. */
 (function(){
-  var form=document.getElementById('qt-form');
-  if(!form)return;
-  var panel=document.getElementById('qt-panel'),body=document.getElementById('qt-mailbody'),copyBtn=document.getElementById('qt-copybtn');
-  function val(id){var el=document.getElementById(id);return el?el.value.trim():''}
-  function compose(){
-    var layers=[].slice.call(form.querySelectorAll('input[name="layer"]:checked')).map(function(el){return el.value});
-    return [
-      'Name: '+val('qt-name'),
-      'Business: '+val('qt-business'),
-      'Email: '+val('qt-email'),
-      'WhatsApp: '+(val('qt-whatsapp')||'not given'),
-      'Layer: '+(layers.length?layers.join(', '):'not specified'),
-      'When: '+(val('qt-when')||'not specified'),
-      '',
-      'What is slow right now:',
-      val('qt-problem')
-    ].join('\n');
-  }
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var text=compose();
-    var subject='Quote request: '+(val('qt-business')||'New request');
-    window.location.href='mailto:hello@jtlgrowth.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
-    if(body)body.value=text;
-    if(panel){panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'nearest'})}
-  });
-  if(copyBtn&&body){
-    copyBtn.addEventListener('click',function(){
-      function done(){copyBtn.textContent='Copied';setTimeout(function(){copyBtn.textContent='Copy'},1800)}
-      if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(body.value).then(done).catch(function(){fallback()});
-      }else{fallback()}
-      function fallback(){
-        body.removeAttribute('readonly');body.focus();body.select();
-        try{document.execCommand('copy');done()}catch(e){}
-        body.setAttribute('readonly','');
+  "use strict";
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function digits(v){ return v.replace(/[\s\-().]/g, ""); }
+  var CHECK = {
+    text: function(v){ return v.length > 0; },
+    email: function(v){ return EMAIL.test(v); },
+    tel: function(v){ return /^\+?\d{7,15}$/.test(digits(v)); },
+    choice: function(v){ return v.length > 0; }
+  };
+
+  function boot(root){
+    var form = root.querySelector("[data-lead-form]");
+    if (!form || form.dataset.w45Booted) return;
+    form.dataset.w45Booted = "1";
+    var S = {};
+    try { S = JSON.parse(root.querySelector("script[data-w45-settings]").textContent); } catch (e) { S = {}; }
+    var lf = S.leadForm || {}, content = S.content || {};
+    var endpoint = (form.getAttribute("data-endpoint") || "").trim(), storageKey = lf.storageKey || "w45-lead";
+    if (!endpoint) console.warn("W-45: the form's data-endpoint is empty, leads go nowhere (preview mode)");
+
+    var card = form.querySelector("[data-w45-card]"), doneCard = form.querySelector("[data-done]");
+    var stepsEl = form.querySelector("[data-steps]");
+    var steps = Array.prototype.slice.call(form.querySelectorAll("fieldset[data-step]"));
+    var TOTAL = steps.length;
+    var progressEl = form.querySelector("[data-progress]"), countEl = form.querySelector("[data-progress-text]");
+    var liveEl = form.querySelector("[data-live]"), honeypot = form.querySelector('input[name="company_website"]');
+    var backBtn = form.querySelector("[data-back]"), skipBtn = form.querySelector("[data-skip]"), nextBtn = form.querySelector("[data-next]");
+
+    // one segment per step, whatever the markup shipped with
+    var segs = Array.prototype.slice.call(progressEl.querySelectorAll("[data-seg]"));
+    while (segs.length < TOTAL) { var sg0 = document.createElement("span"); sg0.className = "w45-seg"; sg0.setAttribute("data-seg", ""); progressEl.appendChild(sg0); segs.push(sg0); }
+    while (segs.length > TOTAL) segs.pop().remove();
+    progressEl.setAttribute("aria-valuemax", String(TOTAL));
+
+    var answers = {};
+    try { answers = JSON.parse(localStorage.getItem(storageKey) || "{}") || {}; } catch (e) { answers = {}; }
+    function store(){ try { localStorage.setItem(storageKey, JSON.stringify(answers)); } catch (e) {} }
+    function unstore(){ try { localStorage.removeItem(storageKey); } catch (e) {} }
+
+    // the step's own field; consent checkboxes ride along beside it and post as "yes" or ""
+    var FIELD = 'input:not([type="radio"]):not([type="checkbox"]),textarea';
+    function info(fs){ return { type: fs.dataset.type || "text", name: fs.dataset.name, optional: fs.hasAttribute("data-optional") }; }
+    function valueOf(fs){
+      if (info(fs).type === "choice") { var c = fs.querySelector('input[type="radio"]:checked'); return c ? c.value : ""; }
+      var el = fs.querySelector(FIELD); return el ? el.value.trim() : "";
+    }
+    function focusable(fs){
+      return fs.querySelector(FIELD) || fs.querySelector('input[type="radio"]:checked') || fs.querySelector('input[type="radio"]');
+    }
+
+    // SETTINGS.questions by name: labels, placeholders and choice options without touching markup
+    (S.questions || []).forEach(function(q){
+      var fs = null;
+      steps.forEach(function(f){ if (f.dataset.name === q.name) fs = f; });
+      if (!fs) return;
+      var lg = fs.querySelector("legend");
+      if (q.label && lg) lg.textContent = q.label;
+      var inp = fs.querySelector('input:not([type="radio"]),textarea');
+      if (q.placeholder && inp) inp.placeholder = q.placeholder;
+      var wrap = fs.querySelector(".w45-chips");
+      if (wrap && Array.isArray(q.options) && q.options.length) {
+        wrap.textContent = "";
+        q.options.forEach(function(opt, n){
+          var id = "w45-" + q.name + "-" + n, d = document.createElement("div"), r = document.createElement("input"), l = document.createElement("label");
+          d.className = "w45-chip"; r.type = "radio"; r.name = q.name; r.id = id; r.value = opt; l.htmlFor = id; l.textContent = opt;
+          d.appendChild(r); d.appendChild(l); wrap.appendChild(d);
+        });
       }
     });
+    var ey = form.querySelector("[data-eyebrow]");
+    if (ey && content.eyebrow) ey.textContent = content.eyebrow;
+    var pl = form.querySelector("[data-privacy-link]");
+    if (pl && content.privacyUrl && /^(\/|https:\/\/)/.test(content.privacyUrl)) pl.setAttribute("href", content.privacyUrl);
+    var dt = form.querySelector("[data-done-title]"), db = form.querySelector("[data-done-body]");
+    if (dt && content.doneTitle) dt.textContent = content.doneTitle;
+    if (db && content.doneBody) db.textContent = content.doneBody;
+
+    // restore what was typed before a refresh
+    steps.forEach(function(fs){
+      var i = info(fs), v = answers[i.name];
+      if (v == null || v === "") return;
+      if (i.type === "choice") {
+        Array.prototype.forEach.call(fs.querySelectorAll('input[type="radio"]'), function(r){ if (r.value === v) r.checked = true; });
+      } else { var el = fs.querySelector(FIELD); if (el) el.value = v; }
+    });
+    Array.prototype.forEach.call(form.querySelectorAll('fieldset[data-step] input[type="checkbox"][name]'), function(cb){
+      cb.checked = answers[cb.name] === "yes";
+    });
+    var current = (answers._step >= 1 && answers._step <= TOTAL) ? answers._step : 1;
+
+    function setError(fs, msg){ var e = fs.querySelector(".w45-error"); if (e) e.textContent = msg || ""; }
+
+    function show(n, opts){
+      opts = opts || {};
+      steps.forEach(function(fs, k){ fs.hidden = (k + 1) !== n; });
+      current = n;
+      progressEl.setAttribute("aria-valuenow", String(n));
+      countEl.textContent = n + " / " + TOTAL;
+      segs.forEach(function(sg, k){ if (k < n) sg.setAttribute("data-filled", ""); else sg.removeAttribute("data-filled"); });
+      backBtn.hidden = n === 1;
+      skipBtn.hidden = !info(steps[n - 1]).optional;
+      nextBtn.textContent = n === TOTAL ? (content.submitLabel || "Send") : "Next";
+      liveEl.textContent = "Step " + n + " of " + TOTAL;
+      if (opts.animate !== false) { stepsEl.classList.remove("w45-anim"); void stepsEl.offsetWidth; stepsEl.classList.add("w45-anim"); }
+      if (opts.focus !== false) { var f = focusable(steps[n - 1]); if (f) f.focus(); }
+      answers._step = n; store();
+    }
+
+    function validate(fs, skipping){
+      var i = info(fs), v = skipping ? "" : valueOf(fs);
+      if (v === "" && i.optional) {
+        setError(fs, ""); answers[i.name] = "";
+        if (skipping) { var el = fs.querySelector('input:not([type="radio"]),textarea'); if (el) el.value = ""; }
+        return true;
+      }
+      if (!CHECK[i.type](v)) { setError(fs, fs.dataset.error || "Please answer this one."); return false; }
+      setError(fs, ""); answers[i.name] = v; return true;
+    }
+
+    function payload(stage){
+      // one id per visitor's lead, so the partial and the complete post land on the same row / contact
+      if (!answers._id) { answers._id = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10); store(); }
+      var out = { stage: stage, lead_id: answers._id, page: location.href, ts: new Date().toISOString() };
+      steps.forEach(function(fs){ var n = info(fs).name; if (answers[n]) out[n] = answers[n]; });
+      Array.prototype.forEach.call(form.querySelectorAll('fieldset[data-step] input[type="checkbox"][name]'), function(cb){
+        out[cb.name] = cb.checked ? "yes" : "";   // an unticked consent box is recorded as a no, never dropped
+      });
+      return out;
+    }
+    function post(body){
+      if (!endpoint) return Promise.resolve({ ok: true, preview: true });
+      // data-endpoint-format="text": a Google Apps Script web app cannot answer the CORS preflight a JSON
+      // content type triggers, so the same JSON goes as text/plain (a simple request, no preflight)
+      var type = form.getAttribute("data-endpoint-format") === "text" ? "text/plain;charset=utf-8" : "application/json";
+      return fetch(endpoint, { method: "POST", headers: { "Content-Type": type }, body: JSON.stringify(body), keepalive: true });
+    }
+
+    function finish(ok){
+      card.hidden = true; doneCard.hidden = false;
+      if (!ok) {
+        var fb = form.querySelector("[data-done-fallback]"), ph = content.fallbackPhone || "";
+        fb.textContent = "Something went wrong on our side. ";
+        if (ph) { var a = document.createElement("a"); a.href = "tel:" + ph.replace(/[^+\d]/g, ""); a.textContent = "Call us on " + ph + "."; fb.appendChild(a); }
+        else fb.textContent += "We will follow up shortly.";
+        fb.hidden = false;
+      }
+      doneCard.setAttribute("tabindex", "-1"); doneCard.focus();
+    }
+
+    function advance(skipping){
+      if (honeypot && honeypot.value) { finish(true); return; }
+      var fs = steps[current - 1];
+      if (!validate(fs, skipping)) { var f = focusable(fs); if (f) f.focus(); return; }
+      store();
+      var i = info(fs);
+      if (current < TOTAL) {
+        // the contact is saved the moment it is given: a drop on a later step still leaves a lead
+        if ((i.type === "email" || i.type === "tel") && answers[i.name]) post(payload("partial")).catch(function(){});
+        show(current + 1);
+        return;
+      }
+      nextBtn.disabled = true; var label = nextBtn.textContent; nextBtn.textContent = "Sending...";
+      post(payload("complete")).then(function(res){
+        if (!res || !res.ok) throw new Error("bad response");
+        // a 200 can still be a refusal: the Apps Script inbox answers {"ok":false} for a lead it did not
+        // save. Only an explicit ok:false fails; GHL's webhook answers without an ok field and passes.
+        return typeof res.json === "function" ? res.json().catch(function(){ return null; }) : null;
+      }).then(function(body){
+        if (body && body.ok === false) throw new Error("refused: " + (body.why || ""));
+        unstore(); finish(true);
+      }).catch(function(){ nextBtn.disabled = false; nextBtn.textContent = label; finish(false); });
+    }
+
+    nextBtn.addEventListener("click", function(){ advance(false); });
+    skipBtn.addEventListener("click", function(){ advance(true); });
+    backBtn.addEventListener("click", function(){ if (current > 1) show(current - 1); });
+    form.addEventListener("submit", function(ev){ ev.preventDefault(); advance(false); });
+    form.addEventListener("keydown", function(ev){
+      if (ev.key === "Enter" && ev.target.tagName === "INPUT" && ev.target.type !== "radio") { ev.preventDefault(); advance(false); }
+    });
+    function remember(ev){
+      var fs = ev.target.closest("fieldset[data-step]");
+      if (!fs) return;
+      if (ev.target.type === "checkbox" && ev.target.name) answers[ev.target.name] = ev.target.checked ? "yes" : "";
+      else answers[info(fs).name] = valueOf(fs);
+      store();
+    }
+    form.addEventListener("input", remember);
+    form.addEventListener("change", remember);
+
+    show(current, { animate: false, focus: false });
   }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".w45-root"), boot);
 })();
 </script>
 </body>
