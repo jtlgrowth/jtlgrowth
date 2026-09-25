@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <!-- template: v6 page shell, extracted from products/index.html per the standing rule
      (new slugs extract from an existing v6 page, never rebuilt from scratch).
-     Free pack: follow-gate.js handles steps 1+2+3, this page listens for its
-     jtl-gate-unlocked event to un-blur the card grid (cheaper than a
-     MutationObserver, and it is what the script already announces).
+     Free pack retired 2026-09-25 (Owner: follows and reviews never came); page is
+     noindex and off the nav, kept live only for Overnight Build vault holders.
      Vault: password gate is local, no server, SHA-256 of the trimmed lowercase
      input checked against one constant (see OBV_HASH below), Venice swaps it. -->
 <html lang="en">
@@ -18,14 +17,16 @@ if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Prompts · the ones we run ourselves · JTL Growth</title>
-<meta name="description" content="The free pack, eight prompts, opens with a follow. The Overnight Build vault, ten prompts that take an idea to an app in one night, opens with a seat.">
+<meta name="description" content="The Overnight Build vault, ten prompts that take an idea to an app in one night, for Overnight Build seats.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
 <link rel="canonical" href="https://jtlgrowth.com/prompts/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Prompts · the ones we run ourselves · JTL Growth">
-<meta property="og:description" content="The free pack, eight prompts, opens with a follow. The Overnight Build vault, ten prompts that take an idea to an app in one night, opens with a seat.">
+<meta property="og:description" content="The Overnight Build vault, ten prompts that take an idea to an app in one night, for Overnight Build seats.">
 <meta property="og:url" content="https://jtlgrowth.com/prompts/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,7 +239,6 @@ section h2 + .lead{margin-top:14px}
     <a href="/services/">Services</a>
     <a href="/quote/">Quote</a>
     <a href="/products/">Products</a>
-    <a href="/prompts/" aria-current="page">Prompts</a>
     <a href="/workshop/">Workshop</a>
     <a href="/work/">Work</a>
   </nav>
@@ -255,7 +255,6 @@ section h2 + .lead{margin-top:14px}
           <a href="/services/">Services <span class="mk">&#8599;</span></a>
           <a href="/quote/">Quote <span class="mk">&#8599;</span></a>
           <a href="/products/">Products <span class="mk">&#8599;</span></a>
-          <a href="/prompts/">Prompts <span class="mk">&#8599;</span></a>
           <a href="/workshop/">Workshop <span class="mk">&#8599;</span></a>
           <a href="/work/">Work <span class="mk">&#8599;</span></a>
         </div>
@@ -278,35 +277,8 @@ section h2 + .lead{margin-top:14px}
 <section class="page-hero wrap">
   <p class="eyebrow rv">JTL Growth &middot; Robots &amp; Coffee</p>
   <h1 class="rv d1">Prompts, not <em class="accent">decks.</em></h1>
-  <p class="lead rv d2">Everything on this page is copy-paste. Read what it does, take it, run it
-    in whatever AI chat you already have open.</p>
-</section>
-
-<section class="wrap" id="unlock">
-  <p class="eyebrow rv">Unlock</p>
-  <h2 class="rv d1">Open the free pack.</h2>
-  <p class="lead rv d2">Prompts we run ourselves. The free pack opens with a follow. The vault
-    opens with a seat.</p>
-  <div class="pr-gate rv d3" data-follow-gate
-       data-gate-id="prompts-free"
-       data-file="/prompts/free-pack.zip"
-       data-label="Open the free pack"
-       data-reward="The free pack, 8 prompts"
-       data-reward-note="Yours the moment steps 1 and 2 are done."
-       data-submit="Open the pack"></div>
-  <noscript>
-    <p class="lead" style="margin-top:18px">JavaScript is off, so the pack and the panel
-      cannot load. Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> and
-      we will send the eight prompts directly.</p>
-  </noscript>
-</section>
-
-<section class="wrap" id="free-pack">
-  <p class="eyebrow rv">Free pack</p>
-  <h2 class="rv d1">The free pack.</h2>
-  <p class="lead rv d2">Eight prompts, each with a video of what it makes. Copy one, paste it
-    into Claude Code, answer the questions it asks, done.</p>
-  <div class="pr-rows pr-blurred" id="free-grid"></div>
+  <p class="lead rv d2">The Overnight Build vault. Unlock it with your seat password, copy a
+    prompt, run it in whatever AI chat you already have open.</p>
 </section>
 
 <section class="wrap" id="obv-vault">
@@ -353,14 +325,6 @@ section h2 + .lead{margin-top:14px}
 
 <script type="application/json" id="prompts-data">
 [
-{"id": "local-hq", "tier": "free", "title": "Your AI office in 3D", "does": "Sets up your team's office in 3D on your own laptop: one desk per AI employee, today's board, and whatever accessories you ask for. Say \"add a cat\" and watch it appear.", "prompt": "I want my AI team's office in 3D, running on my own laptop, built on the JTL HQ base (github.com/jtlgrowth/hq-base).\n\nAsk me three things first, all at once, with options:\n1. My company name and what we sell, in one line.\n2. Who is on my team. If this folder has a roster.json from the /hire skill, read it (and docs/team/) and show me who you found. If not, ask me for up to six names and a one-line job each.\n3. Which accessories to start with. Offer these and let me pick several: a coffee corner, a lounge set, plants by the desks, a bookshelf, a TV wall, a reading nook, an office cat, my logo on the wall.\n\nThen do this yourself, do not just tell me how:\n1. Get the base into a folder called \"hq\" here: git clone --depth 1 https://github.com/jtlgrowth/hq-base hq. Then read hq/CLAUDE.md and follow its rules. Never edit the base files.\n2. Write my company into hq/company.json. Write my team into hq/team.json, one desk each, or leave it as [] if you are reading roster.json.\n3. If there is a brief-*.md or today's daily note in this folder, put its top three to-dos on the board in hq/tasks.md as \"- [ ]\" lines. If not, ask me for three things I am doing today.\n4. Add the accessories I picked to hq/accessories.json, using only the ids in hq/ACCESSORIES.md. Place them with \"near\" (a teammate's name) or \"spot\" (lounge, pantry, entrance, back-left and so on).\n5. Start it in the background: node hq/server.mjs, then open the address it prints in my browser.\n\nWhen you are done, tell me the address, how to start it again tomorrow, and remember this rule: when I say \"add a ___ to the office\", you edit hq/accessories.json and I watch it appear.\n\nTo check it worked: the page opens, every teammate sits at a desk with their name over it, and the accessories I picked are in the room.\n", "isNew": true},
-{"id": "obsidian-second-brain", "tier": "free", "title": "Obsidian second brain setup", "does": "Creates an Obsidian vault folder with a daily note template, a clients folder, an inbox note, and wires your CLAUDE.md to read it.", "prompt": "I want a second brain in Obsidian (a free notes app, obsidian.md) that you can read and write to.\n\nAsk me two things first:\n1. Where should the vault folder live on my computer.\n2. What do I call the folder (a name like a business name or \"notes\" is fine).\n\nThen do this yourself, do not just tell me how:\n1. Create the folder, and inside it: a \"Daily\" folder, a \"Clients\" folder, and an \"Inbox.md\" file for anything I drop in without sorting it.\n2. Create \"Daily/template.md\" with a simple daily note shape: date, three priorities, notes, open loops.\n3. Create today's daily note from that template.\n4. Add a short section to my CLAUDE.md (or create one if I do not have one) that tells you this vault exists, where it lives, and that you should read the Inbox and today's daily note when I ask what is going on.\n\nWhen you are done, tell me the exact folder path, list the files you created, and tell me how to open the vault in the Obsidian app (I install Obsidian myself, you do not need to).\n\nTo check it worked: open the vault folder in Finder or Obsidian and confirm Daily, Clients, Inbox.md and today's dated note are all there.\n"},
-{"id": "morning-brief", "tier": "free", "title": "Morning brief from inbox and calendar", "does": "Reads today's calendar export or a pasted inbox dump and writes a 10-line brief with the three things to do first.", "prompt": "I want a morning brief.\n\nAsk me one thing first: do I want to paste in today's calendar (copy it from Google Calendar or your phone) and a rough dump of what is in my email inbox right now, or do I have a calendar export file (.ics or .csv) to point you to.\n\nOnce I give you that, read it and write a file called \"brief-[today's date].md\" with exactly this shape:\n1. A one-line summary of how full today is (light, normal, packed).\n2. The three things to do first, in order, and why those three over everything else.\n3. Every meeting today with the time and who it is with.\n4. Anything in the inbox dump that looks urgent or time-sensitive, each in one line.\n5. One thing I could cancel or move if today gets tight.\n\nKeep the whole file to about 10 lines of actual content, no filler.\n\nWhen it is done, print the brief in the chat as well as saving the file, and tell me the file path.\n\nTo check it worked: read the brief back and see if the three things to do first actually match what matters most to you today. If they do not, tell Claude what it got wrong so it can fix the rule for next time.\n"},
-{"id": "reply-drafter", "tier": "free", "title": "Reply drafter in your voice", "does": "Learns from three past replies you paste, then drafts three replies to a new message.", "prompt": "I want you to learn how I write and draft replies for me.\n\nAsk me for two things first:\n1. Three examples of real replies I have sent before (emails, chats, anything), pasted in full so you can see my actual voice.\n2. The new message I need to reply to right now.\n\nFrom the three examples, work out: how formal or casual I am, how long my replies usually run, whether I use exclamation points or emoji, and how I usually open and close a message. Do not ask me to describe my own voice, read it from the examples.\n\nThen write a file called \"voice-notes.md\" with what you learned in plain bullet points, so you do not have to re-learn it next time I ask.\n\nThen draft three replies to the new message: one safe and short, one warmer and longer, one that says no or pushes back if that fits the situation. Label each one clearly, and save all three in a file called \"replies-\" plus today's date, like replies-2026-09-19.md, so I can copy from it later.\n\nWhen you are done, tell me which of the three you would send and why.\n\nTo check it worked: read the three drafts out loud. If none of them sound like something you would actually type, tell Claude what is off (too stiff, too long, wrong greeting) and have it redo voice-notes.md before drafting again.\n"},
-{"id": "weekly-numbers", "tier": "free", "title": "Weekly numbers one-pager", "does": "From a pasted or CSV set of sales rows, writes a one-page HTML with this week vs last week.", "prompt": "I want a one-page report comparing this week's sales to last week's.\n\nAsk me one thing first: do I have a CSV file of sales rows to point you to, or should I paste the rows in directly (date, amount, and whatever else I have, like item or customer).\n\nOnce you have the rows, split them into this week and last week by date, then write a single self-contained file called \"weekly-numbers.html\" that shows, in plain readable HTML with basic styling (no build tools, it must open by double-clicking):\n1. Total sales this week vs last week, and the percent change.\n2. Number of sales (transactions) this week vs last week.\n3. The best day this week and the worst day this week.\n4. Top 3 items or customers this week if that data is in the rows.\n\nUse plain numbers, peso sign if the amounts look like pesos, and one simple color to mark up or down. No jargon, no unexplained charts.\n\nWhen it is done, tell me the file path and open it if you can, or tell me to double-click it.\n\nTo check it worked: open weekly-numbers.html in your browser and confirm the this-week and last-week totals actually match what you expected from your own memory of the week.\n"},
-{"id": "hire-next-seat", "tier": "free", "title": "Hire your next seat", "does": "Walks the public hire skill to add one more AI employee, picking the role from what the business does.", "prompt": "I already have one AI employee hired with the hire skill. I want to hire my next one.\n\nUse the hire skill (it is already installed) to walk me through this. Before you start the skill's own questions, ask me: what is the one task in my business that eats the most time right now, the one I would hand off first if I could.\n\nFrom my answer, recommend the type of employee that fits best (someone who finds things, sorts things, writes things, answers things, or watches for things), tell me why, and let me agree or pick a different one.\n\nThen run the hire skill for real, in team mode, and actually write the files, do not just describe what it would write. Ask its questions in the same one-thing-at-a-time way, and when I say \"you pick\" or \"I don't know,\" take the recommended option and tell me which one you took.\n\nWhen the hire is done, tell me the new employee's name, what it owns, and the exact first task I should hand it today.\n\nTo check it worked: ask the new employee (by name) to do that first real task, and see whether the result is usable without you rewriting it.\n"},
-{"id": "chat-followups", "tier": "free", "title": "Follow-ups from a chat dump", "does": "Paste a week of client chats, get who is waiting on you, what you promised, and a draft reply for each.", "prompt": "I want to know who is waiting on me.\n\nAsk me one thing first: paste in the last few days of my client chats (copy from Messenger, WhatsApp, Viber, or email, one conversation after another, names included), or point you to a text file that has them.\n\nOnce you have the chats, go through every conversation and write a file called \"followups-[today's date].md\" with:\n1. Every person who asked me something I have not answered yet, with the question in one line and how many days it has been waiting.\n2. Every promise I made in those chats (a price, a file, a call, a date) that I have not delivered yet, one line each.\n3. For each item in 1 and 2, a short draft reply in my tone, ready to paste back into the chat. Use the words I actually use in the chats, not a formal template.\n4. At the top, the three replies to send first, and why those three.\n\nDo not invent anything I did not say in the chats. If you are not sure whether something was answered, put it in a \"not sure\" list at the bottom instead of guessing.\n\nWhen it is done, print the top three in the chat and tell me the file path.\n\nTo check it worked: open one of the chats it flagged and confirm the question really is still unanswered. If it flagged something you already replied to, tell Claude which one, so it learns what \"answered\" looks like in your chats.\n"},
-{"id": "sop-from-ramble", "tier": "free", "title": "SOP from a voice ramble", "does": "Paste a messy explanation of how you do a task, get a numbered SOP a new hire can follow without asking you.", "prompt": "I want to turn the way I do one task into a written SOP my staff can follow.\n\nAsk me one thing first: explain the task to me the way you would explain it out loud to a new hire, in one messy paragraph or a voice memo transcript, with every \"and then\" and \"oh wait, before that\" left in. Do not clean it up, I will do that.\n\nOnce I paste it, write a file called \"sop-[short task name].md\" with:\n1. A one-line purpose: what this task is for and when it is done.\n2. What you need before starting (accounts, files, tools, which passwords to ask for, never the passwords themselves).\n3. The steps, numbered, one action per step, in the order they actually happen, not the order I said them in.\n4. The places I said \"usually\" or \"depends\": turn each into an if-this-then-that line so the new hire does not have to ask.\n5. A \"done when\" line: how the person knows the task is finished and who to tell.\n\nKeep every step short enough to read while doing it. If I skipped something obvious (like logging in), add it and mark it with (added), so I can check it.\n\nWhen it is done, print the numbered steps in the chat and tell me the file path.\n\nTo check it worked: hand the SOP to someone who has never done the task and watch them do it. Every place they stop to ask you a question is a step Claude should rewrite, tell it which one.\n"},
 {"id": "app-brief", "tier": "vault", "title": "App brief in 10 questions", "does": "Asks 10 questions and writes BRIEF.md: one screen that earns, who taps it, what it stores.", "prompt": "I want to build a small app this weekend at Robots and Coffee, and I need a brief before any code gets written.\n\nAsk me these 10 questions, one at a time, waiting for my answer before the next one:\n1. In one sentence, what problem does this app solve.\n2. Who is the one person that opens it (not \"everyone,\" one real person).\n3. What is the one screen that has to work for this to be worth building at all.\n4. What does that person tap or type on that screen.\n5. What does the app need to remember between visits.\n6. Does it need to work with no internet at all, or is spotty internet fine.\n7. Is there any money, PIN, or private info involved.\n8. What does \"it worked\" look like at demo time, in one sentence.\n9. What is explicitly out of scope for this weekend.\n10. What is the name of the app, even a working name is fine.\n\nAfter question 10, write a file called \"BRIEF.md\" that answers, in plain English:\n- One screen that earns (the single screen that makes this worth building).\n- Who taps it.\n- What it stores.\n- What is out of scope.\n- The one-sentence demo-day success line.\n\nShow me the finished BRIEF.md and ask if anything needs to change before we start building.\n\nTo check it worked: read BRIEF.md out loud in under 30 seconds. If you cannot explain your own app that fast, the brief is still too vague, tell Claude which line to sharpen.\n"},
 {"id": "pwa-scaffold", "tier": "vault", "title": "PWA scaffold", "does": "One index.html plus manifest.webmanifest and sw.js, installable, offline shell, from BRIEF.md.", "prompt": "Read BRIEF.md in this folder (if it does not exist yet, stop and tell me to run the app brief prompt first).\n\nBuild a PWA (a web app that can be installed on a phone like a real app) scaffold from that brief:\n1. \"index.html\": one page, plain HTML, CSS and JavaScript in that same file, no build tools, no npm install needed. It should show the one screen named in BRIEF.md and actually work when I double-click the file and open it in a browser.\n2. \"manifest.webmanifest\": the app name, short name, start_url, display set to standalone, a background and theme color that make sense for the app, and icon entries at 192x192 and 512x512 (use plain colored placeholder icons if I have not given you real ones, and tell me that is what you did).\n3. \"sw.js\": a small service worker that caches the app shell so it opens even with no internet, and always goes to the network for anything that looks like live data. Keep it short and comment why each part exists, do not add anything BRIEF.md did not ask for.\n4. Link the manifest and register the service worker from index.html.\n\nWhen it is done, tell me exactly how to open it locally to test (which command or which file to double-click), and what \"it is installable\" will look like once it is live on a real URL (the Add to Home Screen prompt will not appear on a plain local file, only after it is deployed with a valid manifest and service worker).\n\nTo check it worked: open index.html in your browser, open the browser's developer tools, and confirm no red errors show in the console.\n"},
 {"id": "data-layer", "tier": "vault", "title": "Data layer, localStorage first", "does": "Adds save and load with a versioned schema in localStorage and an export-to-JSON button; notes when to move to Supabase.", "prompt": "Read BRIEF.md and index.html in this folder.\n\nAdd a data layer to the app using localStorage (data saved in the phone's browser, no server needed for this weekend).\n\nDo this:\n1. Design a simple schema for what BRIEF.md says the app needs to remember, and give it a version number, like { \"version\": 1, \"items\": [...] }.\n2. Write save and load functions that read and write that schema to localStorage under one clearly named key.\n3. Wire the app's screen to actually use save and load, so data survives closing and reopening the browser tab.\n4. Add one button on the screen labeled \"Export data\" that downloads the current data as a .json file, so nothing is ever trapped only on one phone.\n5. At the top of the script, write a short comment explaining the version number: when the schema changes later, bump the version and write a small function that upgrades old saved data to the new shape instead of losing it.\n\nDo not add a database or any server code. If this app will ever need more than one person's data in one place (like a shared list, or login), say so in one paragraph and name Supabase as the next step, but do not build it now.\n\nTo check it worked: open the app, add some data, close the browser tab completely, reopen it, and confirm the data is still there. Then click Export data and confirm a .json file downloads with that same data in it.\n"},
@@ -407,9 +371,7 @@ section h2 + .lead{margin-top:14px}
       '</div>' +
       '</article>';
   }
-  var freeGrid = document.getElementById('free-grid');
   var vaultGrid = document.getElementById('vault-grid');
-  freeGrid.innerHTML = data.filter(function(d){ return d.tier === 'free'; }).map(rowHTML).join('');
   vaultGrid.innerHTML = data.filter(function(d){ return d.tier === 'vault'; }).map(cardHTML).join('');
 
   // video 404 fallback: hide the <video>, the "video coming" plate shows through
@@ -446,21 +408,6 @@ section h2 + .lead{margin-top:14px}
     } else {
       legacy();
     }
-  });
-})();
-</script>
-
-<script>
-/* Free pack un-blur: listen for the follow-gate's own unlock announcement
-   (custom event on the gate box, bubbles) rather than poll or observe the
-   DOM. Fires immediately on load too if a returning visitor already
-   unlocked it (localStorage), same as the gate's own restore path. */
-(function(){
-  var gate = document.querySelector('[data-follow-gate]');
-  var grid = document.getElementById('free-grid');
-  if (!gate || !grid) return;
-  gate.addEventListener('jtl-gate-unlocked', function(){
-    grid.classList.remove('pr-blurred');
   });
 })();
 </script>
@@ -601,6 +548,5 @@ section h2 + .lead{margin-top:14px}
   document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
 })();
 </script>
-<script src="/assets/follow-gate.js" defer></script>
 </body>
 </html>
