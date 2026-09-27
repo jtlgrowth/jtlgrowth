@@ -16,14 +16,14 @@ if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Work: JTL Growth</title>
-<meta name="description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee, and the Batch 1 workshop.">
+<meta name="description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee, Oras, the Batch 1 workshop, and our own apps on film.">
 <link rel="canonical" href="https://jtlgrowth.com/work/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Work: JTL Growth">
-<meta property="og:description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee, and the Batch 1 workshop.">
+<meta property="og:description" content="Live proof: real client systems and our own products, built and running on the stack we sell. FWIB, the JTL Growth site, AVAS Night Shift, Robots &amp; Coffee, Oras, the Batch 1 workshop, and our own apps on film.">
 <meta property="og:url" content="https://jtlgrowth.com/work/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -263,6 +263,19 @@ section + section{border-top:1px solid var(--line)}
   .page-hero .hub-chip{font-size:16px;padding:16px 28px;min-height:0;width:100%;max-width:330px;justify-content:center}
 }
 
+
+/* ---------- our own products on film (2026-09-28): click-to-play, nothing autoplays ---------- */
+.demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,2.4vw,36px);margin-top:44px}
+.demo{margin:0;display:flex;flex-direction:column}
+.demo .frame{background:#101010;border:1px solid var(--line);aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
+.demo video{width:100%;height:100%;object-fit:contain;display:block;background:#101010}
+.demo figcaption{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
+.demo .kind{font:700 10.5px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.demo h3{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;margin-top:6px}
+.demo p{color:var(--gray);font-size:15px;line-height:1.6;margin-top:8px;max-width:52ch}
+.demo .credit{font-size:13px;margin-top:6px}
+@media (max-width:1024px){.demo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.demo-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -312,7 +325,7 @@ section + section{border-top:1px solid var(--line)}
     <div class="wrap">
       <p class="eyebrow rv">Live proof</p>
       <h1 class="rv d1">Everything here is <em class="accent">live.</em></h1>
-      <p class="lead rv d2">Real client systems and our own products, built by hand on the stack below. We run our agency on the same systems we sell: no mockups, no staging demos, just what's actually running.</p>
+      <p class="lead rv d2">Real client systems and our own products, built by hand on the stack below. We run the agency on the same systems we sell, and every screen on this page is the real product.</p>
     </div>
   </section>
 
@@ -388,28 +401,28 @@ section + section{border-top:1px solid var(--line)}
           <div class="lap-desc">Our digital products library: courses, workshops, and AI resources. Learn it, buy it, run it yourself.</div>
           <div class="lap-tags"><span>Storefront</span><span>Product Library</span><span>Live</span></div>
         </a>
-        <a class="lap-card rv d4" id="avas-workshop" href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener" aria-label="AVAS AI Workshop: open the live event page">
+        <a class="lap-card rv d4" id="oras" href="/apps/oras/" aria-label="Oras: open the app page">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
-              <div class="screen" data-open="Open live site &#8599;"><img src="/shots/avas-ai-workshop.png" alt="AVAS AI Workshop, live event page screenshot" loading="lazy"></div>
+              <div class="screen" data-open="Open the app page &#8599;"><img src="/shots/oras.png" alt="Oras, live app page screenshot" loading="lazy"></div>
             </div>
             <div class="deck"></div>
             <div class="refl"></div>
           </div>
-          <div class="lap-name">AVAS AI Workshop</div>
-          <div class="lap-desc">Live event page for the two-day workshop in Manila, seats, countdown and checkout on one page.</div>
-          <div class="lap-tags"><span>Event Page</span><span>Seat Counter</span><span>Live</span></div>
+          <div class="lap-name">Oras</div>
+          <div class="lap-desc">Our iPhone app for retainer invoicing: who to bill today, hours on top, one tap to send.</div>
+          <div class="lap-tags"><span>iOS App</span><span>Invoicing</span><span>App Page</span></div>
         </a>
         <a class="lap-card rv d4" id="workshop" href="/workshop/" aria-label="Batch 1 workshop: open the recap">
           <div class="laptop3d">
             <div class="lid"><div class="notch"></div>
-              <div class="screen" data-open="Open the recap &#8599;"><img src="/shots/workshop.png" alt="From Operator to Orchestrator, Batch 1 recap page screenshot" loading="lazy"></div>
+              <div class="screen" data-open="Open the recap &#8599;"><img src="/shots/workshop.png" alt="Founder AI Workshop, Batch 1 recap page screenshot" loading="lazy"></div>
             </div>
             <div class="deck"></div>
             <div class="refl"></div>
           </div>
           <div class="lap-name">Batch 1 Workshop</div>
-          <div class="lap-desc">From Operator to Orchestrator, Aug 22 to 23, BGC. Two build days, every founder shipped. The recap holds the room, the photos and what they built after.</div>
+          <div class="lap-desc">Founder AI Workshop, Aug 22 to 23, BGC. Two build days, every founder shipped. The recap holds the room, the photos and what they built after.</div>
           <div class="lap-tags"><span>Live Event</span><span>Recap</span><span>Live</span></div>
         </a>
       </div>
@@ -432,6 +445,57 @@ section + section{border-top:1px solid var(--line)}
           <span class="pi" aria-hidden="true"><img src="/assets/logos/fastapi.svg" alt="">FastAPI</span>
           <span class="pi" aria-hidden="true">Playwright</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demos" aria-labelledby="demos-h">
+    <div class="wrap">
+      <p class="eyebrow rv">Our own products</p>
+      <h2 class="rv d1" id="demos-h" style="margin-top:16px">Built for us first, <em class="accent">on film.</em></h2>
+      <p class="lead rv d2" style="margin-top:20px">Short screen recordings of the apps we run the firm on, filmed on stand-in data. Press play on any clip.</p>
+      <div class="demo-grid">
+        <figure class="demo rv d1" id="demo-jtlboard">
+          <div class="frame"><video src="/work/demos/jtlboard.mp4" poster="/work/demos/jtlboard-poster.webp" controls muted playsinline preload="none" width="1280" height="720" controlslist="nodownload noplaybackrate" disablepictureinpicture aria-label="jtlboard demo, 11 seconds, no sound"></video></div>
+          <figcaption>
+            <p class="kind">Mac app</p>
+            <h3>jtlboard</h3>
+            <p>Every keystroke gets a mechanical-switch sound, and a small keyboard follows your pointer and lights the key you hit.</p>
+            <p class="credit">Built on <a href="https://github.com/kamillobinski/thock" target="_blank" rel="noopener">Thock</a> by Kamil Lobinski, MIT licence.</p>
+          </figcaption>
+        </figure>
+        <figure class="demo rv d2" id="demo-blurred">
+          <div class="frame"><video src="/work/demos/blurred.mp4" poster="/work/demos/blurred-poster.webp" controls muted playsinline preload="none" width="990" height="640" controlslist="nodownload noplaybackrate" disablepictureinpicture aria-label="Blurred demo, 14 seconds, no sound"></video></div>
+          <figcaption>
+            <p class="kind">Mac app</p>
+            <h3>Blurred</h3>
+            <p>Frosts the screen as the lid closes and clears it the moment the lid opens again. It reads the hinge sensor and draws the blur on the GPU.</p>
+          </figcaption>
+        </figure>
+        <figure class="demo rv d3" id="demo-brain">
+          <div class="frame"><video src="/work/demos/brain.mp4" poster="/work/demos/brain-poster.webp" controls muted playsinline preload="none" width="1440" height="900" controlslist="nodownload noplaybackrate" disablepictureinpicture aria-label="The Brain demo, 12 seconds, no sound"></video></div>
+          <figcaption>
+            <p class="kind">Memory map</p>
+            <h3>The Brain</h3>
+            <p>Venice's memory as a map you can fly through: every note a star, every link a line. Search it, recall a note, see what the firm learned today. Filmed on stand-in notes.</p>
+          </figcaption>
+        </figure>
+        <figure class="demo rv d1" id="demo-hq">
+          <div class="frame"><video src="/work/demos/hq.mp4" poster="/work/demos/hq-poster.webp" controls muted playsinline preload="none" width="1280" height="800" controlslist="nodownload noplaybackrate" disablepictureinpicture aria-label="Venice HQ demo, 11 seconds, no sound"></video></div>
+          <figcaption>
+            <p class="kind">3D office</p>
+            <h3>Venice HQ</h3>
+            <p>The office of our AI team as a small harbour town. Ride the jeepney in, walk the floors, and see which seat is working on what.</p>
+          </figcaption>
+        </figure>
+        <figure class="demo rv d2" id="demo-rialto">
+          <div class="frame"><video src="/work/demos/rialto.mp4" poster="/work/demos/rialto-poster.webp" controls muted playsinline preload="none" width="1440" height="900" controlslist="nodownload noplaybackrate" disablepictureinpicture aria-label="Rialto demo, 13 seconds, no sound"></video></div>
+          <figcaption>
+            <p class="kind">CRM platform</p>
+            <h3>Rialto</h3>
+            <p>Our own CRM and automation platform. Each business gets a workspace with contacts, pipelines, forms and automations under one login. Filmed on demo data.</p>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -466,9 +530,10 @@ section + section{border-top:1px solid var(--line)}
           <a class="cs-link" href="/work/robots-and-coffee/">Read the build <span class="arr">&#8599;</span></a>
         </div>
         <div class="writeup rv d4">
-          <h3>AVAS AI Workshop</h3>
-          <p>The event page for <a href="https://ayalavirtualassistance.site/ai-workshop" target="_blank" rel="noopener">From Operator to Orchestrator</a>, the two-day workshop we run in Manila with <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">AVAS</a>. Seat counter, early-bird countdown and checkout all on one page, so the page closes the sale instead of pointing at a form.</p>
-          <p class="does">What it does: sells seats and holds the date, live, with no funnel builder underneath it.</p>
+          <h3>Oras</h3>
+          <p>A small iPhone app for people who bill the same clients every month. It knows each retainer's billing day, adds the extra hours you logged, and puts whoever is due today at the top. Ask Siri &ldquo;who do I invoice today&rdquo; and it answers.</p>
+          <p class="does">What it does: turns retainer billing into one tap on the right day.</p>
+          <a class="cs-link" href="/apps/oras/">See the app <span class="arr">&#8599;</span></a>
         </div>
       </div>
     </div>

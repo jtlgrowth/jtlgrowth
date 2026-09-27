@@ -124,9 +124,9 @@ with JTL Growth workshop batches and client builds.
 
 ---
 
-## /workshop/: Founder AI Workshop: From Operator to Orchestrator
+## /workshop/: Founder AI Workshop, Batch 1 recap
 
-**Hero.** "From operator to orchestrator." Two days, hands-on. Day one you build a working
+**Hero.** "Two build days. Every founder shipped." Two days, hands-on. Day one you build a working
 AI employee for your own business and put it live on the internet. Day two you give it a UI
 system so it stops looking like every other AI page.
 
@@ -166,15 +166,17 @@ commit. Links to booking, /services/, /products/.
 ## /work/: Work
 
 **Hero.** "Everything here is live." Real client systems and our own products, built by
-hand on the stack below. We run our agency on the same systems we sell: no mockups, no
-staging demos, just what's actually running.
+hand on the stack below. We run the agency on the same systems we sell, and every screen on
+the page is the real product.
 
-**Shipped work: four systems, in production right now.** Four builds, four different
-problems; every screen shown is a live URL, not a mockup. FWIB: 42-member community
+**Shipped work: six systems, in production right now.** Six builds, six different
+problems; every screen on the shelf is a live URL you can open. FWIB: 42-member community
 platform for Filipina founders, live and growing. JTL Growth site: this site, built and
 launched in one night, DNS to HTTPS. AVAS Night Shift: six-page brand site for our sister
 agency, no template, with a live ops dashboard behind it. Robots & Coffee: digital products
-library: courses, workshops, and AI resources, learn it, buy it, run it yourself. Proof
+library: courses, workshops, and AI resources, learn it, buy it, run it yourself. Oras:
+our iPhone app for retainer invoicing. Batch 1 workshop: the recap of two build days in BGC
+where every founder shipped. Proof
 strip: ₱475K+ closed, 42-member community, 34 paid customers, 15+ agents on duty; stack
 shown: Claude, GPT-5, Gemini, n8n, GoHighLevel, Supabase, FastAPI, Playwright.
 
@@ -195,6 +197,16 @@ shown: Claude, GPT-5, Gemini, n8n, GoHighLevel, Supabase, FastAPI, Playwright.
   sold direct. The storefront for everything we've packaged from running the agency, now
   hosted at ayalavirtualassistance.site. What it does: lets people learn the system, buy the
   kit, and run it themselves.
+- Oras: a small iPhone app for people who bill the same clients every month. It knows each
+  retainer's billing day, adds logged hours, and puts whoever is due today at the top. What
+  it does: turns retainer billing into one tap on the right day.
+
+**Built for us first, on film.** Short screen recordings of the apps we run the firm on,
+filmed on stand-in data, click to play: jtlboard (Mac app, a switch sound and an on-screen
+keycap for every keystroke, built on Thock by Kamil Lobinski, MIT), Blurred (Mac app,
+frosts the screen as the lid closes), the Brain (Venice's memory as a map of notes and
+links), Venice HQ (the AI team's office as a small 3D harbour town), Rialto (our CRM and
+automation platform, one workspace per business).
 
 **CTA.** "Want something like this, live?" We build the same way for clients: real
 systems, shipped, not slides. Links to /services/.

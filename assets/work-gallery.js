@@ -9,7 +9,7 @@ const SCREENS = [
   { id: 'jtl', name: 'JTL Growth site', img: '/shots/jtlgrowth.png' },
   { id: 'nightshift', name: 'AVAS Night Shift', img: '/shots/avas-nightshift.png' },
   { id: 'rnc', name: 'Robots & Coffee', img: '/shots/rnc.png' },
-  { id: 'avas-workshop', name: 'AVAS AI Workshop', img: '/shots/avas-ai-workshop.png' },
+  { id: 'oras', name: 'Oras', img: '/shots/oras.png' },
   { id: 'workshop', name: 'Batch 1 Workshop', img: '/shots/workshop.png' }
 ];
 
