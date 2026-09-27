@@ -206,7 +206,8 @@ filmed on stand-in data, click to play: jtlboard (Mac app, a switch sound and an
 keycap for every keystroke, built on Thock by Kamil Lobinski, MIT), Blurred (Mac app,
 frosts the screen as the lid closes), the Brain (Venice's memory as a map of notes and
 links), Venice HQ (the AI team's office as a small 3D harbour town), Rialto (our CRM and
-automation platform, one workspace per business).
+automation platform, one workspace per business), the AVAS portal (our sister agency's
+team portal: a morning board, tasks by client, end-of-day reports, team capacity).
 
 **CTA.** "Want something like this, live?" We build the same way for clients: real
 systems, shipped, not slides. Links to /services/.

@@ -62,7 +62,7 @@
     { name: 'quote', kws: ['quote', 'request a quote', 'proposal', 'estimate', 'scope', 'scoped', 'how do i start', 'get started'],
       a: 'No public price list. Tell us the bottleneck, we read what is already wired, and you get a written quote in two business days: the count, where it stops, the timeline. Type go to quote to send the request, or book for thirty minutes with Gwen.' },
     { name: 'work', kws: ['work', 'portfolio', 'case study', 'case studies', 'clients', 'examples', 'proof', 'live sites', 'what have you built'],
-      a: 'Six systems in production: FWIB, this site, AVAS Night Shift, Robots and Coffee, the Oras app page and the Batch 1 workshop recap. Below them, short films of our own apps: jtlboard, Blurred, the Brain, Venice HQ and Rialto. The six screens are live URLs, and the films are the real apps on stand-in data. Type go to work.' },
+      a: 'Six systems in production: FWIB, this site, AVAS Night Shift, Robots and Coffee, the Oras app page and the Batch 1 workshop recap. Below them, short films of our own apps: jtlboard, Blurred, the Brain, Venice HQ, Rialto and the AVAS portal. The six screens are live URLs, and the films are the real apps on stand-in data. Type go to work.' },
     { name: 'built', kws: ['students', 'founders built', 'what they built', 'testimonials', 'results', 'after the room', 'batch 1 results', 'reviews'],
       a: 'Within two weeks of the room, Batch 1 founders shipped their own headquarters, a catalog site, second brains and AI employees. Their clips and words sit on the workshop page under Built after the room. Type go to built.' },
     { name: 'batch2', kws: ['batch 2', 'batch2', 'batch two', 'next workshop', 'next batch', 'join the workshop', 'sept 19', 'september 19', 'how do i join'],
