@@ -514,7 +514,7 @@ addEventListener("DOMContentLoaded",function(){
 <section class="wrap" id="form">
   <p class="eyebrow rv">The request</p>
   <div class="w45-root" id="qt-w45">
-  <form class="w45-form" data-lead-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-format="text" data-partial="on" novalidate>
+  <form class="w45-form" data-lead-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-format="text" data-endpoint-mirror="https://rialto-ten.vercel.app/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA" data-partial="on" novalidate>
     <div class="w45-card" data-w45-card>
       <div class="w45-top">
         <span class="w45-eyebrow" data-eyebrow></span>
@@ -885,6 +885,13 @@ addEventListener("DOMContentLoaded",function(){
       // data-endpoint-format="text": a Google Apps Script web app cannot answer the CORS preflight a JSON
       // content type triggers, so the same JSON goes as text/plain (a simple request, no preflight)
       var type = form.getAttribute("data-endpoint-format") === "text" ? "text/plain;charset=utf-8" : "application/json";
+      // data-endpoint-mirror: the same body, once more, to JTL Growth's own CRM (Rialto). Sent as
+      // text/plain so it needs no preflight; fire and forget, so its answer never changes what the
+      // visitor sees and a failure there never touches the primary post.
+      var mirror = (form.getAttribute("data-endpoint-mirror") || "").trim();
+      if (mirror) {
+        try { fetch(mirror, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(body), keepalive: true }).catch(function(){}); } catch (e) {}
+      }
       return fetch(endpoint, { method: "POST", headers: { "Content-Type": type }, body: JSON.stringify(body), keepalive: true });
     }
 
