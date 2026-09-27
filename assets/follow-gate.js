@@ -40,7 +40,7 @@
      A gate overrides it with data-webhook="<url>", and that is the shape to
      prefer: the endpoint then lives on the page that uses it, not in this
      shared file, so one page turning capture on cannot turn it on for another.
-     /starter-pack/ carries its own GoHighLevel inbound webhook that way.
+     /starter-pack/ carries its own endpoint (Rialto, JTL Growth's CRM) that way.
 
      Either way the rule holds: no endpoint, no fields, and the fine print says
      nothing is collected. Never ask for something you have nowhere to put. */
@@ -71,6 +71,13 @@
   var KEY = function (slug) { return 'jtl-recommend-' + slug; };
   var FOLLOW_KEY = function (slug) { return 'jtl-follow-' + slug; };
   function has(k) { try { return localStorage.getItem(k) === '1'; } catch (e) { return false; } }
+  function rand() {
+    try {
+      var a = new Uint32Array(2);
+      crypto.getRandomValues(a);
+      return a[0].toString(36) + a[1].toString(36);
+    } catch (e) { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
+  }
   var EMAIL_KEY = 'jtl-gate-email';
   var RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -164,6 +171,9 @@
       .split(/[,\s]+/).filter(function (k) { return FIELDS[k]; });
     if (!want.length) want = ['email'];
     var event = box.getAttribute('data-event') || '';
+    /* one key per gate per page view, so a second press of submit is the same
+       submission and an endpoint that dedupes on it (Rialto does) records one */
+    var subKey = 'fg-' + id.replace(/[^A-Za-z0-9_-]/g, '').slice(0, 24) + '-' + rand();
     var need1 = accounts.length;
     var need2 = (socials || []).length;
     var unlockedOnce = false;
@@ -346,9 +356,12 @@
       if (form) form.hidden = true;
       vault.classList.add('open');
       s3.classList.add('jstep-done');
+      /* "on its way" is a promise that an email goes out; only a gate whose
+         endpoint really sends one (data-emails-pack) may make it */
       msg.textContent = isRestore ? 'Unlocked. The link is below.'
-        : (email ? 'Unlocked. The link is below, and a copy is on its way to ' + email + '.'
-                 : 'Unlocked. The link is below.');
+        : (email && box.hasAttribute('data-emails-pack')
+            ? 'Unlocked. The link is below, and a copy is on its way to ' + email + '.'
+            : 'Unlocked. The link is below.');
       if (!isRestore && !unlockedOnce) track('follow_gate_unlock', { gate: id, accounts: need1 + need2, ask: 'recommend+follow' });
       announce('jtl-gate-unlocked', { gate: id, restored: !!isRestore });
       unlockedOnce = true;
@@ -398,7 +411,12 @@
         }
 
         if (values.email) { try { localStorage.setItem(EMAIL_KEY, values.email); } catch (e) {} }
-        var payload = { gate: id, file: file, source: location.pathname };
+        /* submission_key, stage and page_url are what a W-45 form endpoint reads
+           to store one complete submission; a plain webhook ignores keys it does
+           not map */
+        var payload = { gate: id, file: file, source: location.pathname,
+                        submission_key: subKey, stage: 'complete',
+                        page_url: location.origin + location.pathname };
         if (event) payload.event = event;
         for (var key in values) if (values[key]) payload[key] = values[key];
         fetch(hook, {
