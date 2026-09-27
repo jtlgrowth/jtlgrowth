@@ -265,6 +265,7 @@ section + section{border-top:1px solid var(--line)}
 
 
 /* ---------- our own products on film (2026-09-28): click-to-play, nothing autoplays ---------- */
+.demo,#grid{scroll-margin-top:96px}
 .demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,2.4vw,36px);margin-top:44px}
 .demo{margin:0;display:flex;flex-direction:column}
 .demo .frame{background:#101010;border:1px solid var(--line);aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
@@ -658,5 +659,24 @@ section + section{border-top:1px solid var(--line)}
 })();
 </script>
 <script type="module" src="/assets/work-gallery.js"></script>
+<script>
+/* A link like /work/#demo-portal starts its smooth jump before the gallery and posters settle, and the
+   browser's own fragment scroll can keep running after load, so it stops short or overshoots. Land on
+   the target again, instantly, twice after load, unless the visitor has started scrolling themselves.
+   offsetTop ignores the reveal transform, which getBoundingClientRect would include. */
+addEventListener('load', function () {
+  var id = location.hash.slice(1), t = id && document.getElementById(id), moved = false;
+  if (!t) return;
+  ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { addEventListener(ev, function () { moved = true; }, { once: true, passive: true }); });
+  function land() {
+    if (moved) return;
+    var y = 0, e = t;
+    while (e) { y += e.offsetTop; e = e.offsetParent; }
+    scrollTo({ top: Math.max(0, y - 96), behavior: 'instant' });
+  }
+  setTimeout(land, 150);
+  setTimeout(land, 900);
+});
+</script>
 </body>
 </html>
