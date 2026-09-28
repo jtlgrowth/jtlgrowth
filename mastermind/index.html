@@ -247,6 +247,7 @@ h1 .serif{font-weight:650;letter-spacing:-.015em}
 .tier.eb .price small{color:var(--blue-soft)}
 .chairs{display:flex;gap:8px}
 .chair{width:22px;height:22px;border-radius:6px;border:1.5px solid currentColor;opacity:.9}
+.chair.taken{background:currentColor}
 .tier ul{margin:0;padding:0;list-style:none;display:grid;gap:var(--s1);font-size:var(--t3);line-height:1.62}
 .tier li{padding-left:18px;position:relative}
 .tier li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:currentColor;opacity:.6}
@@ -318,7 +319,7 @@ footer a:hover{text-decoration:underline}
 const SETTINGS = {
   "brand": {"name": "Robots & Coffee", "logo": ""},
   "content": {"cta": "Take a seat"},
-  "event": {"earlyBirdCloses": "2026-09-27T23:59:59+08:00", "earlyBirdPrice": "70,000", "regularPrice": "90,000", "earlyBirdSeats": 3},
+  "event": {"earlyBirdCloses": "2026-10-15T23:59:59+08:00", "earlyBirdPrice": "70,000", "regularPrice": "90,000", "earlyBirdSeats": 3},
   "behavior": {"animations": true},
   "integration": {"analyticsId": ""}
 };
@@ -335,8 +336,8 @@ const SETTINGS = {
 </nav>
 
 <div class="bar" id="bar" role="status" aria-live="off">
-  <span id="bar-open"><b>Early bird &#8369;70,000</b> ends in <span class="t" id="cd"><span>00d</span><span>00h</span><span>00m</span><span>00s</span></span><span class="sep">&middot;</span>then &#8369;90,000<span class="sep only">&middot;</span><span class="only">only 3 seats at this price</span></span>
-  <span id="bar-closed" hidden><b>Early bird closed Sept 27.</b><span class="sep">&middot;</span>Regular seats &#8369;90,000<span class="sep">&middot;</span>ten chairs, one villa</span>
+  <span id="bar-open"><b>Early bird &#8369;70,000</b> ends in <span class="t" id="cd"><span>00d</span><span>00h</span><span>00m</span><span>00s</span></span><span class="sep">&middot;</span>then &#8369;90,000<span class="sep only">&middot;</span><span class="only">only 2 seats left at this price</span></span>
+  <span id="bar-closed" hidden><b>Early bird closed Oct 15.</b><span class="sep">&middot;</span>Regular seats &#8369;90,000<span class="sep">&middot;</span>ten chairs, one villa</span>
 </div>
 
 <header class="hero" data-hero-exempt="Owner 2026-09-16: follow the ai-workshop breather, the hero runs past the fold on purpose">
@@ -351,7 +352,6 @@ const SETTINGS = {
       <a class="btn big on-dark solid" id="hero-eb-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat</a>
       <a class="btn on-dark hide-phone" href="#teaser">Watch the villa</a>
     </div>
-    <p class="hero-price" id="hero-price"><s>&#8369;90,000</s> <b>&#8369;70,000</b> early bird<span class="hide-phone">, until Sept 27</span></p>
   </div>
 </header>
 
@@ -359,7 +359,7 @@ const SETTINGS = {
   <div class="mcell"><span class="label">When</span><h4>Oct 24 to 25</h4><p>Sat 1pm to Sun 3pm, one night</p></div>
   <div class="mcell"><span class="label">Where</span><h4>Tagaytay</h4><p>Private villa, 90 min from BGC</p></div>
   <div class="mcell"><span class="label">Seats</span><h4>9 of 10 left</h4><p>Alumni of Batch 1 and 2 first</p></div>
-  <div class="mcell"><span class="label">Your seat</span><h4>&#8369;90,000</h4><p>Pay once, everything included</p></div>
+  <div class="mcell"><span class="label">Your coaches</span><h4>Gwen + Jamz</h4><p>Content by day, build by night</p></div>
 </div>
 
 <section id="why">
@@ -376,6 +376,83 @@ const SETTINGS = {
       <div><b>You feel late to AI.</b><span>You've tried ChatGPT. Everyone's talking about it. It hasn't changed a single thing about your week yet.</span></div>
     </div>
     <p class="turn">You don't need more discipline. You need one afternoon where someone makes the content with you, and one night where you build the thing your business has been begging for.</p>
+  </div>
+</section>
+
+<section id="outcome" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What you leave with</span>
+      <h2>A month of content, your app on your phone, and a team that keeps it shipping.</h2>
+      <p class="dim">Picture Monday morning. Your posts for the month are already done. The job you used to do by hand every single day now takes one tap. And you built it yourself, so you're never again waiting on someone else to fix it. You also know how to run a team of AI agents now, so some of the work is already done before you wake up.</p>
+    </div>
+    <div class="outcome">
+      <div class="phone">
+        <svg viewBox="0 0 260 520" role="img" aria-label="Phone home screen with the attendee's own app icon">
+          <rect class="ph-body" x="6" y="6" width="248" height="508" rx="38"/>
+          <rect class="ph-screen" x="18" y="18" width="224" height="484" rx="30"/>
+          <rect class="ph-notch" x="92" y="26" width="76" height="20" rx="10"/>
+          <g>
+            <rect class="ph-icon" x="40" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="131">Calendar</text>
+            <rect class="ph-icon" x="108" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="130" y="131">Messages</text>
+            <rect class="ph-icon" x="176" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="131">GCash</text>
+            <rect class="ph-icon" x="40" y="150" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="209">Viber</text>
+            <rect class="ph-you" x="108" y="150" width="44" height="44" rx="11"/><text class="ph-t you" x="130" y="209">Your app</text>
+            <rect class="ph-icon" x="176" y="150" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="209">Maps</text>
+            <rect class="ph-icon" x="40" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="287">Notes</text>
+            <rect class="ph-icon" x="108" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="130" y="287">Photos</text>
+            <rect class="ph-icon" x="176" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="287">Mail</text>
+          </g>
+          <text class="ph-r" x="130" y="181">R</text>
+          <rect class="ph-dock" x="34" y="430" width="192" height="52" rx="16"/>
+          <g class="ph-icon"><rect x="52" y="438" width="36" height="36" rx="9"/><rect x="100" y="438" width="36" height="36" rx="9"/><rect x="148" y="438" width="36" height="36" rx="9"/></g>
+        </svg>
+      </div>
+      <div class="steps">
+        <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your build live on the internet at its own link.</b><p class="dim">Live, not stuck on your laptop. Open it on your phone, send the link to your team or your clients. Yours to keep, hosted on your own GitHub.</p></div>
+        <div class="step"><span class="label">Within 14 days</span><b>On TestFlight, under the Robots &amp; Coffee developer account.</b><p class="dim">We wrap it and ship it. You get the TestFlight link, your team installs it like any app.</p></div>
+        <div class="step"><span class="label">Every 90 days</span><b>Re-shipped, while you are in the alumni circle.</b><p class="dim">TestFlight builds expire. Ours do not, because we keep shipping them for you.</p></div>
+      </div>
+    </div>
+    <div class="sec-head" style="margin-top:var(--s8);margin-bottom:var(--s4)">
+      <span class="eyebrow">What you could build</span>
+      <h3 style="font-size:var(--t6)">Bring the problem that's been eating your week. Build the fix.</h3>
+    </div>
+    <div class="incl">
+      <div><b>A client portal</b><span>One link where clients see their files, status and next steps, so they stop asking you in DMs.</span></div>
+      <div><b>A live dashboard</b><span>Your sales, leads or bookings on one screen that updates itself. No more building the report every Monday.</span></div>
+      <div><b>GHL + AI</b><span>Your GoHighLevel wired to AI, so new leads get answered, tagged and followed up without you touching it.</span></div>
+      <div><b>Anything your business needs</b><span>An intake form, a quote calculator, a team tracker. If it keeps you stuck, it's fair game.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="hours">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The 26 hours</span>
+      <h2>Saturday you shoot, then you build. Sunday you demo.</h2>
+    </div>
+    <div class="sched">
+      <div class="day">
+        <h3>Saturday <small>Oct 24</small></h3>
+        <div class="slot"><time datetime="13:00">1:00 PM</time><div><span class="hi">Arrive by car, 90 minutes from BGC. Coffee, gift box, your seat at the table.</span></div></div>
+        <div class="slot"><time datetime="14:00">2:00 PM</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one thing your business needs built.</span></div></div>
+        <div class="slot"><time datetime="15:00">3:00 PM</time><div><span class="hi">Shoot block, then Higgsfield.</span><span>Talking heads and b-roll around the villa with the photographer. Then Higgsfield turns that shoot into AI photos and video, and captions get drafted before dinner.</span></div></div>
+        <div class="slot"><time datetime="18:00">6:00 PM</time><div><span class="hi">Multi-agent AI and Hermes, taught.</span><span>How to run a team of AI agents that split the work, wake up on schedule, and report back without you. Questions until dinner.</span></div></div>
+        <div class="slot"><time datetime="19:30">7:30 PM</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
+        <div class="slot"><time datetime="21:00">9:00 PM</time><div><span class="hi">Build night with Jamz.</span><span>A client portal, a live dashboard, GHL wired to AI, whatever your business keeps asking for. Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
+      </div>
+      <div class="day">
+        <h3>Sunday <small>Oct 25</small></h3>
+        <div class="slot"><time datetime="08:00">8:00 AM</time><div><span class="hi">Breakfast.</span></div></div>
+        <div class="slot"><time datetime="09:00">9:00 AM</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
+        <div class="slot"><time datetime="10:30">10:30 AM</time><div><span class="hi">Demo day.</span><span>Ten apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
+        <div class="slot"><time datetime="12:00">12:00 PM</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
+        <div class="slot"><time datetime="13:30">1:30 PM</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
+        <div class="slot"><time datetime="15:00">3:00 PM</time><div><span class="hi">Home. Carpools sorted at the table the night before.</span></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -460,83 +537,6 @@ const SETTINGS = {
       </div>
     </div>
     <p class="note" style="margin-top:14px">The plan is representative; the booked villa differs in shape, not in zones.</p>
-  </div>
-</section>
-
-<section id="hours" class="alt">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">The 26 hours</span>
-      <h2>Saturday you shoot, then you build. Sunday you demo.</h2>
-    </div>
-    <div class="sched">
-      <div class="day">
-        <h3>Saturday <small>Oct 24</small></h3>
-        <div class="slot"><time datetime="13:00">1:00 PM</time><div><span class="hi">Arrive by car, 90 minutes from BGC. Coffee, gift box, your seat at the table.</span></div></div>
-        <div class="slot"><time datetime="14:00">2:00 PM</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one thing your business needs built.</span></div></div>
-        <div class="slot"><time datetime="15:00">3:00 PM</time><div><span class="hi">Shoot block, then Higgsfield.</span><span>Talking heads and b-roll around the villa with the photographer. Then Higgsfield turns that shoot into AI photos and video, and captions get drafted before dinner.</span></div></div>
-        <div class="slot"><time datetime="18:00">6:00 PM</time><div><span class="hi">Multi-agent AI and Hermes, taught.</span><span>How to run a team of AI agents that split the work, wake up on schedule, and report back without you. Questions until dinner.</span></div></div>
-        <div class="slot"><time datetime="19:30">7:30 PM</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
-        <div class="slot"><time datetime="21:00">9:00 PM</time><div><span class="hi">Build night with Jamz.</span><span>A client portal, a live dashboard, GHL wired to AI, whatever your business keeps asking for. Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
-      </div>
-      <div class="day">
-        <h3>Sunday <small>Oct 25</small></h3>
-        <div class="slot"><time datetime="08:00">8:00 AM</time><div><span class="hi">Breakfast.</span></div></div>
-        <div class="slot"><time datetime="09:00">9:00 AM</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
-        <div class="slot"><time datetime="10:30">10:30 AM</time><div><span class="hi">Demo day.</span><span>Ten apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
-        <div class="slot"><time datetime="12:00">12:00 PM</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
-        <div class="slot"><time datetime="13:30">1:30 PM</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
-        <div class="slot"><time datetime="15:00">3:00 PM</time><div><span class="hi">Home. Carpools sorted at the table the night before.</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="outcome">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">What you leave with</span>
-      <h2>A month of content, your app on your phone, and a team that keeps it shipping.</h2>
-      <p class="dim">Picture Monday morning. Your posts for the month are already done. The job you used to do by hand every single day now takes one tap. And you built it yourself, so you're never again waiting on someone else to fix it. You also know how to run a team of AI agents now, so some of the work is already done before you wake up.</p>
-    </div>
-    <div class="outcome">
-      <div class="phone">
-        <svg viewBox="0 0 260 520" role="img" aria-label="Phone home screen with the attendee's own app icon">
-          <rect class="ph-body" x="6" y="6" width="248" height="508" rx="38"/>
-          <rect class="ph-screen" x="18" y="18" width="224" height="484" rx="30"/>
-          <rect class="ph-notch" x="92" y="26" width="76" height="20" rx="10"/>
-          <g>
-            <rect class="ph-icon" x="40" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="131">Calendar</text>
-            <rect class="ph-icon" x="108" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="130" y="131">Messages</text>
-            <rect class="ph-icon" x="176" y="72" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="131">GCash</text>
-            <rect class="ph-icon" x="40" y="150" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="209">Viber</text>
-            <rect class="ph-you" x="108" y="150" width="44" height="44" rx="11"/><text class="ph-t you" x="130" y="209">Your app</text>
-            <rect class="ph-icon" x="176" y="150" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="209">Maps</text>
-            <rect class="ph-icon" x="40" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="62" y="287">Notes</text>
-            <rect class="ph-icon" x="108" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="130" y="287">Photos</text>
-            <rect class="ph-icon" x="176" y="228" width="44" height="44" rx="11"/><text class="ph-t" x="198" y="287">Mail</text>
-          </g>
-          <text class="ph-r" x="130" y="181">R</text>
-          <rect class="ph-dock" x="34" y="430" width="192" height="52" rx="16"/>
-          <g class="ph-icon"><rect x="52" y="438" width="36" height="36" rx="9"/><rect x="100" y="438" width="36" height="36" rx="9"/><rect x="148" y="438" width="36" height="36" rx="9"/></g>
-        </svg>
-      </div>
-      <div class="steps">
-        <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your build live on the internet at its own link.</b><p class="dim">Live, not stuck on your laptop. Open it on your phone, send the link to your team or your clients. Yours to keep, hosted on your own GitHub.</p></div>
-        <div class="step"><span class="label">Within 14 days</span><b>On TestFlight, under the Robots &amp; Coffee developer account.</b><p class="dim">We wrap it and ship it. You get the TestFlight link, your team installs it like any app.</p></div>
-        <div class="step"><span class="label">Every 90 days</span><b>Re-shipped, while you are in the alumni circle.</b><p class="dim">TestFlight builds expire. Ours do not, because we keep shipping them for you.</p></div>
-      </div>
-    </div>
-    <div class="sec-head" style="margin-top:var(--s8);margin-bottom:var(--s4)">
-      <span class="eyebrow">What you could build</span>
-      <h3 style="font-size:var(--t6)">Bring the problem that's been eating your week. Build the fix.</h3>
-    </div>
-    <div class="incl">
-      <div><b>A client portal</b><span>One link where clients see their files, status and next steps, so they stop asking you in DMs.</span></div>
-      <div><b>A live dashboard</b><span>Your sales, leads or bookings on one screen that updates itself. No more building the report every Monday.</span></div>
-      <div><b>GHL + AI</b><span>Your GoHighLevel wired to AI, so new leads get answered, tagged and followed up without you touching it.</span></div>
-      <div><b>Anything your business needs</b><span>An intake form, a quote calculator, a team tracker. If it keeps you stuck, it's fair game.</span></div>
-    </div>
   </div>
 </section>
 
@@ -629,21 +629,21 @@ const SETTINGS = {
     <div class="sec-head">
       <span class="eyebrow">Seats</span>
       <h2>Ten chairs. When the tenth one goes, the villa's full.</h2>
-      <p class="dim">Alumni of Batch 1 and Batch 2 book first. The three early bird seats take private rooms; regular seats share the builders' room, the way a hackathon sleeps.</p>
+      <p class="dim">Early bird is &#8369;70,000 until Oct 15 or until the last early bird chair goes, then &#8369;90,000. Early birds take private rooms; regular seats share the builders' room, the way a hackathon sleeps.</p>
     </div>
     <div class="seats">
       <div class="tier eb">
-        <span class="eyebrow">Early bird &middot; 3 seats &middot; a private room each</span>
+        <span class="eyebrow">Early bird &middot; 2 of 3 left &middot; a private room each</span>
         <div class="price">&#8369;70,000<small>pay once</small></div>
-        <div class="chairs" role="img" aria-label="3 early bird chairs, all open"><span class="chair"></span><span class="chair"></span><span class="chair"></span></div>
-        <ul><li>Your own queen room for the night</li><li>Everything included, no upgrade tier</li><li>Closes Sept 27 or at 3 sold</li><li>Batch 2 attendees: ask for the room code this weekend, &#8369;10,000 off, Sept 19 to 20 only</li></ul>
+        <div class="chairs" role="img" aria-label="3 early bird chairs, 1 taken, 2 open"><span class="chair taken"></span><span class="chair"></span><span class="chair"></span></div>
+        <ul><li>Your own queen room for the night</li><li>Everything included, no upgrade tier</li><li>Until Oct 15, or when the third early bird chair goes</li><li>Then the price goes to &#8369;90,000</li></ul>
         <a class="btn big on-dark solid" id="eb-seat-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat</a>
       </div>
       <div class="tier">
         <span class="eyebrow">Regular &middot; seats 4 to 10 &middot; the builders' room</span>
         <div class="price">&#8369;90,000<small>pay once</small></div>
         <div class="chairs" role="img" aria-label="7 regular chairs, all open"><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span><span class="chair"></span></div>
-        <ul><li>Same table, same vault, same shoot</li><li>A bunk in the builders' room, eight bunks, its own bath</li><li>Opens Sept 28, closes when the tenth chair goes</li></ul>
+        <ul><li>Same table, same vault, same shoot</li><li>A bunk in the builders' room, eight bunks, its own bath</li><li>Closes when the tenth chair goes</li></ul>
         <a class="btn big solid" href="https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53" rel="noopener" target="_blank">Take a regular seat</a>
         <span class="note">Prerequisite: Claude Code running on your laptop, or a Batch 1 / Batch 2 seat.</span>
       </div>
@@ -675,8 +675,8 @@ const SETTINGS = {
     <span class="eyebrow">One last thing</span>
     <h2>Six months from now, you'll either have <span class="serif">built it,</span> or you'll still be meaning to.</h2>
     <p>Ten people get the night. The ones who come won't be smarter than you. They'll just be the ones who decided.</p>
-    <a class="btn big on-dark solid" href="https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53" rel="noopener" target="_blank">Take your seat</a>
-    <p class="hero-price"><b>&#8369;90,000</b> &middot; pay once &middot; everything included</p>
+    <a class="btn big on-dark solid" id="close-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take your seat</a>
+    <p class="hero-price" id="close-price"><s>&#8369;90,000</s> <b>&#8369;70,000</b> early bird until Oct 15 &middot; everything included</p>
   </div>
 </section>
 
@@ -704,11 +704,13 @@ const SETTINGS = {
   if (tick()) { var timer = setInterval(function(){ if (!tick()) clearInterval(timer); }, 1000); }
   else {
     var ebBtn = document.getElementById('eb-seat-btn');
-    if (ebBtn) { var note = document.createElement('p'); note.className = 'note'; note.textContent = 'Early bird closed Sept 27.'; ebBtn.replaceWith(note); }
+    if (ebBtn) { var note = document.createElement('p'); note.className = 'note'; note.textContent = 'Early bird closed Oct 15.'; ebBtn.replaceWith(note); }
     var heroBtn = document.getElementById('hero-eb-btn');
     if (heroBtn) { heroBtn.href = 'https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53'; heroBtn.textContent = 'Take a seat'; }
-    var price = document.getElementById('hero-price');
-    if (price) { price.textContent = '\u20B1' + ev.regularPrice + ' \u00b7 early bird closed Sept 27'; }
+    var cb = document.getElementById('close-btn');
+    if (cb) { cb.href = 'https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53'; }
+    var price = document.getElementById('close-price');
+    if (price) { price.textContent = '\u20B1' + ev.regularPrice + ' \u00b7 pay once \u00b7 everything included'; }
   }
   var v = document.getElementById('teaser-video'), ctrl = document.getElementById('teaser-ctrl');
   var still = !SETTINGS.behavior.animations || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
