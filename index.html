@@ -3,27 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- v9 draw-on preloader surface, in the head so the curtain is styled at the first paint -->
-<link rel="preload" as="image" href="/assets/boot/jtl-draw.webp" fetchpriority="high">
+<!-- v10 cinematic preloader surface, in the head so the curtain is styled at the first paint -->
+<link rel="preload" as="image" href="/assets/boot/jtl-film-poster.webp" fetchpriority="high">
 <style>
-/* v9 draw-on preloader (2026-09-28, Owner ask "the animation and the loading is sabay"): a spark
-   draws the JTL mark (Higgy, FLUX video, 43 frames) on a constant-dark curtain. The frame on screen
-   and the % under it are the page's real load progress; it ends on the crisp SVG mark, then the
-   curtain slides left. v8 keycap board: HQ ops/reports/jtl-site-refresh-2026-09-28/work/preloader. */
-#boot{position:fixed;inset:0;z-index:9999;background:#121212;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3vh,30px);overflow:hidden;will-change:transform;transition:transform .5s cubic-bezier(.83,0,.17,1)}
+/* v10 cinematic preloader (2026-09-28, Owner: a close-up on a white bar, the angle changes as it
+   finishes, something subtle about AI employees, "the animation and the loading is sabay"). Higgy
+   (MiniMax H3, start frame a macro of one bar, end frame our exact mark) films the glass bars; the
+   film only runs as far as the page has loaded, and the angle change waits for the load event.
+   27 seat lights (Venice's AI team) clock in with the progress. Ends on the crisp SVG mark, then the
+   curtain slides left. v9 draw-on: HQ ops/reports/jtl-site-refresh-2026-09-28/work/preloader. */
+#boot{position:fixed;inset:0;z-index:9999;background:#0f0f0f;overflow:hidden;will-change:transform;transition:transform .5s cubic-bezier(.83,0,.17,1)}
 #boot.off{transform:translateX(-100%);pointer-events:none}
-#boot .bt-stage{position:relative;width:min(56vw,560px);aspect-ratio:600/320}
-#boot canvas{position:absolute;left:0;top:0;width:100%;height:100%;transition:opacity .35s ease}
-#boot .bt-mark{position:absolute;left:8.667%;top:13.125%;width:82.5%;height:73.438%;opacity:0;transition:opacity .35s ease}
+#boot .bt-film{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);aspect-ratio:16/9;transform:translate(-50%,-50%)}
+#boot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0f0f0f;transition:opacity .35s ease}
+#boot .bt-mark{position:absolute;left:50%;top:50%;width:39.06%;transform:translate(-50%,-50%);opacity:0;transition:opacity .35s ease}
 #boot.crisp .bt-mark{opacity:1}
-#boot.crisp canvas{opacity:0}
+#boot.crisp video{opacity:0;transition:opacity 0s .35s}
+#boot .bt-hud{position:absolute;left:0;right:0;bottom:clamp(30px,8vh,72px);display:flex;flex-direction:column;align-items:center;gap:14px}
+#boot .bt-seats{display:flex;gap:7px}
+#boot .bt-seats i{width:4px;height:4px;border-radius:50%;background:#333;transition:background .35s ease,box-shadow .35s ease}
+#boot .bt-seats i.on{background:#E2E2E2;box-shadow:0 0 6px rgba(226,226,226,.55)}
 #boot .bt-pct{margin:0;font:700 11px/1 'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8A8A8A;font-variant-numeric:tabular-nums}
 #boot .bt-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-#boot .bt-skip{position:absolute;right:18px;bottom:16px;font:12px/1 'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A8A8A;background:none;border:0;padding:8px 10px;cursor:pointer}
+#boot .bt-skip{position:absolute;right:18px;bottom:16px;font:12px/1 'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A8A8A;background:none;border:0;padding:14px 12px;cursor:pointer}
 #boot .bt-skip:hover,#boot .bt-skip:focus-visible{color:#E2E2E2}
 #boot .bt-skip:focus-visible{outline:2px solid #E2E2E2;outline-offset:2px}
-@media (max-width:600px){#boot .bt-stage{width:80vw}}
-@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}#boot canvas{display:none}#boot .bt-mark{opacity:1;transition:none}#boot .bt-pct{visibility:hidden}}
+/* portrait screens: a wide letterboxed band, so the whole mark stays on screen, edges melt into the curtain */
+@media (max-aspect-ratio:1/1){#boot .bt-film{width:150vw;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent)}}
+@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}#boot video{display:none}#boot .bt-mark{opacity:1;transition:none}#boot .bt-hud{visibility:hidden}}
 </style>
 <!-- template: v2-mono (own, 2026-07-23) + v3.1 grafts + v4 "clean filmstrip"
      2026-08-20 (Owner directive, Saturday presentation): 8 panels -> 3
@@ -307,27 +314,35 @@ header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 .about-copy .lead{margin-top:16px;max-width:52ch}
 .about-links{margin-top:clamp(20px,2.4vw,32px);justify-content:flex-start}
 
-/* the two founder tabs — same pill the chips used, now interactive */
-.who-tabs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:clamp(18px,2.2vw,28px)}
-.who{display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(24,24,24,.22);border-radius:999px;padding:8px 18px 8px 9px;background:rgba(255,255,255,.35);color:var(--navy);font:inherit;text-align:left;cursor:pointer;transition:border-color .3s,background .3s,opacity .3s;opacity:.55}
-.who img{width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:top;filter:grayscale(1);flex:none}
-.who .fm b{display:block;font:600 13px 'Archivo',sans-serif;letter-spacing:.01em}
-.who .fm span{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
-.who:hover{opacity:.85;border-color:rgba(24,24,24,.45)}
-.who[aria-selected="true"]{opacity:1;border-color:var(--navy);background:rgba(255,255,255,.62)}
-[data-theme="dark"] .who{background:rgba(255,255,255,.06);border-color:rgba(226,226,226,.22)}
-[data-theme="dark"] .who[aria-selected="true"]{border-color:#E2E2E2;background:rgba(255,255,255,.12)}
+/* v7 About, Owner pick C (2026-09-28): statement left, portrait bleeding off the right edge */
+#about .about-c{display:flex;align-items:center}
+.about-copy{width:min(48vw,720px);position:relative;z-index:2}
+#about .kick{font:700 11px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+#about h2{font-size:clamp(46px,4.9vw,84px);line-height:.98;max-width:12ch;margin-top:16px}
+.about-copy .lead{margin-top:28px;max-width:52ch}
+#about .sig{margin-top:28px;display:flex;gap:10px 26px;flex-wrap:wrap;font:700 11px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+#about .about-links{margin-top:34px;justify-content:flex-start}
+#about .lead a{color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .pane:focus-visible{outline:2px solid var(--wood);outline-offset:8px}
-
-/* the portrait — one face, big, whoever is selected */
-.about-face{position:relative;aspect-ratio:4/5;width:min(100%,430px);margin-left:auto;border:1px solid rgba(24,24,24,.16)}
-[data-theme="dark"] .about-face{border-color:rgba(226,226,226,.16)}
-.about-face .face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;filter:grayscale(1) contrast(1.04);opacity:0;transition:opacity .5s cubic-bezier(.2,.7,.2,1)}
+.about-face{position:absolute;top:0;right:0;bottom:0;width:44vw;z-index:1}
+.about-face a{display:block;position:absolute;inset:0}
+.about-face .face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.04);opacity:0;transition:opacity .5s cubic-bezier(.2,.7,.2,1)}
 .about-face .face.is-on{opacity:1}
+/* left edge melts into the page; a soft top band keeps the header controls readable over a dark photo */
+.about-face::after{content:"";position:absolute;inset:0 0 0 -2px;background:linear-gradient(90deg,var(--cement) 0,rgba(0,0,0,0) 22%),linear-gradient(180deg,color-mix(in srgb,var(--cement) 88%,transparent) 0,rgba(0,0,0,0) 130px);pointer-events:none}
+.who-next{position:absolute;right:min(5vw,68px);bottom:max(11vh,84px);z-index:3;display:flex;align-items:center;gap:12px;min-height:44px;border:0;cursor:pointer;background:rgba(18,18,18,.86);color:#E2E2E2;padding:8px 16px 8px 8px;font:700 11px 'Space Mono',monospace;letter-spacing:.16em;text-transform:uppercase;transition:background .3s}
+.who-next:hover{background:#121212}
+#about .hub-chip.solid{background:var(--navy);color:var(--cement);border-color:var(--navy)}
+.who-next:focus-visible{outline:2px solid #E2E2E2;outline-offset:3px}
+.who-next img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:top;filter:grayscale(1)}
 @media (prefers-reduced-motion:reduce){.about-face .face{transition:none}}
-@media (max-width:960px){
-  #about .split{grid-template-columns:1fr}
-  .about-face{width:min(100%,330px);margin:0 0 clamp(22px,4vw,34px);order:-1}
+@media (max-width:860px){
+  #about{flex-direction:column;align-items:stretch}
+  .about-face{position:relative;top:auto;right:auto;bottom:auto;width:100%;height:52vh;order:-1;margin-top:-84px}
+  .about-face::after{inset:0;background:linear-gradient(0deg,var(--cement) 0,rgba(0,0,0,0) 30%)}
+  .about-copy{width:100%}
+  #about h2{font-size:clamp(38px,10vw,52px)}
+  .who-next{position:relative;right:auto;bottom:auto;margin:22px 5vw 0 auto;align-self:flex-end}
 }
 
 /* ---- v6 visible primary nav (sahni.ai shape). MENU stays for the long tail;
@@ -471,30 +486,35 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </style>
 </head>
 <body>
-<!-- v9 draw-on preloader (2026-09-28). Static markup + head CSS + inline script so the curtain is
-     in the first paint. Contract kept from v8: sessionStorage jtlboot, .off slide-left, node removed
+<!-- v10 cinematic preloader (2026-09-28). Static markup + head CSS + inline script so the curtain is
+     in the first paint. Contract kept from v8/v9: sessionStorage jtlboot, .off slide-left, node removed
      700 ms later, Esc or SKIP dismisses, reduced motion shows the final mark and fades at 0.4 s. -->
-<div id="boot"><div class="bt-stage"><canvas width="600" height="320" aria-hidden="true"></canvas><svg class="bt-mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="#FCFCFC" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></div><p class="bt-pct" aria-hidden="true">Loading <span>0</span>%</p><span class="bt-sr" role="status">Loading JTL Growth</span><button class="bt-skip" type="button" aria-label="Skip intro">skip</button></div>
+<div id="boot"><div class="bt-film"><video muted playsinline preload="auto" disablepictureinpicture poster="/assets/boot/jtl-film-poster.webp" aria-hidden="true"><source src="/assets/boot/jtl-film.mp4" type='video/mp4; codecs="avc1.64001F"'><source src="/assets/boot/jtl-film.webm" type='video/webm; codecs="vp9"'></video><svg class="bt-mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="#FCFCFC" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></div><div class="bt-hud" aria-hidden="true"><div class="bt-seats"></div><p class="bt-pct">Clocking in <span>0</span>%</p></div><span class="bt-sr" role="status">Loading JTL Growth</span><button class="bt-skip" type="button" aria-label="Skip intro">skip</button></div>
 <script>
-/* v9 draw-on preloader. The mark is drawn by a spark; the frame shown is picked by how much of the
-   mark it has drawn (FR, measured per frame), so the drawing grows in step with the page's real load:
-   parsing eases toward 40%, DOMContentLoaded is 45%, eager images and fonts fill to 95%, the load
-   event is 100%. The number never runs ahead of the page and the draw never takes under 1.6 s.
-   A stuck resource cannot hold the curtain past 7 s. At 100% it crossfades to the crisp SVG mark and
-   slides left. Once per tab session (sessionStorage jtlboot). ?hold=1 keeps it up for QA. */
+/* v10 cinematic preloader. The film (3.7 s) has two parts: a close-up travelling along one bar
+   (0 to 2.0 s), then the angle swings round onto the flat mark. The travel may only run as far as
+   the page has loaded (parsing eases toward 40%, DOMContentLoaded 45%, eager images and fonts fill
+   to 95%), and the angle change waits for the load event, so the reveal can never land before the
+   page is ready. Near its limit the film eases into slow motion instead of freezing. The number and
+   the 27 seat lights follow the film's own position, so they never run ahead of the page either.
+   If the film cannot play (blocked autoplay, error, not ready in time) the poster stays and the
+   count falls back to the v9 rule: real progress, never faster than 1.6 s. A stuck resource cannot
+   hold the curtain past 9 s. Once per tab session (sessionStorage jtlboot). ?hold=1 keeps it up. */
 (function () {
   'use strict';
   var root = document.getElementById('boot'); if (!root) return;
   try { if (sessionStorage.getItem('jtlboot')) { root.parentNode.removeChild(root); return; } } catch (e) {}
-  var FR = [0.001, 0.008, 0.033, 0.058, 0.083, 0.112, 0.146, 0.175, 0.201, 0.227, 0.256, 0.279, 0.304, 0.328, 0.354, 0.382, 0.406, 0.423, 0.447, 0.475, 0.502, 0.509, 0.512, 0.525, 0.557, 0.588, 0.614, 0.622, 0.627, 0.637, 0.66, 0.686, 0.713, 0.74, 0.768, 0.795, 0.824, 0.852, 0.883, 0.913, 0.942, 0.972, 1.0];
-  var COLS = 8, FW = 600, FH = 320, MIN = 1600, CAP = 7000, SPEED = 1 / 800;
-  var S = { shown: 0, real: 0, frame: -1, dom: false, fonts: false, loaded: false, sprite: 'loading', finishing: false, done: false, reduced: false, t: 0, trace: [], hold: /[?&]hold=1/.test(location.search) };
-  var t0 = performance.now(), last = t0;
-  var cv = root.querySelector('canvas'), cx = cv.getContext('2d'), num = root.querySelector('.bt-pct span');
-  var img = new Image();
-  img.onload = function () { S.sprite = 'ready'; };
-  img.onerror = function () { S.sprite = 'failed'; };
-  img.src = '/assets/boot/jtl-draw.webp';
+  var TRAVEL = 2.0, FILM = 3.7, FPS = 24, SEATS = 27, MIN = 1600, CAP = 9000, SPEED = 1 / 800;
+  var S = { shown: 0, real: 0, frame: -1, dom: false, fonts: false, loaded: false, film: 'loading', finishing: false, done: false, reduced: false, t: 0, trace: [], hold: /[?&]hold=1/.test(location.search) };
+  var t0 = performance.now(), last = t0, lit = 0;
+  var v = root.querySelector('video'), num = root.querySelector('.bt-pct span'), row = root.querySelector('.bt-seats');
+  var seats = [];
+  for (var k = 0; k < SEATS; k++) { var d = document.createElement('i'); row.appendChild(d); seats.push(d); }
+  v.muted = true;
+  // State is polled each frame, not taken from events: canplay can fire before this script runs,
+  // iOS ignores preload until play() is called, and a skipped <source> fires its own error.
+  var srcs = v.querySelectorAll('source');
+  srcs[srcs.length - 1].addEventListener('error', function () { S.film = 'failed'; });
   function real() {
     if (S.loaded) return 1;
     if (!S.dom) return Math.min(0.4, 0.04 + 0.36 * (1 - Math.exp(-(performance.now() - t0) / 900)));
@@ -502,38 +522,63 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     var got = imgs.filter(function (i) { return i.complete; }).length;
     return Math.min(0.95, 0.45 + 0.5 * ((imgs.length ? got / imgs.length : 1) * 0.75 + (S.fonts ? 0.25 : 0)));
   }
-  function frameFor(p) { for (var i = 0; i < FR.length; i++) if (FR[i] >= p - 0.0005) return i; return FR.length - 1; }
-  function draw(i) {
-    if (S.sprite !== 'ready' || i === S.frame) return;
-    S.frame = i;
-    /* the frames are white on pure black: paint the curtain colour, then add the frame with
-       'lighter' so black adds nothing and the mark sits on #121212 with no box around it */
-    cx.globalCompositeOperation = 'source-over'; cx.fillStyle = '#121212'; cx.fillRect(0, 0, FW, FH);
-    cx.globalCompositeOperation = 'lighter';
-    cx.drawImage(img, (i % COLS) * FW, Math.floor(i / COLS) * FH, FW, FH, 0, 0, FW, FH);
+  function steer(dur) {
+    // how far into the film the page lets it run: the travel follows real progress, the rest needs load
+    var open = S.loaded || S.t > CAP;
+    var lim = open ? dur : Math.min(S.real / 0.95, 1) * TRAVEL;
+    var room = lim - v.currentTime;
+    // once the page is loaded the film plays out to its last frame; before that it parks at the limit
+    if (!open && room <= 0.03) { if (!v.paused) v.pause(); return; }
+    var rate = open || room >= 0.6 ? 1 : Math.max(0.25, Math.round(room / 0.6 * 10) / 10);
+    if (v.playbackRate !== rate) v.playbackRate = rate;
+    if (v.paused && !v.ended) {
+      var p = v.play();
+      // autoplay refused: blocked; no playable source: failed; a play() cut short by pause() is normal
+      if (p && p.catch) p.catch(function (e) { if (e && e.name === 'NotAllowedError') S.film = 'blocked'; else if (e && e.name === 'NotSupportedError') S.film = 'failed'; });
+    }
+  }
+  function light(p) {
+    var n = Math.round(p * SEATS);
+    while (lit < n) seats[lit++].className = 'on';
   }
   function done() {
     if (S.done) return; S.done = true;
     root.classList.add('off');
+    try { v.pause(); } catch (e) {}
     try { sessionStorage.setItem('jtlboot', '1'); } catch (e) {}
     setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 700);
   }
   function finish() {
     if (S.finishing) return; S.finishing = true;
     root.classList.add('crisp');
-    if (!S.hold) setTimeout(done, 700);
+    if (!S.hold) setTimeout(done, 550);
   }
   function tick(now) {
     if (S.done) return;
     var dt = Math.min(64, now - last); last = now; S.t = now - t0;
     S.real = real();
-    var target = S.t > CAP ? 1 : Math.min(S.real, S.t / MIN);
-    if (target > S.shown) S.shown = Math.min(target, S.shown + dt * SPEED);
+    // the film gets 2.5 s to start moving; after that, or if it fails, the poster holds the frame
+    var dur = v.duration && isFinite(v.duration) ? v.duration : FILM;
+    if (v.error) S.film = 'failed';
+    if (S.film === 'loading' || S.film === 'ready') steer(dur);
+    if (S.film === 'loading' && v.currentTime > 0) S.film = 'ready';
+    if (S.film === 'loading' && S.t > 2500) S.film = 'late';
+    var target;
+    if (S.film === 'loading') {
+      target = S.shown;
+    } else if (S.film === 'ready') {
+      target = v.ended || v.currentTime >= dur - 0.05 ? 1 : Math.min(v.currentTime / dur, 0.999);
+      S.frame = Math.round(v.currentTime * FPS);
+    } else {
+      var soft = S.t > CAP ? 1 : Math.min(S.real, S.t / MIN);
+      target = S.shown + Math.min(Math.max(0, soft - S.shown), dt * SPEED);
+    }
+    if (target > S.shown) S.shown = target;
     var n = Math.round(S.shown * 100);
     if (num.textContent !== String(n)) num.textContent = n;
-    draw(frameFor(S.shown));
-    if (S.trace.length < 600) S.trace.push([Math.round(S.t), +S.shown.toFixed(3), +S.real.toFixed(3), S.frame]);
-    if (S.shown >= 1 && (S.sprite !== 'loading' || S.t > CAP)) { finish(); return; }
+    light(S.shown);
+    if (S.trace.length < 900) S.trace.push([Math.round(S.t), +S.shown.toFixed(3), +S.real.toFixed(3), S.frame]);
+    if (S.shown >= 1 || S.t > CAP + 1500) { S.shown = 1; num.textContent = '100'; light(1); finish(); return; }
     requestAnimationFrame(tick);
   }
   document.addEventListener('DOMContentLoaded', function () { S.dom = true; });
@@ -544,6 +589,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   window.JTLBOOT = window.KC = { state: S, done: done };
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     S.reduced = true; root.classList.add('crisp');
+    try { v.removeAttribute('preload'); v.preload = 'none'; } catch (e) {}
     if (!S.hold) setTimeout(done, 400);
     return;
   }
@@ -652,27 +698,22 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
        two founder chips became TABS: click Gwen and the panel is about Gwen.
        Public-name rule (company/profile.md:26): first names + photos only. -->
   <section class="panel" id="about" aria-label="About the founders">
-    <div class="inner split about-split">
+    <!-- v7 About, Owner pick C (2026-09-28): the statement on the left, the portrait bleeding off
+         the right edge, one "Next" chip to switch founders instead of two tabs. -->
+    <div class="about-face rv d2">
+        <a href="/jamz-jamorol/" aria-label="Jamz Jamorol: founder profile"><img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async"></a>
+        <img class="face" id="face-gwen" src="assets/portrait-gwen.jpg" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
+    <div class="inner about-c">
       <div class="about-copy">
-        <div class="who-tabs" role="tablist" aria-label="Choose a founder">
-          <button class="who" type="button" role="tab" id="tab-jamz" aria-controls="pane-jamz" aria-selected="true" data-who="jamz">
-            <img src="assets/portrait-jamz.jpg" alt="" width="38" height="38">
-            <span class="fm"><b>Jamz Jamorol</b><span>Founder &middot; systems</span></span>
-          </button>
-          <button class="who" type="button" role="tab" id="tab-gwen" aria-controls="pane-gwen" aria-selected="false" tabindex="-1" data-who="gwen">
-            <img src="assets/portrait-gwen.jpg" alt="" width="38" height="38">
-            <span class="fm"><b>Gwen Ayala</b><span>Co-founder &middot; OBM + strategy</span></span>
-          </button>
-        </div>
-
-        <div class="pane" id="pane-jamz" role="tabpanel" aria-labelledby="tab-jamz" tabindex="0">
+        <div class="pane" id="pane-jamz" tabindex="-1">
+          <p class="kick rv">Jamz Jamorol &middot; founder</p>
           <h2 class="rv d1">He builds the systems <em class="accent">he sells.</em></h2>
-          <p class="lead rv d2">I&rsquo;m Jamz Jamorol. I run JTL Growth out of Caloocan with my co-founder Gwen, and with an AI workforce that handles the repetitive half of the work, so a two-person firm ships like a ten-person one.</p>
-          <p class="lead rv d3">Since January 2025 I&rsquo;ve been building AI, automation and CRM systems for coaches, agencies and small businesses: funnels, client portals, content engines, lead engines, and the operations underneath them. Clients in the Philippines, the US, Europe and Australia.</p>
-          <p class="lead rv d3">Everything on this site runs on the same stack we install for you. We don&rsquo;t sell a system we don&rsquo;t run ourselves.</p>
+          <p class="lead rv d2">Two founders and an AI workforce that takes the repetitive half of the work, so a two-person firm ships like a ten-person one. Everything on this site runs on the stack we install for you.</p>
+          <p class="sig rv d3"><span>Since Jan 2025</span><span>PH &middot; US &middot; EU &middot; AU</span><span>27 AI seats</span></p>
           <div class="hub-row about-links rv d4">
-            <a class="hub-chip magnet" href="/jamz-jamorol/">Full profile <span class="arr">↗</span></a>
-            <a class="hub-chip magnet" href="/work/">What we&rsquo;ve shipped <span class="arr">↗</span></a>
+            <a class="hub-chip magnet solid" href="/jamz-jamorol/">Full profile <span class="arr">&#8599;</span></a>
+            <a class="hub-chip magnet" href="/work/">What we&rsquo;ve shipped <span class="arr">&#8599;</span></a>
           </div>
         </div>
 
@@ -682,23 +723,22 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
              voice, and AVAS is written as "runs" rather than founder/co-founder,
              because her bio says founder and proposals she signed say co-founder and
              that conflict is hers to settle, not ours to paper over. -->
-        <div class="pane" id="pane-gwen" role="tabpanel" aria-labelledby="tab-gwen" tabindex="0" hidden>
+        <div class="pane" id="pane-gwen" tabindex="-1" hidden>
+          <p class="kick rv">Gwen Ayala &middot; co-founder</p>
           <h2 class="rv d1">She helps founders stop being the <em class="accent">bottleneck.</em></h2>
-          <p class="lead rv d2">Gwen Ayala is an Online Business Manager and Marketing Strategist, and co-founder of JTL Growth. She runs <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">Ayala Virtual Assistance Services</a>, founded <a href="https://filipinawomeninbusiness.com/" target="_blank" rel="noopener">Filipina Women in Business</a>, and co-founded <a href="/robots-and-coffee/">Robots &amp; Coffee</a>.</p>
-          <p class="lead rv d3">Five years in the digital space. She started at 18 as a working student and a VA with no experience and no resume, landed international clients, and built her own agency. She now helps coaches, creatives and CEOs clean up their operations, launch with clarity, and scale with strategy.</p>
-          <p class="lead rv d3">On this side of the house she owns the part clients actually meet: the messaging, the content, and the conversation. That is why the call you book is hers.</p>
+          <p class="lead rv d2">Online Business Manager and Marketing Strategist, and co-founder of JTL Growth. She runs <a href="https://ayalavirtualassistance.site" target="_blank" rel="noopener">Ayala Virtual Assistance Services</a> and owns the part clients actually meet: the messaging, the content, and the conversation.</p>
+          <p class="sig rv d3"><span>Five years in digital</span><span>OBM + strategy</span><span>The call is hers</span></p>
           <div class="hub-row about-links rv d4">
-            <a class="hub-chip magnet" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book the call with Gwen <span class="arr">↗</span></a>
-            <a class="hub-chip magnet" href="https://ayalavirtualassistance.site/" target="_blank" rel="noopener">AVAS <span class="arr">↗</span></a>
+            <a class="hub-chip magnet solid" href="https://calendly.com/obmgwenayala/30min" target="_blank" rel="noopener">Book the call with Gwen <span class="arr">&#8599;</span></a>
+            <a class="hub-chip magnet" href="https://ayalavirtualassistance.site/" target="_blank" rel="noopener">AVAS <span class="arr">&#8599;</span></a>
           </div>
         </div>
       </div>
-
-      <div class="about-face rv d2">
-        <a href="/jamz-jamorol/" aria-label="Jamz Jamorol: founder profile"><img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async"></a>
-        <img class="face" id="face-gwen" src="assets/portrait-gwen.jpg" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
-      </div>
     </div>
+    <button class="who-next" type="button" aria-controls="pane-jamz pane-gwen" data-next="gwen">
+      <img src="assets/portrait-gwen.jpg" alt="" width="34" height="34">
+      <span class="wn-label">Next: Gwen</span><span aria-hidden="true">&rarr;</span>
+    </button>
   </section>
 
   <!-- 3 · CONTACT (v6): CTA + founders folded in + hub chips out to the landing pages -->
@@ -1144,34 +1184,33 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
    tabs pattern), and the panel's own reveal classes are re-armed on the incoming
    pane so a switch never lands on invisible text. */
 (function(){
-  var tabs=[].slice.call(document.querySelectorAll('.who-tabs .who'));
-  if(tabs.length<2)return;
-  function select(who,focus){
-    tabs.forEach(function(t){
-      var on=t.dataset.who===who;
-      t.setAttribute('aria-selected',on?'true':'false');
-      t.tabIndex=on?0:-1;
-      if(on&&focus)t.focus();
-      var pane=document.getElementById('pane-'+t.dataset.who);
+  var btn=document.querySelector('#about .who-next');
+  if(!btn)return;
+  var label=btn.querySelector('.wn-label'),img=btn.querySelector('img');
+  var NEXT={jamz:{to:'gwen',text:'Next: Gwen',src:'assets/portrait-gwen.jpg'},gwen:{to:'jamz',text:'Back to Jamz',src:'assets/portrait-jamz.jpg'}};
+  function select(who){
+    ['jamz','gwen'].forEach(function(w){
+      var on=w===who,pane=document.getElementById('pane-'+w),face=document.getElementById('face-'+w);
       if(pane){
         pane.hidden=!on;
         // the panel already fired its reveal; the incoming pane must not start hidden
         if(on)[].slice.call(pane.querySelectorAll('.rv')).forEach(function(e){e.classList.add('shown')});
       }
-      var face=document.getElementById('face-'+t.dataset.who);
       if(face){face.classList.toggle('is-on',on);face.setAttribute('aria-hidden',on?'false':'true');}
     });
+    var n=NEXT[who];
+    btn.dataset.next=n.to;label.textContent=n.text;img.src=n.src;
+    btn.setAttribute('aria-label',who==='jamz'?'Show Gwen Ayala, co-founder':'Show Jamz Jamorol, founder');
   }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){select(t.dataset.who,false)});
-    t.addEventListener('keydown',function(e){
-      var k=e.key,n=null;
-      if(k==='ArrowRight'||k==='ArrowDown')n=tabs[(i+1)%tabs.length];
-      else if(k==='ArrowLeft'||k==='ArrowUp')n=tabs[(i-1+tabs.length)%tabs.length];
-      else if(k==='Home')n=tabs[0];
-      else if(k==='End')n=tabs[tabs.length-1];
-      if(n){e.preventDefault();select(n.dataset.who,true)}
-    });
+  btn.setAttribute('aria-label','Show Gwen Ayala, co-founder');
+  btn.addEventListener('click',function(){
+    select(btn.dataset.next);
+    var pane=document.getElementById('pane-'+(btn.dataset.next==='gwen'?'jamz':'gwen'));
+    if(pane)pane.focus({preventScroll:true});
+    // stacked (phone) layout: the new face sits above the button, so bring it back into view
+    var face=document.getElementById('face-'+(btn.dataset.next==='gwen'?'jamz':'gwen'));
+    var top=face?face.getBoundingClientRect().top:0;
+    if(top<0)window.scrollBy({top:top,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
   });
 })();
 </script>
