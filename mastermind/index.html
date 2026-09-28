@@ -206,7 +206,7 @@ h1 .serif{font-weight:650;letter-spacing:-.015em}
 .day{border:1px solid var(--line);border-radius:var(--radius-md);padding:var(--s3) var(--s3) var(--s1);background:var(--surface)}
 .day h3{margin-bottom:var(--s2);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .day h3 small{font:400 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--meta)}
-.slot{display:grid;grid-template-columns:64px 1fr;gap:var(--s2);padding:var(--s2) 0;border-top:1px solid var(--line);font-size:var(--t3);line-height:1.62}
+.slot{display:grid;grid-template-columns:84px 1fr;gap:var(--s2);padding:var(--s2) 0;border-top:1px solid var(--line);font-size:var(--t3);line-height:1.62}
 .slot:first-of-type{border-top:0}
 .slot time{font:400 14px/1.6 var(--font-mono);color:var(--muted);font-variant-numeric:tabular-nums}
 .slot .hi{font-weight:600}
@@ -263,6 +263,49 @@ summary::after{content:"+";font:400 24px/1 var(--font-mono);color:var(--muted);f
 details[open] summary::after{content:"\2212"}
 details p{margin-top:var(--s2);color:var(--muted);font-size:var(--t3);line-height:1.62}
 
+/* ---- pain, fit, close ---- */
+.turn{font:650 clamp(24px,2.8vw,36px)/var(--leading-head) var(--font-display);font-style:italic;letter-spacing:-.01em;max-width:32ch;margin-top:var(--s7)}
+.fit{display:grid;grid-template-columns:1fr;gap:var(--s3)}
+.fit > div{border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--s4);background:var(--surface);display:grid;gap:var(--s2);align-content:start}
+.fit > div.no{background:transparent}
+.fit ul{margin:0;padding:0;list-style:none;display:grid;gap:var(--s2);font-size:var(--t3);line-height:1.62}
+.fit li{padding-left:28px;position:relative}
+.fit li::before{content:"\2713";position:absolute;left:0;top:0;font:700 var(--t3)/1.62 var(--font-mono)}
+.fit .no li::before{content:"\2715";color:var(--muted)}
+.fit .no li{color:var(--muted)}
+@media (min-width:900px){.fit{grid-template-columns:1fr 1fr}}
+.close{background:var(--navy-deep);color:var(--paper);text-align:center}
+.close .wrap{display:grid;justify-items:center;gap:var(--s3)}
+.close .eyebrow{color:var(--blue-soft)}
+.close h2{max-width:20ch}
+.close p{font-size:var(--t4);color:rgba(255,255,255,.82);max-width:52ch}
+.close .hero-price{margin-top:0}
+
+/* ---- the table: coaches + ten chairs ---- */
+.crew{background:var(--navy-deep);color:var(--paper)}
+.crew .wrap{display:grid;justify-items:center;text-align:center}
+.crew .sec-head{justify-items:center;margin-inline:auto}
+.crew .eyebrow,.crew .dim{color:var(--blue-soft)}
+.coaches{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s6)}
+.coach{margin:0;display:grid;justify-items:center;gap:6px}
+.coach img{width:132px;height:132px;border-radius:50%;object-fit:cover;border:3px solid var(--paper);margin-bottom:var(--s1)}
+.coach b{font:600 var(--t4)/1.3 var(--font-body)}
+.coach span{font:400 var(--t1)/1.5 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-soft)}
+.crew-line{width:1px;height:var(--s7);background:var(--line-on-dark);margin:var(--s3) 0 var(--s4)}
+.ring{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s4) var(--s3);width:min(100%,720px)}
+.ring li,.ring a{display:grid;justify-items:center;gap:6px;text-decoration:none}
+.seat-dot{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;overflow:hidden}
+.seat-dot img{width:100%;height:100%;object-fit:cover}
+.taken .seat-dot{border:2px solid var(--paper)}
+.open .seat-dot{border:1.5px dashed var(--line-on-dark);color:var(--blue-soft);transition:border-color var(--motion-base),color var(--motion-base)}
+.open a:hover .seat-dot{border-color:var(--paper);color:var(--paper)}
+.seat-dot svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ring b{font:600 var(--t2)/1.2 var(--font-body)}
+.ring small{font:400 11px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blue-soft)}
+.said{margin:var(--s7) 0 var(--s4);font:650 clamp(26px,3vw,38px)/1.2 var(--font-display);font-style:italic}
+.said cite{display:block;margin-top:var(--s2);font:400 var(--t2)/1.5 var(--font-mono);font-style:normal;letter-spacing:.06em;color:var(--blue-soft)}
+@media (max-width:600px){.seat-dot{width:56px;height:56px} .ring{gap:var(--s3) var(--s1)} .coach img{width:100px;height:100px} .coaches{gap:var(--s4)} .ring b{font-size:12px} .ring small{font-size:9.5px;letter-spacing:.08em}}
+
 /* ---- footer ---- */
 footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s6);display:grid;gap:var(--s1);font:400 var(--t2)/1.7 var(--font-mono);color:var(--muted)}
 footer a{text-decoration:none}
@@ -303,7 +346,7 @@ const SETTINGS = {
     <span class="pill">Content and build mastermind<span class="long"> &middot; 10 seats &middot; one villa</span></span>
     <h1>Content by day.<br><span class="serif">Your app by night.</span></h1>
     <p class="hero-lead">Arrive with a problem. Leave with your app on your phone.</p>
-    <p class="hero-sub">The goal is not to make you an AI engineer. It is to know AI well enough that it works beside you: content by day, your app by night.</p>
+    <p class="hero-sub">For the owner who's tired of being the whole team. One afternoon, your month of content gets made. One night, the tool you've needed for years gets built. And you learn multi-agent AI, from Hermes to Higgsfield, so the work keeps going even when you're not.</p>
     <div class="hero-cta">
       <a class="btn big on-dark solid" id="hero-eb-btn" href="https://app.ldcagency.com/payment-link/6aa90e1c13f5d2e3e96ab44d" rel="noopener" target="_blank">Take an early bird seat</a>
       <a class="btn on-dark hide-phone" href="#teaser">Watch the villa</a>
@@ -315,9 +358,26 @@ const SETTINGS = {
 <div class="meta" aria-label="At a glance">
   <div class="mcell"><span class="label">When</span><h4>Oct 24 to 25</h4><p>Sat 1pm to Sun 3pm, one night</p></div>
   <div class="mcell"><span class="label">Where</span><h4>Tagaytay</h4><p>Private villa, 90 min from BGC</p></div>
-  <div class="mcell"><span class="label">Seats</span><h4>10 chairs</h4><p>Alumni of Batch 1 and 2 first</p></div>
-  <div class="mcell"><span class="label">Early bird</span><h4>&#8369;70,000</h4><p>3 seats, until Sept 27, then &#8369;90,000</p></div>
+  <div class="mcell"><span class="label">Seats</span><h4>9 of 10 left</h4><p>Alumni of Batch 1 and 2 first</p></div>
+  <div class="mcell"><span class="label">Your seat</span><h4>&#8369;90,000</h4><p>Pay once, everything included</p></div>
 </div>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Be honest for a second</span>
+      <h2>You started a business to be free. <span class="serif">Now it runs you.</span></h2>
+      <p class="dim">You're the one answering DMs at 11pm. You know you should post, and you don't, because there's another client fire. Meanwhile people with half your experience are using AI to look twice as big, and you're still copy-pasting between five apps that almost fit.</p>
+    </div>
+    <div class="incl">
+      <div><b>Your content is always "next week."</b><span>You know it's what brings clients in. You just never get a quiet afternoon to make it.</span></div>
+      <div><b>Your business lives in your head.</b><span>Every price, every process, every follow-up. If you get sick for a week, it all stops.</span></div>
+      <div><b>You've paid for tools that don't fit.</b><span>Subscriptions built for someone else's business, and one tired spreadsheet holding it all together.</span></div>
+      <div><b>You feel late to AI.</b><span>You've tried ChatGPT. Everyone's talking about it. It hasn't changed a single thing about your week yet.</span></div>
+    </div>
+    <p class="turn">You don't need more discipline. You need one afternoon where someone makes the content with you, and one night where you build the thing your business has been begging for.</p>
+  </div>
+</section>
 
 <section id="teaser" class="alt">
   <div class="wrap">
@@ -375,7 +435,7 @@ const SETTINGS = {
             <circle cx="410" cy="178" r="6"/><circle cx="432" cy="178" r="6"/><circle cx="454" cy="178" r="6"/><circle cx="476" cy="178" r="6"/>
             <circle cx="410" cy="200" r="6"/><circle cx="432" cy="200" r="6"/><circle cx="454" cy="200" r="6"/><circle cx="476" cy="200" r="6"/>
           </g>
-          <text class="pl-t ink" x="300" y="246">SHOOT SET 15:00 &middot; SPEAKER 18:00</text>
+          <text class="pl-t ink" x="300" y="246">SHOOT SET 3PM &middot; AI SESSION 6PM</text>
           <rect class="pl-lanai" x="60" y="260" width="440" height="130"/>
           <rect class="pl-table" x="110" y="300" width="340" height="44" rx="4"/>
           <g class="pl-laptop"><rect x="122" y="288" width="20" height="8"/><rect x="154" y="288" width="20" height="8"/><rect x="186" y="288" width="20" height="8"/><rect x="218" y="288" width="20" height="8"/><rect x="250" y="288" width="20" height="8"/><rect x="282" y="288" width="20" height="8"/><rect x="314" y="288" width="20" height="8"/><rect x="346" y="288" width="20" height="8"/><rect x="378" y="288" width="20" height="8"/><rect x="410" y="288" width="20" height="8"/></g>
@@ -386,14 +446,14 @@ const SETTINGS = {
           <g class="pl-bar-mark"><rect x="536" y="274" width="12" height="12"/><rect x="556" y="274" width="12" height="12"/><rect x="576" y="274" width="12" height="12"/><rect x="596" y="274" width="12" height="12"/></g>
           <text class="pl-t" x="520" y="328">COFFEE BAR &middot; ALL NIGHT</text>
           <rect class="pl-pool" x="180" y="408" width="440" height="56" rx="12"/>
-          <text class="pl-t ink" x="196" y="442">POOL &middot; FREE TIME FROM 19:30</text>
+          <text class="pl-t ink" x="196" y="442">POOL &middot; FREE TIME FROM 7:30PM</text>
           <path class="pl-path" d="M540 360 C 600 340, 640 380, 660 420"/>
           <text class="pl-t sm" x="560" y="352">PHOTOGRAPHER ROAMS</text>
         </svg>
       </div>
       <div class="legend">
         <div><span class="key k-table"></span><div><b>The table</b><span>One long table. Ten builders, a host at each end, laptops open from 9pm. This is the mastermind: everyone sees everyone's build.</span></div></div>
-        <div><span class="key k-set"></span><div><b>Shoot set and speaker corner</b><span>The living room. Content shoot from 3pm with the photographer, then stools in an arc for the Hermes talk at 6pm.</span></div></div>
+        <div><span class="key k-set"></span><div><b>Shoot set and speaker corner</b><span>The living room. Content shoot from 3pm with the photographer, then stools in an arc for the Hermes session at 6pm.</span></div></div>
         <div><span class="key k-pool"></span><div><b>Pool and free time</b><span>From 7:30pm the night is yours. Swim, sleep, or keep building with a host beside you.</span></div></div>
         <div><span class="key k-room"></span><div><b>Bedrooms</b><span>Twin share, sleep whenever. Breakfast at 8.</span></div></div>
         <div><span class="key k-bar"></span><div><b>Coffee bar</b><span>The kitchen island. Robots &amp; Coffee beans, open all night. The photographer works the whole 26 hours.</span></div></div>
@@ -412,21 +472,21 @@ const SETTINGS = {
     <div class="sched">
       <div class="day">
         <h3>Saturday <small>Oct 24</small></h3>
-        <div class="slot"><time>13:00</time><div><span class="hi">Arrive by car, 90 minutes from BGC. Coffee, gift box, your seat at the table.</span></div></div>
-        <div class="slot"><time>14:00</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one app your business needs.</span></div></div>
-        <div class="slot"><time>15:00</time><div><span class="hi">Shoot block.</span><span>Talking heads and b-roll around the villa with the photographer, then captions drafted with the content prompts before dinner.</span></div></div>
-        <div class="slot"><time>18:00</time><div><span class="hi">Guest speaker: the Hermes talk.</span><span>Agents that run on their own. Questions until dinner.</span></div></div>
-        <div class="slot"><time>19:30</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
-        <div class="slot"><time>21:00</time><div><span class="hi">Build night with Jamz.</span><span>Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
+        <div class="slot"><time datetime="13:00">1:00 PM</time><div><span class="hi">Arrive by car, 90 minutes from BGC. Coffee, gift box, your seat at the table.</span></div></div>
+        <div class="slot"><time datetime="14:00">2:00 PM</time><div><span class="hi">Content kickoff with Gwen.</span><span>Your 30-day content plan: openers, formats, the posts that sell. Pick the one thing your business needs built.</span></div></div>
+        <div class="slot"><time datetime="15:00">3:00 PM</time><div><span class="hi">Shoot block, then Higgsfield.</span><span>Talking heads and b-roll around the villa with the photographer. Then Higgsfield turns that shoot into AI photos and video, and captions get drafted before dinner.</span></div></div>
+        <div class="slot"><time datetime="18:00">6:00 PM</time><div><span class="hi">Multi-agent AI and Hermes, taught.</span><span>How to run a team of AI agents that split the work, wake up on schedule, and report back without you. Questions until dinner.</span></div></div>
+        <div class="slot"><time datetime="19:30">7:30 PM</time><div><span class="hi">Dinner, pool, free time.</span></div></div>
+        <div class="slot"><time datetime="21:00">9:00 PM</time><div><span class="hi">Build night with Jamz.</span><span>A client portal, a live dashboard, GHL wired to AI, whatever your business keeps asking for. Claude Code, the Overnight Build vault, hosts on the floor until it runs.</span></div></div>
       </div>
       <div class="day">
         <h3>Sunday <small>Oct 25</small></h3>
-        <div class="slot"><time>08:00</time><div><span class="hi">Breakfast.</span></div></div>
-        <div class="slot"><time>09:00</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
-        <div class="slot"><time>10:30</time><div><span class="hi">Demo day.</span><span>Ten apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
-        <div class="slot"><time>12:00</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
-        <div class="slot"><time>13:30</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
-        <div class="slot"><time>15:00</time><div><span class="hi">Home. Carpools sorted at the table the night before.</span></div></div>
+        <div class="slot"><time datetime="08:00">8:00 AM</time><div><span class="hi">Breakfast.</span></div></div>
+        <div class="slot"><time datetime="09:00">9:00 AM</time><div><span class="hi">Polish, then add to home screen.</span><span>Your app goes on your phone. No app store, no developer fee.</span></div></div>
+        <div class="slot"><time datetime="10:30">10:30 AM</time><div><span class="hi">Demo day.</span><span>Ten apps, phone in hand, two minutes each, and your first post goes live from the table. Photographer on.</span></div></div>
+        <div class="slot"><time datetime="12:00">12:00 PM</time><div><span class="hi">Checkout and lunch on the ridge.</span></div></div>
+        <div class="slot"><time datetime="13:30">1:30 PM</time><div><span class="hi">What happens next, over coffee.</span><span>TestFlight wrap, the alumni circle, the 90-day re-ship.</span></div></div>
+        <div class="slot"><time datetime="15:00">3:00 PM</time><div><span class="hi">Home. Carpools sorted at the table the night before.</span></div></div>
       </div>
     </div>
   </div>
@@ -437,6 +497,7 @@ const SETTINGS = {
     <div class="sec-head">
       <span class="eyebrow">What you leave with</span>
       <h2>A month of content, your app on your phone, and a team that keeps it shipping.</h2>
+      <p class="dim">Picture Monday morning. Your posts for the month are already done. The job you used to do by hand every single day now takes one tap. And you built it yourself, so you're never again waiting on someone else to fix it. You also know how to run a team of AI agents now, so some of the work is already done before you wake up.</p>
     </div>
     <div class="outcome">
       <div class="phone">
@@ -461,10 +522,20 @@ const SETTINGS = {
         </svg>
       </div>
       <div class="steps">
-        <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your app on your phone from your own URL.</b><p class="dim">A browser app that installs to the home screen and works offline. Yours to keep, hosted on your own GitHub.</p></div>
+        <div class="step now"><span class="label">Sunday 9am</span><b>Thirty days of content shot and drafted, and your build live on the internet at its own link.</b><p class="dim">Live, not stuck on your laptop. Open it on your phone, send the link to your team or your clients. Yours to keep, hosted on your own GitHub.</p></div>
         <div class="step"><span class="label">Within 14 days</span><b>On TestFlight, under the Robots &amp; Coffee developer account.</b><p class="dim">We wrap it and ship it. You get the TestFlight link, your team installs it like any app.</p></div>
         <div class="step"><span class="label">Every 90 days</span><b>Re-shipped, while you are in the alumni circle.</b><p class="dim">TestFlight builds expire. Ours do not, because we keep shipping them for you.</p></div>
       </div>
+    </div>
+    <div class="sec-head" style="margin-top:var(--s8);margin-bottom:var(--s4)">
+      <span class="eyebrow">What you could build</span>
+      <h3 style="font-size:var(--t6)">Bring the problem that's been eating your week. Build the fix.</h3>
+    </div>
+    <div class="incl">
+      <div><b>A client portal</b><span>One link where clients see their files, status and next steps, so they stop asking you in DMs.</span></div>
+      <div><b>A live dashboard</b><span>Your sales, leads or bookings on one screen that updates itself. No more building the report every Monday.</span></div>
+      <div><b>GHL + AI</b><span>Your GoHighLevel wired to AI, so new leads get answered, tagged and followed up without you touching it.</span></div>
+      <div><b>Anything your business needs</b><span>An intake form, a quote calculator, a team tracker. If it keeps you stuck, it's fair game.</span></div>
     </div>
   </div>
 </section>
@@ -478,10 +549,10 @@ const SETTINGS = {
     <div class="incl">
       <div><b>The villa night</b><span>A private room for early birds, a bunk in the builders' room for regular seats. Pool, table, all of it.</span></div>
       <div><b>Every meal and the coffee bar</b><span>Merienda, dinner, breakfast, lunch. Beans all night.</span></div>
-      <div><b>Content shoot</b><span>Photographer plus the villa as your set. A month of posts shot and drafted before dinner.</span></div>
+      <div><b>Content shoot + Higgsfield</b><span>Photographer plus the villa as your set, then Higgsfield turns it into AI photos and video. A month of posts before dinner.</span></div>
       <div><b>Gift box</b><span>Robots &amp; Coffee kit at your seat.</span></div>
       <div><b>The Overnight Build vault</b><span>Ten prompts with a video each, from brief to demo day.</span></div>
-      <div><b>Guest speaker</b><span>The Hermes talk, then questions.</span></div>
+      <div><b>Multi-agent AI, taught</b><span>Hermes and a team of agents that keep working after you close the laptop.</span></div>
       <div><b>TestFlight wrap</b><span>Your app shipped under our developer account within 14 days.</span></div>
       <div><b>Photographer</b><span>The whole 26 hours. Your edited set within a week.</span></div>
     </div>
@@ -489,19 +560,76 @@ const SETTINGS = {
       <div class="ph">TBA</div>
       <div>
         <span class="label">Guest speaker &middot; Saturday 6pm</span>
-        <h3 style="margin-top:6px">The Hermes talk</h3>
+        <h3 style="margin-top:6px">Multi-agent AI and Hermes, taught</h3>
         <p class="dim" style="margin-top:6px">Agents that wake up, do the job, and report, without a prompt from you. Speaker announced to enrollees.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="seats">
+<section id="fit">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Is this you?</span>
+      <h2>Ten chairs means we're picky about who sits in them.</h2>
+    </div>
+    <div class="fit">
+      <div>
+        <span class="eyebrow">This is for you if</span>
+        <ul>
+          <li>You own the business and you make the calls.</li>
+          <li>There's one job you'd pay anything to never do by hand again.</li>
+          <li>You'd rather build it tonight than hear about it for another year.</li>
+          <li>You want your face and your story out there, not just your logo.</li>
+        </ul>
+      </div>
+      <div class="no">
+        <span class="eyebrow">Skip this if</span>
+        <ul>
+          <li>You want to become a software engineer. We won't make you one.</li>
+          <li>You want someone else to build it while you watch.</li>
+          <li>You're after a motivational weekend with no homework.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="crew" id="table">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The table</span>
+      <h2>One chair is taken. <span class="serif">Nine are still open.</span></h2>
+      <p class="dim">Two coaches at the head of the table, ten builders around it. When the tenth chair fills, the villa's full.</p>
+    </div>
+    <div class="coaches">
+      <figure class="coach"><img src="/mastermind/media/coach-gwen.jpg" alt="Gwen Ayala" width="360" height="360" loading="lazy"><b>Gwen Ayala</b><span>Content coach &middot; by day</span></figure>
+      <figure class="coach"><img src="/mastermind/media/coach-jamz.jpg" alt="Jamz Jamorol" width="360" height="360" loading="lazy"><b>Jamz Jamorol</b><span>Build coach &middot; by night</span></figure>
+    </div>
+    <div class="crew-line" aria-hidden="true"></div>
+    <ol class="ring" aria-label="Ten builder chairs: one taken, nine open">
+      <li class="taken"><span class="seat-dot"><img src="/mastermind/media/builder-01.jpg" alt="Our first Overnight Build builder, a Robots &amp; Coffee Batch 1 alum" width="360" height="360" loading="lazy"></span><b>Chair 1</b><small>Taken</small></li>
+      <li class="open"><a href="#seats" aria-label="Chair 2, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 2</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 3, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 3</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 4, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 4</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 5, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 5</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 6, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 6</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 7, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 7</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 8, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 8</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 9, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 9</b><small>Open</small></a></li>
+      <li class="open"><a href="#seats" aria-label="Chair 10, open. Take a seat"><span class="seat-dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.8"/></svg></span><b>Chair 10</b><small>Open</small></a></li>
+    </ol>
+    <blockquote class="said">&ldquo;I don't code. I direct.&rdquo;<cite>Chair 1 &middot; AI Director, Robots &amp; Coffee Batch 1</cite></blockquote>
+    <a class="btn big on-dark solid" href="#seats">Claim chair 2</a>
+  </div>
+</section>
+
+<section id="seats" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Seats</span>
-      <h2>Ten chairs. Three of them early.</h2>
-      <p class="dim">Alumni of Batch 1 and Batch 2 book first. Early bird closes Sunday, Sept 27, or when the third chair goes. The three early birds take private rooms; the seven regular seats share the builders' room.</p>
+      <h2>Ten chairs. When the tenth one goes, the villa's full.</h2>
+      <p class="dim">Alumni of Batch 1 and Batch 2 book first. The three early bird seats take private rooms; regular seats share the builders' room, the way a hackathon sleeps.</p>
     </div>
     <div class="seats">
       <div class="tier eb">
@@ -523,7 +651,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="faq" class="alt">
+<section id="faq">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Questions</span>
@@ -534,7 +662,21 @@ const SETTINGS = {
     <details><summary>I did not attend the workshop. Can I come?</summary><p>If Claude Code is already running on your laptop and you have built one thing with it, yes. If not, Batch 2 on Sept 19 to 20 is the door.</p></details>
     <details><summary>Do I need to be on camera?</summary><p>Only as much as you want. Gwen builds the plan around your format: talking head, voiceover over b-roll, or text on screen. The photographer shoots the villa either way.</p></details>
     <details><summary>Where do I sleep?</summary><p>Early bird seats get a private queen room. Regular seats share the builders' room: eight bunks and its own bath, the way a hackathon sleeps. Hosts and staff take the lanai. Most people build past midnight anyway.</p></details>
+    <details><summary>I'm not techy. Will I get lost?</summary><p>You won't be left alone with it. The hosts sit at the same table all night, the vault walks you through ten prompts with a video each, and the only thing you need before you arrive is Claude Code running on your laptop. If you can describe the problem, we'll help you build the fix.</p></details>
+    <details><summary>What AI will I actually learn?</summary><p>Three things on top of your app. Higgsfield in the content block, for AI photos and video made from your own shoot. Multi-agent AI, where several agents split one job between them, like one researching, one writing, one checking. And Hermes, below.</p></details>
+    <details><summary>What is Hermes, and why learn it here?</summary><p>Hermes runs AI agents on their own. You give it a job once, like checking your inbox, drafting follow-ups, or pulling a report, and it does the job on schedule and tells you what it did. ChatGPT waits for you to type. Hermes doesn't. We teach it Saturday at 6pm, then you can wire it into the app you build that night.</p></details>
+    <details><summary>Will my build actually be live, or just on my laptop?</summary><p>Live. By Sunday it sits on the internet at its own link, so you can open it on your phone and send it to your team or clients. It stays yours, on your own GitHub.</p></details>
     <details><summary>Refunds?</summary><p>Seats are capacity, not stock. A seat can be transferred to another builder up to Oct 17. No refunds after booking.</p></details>
+  </div>
+</section>
+
+<section class="close" id="close">
+  <div class="wrap">
+    <span class="eyebrow">One last thing</span>
+    <h2>Six months from now, you'll either have <span class="serif">built it,</span> or you'll still be meaning to.</h2>
+    <p>Ten people get the night. The ones who come won't be smarter than you. They'll just be the ones who decided.</p>
+    <a class="btn big on-dark solid" href="https://app.ldcagency.com/payment-link/6aa90ea8ceb12d9fc1a8cf53" rel="noopener" target="_blank">Take your seat</a>
+    <p class="hero-price"><b>&#8369;90,000</b> &middot; pay once &middot; everything included</p>
   </div>
 </section>
 
