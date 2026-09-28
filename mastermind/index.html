@@ -323,6 +323,18 @@ a.app:hover{border-color:var(--paper)}
 @media (min-width:640px){.apps{grid-template-columns:1fr 1fr}}
 @media (min-width:1100px){.apps{grid-template-columns:repeat(4,1fr)}}
 
+/* ---- testimonials ---- */
+.quotes{columns:1;column-gap:var(--s3)}
+.tq{break-inside:avoid;margin:0 0 var(--s3);padding:var(--s3);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);display:grid;gap:var(--s2)}
+.tq blockquote{margin:0;display:grid;gap:10px;font-size:var(--t3);line-height:1.62}
+.tq.feat blockquote{font:500 var(--t4)/1.55 var(--font-body)}
+.tq.feat blockquote p:nth-child(3){font:650 var(--t6)/1.2 var(--font-display);font-style:italic}
+.tq figcaption{display:grid;gap:2px;padding-top:var(--s2);border-top:1px solid var(--line)}
+.tq figcaption b{font:600 var(--t3)/1.3 var(--font-body)}
+.tq figcaption span{font:400 var(--t1)/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (min-width:720px){.quotes{columns:2}}
+@media (min-width:1100px){.quotes{columns:3}}
+
 /* ---- footer ---- */
 footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s6);display:grid;gap:var(--s1);font:400 var(--t2)/1.7 var(--font-mono);color:var(--muted)}
 footer a{text-decoration:none}
@@ -488,7 +500,28 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="hours">
+<section id="said">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">From our last two workshop batches</span>
+      <h2>What people said after <span class="serif">a weekend with us.</span></h2>
+      <p class="dim">Real Facebook recommendations from the AI Takeover and From Operator to Orchestrator batches, the same coaches you'll sit with in Tagaytay.</p>
+    </div>
+    <div class="quotes">
+      <figure class="tq feat"><blockquote><p>I was the last person to sign up for this event. I literally just paid the same day the event started despite seeing it online for the nth time. Pinag iisipan kong mabuti if it&#39;s actually worth it kasi I already have ai agents working. I already know how to build it. Pero hindi pa pala.</p><p>I&#39;ve been spending some of my time watching youtube videos or buying a coursera course for ai employees pero hirap na hirap padin akong i determine kung paano ba dapat sila mag work. And as a visual learner nakakahilo magbasa ng mahahabang courses or manood ng 15min video per topic.</p><p>So is it worth it? Yes definitely.</p><p>I just didn&#39;t learn about AI agents. Madaming topics about how can AI make your business run smoothly and how to build something that you actually need.</p></blockquote><figcaption><b>Raven Lui</b><span>Facebook recommendation &middot; Sept 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>Two days well spent. Our biggest takeaway: AI will not replace people, only the wrong people, the ones who refuse to learn. We&#39;re going home committed to empowering the team to use AI, not shielding them from it. Thank you for a workshop that treated AI as a leadership question, not just a technology one. From operators to orchestrators indeed.</p></blockquote><figcaption><b>Precious Clavo</b><span>Facebook recommendation &middot; Aug 23, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>Gwen and Jamz absolutely blew me away this weekend.</p><p>The Claude building sessions were such an eye-opener. I am walking away with so many ideas for what I can build and create.</p><p>Thank you so much for putting together this hands-on workshop and for sharing so generously. Truly a game changer.</p></blockquote><figcaption><b>Lish Ma Rie</b><span>Facebook recommendation &middot; Aug 23, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>Highly recommended talaga ang Robots &amp; Coffee! Andaming learnings pagdating sa AI, content creation and personal branding. Nakaka amazed talaga natuto ako gumawa ng AI Employee and Lead Engine. It&#39;s all worth it talaga!</p></blockquote><figcaption><b>Jovit Ryan Lucero</b><span>Facebook recommendation &middot; Aug 23, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>After spending the weekend learning about AI employees and becoming a Certified AI Orchestrator, I definitely want to keep the momentum going.</p><p>Robots &amp; Coffee feels like the perfect next space to keep learning, meet people who are also exploring AI, and see how others are actually using it in their businesses.</p><p>Highly recommend checking it out if you&#39;re also getting serious about AI.</p></blockquote><figcaption><b>Zelle Jeremias Herbolario</b><span>Facebook recommendation &middot; Sept 21, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>Super satisfied!</p><p>Very knowledgeable, and accommodating sina Coach Gwen! You can really feel their expertise, and they explain everything clearly and patiently.</p><p>Thank you for sharing your knowledge and for making the experience so worthwhile! Highly recommended!</p></blockquote><figcaption><b>Musee Quinto</b><span>Facebook recommendation &middot; Aug 23, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>I genuinely appreciate the teachings and effort of Gwen and Jamz. I&#39;m proud to see this generation showing up, stepping up, and choosing to learn.</p><p>We can truly see your heart for helping and your willingness to listen and communicate better with the community. Keep growing, keep learning, and keep going. We are cheering for you both.</p></blockquote><figcaption><b>Leonalyn Dela Cruz</b><span>Facebook recommendation &middot; Sept 21, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>It was a fabulous experience being trained by Coach Gwen. A testimonial that young women has so much potential. Coach Gwen&#39;s teachings were definitely very useful in our lives!</p></blockquote><figcaption><b>Gerard Fidelis</b><span>Facebook recommendation &middot; Aug 23, 2026</span></figcaption></figure>
+      <figure class="tq"><blockquote><p>Thank u coach Gwen and coach Jamz.</p></blockquote><figcaption><b>Rovilyn Encinares</b><span>Facebook recommendation &middot; Aug 23, 2026</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="hours" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">The 26 hours</span>
@@ -517,7 +550,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="teaser" class="alt">
+<section id="teaser">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Before you decide</span>
@@ -532,7 +565,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="place">
+<section id="place" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">The place</span>
@@ -601,7 +634,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="included" class="alt">
+<section id="included">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Included</span>
@@ -628,7 +661,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="fit">
+<section id="fit" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Is this you?</span>
@@ -656,7 +689,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="seats" class="alt">
+<section id="seats">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Seats</span>
@@ -683,7 +716,7 @@ const SETTINGS = {
   </div>
 </section>
 
-<section id="faq">
+<section id="faq" class="alt">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Questions</span>
