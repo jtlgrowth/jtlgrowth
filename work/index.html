@@ -677,6 +677,16 @@ addEventListener('load', function () {
   setTimeout(land, 150);
   setTimeout(land, 900);
 });
+/* The films ship preload="none" so the page downloads nothing until someone plays one. Chrome then
+   ignores a click on the middle of the frame (only its play button works), so the first click on a
+   film that has not loaded anything starts it. Once it has data, the browser's own controls take over. */
+[].forEach.call(document.querySelectorAll('.demo video'), function (v) {
+  v.addEventListener('click', function () {
+    if (!v.paused || v.readyState > 0) return;
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  });
+});
 </script>
 </body>
 </html>

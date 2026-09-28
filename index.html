@@ -489,7 +489,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <!-- v10 cinematic preloader (2026-09-28). Static markup + head CSS + inline script so the curtain is
      in the first paint. Contract kept from v8/v9: sessionStorage jtlboot, .off slide-left, node removed
      700 ms later, Esc or SKIP dismisses, reduced motion shows the final mark and fades at 0.4 s. -->
-<div id="boot"><div class="bt-film"><video muted playsinline preload="auto" disablepictureinpicture poster="/assets/boot/jtl-film-poster.webp" aria-hidden="true"><source src="/assets/boot/jtl-film.mp4" type='video/mp4; codecs="avc1.64001F"'><source src="/assets/boot/jtl-film.webm" type='video/webm; codecs="vp9"'></video><svg class="bt-mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="#FCFCFC" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></div><div class="bt-hud" aria-hidden="true"><div class="bt-seats"></div><p class="bt-pct">Clocking in <span>0</span>%</p></div><span class="bt-sr" role="status">Loading JTL Growth</span><button class="bt-skip" type="button" aria-label="Skip intro">skip</button></div>
+<div id="boot"><div class="bt-film"><video muted playsinline preload="none" disablepictureinpicture poster="/assets/boot/jtl-film-poster.webp" aria-hidden="true"><source src="/assets/boot/jtl-film.mp4" type='video/mp4; codecs="avc1.64001F"'><source src="/assets/boot/jtl-film.webm" type='video/webm; codecs="vp9"'></video><svg class="bt-mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="#FCFCFC" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></div><div class="bt-hud" aria-hidden="true"><div class="bt-seats"></div><p class="bt-pct">Clocking in <span>0</span>%</p></div><span class="bt-sr" role="status">Loading JTL Growth</span><button class="bt-skip" type="button" aria-label="Skip intro">skip</button></div>
 <script>
 /* v10 cinematic preloader. The film (3.7 s) has two parts: a close-up travelling along one bar
    (0 to 2.0 s), then the angle swings round onto the flat mark. The travel may only run as far as
@@ -589,10 +589,11 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   window.JTLBOOT = window.KC = { state: S, done: done };
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     S.reduced = true; root.classList.add('crisp');
-    try { v.removeAttribute('preload'); v.preload = 'none'; } catch (e) {}
     if (!S.hold) setTimeout(done, 400);
     return;
   }
+  // the markup ships preload="none" so reduced-motion visitors never download the film
+  v.preload = 'auto';
   requestAnimationFrame(tick);
 })();
 </script>

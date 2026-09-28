@@ -66,7 +66,7 @@
     { name: 'built', kws: ['students', 'founders built', 'what they built', 'testimonials', 'results', 'after the room', 'batch 1 results', 'reviews'],
       a: 'Within two weeks of the room, Batch 1 founders shipped their own headquarters, a catalog site, second brains and AI employees. Their clips and words sit on the workshop page under Built after the room. Type go to built.' },
     { name: 'batch2', kws: ['batch 2', 'batch2', 'batch two', 'next workshop', 'next batch', 'join the workshop', 'sept 19', 'september 19', 'how do i join'],
-      a: 'Batch 2 ran September 19 to 20, 2026. In the room? Your laptop setup is one command: type setup. The next room is announced on the Robots and Coffee page: ayalavirtualassistance.site/robots-and-coffee.' },
+      a: 'Batch 2 ran September 19 to 20, 2026. In the room? Your laptop setup is one command: type setup. Batch 3 is next, and the list is open: ayalavirtualassistance.site/ai-workshop-waitlist.' },
     { name: 'setup', kws: ['setup', 'set up', 'claude code', 'install', 'installer', 'install claude', 'how do i install', 'installation', 'powershell', 'command prompt', 'cmd', 'terminal', 'windows', 'mac', 'macbook', 'laptop', 'one command'],
       a: 'One command installs Claude Code, Node.js and Git on Mac or Windows, PowerShell or Command Prompt. Opening the setup page.', go: '/setup/' },
     { name: 'codex', kws: ['codex', 'setup codex', 'set up codex', 'install codex', 'codex cli', 'openai', 'chatgpt', 'chat gpt'],
