@@ -323,6 +323,22 @@ a.app:hover{border-color:var(--paper)}
 @media (min-width:640px){.apps{grid-template-columns:1fr 1fr}}
 @media (min-width:1100px){.apps{grid-template-columns:repeat(4,1fr)}}
 
+/* ---- the room: real workshop photos ---- */
+.room{background:var(--navy-deep);color:var(--paper)}
+.room .eyebrow,.room .dim{color:var(--blue-soft)}
+.nos{display:flex;flex-wrap:wrap;gap:var(--s1);margin:0 0 var(--s4);padding:0;list-style:none}
+.nos li{padding:10px 16px;border:1px solid var(--line-on-dark);border-radius:var(--radius-pill);font:700 var(--t1)/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper)}
+.nos li.no{color:var(--blue-soft)}
+.nos li.no s{text-decoration-thickness:1px}
+.shots{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;grid-auto-flow:dense;gap:var(--s1)}
+.shots figure{position:relative;margin:0;overflow:hidden;border-radius:var(--radius-md);background:#1E1E1E}
+.shots figure.tall{grid-row:span 2}
+.shots figure.wide{grid-column:span 2}
+.shots img{width:100%;height:100%;object-fit:cover;display:block}
+.shots figcaption{position:absolute;inset:auto 0 0 0;padding:28px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.72));font:400 11px/1.35 var(--font-mono);letter-spacing:.06em;color:var(--paper)}
+@media (min-width:700px){.shots{grid-template-columns:repeat(3,1fr);grid-auto-rows:210px} .shots figure.wide3{grid-column:span 3}}
+@media (min-width:1100px){.shots{grid-template-columns:repeat(4,1fr);grid-auto-rows:230px} .shots figure.wide3{grid-column:auto}}
+
 /* ---- testimonials ---- */
 .quotes{columns:1;column-gap:var(--s3)}
 .tq{break-inside:avoid;margin:0 0 var(--s3);padding:var(--s3);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);display:grid;gap:var(--s2)}
@@ -433,6 +449,37 @@ const SETTINGS = {
       <div><b>You feel late to AI.</b><span>You've tried ChatGPT. Everyone's talking about it. It hasn't changed a single thing about your week yet.</span></div>
     </div>
     <p class="turn">You don't need more discipline. You need one evening where someone makes the content with you, and one night where you build the thing your business has been begging for.</p>
+  </div>
+</section>
+
+<section class="room" id="room">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Real photos from our last two batches</span>
+      <h2>No theory. No demos. <span class="serif">You actually build.</span></h2>
+      <p class="dim">This is what a Gwen and Jamz room looks like: laptops open, your own business on the screen, a coach at your shoulder until it works. That was a full room. The Overnight Build is ten founders at one table, so we sit with every single one of you.</p>
+    </div>
+    <ul class="nos">
+      <li>10 founders only</li>
+      <li>Hands on, all night</li>
+      <li class="no"><s>Theory</s></li>
+      <li class="no"><s>Demos you just watch</s></li>
+      <li class="no"><s>AI tools you&#39;ll never use</s></li>
+    </ul>
+    <div class="shots">
+      <figure class="tall"><img src="/mastermind/media/gallery-01.jpg" alt="Gwen and Jamz, your two coaches, on Day 1 of the August batch" loading="lazy"><figcaption>Gwen + Jamz, your coaches</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-03.jpg" alt="Jamz at the laptop with a founder, building live in front of the room" loading="lazy"><figcaption>Jamz, building live with a founder</figcaption></figure>
+      <figure class="tall"><img src="/mastermind/media/gallery-02.jpg" alt="Gwen standing with a founder, both looking at the founder&#39;s laptop" loading="lazy"><figcaption>Gwen, at a founder&#39;s laptop</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-06.jpg" alt="Jamz with founders, laptops open, going through a build" loading="lazy"><figcaption>Jamz with founders, laptops out</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-04.jpg" alt="Gwen teaching in a polka-dot blazer" loading="lazy"><figcaption>Gwen, on content that sells</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-08.jpg" alt="Jamz typing at a founder&#39;s laptop while the table leans in" loading="lazy"><figcaption>Everyone leaning in on one build</figcaption></figure>
+      <figure class="tall"><img src="/mastermind/media/gallery-07.jpg" alt="Gwen speaking on Day 2 of the August batch" loading="lazy"><figcaption>Gwen, Day 2</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-05.jpg" alt="Gwen holding a founder&#39;s laptop, checking the work together" loading="lazy"><figcaption>Checking the work together</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-10.jpg" alt="Jamz leaning over a founder&#39;s shoulder at her laptop" loading="lazy"><figcaption>Jamz, at your shoulder</figcaption></figure>
+      <figure><img src="/mastermind/media/gallery-09.jpg" alt="Gwen walking the room with a laptop, checking a founder&#39;s build" loading="lazy"><figcaption>Walking the room, laptop in hand</figcaption></figure>
+      <figure class="wide"><img src="/mastermind/media/gallery-11.jpg" alt="Gwen on stage in front of a slide that reads I don&#39;t code" loading="lazy"><figcaption>&ldquo;I don&#39;t code.&rdquo; Neither do most of them.</figcaption></figure>
+      <figure class="wide3"><img src="/mastermind/media/gallery-12.jpg" alt="Two founders heads down at their laptops, building" loading="lazy"><figcaption>Heads down, building</figcaption></figure>
+    </div>
   </div>
 </section>
 
@@ -728,7 +775,7 @@ const SETTINGS = {
     <details><summary>Where do I sleep?</summary><p>Early bird seats get a private queen room. Regular seats share the builders' room: eight bunks and its own bath, the way a hackathon sleeps. Hosts and staff take the lanai. Most people build past midnight anyway.</p></details>
     <details><summary>I'm not techy. Will I get lost?</summary><p>You won't be left alone with it. The hosts sit at the same table all night, the vault walks you through ten prompts with a video each, and the only thing you need before you arrive is Claude Code running on your laptop. If you can describe the problem, we'll help you build the fix.</p></details>
     <details><summary>What AI will I actually learn?</summary><p>Three things on top of your app. Higgsfield in the content block, for AI photos and video made from your own shoot. Multi-agent AI, where several agents split one job between them, like one researching, one writing, one checking. And Hermes, below.</p></details>
-    <details><summary>What is Hermes, and why learn it here?</summary><p>Hermes runs AI agents on their own. You give it a job once, like checking your inbox, drafting follow-ups, or pulling a report, and it does the job on schedule and tells you what it did. ChatGPT waits for you to type. Hermes doesn't. We teach it Saturday at 6pm, then you can wire it into the app you build that night.</p></details>
+    <details><summary>What is Hermes, and why learn it here?</summary><p>Hermes runs AI agents on their own. You give it a job once, like checking your inbox, drafting follow-ups, or pulling a report, and it does the job on schedule and tells you what it did. ChatGPT waits for you to type. Hermes doesn't. We teach it Saturday at 7:30pm, right after dinner, then you can wire it into the app you build that night.</p></details>
     <details><summary>Will my build actually be live, or just on my laptop?</summary><p>Live. By Sunday it sits on the internet at its own link, so you can open it on your phone and send it to your team or clients. It stays yours, on your own GitHub.</p></details>
     <details><summary>Refunds?</summary><p>Seats are capacity, not stock. A seat can be transferred to another builder up to Oct 17. No refunds after booking.</p></details>
   </div>
