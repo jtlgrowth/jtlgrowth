@@ -1,0 +1,740 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours and type live in :root below; every word, price and name lives in SETTINGS at the bottom.
+     World E "Si Bubu sa Lababo" (Owner pick 2026-09-28), ported from apps/hugas/redesign/2026-09-28/e-bubu.html.
+     settings: host-ok=jtlgrowth.com
+     Motion rule: nothing sways on its own. Bubu only wiggles when someone touches him; ambient motion is bubbles rising. -->
+<html lang="fil">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hugas: kaninong turn na sa lababo?</title>
+<meta name="description" content="Kita kung kaninong turn maghugas. Take 1 photo ng malinis na lababo, then next na sa pila. Coming soon sa iPhone. Free with a small ad. ₱99 one-time para walang ads ang buong bahay.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/hugas/">
+<meta property="og:title" content="Hugas: kaninong turn na sa lababo?">
+<meta property="og:description" content="Kaninong turn maghugas? May pila na sa app, may photo proof pa. Meet Bubu, ang alaga n&#x27;yong bula sa lababo. Tap mo, kilitiin mo!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jtlgrowth.com/apps/hugas/">
+<meta property="og:image" content="https://jtlgrowth.com/shots/hugas.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fff4f8"><!-- settings: literal-ok -->
+<link rel="icon" href="icon.png">
+<link rel="preload" href="fonts/MochiyPopOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+@font-face { font-family: "Mochiy Pop One"; src: url("fonts/MochiyPopOne-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "M PLUS Rounded 1c"; src: url("fonts/MPLUSRounded1c-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "M PLUS Rounded 1c"; src: url("fonts/MPLUSRounded1c-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "M PLUS Rounded 1c"; src: url("fonts/MPLUSRounded1c-ExtraBold.ttf") format("truetype"); font-weight: 800; font-display: swap; }
+
+/* PROJECT SETTINGS: venice-base roles first, then the Bubu world palette (same values as the app's colorsets). */
+:root {
+  --bg: #fff4f8;
+  --surface: #ffffff;
+  --surface-warm: #ffe0ee;
+  --fg: #3a2e4f;
+  --fg-2: #6e6387;
+  --muted: #6e6387;
+  --meta: #6e6387;
+  --border: #f1dce8;
+  --border-soft: #f7e8f0;
+  --accent: #ff6fae;
+  --accent-hover: #b8326f;
+  --accent-active: #8a2253;
+  --accent-on: #3a2e4f;
+  --success: #0f7354;
+  --warn: #ffd76a;
+  --danger: #b8326f;
+  --focus-ring: #463b7a;
+
+  --ink: #3a2e4f;
+  --white: #ffffff;
+  --pink: #ff6fae;
+  --pink-deep: #b8326f;
+  --pink-lip: #8a2253;
+  --pink-soft: #ffe0ee;
+  --mint: #3fd6a6;
+  --mint-deep: #0f7354;
+  --mint-lip: #0b5e45;
+  --mint-soft: #d9f7ec;
+  --lav: #b9a7ff;
+  --lav-soft: #ece6ff;
+  --sky: #9ad9ff;
+  --sun: #ffd76a;
+  --stink: #9bc53d;
+  --stink-deep: #486a10;
+  --mud: #a98a5a;
+  --night: #2d2550;
+  --night-2: #463b7a;
+
+  --font-display: "Mochiy Pop One", "Arial Rounded MT Bold", ui-rounded, system-ui, sans-serif;
+  --font-body: "M PLUS Rounded 1c", ui-rounded, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --text-xs: 13px; --text-sm: 15px; --text-base: 17px; --text-lg: 20px; --text-xl: 24px;
+  --text-2xl: clamp(28px, 4.2vw, 40px); --text-3xl: clamp(34px, 5.6vw, 58px); --text-4xl: clamp(40px, 7vw, 76px);
+  --leading-body: 1.55; --leading-tight: 1.08; --tracking-display: -0.01em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+  --radius-sm: 10px; --radius-md: 18px; --radius-lg: 28px; --radius-pill: 999px;
+  --container-max: 1120px; --container-gutter-phone: 16px; --container-gutter-tablet: 28px; --container-gutter-desktop: 40px;
+  --section-y-phone: 64px; --section-y-tablet: 88px; --section-y-desktop: 112px;
+  --elev-flat: none; --elev-raised: 0 6px 0 var(--ink); --elev-ring: 0 0 0 4px var(--ink);
+  --ease-standard: cubic-bezier(.2, .9, .3, 1); --ease-spring: cubic-bezier(.2, 1.5, .4, 1);
+  --motion-fast: .18s; --motion-base: .32s;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 var(--text-base)/var(--leading-body) var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 4px solid var(--focus-ring); outline-offset: 3px; border-radius: var(--radius-sm); }
+.wrap { width: min(var(--container-max), 100% - 2 * var(--container-gutter-phone)); margin-inline: auto; }
+.pop { font-family: var(--font-display); font-weight: 400; letter-spacing: var(--tracking-display); line-height: var(--leading-tight); text-wrap: balance; margin: 0; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Top bar */
+.top { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-4); }
+.brand { display: flex; align-items: center; gap: var(--space-2); text-decoration: none; }
+.brand svg { width: 38px; height: 38px; }
+.brand b { font: 400 var(--text-xl)/1 var(--font-display); }
+.chip { display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px 12px; border-radius: var(--radius-pill); background: var(--surface); border: 2.5px solid var(--ink); font: 800 var(--text-xs)/1.2 var(--font-body); }
+.chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--mint); border: 2px solid var(--ink); }
+.iconbtn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--surface); border: 2.5px solid var(--ink); cursor: pointer; box-shadow: 0 3px 0 var(--ink); }
+.iconbtn svg { width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.iconbtn:active { transform: translateY(3px); box-shadow: none; }
+.top-r { display: flex; align-items: center; gap: var(--space-2); }
+
+/* Hero: the object leads (visual left, one headline and one CTA) */
+.hero { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); align-items: center; gap: var(--space-12); min-height: calc(100svh - 80px); padding-bottom: var(--space-8); }
+.stage { position: relative; width: 100%; aspect-ratio: 1; border-radius: 40px; background: radial-gradient(circle at 50% 42%, var(--white) 0 30%, var(--pink-soft) 72%, var(--lav-soft)); border: 4px solid var(--ink); box-shadow: 0 10px 0 var(--ink); overflow: hidden; touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.stage .floor { position: absolute; left: 0; right: 0; bottom: 0; height: 17%; background: var(--sky); border-top: 4px solid var(--ink); }
+.stage .floor::before { content: ""; position: absolute; inset: 10px 0 auto; height: 6px; background: repeating-linear-gradient(90deg, var(--white) 0 26px, transparent 26px 52px); opacity: .7; }
+.bubu-btn { position: absolute; left: 50%; bottom: 9%; width: 74%; translate: -50% 0; aspect-ratio: 1; border: 0; background: none; padding: 0; cursor: pointer; transform-origin: 50% 92%; }
+.bubu-btn svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.bubu-btn:focus-visible { outline-offset: -6px; border-radius: 50%; }
+.say { position: absolute; left: 50%; top: 5%; translate: -50% 0; z-index: 4; max-width: 86%; padding: 10px 18px; border-radius: 22px; background: var(--surface); border: 3.5px solid var(--ink); box-shadow: 0 4px 0 var(--ink); font: 400 clamp(17px, 2.4vw, 24px)/1.2 var(--font-display); text-align: center; opacity: 0; scale: .6; transition: opacity var(--motion-fast), scale var(--motion-base) var(--ease-spring); pointer-events: none; }
+.say::after { content: ""; position: absolute; left: 50%; bottom: -13px; width: 20px; height: 20px; translate: -50% 0; rotate: 45deg; background: var(--surface); border-right: 3.5px solid var(--ink); border-bottom: 3.5px solid var(--ink); }
+.say.on { opacity: 1; scale: 1; }
+.hint { position: absolute; right: 4%; top: 36%; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: var(--radius-pill); background: var(--sun); border: 3px solid var(--ink); font: 800 var(--text-xs)/1.1 var(--font-body); pointer-events: none; transition: opacity var(--motion-base), translate var(--motion-base) var(--ease-standard); }
+.hint svg { width: 18px; height: 18px; fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hint.gone { opacity: 0; translate: 0 -12px; }
+.count { position: absolute; left: 50%; bottom: 3.2%; translate: -50% 0; z-index: 3; margin: 0; white-space: nowrap; font: 800 var(--text-xs)/1 var(--font-body); color: var(--ink); }
+.count b { font: 400 var(--text-sm)/1 var(--font-display); color: var(--pink-deep); }
+.copy h1 { font-size: clamp(40px, 4.6vw, 64px); }
+.copy h1 em { font-style: normal; color: var(--pink-deep); }
+.cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+
+/* Buttons: pink or mint with a lip, like the app's BubuButtonStyle */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; padding: 0 26px; border-radius: var(--radius-pill); border: 3.5px solid var(--ink); background: var(--pink); color: var(--accent-on); font: 800 var(--text-lg)/1 var(--font-body); text-decoration: none; cursor: pointer; box-shadow: 0 6px 0 var(--pink-lip); transition: transform var(--motion-fast), box-shadow var(--motion-fast); }
+.btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--pink-lip); }
+.btn.mint { background: var(--mint); box-shadow: 0 6px 0 var(--mint-lip); }
+.btn.mint:active { box-shadow: 0 0 0 var(--mint-lip); }
+.btn.ghost { background: var(--surface); box-shadow: 0 6px 0 var(--ink); }
+.btn.ghost:active { box-shadow: 0 0 0 var(--ink); }
+.toast { position: fixed; left: 50%; bottom: 24px; z-index: 50; translate: -50% 20px; padding: 12px 20px; border-radius: var(--radius-pill); background: var(--ink); color: var(--white); font: 800 var(--text-sm)/1.2 var(--font-body); opacity: 0; transition: opacity var(--motion-base), translate var(--motion-base) var(--ease-standard); pointer-events: none; }
+.toast.on { opacity: 1; translate: -50% 0; }
+
+/* Rising bubbles: the only ambient motion on the page, always upward */
+.fizz { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.fizz i { position: absolute; bottom: -60px; border-radius: 50%; border: 2.5px solid var(--sky); background: radial-gradient(circle at 30% 30%, var(--white) 0 18%, transparent 21%); opacity: .75; animation: up linear infinite; }
+@keyframes up { to { transform: translateY(-130vh); } }
+.pop-b { position: absolute; z-index: 3; border-radius: 50%; border: 3px solid var(--ink); background: radial-gradient(circle at 32% 30%, var(--white) 0 20%, var(--sky) 22% 60%, var(--lav)); pointer-events: none; animation: popup .9s var(--ease-standard) forwards; }
+@keyframes popup { from { transform: translate(-50%, -50%) scale(.3); opacity: 1; } to { transform: translate(calc(-50% + var(--dx)), calc(-50% - var(--dy))) scale(1); opacity: 0; } }
+.heart { position: absolute; z-index: 3; width: 34px; height: 30px; pointer-events: none; animation: heartup 1.4s ease-out forwards; }
+.heart path { fill: var(--pink); stroke: var(--ink); stroke-width: 2.5; }
+@keyframes heartup { from { transform: translate(-50%, 0) scale(.4); opacity: 1; } to { transform: translate(calc(-50% + var(--dx)), -190px) scale(1.1); opacity: 0; } }
+
+/* Tickle: a squash and a wiggle, only on touch, over in half a second */
+.bubu-btn.tickle { animation: tickle .52s var(--ease-standard); }
+@keyframes tickle { 0% { transform: scale(1, 1) rotate(0); } 18% { transform: scale(1.14, .84) rotate(-5deg); } 40% { transform: scale(.92, 1.1) rotate(5deg); } 62% { transform: scale(1.05, .96) rotate(-2deg); } 100% { transform: scale(1, 1) rotate(0); } }
+.bubu-btn.spin { animation: spin .8s var(--ease-standard); transform-origin: 50% 58%; }
+@keyframes spin { 0% { transform: scale(1) rotate(0); } 25% { transform: scale(1.1, .85) rotate(0); } 100% { transform: scale(1) rotate(360deg); } }
+
+/* Bubu parts, same classes as the mock */
+.bubu .bs { fill: var(--lav); opacity: .35; }
+.bubu .bb { stroke: var(--ink); stroke-width: 4.5; }
+.bubu .bhi { fill: var(--white); opacity: .9; }
+.bubu .bhl { fill: none; stroke: var(--white); stroke-width: 7; stroke-linecap: round; opacity: .9; }
+.bubu .bk { fill: var(--ink); }
+.bubu .bw { fill: var(--white); }
+.bubu .bl { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.bubu .bc { fill: var(--pink); opacity: .55; }
+.bubu .bc.hot { opacity: .9; }
+.bubu .bmouth { fill: var(--pink-deep); stroke: var(--ink); stroke-width: 3.5; stroke-linejoin: round; }
+.bubu .btongue { fill: var(--pink); }
+.bubu .btear { fill: var(--sky); stroke: var(--ink); stroke-width: 2.5; }
+.bubu .bmud { fill: var(--mud); opacity: .6; }
+.bubu .bstink { fill: none; stroke: var(--stink); stroke-width: 5; stroke-linecap: round; }
+.bubu .bant { fill: var(--sky); stroke: var(--ink); stroke-width: 3.5; }
+.bubu .bhat { fill: var(--pink); stroke: var(--ink); stroke-width: 3.5; stroke-linejoin: round; }
+.bubu .bhat2 { fill: var(--sun); }
+.bubu .bpom { fill: var(--sun); stroke: var(--ink); stroke-width: 3; }
+.bubu .bspark { fill: var(--sun); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+.bubu .barm { fill: none; stroke: var(--ink); stroke-width: 4.5; stroke-linecap: round; }
+.bubu .barmf { fill: none; stroke: var(--lav-soft); stroke-width: 9; stroke-linecap: round; }
+.g1 { stop-color: var(--white); } .g2 { stop-color: var(--sky); } .g3 { stop-color: var(--lav); } .g4 { stop-color: var(--pink); }
+.m1 { stop-color: var(--mint-soft); } .m2 { stop-color: var(--stink); } .m3 { stop-color: var(--mud); }
+.eye { transform-box: fill-box; transform-origin: center; animation: blink 4.2s infinite; }
+@keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+.stinkl { animation: stinkup 1.8s ease-out infinite; transform-box: fill-box; }
+.stinkl.l2 { animation-delay: .6s; } .stinkl.l3 { animation-delay: 1.2s; }
+@keyframes stinkup { from { transform: translateY(8px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(-16px); opacity: 0; } }
+.hatdrop { animation: hatdrop .6s var(--ease-spring) both; }
+@keyframes hatdrop { from { transform: translateY(-90px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Sections */
+section.band { position: relative; padding-block: var(--section-y-phone); }
+.kick { display: inline-block; margin-bottom: var(--space-4); padding: 6px 14px; border-radius: var(--radius-pill); background: var(--lav-soft); border: 2.5px solid var(--ink); font: 800 var(--text-xs)/1.2 var(--font-body); }
+h2.pop { font-size: var(--text-3xl); }
+.lead { max-width: 58ch; margin: var(--space-4) 0 0; color: var(--fg-2); font-size: var(--text-lg); font-weight: 700; }
+
+.night { background: var(--night); color: var(--white); border-block: 4px solid var(--ink); overflow: hidden; }
+.night .lead { color: var(--lav-soft); }
+.night .kick { background: var(--night-2); color: var(--white); border-color: var(--lav); }
+.fight { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
+.bub { position: relative; padding: var(--space-5); border-radius: 24px; background: var(--surface); color: var(--ink); border: 3.5px solid var(--ink); font: 800 var(--text-lg)/1.3 var(--font-body); }
+.bub small { display: block; margin-top: 6px; font: 700 var(--text-sm)/1.3 var(--font-body); color: var(--fg-2); }
+.cost { margin-top: var(--space-8); font: 400 var(--text-2xl)/1.2 var(--font-display); color: var(--sun); text-wrap: balance; }
+
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-8); }
+.step { position: relative; padding: var(--space-6); border-radius: var(--radius-lg); background: var(--surface); border: 3.5px solid var(--ink); box-shadow: var(--elev-raised); }
+.step .n { position: absolute; top: -18px; left: 20px; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--pink); border: 3px solid var(--ink); font: 400 var(--text-lg)/1 var(--font-display); }
+.step:nth-child(2) .n { background: var(--sky); } .step:nth-child(3) .n { background: var(--mint); }
+.step svg.mini { width: 120px; height: 120px; display: block; margin: 0 auto var(--space-3); overflow: visible; }
+.step h3 { margin: 0 0 6px; font: 400 var(--text-xl)/1.15 var(--font-display); }
+.step p { margin: 0; color: var(--fg-2); font-weight: 700; }
+
+/* Try it: scrub Bubu clean */
+.try { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-12); align-items: center; }
+.tub { position: relative; aspect-ratio: 1; border-radius: 40px; background: radial-gradient(circle at 50% 45%, var(--white), var(--mint-soft) 75%); border: 4px solid var(--ink); box-shadow: 0 10px 0 var(--ink); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: none; }
+.tub .sink { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: var(--sky); border-top: 4px solid var(--ink); }
+.tub .scrubbu { position: absolute; left: 50%; bottom: 10%; width: 70%; translate: -50% 0; aspect-ratio: 1; pointer-events: none; }
+.tub .scrubbu svg { width: 100%; height: 100%; overflow: visible; }
+.tub .dirt { opacity: var(--dirt, 1); transition: opacity .12s linear; }
+.sponge { position: absolute; z-index: 4; width: 84px; height: 62px; left: 0; top: 0; translate: -50% -50%; pointer-events: none; opacity: 0; transition: opacity var(--motion-fast); }
+.sponge.on { opacity: 1; }
+.sponge .sp1 { fill: var(--sun); stroke: var(--ink); stroke-width: 3.5; }
+.sponge .sp2 { fill: var(--mint); stroke: var(--ink); stroke-width: 3.5; }
+.sponge .sp3 { fill: var(--mud); opacity: .35; }
+.foam { position: absolute; z-index: 3; border-radius: 50%; background: var(--white); border: 2.5px solid var(--sky); pointer-events: none; animation: foam 1s ease-out forwards; }
+@keyframes foam { from { transform: translate(-50%, -50%) scale(.4); opacity: 1; } to { transform: translate(-50%, calc(-50% - 70px)) scale(1); opacity: 0; } }
+.tub-say { position: absolute; left: 50%; top: 5%; translate: -50% 0; z-index: 5; padding: 8px 16px; border-radius: 20px; background: var(--surface); border: 3.5px solid var(--ink); font: 400 var(--text-lg)/1.2 var(--font-display); white-space: nowrap; }
+.meter { margin-top: var(--space-6); }
+.meter .row { display: flex; justify-content: space-between; font: 800 var(--text-sm)/1 var(--font-body); margin-bottom: 8px; }
+.meter .bar { height: 22px; border-radius: var(--radius-pill); background: var(--surface); border: 3px solid var(--ink); overflow: hidden; }
+.meter .bar i { display: block; height: 100%; width: var(--p, 20%); background: var(--stink); border-right: 3px solid var(--ink); transition: width .15s linear, background var(--motion-base); }
+.meter.clean .bar i { background: var(--mint); }
+.pila { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); padding: 0; list-style: none; }
+.pila li { display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: var(--radius-pill); background: var(--surface); border: 3px solid var(--border); font: 800 var(--text-sm)/1 var(--font-body); transition: border-color var(--motion-base), background var(--motion-base), transform var(--motion-base) var(--ease-spring); }
+.pila li .av { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 2.5px solid var(--ink); font: 400 var(--text-sm)/1 var(--font-display); }
+.pila li.now { border-color: var(--ink); background: var(--pink-soft); transform: translateY(-3px); }
+.pila li.now::after { content: attr(data-tag); margin-left: 4px; padding: 3px 8px; border-radius: var(--radius-pill); background: var(--ink); color: var(--white); font-size: var(--text-xs); }
+.c0 { background: var(--pink); } .c1 { background: var(--sky); } .c2 { background: var(--mint); } .c3 { background: var(--sun); } .c4 { background: var(--lav); }
+.try-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+.done-note { margin: var(--space-4) 0 0; min-height: 1.5em; font: 800 var(--text-base)/1.4 var(--font-body); color: var(--success); }
+
+/* Prices */
+.prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-8); align-items: stretch; }
+.price { position: relative; display: flex; flex-direction: column; padding: var(--space-6); border-radius: var(--radius-lg); background: var(--surface); border: 3.5px solid var(--ink); box-shadow: var(--elev-raised); }
+.price.best { background: var(--pink-soft); }
+.price .tag { position: absolute; top: -16px; right: 18px; padding: 6px 12px; border-radius: var(--radius-pill); background: var(--sun); border: 3px solid var(--ink); font: 800 var(--text-xs)/1 var(--font-body); }
+.price h3 { margin: 0; font: 800 var(--text-lg)/1.2 var(--font-body); }
+.price .amt { margin: var(--space-3) 0 var(--space-2); font: 400 clamp(40px, 5vw, 56px)/1 var(--font-display); }
+.price .amt small { font: 800 var(--text-sm)/1 var(--font-body); color: var(--fg-2); margin-left: 6px; }
+.price ul { margin: var(--space-3) 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.price li { display: flex; gap: 10px; font-weight: 700; }
+.price li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%; background: var(--mint); border: 2.5px solid var(--ink); }
+.fine { margin-top: var(--space-6); color: var(--fg-2); font-weight: 700; }
+
+/* FAQ */
+.faq { display: grid; gap: var(--space-3); margin-top: var(--space-8); max-width: 780px; }
+.faq details { border-radius: 22px; background: var(--surface); border: 3.5px solid var(--ink); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding: var(--space-5); font: 800 var(--text-lg)/1.3 var(--font-body); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--lav-soft); border: 2.5px solid var(--ink); font: 400 var(--text-lg)/1 var(--font-display); transition: rotate var(--motion-base) var(--ease-standard); }
+.faq details[open] summary::after { rotate: 45deg; }
+.faq details p { margin: 0; padding: 0 var(--space-5) var(--space-5); color: var(--fg-2); font-weight: 700; }
+
+.end { text-align: center; }
+.end svg.bubu-end { width: 180px; height: 180px; overflow: visible; }
+.end .cta-row { justify-content: center; }
+footer { padding-block: var(--space-8) var(--space-12); text-align: center; color: var(--fg-2); font: 700 var(--text-sm)/1.6 var(--font-body); }
+footer a { font-weight: 800; }
+
+@media (min-width: 720px) {
+  section.band { padding-block: var(--section-y-tablet); }
+  .wrap { width: min(var(--container-max), 100% - 2 * var(--container-gutter-tablet)); }
+}
+@media (min-width: 1100px) {
+  section.band { padding-block: var(--section-y-desktop); }
+  .wrap { width: min(var(--container-max), 100% - 2 * var(--container-gutter-desktop)); }
+}
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: var(--space-6); min-height: 0; padding-top: var(--space-2); }
+  .stage { width: calc(100% + 12px); margin-inline: -6px; border-radius: 32px; }
+  .copy { text-align: center; }
+  .copy .cta-row { justify-content: center; margin-top: var(--space-5); }
+  .try { grid-template-columns: 1fr; gap: var(--space-8); }
+  .tub { width: calc(100% + 12px); margin-inline: -6px; }
+  .fight, .steps, .prices { grid-template-columns: 1fr; }
+  .steps { gap: var(--space-8); }
+  .prices { gap: var(--space-8); }
+  .chip.soon { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fizz, .pop-b, .heart, .foam { display: none; }
+  .bubu-btn.tickle, .bubu-btn.spin, .hatdrop, .stinkl, .eye { animation: none; }
+  .say, .hint, .toast, .pila li { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Hugas">
+      <svg viewBox="0 0 200 200" data-m="happy" aria-hidden="true"></svg><b>Hugas</b>
+    </a>
+    <div class="top-r">
+      <span class="chip soon"><i></i><span data-t="soon"></span></span>
+      <button class="iconbtn" id="sound" type="button" aria-pressed="true" aria-label="Sound: on">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><g class="on"><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></g><g class="off" hidden><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></g></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="h1">
+      <div class="stage" id="stage">
+        <div class="fizz" data-fizz="9"></div>
+        <div class="floor"></div>
+        <div class="say" id="say" role="status" aria-live="polite"></div>
+        <div class="hint" id="hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"/><path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg><span data-t="hint"></span></div>
+        <button class="bubu-btn" id="bubu" type="button" data-label="bubu_label"><svg viewBox="0 0 200 200" id="bubuSvg" aria-hidden="true"></svg></button>
+        <p class="count" id="count" aria-live="off"></p>
+      </div>
+      <div class="copy">
+        <h1 class="pop" id="h1" data-t="h1"></h1>
+        <div class="cta-row">
+          <button class="btn" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg><span data-t="cta_share"></span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<section class="band night" aria-labelledby="h-prob">
+  <div class="fizz" data-fizz="7"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <span class="kick" data-t="prob_kick"></span>
+    <h2 class="pop" id="h-prob" data-t="prob_h"></h2>
+    <div class="fight" id="fight"></div>
+    <p class="cost" data-t="prob_cost"></p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="h-how">
+  <div class="wrap">
+    <span class="kick" data-t="how_kick"></span>
+    <h2 class="pop" id="h-how" data-t="how_h"></h2>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section class="band" style="background:var(--surface-warm);border-block:4px solid var(--ink)" aria-labelledby="h-try">
+  <div class="wrap try">
+    <div class="tub" id="tub">
+      <div class="sink"></div>
+      <div class="tub-say" id="tubSay"></div>
+      <div class="scrubbu"><svg viewBox="0 0 200 200" id="scrubSvg" aria-hidden="true"></svg></div>
+      <svg class="sponge" id="sponge" viewBox="0 0 84 62" aria-hidden="true"><rect class="sp2" x="4" y="34" width="76" height="24" rx="10"/><rect class="sp1" x="4" y="4" width="76" height="34" rx="12"/><circle class="sp3" cx="22" cy="18" r="4"/><circle class="sp3" cx="46" cy="24" r="5"/><circle class="sp3" cx="64" cy="14" r="3.5"/></svg>
+    </div>
+    <div>
+      <span class="kick" data-t="try_kick"></span>
+      <h2 class="pop" id="h-try" data-t="try_h"></h2>
+      <p class="lead" data-t="try_lead"></p>
+      <div class="meter" id="meter">
+        <div class="row"><span data-t="linis"></span><span id="linisPct">20%</span></div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" id="linisBar" data-label="linis"><i></i></div>
+      </div>
+      <ul class="pila" id="pila" aria-label="Pila"></ul>
+      <p class="done-note" id="doneNote" role="status" aria-live="polite"></p>
+      <div class="try-actions">
+        <button class="btn mint" type="button" id="scrubBtn" data-t="scrub_btn"></button>
+        <button class="btn ghost" type="button" id="againBtn" hidden data-t="again_btn"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="h-price">
+  <div class="wrap">
+    <span class="kick" data-t="price_kick"></span>
+    <h2 class="pop" id="h-price" data-t="price_h"></h2>
+    <div class="prices" id="prices"></div>
+    <p class="fine" data-t="price_fine"></p>
+  </div>
+</section>
+
+<section class="band" style="padding-top:0" aria-labelledby="h-faq">
+  <div class="wrap">
+    <span class="kick" data-t="faq_kick"></span>
+    <h2 class="pop" id="h-faq" data-t="faq_h"></h2>
+    <div class="faq" id="faq"></div>
+  </div>
+</section>
+
+<section class="band end" style="background:var(--mint-soft);border-top:4px solid var(--ink)" aria-labelledby="h-end">
+  <div class="wrap">
+    <svg class="bubu-end" viewBox="0 0 200 200" data-m="glow" aria-hidden="true"></svg>
+    <h2 class="pop" id="h-end" data-t="end_h"></h2>
+    <div class="cta-row">
+      <button class="btn" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg><span data-t="cta_share"></span></button>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap"><span data-t="footer"></span> <a href="https://jtlgrowth.com/apps/">JTL Growth</a><br><a href="https://jtlgrowth.com/privacy/">Privacy</a> · <a href="https://jtlgrowth.com/terms/">Terms</a></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const SETTINGS = {
+  "product": "Hugas",
+  "mascot": "Bubu",
+  "url": "https://jtlgrowth.com/apps/hugas/",
+  "share_title": "Hugas",
+  "share_text": "May app na para alam natin kung kaninong turn maghugas. May alaga pa tayong bula sa lababo. Meet Bubu!",
+  "soon": "Coming soon sa iPhone",
+  "hint": "Tap mo ako!",
+  "bubu_label": "Si Bubu! Tap mo para kilitiin.",
+  "h1": "Kita na kung sino ang <em>maghuhugas</em>.",
+  "cta_share": "Share sa family GC",
+  "copied": "Link copied! Paste mo na sa GC.",
+  "count": "{n} beses mo nang nakiliti si Bubu!",
+  "count_zero": "Wala pang kumikiliti kay Bubu!",
+  "tickle_lines": ["Hihihi! Teka lang!", "Hala, kiliti ako diyan!", "HAHAHA! Hindi ako makahinga!", "Bula ako! Baka pumutok!", "Hehe. Ulit pa nga!", "Hoy! May hugasin ka pa!", "Tama na! Ay, bitin. Ulit!", "Ang kulit! Hihihi!"],
+  "combo_line": "HAHAHA! SURRENDER NA!",
+  "calm_line": "Whew. Kaninong turn na?",
+  "calm_after": 25,
+  "combo_taps": 6,
+  "prob_kick": "Pagkatapos kumain",
+  "prob_h": "Sa hugasin pa lang, may debate na.",
+  "fight": [["Ako na nga kahapon!", "sabay-sabay nilang sabi"], ["Ikaw muna. Busog pa ako.", "sabi ng nakahiga"], ["Binababad ko pa!", "3 days na 'yan"]],
+  "prob_cost": "10 minutes maghugas. 30 minutes magturuan.",
+  "how_kick": "Ganito lang",
+  "how_h": "Turn mo? Hugas, photo, tapos pasa.",
+  "steps": [["grumpy", "Kita kung kaninong turn", "Kita ng lahat ang pila sa phone. Habang hindi pa tapos ang hugas, bawas 4% kada oras ang Linis ni Bubu. Lalo siyang dumudumi at sumasama ang mood."], ["happy", "Malinis na? Take 1 photo.", "Photo ng malinis na lababo ang proof. Walang photo, walang pasa. Hindi sapat ang \"Tapos na, promise!\""], ["glow", "Next na sa pila", "Pag may photo na, lipat ang turn sa next sa pila. Level up din si Bubu! May party hat sa 10th wash at korona sa 50th wash."]],
+  "try_kick": "Try mo!",
+  "try_h": "May bula kang papaliguan.",
+  "try_lead": "Drag mo ang sponge para linisin si Bubu, daliri sa phone o mouse sa computer. Pag 100% na ang Linis, next na sa pila.",
+  "linis": "Linis",
+  "scrub_btn": "Kuskos na!",
+  "again_btn": "Ulit tayo!",
+  "tub_dirty": "Hala, ang dumi ko!",
+  "tub_half": "Hihihi! Kuskos pa!",
+  "tub_clean": "Ang bango! Amuyin mo!",
+  "done_note": "Next sa pila: {next}. Kita na ng lahat!",
+  "turn_tag_me": "Ikaw na!",
+  "turn_tag": "Turn",
+  "members": ["Ikaw", "Ate Joy", "Kuya Migs", "Nanay", "Bunso"],
+  "scrub_widths": 4,
+  "price_kick": "Magkano?",
+  "price_h": "Free gamitin. ₱99 kung ayaw ng ads.",
+  "prices": [{"name": "Free", "amt": "₱0", "per": "walang bayad", "best": false, "items": ["Pila sa bahay, kahit ilan pa kayo", "Photo proof at wash history", "Si Bubu, pati party hat at korona niya", "May maliit na ad sa baba"]}, {"name": "Walang ads", "amt": "₱99", "per": "one-time", "best": true, "tag": "Para sa buong bahay", "items": ["Walang ads para sa lahat sa bahay", "1 lang ang bibili, kasama na lahat", "Walang monthly fee o renewal"]}, {"name": "Bubu packs", "amt": "₱59", "per": "per pack", "best": false, "items": ["Mga kulay, damit at accessories", "₱299 for all packs", "Kasama sa ₱299 ang future packs"]}],
+  "price_fine": "Walang subscription. Yung ₱99, one-time lang para tanggal ang ads sa buong bahay.",
+  "faq_kick": "May tanong ka?",
+  "faq_h": "Baka ito rin tanong sa GC.",
+  "faq": [["Sa iPhone lang?", "Oo, iPhone lang muna. Wala pa sa App Store. Tinetest pa namin sa bahay bago i-release."], ["Ilan ang pwedeng sumali?", "Kahit ilan! Pwedeng kayong mag-asawa, magkakapatid o roommates. Kayo ang mag-aayos ng pila, tapos iikot ang turn sa lahat."], ["Sino ang makakakita ng photos?", "Private sa household ang photos. Kayo lang sa bahay ang makakakita."], ["Paano pag walang signal?", "Saved muna sa phone ang photo. Pag may signal na ulit, automatic itong ise-send ng app. Saka lilipat ang turn."], ["Paano kung may nandadaya?", "Walang photo, walang pasa. Kita rin ng lahat sa bahay ang photo sa history. Mahirap idaan sa \"Trust me.\""]],
+  "end_h": "Share mo sa GC. Sino raw mauuna?",
+  "footer": "Made in the Philippines by",
+  "sound_on": "Sound: on",
+  "sound_off": "Sound: off"
+};
+
+/* Bubu, one soap-bubble blob. Faces: happy, grumpy, glow, laugh, wild. opts.dirt adds a scrubbable dirt layer. */
+let gid = 0;
+function bubu(expr, opts) {
+  opts = opts || {};
+  const id = 'g' + (gid++), dm = 'd' + id;
+  const clean = '<radialGradient id="' + id + '" cx="35%" cy="30%" r="75%"><stop offset="0" class="g1"/><stop offset=".45" class="g2"/><stop offset=".8" class="g3"/><stop offset="1" class="g4"/></radialGradient>';
+  const dirty = '<radialGradient id="' + dm + '" cx="35%" cy="30%" r="75%"><stop offset="0" class="m1"/><stop offset=".6" class="m2"/><stop offset="1" class="m3"/></radialGradient>';
+  const allDirty = expr === 'grumpy' && !opts.dirt;
+  const body = 'M100 44 C148 44 176 78 176 118 C176 160 142 184 100 184 C58 184 24 160 24 118 C24 78 52 44 100 44z';
+  const eyes = {
+    happy: '<g class="look"><g class="eye"><ellipse class="bk" cx="80" cy="118" rx="8" ry="10"/><circle class="bw" cx="83" cy="114" r="3"/></g><g class="eye"><ellipse class="bk" cx="120" cy="118" rx="8" ry="10"/><circle class="bw" cx="123" cy="114" r="3"/></g></g>',
+    grumpy: '<ellipse class="bk" cx="80" cy="122" rx="7" ry="6"/><ellipse class="bk" cx="120" cy="122" rx="7" ry="6"/><path class="bl" d="M68 106 l22 8"/><path class="bl" d="M132 106 l-22 8"/>',
+    glow: '<path class="bl" d="M70 120 q10 -12 20 0"/><path class="bl" d="M110 120 q10 -12 20 0"/>',
+    laugh: '<path class="bl" d="M68 112 l14 8 l-14 8"/><path class="bl" d="M132 112 l-14 8 l14 8"/>',
+    wild: '<path class="bl" d="M66 110 l16 10 l-16 10"/><path class="bl" d="M134 110 l-16 10 l16 10"/><path class="btear" d="M62 128 q-6 10 0 14 q6 -4 0 -14z"/><path class="btear" d="M138 128 q-6 10 0 14 q6 -4 0 -14z"/>'
+  }[expr];
+  const mouth = {
+    happy: '<path class="bl" d="M92 136 q4 5 8 0 q4 5 8 0"/>',
+    grumpy: '<path class="bl" d="M90 144 q10 -8 20 0"/>',
+    glow: '<path class="bmouth" d="M86 132 q14 20 28 0z"/>',
+    laugh: '<path class="bmouth" d="M82 132 q18 28 36 0z"/><path class="btongue" d="M92 146 q8 6 16 0 q-8 -5 -16 0z"/>',
+    wild: '<path class="bmouth" d="M78 130 q22 38 44 0z"/><path class="btongue" d="M90 150 q10 8 20 0 q-10 -6 -20 0z"/>'
+  }[expr];
+  const arms = {
+    happy: '<path class="barmf" d="M30 124 q-18 -8 -16 -28"/><path class="barm" d="M30 124 q-18 -8 -16 -28"/><path class="barmf" d="M170 124 q18 -8 16 -28"/><path class="barm" d="M170 124 q18 -8 16 -28"/>',
+    grumpy: '<path class="barmf" d="M34 136 q20 14 40 6"/><path class="barm" d="M34 136 q20 14 40 6"/><path class="barmf" d="M166 136 q-20 14 -40 6"/><path class="barm" d="M166 136 q-20 14 -40 6"/>',
+    glow: '<path class="barmf" d="M28 118 q-18 -18 -10 -40"/><path class="barm" d="M28 118 q-18 -18 -10 -40"/><path class="barmf" d="M172 118 q18 -18 10 -40"/><path class="barm" d="M172 118 q18 -18 10 -40"/>',
+    laugh: '<path class="barmf" d="M34 140 q16 18 44 8"/><path class="barm" d="M34 140 q16 18 44 8"/><path class="barmf" d="M166 140 q-16 18 -44 8"/><path class="barm" d="M166 140 q-16 18 -44 8"/>',
+    wild: '<path class="barmf" d="M28 112 q-22 -22 -8 -48"/><path class="barm" d="M28 112 q-22 -22 -8 -48"/><path class="barmf" d="M172 112 q22 -22 8 -48"/><path class="barm" d="M172 112 q22 -22 8 -48"/>'
+  }[expr];
+  const spark = '<path class="bspark" d="M26 60l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/><path class="bspark" d="M176 150l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>';
+  const hat = '<g class="' + (opts.hatdrop ? 'hatdrop' : '') + '"><path class="bhat" d="M100 4 L124 52 H76z"/><path class="bhat2" d="M84 38 h32 v6 h-32z"/><circle class="bpom" cx="100" cy="6" r="8"/></g>';
+  const stink = '<g class="stinkl"><path class="bstink" d="M70 30 q-8 -8 0 -16 q8 -8 0 -16"/></g><g class="stinkl l2"><path class="bstink" d="M100 26 q-8 -8 0 -16 q8 -8 0 -16"/></g><g class="stinkl l3"><path class="bstink" d="M130 30 q-8 -8 0 -16 q8 -8 0 -16"/></g>';
+  const mud = '<ellipse class="bmud" cx="60" cy="150" rx="12" ry="8"/><ellipse class="bmud" cx="138" cy="160" rx="9" ry="6"/><ellipse class="bmud" cx="130" cy="80" rx="7" ry="5"/><ellipse class="bmud" cx="84" cy="170" rx="8" ry="5"/>';
+  const extra = {
+    happy: '<path class="bspark" d="M34 60l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/><path class="bspark" d="M172 64l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>',
+    grumpy: opts.dirt ? '' : mud + stink,
+    glow: hat + spark,
+    laugh: '',
+    wild: spark
+  }[expr];
+  const dirtLayer = opts.dirt ? '<g class="dirt"><path d="' + body + '" fill="url(#' + dm + ')"/>' + mud + '</g>' : '';
+  const dirtStink = opts.dirt ? '<g class="dirt">' + stink + '</g>' : '';
+  const ant = expr === 'glow' ? '' : '<path class="bl" d="M100 44 q-2 -14 8 -20"/><circle class="bant" cx="110" cy="22" r="8"/>';
+  const cheeks = expr === 'laugh' || expr === 'wild' ? 'bc hot' : 'bc';
+  return '<defs>' + clean + dirty + '</defs><g class="bubu"><ellipse class="bs" cx="100" cy="192" rx="62" ry="6"/>' + ant + arms +
+    '<path class="bb" d="' + body + '" fill="url(#' + (allDirty ? dm : id) + ')"/>' + dirtLayer +
+    '<path class="bhl" d="M52 96 q6 -26 34 -36"/><circle class="bhi" cx="142" cy="80" r="6"/>' +
+    eyes + '<ellipse class="' + cheeks + '" cx="64" cy="134" rx="10" ry="6"/><ellipse class="' + cheeks + '" cx="136" cy="134" rx="10" ry="6"/>' + mouth + extra + dirtStink + '</g>';
+}
+
+const $ = s => document.querySelector(s);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+/* Copy from SETTINGS. h1 carries one <em>, everything else is plain text. */
+document.querySelectorAll('[data-t]').forEach(el => {
+  const v = SETTINGS[el.dataset.t];
+  if (v == null) return;
+  if (el.dataset.t === 'h1') el.innerHTML = v; else el.textContent = v;
+});
+document.querySelectorAll('[data-label]').forEach(el => el.setAttribute('aria-label', SETTINGS[el.dataset.label] || el.dataset.label));
+document.querySelectorAll('[data-m]').forEach(el => { el.innerHTML = bubu(el.dataset.m); });
+
+document.querySelectorAll('[data-fizz]').forEach(el => {
+  if (reduce) return;
+  let h = '';
+  for (let i = 0; i < +el.dataset.fizz; i++) {
+    const s = 12 + ((i * 37) % 30);
+    h += '<i style="left:' + ((i * 53) % 96) + '%;width:' + s + 'px;height:' + s + 'px;animation-duration:' + (9 + (i * 7) % 8) + 's;animation-delay:-' + ((i * 3.1) % 9).toFixed(1) + 's"></i>';
+  }
+  el.innerHTML = h;
+});
+
+$('#fight').innerHTML = SETTINGS.fight.map(([a, b]) => '<div class="bub">' + esc(a) + '<small>' + esc(b) + '</small></div>').join('');
+$('#steps').innerHTML = SETTINGS.steps.map(([m, h, p], i) => '<div class="step"><span class="n">' + (i + 1) + '</span><svg class="mini" viewBox="0 0 200 200" aria-hidden="true">' + bubu(m) + '</svg><h3>' + esc(h) + '</h3><p>' + esc(p) + '</p></div>').join('');
+$('#prices').innerHTML = SETTINGS.prices.map(p => '<div class="price' + (p.best ? ' best' : '') + '">' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') + '<h3>' + esc(p.name) + '</h3><div class="amt">' + esc(p.amt) + '<small>' + esc(p.per) + '</small></div><ul>' + p.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></div>').join('');
+$('#faq').innerHTML = SETTINGS.faq.map(([q, a]) => '<details><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('');
+
+/* Sound: a tiny synthesized giggle, only ever on a tap. */
+let sound = store('hugas.sound') !== 'off', actx = null;
+const soundBtn = $('#sound');
+function paintSound() {
+  soundBtn.setAttribute('aria-pressed', String(sound));
+  soundBtn.setAttribute('aria-label', sound ? SETTINGS.sound_on : SETTINGS.sound_off);
+  soundBtn.querySelector('.on').toggleAttribute('hidden', !sound);
+  soundBtn.querySelector('.off').toggleAttribute('hidden', sound);
+}
+paintSound();
+soundBtn.addEventListener('click', () => { sound = !sound; store('hugas.sound', sound ? 'on' : 'off'); paintSound(); });
+function audio() { if (!actx) { const A = window.AudioContext || window.webkitAudioContext; if (!A) return null; actx = new A(); } if (actx.state === 'suspended') actx.resume(); return actx; }
+function blip(t, f0, f1, dur, vol, type) {
+  const a = actx, o = a.createOscillator(), g = a.createGain();
+  o.type = type || 'triangle';
+  o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+}
+function giggle(big) {
+  if (!sound || !audio()) return;
+  const n = big ? 7 : 3 + Math.floor(Math.random() * 3), base = 560 + Math.random() * 200;
+  let t = actx.currentTime;
+  for (let i = 0; i < n; i++) { const f = base * (1 + (n - i) * 0.05); blip(t, f * 1.3, f * 0.8, 0.085, big ? 0.2 : 0.15); t += 0.105 + Math.random() * 0.02; }
+}
+function chime() {
+  if (!sound || !audio()) return;
+  const t = actx.currentTime;
+  [523, 659, 784, 1047].forEach((f, i) => blip(t + i * 0.09, f, f * 1.01, 0.32, 0.14, 'sine'));
+}
+function squish() { if (sound && audio()) blip(actx.currentTime, 240 + Math.random() * 90, 130, 0.07, 0.06, 'sine'); }
+
+let toastT;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2200); }
+
+/* Tickle */
+const stage = $('#stage'), btn = $('#bubu'), svg = $('#bubuSvg'), say = $('#say'), hint = $('#hint'), countEl = $('#count');
+let face = 'happy', faceT, sayT, comboUntil = 0, taps = [], total = +(store('hugas.tickles') || 0), lineI = Math.floor(Math.random() * SETTINGS.tickle_lines.length);
+function setFace(f) { if (f === face) return; face = f; svg.innerHTML = bubu(f); }
+svg.innerHTML = bubu('happy');
+function paintCount() { countEl.textContent = total ? SETTINGS.count.replace('{n}', total) : SETTINGS.count_zero; }
+paintCount();
+function speak(line, ms) { say.textContent = line; say.classList.add('on'); clearTimeout(sayT); sayT = setTimeout(() => say.classList.remove('on'), ms || 1500); }
+function burst(x, y, n, big) {
+  if (reduce) return;
+  for (let i = 0; i < n; i++) {
+    const b = document.createElement('i'), s = (big ? 18 : 12) + Math.random() * (big ? 26 : 16);
+    b.className = 'pop-b';
+    b.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + s + 'px;height:' + s + 'px;--dx:' + ((Math.random() - .5) * 150).toFixed(0) + 'px;--dy:' + (70 + Math.random() * 120).toFixed(0) + 'px';
+    stage.appendChild(b); b.addEventListener('animationend', () => b.remove());
+  }
+}
+function hearts(host, x, y, n) {
+  if (reduce) return;
+  for (let i = 0; i < n; i++) {
+    const h = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    h.setAttribute('viewBox', '0 0 18 16'); h.setAttribute('class', 'heart');
+    h.innerHTML = '<path d="M9 15 2 8a4 4 0 0 1 7-5 4 4 0 0 1 7 5z"/>';
+    h.style.cssText = 'left:' + x + 'px;top:' + y + 'px;--dx:' + ((Math.random() - .5) * 220).toFixed(0) + 'px;animation-delay:' + (i * 0.07).toFixed(2) + 's';
+    host.appendChild(h); h.addEventListener('animationend', () => h.remove());
+  }
+}
+function restart(el, cls) { el.classList.remove('tickle', 'spin'); void el.offsetWidth; el.classList.add(cls); }
+function tickle(x, y) {
+  const now = performance.now();
+  taps = taps.filter(t => now - t < 1600); taps.push(now);
+  total++; store('hugas.tickles', total); paintCount();
+  hint.classList.add('gone');
+  if (navigator.vibrate) navigator.vibrate(12);
+  if (now < comboUntil) {
+    giggle(true); burst(x, y, 6, true); hearts(stage, x, y, 2);
+    comboUntil = now + 900; clearTimeout(faceT); faceT = setTimeout(() => setFace('happy'), 900);
+    return;
+  }
+  const combo = taps.length >= SETTINGS.combo_taps;
+  if (combo) {
+    comboUntil = now + 1500;
+    taps = [];
+    setFace('wild'); restart(btn, 'spin'); giggle(true);
+    speak(SETTINGS.combo_line, 2000); burst(x, y, 14, true); hearts(stage, x, y, 8);
+  } else {
+    setFace('laugh'); restart(btn, 'tickle'); giggle(false);
+    const calm = total % SETTINGS.calm_after === 0;
+    speak(calm ? SETTINGS.calm_line : SETTINGS.tickle_lines[lineI++ % SETTINGS.tickle_lines.length], calm ? 2400 : 1400);
+    burst(x, y, 6, false);
+  }
+  clearTimeout(faceT); faceT = setTimeout(() => setFace('happy'), combo ? 1500 : 900);
+}
+/* Pointer taps tickle where the finger lands; keyboard and VoiceOver arrive as a plain click and tickle the middle. */
+let fromPointer = false;
+btn.addEventListener('pointerdown', e => {
+  fromPointer = true;
+  const r = stage.getBoundingClientRect();
+  tickle(e.clientX - r.left, e.clientY - r.top);
+});
+btn.addEventListener('click', () => {
+  if (fromPointer) { fromPointer = false; return; }
+  const r = stage.getBoundingClientRect(), b = btn.getBoundingClientRect();
+  tickle(b.left - r.left + b.width / 2, b.top - r.top + b.height / 2);
+});
+
+/* Eyes follow the pointer: they track, they never drift on their own. */
+addEventListener('pointermove', e => {
+  if (face !== 'happy') return;
+  const b = btn.getBoundingClientRect();
+  if (!b.width || b.bottom < 0 || b.top > innerHeight) return;
+  const dx = e.clientX - (b.left + b.width / 2), dy = e.clientY - (b.top + b.height * .55), d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 300) * 5;
+  svg.querySelector('.look')?.setAttribute('transform', 'translate(' + (dx / d * k).toFixed(1) + ' ' + (dy / d * k).toFixed(1) + ')');
+}, { passive: true });
+
+/* One nudge if nobody has touched him yet. */
+setTimeout(() => { if (!total) speak(SETTINGS.hint + '...', 2200); }, 6000);
+
+/* Share */
+document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click', async () => {
+  const data = { title: SETTINGS.share_title, text: SETTINGS.share_text, url: SETTINGS.url };
+  try {
+    if (navigator.share) { await navigator.share(data); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  try { await navigator.clipboard.writeText(SETTINGS.share_text + ' ' + SETTINGS.url); toast(SETTINGS.copied); }
+  catch (e) { toast(SETTINGS.url); }
+}));
+
+/* Scrub Bubu clean, then the turn passes down the pila. */
+const tub = $('#tub'), scrubSvg = $('#scrubSvg'), sponge = $('#sponge'), tubSay = $('#tubSay'), meter = $('#meter'), bar = $('#linisBar'), pct = $('#linisPct');
+const pilaEl = $('#pila'), doneNote = $('#doneNote'), scrubBtn = $('#scrubBtn'), againBtn = $('#againBtn');
+let prog = 0, scrubFace = '', done = false, turn = 0, last = null, scrubbing = false, foamT = 0;
+function paintPila() {
+  pilaEl.innerHTML = SETTINGS.members.map((m, i) => '<li class="' + (i === turn ? 'now' : '') + '" data-tag="' + esc(i === 0 ? SETTINGS.turn_tag_me : SETTINGS.turn_tag) + '"><span class="av c' + (i % 5) + '" aria-hidden="true">' + esc(m[0]) + '</span>' + esc(m) + '</li>').join('');
+}
+function paintScrub() {
+  const want = done ? 'glow' : prog < .5 ? 'grumpy' : 'happy';
+  if (want !== scrubFace) { scrubFace = want; scrubSvg.innerHTML = bubu(want, { dirt: !done, hatdrop: done }); }
+  const dirt = Math.max(0, 1 - prog);
+  tub.style.setProperty('--dirt', dirt.toFixed(3));
+  const linis = Math.round(20 + 80 * prog);
+  pct.textContent = linis + '%'; bar.setAttribute('aria-valuenow', linis);
+  meter.style.setProperty('--p', linis + '%'); bar.querySelector('i').style.width = linis + '%';
+  meter.classList.toggle('clean', prog >= .5);
+  tubSay.textContent = done ? SETTINGS.tub_clean : prog < .5 ? SETTINGS.tub_dirty : SETTINGS.tub_half;
+}
+function foam(x, y, n) {
+  if (reduce) return;
+  for (let i = 0; i < n; i++) {
+    const f = document.createElement('i'), s = 10 + Math.random() * 18;
+    f.className = 'foam';
+    f.style.cssText = 'left:' + (x + (Math.random() - .5) * 40).toFixed(0) + 'px;top:' + (y + (Math.random() - .5) * 30).toFixed(0) + 'px;width:' + s + 'px;height:' + s + 'px';
+    tub.appendChild(f); f.addEventListener('animationend', () => f.remove());
+  }
+}
+function addProg(p) {
+  if (done) return;
+  prog = Math.min(1, prog + p);
+  if (prog >= 1) finish();
+  paintScrub();
+}
+function finish() {
+  done = true; prog = 1;
+  const r = tub.getBoundingClientRect();
+  chime(); hearts(tub, r.width / 2, r.height * .55, 10);
+  const next = (turn + 1) % SETTINGS.members.length;
+  doneNote.textContent = SETTINGS.done_note.replace('{next}', SETTINGS.members[next]);
+  turn = next; paintPila();
+  scrubBtn.hidden = true; againBtn.hidden = false;
+  sponge.classList.remove('on');
+}
+function inBubu(x, y) {
+  const w = tub.clientWidth, cx = w / 2, cy = w * .58, rad = w * .3;
+  return Math.hypot(x - cx, y - cy) < rad;
+}
+function spongeAt(x, y) { sponge.style.left = x + 'px'; sponge.style.top = y + 'px'; }
+tub.addEventListener('pointerenter', e => { if (!done && e.pointerType === 'mouse') sponge.classList.add('on'); });
+tub.addEventListener('pointerleave', () => { if (!scrubbing) sponge.classList.remove('on'); last = null; });
+tub.addEventListener('pointerdown', e => {
+  if (done) return;
+  scrubbing = true;
+  try { tub.setPointerCapture(e.pointerId); } catch (err) { /* a pointer the browser does not track; scrubbing still works */ }
+  const r = tub.getBoundingClientRect(); last = [e.clientX - r.left, e.clientY - r.top];
+  spongeAt(...last); sponge.classList.add('on');
+});
+tub.addEventListener('pointermove', e => {
+  const r = tub.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  spongeAt(x, y);
+  if (!scrubbing || done) return;
+  if (last && inBubu(x, y)) {
+    const d = Math.hypot(x - last[0], y - last[1]);
+    addProg(d / (tub.clientWidth * SETTINGS.scrub_widths));
+    const now = performance.now();
+    if (now - foamT > 60) { foamT = now; foam(x, y, 2); if (d > 6) squish(); }
+  }
+  last = [x, y];
+});
+function endScrub(e) { scrubbing = false; last = null; if (e.pointerType !== 'mouse') sponge.classList.remove('on'); }
+tub.addEventListener('pointerup', endScrub);
+tub.addEventListener('pointercancel', endScrub);
+scrubBtn.addEventListener('click', () => {
+  const w = tub.clientWidth; foam(w / 2, w * .58, 6); squish(); addProg(.2);
+});
+againBtn.addEventListener('click', () => {
+  done = false; prog = 0; scrubFace = ''; doneNote.textContent = '';
+  scrubBtn.hidden = false; againBtn.hidden = true; paintScrub(); scrubBtn.focus();
+});
+paintPila(); paintScrub();
+</script>
+</body>
+</html>
