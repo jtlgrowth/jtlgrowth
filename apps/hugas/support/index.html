@@ -1,0 +1,89 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours and type live in :root below; the contact address lives in SETTINGS.
+     settings: host-ok=jtlgrowth.com
+     settings: host-ok=reportaproblem.apple.com
+     Every fix below matches app behaviour as of 2026-09-29 (camera re-check on return, offline outbox, stale-turn notice). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hugas support</title>
+<meta name="description" content="Help with the Hugas app: camera access, proofs waiting for signal, switching who you are, and how to reach us.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/hugas/support/">
+<link rel="icon" href="../icon.png">
+<style>
+@font-face { font-family: "Mochiy Pop One"; src: url("../fonts/MochiyPopOne-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "M PLUS Rounded 1c"; src: url("../fonts/MPLUSRounded1c-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "M PLUS Rounded 1c"; src: url("../fonts/MPLUSRounded1c-ExtraBold.ttf") format("truetype"); font-weight: 800; font-display: swap; }
+/* PROJECT SETTINGS: the same Bubu world tokens as the landing page */
+:root {
+  --bg: #fff4f8;
+  --surface: #ffffff;
+  --fg: #3a2e4f;
+  --fg-2: #6e6387;
+  --muted: #6e6387;
+  --border: #f1dce8;
+  --accent: #ff6fae;
+  --accent-hover: #b8326f;
+  --accent-on: #3a2e4f;
+  --focus-ring: #463b7a;
+  --lav-soft: #ece6ff;
+  --mint-soft: #d9f7ec;
+  --font-display: "Mochiy Pop One", ui-rounded, system-ui, sans-serif;
+  --font-body: "M PLUS Rounded 1c", ui-rounded, system-ui, sans-serif;
+  --radius-pill: 999px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.65 var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent-hover); font-weight: 800; }
+:focus-visible { outline: 4px solid var(--focus-ring); outline-offset: 3px; }
+.wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 0; }
+nav .home { font: 400 24px/1 var(--font-display); color: var(--fg); text-decoration: none; }
+nav .links { display: flex; gap: 8px; }
+nav .links a { padding: 6px 12px; border-radius: var(--radius-pill); border: 2.5px solid var(--fg); background: var(--surface); color: var(--fg); font-size: 14px; text-decoration: none; }
+nav .links a[aria-current] { background: var(--lav-soft); }
+h1 { margin: 24px 0 16px; font: 400 clamp(32px, 7vw, 46px)/1.1 var(--font-display); }
+.lead { padding: 18px 20px; border-radius: 22px; background: var(--mint-soft); border: 3px solid var(--fg); font-weight: 800; }
+h2 { margin: 36px 0 8px; font: 400 22px/1.2 var(--font-display); }
+.fix { margin: 12px 0; padding: 16px 18px; border-radius: 20px; background: var(--surface); border: 3px solid var(--fg); }
+.fix b { display: block; margin-bottom: 4px; }
+.fix p { margin: 0; }
+footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Hugas">
+    <a class="home" href="../">Hugas</a>
+    <span class="links"><a href="../privacy/">Privacy</a><a href="./" aria-current="page">Support</a></span>
+  </nav>
+  <main>
+    <h1>Support</h1>
+    <p class="lead">Email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. We read everything and usually reply within two business days.</p>
+
+    <h2>Quick fixes</h2>
+    <div class="fix"><b>The camera says it is off</b><p>Open the iPhone Settings app, go to Hugas, and turn on Camera. Then come back to Hugas; it picks up the change on its own.</p></div>
+    <div class="fix"><b>My proof is still waiting</b><p>No signal is fine. The photo is saved on your phone, and Hugas sends it by itself once signal is back, as long as the app is open or the next time you open it. Then the turn moves on.</p></div>
+    <div class="fix"><b>It says someone finished first</b><p>Another member logged that turn before your photo arrived, so the turn had already moved on. Nothing is broken. Check the pila to see who is next.</p></div>
+    <div class="fix"><b>The wrong person is signed in</b><p>Go to the Puso tab and tap "Palitan kung sino ka".</p></div>
+    <div class="fix"><b>Text is cut off</b><p>Hugas is built to work at every text size. Tell us which screen and your text size setting, and we will fix it.</p></div>
+
+    <h2>Reporting a bug</h2>
+    <p>Tell us what you did, what you expected, and what happened instead. Your iPhone model and iOS version help. A screenshot helps more.</p>
+
+    <h2>Refunds</h2>
+    <p>Purchases are handled by Apple, so refunds go through Apple at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>. We cannot issue refunds directly, but tell us what went wrong so we can fix it.</p>
+
+    <h2>Your data</h2>
+    <p>What Hugas keeps and how to delete it is in the <a href="../privacy/">privacy policy</a>.</p>
+  </main>
+  <footer>Hugas is built and maintained by <a href="https://jtlgrowth.com/apps/">JTL Growth</a>. © 2026</footer>
+</div>
+<script>
+const SETTINGS = {"support_email": "support@jtlgrowth.com"};
+document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
+</script>
+</body>
+</html>
