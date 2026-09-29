@@ -831,5 +831,24 @@ const SETTINGS = {
   v.addEventListener('play', function(){ setCtrl(true); }); v.addEventListener('pause', function(){ setCtrl(false); });
 })();
 </script>
+<script>
+// Affiliate links (/mastermind/?ref=CODE): remember the latest code for 60 days and tag every
+// checkout link with it, so the payment carries the referrer. 5% payout is reconciled by hand
+// (pay links are SaligPay, which GHL Affiliate Manager cannot track).
+(function(){
+  var ref = '';
+  try {
+    var refIn = (new URLSearchParams(location.search).get('ref') || '').toUpperCase().replace(/[^A-Z0-9_-]/g, '').slice(0, 40);
+    if (refIn) localStorage.setItem('ob-ref', JSON.stringify({ code: refIn, at: Date.now() }));
+    var saved = JSON.parse(localStorage.getItem('ob-ref') || 'null');
+    if (saved && saved.code && Date.now() - saved.at < 60 * 864e5) ref = saved.code;
+  } catch (_) {}
+  if (!ref) return;
+  document.querySelectorAll('a[href*="/payment-link/"]').forEach(function(a){
+    var url = a.getAttribute('href').split('?')[0];
+    a.setAttribute('href', url + '?utm_source=affiliate&utm_medium=referral&utm_campaign=' + encodeURIComponent(ref));
+  });
+})();
+</script>
 </body>
 </html>
