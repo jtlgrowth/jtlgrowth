@@ -844,8 +844,14 @@ const SETTINGS = {
     if (saved && saved.code && Date.now() - saved.at < 60 * 864e5) ref = saved.code;
   } catch (_) {}
   if (!ref) return;
+  // Affiliates with their own GHL product get their own pay links, so GHL shows the sale under
+  // that product (the UTMs do not survive SaligPay). Empty id = keep the house link.
+  var HOUSE = { eb: '6aa90e1c13f5d2e3e96ab44d', reg: '6aa90ea8ceb12d9fc1a8cf53' };
+  var OWN = { ANNIKA: { eb: '', reg: '' } }[ref];
   document.querySelectorAll('a[href*="/payment-link/"]').forEach(function(a){
     var url = a.getAttribute('href').split('?')[0];
+    if (OWN && OWN.eb) url = url.replace(HOUSE.eb, OWN.eb);
+    if (OWN && OWN.reg) url = url.replace(HOUSE.reg, OWN.reg);
     a.setAttribute('href', url + '?utm_source=affiliate&utm_medium=referral&utm_campaign=' + encodeURIComponent(ref));
   });
 })();
