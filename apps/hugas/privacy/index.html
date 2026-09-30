@@ -61,24 +61,26 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
   </nav>
   <main>
     <h1>Privacy policy</h1>
-    <p class="upd">Last updated <span data-s="updated">29 September 2026</span></p>
+    <p class="upd">Last updated <span data-s="updated">September 30, 2026</span></p>
 
-    <p class="lead">Hugas keeps a household's dish-washing turns and the photo that proves each one. Only the people in your household can see them. There are no analytics, no advertising identifier and no crash reporting in the app.</p>
+    <p class="lead">Hugas keeps a household's dish-washing turns and the before and after photos that prove each one. Only the people in your household can see them. There are no analytics, no advertising identifier and no crash reporting in the app.</p>
 
     <h2>What Hugas collects</h2>
     <ul>
-      <li><b>Your household membership:</b> your display name, which household you belong to, and your place in its turn order.</li>
-      <li><b>Turn records:</b> who completed each turn and when.</li>
-      <li><b>Proof photos:</b> the photo you take of the clean sink when you finish your turn. Hugas uses the camera only when you tap to take that photo, and it never reads your photo library.</li>
-      <li><b>Sign-in details:</b> what is needed to keep you signed in to your household account.</li>
+      <li><b>Your Apple sign-in:</b> Hugas uses Sign in with Apple. We receive an Apple user identifier and the email Apple shares with us, which can be Apple's private relay address if you choose to hide yours. Other members never see your email. We do not use it to contact you unless you write to us.</li>
+      <li><b>Your household membership:</b> the name you choose for the pila, which household you belong to, your place in its turn order, whether you created it, and when you joined or left.</li>
+      <li><b>Invite codes:</b> each household has one 6-character code that lets someone join. It expires after 7 days and changes whenever a member renews it or the household creator removes someone.</li>
+      <li><b>Turn records:</b> who took each turn, when the washing started and when it finished. Hugas waits a few minutes between the before and after photos, timed by our server.</li>
+      <li><b>Before and after photos:</b> a photo of the sink before you wash and another when you finish. Hugas uses the camera only when you tap to take one, and it never reads your photo library.</li>
+      <li><b>Failed join attempts:</b> when you type a wrong code, we note the time so we can stop code guessing (only the last hour counts). These notes are deleted with your account.</li>
     </ul>
 
     <h2>Where it is kept</h2>
     <p>Turn records and photos are stored with our hosting provider, Supabase, in private storage. They travel over encrypted connections. A photo is opened in the app through a link that expires after 5 minutes.</p>
-    <p>On your phone, a photo stays only until the server has it, so a proof taken without signal is not lost. Once the turn is saved, the phone's copy is deleted. While it waits, the photo is protected by iOS file encryption.</p>
+    <p>On your phone, the before and after photos stay only until the server has the turn, so photos taken without signal are not lost. Once the turn is saved, the phone's copies are deleted. While it waits, the photo is protected by iOS file encryption.</p>
 
     <h2>Who can see it</h2>
-    <p>The members of your household, and nobody else. We do not sell, rent or share your information with anyone for advertising or any other purpose. Our team can reach the stored data only to operate Hugas or to answer a request from you.</p>
+    <p>The current members of your household, and nobody else. Someone who leaves or is removed can no longer see the household, its turns or its photos. Photos you took before leaving stay in the household's history until you delete your account. We do not sell, rent or share your information with anyone for advertising or any other purpose. Our team can reach the stored data only to operate Hugas or to answer a request from you.</p>
 
     <h2>Third parties</h2>
     <p>The app includes one third-party library, the Supabase client, which talks only to our Hugas database and storage. There are no ad networks or trackers in the current app. If a free version with ads ships, this page will name the ad network and what it receives before that version is released.</p>
@@ -87,7 +89,7 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
     <p>Any purchase in Hugas is handled by Apple. We never see your payment details.</p>
 
     <h2>How long it is kept, and deleting it</h2>
-    <p>Turn records and photos are kept while your household uses Hugas. To delete your data or your whole household's, email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a> from the address you use with us, and we will delete it within 30 days and confirm when it is done. Deleting the app removes anything still waiting on your phone.</p>
+    <p>Turn records and photos are kept while your household uses Hugas. You can delete your account in the app: Puso, then Settings ng bahay, then Burahin ang account. Apple asks you to confirm, then we revoke Hugas's access to your Apple ID and delete your photos, your turns, your membership and your login. If you were the last member, the household and all of its photos are deleted too. You can also email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a> and we will delete it within 30 days and confirm when it is done. Deleting the app removes anything still waiting on your phone.</p>
 
     <h2>Children</h2>
     <p>Hugas is made for households and is not directed to children under 13. We do not knowingly collect personal information from a child under 13 without a parent or guardian. If you believe a child's information is in Hugas without that consent, email us and we will delete it.</p>
@@ -101,7 +103,7 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
   <footer>© 2026 JTL Growth · <a href="https://jtlgrowth.com/terms/">Terms</a></footer>
 </div>
 <script>
-const SETTINGS = {"support_email": "support@jtlgrowth.com", "updated": "29 September 2026"};
+const SETTINGS = {"support_email": "support@jtlgrowth.com", "updated": "September 30, 2026"};
 document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
 document.querySelectorAll('[data-s]').forEach(el => { el.textContent = SETTINGS[el.dataset.s]; });
 </script>
