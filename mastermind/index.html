@@ -13,7 +13,7 @@
   page width            -> --container-max (feeds .wrap)
   event dates and price -> SETTINGS.event (earlyBirdCloses drives the countdown bar and the seat swap)
   header CTA text       -> SETTINGS.content.cta (bound by data-setting on .nav-cta)
-  animations on or off  -> SETTINGS.behavior.animations (false also stops the teaser autoplay)
+  animations on or off  -> SETTINGS.behavior.animations (false also stops the teaser and the Built films)
   analytics             -> SETTINGS.integration.analyticsId; site-wide IDs load from /assets/tracking.js
   theme-color meta pins #121212 as a literal (constant chrome); that line carries the literal-ok marker
 -->
@@ -26,12 +26,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overnight Build &middot; Robots &amp; Coffee</title>
-<meta name="description" content="Ten business owners, one Tagaytay villa, one night. Content by day with Gwen, your app by night with Jamz. Oct 24 to 25, 2026.">
+<meta name="description" content="Ten business owners, one private villa near Tagaytay, one night. Content by day with Gwen, your app by night with Jamz. Oct 24 to 25, 2026.">
 <link rel="canonical" href="https://jtlgrowth.com/mastermind/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Overnight Build · Robots &amp; Coffee">
-<meta property="og:description" content="Content by day. Your app by night. One Tagaytay villa, ten seats, Oct 24 to 25, 2026.">
-<meta property="og:image" content="https://jtlgrowth.com/mastermind/media/hero.jpg">
+<meta property="og:description" content="Content by day. Your app by night. One villa near Tagaytay, ten seats, Oct 24 to 25, 2026.">
+<meta property="og:image" content="https://jtlgrowth.com/mastermind/media/villa-og.jpg">
 <meta property="og:url" content="https://jtlgrowth.com/mastermind/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#121212"> <!-- settings: literal-ok (constant chrome) -->
@@ -312,16 +312,16 @@ details p{margin-top:var(--s2);color:var(--muted);font-size:var(--t3);line-heigh
 .built .eyebrow,.built .dim{color:var(--blue-soft)}
 .apps{display:grid;grid-template-columns:1fr;gap:var(--s3)}
 .app{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--line-on-dark);border-radius:var(--radius-md);overflow:hidden;background:rgba(255,255,255,.03);text-decoration:none}
-.app-media{aspect-ratio:4/3;background:#1E1E1E;display:grid;place-items:center;overflow:hidden}
-.app-media img{width:100%;height:100%;object-fit:cover;object-position:top center}
-.app-media.icon img{width:38%;height:auto;border-radius:22%}
+.app-media{aspect-ratio:16/10;background:#1E1E1E;display:grid;place-items:center;overflow:hidden}
+.app-media video{width:100%;height:100%;object-fit:cover;object-position:top center}
+.app-media .icon-plate{display:grid;place-items:center;width:100%;height:100%}
+.app-media .icon-plate img{width:28%;height:auto;border-radius:22%;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .app-body{display:grid;gap:6px;align-content:start;padding:var(--s3)}
 .app-body .label{color:var(--blue-soft)}
 .app-body b{font:600 var(--t5)/1.25 var(--font-body)}
 .app-body span{font-size:var(--t3);line-height:1.6;color:rgba(255,255,255,.72)}
 a.app:hover{border-color:var(--paper)}
-@media (min-width:640px){.apps{grid-template-columns:1fr 1fr}}
-@media (min-width:1100px){.apps{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:760px){.apps{grid-template-columns:1fr 1fr}}
 
 /* ---- the room: real workshop photos ---- */
 .room{background:var(--navy-deep);color:var(--paper)}
@@ -374,7 +374,7 @@ const SETTINGS = {
 <nav class="nav" aria-label="Page">
   <div class="wrap">
     <a class="mark" href="/robots-and-coffee/"><img src="/mastermind/media/logo-mark-ink.png" alt="" width="90" height="96"><span><b>Robots &amp; Coffee</b><small>Overnight Build</small></span></a>
-    <div class="nav-meta">Overnight Build &middot; Oct 24 to 25, 2026 &middot; Tagaytay</div>
+    <div class="nav-meta">Overnight Build &middot; Oct 24 to 25, 2026 &middot; Near Tagaytay</div>
     <a class="nav-cta" data-setting="content.cta" href="#seats">Take a seat</a>
   </div>
 </nav>
@@ -385,7 +385,7 @@ const SETTINGS = {
 </div>
 
 <header class="hero" data-hero-exempt="Owner 2026-09-16: follow the ai-workshop breather, the hero runs past the fold on purpose">
-  <div class="hero-plate"><img src="/mastermind/media/hero.jpg" alt="The villa from the road: a white gable house with black window frames, palms, and the Tagaytay ridge behind it" width="1440" height="960" fetchpriority="high"></div>
+  <div class="hero-plate"><img src="/mastermind/media/villa-hero.jpg" alt="Acacia Uno at dusk: the lit pool in front of the two-storey house and the covered pool lounge" width="1600" height="1067" fetchpriority="high"></div>
   <div class="hero-in">
     <img class="hero-logo" src="/mastermind/media/logo-lockup.png" alt="Robots and Coffee" width="357" height="480" fetchpriority="high">
     <span class="pill">Content and build mastermind<span class="long"> &middot; 10 seats &middot; one villa</span></span>
@@ -401,7 +401,7 @@ const SETTINGS = {
 
 <div class="meta" aria-label="At a glance">
   <div class="mcell"><span class="label">When</span><h4>Oct 24 to 25</h4><p>Sat 4pm to Sun 3pm, one night</p></div>
-  <div class="mcell"><span class="label">Where</span><h4>Tagaytay</h4><p>Private villa, 90 min from BGC</p></div>
+  <div class="mcell"><span class="label">Where</span><h4>Near Tagaytay</h4><p>Acacia Uno, a private resort in Silang</p></div>
   <div class="mcell"><span class="label">Seats</span><h4>9 of 10 left</h4><p>Alumni of Batch 1 and 2 first</p></div>
   <div class="mcell"><span class="label">Your coaches</span><h4>Gwen + Jamz</h4><p>Content by day, build by night</p></div>
 </div>
@@ -536,13 +536,15 @@ const SETTINGS = {
     <div class="sec-head">
       <span class="eyebrow">Built by your coaches</span>
       <h2>We don't teach what we <span class="serif">haven't shipped.</span></h2>
-      <p class="dim">Everything we'll build with you, we built for our own lives and businesses first. Here are four of them.</p>
+      <p class="dim">Everything we'll build with you, we built for our own lives and businesses first. Here are six of them, running.</p>
     </div>
     <div class="apps">
-      <div class="app"><div class="app-media"><img src="/mastermind/media/built-resibo.jpg" alt="Resibo on iPhone: a Mercury Drug receipt logged to the Personal book" width="800" height="600" loading="lazy"></div><div class="app-body"><span class="label">iPhone app</span><b>Resibo</b><span>Snap a receipt, pick the business, and it lands in the right books. A built-in Philippine tax coach explains the numbers.</span></div></div>
-      <div class="app"><div class="app-media icon"><img src="/mastermind/media/built-hugas.png" alt="The Hugas app icon: a yellow sink on blue" width="360" height="360" loading="lazy"></div><div class="app-body"><span class="label">iPhone app</span><b>Hugas</b><span>Whose turn is it to wash the dishes? Snap the sink, log it, and the next name comes up. A household app, in Taglish.</span></div></div>
-      <div class="app"><div class="app-media"><img src="/work/demos/portal-poster.webp" alt="The AVAS portal: a morning board, tasks by client and end-of-day reports, shown on stand-in data" width="1440" height="900" loading="lazy"></div><div class="app-body"><span class="label">Team portal</span><b>AVAS portal</b><span>Where our agency runs its day: what needs you this morning, tasks by client, end-of-day reports and team capacity.</span></div></div>
-      <a class="app" href="https://ayalavirtualassistance.site/" target="_blank" rel="noopener"><div class="app-media"><img style="object-position:left center" src="/mastermind/media/built-avas-site.jpg" alt="The AVAS website hero: stop doing everything alone" width="1000" height="430" loading="lazy"></div><div class="app-body"><span class="label">Website</span><b>AVAS</b><span>Our agency's site, designed and shipped with AI. No page builder, no developer on payroll.</span></div></a>
+      <div class="app"><div class="app-media"><video muted loop playsinline preload="none" data-src="/mastermind/media/built-resibo.mp4" poster="/mastermind/media/built-resibo-poster.jpg" aria-label="Resibo on iPhone: tap the camera, snap a Mercury Drug receipt, it logs to the Personal book, then the receipts list"></video></div><div class="app-body"><span class="label">iPhone app</span><b>Resibo</b><span>Snap a receipt, pick the business, and it lands in the right books. A built-in Philippine tax coach explains the numbers.</span></div></div>
+      <div class="app"><div class="app-media"><div class="icon-plate"><img src="/mastermind/media/built-hugas.png" alt="The Hugas app icon: a yellow sink on blue" width="360" height="360" loading="lazy"></div></div><div class="app-body"><span class="label">iPhone app</span><b>Hugas</b><span>Whose turn is it to wash the dishes? Snap the sink, log it, and the next name comes up. A household app, in Taglish.</span></div></div>
+      <div class="app"><div class="app-media"><video muted loop playsinline preload="none" data-src="/work/demos/portal.mp4" poster="/work/demos/portal-poster.webp" aria-label="The AVAS portal: a morning board, tasks by client and end-of-day reports, shown on stand-in data"></video></div><div class="app-body"><span class="label">Team portal</span><b>AVAS portal</b><span>Where our agency runs its day: what needs you this morning, tasks by client, end-of-day reports and team capacity.</span></div></div>
+      <a class="app" href="https://ayalavirtualassistance.site/" target="_blank" rel="noopener"><div class="app-media"><video muted loop playsinline preload="none" data-src="/mastermind/media/site-avas.mp4" poster="/mastermind/media/site-avas-poster.jpg" aria-label="Scrolling the AVAS website: stop doing everything alone, the ask-anything box, the team, and a client story"></video></div><div class="app-body"><span class="label">Website</span><b>AVAS</b><span>Our agency's site, designed and shipped with AI. No page builder, no developer on payroll.</span></div></a>
+      <a class="app" href="https://katepowerscreates.org/" target="_blank" rel="noopener"><div class="app-media"><video muted loop playsinline preload="none" data-src="/mastermind/media/site-kate.mp4" poster="/mastermind/media/site-kate-poster.jpg" aria-label="Scrolling Kate Powers&#39; website: her books, the free resource library, and her story"></video></div><div class="app-body"><span class="label">Client website</span><b>Kate Powers</b><span>An author and educator&#39;s home for her books, free tools and talks, in one calm place. Designed and built by us, with AI.</span></div></a>
+      <a class="app" href="https://jtlgrowth.com/" target="_blank" rel="noopener"><div class="app-media"><video muted loop playsinline preload="none" data-src="/mastermind/media/site-jtl.mp4" poster="/mastermind/media/site-jtl-poster.jpg" aria-label="Touring the JTL Growth website: the AI employee on the homepage, the founder, and the globe of running systems"></video></div><div class="app-body"><span class="label">Website</span><b>JTL Growth</b><span>Jamz's AI and automation agency. A side-scrolling site with an AI employee answering on the homepage.</span></div></a>
     </div>
   </div>
 </section>
@@ -552,7 +554,7 @@ const SETTINGS = {
     <div class="sec-head">
       <span class="eyebrow">From our last two workshop batches</span>
       <h2>What people said after <span class="serif">a weekend with us.</span></h2>
-      <p class="dim">Real Facebook recommendations from the AI Takeover and From Operator to Orchestrator batches, the same coaches you'll sit with in Tagaytay.</p>
+      <p class="dim">Real Facebook recommendations from the AI Takeover and From Operator to Orchestrator batches, the same coaches you'll sit with at the villa.</p>
     </div>
     <div class="quotes">
       <figure class="tq feat"><blockquote><p>I was the last person to sign up for this event. I literally just paid the same day the event started despite seeing it online for the nth time. Pinag iisipan kong mabuti if it&#39;s actually worth it kasi I already have ai agents working. I already know how to build it. Pero hindi pa pala.</p><p>I&#39;ve been spending some of my time watching youtube videos or buying a coursera course for ai employees pero hirap na hirap padin akong i determine kung paano ba dapat sila mag work. And as a visual learner nakakahilo magbasa ng mahahabang courses or manood ng 15min video per topic.</p><p>So is it worth it? Yes definitely.</p><p>I just didn&#39;t learn about AI agents. Madaming topics about how can AI make your business run smoothly and how to build something that you actually need.</p></blockquote><figcaption><b>Raven Lui</b><span>Facebook recommendation &middot; Sept 2026</span></figcaption></figure>
@@ -601,10 +603,10 @@ const SETTINGS = {
     <div class="sec-head">
       <span class="eyebrow">Before you decide</span>
       <h2>Fifteen seconds of the villa.</h2>
-      <p class="dim">The house on the ridge, the table where the night happens, the pool you step out to. This is where the ten of you spend 26 hours.</p>
+      <p class="dim">The house at dusk, the dining hall where the night happens, the pool you step out to. This is where the ten of you spend 26 hours.</p>
     </div>
     <div class="teaser">
-      <video id="teaser-video" src="/mastermind/media/teaser.mp4" poster="/mastermind/media/teaser-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Teaser: the white villa on the Tagaytay ridge, the double-height living room, the long dining table, and the pool at night"></video>
+      <video id="teaser-video" src="/mastermind/media/villa-teaser.mp4" poster="/mastermind/media/villa-teaser-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Teaser: Acacia Uno&#39;s pool at dusk, the dining hall&#39;s long tables, the covered pool lounge, the upstairs terrace, and the house lit at night"></video>
       <button class="ctrl" id="teaser-ctrl" type="button" aria-pressed="true">Pause</button>
     </div>
     <div class="teaser-cap"><span>The villa, Oct 24 to 25 &middot; animated from the listing's own photos</span><span>Sound off by design</span></div>
@@ -615,19 +617,18 @@ const SETTINGS = {
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">The place</span>
-      <h2>A white villa on the Tagaytay ridge, an hour and a half from BGC.</h2>
-      <p class="dim">White walls and black frames, a heated pool, a double-height living room, five rooms and six baths for the night. Every corner is a set by day and a build table by night. Pre-final: the address reaches enrollees a week before.</p>
+      <h2>Acacia Uno, a private resort five minutes from Tagaytay.</h2>
+      <p class="dim">The whole resort is ours for the night: a private pool with a covered lounge, a dining hall with long tables, air-conditioned rooms and a garden full of old trees. Every corner is a set by day and a build table by night. It&#39;s in Silang, Cavite, about 90 minutes from BGC. The pin and directions reach you when you book.</p>
     </div>
     <div class="gallery">
-      <figure><img src="/mastermind/media/pool-night.jpg" alt="The pool lit at night under string lights, bamboo fence behind" width="1200" height="1600" loading="lazy"><figcaption>The pool after the second build block</figcaption></figure>
-      <figure><img src="/mastermind/media/living.jpg" alt="The double-height living room: white walls, black stair rail, grey sofas around a wooden table" width="1440" height="960" loading="lazy"><figcaption>The living room, where the speaker corner goes</figcaption></figure>
-      <figure><img src="/mastermind/media/island.jpg" alt="The white kitchen island with black bar stools and pendant lights" width="1440" height="960" loading="lazy"><figcaption>The island, coffee bar all night</figcaption></figure>
-      <figure><img src="/mastermind/media/table.jpg" alt="The dining table by the window under a wire chandelier" width="1440" height="1080" loading="lazy"><figcaption>The table, before we join two of them</figcaption></figure>
-      <figure><img src="/mastermind/media/lanai.jpg" alt="The covered lanai with a sofa set opening onto the garden and pool" width="1200" height="1600" loading="lazy"><figcaption>The lanai, first build block</figcaption></figure>
-      <figure><img src="/mastermind/media/room.jpg" alt="A bedroom with a white bed, wood floor and a whitewashed brick wall" width="1200" height="1600" loading="lazy"><figcaption>One of five rooms</figcaption></figure>
+      <figure><img src="/mastermind/media/villa-dusk.jpg" alt="The two-storey house lit up at dusk, long tables glowing through the ground-floor glass" width="1200" height="900" loading="lazy"><figcaption>The house at dusk, when the build starts</figcaption></figure>
+      <figure><img src="/mastermind/media/villa-hall.jpg" alt="The dining hall: long wooden tables and benches under pendant lights, glass walls onto the garden" width="1200" height="900" loading="lazy"><figcaption>The dining hall, where the table goes</figcaption></figure>
+      <figure><img src="/mastermind/media/villa-lounge.jpg" alt="The pool beside the covered lounge, woven lamps under a wooden roof" width="1200" height="900" loading="lazy"><figcaption>The covered pool lounge, your shoot set</figcaption></figure>
+      <figure><img src="/mastermind/media/villa-terrace.jpg" alt="The upstairs terrace with a rattan bar table and two stools, looking down at the garden and pool" width="1200" height="900" loading="lazy"><figcaption>The upstairs terrace, coffee with a view</figcaption></figure>
+      <figure><img src="/mastermind/media/villa-bunks.jpg" alt="The bunk room: black steel bunk beds with white linen on a wood floor" width="1200" height="900" loading="lazy"><figcaption>The builders&#39; room</figcaption></figure>
+      <figure><img src="/mastermind/media/villa-pool.jpg" alt="The pool by day with loungers, the house and the covered lounge behind it" width="1200" height="900" loading="lazy"><figcaption>The pool after the second build block</figcaption></figure>
     </div>
-    <p class="note" style="margin-top:14px">Photos: the villa's own listing.</p>
-    <!-- Rate pending Gwen's quote; shortlist runs 10+ villas, chosen the night before the booking window closes. -->
+    <p class="note" style="margin-top:14px">Photos: Acacia Uno&#39;s own listing, rated 4.89 from 101 guest reviews.</p>
     <div class="plan">
       <div class="plan-vis">
         <svg viewBox="0 0 720 500" role="img" aria-label="Floor plan: build table on the lanai, speaker corner, coffee bar, pool, bedrooms, kitchen, parking">
@@ -635,7 +636,7 @@ const SETTINGS = {
           <rect class="pl-lot" x="20" y="20" width="680" height="460" rx="4"/>
           <rect class="pl-park" x="20" y="400" width="130" height="80"/>
           <rect class="pl-car" x="42" y="428" width="60" height="30" rx="5"/>
-          <text class="pl-t" x="30" y="473">PARKING · 8 CARS</text>
+          <text class="pl-t" x="30" y="473">PARKING · 6 CARS</text>
           <rect class="pl-house" x="60" y="60" width="440" height="200"/>
           <g class="pl-room">
             <rect x="60" y="60" width="110" height="100"/><rect x="170" y="60" width="110" height="100"/><rect x="60" y="160" width="110" height="100"/><rect x="170" y="160" width="110" height="100"/>
@@ -652,7 +653,7 @@ const SETTINGS = {
             <circle cx="410" cy="178" r="6"/><circle cx="432" cy="178" r="6"/><circle cx="454" cy="178" r="6"/><circle cx="476" cy="178" r="6"/>
             <circle cx="410" cy="200" r="6"/><circle cx="432" cy="200" r="6"/><circle cx="454" cy="200" r="6"/><circle cx="476" cy="200" r="6"/>
           </g>
-          <text class="pl-t ink" x="300" y="246">SHOOT SET 3PM &middot; AI SESSION 6PM</text>
+          <text class="pl-t ink" x="300" y="246">SHOOT SET 5:30PM &middot; AI SESSION 7:30PM</text>
           <rect class="pl-lanai" x="60" y="260" width="440" height="130"/>
           <rect class="pl-table" x="110" y="300" width="340" height="44" rx="4"/>
           <g class="pl-laptop"><rect x="122" y="288" width="20" height="8"/><rect x="154" y="288" width="20" height="8"/><rect x="186" y="288" width="20" height="8"/><rect x="218" y="288" width="20" height="8"/><rect x="250" y="288" width="20" height="8"/><rect x="282" y="288" width="20" height="8"/><rect x="314" y="288" width="20" height="8"/><rect x="346" y="288" width="20" height="8"/><rect x="378" y="288" width="20" height="8"/><rect x="410" y="288" width="20" height="8"/></g>
@@ -663,20 +664,20 @@ const SETTINGS = {
           <g class="pl-bar-mark"><rect x="536" y="274" width="12" height="12"/><rect x="556" y="274" width="12" height="12"/><rect x="576" y="274" width="12" height="12"/><rect x="596" y="274" width="12" height="12"/></g>
           <text class="pl-t" x="520" y="328">COFFEE BAR &middot; ALL NIGHT</text>
           <rect class="pl-pool" x="180" y="408" width="440" height="56" rx="12"/>
-          <text class="pl-t ink" x="196" y="442">POOL &middot; FREE TIME FROM 7:30PM</text>
+          <text class="pl-t ink" x="196" y="442">POOL &middot; BREAKS BETWEEN BUILDS</text>
           <path class="pl-path" d="M540 360 C 600 340, 640 380, 660 420"/>
           <text class="pl-t sm" x="560" y="352">PHOTOGRAPHER ROAMS</text>
         </svg>
       </div>
       <div class="legend">
         <div><span class="key k-table"></span><div><b>The table</b><span>One long table. Ten builders, a host at each end, laptops open from 9pm. This is the mastermind: everyone sees everyone's build.</span></div></div>
-        <div><span class="key k-set"></span><div><b>Shoot set and speaker corner</b><span>The living room. Content shoot from 3pm with the photographer, then stools in an arc for the Hermes session at 6pm.</span></div></div>
-        <div><span class="key k-pool"></span><div><b>Pool and free time</b><span>From 7:30pm the night is yours. Swim, sleep, or keep building with a host beside you.</span></div></div>
-        <div><span class="key k-room"></span><div><b>Bedrooms</b><span>Twin share, sleep whenever. Breakfast at 8.</span></div></div>
+        <div><span class="key k-set"></span><div><b>Shoot set and speaker corner</b><span>The covered pool lounge. Golden-hour shoot from 5:30pm with the photographer, then chairs in an arc for the Hermes session after dinner.</span></div></div>
+        <div><span class="key k-pool"></span><div><b>Pool and breaks</b><span>Step out between build blocks. Swim, sleep, or keep building with a host beside you. The resort keeps quiet hours from 10pm, so late swims stay quiet.</span></div></div>
+        <div><span class="key k-room"></span><div><b>Bedrooms</b><span>Shared, air-conditioned rooms. Sleep whenever. Breakfast at 8.</span></div></div>
         <div><span class="key k-bar"></span><div><b>Coffee bar</b><span>The kitchen island. Robots &amp; Coffee beans, open all night. The photographer works the whole 26 hours.</span></div></div>
       </div>
     </div>
-    <p class="note" style="margin-top:14px">The plan is representative; the booked villa differs in shape, not in zones.</p>
+    <p class="note" style="margin-top:14px">The plan shows the zones, not Acacia Uno&#39;s exact layout.</p>
   </div>
 </section>
 
@@ -829,6 +830,24 @@ const SETTINGS = {
   if (still) { v.removeAttribute('autoplay'); v.pause(); setCtrl(false); }
   ctrl.addEventListener('click', function(){ if (v.paused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function(){ setCtrl(false); }); } else { v.pause(); } });
   v.addEventListener('play', function(){ setCtrl(true); }); v.addEventListener('pause', function(){ setCtrl(false); });
+})();
+</script>
+<script>
+// Built cards: each film loads when it scrolls into view and pauses when it leaves.
+// Reduced motion (or animations off) keeps the posters as stills.
+(function(){
+  var still = !SETTINGS.behavior.animations || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if (e.isIntersecting) {
+        if (!v.getAttribute('src')) v.src = v.getAttribute('data-src');
+        var pr = v.play(); if (pr && pr.catch) pr.catch(function(){});
+      } else if (!v.paused) v.pause();
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.app-media video[data-src]').forEach(function(v){ io.observe(v); });
 })();
 </script>
 <script>
