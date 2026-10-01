@@ -254,7 +254,7 @@ header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 /* ---------- dots + progress ---------- */
 #dots{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:8px;align-items:center}
 /* v4: named, clickable section markers (24px+ targets, WCAG 2.2 target-size) */
-#dots button{font:700 9.5px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--gray);cursor:pointer;padding:8px 14px;transition:all .45s cubic-bezier(.6,0,.2,1);display:inline-flex;align-items:center;gap:8px}
+#dots button{font:700 9.5px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--gray);cursor:pointer;padding:8px 14px;transition:color .45s cubic-bezier(.6,0,.2,1),border-color .45s cubic-bezier(.6,0,.2,1);display:inline-flex;align-items:center;gap:8px}
 #dots button::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gray-light);transition:background .45s}
 #dots button.active{color:var(--navy);border-color:rgba(24,24,24,.25)}
 #dots button.active::before{background:var(--wood)}
