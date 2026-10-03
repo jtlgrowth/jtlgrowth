@@ -117,7 +117,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       "@id": "https://jtlgrowth.com/jamz-jamorol/#person",
       "name": "Jamz Jamorol",
       "url": "https://jtlgrowth.com/jamz-jamorol/",
-      "image": "https://jtlgrowth.com/assets/jamz.png",
+      "image": "https://jtlgrowth.com/assets/jamz.webp",
       "jobTitle": "Founder",
       "description": "Jamz Jamorol is a Filipino systems builder and electrical engineer based in Caloocan City, Metro Manila, Philippines. Founder of JTL Growth and Co-Founder of AVAS (Ayala Virtual Assistance Services).",
       "nationality": { "@type": "Country", "name": "Philippines" },
@@ -703,7 +703,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
          the right edge, one "Next" chip to switch founders instead of two tabs. -->
     <div class="about-face rv d2">
         <a href="/jamz-jamorol/" aria-label="Jamz Jamorol: founder profile"><img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async"></a>
-        <img class="face" id="face-gwen" src="assets/portrait-gwen.jpg" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="face" id="face-gwen" src="assets/portrait-gwen.webp" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
       </div>
     <div class="inner about-c">
       <div class="about-copy">
@@ -737,7 +737,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       </div>
     </div>
     <button class="who-next" type="button" aria-controls="pane-jamz pane-gwen" data-next="gwen">
-      <img src="assets/portrait-gwen.jpg" alt="" width="34" height="34">
+      <img src="assets/portrait-gwen.webp" alt="" width="34" height="34">
       <span class="wn-label">Next: Gwen</span><span aria-hidden="true">&rarr;</span>
     </button>
   </section>
@@ -763,7 +763,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
             <div class="p-notch"></div>
             <div class="p-screen">
               <div class="p-eyebrow">Incoming &middot; 30-min call</div>
-              <div class="p-avatar"><img src="assets/gwen.jpg" alt=""></div>
+              <div class="p-avatar"><img src="assets/gwen.webp" alt=""></div>
               <div class="p-name">Revenue Leak Check</div>
               <div class="p-sub">We look at your funnel together and show you what the leaks cost. No pitch, no pressure.</div>
               <div class="p-accept">Accept &middot; Book the call</div>
@@ -1188,7 +1188,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
   var btn=document.querySelector('#about .who-next');
   if(!btn)return;
   var label=btn.querySelector('.wn-label'),img=btn.querySelector('img');
-  var NEXT={jamz:{to:'gwen',text:'Next: Gwen',src:'assets/portrait-gwen.jpg'},gwen:{to:'jamz',text:'Back to Jamz',src:'assets/portrait-jamz.jpg'}};
+  var NEXT={jamz:{to:'gwen',text:'Next: Gwen',src:'assets/portrait-gwen.webp'},gwen:{to:'jamz',text:'Back to Jamz',src:'assets/portrait-jamz.jpg'}};
   function select(who){
     ['jamz','gwen'].forEach(function(w){
       var on=w===who,pane=document.getElementById('pane-'+w),face=document.getElementById('face-'+w);

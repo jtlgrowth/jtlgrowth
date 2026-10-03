@@ -10,7 +10,7 @@ const SCREENS = [
   { id: 'nightshift', name: 'AVAS Night Shift', img: '/shots/avas-nightshift.png' },
   { id: 'rnc', name: 'Robots & Coffee', img: '/shots/rnc.png' },
   { id: 'oras', name: 'Oras', img: '/shots/oras.png' },
-  { id: 'workshop', name: 'Batch 1 Workshop', img: '/shots/workshop.png' }
+  { id: 'workshop', name: 'Batch 1 Workshop', img: '/shots/workshop.webp' }
 ];
 
 const stageEl = document.getElementById('stage');
