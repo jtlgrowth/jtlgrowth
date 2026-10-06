@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Gladex AI Staff Training. Every prompt from Day 1 and Day 2.">
+<title>Gladex AI Prompts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+:root{--ink:#0B0B0B;--mute:#5C5C5C;--gray:#9A9A9A;--line:#E2E2E2;--soft:#F3F3F3;--bg:#FFFFFF;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Roboto Mono",Consolas,Menlo,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+.eb{font:500 11.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+[hidden]{display:none!important}
+#gate{min-height:100svh;display:grid;place-items:center;padding:40px 20px}
+.gatebox{width:100%;max-width:520px}
+.gatebox h1{font-size:clamp(40px,9vw,64px);font-weight:800;margin:14px 0 12px}
+.gatebox p{color:var(--mute);margin:0 0 22px}
+.pwrow{display:flex;gap:10px;flex-wrap:wrap}
+input{flex:1 1 220px;font:500 17px var(--sans);padding:14px 16px;border:1.5px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink)}
+.btn{font:700 16px var(--sans);padding:14px 22px;border-radius:10px;border:0;background:var(--ink);color:#fff;cursor:pointer}
+.err{color:var(--ink);font-weight:700;margin-top:12px;min-height:1.4em}
+#page{display:none}
+.hero{padding:64px 0 36px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(42px,8vw,76px);font-weight:800;margin:16px 0 14px}
+.hero p{color:var(--mute);max-width:640px;margin:0}
+nav.jump{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.jump .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.jump a{flex:0 0 auto;font:500 13px var(--sans);color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 13px}
+nav.jump a:hover{border-color:var(--ink)}
+section{padding:52px 0 8px}
+section>h2{font-size:clamp(30px,5.5vw,44px);font-weight:800;margin:12px 0 10px}
+section>p.lead{color:var(--mute);margin:0 0 22px;max-width:680px}
+.desk{border-top:1.5px solid var(--ink);margin-top:30px;padding-top:14px}
+.desk h3{font-size:24px;font-weight:800;margin-bottom:2px}
+.desk .who{color:var(--mute);font-size:15px;margin-bottom:6px}
+.p{border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
+.p .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:14px 16px 6px}
+.p .t{font-weight:700;font-size:17px}
+.p .n{color:var(--mute);font-size:14px}
+.p pre{margin:0;padding:12px 16px 16px;font:400 14px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.p.dark{background:var(--ink);border-color:var(--ink)}
+.p.dark .t,.p.dark pre{color:#fff}.p.dark .n{color:#BDBDBD}
+.copy{flex:0 0 auto;font:700 13px var(--sans);padding:8px 14px;border-radius:8px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.p.dark .copy{background:#fff}
+.copy.ok{background:var(--ink);color:#fff}
+.p.dark .copy.ok{background:#555;color:#fff;border-color:#555}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:4px 0 12px 44px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font:700 14px/30px var(--sans);text-align:center}
+.note{background:var(--soft);border-radius:12px;padding:16px 18px;margin:16px 0;font-size:15.5px}
+.note b{font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:15.5px;margin:10px 0}
+td{border-top:1px solid var(--line);padding:10px 8px 10px 0;vertical-align:top}
+td:first-child{font:500 14.5px var(--mono);white-space:nowrap;padding-right:18px}
+.promos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.promo{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.promo b{display:block;font-size:17px}.promo span{color:var(--mute);font-size:14.5px}
+footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gatebox">
+    <span class="eb">Gladex Travel and Tours · AI Staff Training</span>
+    <h1>Every prompt, one page.</h1>
+    <p>Day 1 and Day 2, every desk, and Gwen's promo page activity. The password is on the screen in the room.</p>
+    <div class="pwrow">
+      <input id="pw" type="password" placeholder="Password on the screen" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="btn" id="go" type="button">Open the page</button>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<div id="page">
+<header class="hero"><div class="wrap">
+  <span class="eb">Gladex · October 8 and 9, 2026</span>
+  <h1>Copy. Never type.</h1>
+  <p>Every command and prompt from the training. Tap Copy, paste inside Claude Code in your desk folder, and fill the [brackets] with your own words. Sample data only, never real client data.</p>
+  <p style="margin-top:18px"><a href="activity/" style="font:700 16px var(--sans);padding:13px 20px;border-radius:10px;background:var(--ink);color:#fff;text-decoration:none;display:inline-block">Every activity, step by step</a></p>
+</div></header>
+
+<nav class="jump"><div class="wrap">
+  <a href="#setup">Set up</a><a href="#helpers">Helper prompts</a><a href="#day1">Day 1 · by desk</a>
+  <a href="#brain">Day 2 · Brain</a><a href="#ui">Day 2 · UI system</a><a href="#promo">Gwen's activity</a>
+  <a href="#count">Make it count</a><a href="#day2">Day 2 · by desk</a><a href="#basics">Basics</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="setup">
+  <span class="eb">Day 1 · Part 1</span>
+  <h2>Set up your laptop.</h2>
+  <ol class="steps">
+    <li>Press the Windows key, type <b>PowerShell</b>, press Enter.</li>
+    <li>Copy the line below, paste it into PowerShell (right-click pastes if Ctrl+V does nothing), press Enter. If it asks Y/n, press Enter.</li>
+    <li>When it asks for the <b>Workshop key</b>, type the key from the whiteboard. It starts with wk_.</li>
+    <li>When it finishes, close PowerShell, open a new one, then type <b>claude</b> and <b>/login</b>.</li>
+    <li>Inside Claude Code type <b>/setup</b> and name your chief of staff.</li>
+  </ol>
+  <div class="p dark"><div class="top"><div><div class="t">Install · Windows PowerShell</div></div><button class="copy">Copy</button></div>
+<pre>$env:CCI_SKILLS='hire,setup'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex</pre></div>
+  <div class="p"><div class="top"><div><div class="t">If PowerShell blocks it · use Command Prompt</div><div class="n">Windows key, type cmd, Enter, paste this.</div></div><button class="copy">Copy</button></div>
+<pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:CCI_SKILLS='hire,setup'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex"</pre></div>
+  <div class="p"><div class="top"><div><div class="t">On a Mac · Terminal</div></div><button class="copy">Copy</button></div>
+<pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.sh | CCI_SKILLS=hire,setup bash</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Make your desk and hire</div><div class="n">Change marketing-hq to your desk: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, it-hq.</div></div><button class="copy">Copy</button></div>
+<pre>mkdir marketing-hq
+cd marketing-hq
+claude</pre></div>
+  <p>Then type <b>/hire</b> inside Claude Code and answer the seven questions.</p>
+  <div class="note"><b>If something goes wrong.</b> "Running scripts is disabled": use the Command Prompt line. "'claude' is not recognized": close every terminal and open a new one, or restart. Key not accepted: copy it again with no spaces. Login stuck: copy the link it prints into your browser and paste the code back. Office network blocks it: ask IT to allow github.com, githubusercontent.com, anthropic.com and claude.ai, or use a phone hotspot for the install.</div>
+</section>
+
+<section id="helpers">
+  <span class="eb">Day 1 · Any desk</span>
+  <h2>Five helper prompts.</h2>
+  <p class="lead">They work on every desk. Use them all the time.</p>
+  <div class="p"><div class="top"><div><div class="t">Fix my brief</div><div class="n">Before you run anything big.</div></div><button class="copy">Copy</button></div>
+<pre>Here is my brief: [brief]
+Rewrite it with five parts: Goal, Input, Output, Check, Never.
+Ask me about anything missing before you start.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Show your source</div><div class="n">Check 1, every time there is a number.</div></div><button class="copy">Copy</button></div>
+<pre>For every number in [file], tell me which file and which line it came from.
+Mark anything you calculated or guessed.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">What were you unsure about</div><div class="n">The fastest way to find the weak spot.</div></div><button class="copy">Copy</button></div>
+<pre>List everything in your last answer that you were unsure about,
+and what you would need from me to be sure.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Explain what you did</div><div class="n">Before you sign it.</div></div><button class="copy">Copy</button></div>
+<pre>Explain what you just did in 3 lines: what you read, what you wrote,
+and what you did not check.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Save it as a command</div><div class="n">So tomorrow it is one word.</div></div><button class="copy">Copy</button></div>
+<pre>Turn this brief into a slash command saved at
+.claude/commands/[name].md so I can run /[name] next time.</pre></div>
+</section>
+
+<section id="day1">
+  <span class="eb">Day 1 · First shift</span>
+  <h2>Your first shift, by desk.</h2>
+  <p class="lead">Two starter briefs per desk, built from your survey answers.</p>
+
+  <div class="desk"><h3>Marketing</h3><div class="who">Harmony · the ads report</div>
+  <div class="p"><div class="top"><div><div class="t">Weekly ads report</div><div class="n">Export each ad account to ads/ first. CSV is fine.</div></div><button class="copy">Copy</button></div>
+<pre>Read every export in ads/. Make one table per account: spend, leads,
+CPL, ROAS, sales. Mark any campaign with CPL above [target].
+Then three moves: what to scale, what to fix, what to stop, with the
+number behind each. Save as ads/report-[date].md.
+Never invent a number that is not in the files.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Week over week</div><div class="n">Once you have two reports.</div></div><button class="copy">Copy</button></div>
+<pre>Compare ads/report-[last week].md with ads/report-[this week].md.
+List what moved more than 20 percent and the likely reason.
+Say which reasons are a guess.</pre></div></div>
+
+  <div class="desk"><h3>Multimedia</h3><div class="who">Rhoniel · the daily poster</div>
+  <div class="p"><div class="top"><div><div class="t">Poster brief</div><div class="n">Before you open Canva.</div></div><button class="copy">Copy</button></div>
+<pre>Write the brief for today's collective poster: headline under 8 words,
+3 supporting lines, the call to action, and the size for each platform.
+Use brain/company.md for the voice. Save as posters/[date]-brief.md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Poster as a page</div><div class="n">A reusable template you fill in.</div></div><button class="copy">Copy</button></div>
+<pre>Build posters/template.html: a 1080x1350 poster using DESIGN.md.
+The headline, the 3 lines and the photo are fields I can edit at the top.
+Add a button that downloads it as a PNG.</pre></div></div>
+
+  <div class="desk"><h3>HR</h3><div class="who">Keiko · the applicant tracker</div>
+  <div class="p"><div class="top"><div><div class="t">Applicant tracker</div><div class="n">Practise with made-up applicants first.</div></div><button class="copy">Copy</button></div>
+<pre>Build an applicant tracker as one page, hr/tracker.html, using DESIGN.md.
+Columns: Applied, Screened, Interview, Offer, Hired, Not now.
+Each card: name, role, date, next step. Data lives in hr/applicants.json
+so I can edit it. Sample data only, 10 made-up people.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Screen a CV against the role</div><div class="n">Remove contact details and IDs first.</div></div><button class="copy">Copy</button></div>
+<pre>Read the role in hr/roles/[role].md and the CV in hr/cv/[file].
+Score each requirement: met, partly, not shown, with the line from the CV.
+No final verdict. Save as hr/screens/[file].md.</pre></div></div>
+
+  <div class="desk"><h3>Finance</h3><div class="who">Jayson · the Lakbay Hub audit</div>
+  <div class="p"><div class="top"><div><div class="t">Audit checklist</div><div class="n">Sample exports only. Never card or bank numbers.</div></div><button class="copy">Copy</button></div>
+<pre>Read the files in audit/. Build a checklist of every item to verify:
+the item, where its proof should be, status (found, missing, mismatch).
+Flag every mismatch with the two numbers side by side.
+Save as audit/checklist-[date].md. Never round or guess a figure.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Reconcile two lists</div><div class="n">Bookings against payments, invoices against statements.</div></div><button class="copy">Copy</button></div>
+<pre>Match audit/[list A].csv against audit/[list B].csv by reference number.
+Three sections: matched, in A only, in B only, plus amount mismatches.
+Save as audit/recon-[date].md.</pre></div></div>
+
+  <div class="desk"><h3>Operations</h3><div class="who">Kevin · reports and mobile</div>
+  <div class="p"><div class="top"><div><div class="t">Weekly operations report</div><div class="n">Your one task.</div></div><button class="copy">Copy</button></div>
+<pre>Read the notes in ops/[week]/. Write the weekly report: what shipped,
+what is late and why, what is blocked, and who owns each next step.
+Save as ops/report-[week].md. Ask me before you guess an owner.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Meeting to action items</div><div class="n">Save your notes first.</div></div><button class="copy">Copy</button></div>
+<pre>Read meetings/[file]. List every decision and every action item
+with an owner and a date. Anything without an owner, list separately.</pre></div></div>
+
+  <div class="desk"><h3>Quality Assurance</h3><div class="who">Paula · process</div>
+  <div class="p"><div class="top"><div><div class="t">Process map</div><div class="n">Start with one process, not all.</div></div><button class="copy">Copy</button></div>
+<pre>Interview me about the [process] process, one question at a time.
+Then write it as numbered steps: who does it, what goes in, what comes out,
+and where it usually goes wrong. Save as qa/process-[name].md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">QA checklist</div><div class="n">From the process map.</div></div><button class="copy">Copy</button></div>
+<pre>From qa/process-[name].md, make a pass or fail checklist a reviewer
+can run in 10 minutes. Each check must be observable, not an opinion.</pre></div></div>
+
+  <div class="desk"><h3>IT</h3><div class="who">Luisa · automation</div>
+  <div class="p"><div class="top"><div><div class="t">Plan before it builds</div><div class="n">Agentic work starts with a plan you approve.</div></div><button class="copy">Copy</button></div>
+<pre>I want [task] to run on its own. Before writing code, give me the plan:
+the steps, the inputs, what it writes, what it must never touch, and how
+I can test it on sample data. Wait for my yes.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Make it a command</div><div class="n">So anyone on the team can run it.</div></div><button class="copy">Copy</button></div>
+<pre>Turn what we just did into a slash command saved at
+.claude/commands/[name].md so I can run /[name] next time.
+List the inputs it expects at the top.</pre></div></div>
+</section>
+
+<section id="brain">
+  <span class="eb">Day 2 · Part 1</span>
+  <h2>Build its brain.</h2>
+  <p class="lead">Open PowerShell, cd into your desk folder, type claude. Then paste this and answer like you are training a new hire.</p>
+  <div class="p dark"><div class="top"><div><div class="t">Let it interview you</div></div><button class="copy">Copy</button></div>
+<pre>Ask me 10 questions about my desk and my one task,
+one at a time. Wait for my answer each time.
+Then write company.md, desk.md, process.md and rules.md
+in a folder called brain/. Use my words, not marketing words.
+Then add to CLAUDE.md: read brain/ before every task.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">rules.md starter</div><div class="n">Paste into brain/rules.md, then add your own.</div></div><button class="copy">Copy</button></div>
+<pre>Never send anything outside without my approval.
+Never quote a fare or a price I have not given you.
+Never paste client IDs, cards or salaries.
+Never guess a number. Say where it came from.
+If unsure, stop and ask me.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Every mistake becomes a rule</div></div><button class="copy">Copy</button></div>
+<pre>You just [mistake]. Add a rule to brain/rules.md so it never happens
+again. Show me the line you added.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Update the process</div><div class="n">When you corrected a step.</div></div><button class="copy">Copy</button></div>
+<pre>Update brain/process.md with the step I just corrected.
+Show me the before and after.</pre></div>
+</section>
+
+<section id="ui">
+  <span class="eb">Day 2 · Part 2</span>
+  <h2>Build your UI system.</h2>
+  <p class="lead">Two fonts, four colors, one spacing rhythm, and the things you never do. Then one screen for your one task.</p>
+  <div class="p"><div class="top"><div><div class="t">① Write the system</div></div><button class="copy">Copy</button></div>
+<pre>Create DESIGN.md for Gladex.
+Fonts: [heading] + [body]
+Colors: [background], [text], [accent], [warning]
+Never: [one thing you hate]
+Write it as rules my AI must follow on every page.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">② Build the screen</div><div class="n">Ads board, poster maker, applicant tracker, audit checklist, ops report, process board, or agent runner.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/.
+Build index.html: one screen for my one task, with sample data.
+It must work on a phone first. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">③ Judge it · three rounds</div></div><button class="copy">Copy</button></div>
+<pre>The spacing feels [crowded], the [title] is too [small], and
+[the table] is hard to scan. Fix those, follow DESIGN.md, nothing else.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Your app on a phone</div><div class="n">Start with the home screen version. The App Store needs a Mac and an Apple Developer account.</div></div><button class="copy">Copy</button></div>
+<pre>Make this app work on a phone first: readable at 375px wide, buttons
+big enough for a thumb. Then make it installable to the home screen
+(a web app manifest and icons). Tell me how to test it on an iPhone.</pre></div>
+</section>
+
+<section id="promo">
+  <span class="eb">Day 2 · Gwen's activity · 25 minutes</span>
+  <h2>Build a promo page with me.</h2>
+  <p class="lead">Gladex just announced a sale (totally made up). The page is due in 25 minutes. Pick one promo per pair. Every price stays [PRICE]. We never invent a fare.</p>
+  <div class="promos">
+    <div class="promo"><b>A · Boracay Barkada Sale</b><span>3 days, 2 nights, for the whole squad.</span></div>
+    <div class="promo"><b>B · Japan Sakura Season</b><span>Cherry blossoms, ramen, a full camera roll.</span></div>
+    <div class="promo"><b>C · Hong Kong Family Weekend</b><span>Disneyland for the kids, dim sum for the titas.</span></div>
+    <div class="promo"><b>D · Bohol Island Hopping</b><span>Chocolate Hills and tarsiers, no stress.</span></div>
+  </div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt A · Brief</div></div><button class="copy">Copy</button></div>
+<pre>Read brain/company.md. Write a plan for a one-page promo: [PROMO].
+Headline under 8 words, 3 reasons to book, what is included,
+and one button. Prices stay [PRICE]. Save as promo/plan.md.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt B · Build</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and promo/plan.md. Build promo/promo.html.
+Phone first, then laptop. One big button: "Message us to book".
+No emojis. Open it in my browser.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt C · Judge</div><div class="n">Two rounds.</div></div><button class="copy">Copy</button></div>
+<pre>Look at it at 375px wide. Fix these: [what is off].
+Then tell me 3 things a customer would still find confusing.
+Fix those too. Follow DESIGN.md only.</pre></div>
+  <div class="note"><b>Then:</b> swap laptops with your buddy. One thing you love, one thing to fix. Gallery walk after: vote for the page you would actually book from.</div>
+</section>
+
+<section id="count">
+  <span class="eb">Day 2 · Part 3</span>
+  <h2>Make it count.</h2>
+  <p class="lead">Hours before, hours after, times 52. Then the two-minute demo: the pain, run it live, the number, the guardrail.</p>
+  <div class="p"><div class="top"><div><div class="t">Your week 4 report</div><div class="n">Run it at the end of the month.</div></div><button class="copy">Copy</button></div>
+<pre>Read brain/ and the files you made this month in this folder.
+Write a 5 line report for my manager: the task, hours saved per week,
+one example output, one mistake we fixed, and what I want to automate next.</pre></div>
+  <table>
+    <tr><td>Week 1</td><td>Use it every day on the same task. You, not a teammate.</td></tr>
+    <tr><td>Week 2</td><td>Every mistake becomes a line in brain/rules.md.</td></tr>
+    <tr><td>Week 3</td><td>Teach one teammate to hire their own.</td></tr>
+    <tr><td>Week 4</td><td>Report hours saved to your manager, in one line.</td></tr>
+  </table>
+</section>
+
+<section id="day2">
+  <span class="eb">Day 2 · After the training</span>
+  <h2>Your next prompt, by desk.</h2>
+  <p class="lead">Run these with your brain folder in place.</p>
+  <div class="p"><div class="top"><div><div class="t">Marketing · Caption batch</div></div><button class="copy">Copy</button></div>
+<pre>Read brain/company.md and brain/examples.md. Write 7 captions for
+[tour or promo], one per day, in the Gladex voice. Each under 60 words,
+one clear call to action. Save as content/captions-[date].md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Multimedia · Ten variations</div></div><button class="copy">Copy</button></div>
+<pre>Give me 10 headline options for [promo], each a different angle:
+price, place, feeling, urgency, family, and so on. Under 8 words each.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">HR · Interview questions</div></div><button class="copy">Copy</button></div>
+<pre>Write 8 interview questions for [role] from hr/roles/[role].md.
+For each, what a strong answer sounds like. Save as hr/interview-[role].md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Finance · Explain it to management</div><div class="n">After the checklist is done and checked by you.</div></div><button class="copy">Copy</button></div>
+<pre>Read audit/checklist-[date].md. Write a one page summary for management:
+what was checked, what is open, what needs a decision. Plain words.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Quality Assurance · Improvement ideas</div><div class="n">After a week of checks.</div></div><button class="copy">Copy</button></div>
+<pre>Read every file in qa/results/. Which checks fail most? For the top 3,
+suggest one change to the process each, and how we would know it worked.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">IT · Write the test first</div></div><button class="copy">Copy</button></div>
+<pre>Write a small test that proves [script] does its job on sample data,
+run it, and show me the output. Then tell me what it does not cover.</pre></div>
+</section>
+
+<section id="basics">
+  <span class="eb">Claude Code basics</span>
+  <h2>Five things to type.</h2>
+  <table>
+    <tr><td>claude</td><td>Starts Claude Code in the folder you are in</td></tr>
+    <tr><td>/clear</td><td>A fresh conversation, same folder, same employee</td></tr>
+    <tr><td>/resume</td><td>Opens an earlier conversation</td></tr>
+    <tr><td>/help</td><td>Lists every command</td></tr>
+    <tr><td>Esc</td><td>Stops it mid-task so you can redirect it</td></tr>
+  </table>
+  <div class="note"><b>The data rules.</b> Never paste passport or ID numbers, card or bank details, salaries, or passwords. If it should not be in the group chat, it should not be in the prompt. Use "Client A" instead of a name. Gladex IT policy comes first.</div>
+  <div class="note"><b>After today.</b> The workshop key closes after the training. Everything you installed and built stays on your laptop. Back up your desk folder like any work file. Questions go to Gwen Ayala.</div>
+</section>
+
+</main>
+<footer><div class="wrap">Gladex AI Staff Training · Jamz Jamorol and Gwen Ayala · JTL Growth</div></footer>
+</div>
+
+<script>
+(function(){
+  var PW='lakbay', OPEN='gdx.open';
+  function openPage(){document.getElementById('gate').style.display='none';document.getElementById('page').style.display='block';window.scrollTo(0,0);}
+  function unlock(){
+    var v=document.getElementById('pw').value.trim().toLowerCase();
+    if(v===PW){try{localStorage.setItem(OPEN,'1');}catch(e){} openPage();}
+    else{document.getElementById('err').textContent='Not that one. It is on the screen in the room.';document.getElementById('pw').select();}
+  }
+  document.getElementById('go').addEventListener('click',unlock);
+  document.getElementById('pw').addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
+  try{if(localStorage.getItem(OPEN)==='1')openPage();}catch(e){}
+  function legacyCopy(t){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');
+    ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);return ok;}
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.closest('.p').querySelector('pre').textContent;
+      function done(ok){b.textContent=ok?'Copied':'Select it';b.classList.toggle('ok',ok);setTimeout(function(){b.textContent='Copy';b.classList.remove('ok');},1600);}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){done(legacyCopy(t));});}
+      else done(legacyCopy(t));
+    });
+  });
+})();
+</script>
+</body>
+</html>
