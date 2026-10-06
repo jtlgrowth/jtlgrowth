@@ -52,7 +52,7 @@
     { name: 'stack', kws: ['stack', 'tools', 'tech', 'built on', 'claude', 'gpt', 'supabase', 'fastapi', 'playwright'],
       a: 'Built by hand on Claude, GPT-5, n8n, GoHighLevel, Supabase, FastAPI and Playwright. No template, no page builder, no drag-and-drop.' },
     { name: 'where', kws: ['where', 'location', 'based', 'philippines', 'manila', 'caloocan', 'timezone'],
-      a: 'Caloocan, Metro Manila. Serving PH, US and EU, so we work while your side of the world sleeps.' },
+      a: 'Metro Manila. Serving PH, US and EU, so we work while your side of the world sleeps.' },
     { name: 'who', kws: ['who', 'founder', 'founders', 'jamz', 'gwen', 'team'],
       a: 'Jamz Jamorol, founder, builds the systems he sells. Gwen Ayala, co-founder, OBM and strategy, owns the conversation: the call you book is hers.' },
     { name: 'thanks', kws: ['thanks', 'thank you', 'salamat', 'cheers'],
