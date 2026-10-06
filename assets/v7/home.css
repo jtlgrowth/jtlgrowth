@@ -5,7 +5,7 @@
 @media (max-width:1100px){.kb-hero{grid-template-columns:1fr}}
 
 .kb-eyebrow{font:700 10.5px 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin:0 0 14px}
-.kb-copy h1{margin:0 0 4px}
+.kb-copy h1,.kb-copy .h1{margin:0 0 4px}
 .kb-copy .lead{margin-top:14px}
 .kb-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .kb-cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;font:700 11px 'Space Mono',monospace;letter-spacing:.18em;text-transform:uppercase;background:var(--navy);color:var(--cement);border:1px solid var(--navy);text-decoration:none;transition:background .25s,color .25s}
@@ -249,7 +249,7 @@
 /* round 2 fixes after the wide render: the copy column measures in its own 16px ch, so 34ch was 306px and the
    headline overflowed; the bleed hid the cockpit sidebar at 1440; the laptop base touched the dots at 900 tall */
 #p1 .kb-copy,#p1clone .kb-copy{max-width:min(100%,560px);padding:0 4vw 0 2vw}
-#p1 .kb-copy h1,#p1clone .kb-copy h1{font-size:clamp(44px,4.4vw,84px)}
+#p1 .kb-copy h1,#p1clone .kb-copy .h1{font-size:clamp(44px,4.4vw,84px)}
 #p1 .kb-copy .lead,#p1clone .kb-copy .lead{max-width:36ch}
 #p1 .kb-cta,#p1clone .kb-cta{white-space:nowrap}
 #p1 .kb-laptop,#p1clone .kb-laptop{max-width:calc((100vh - 200px) * 1.1);margin-left:-3vw}
@@ -263,7 +263,7 @@
 /* round 4: sample 03, fitted to one screen. Headline over the stage, laptop below, everything inside 100vh. */
 #p1 .kb-hero-03,#p1clone .kb-hero-03{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:none;margin:0;padding:84px 0 64px;min-height:100vh;gap:0}
 #p1 .kb-hero-03 .kb-copy,#p1clone .kb-hero-03 .kb-copy{text-align:center;max-width:none;padding:0;display:flex;flex-direction:column;align-items:center}
-#p1 .kb-hero-03 h1,#p1clone .kb-hero-03 h1{font-size:clamp(36px,3.6vw,64px);line-height:1.02}
+#p1 .kb-hero-03 h1,#p1clone .kb-hero-03 .h1{font-size:clamp(36px,3.6vw,64px);line-height:1.02}
 #p1 .kb-hero-03 .lead,#p1clone .kb-hero-03 .lead{margin:10px auto 0;max-width:40ch;font-size:clamp(16px,1.15vw,18px)}
 #p1 .kb-hero-03 .kb-ctas,#p1clone .kb-hero-03 .kb-ctas{flex-direction:row;align-items:center;justify-content:center;gap:22px;margin-top:16px}
 #p1 .kb-hero-03 .kb-laptop,#p1clone .kb-hero-03 .kb-laptop{width:min(64vw,calc((100vh - 400px) * 1.6));max-width:none;margin:28px 0 0;justify-self:auto}
@@ -287,8 +287,8 @@
 #p1 .kb-hero-r5,#p1clone .kb-hero-r5{display:grid;grid-template-columns:66% 34%;align-items:center;gap:0;width:100%;max-width:none;margin:0;padding:70px 0 0;min-height:0}
 #p1 .kb-hero-r5 .kb-laptop,#p1clone .kb-hero-r5 .kb-laptop{width:100%;max-width:calc((100vh - 150px) * 1.5);margin:0 0 0 clamp(-22px,-1.4vw,0px);justify-self:start}
 #p1 .kb-hero-r5 .kb-copy,#p1clone .kb-hero-r5 .kb-copy{justify-self:center;text-align:center;max-width:min(100%,600px);padding:0 3vw 0 1vw;display:block}
-#p1 .kb-hero-r5 h1,#p1clone .kb-hero-r5 h1{font-size:clamp(44px,4.4vw,88px);line-height:.98}
-#p1 .kb-hero-r5 h1 .l,#p1clone .kb-hero-r5 h1 .l{display:block}
+#p1 .kb-hero-r5 h1,#p1clone .kb-hero-r5 .h1{font-size:clamp(44px,4.4vw,88px);line-height:.98}
+#p1 .kb-hero-r5 h1 .l,#p1clone .kb-hero-r5 .h1 .l{display:block}
 #p1 .kb-hero-r5 .lead,#p1clone .kb-hero-r5 .lead{font-size:clamp(18px,1.2vw,22px);max-width:34ch;margin:12px auto 0}
 #p1 .kb-hero-r5 .kb-ctas,#p1clone .kb-hero-r5 .kb-ctas{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:24px}
 #p1 .kb-hero-r5 .kb-cta,#p1clone .kb-hero-r5 .kb-cta{min-height:52px;padding:0 28px;font-size:12.5px}

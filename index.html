@@ -207,9 +207,9 @@ body{font-family:'Archivo',sans-serif;color:var(--navy);-webkit-font-smoothing:a
 .inner{width:min(1380px,90vw);margin:0 auto;position:relative;z-index:2}
 
 /* ---------- type ---------- */
-h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:650;line-height:1.05;letter-spacing:-.01em}
-h1 .accent,h2 .accent{font-style:italic;color:inherit}
-h1{font-size:clamp(48px,6.6vw,104px)}
+h1,.h1,h2{font-family:'Fraunces',Georgia,serif;font-weight:650;line-height:1.05;letter-spacing:-.01em}
+h1 .accent,.h1 .accent,h2 .accent{font-style:italic;color:inherit}
+h1,.h1{font-size:clamp(48px,6.6vw,104px)}
 h2{font-size:clamp(36px,4.8vw,72px)}
 .lead{font-size:clamp(16px,1.35vw,20px);line-height:1.6;color:var(--gray);max-width:52ch;font-weight:400}
 
@@ -298,8 +298,8 @@ header.on-dark .tgl:hover{background:#E2E2E2;color:#181818;border-color:#E2E2E2}
 @keyframes heroDrift{from{transform:translate3d(-1.5%,-1%,0) scale(1)}to{transform:translate3d(1.5%,1.2%,0) scale(1.05)}}
 .hero-center{text-align:center}
 .hero-center .lead{margin-left:auto;margin-right:auto}
-#p1 h1 .accent,#p1clone h1 .accent{color:var(--wood)}
-#p1 h1 .thin,#p1clone h1 .thin{color:var(--blue);font-weight:500}
+#p1 h1 .accent,#p1clone .h1 .accent{color:var(--wood)}
+#p1 h1 .thin,#p1clone .h1 .thin{color:var(--blue);font-weight:500}
 
 .split{display:grid;gap:clamp(24px,3.5vw,56px);align-items:center;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
 @media (max-width:960px){.split{grid-template-columns:1fr}}
@@ -834,7 +834,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
       <div class="kb-base kb-lip" aria-hidden="true"></div>
     </div>
       <div class="kb-copy rv d1">
-        <h1><span class="l">Growth,</span> <em class="accent">engineered.</em></h1>
+        <div class="h1"><span class="l">Growth,</span> <em class="accent">engineered.</em></div>
         <p class="lead">AI systems that run the repetitive half of your business.</p>
         <div class="kb-ctas"><a class="kb-cta" href="https://book.ayalavirtualassistance.site/" target="_blank" rel="noopener">Put AI to work for me</a><a class="kb-link" href="/ai-employee/">See the seven stages <span aria-hidden="true">&#8599;</span></a></div>
         <p class="kb-hint" data-hint>Or ask Venice. It answers what we build, what it costs, how fast, and who runs it.</p>
