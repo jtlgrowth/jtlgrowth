@@ -369,6 +369,10 @@ header.on-dark .nav-row a{color:#E2E2E2}
 .contact-side a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--wood-warm)}
 .footline{position:absolute;bottom:96px;left:0;right:0}
 .footline .inner{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray)}
+.footline .inner{flex-wrap:wrap;gap:10px 32px;line-height:1.7}
+.footline .inner>span{min-width:0}
+.footline a{color:inherit;text-decoration:none;border-bottom:1px solid var(--wood-warm);transition:color .2s}
+.footline a:hover,.footline a:focus-visible{color:var(--navy);border-bottom-color:var(--navy)}
 
 /* ---------- vertical fallback: mobile AND prefers-reduced-motion (a11y) ----------
    One shared static mode: native vertical scroll, no filmstrip hijack, no canvas
@@ -391,7 +395,10 @@ header.on-dark .nav-row a{color:#E2E2E2}
   .panel{width:100%;height:auto;min-height:92svh;padding:84px 0 70px}
   .panel .rv{opacity:1;transform:none}
   #dots,#counter,#hint{display:none}
-  .footline{position:static;margin-top:70px}
+  #p5{flex-direction:column;justify-content:center}
+  #p5>.inner{flex:none}
+  .footline{position:static;margin-top:70px;width:100%;flex:none}
+  .footline .inner{flex-direction:column;gap:14px;letter-spacing:.14em}
   #p1 .bignum{font-size:24vh}
   .hub-row{justify-content:center}
 }
