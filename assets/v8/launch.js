@@ -4,7 +4,9 @@
    Reduced motion (or SETTINGS.behavior.animations = false) adds html.still: no scene runs, CSS stacks them. */
 (() => {
   const root = document.documentElement;
-  const S = window.SETTINGS || {};
+  // The pages declare `const SETTINGS` in a classic script: a global binding every script can read by name,
+  // but never a window property, so window.SETTINGS alone was always empty (2026-10-08).
+  const S = (typeof SETTINGS !== 'undefined' && SETTINGS) || window.SETTINGS || {};
   const B = S.behavior || {};
   const rm = matchMedia('(prefers-reduced-motion: reduce)').matches || B.animations === false;
   if (rm) root.classList.add('still');

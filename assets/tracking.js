@@ -109,7 +109,7 @@
 
   // Intent: any click heading to the booking form (our own since 2026-10-02, Calendly before it).
   document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a[href*="book.ayalavirtualassistance.site"], a[href*="calendly.com"]') : null;
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="book.ayalavirtualassistance.site"], a[href*="book.jtlgrowth.com"], a[href*="calendly.com"]') : null;
     if (a) track('book_call_click', { link_url: a.href }, 'ViewContent');
   }, true);
 
