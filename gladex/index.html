@@ -91,9 +91,9 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;colo
 </div></header>
 
 <nav class="jump"><div class="wrap">
-  <a href="#setup">Set up</a><a href="#helpers">Helper prompts</a><a href="#day1">Day 1 · by desk</a>
-  <a href="#brain">Day 2 · Brain</a><a href="#ui">Day 2 · UI system</a><a href="#promo">Gwen's activity</a>
-  <a href="#count">Make it count</a><a href="#day2">Day 2 · by desk</a><a href="#basics">Basics</a>
+  <a href="#setup">Set up</a><a href="#helpers">Helper prompts</a><a href="#gwen1">Day 1 · Gwen's activity</a><a href="#day1">Day 1 · by desk</a>
+  <a href="#brain">Day 2 · Brain</a><a href="#ui">Day 2 · UI system</a><a href="#promo">Day 2 · Gwen's activity</a>
+  <a href="#count">Make it count</a><a href="#day2">Day 2 · by desk</a><a href="#more">More prompts</a><a href="#basics">Basics</a>
 </div></nav>
 
 <main class="wrap">
@@ -156,13 +156,6 @@ Its name: [name]</pre></div>
   <span class="eb">Day 1 · Any desk</span>
   <h2>Your first task, plus helper prompts.</h2>
   <p class="lead">They work on every desk. Use them all the time.</p>
-  <div class="p dark"><div class="top"><div><div class="t">Gwen's activity · The messy message</div><div class="n">Day 1, with your buddy. Paste the client message into the first bracket.</div></div><button class="copy">Copy</button></div>
-<pre>Client A sent this: [paste the message].
-Goal: a friendly reply plus a 3 days 2 nights plan.
-Output: save as client-a-reply.md. The reply first, under 120 words, then a day-by-day plan.
-Check: list the 5 things the client asked for and show where each one is answered.
-Never: write a real price (use [PRICE]), invent hotel names or flight times.
-Ask me about anything missing before you start.</pre></div>
   <div class="p dark"><div class="top"><div><div class="t">Send the brief</div><div class="n">Activity 3. Copy your five lines into the brackets.</div></div><button class="copy">Copy</button></div>
 <pre>Use [employee name] for this task.
 Goal: [what done looks like]
@@ -191,6 +184,42 @@ and what you did not check.</pre></div>
   <div class="p"><div class="top"><div><div class="t">Save it as a command</div><div class="n">So tomorrow it is one word.</div></div><button class="copy">Copy</button></div>
 <pre>Turn this brief into a slash command saved at
 .claude/commands/[name].md so I can run /[name] next time.</pre></div>
+</section>
+
+<section id="gwen1">
+  <span class="eb">Day 1 · Gwen's activity · 25 minutes</span>
+  <h2>Build a client page with me.</h2>
+  <p class="lead">A messy client message comes in. Your AI builds a one-page itinerary you can send back. Every price stays [PRICE]. Score it out of 10: all 5 asks answered (4), prices as [PRICE] (2), easy on a phone (2), you would send it today (2).</p>
+  <div class="p"><div class="top"><div><div class="t">The client message</div><div class="n">Sample data. Paste it into the first bracket of the Build prompt.</div></div><button class="copy">Copy</button></div>
+<pre>hi po!! ask lang, boracay sana kami next month, 4 pax, 3d2n. kasama namin si lola kaya sana di masyado lakad. gusto rin namin mag island hopping kung kaya. budget friendly lang po. pa quote po asap, salamat!!</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">1 · Build the client page</div><div class="n">Paste the client message into the first bracket.</div></div><button class="copy">Copy</button></div>
+<pre>Client A sent this: [paste the message].
+Build client-a-itinerary.html, a one-page plan I can send to the client:
+the reply on top (under 120 words), then Day 1, Day 2, Day 3,
+what is included, and a price line that says [PRICE].
+Check: list the 5 things the client asked for and show where each one is answered.
+Never: write a real price, invent hotel names or flight times.
+Clean and simple, works on a phone. Open it in my browser.
+Ask me about anything missing before you start.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">2 · Fix what is off</div><div class="n">Round 2. Say it like you would to a staff.</div></div><button class="copy">Copy</button></div>
+<pre>The page missed [what]. Also [the title] is too [small] and [Day 2] is confusing.
+Fix only that. Keep prices as [PRICE]. Open it again.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">3 · Make it look like Gladex</div><div class="n">If you have time.</div></div><button class="copy">Copy</button></div>
+<pre>Use Gladex colors: [colors]. Put &quot;Gladex Travel and Tours&quot; at the top
+and a big &quot;Message us to book&quot; button at the bottom. Keep it simple. No emojis.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">4 · Make it reusable</div><div class="n">So the next client takes 2 minutes.</div></div><button class="copy">Copy</button></div>
+<pre>Turn this into a template for any client inquiry.
+Save the steps as itinerary-brief.md so next time I paste a new message
+and say &quot;use itinerary-brief.md&quot; and the page is ready.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">5 · Use it on the next client</div><div class="n">After you made itinerary-brief.md.</div></div><button class="copy">Copy</button></div>
+<pre>Use itinerary-brief.md. New client message: [paste the message].
+Build client-[letter]-itinerary.html and open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">6 · Print or send as PDF</div><div class="n">When the client wants a file.</div></div><button class="copy">Copy</button></div>
+<pre>Make client-a-itinerary.html print nicely on one A4 page.
+Hide the button when printing. Tell me how to save it as PDF from my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">7 · Reply in Taglish or English</div><div class="n">Match how the client talks.</div></div><button class="copy">Copy</button></div>
+<pre>Rewrite the reply on top in [light Taglish / clear English], friendly and short,
+like a Gladex agent on Messenger. Keep every price as [PRICE].</pre></div>
 </section>
 
 <section id="day1">
@@ -356,6 +385,25 @@ No emojis. Open it in my browser.</pre></div>
 <pre>Look at it at 375px wide. Fix these: [what is off].
 Then tell me 3 things a customer would still find confusing.
 Fix those too. Follow DESIGN.md only.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt D · Three headlines</div><div class="n">Before you build. Pick the best one.</div></div><button class="copy">Copy</button></div>
+<pre>Give me 3 headline options for the [PROMO] page, each under 8 words.
+One fun, one urgent, one for families. Tell me which one you would pick and why.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt E · Add an FAQ</div><div class="n">Answers the questions clients always ask.</div></div><button class="copy">Copy</button></div>
+<pre>Add a short FAQ to promo/promo.html: 5 questions clients really ask about [PROMO]
+(dates, what is included, kids and seniors, payment, how to book).
+Where you do not know the answer, write [ASK GLADEX]. Never guess.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt F · Make the button work</div><div class="n">So people can message you.</div></div><button class="copy">Copy</button></div>
+<pre>Make the &quot;Message us to book&quot; button open Messenger: [Gladex page link].
+On a phone it should open the Messenger app.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt G · Real customer test</div><div class="n">Read it like a client would.</div></div><button class="copy">Copy</button></div>
+<pre>Pretend you are a tita with 2 kids seeing this page on her phone.
+What would make you book? What would make you leave? Fix the top 3 things.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt H · Post it</div><div class="n">Caption for the Gladex page.</div></div><button class="copy">Copy</button></div>
+<pre>Write a Facebook caption for this promo: hook in the first line,
+3 short lines, then &quot;Message us to book&quot;. Light Taglish, max 2 emojis, prices as [PRICE].</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt I · Second version</div><div class="n">Compare two styles.</div></div><button class="copy">Copy</button></div>
+<pre>Make promo-v2.html, same promo but a different style: [bolder / calmer / more photos].
+Keep promo.html. Open both so I can compare.</pre></div>
   <div class="note"><b>Then:</b> swap laptops with your buddy. One thing you love, one thing to fix. Gallery walk after: vote for the page you would actually book from.</div>
 </section>
 
@@ -410,6 +458,48 @@ run it, and show me the output. Then tell me what it does not cover.</pre></div>
 <pre>Read product/package-[name].md and brain/company.md. Write the launch kit:
 a one-line pitch, 5 selling points, an FAQ with 6 questions, and a short
 brief for Marketing. Do not change any price or inclusion.</pre></div>
+</section>
+
+<section id="more">
+  <span class="eb">Any day · Any desk</span>
+  <h2>More prompts for travel work.</h2>
+  <p class="lead">Use these after the training, in your desk folder. Fill the [brackets]. Sample data or Client A only, never passports, cards or salaries.</p>
+  <div class="p"><div class="top"><div><div class="t">Reply to an inquiry</div><div class="n">A client message comes in.</div></div><button class="copy">Copy</button></div>
+<pre>Client A sent: [message]. Write a friendly reply under 100 words in [light Taglish / English]. Answer every question they asked. Prices as [PRICE]. List anything I need to confirm before sending.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Follow up, no reply yet</div><div class="n">Client went quiet after the quote.</div></div><button class="copy">Copy</button></div>
+<pre>Client A got our quote for [trip] [3] days ago and has not replied. Write a short, friendly follow-up. Not pushy. One question that is easy to answer.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Compare two packages</div><div class="n">Client cannot decide.</div></div><button class="copy">Copy</button></div>
+<pre>Compare [package 1] and [package 2] for Client A ([who is traveling]). Simple table: days, inclusions, best for, things to note. Prices as [PRICE]. End with which one fits them and why.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Visa checklist</div><div class="n">Clear list for the client.</div></div><button class="copy">Copy</button></div>
+<pre>Make a simple checklist of documents a Filipino tourist usually prepares for a [country] visa. Mark it &quot;Please confirm with the embassy&quot;. Save as visa-[country].md. Never say it is guaranteed.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Packing list</div><div class="n">A nice extra for clients.</div></div><button class="copy">Copy</button></div>
+<pre>Make a packing list for [destination] in [month] for [who is traveling]. Short, grouped by category, one page. Save as packing-[destination].md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Family-friendly itinerary</div><div class="n">Kids or seniors in the group.</div></div><button class="copy">Copy</button></div>
+<pre>Make a [3]-day [destination] plan for a family with [2 kids and a lola]. Less walking, rest time after lunch, kid-friendly food. Never invent hotel names or prices.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Booking confirmation message</div><div class="n">After payment is confirmed.</div></div><button class="copy">Copy</button></div>
+<pre>Write a booking confirmation for Client A: trip [trip], dates [dates], what is included, what they need to bring, who to message. Warm and clear. No payment details.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Reply to a good review</div><div class="n">Say thank you properly.</div></div><button class="copy">Copy</button></div>
+<pre>Client A left this review: [review]. Write a thank-you reply in 2 to 3 lines. Mention one detail from their review. No copy-paste feel.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Reply to a bad review</div><div class="n">Calm, not defensive.</div></div><button class="copy">Copy</button></div>
+<pre>Client A left this review: [review]. Write a calm, kind reply: say sorry for how they felt, one line on what we will do, invite them to message us. Never argue. Show me before I post.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Promo caption</div><div class="n">For the Gladex page.</div></div><button class="copy">Copy</button></div>
+<pre>Write 3 Facebook captions for [promo]. Hook in the first line, short lines, ends with &quot;Message us to book&quot;. Light Taglish, max 2 emojis, prices as [PRICE].</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Reel hooks</div><div class="n">Five ideas to film.</div></div><button class="copy">Copy</button></div>
+<pre>Give me 5 reel hooks for [destination], each under 10 words, and one line on what to show on screen for each.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Supplier email</div><div class="n">Ask a hotel or partner for a quote.</div></div><button class="copy">Copy</button></div>
+<pre>Write a short email to [supplier] asking for rates for [dates], [number] guests, [room type]. Ask for inclusions and cancellation policy. Professional and friendly.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Explain a policy simply</div><div class="n">Refunds, rebooking, cancellations.</div></div><button class="copy">Copy</button></div>
+<pre>Here is our [refund] policy: [paste]. Rewrite it in plain words a client understands in 30 seconds. Then 3 common questions with short answers.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Summarize a long chat</div><div class="n">Long Messenger thread with a client.</div></div><button class="copy">Copy</button></div>
+<pre>Here is a long chat with Client A: [paste, names removed]. Summarize in 5 bullets: what they want, what we promised, what is still open, next step, deadline.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Notes to tasks</div><div class="n">After a meeting.</div></div><button class="copy">Copy</button></div>
+<pre>Here are my meeting notes: [paste]. Turn them into a task list: task, owner, deadline. Mark anything unclear with [ASK].</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Turn my steps into an SOP</div><div class="n">So anyone can do it.</div></div><button class="copy">Copy</button></div>
+<pre>Interview me one question at a time about how I do [task]. Then write numbered steps, what usually goes wrong, and a checklist. Save as sop-[task].md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">My day plan</div><div class="n">Start of the day.</div></div><button class="copy">Copy</button></div>
+<pre>Here is my list for today: [paste]. Sort it by urgent and important. Give me the order to do them and what can wait until tomorrow.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Make it clearer</div><div class="n">Before you send anything.</div></div><button class="copy">Copy</button></div>
+<pre>Make this clearer and shorter, same meaning, same tone: [paste]. Then tell me if anything could be misunderstood.</pre></div>
 </section>
 
 <section id="basics">

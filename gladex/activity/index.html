@@ -81,7 +81,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
 </div></header>
 
 <nav class="jump"><div class="wrap">
-  <a href="#a1">1 · Setup check</a><a href="#a2">2 · Hire</a><a href="#gwen1">Gwen · Messy message</a><a href="#a3">3 · Brief</a><a href="#a4">4 · First shift</a>
+  <a href="#a1">1 · Setup check</a><a href="#a2">2 · Hire</a><a href="#gwen1">Gwen · Client page</a><a href="#a3">3 · Brief</a><a href="#a4">4 · First shift</a>
   <a href="#a5">5 · Brain</a><a href="#a6">6 · Screen</a><a href="#promo">Gwen · Promo page</a><a href="#a7">7 · Win card</a><a href="#a8">8 · Demo</a>
 </div></nav>
 
@@ -135,38 +135,47 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
   </div>
 
   <div class="act" id="gwen1">
-    <span class="eb">Gwen's activity · with your buddy · 20 minutes</span>
-    <h3>The messy message</h3>
-    <p class="goal">At the end: a reply to a client you would actually send, written by your AI from a clear five-line brief.</p>
-    <div class="why"><b>WHY · GWEN</b>This is the kind of message Gladex gets every day: Taglish, many questions in one. If the AI misses even one ask, the client messages again. A good brief makes it catch every ask, and keeps prices in your hands.</div>
+    <span class="eb">Gwen's activity · with your buddy · 25 minutes</span>
+    <h3>Build a client page from a messy message</h3>
+    <p class="goal">At the end: a one-page itinerary for a client, built by your AI from a clear brief, open in your browser.</p>
+    <div class="why"><b>WHY · GWEN</b>This is the kind of message Gladex gets every day: Taglish, many questions in one. Usually you type the reply, make the itinerary, then format it. Today your AI does all three in one page. If it misses even one ask, the client messages again, so the brief has to catch every ask. Prices stay in your hands.</div>
     <p><b>The client message</b> (sample data, safe to paste):</p>
     <div class="cmd"><pre>hi po!! ask lang, boracay sana kami next month, 4 pax, 3d2n. kasama namin si lola kaya sana di masyado lakad. gusto rin namin mag island hopping kung kaya. budget friendly lang po. pa quote po asap, salamat!!</pre><button class="copy">Copy</button></div>
     <ol class="steps">
       <li>With your buddy, count the asks. How many things is the client asking for?<span class="see">Shout the number to Gwen.</span></li>
-      <li>On your sheet, write five lines: Goal, Input, Output, Check, Never.<span class="see">Five short lines. After 5 minutes Gwen shows hers.</span></li>
       <li>Open your desk folder and type <b>claude</b>.<span class="see">Your AI employee is ready.</span></li>
-      <li>Copy this prompt. Paste the client message where it says [paste the message].
+      <li>Copy the Build prompt. Paste the client message where it says [paste the message].
         <div class="cmd"><pre>Client A sent this: [paste the message].
-Goal: a friendly reply plus a 3 days 2 nights plan.
-Output: save as client-a-reply.md. The reply first, under 120 words, then a day-by-day plan.
+Build client-a-itinerary.html, a one-page plan I can send to the client:
+the reply on top (under 120 words), then Day 1, Day 2, Day 3,
+what is included, and a price line that says [PRICE].
 Check: list the 5 things the client asked for and show where each one is answered.
-Never: write a real price (use [PRICE]), invent hotel names or flight times.
+Never: write a real price, invent hotel names or flight times.
+Clean and simple, works on a phone. Open it in my browser.
 Ask me about anything missing before you start.</pre><button class="copy">Copy</button></div>
         <span class="see">It may ask you the dates or the budget first. Answer it.</span></li>
-      <li>It asks to create a file. Choose Yes.<span class="see">client-a-reply.md appears in your folder.</span></li>
-      <li>Open the file. Score it with your buddy using Gwen's score card below.<span class="see">A score out of 10.</span></li>
-      <li>Missed an ask? Do not fix the reply by hand. Paste this, then score again.
-        <div class="cmd"><pre>The reply missed [what was missing]. Do not patch the file.
-Update the brief so this cannot happen again, show me the new brief,
-then run it again and save over client-a-reply.md.</pre><button class="copy">Copy</button></div>
-        <span class="see">A second reply. Your score should go up.</span></li>
+      <li>It asks to create a file. Choose Yes.<span class="see">client-a-itinerary.html opens in your browser.</span></li>
+      <li>Score it with your buddy using Gwen's score card below.<span class="see">A score out of 10.</span></li>
+      <li>Round 2. Tell it what is off, in plain words.
+        <div class="cmd"><pre>The page missed [what]. Also [the title] is too [small] and [Day 2] is confusing.
+Fix only that. Keep prices as [PRICE]. Open it again.</pre><button class="copy">Copy</button></div>
+        <span class="see">A better page. Score it again.</span></li>
+      <li>Done early? Make it look like Gladex.
+        <div class="cmd"><pre>Use Gladex colors: [colors]. Put "Gladex Travel and Tours" at the top
+and a big "Message us to book" button at the bottom. Keep it simple. No emojis.</pre><button class="copy">Copy</button></div>
+        <span class="see">Same page, now with Gladex branding.</span></li>
+      <li>Best bonus: make it reusable for the next client.
+        <div class="cmd"><pre>Turn this into a template for any client inquiry.
+Save the steps as itinerary-brief.md so next time I paste a new message
+and say "use itinerary-brief.md" and the page is ready.</pre><button class="copy">Copy</button></div>
+        <span class="see">itinerary-brief.md in your folder.</span></li>
     </ol>
-    <p><b>Gwen's score card</b> (out of 10): all 5 asks answered, 5 pts. Every price is [PRICE], 2 pts. Sounds like Gladex, not a robot, 1 pt. You would send it today, 2 pts.</p>
-    <p class="done"><b>Done when:</b> you have a reply you would send to a real client, with every price left as [PRICE]. Top score wins a prize from Gwen.</p>
+    <p><b>Gwen's score card</b> (out of 10): all 5 asks answered, 4 pts. Every price is [PRICE], 2 pts. Easy to read on a phone, 2 pts. You would send it today, 2 pts.</p>
+    <p class="done"><b>Done when:</b> a page opens that you would send to a real client, with every price left as [PRICE]. Top score wins a prize from Gwen, and three pairs show their page on the big screen.</p>
   </div>
 
   <div class="act" id="a3">
-    <span class="eb">Activity 3 · 10 minutes · on paper · now for your own desk</span>
+    <span class="eb">Activity 3 · 5 minutes · on paper · now for your own desk</span>
     <h3>Write the brief for your one task</h3>
     <p class="goal">At the end: five lines that tell your employee exactly what to do.</p>
     <div class="why"><b>WHY · GWEN</b>AI is only as good as your instructions. Vague brief, vague output. Five parts means it cannot guess what you meant.</div>
