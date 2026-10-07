@@ -39,6 +39,7 @@ section{padding:52px 0 8px}
 section>h2{font-size:clamp(30px,5.5vw,44px);font-weight:800;margin:12px 0 10px}
 section>p.lead{color:var(--mute);margin:0 0 22px;max-width:680px}
 .desk{border-top:1.5px solid var(--ink);margin-top:30px;padding-top:14px}
+section>h3{font-size:22px;font-weight:800;margin:28px 0 10px}
 .desk h3{font-size:24px;font-weight:800;margin-bottom:2px}
 .desk .who{color:var(--mute);font-size:15px;margin-bottom:6px}
 .p{border:1px solid var(--line);border-radius:12px;margin:14px 0;overflow:hidden}
@@ -102,29 +103,71 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;colo
   <h2>Set up your laptop.</h2>
   <ol class="steps">
     <li>Press the Windows key, type <b>PowerShell</b>, press Enter.</li>
-    <li>Copy the line below, paste it into PowerShell (right-click pastes if Ctrl+V does nothing), press Enter. If it asks Y/n, press Enter.</li>
+    <li>Copy the line below, paste it into PowerShell (right-click pastes if Ctrl+V does nothing), press Enter.</li>
     <li>When it asks for the <b>Workshop key</b>, type the key from the whiteboard. It starts with wk_.</li>
     <li>When it finishes, close PowerShell, open a new one, then type <b>claude</b> and <b>/login</b>.</li>
     <li>Inside Claude Code type <b>/setup</b> and name your chief of staff.</li>
   </ol>
   <div class="p dark"><div class="top"><div><div class="t">Install · Windows PowerShell</div></div><button class="copy">Copy</button></div>
-<pre>$env:CCI_SKILLS='hire,setup'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex</pre></div>
-  <div class="p"><div class="top"><div><div class="t">If PowerShell blocks it · use Command Prompt</div><div class="n">Windows key, type cmd, Enter, paste this.</div></div><button class="copy">Copy</button></div>
-<pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:CCI_SKILLS='hire,setup'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex"</pre></div>
+<pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Using Codex instead of Claude Code</div><div class="n">Windows PowerShell.</div></div><button class="copy">Copy</button></div>
+<pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/codex.ps1 | iex</pre></div>
   <div class="p"><div class="top"><div><div class="t">On a Mac · Terminal</div></div><button class="copy">Copy</button></div>
-<pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.sh | CCI_SKILLS=hire,setup bash</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Make your desk and hire</div><div class="n">Change marketing-hq to your desk: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, it-hq.</div></div><button class="copy">Copy</button></div>
+<pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.sh | bash</pre></div>
+  <div class="p"><div class="top"><div><div class="t">On a Mac · Codex users</div></div><button class="copy">Copy</button></div>
+<pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/codex.sh | bash</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Red text? Paste the backup line</div><div class="n">Works in PowerShell, Command Prompt and Git Bash. Ends with "Not done yet"? Paste it again, what installed is kept.</div></div><button class="copy">Copy</button></div>
+<pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=3072; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex"</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Folder or path error? Paste the doctor</div><div class="n">For: claude or your alias not recognized, "requires git-bash", a window opened as administrator, a Desktop inside OneDrive. It deletes nothing. Then open a new window.</div></div><button class="copy">Copy</button></div>
+<pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/doctor.ps1 | iex</pre></div>
+  <div class="p"><div class="top"><div><div class="t">The doctor · Mac</div></div><button class="copy">Copy</button></div>
+<pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/doctor.sh | bash</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Check the install</div><div class="n">Activity 1. Paste inside Claude Code, in any folder.</div></div><button class="copy">Copy</button></div>
+<pre>List the skills you can use right now, then tell me your name and the first thing you will ask me before any task.</pre></div>
+  <div class="note"><b>If something goes wrong.</b> Ends with "Not done yet": paste the same line again. "'irm' is not recognized": you are in Command Prompt, use the backup line. "'claude' is not recognized": close every window and open a new one, still missing, paste the doctor. Key not accepted: paste it again with no spaces, after three tries raise your hand. Login stuck: copy the link it prints into your browser and paste the code back. "This network cannot reach": ask IT to allow the sites it names, or use a phone hotspot for the install.</div>
+  <h3>Lost in folders inside Claude Code?</h3>
+  <div class="p"><div class="top"><div><div class="t">Where am I?</div><div class="n">First thing to paste when something lands in the wrong place.</div></div><button class="copy">Copy</button></div>
+<pre>Tell me the full path of the folder you are working in and list what is in it. Is this my desk folder [desk folder name]? If not, give me the exact command to go there, in quotes.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Find my desk folder</div><div class="n">When cd says it cannot find the path.</div></div><button class="copy">Copy</button></div>
+<pre>Search my user folder, including OneDrive Desktop and Documents, for a folder named [desk folder name]. Give me the full path and the exact PowerShell command to open it, in quotes.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Files landed in the wrong folder</div><div class="n">It made files somewhere else.</div></div><button class="copy">Copy</button></div>
+<pre>The files you made for [employee name] are in [wrong folder]. List them, then tell me how to move them into [desk folder]. Do not move anything until I say yes.</pre></div>
+  <h3>Hire</h3>
+  <div class="p"><div class="top"><div><div class="t">Make your desk and hire</div><div class="n">Change marketing-hq to your desk: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, ai-hq, product-hq.</div></div><button class="copy">Copy</button></div>
 <pre>mkdir marketing-hq
 cd marketing-hq
 claude</pre></div>
   <p>Then type <b>/hire</b> inside Claude Code and answer the seven questions.</p>
-  <div class="note"><b>If something goes wrong.</b> "Running scripts is disabled": use the Command Prompt line. "'claude' is not recognized": close every terminal and open a new one, or restart. Key not accepted: copy it again with no spaces. Login stuck: copy the link it prints into your browser and paste the code back. Office network blocks it: ask IT to allow github.com, githubusercontent.com, anthropic.com and claude.ai, or use a phone hotspot for the install.</div>
+  <div class="p"><div class="top"><div><div class="t">Hire from your sheet in one go</div><div class="n">If you filled the hire sheet first.</div></div><button class="copy">Copy</button></div>
+<pre>Hire an employee for this desk from my answers:
+1 Job: [one thing it owns]
+2 In and out: [what comes in, what goes out]
+3 Tools: [files only, or files and web]
+4 Desk: this folder
+5 Never: [three things]
+6 When unsure: stop and ask [who]
+7 First shift: [the real task]
+Its name: [name]</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Meet your hire</div><div class="n">Proof it exists before you give it work.</div></div><button class="copy">Copy</button></div>
+<pre>Read roster.json and docs/team/. Introduce my new employee in 3 lines: its job, what it never does, and what it needs from me first.</pre></div>
 </section>
 
 <section id="helpers">
   <span class="eb">Day 1 · Any desk</span>
-  <h2>Five helper prompts.</h2>
+  <h2>Your first task, plus helper prompts.</h2>
   <p class="lead">They work on every desk. Use them all the time.</p>
+  <div class="p dark"><div class="top"><div><div class="t">Send the brief</div><div class="n">Activity 3. Copy your five lines into the brackets.</div></div><button class="copy">Copy</button></div>
+<pre>Use [employee name] for this task.
+Goal: [what done looks like]
+Input: [what to read]
+Output: [format and filename]
+Check: [how I will know it is right]
+Never: [what it must not do]
+Ask me about anything missing before you start.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Fix the brief, not the file</div><div class="n">Activity 4. Once, after you find what was wrong.</div></div><button class="copy">Copy</button></div>
+<pre>Run 1 got [what was wrong]. Do not patch the file. Update the brief so this cannot happen again, show me the new brief, then run it again and save over [filename].</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Ready to post</div><div class="n">For the group chat.</div></div><button class="copy">Copy</button></div>
+<pre>Write 3 lines for my team chat: your name, the brief in one line, and the file you made, with its path.</pre></div>
   <div class="p"><div class="top"><div><div class="t">Fix my brief</div><div class="n">Before you run anything big.</div></div><button class="copy">Copy</button></div>
 <pre>Here is my brief: [brief]
 Rewrite it with five parts: Goal, Input, Output, Check, Never.
@@ -247,6 +290,12 @@ Never quote a fare or a price I have not given you.
 Never paste client IDs, cards or salaries.
 Never guess a number. Say where it came from.
 If unsure, stop and ask me.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Run yesterday's brief with the brain</div><div class="n">Activity 5, after the interview.</div></div><button class="copy">Copy</button></div>
+<pre>Read brain/ first. Then run this brief again: [yesterday's brief]
+Save it as a new file and tell me what you did differently because of brain/.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Count the difference</div><div class="n">Activity 5, for your sheet.</div></div><button class="copy">Copy</button></div>
+<pre>Compare [yesterday's file] with [today's file]. List what is better,
+what is still wrong, and which brain file made each difference.</pre></div>
   <div class="p"><div class="top"><div><div class="t">Every mistake becomes a rule</div></div><button class="copy">Copy</button></div>
 <pre>You just [mistake]. Add a rule to brain/rules.md so it never happens
 again. Show me the line you added.</pre></div>
@@ -307,6 +356,14 @@ Fix those too. Follow DESIGN.md only.</pre></div>
   <span class="eb">Day 2 · Part 3</span>
   <h2>Make it count.</h2>
   <p class="lead">Hours before, hours after, times 52. Then the two-minute demo: the pain, run it live, the number, the guardrail.</p>
+  <div class="p"><div class="top"><div><div class="t">Fill the win card</div><div class="n">Activity 7. It asks, you answer, it does the math.</div></div><button class="copy">Copy</button></div>
+<pre>Help me fill my win card for [task]. Ask me one question at a time:
+hours a week before, hours a week now, who checks it, what it never does alone.
+Then work out hours saved a year (times 52) and save it as win-card.md.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Draft my demo</div><div class="n">Activity 8. Then say it out loud once and cut what you stumble on.</div></div><button class="copy">Copy</button></div>
+<pre>Read win-card.md and brain/rules.md. Write my 2 minute demo script in 4 parts:
+the pain (15 seconds), the live run (60), the number (15), the guardrail (30).
+Short spoken sentences, my words, no slides.</pre></div>
   <div class="p"><div class="top"><div><div class="t">Your week 4 report</div><div class="n">Run it at the end of the month.</div></div><button class="copy">Copy</button></div>
 <pre>Read brain/ and the files you made this month in this folder.
 Write a 5 line report for my manager: the task, hours saved per week,
