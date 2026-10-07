@@ -191,6 +191,16 @@ footer.site a{color:var(--mut)}
   font:700 34px/1 var(--sans);letter-spacing:.16em;padding:9px 22px 10px}
 #cta .tail{font-size:16px;color:#B9BEC9;line-height:1.4;max-width:32ch}
 #cta .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+/* Owner 2026-10-08: three ways to get one (DIY free / book a call / buy it built from USD 1,500) */
+#ways .grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px}
+#ways .card{display:flex;flex-direction:column;gap:12px}
+#ways .card .tag{font:600 15px/1.2 var(--sans);color:var(--mut)}
+#ways .card .price{font-size:34px;font-weight:700;letter-spacing:-.035em;line-height:1}
+#ways .card .price small{display:block;font:500 13px/1.4 var(--sans);color:var(--mut);letter-spacing:0;margin-top:6px}
+#ways .card p{color:var(--mut);font-size:15px;line-height:1.55}
+#ways .card .btn{margin-top:auto;align-self:flex-start}
+#ways .card.lead{border-color:var(--ink);box-shadow:0 18px 40px -26px rgba(29,29,31,.45)}
+#ways .fineprint{margin-top:18px;font-size:14px;color:var(--mut);max-width:70ch}
 /* #cta is a dark block, and .btn-primary/.btn-ghost are both authored for the
    light page: primary is ink-on-ink and ghost is ink text on ink. Invert them
    here or the two buttons render invisible. */
@@ -333,9 +343,35 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
     <li>Run stage 1 and 2 yourself: no software needed, just the real conversation and the data you already have.</li>
     <li>Draft stage 3 with Claude or whatever tool you already have open.</li>
     <li>Get stage 4 (wire) and stage 7 (watch) covered before you call it done: this is where builds quietly die.</li>
-    <li>Want the whole seven run on your business, shipped behind your brand, watched after launch? <a href="https://book.ayalavirtualassistance.site/" target="_blank" rel="noopener">Book the call</a>, quote-based, depends on what's already wired.</li>
+    <li>Want the whole seven run on your business, shipped behind your brand, watched after launch? <a href="https://book.ayalavirtualassistance.site/" target="_blank" rel="noopener">Book a call</a>. One AI employee starts from USD 1,500; the final quote depends on what's already wired.</li>
   </ul>
   <p class="fineprint">Or email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a>. If your bottleneck turns out not to need AI, we'll tell you that on the call.</p>
+</section>
+
+<section id="ways" class="shell">
+  <div class="eyebrow">THREE WAYS TO GET ONE</div>
+  <h2>Do it yourself, or have us build it.</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">Do it yourself</div>
+      <div class="price">Free<small>This page is the whole build.</small></div>
+      <p>Take the seven stages and run them on the tools you already use. No signup, no call.</p>
+      <a class="btn btn-ghost" href="#inside">See the seven stages</a>
+    </div>
+    <div class="card">
+      <div class="tag">Build it with us</div>
+      <div class="price">Quote<small>After one call about your business.</small></div>
+      <p>We look at what is already wired, scope the employee you need, and quote the build in writing.</p>
+      <a class="btn btn-ghost" href="https://book.ayalavirtualassistance.site/" target="_blank" rel="noopener">Book a call</a>
+    </div>
+    <div class="card lead">
+      <div class="tag">Buy it built</div>
+      <div class="price">From USD 1,500<small>Philippines: from PHP 75,000.</small></div>
+      <p>One AI employee, one channel, live in 14 days and watched for 30 after launch. Book the call, then a 50% deposit by bank transfer.</p>
+      <a class="btn btn-primary" href="https://book.ayalavirtualassistance.site/" target="_blank" rel="noopener">Book a call</a>
+    </div>
+  </div>
+  <p class="fineprint">Payment is by bank transfer, no card fees: USD, GBP or EUR through Wise, InstaPay or bank transfer in the Philippines. Rather write? <a href="mailto:hello@jtlgrowth.com?subject=Buy%20an%20AI%20employee%20built">hello@jtlgrowth.com</a>.</p>
 </section>
 
 <section id="author" class="shell">
@@ -358,6 +394,7 @@ html[data-progress] body{padding-bottom:calc(56px + var(--fm))}
   <div class="actions" style="margin-top:24px">
     <a class="btn btn-primary" href="https://www.instagram.com/jtlgrowth" target="_blank" rel="noopener">Comment on Instagram</a>
     <a class="btn btn-ghost" href="https://www.facebook.com/jtlgrowth" target="_blank" rel="noopener">Comment on Facebook</a>
+    <a class="btn btn-ghost" href="https://www.linkedin.com/in/jamzjamorol/" target="_blank" rel="noopener">Comment on LinkedIn</a>
   </div>
   <div class="foot"><span><a href="/">jtlgrowth.com</a></span><span>Manila · Worldwide</span></div>
 </section>

@@ -6,7 +6,7 @@ AI and automation agency in Metro Manila, Philippines. Founded 2026 by
 [Jamz Jamorol](https://jtlgrowth.com/jamz-jamorol/), with Gwen on the agency side.
 Clients in the Philippines, the US, Europe and Australia.
 
-[jtlgrowth.com](https://jtlgrowth.com) · hello@jtlgrowth.com · quote-based, no public price list
+[jtlgrowth.com](https://jtlgrowth.com) · hello@jtlgrowth.com · quote-based, one AI employee build from USD 1,500
 
 ### We run the firm on the thing we sell
 
