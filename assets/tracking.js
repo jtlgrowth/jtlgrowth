@@ -86,20 +86,27 @@
   }
 
   // ─── Google (GA4 + Ads share one gtag.js load) ────────────────────────────
+  // Basic consent mode: gtag.js itself loads only after a yes. Loaded on a denied
+  // default it still sends cookieless pings, and the bar promises "It stays off
+  // until you say yes" (live check 2026-10-08 caught one collect hit on Decline).
   var googleId = CFG.ga4 && CFG.ga4.indexOf('X') === -1 ? CFG.ga4 : (CFG.googleAds || '');
-  if (googleId) {
+  var googleLoaded = false;
+  function loadGoogle() {
+    if (googleLoaded || !googleId) return;
+    googleLoaded = true;
     loadScript('https://www.googletagmanager.com/gtag/js?id=' + googleId);
     gtag('js', new Date());
     if (CFG.ga4 && CFG.ga4.indexOf('X') === -1) gtag('config', CFG.ga4);
     if (CFG.googleAds) gtag('config', CFG.googleAds);
   }
 
-  // ─── Opt-in tags: Meta and Clarity set their own cookies and ignore Google's
-  // consent signal, so they only load once the visitor says yes. ───────────
+  // ─── Opt-in tags: Google above, and Meta and Clarity, which set their own
+  // cookies and ignore Google's consent signal, load only once the visitor says yes.
   var optedIn = false;
   function loadOptIns() {
   if (optedIn) return;
   optedIn = true;
+  loadGoogle();
 
   // ─── Meta pixel ───────────────────────────────────────────────────────────
   if (CFG.metaPixel) {
