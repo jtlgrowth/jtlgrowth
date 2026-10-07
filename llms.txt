@@ -3,7 +3,7 @@
 > JTL Growth is an AI and automation agency based in Metro Manila, Philippines, founded in July 2026 by Jamz Jamorol. It builds AI and automation systems scoped to client goals: AI agents, CRM and workflow automation, business process systems, and custom web builds. Pricing is quote-based: you name the outcome, we quote the build. Serving Philippine and international businesses.
 
 - Site: https://jtlgrowth.com/
-- Founder: Jamz Jamorol (full name Jamz Todd Laurence Fedillaga Jamorol), AI engineer (https://jamzjamorol.com/ · https://jtlgrowth.com/jamz-jamorol/ · https://www.linkedin.com/in/jamzjamorol)
+- Founder: Jamz Jamorol (full name Jamz Todd Laurence Fedillaga Jamorol), AI engineer (https://jamzjamorol.com/ · https://www.linkedin.com/in/jamzjamorol)
 - Location: Metro Manila, Philippines
 - Registered: DTI Business Name No. 8378934 (legal name: JTLGROWTH COMPUTER PROGRAMMING SERVICES), Philippines, 2026
 - Facebook: https://www.facebook.com/jtlgrowth
@@ -23,7 +23,7 @@
 
 ## Jamz Jamorol (founder)
 
-Profile page: https://jtlgrowth.com/jamz-jamorol/
+Profile page: https://jamzjamorol.com/
 
 Jamz Jamorol is a Filipino systems builder and electrical engineer based in Metro Manila, Philippines. He is the founder of JTL Growth, a web development and growth studio, and the Co-Founder of AVAS (Ayala Virtual Assistance Services). He designs and builds AI agents, workflow and CRM automation, client ops portals, lead generation engines, and custom web systems, and runs his own agency on the AI operations system he designed himself.
 

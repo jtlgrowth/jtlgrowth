@@ -13,7 +13,7 @@
     'group': '/group/', 'the group': '/group/',
     'growth': '/growth/', 'growth software': '/growth/', 'demo': '/growth/',
     'inbox scout': '/inbox-scout/', 'inbox': '/inbox-scout/',
-    'jamz': '/jamz-jamorol/',
+    'jamz': 'https://jamzjamorol.com/',
     'starter pack': '/starter-pack/', 'starter-pack': '/starter-pack/', 'starterpack': '/starter-pack/', 'pack': '/starter-pack/',
     'quote': '/quote/', 'request a quote': '/quote/', 'pricing': '/quote/',
     'setup codex': '/setup-codex/', 'codex': '/setup-codex/',
