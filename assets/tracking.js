@@ -22,9 +22,10 @@
     // recordings. Owner setup (2 min): clarity.microsoft.com → sign in →
     // "Add new project" → site jtlgrowth.com → copy the Project ID here.
     clarity: '',
-    // Consent default. 'granted' suits PH/US-only traffic. Flip to 'denied' and
-    // wire a CMP update before running EU/UK traffic — see the consent-audit skill.
-    consentDefault: 'granted',
+    // Consent default. 'denied' since 2026-10-08 so the /privacy/ promise is true
+    // (analytics storage denied by default). Granting needs a CMP update call;
+    // see the consent-audit skill before running ads or EU/UK traffic.
+    consentDefault: 'denied',
     debug: false,
   };
   // ──────────────────────────────────────────────────────────────────────────

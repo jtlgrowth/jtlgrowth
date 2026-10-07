@@ -26,7 +26,7 @@ half of your business, so you scale output without adding headcount.
 
 **About Me.** "He builds the systems he sells." I'm Jamz Jamorol. I run JTL Growth out of
 Metro Manila with my co-founder Gwen, and with an AI workforce that handles the repetitive
-half of the work, so a two-person firm ships like a ten-person one. Since January 2025 I've
+half of the work, so our hours go to the part that needs a person. Since January 2025 I've
 been building AI, automation and CRM systems for coaches, agencies and small businesses:
 funnels, client portals, content engines, lead engines, and the operations underneath them.
 Clients in the Philippines, the US, Europe and Australia. Everything on this site runs on
@@ -73,7 +73,7 @@ sequences; tool-to-tool plumbing so data stops being retyped; failure paths desi
 retries, alerts, and a human fallback.
 
 **Tier 3: AI Employees.** Trained agents that answer, qualify and follow up inside your
-inbox, chat and CRM. Around the clock, on your process, not a generic chatbot. An agent
+inbox, chat and CRM, on your process, not a generic chatbot. An agent
 per job, with a written job description and real tools; trained on your process, your
 voice and your edge cases; automated replies that disclose they are automated, by policy;
 a review loop, so the agent gets corrected instead of trusted blindly.
@@ -171,8 +171,8 @@ the page is the real product.
 
 **Shipped work: six systems, in production right now.** Six builds, six different
 problems; every screen on the shelf is a live URL you can open. FWIB: 42-member community
-platform for Filipina founders, live and growing. JTL Growth site: this site, built and
-launched in one night, DNS to HTTPS. AVAS Night Shift: six-page brand site for our sister
+platform for Filipina founders, live and growing. JTL Growth site: this site, hand-coded,
+no page builder, domain to live HTTPS. AVAS Night Shift: six-page brand site for our sister
 agency, no template, with a live ops dashboard behind it. Robots & Coffee: digital products
 library: courses, workshops, and AI resources, learn it, buy it, run it yourself. Oras:
 our iPhone app for retainer invoicing. Batch 1 workshop: the recap of two build days in BGC
@@ -342,8 +342,9 @@ the page and run all seven yourself if there's time. What people usually hire JT
 is stage 4 and stage 7: unglamorous, never finished, easy to neglect. If the client's
 bottleneck turns out not to need AI, JTL Growth says so on the discovery call.
 
-**CTA.** Book a 30-minute call, or email hello@jtlgrowth.com. Pricing is quote-based:
-depends on what the client already has wired.
+**CTA.** Book a 30-minute call, or email hello@jtlgrowth.com. One public from-price: an AI employee
+from USD 1,500 (see /ai-employee/). Every other build is quoted in writing, against what the
+client already has wired.
 
 ---
 

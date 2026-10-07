@@ -1,6 +1,6 @@
 # JTL Growth
 
-> JTL Growth is an AI and automation agency based in Metro Manila, Philippines, founded in July 2026 by Jamz Jamorol. It builds AI and automation systems scoped to client goals: AI agents, CRM and workflow automation, business process systems, and custom web builds. Pricing is quote-based: you name the outcome, we quote the build. Serving Philippine and international businesses.
+> JTL Growth is an AI and automation agency based in Metro Manila, Philippines, founded in July 2026 by Jamz Jamorol. It builds AI and automation systems scoped to client goals: AI agents, CRM and workflow automation, business process systems, and custom web builds. One public from-price: an AI employee from USD 1,500 (see /ai-employee/); every other build is quoted in writing. You name the outcome, we quote the build. Serving Philippine and international businesses.
 
 - Site: https://jtlgrowth.com/
 - Founder: Jamz Jamorol (full name Jamz Todd Laurence Fedillaga Jamorol), AI engineer (https://jamzjamorol.com/ · https://www.linkedin.com/in/jamzjamorol)
@@ -13,12 +13,12 @@
 - Directory profiles: https://www.sortlist.com/agency/jtl-growth · https://www.agencyspotter.com/jtl-growth
 - Homepage: hero, an About Me section on the founder, and a contact/booking section; links out to every page below.
 - Services (https://jtlgrowth.com/services/): the four-tier ladder, built in order: Tier 1 Funnels & Websites, Tier 2 Automation Systems, Tier 3 AI Employees, Tier 4 Ops Portals.
-- Quote (https://jtlgrowth.com/quote/): request a written quote, no public price list
+- Quote (https://jtlgrowth.com/quote/): request a written quote; the only public price is the AI employee's from-price
 - Products (https://jtlgrowth.com/products/): things you can get or install today: Inbox Scout, The AI Employee, the Growth software demo, the AgentKit archive, Scout packs, and Robots & Coffee (off-site storefront).
 - Workshop (https://jtlgrowth.com/workshop/): a two-day, hands-on founder AI workshop: build a working AI employee and give it a UI system.
 - Work (https://jtlgrowth.com/work/): six shipped, live systems (FWIB, this site, AVAS Night Shift, Robots & Coffee, Oras, the Batch 1 workshop) plus short films of our own apps (jtlboard, Blurred, the Brain, Venice HQ, Rialto, the AVAS portal).
 - Growth software demo (https://jtlgrowth.com/growth/): screen recordings of the AI operations HQ the agency runs on.
-- What we do: custom AI and automation systems (AI agents, workflow automation, CRM automation, business process systems, websites and landing pages), quote-based pricing.
+- What we do: custom AI and automation systems (AI agents, workflow automation, CRM automation, business process systems, websites and landing pages), one public from-price (AI employee from USD 1,500), every other build quoted in writing.
 - Contact: booking via the site's main call-to-action.
 
 ## Jamz Jamorol (founder)
