@@ -102,10 +102,10 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;colo
   <span class="eb">Day 1 · Part 1</span>
   <h2>Set up your laptop.</h2>
   <ol class="steps">
-    <li>Press the Windows key, type <b>PowerShell</b>, press Enter.</li>
-    <li>Copy the line below, paste it into PowerShell (right-click pastes if Ctrl+V does nothing), press Enter.</li>
+    <li>Press the Windows key, type <b>PowerShell</b>, press Enter. <b>On a Mac:</b> press Cmd + Space, type <b>Terminal</b>, press Enter.</li>
+    <li>Copy the line for your laptop below (Windows or Mac), paste it in (Windows: right-click or Ctrl+V. Mac: Cmd+V), press Enter. A Mac may ask your laptop password: type it, nothing shows, press Enter.</li>
     <li>When it asks for the <b>Workshop key</b>, type the key from the whiteboard. It starts with wk_.</li>
-    <li>When it finishes, close PowerShell, open a new one, then type <b>claude</b> and <b>/login</b>.</li>
+    <li>When it finishes, close PowerShell (Mac: quit Terminal with Cmd+Q), open a new one, then type <b>claude</b> and <b>/login</b>.</li>
     <li>Inside Claude Code type <b>/setup</b> and name your chief of staff.</li>
   </ol>
   <div class="p dark"><div class="top"><div><div class="t">Install · Windows PowerShell</div></div><button class="copy">Copy</button></div>
@@ -116,7 +116,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;colo
 <pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.sh | bash</pre></div>
   <div class="p"><div class="top"><div><div class="t">On a Mac · Codex users</div></div><button class="copy">Copy</button></div>
 <pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/codex.sh | bash</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Red text? Paste the backup line</div><div class="n">Works in PowerShell, Command Prompt and Git Bash. Ends with "Not done yet"? Paste it again, what installed is kept.</div></div><button class="copy">Copy</button></div>
+  <div class="p"><div class="top"><div><div class="t">Red text? Paste the backup line · Windows</div><div class="n">Mac users: no backup line, paste the Mac line again or the Mac doctor. Works in PowerShell, Command Prompt and Git Bash. Ends with "Not done yet"? Paste it again, what installed is kept.</div></div><button class="copy">Copy</button></div>
 <pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=3072; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex"</pre></div>
   <div class="p"><div class="top"><div><div class="t">Folder or path error? Paste the doctor</div><div class="n">For: claude or your alias not recognized, "requires git-bash", a window opened as administrator, a Desktop inside OneDrive. It deletes nothing. Then open a new window.</div></div><button class="copy">Copy</button></div>
 <pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/doctor.ps1 | iex</pre></div>
@@ -129,7 +129,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;colo
   <div class="p"><div class="top"><div><div class="t">Where am I?</div><div class="n">First thing to paste when something lands in the wrong place.</div></div><button class="copy">Copy</button></div>
 <pre>Tell me the full path of the folder you are working in and list what is in it. Is this my desk folder [desk folder name]? If not, give me the exact command to go there, in quotes.</pre></div>
   <div class="p"><div class="top"><div><div class="t">Find my desk folder</div><div class="n">When cd says it cannot find the path.</div></div><button class="copy">Copy</button></div>
-<pre>Search my user folder, including OneDrive Desktop and Documents, for a folder named [desk folder name]. Give me the full path and the exact PowerShell command to open it, in quotes.</pre></div>
+<pre>Search my user folder, including OneDrive Desktop and Documents, for a folder named [desk folder name]. Give me the full path and the exact command to open it in PowerShell (or Terminal on a Mac), in quotes.</pre></div>
   <div class="p"><div class="top"><div><div class="t">Files landed in the wrong folder</div><div class="n">It made files somewhere else.</div></div><button class="copy">Copy</button></div>
 <pre>The files you made for [employee name] are in [wrong folder]. List them, then tell me how to move them into [desk folder]. Do not move anything until I say yes.</pre></div>
   <h3>Hire</h3>
@@ -407,7 +407,7 @@ what they have that we do not. Then 3 ideas to make ours stand out.</pre></div><
 <section id="brain">
   <span class="eb">Day 2 · Part 1</span>
   <h2>Build its brain.</h2>
-  <p class="lead">Open PowerShell, cd into your desk folder, type claude. Then paste this and answer like you are training a new hire.</p>
+  <p class="lead">Open PowerShell (Mac: Terminal), cd into your desk folder, type claude. Then paste this and answer like you are training a new hire.</p>
   <div class="p dark"><div class="top"><div><div class="t">Let it interview you</div></div><button class="copy">Copy</button></div>
 <pre>Ask me 10 questions about my desk and my one task,
 one at a time. Wait for my answer each time.

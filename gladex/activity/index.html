@@ -97,23 +97,25 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
     <p class="goal">At the end: Claude Code runs on your laptop, with a chief of staff that has a name.</p>
     <div class="why"><b>WHY · GWEN</b>Everything else in the two days runs on this. A setup problem found now takes 2 minutes. Found later, it eats an hour.</div>
     <ol class="steps">
-      <li>Press the Windows key, type PowerShell, press Enter.<span class="see">A dark window with a blinking line.</span></li>
-      <li>Copy this line, right-click inside PowerShell to paste, press Enter.
+      <li>Press the Windows key, type PowerShell, press Enter. <b>On a Mac:</b> press Cmd + Space, type Terminal, press Enter.<span class="see">A window with a blinking line.</span></li>
+      <li>Copy this line, right-click inside PowerShell to paste, press Enter. <b>On a Mac,</b> use the Mac line under the steps and paste with Cmd+V.
         <div class="cmd"><pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex</pre><button class="copy">Copy</button></div>
         <span class="see">Lines of text scrolling. If it asks Y/n, press Enter. If Windows asks for permission, click Yes.</span></li>
       <li>When it asks for the Workshop key, type the key from the whiteboard.<span class="see">It keeps installing. This takes a few minutes.</span></li>
-      <li>When it finishes, close PowerShell. Open a new one.<span class="see">A fresh, empty window.</span></li>
+      <li>When it finishes, close PowerShell (Mac: quit Terminal with Cmd+Q). Open a new one.<span class="see">A fresh, empty window.</span></li>
       <li>Type <b>claude</b> and press Enter. Then type <b>/login</b> and finish in the browser.<span class="see">Claude Code waiting for your message.</span></li>
       <li>Type <b>/setup</b>. Answer the three questions: its name, how it talks, what it asks you first.<span class="see">Every reply now starts with that name.</span></li>
       <li>Check your buddy's laptop: installed, opens, logged in, named.<span class="see">Both laptops pass all four.</span></li>
     </ol>
     <p class="done"><b>Done when:</b> both laptops pass all four checks. First pair to shout "Hired!" wins the install race.</p>
-    <p class="stuck"><b>On a Mac?</b> Open Terminal and paste this instead.</p>
+    <p class="stuck"><b>On a Mac?</b> Open Terminal and paste this instead. If it asks for a password, type your laptop password (nothing shows while you type) and press Enter. A popup about Command Line Tools? Click Install, wait, then paste the line again.</p>
     <div class="cmd"><pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.sh | bash</pre><button class="copy">Copy</button></div>
-    <p class="stuck"><b>Stuck?</b> "Running scripts is disabled" or a red error: paste the backup line below. "'claude' is not recognized": close every window, open a new one, or restart. Still stuck after 2 minutes: hand up.</p>
+    <p class="stuck"><b>Stuck on Windows?</b> "Running scripts is disabled" or a red error: paste the backup line below. "'claude' is not recognized": close every window, open a new one, or restart. Still stuck after 2 minutes: hand up.</p>
     <div class="cmd"><pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=3072; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex"</pre><button class="copy">Copy</button></div>
     <p class="stuck"><b>Not sure it worked?</b> Paste the doctor line. It checks everything and tells you what to fix.</p>
     <div class="cmd"><pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/doctor.ps1 | iex</pre><button class="copy">Copy</button></div>
+    <p class="stuck"><b>Mac doctor:</b> "command not found: claude" or a folder problem on a Mac? Paste this in Terminal, then open a new Terminal.</p>
+    <div class="cmd"><pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/doctor.sh | bash</pre><button class="copy">Copy</button></div>
   </div>
 
   <div class="act" id="a2">
@@ -122,7 +124,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
     <p class="goal">At the end: one employee with one job, living in its own folder.</p>
     <div class="why"><b>WHY · GWEN</b>A folder is its desk, so its files never mix with your other work. The seven questions are the same ones you ask a real new hire. Reading the job back catches the wrong job before it does the wrong work.</div>
     <ol class="steps">
-      <li>In PowerShell, make your desk. Change marketing-hq to yours: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, ai-hq, product-hq.
+      <li>In PowerShell (Mac: Terminal), make your desk. Change marketing-hq to yours: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, ai-hq, product-hq.
         <div class="cmd"><pre>mkdir marketing-hq</pre><button class="copy">Copy</button></div><span class="see">Nothing. That is normal.</span></li>
       <li>Go inside it.<div class="cmd"><pre>cd marketing-hq</pre><button class="copy">Copy</button></div><span class="see">The line now ends with your folder name.</span></li>
       <li>Type <b>claude</b>.<span class="see">Claude Code opens with your chief of staff's name.</span></li>
@@ -318,7 +320,7 @@ Mark anything you calculated or guessed.</pre><button class="copy">Copy</button>
     <p class="goal">At the end: a brain/ folder your employee reads before every task.</p>
     <div class="why"><b>WHY · GWEN</b>Without memory you repeat yourself forever. The brain is how it learns your desk once. Plain text files: no app to buy, nothing locked in.</div>
     <ol class="steps">
-      <li>Open PowerShell. Go to your desk and start Claude.
+      <li>Open PowerShell (Mac: Terminal). Go to your desk and start Claude.
         <div class="cmd"><pre>cd marketing-hq
 claude</pre><button class="copy">Copy</button></div><span class="see">The same employee as yesterday.</span></li>
       <li>Paste the interview prompt.
