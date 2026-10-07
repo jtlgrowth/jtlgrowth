@@ -46,47 +46,46 @@ serving Philippines, US & EU. Hub links out to /services/, /products/, /workshop
 
 ---
 
-## /services/: Services · The four-tier ladder
+## /services/: Services · One AI employee, one quote
 
-**Hero.** "Four tiers. Built in order." We install the same four layers we run our own firm
-on, in the order that makes each one pay for the next. You do not buy tier three before
-tier one works. Everything behind this page is the live memory of that system: every
-lesson, decision and note our AI workforce has accumulated, one point each.
+**Hero.** "One AI employee. One written quote." Start with the job you most want off your
+plate. If your site, funnel or automations need fixing for the employee to work, the fixes
+go inside the same quote. Buy it built from USD 1,500 (all three ways on /ai-employee/).
 
-**The ladder.** "Each tier only works because the one under it does." A funnel with no
-automation leaks. Automation with no AI seat still needs a human in the loop at 2am. An AI
-seat with no portal is invisible to your team. The summit, a business that runs itself,
-stays locked, on purpose. We build to four, not to a fantasy. Built by hand on Claude,
+**The stack.** "We fix what it runs on, inside the same quote." The AI employee sits on top:
+funnels and websites and automation systems sit under it and are fixed inside its quote, or
+quoted on their own; ops portals are an add-on, quoted in writing. Built by hand on Claude,
 GPT-5, n8n, GoHighLevel, Supabase, FastAPI and Playwright. No template, no page builder, no
 drag-and-drop.
 
-**Tier 1: Funnels & Websites.** Pages engineered around one question: does the visitor
-take the next step? Copy, flow and tracking included, not bolted on after launch.
+**The offer: AI Employees.** From USD 1,500. Trained agents that answer, qualify and follow
+up inside your inbox, chat and CRM, on your process, not a generic chatbot. An agent per job,
+with a written job description and real tools; trained on your process, your voice and your
+edge cases; automated replies that disclose they are automated, by policy; a review loop, so
+the agent gets corrected instead of trusted blindly. Three ways to get one, on /ai-employee/:
+do it yourself (free), buy it built (from USD 1,500, PHP 75,000 in the Philippines; founding
+rate USD 600 for the first 5 builds), or build it with us (from USD 2,500, PHP 125,000).
+
+**Inside the quote: Funnels & Websites.** Pages engineered around one question: does the
+visitor take the next step? Fixed inside your AI employee's quote, or quoted on its own.
 Landing pages and full sites, hand-coded, no builder lock-in; copy written against the
 offer, not around it; analytics and conversion events wired at build time, behind consent;
 speed, accessibility and search visibility treated as requirements.
 
-**Tier 2: Automation Systems.** Your tools, wired together. A lead triggers the sequence,
-the booking confirms itself, nothing slips, while you sleep. CRM and pipeline automation
-on GoHighLevel or a custom backend; lead capture, routing, follow-up and reminder
-sequences; tool-to-tool plumbing so data stops being retyped; failure paths designed in:
-retries, alerts, and a human fallback.
+**Inside the quote: Automation Systems.** Your tools, wired together. A lead triggers the
+sequence, the booking confirms itself, nothing slips. Fixed inside your AI employee's quote,
+or quoted on its own. CRM and pipeline automation on GoHighLevel or a custom backend; lead
+capture, routing, follow-up and reminder sequences; tool-to-tool plumbing so data stops
+being retyped; failure paths designed in: retries, alerts, and a human fallback.
 
-**Tier 3: AI Employees.** Trained agents that answer, qualify and follow up inside your
-inbox, chat and CRM, on your process, not a generic chatbot. An agent
-per job, with a written job description and real tools; trained on your process, your
-voice and your edge cases; automated replies that disclose they are automated, by policy;
-a review loop, so the agent gets corrected instead of trusted blindly.
-
-**Tier 4: Ops Portals.** Your team, tasks and pipeline on one screen. AI seats handle the
-intake and the reporting; the humans handle the calls. One dashboard for people, work in
-flight and revenue; agent seats reporting into the same board your team reads;
+**Add-on, quote only: Ops Portals.** Your team, tasks and pipeline on one screen. AI seats
+handle the intake and the reporting; the humans handle the calls. One dashboard for people,
+work in flight and revenue; agent seats reporting into the same board your team reads;
 client-facing portals where that is the product; built on the same stack we run our own
 operations on daily.
 
-**CTA.** "You name the outcome. We quote the build." Thirty minutes, no pitch. We look at
-your funnel together and show you what the leaks cost. If your bottleneck turns out not to
-need AI, we will tell you that on the call.
+**CTA.** "You name the outcome. We quote the build." Thirty minutes, no pitch. If your
+bottleneck turns out not to need AI, we will tell you that on the call.
 
 ---
 
