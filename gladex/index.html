@@ -189,7 +189,7 @@ and what you did not check.</pre></div>
 <section id="gwen1">
   <span class="eb">Day 1 · Gwen's activity · 25 minutes</span>
   <h2>Build a client page with me.</h2>
-  <p class="lead">A messy client message comes in. Your AI builds a one-page itinerary you can send back. Every price stays [PRICE]. Score it out of 10: all 5 asks answered (4), prices as [PRICE] (2), easy on a phone (2), you would send it today (2).</p>
+  <p class="lead">A messy client message comes in. Your AI builds a one-page itinerary you can send back. Every price stays [PRICE]. Then each desk builds its own page (below). Score out of 10: everything asked for is there (4), no made-up numbers or prices (2), easy on a phone (2), you would use or send it today (2).</p>
   <div class="p"><div class="top"><div><div class="t">The client message</div><div class="n">Sample data. Paste it into the first bracket of the Build prompt.</div></div><button class="copy">Copy</button></div>
 <pre>hi po!! ask lang, boracay sana kami next month, 4 pax, 3d2n. kasama namin si lola kaya sana di masyado lakad. gusto rin namin mag island hopping kung kaya. budget friendly lang po. pa quote po asap, salamat!!</pre></div>
   <div class="p dark"><div class="top"><div><div class="t">1 · Build the client page</div><div class="n">Paste the client message into the first bracket.</div></div><button class="copy">Copy</button></div>
@@ -220,6 +220,100 @@ Hide the button when printing. Tell me how to save it as PDF from my browser.</p
   <div class="p"><div class="top"><div><div class="t">7 · Reply in Taglish or English</div><div class="n">Match how the client talks.</div></div><button class="copy">Copy</button></div>
 <pre>Rewrite the reply on top in [light Taglish / clear English], friendly and short,
 like a Gladex agent on Messenger. Keep every price as [PRICE].</pre></div>
+  <h3>Your desk's build · after the Boracay demo</h3>
+  <p class="lead">One copy each. The sample data is already inside.</p>
+  <div class="p"><div class="top"><div><div class="t">Harmony · Marketing · Ads snapshot</div><div class="n">Every campaign, cost per lead, and a Scale, Fix or Stop tag. Makes ads-snapshot.html.</div></div><button class="copy">Copy</button></div>
+<pre>Here is last week&#x27;s ads data (sample):
+Campaign, Spend, Leads, Bookings
+Boracay Barkada, 12500, 84, 9
+Japan Sakura, 18200, 61, 4
+HK Family, 9800, 22, 1
+Bohol Hopping, 7400, 55, 6
+Palawan Couples, 11000, 18, 0
+Target cost per lead: 200
+
+Build ads-snapshot.html: one table with spend, leads, cost per lead and bookings
+per campaign. Tag each campaign Scale, Fix or Stop, with one line why.
+Check: every number comes from the data above. Show your math.
+Never: invent a number or suggest changing a budget without me.
+Clean, works on a phone. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Rhoniel · Graphics · Poster brief board</div><div class="n">10 headlines, the top 3, the text per size, a checklist before he designs. Makes poster-brief.html.</div></div><button class="copy">Copy</button></div>
+<pre>My manager sent this:
+&quot;rhoniel pa-poster naman for bohol island hopping, 3d2n, kasama tours and hotel,
+post this weekend. gawin mong fun pero clean, may &#x27;message us&#x27; ha, wag muna lagay price&quot;
+
+Build poster-brief.html: 10 headline options under 8 words, your top 3 and why,
+the exact text for a 1080x1350 post and a 1080x1920 story,
+and a checklist before I start designing.
+Never: write a price (use [PRICE]) or design the poster. The design is mine.
+Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Keiko · HR · Job post page</div><div class="n">A clear job post from messy notes, plus screening questions. Makes job-post.html.</div></div><button class="copy">Copy</button></div>
+<pre>The manager&#x27;s notes for a new hire:
+&quot;need 2 travel consultants asap. alam sana amadeus or galileo, good english,
+may sales exp, ok mag weekend minsan, binondo office, fresh grad ok basta may sales vibe&quot;
+
+Build job-post.html: the role, what you will do, must-haves vs nice-to-haves,
+schedule, location, and how to apply ([HR EMAIL]).
+Below it, 5 screening questions for the first call.
+Never: write a salary, or ask about age, gender, looks or religion.
+Clean, works on a phone. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Jason · Accounting · Payment checker</div><div class="n">Bookings matched to payments. Missing and wrong amounts in red. Makes audit-check.html.</div></div><button class="copy">Copy</button></div>
+<pre>Sample data, no names:
+BOOKINGS: REF101 Boracay 24000 | REF102 Japan 68500 | REF103 Bohol 15200 |
+REF104 HK 41000 | REF105 Palawan 22800 | REF106 Boracay 24000
+PAYMENTS: REF101 24000 | REF102 65000 | REF104 41000 | REF105 22800 |
+REF106 24000 | REF107 9500
+
+Build audit-check.html: match bookings to payments by reference number.
+Show four groups: matched, no payment yet, amount does not match (with the difference),
+and payment with no booking. Totals at the top. Problems in red.
+Never: round a number or guess. If unsure, write NOT SURE.
+Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Kevin · Operations · Daily report on a phone</div><div class="n">His messy notes as a clean report: done, doing, blockers, tomorrow. Makes ops-report.html.</div></div><button class="copy">Copy</button></div>
+<pre>My notes from today:
+&quot;booking page bug fixed (date picker). mobile app login still slow on android.
+waiting sa API key ng supplier. tomorrow: test payment flow, 3pm meeting with
+marketing re promo page. blocker: need approval for server upgrade&quot;
+
+Build ops-report.html, phone first: Done today, In progress, Blockers (in red),
+Tomorrow, and one line for management at the top.
+Never: add a task that is not in my notes.
+Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Paula · Quality · Process checklist</div><div class="n">Tick boxes per step, a live pass and fail count, the weak steps marked. Makes qa-checklist.html.</div></div><button class="copy">Copy</button></div>
+<pre>Our booking process:
+&quot;inquiry &gt; agent replies within 1 hr &gt; quote sent with inclusions &gt; client pays
+downpayment &gt; agent confirms with supplier &gt; send confirmation + itinerary &gt;
+reminder 3 days before trip. problems: minsan late reply, nakakalimutan
+inclusions, walang reminder&quot;
+
+Build qa-checklist.html: one row per step with a Pass and Fail button,
+a live count of passes and fails at the top, and the 3 known problem steps marked.
+Add a notes box per step.
+Never: add steps that are not in the process. Mark your ideas as SUGGESTED.
+Clean, works on a phone. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Luisa · AI · Automation finder</div><div class="n">The team&#x27;s tasks ranked by hours a month, and where AI helps first. Makes automation-ideas.html.</div></div><button class="copy">Copy</button></div>
+<pre>Sample time per task from the team:
+Harmony: ads report 3 hrs a week. Rhoniel: poster headlines 1 hr a day.
+Keiko: CV screening 6 hrs a week. Jason: audit matching 5 hrs a week.
+Kevin: daily report 30 min a day. Paula: process checks 4 hrs a week.
+Christine: package drafts 8 hrs a week.
+
+Build automation-ideas.html: rank the tasks by hours per month (show the math).
+For each: what AI can do, what a human must still do, and easy, medium or hard.
+Mark one &quot;start here&quot; pick and say why.
+Never: promise exact hours saved. Use &quot;about&quot;.
+Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Christine · Product Dev · Package draft</div><div class="n">Supplier quotes turned into a package: itinerary, inclusions, cost table. Makes package-draft.html.</div></div><button class="copy">Copy</button></div>
+<pre>Supplier notes (sample):
+&quot;supplier 1: resort near station 2, 3d2n, room for 4 with breakfast, [RATE].
+supplier 2: shared island hopping boat, half day, [RATE] per person.
+supplier 3: van transfer caticlan to resort, [RATE]. note: oct-nov peak, min 2 pax&quot;
+
+Build package-draft.html: a 3 days 2 nights Boracay package. Day 1, 2, 3,
+inclusions and exclusions, a cost table per person with [RATE] placeholders
+and the formula, selling price as [PRICE], and 3 questions to ask suppliers.
+Never: invent a rate, a hotel name or a flight time.
+Open it in my browser.</pre></div>
 </section>
 
 <section id="day1">
@@ -404,6 +498,53 @@ What would make you book? What would make you leave? Fix the top 3 things.</pre>
   <div class="p dark"><div class="top"><div><div class="t">Prompt I · Second version</div><div class="n">Compare two styles.</div></div><button class="copy">Copy</button></div>
 <pre>Make promo-v2.html, same promo but a different style: [bolder / calmer / more photos].
 Keep promo.html. Open both so I can compare.</pre></div>
+  <h3>Your desk's page</h3>
+  <p class="lead">Gladex needs 8 new pages, one per desk. Copy yours, then fix it with Prompt C. The promo prompts above are the backup.</p>
+  <div class="p"><div class="top"><div><div class="t">Harmony · Marketing · Ad landing page</div><div class="n">Boracay Barkada Sale page, plus 3 ad captions that match it. Makes promo/boracay-ad.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build promo/boracay-ad.html: a landing page for the
+Boracay Barkada Sale ad. Headline under 8 words, 3 reasons to book, what is included,
+one big &quot;Message us to book&quot; button. Below the page, in a separate file
+promo/ad-copy.md, write 3 ad captions that match the page.
+Phone first. Prices stay [PRICE]. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Rhoniel · Graphics · Poster promo page</div><div class="n">Japan Sakura page with a big space for his poster. Makes promo/sakura.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build promo/sakura.html: a Japan Sakura Season promo page.
+Leave a big hero area marked [POSTER] where my poster goes. Use my top headline:
+[headline]. Then 3 reasons to book, what is included, and &quot;Message us to book&quot;.
+Phone first. Prices stay [PRICE]. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Keiko · HR · Work at Gladex page</div><div class="n">A careers page for the travel consultant role from Day 1. Makes careers.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md, brain/ and job-post.html. Build careers.html: a &quot;Work at Gladex&quot;
+page. Why work here (use [ASK GLADEX] where you do not know), the travel consultant
+role, must-haves, how to apply ([HR EMAIL]), and an FAQ for applicants.
+Never: write a salary. Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Jason · Accounting · How to pay page</div><div class="n">Payment steps for clients, in plain words. No account numbers. Makes how-to-pay.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build how-to-pay.html for clients: the payment steps
+for a booking, downpayment and full payment deadlines as [DATE RULE], payment
+options as [BANK DETAILS], what to send after paying, and refund rules in plain words
+as [ASK GLADEX]. Never: write a real account number.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Kevin · Operations · Trip page on a phone</div><div class="n">Hong Kong Family Weekend, phone first, add to home screen. Makes promo/hk-family.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build promo/hk-family.html: the Hong Kong Family Weekend
+trip page. Day by day schedule, what to bring, who to message, and one
+&quot;Message us to book&quot; button. Phone first, and make it work when added to the
+home screen. Prices stay [PRICE]. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Paula · Quality · Why book Gladex</div><div class="n">Our booking process as 5 promises a client can trust. Makes why-gladex.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md, brain/ and qa-checklist.html. Build why-gladex.html: our booking
+process as 5 clear steps a client can expect (reply time, quote with inclusions,
+confirmation, itinerary, reminder), plus an FAQ. Where you are not sure, write
+[ASK GLADEX]. Never: promise anything that is not in our process.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Luisa · AI · Get a quote page</div><div class="n">A form that turns a client&#x27;s answers into a ready brief for the agent. Makes get-a-quote.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build get-a-quote.html: a short form (destination,
+dates, number of people, kids or seniors, budget, special requests). When the
+client taps &quot;Get my quote&quot;, show a clean summary they can copy and send to
+Gladex on Messenger. Nothing is sent or saved anywhere.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Christine · Product Dev · Package sales page</div><div class="n">Bohol Island Hopping sales page from her package draft. Makes promo/bohol.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md, brain/ and package-draft.html. Build promo/bohol.html: a sales page
+for a Bohol Island Hopping package. Headline under 8 words, the day by day plan,
+what is included and not included, 3 reasons to book, and &quot;Message us to book&quot;.
+Prices stay [PRICE]. Never invent a hotel or a rate.
+Phone first. No emojis. Open it in my browser.</pre></div>
   <div class="note"><b>Then:</b> swap laptops with your buddy. One thing you love, one thing to fix. Gallery walk after: vote for the page you would actually book from.</div>
 </section>
 
