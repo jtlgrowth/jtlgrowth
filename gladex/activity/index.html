@@ -81,8 +81,8 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
 </div></header>
 
 <nav class="jump"><div class="wrap">
-  <a href="#a1">1 · Setup check</a><a href="#a2">2 · Hire</a><a href="#a3">3 · Brief</a><a href="#a4">4 · First shift</a>
-  <a href="#a5">5 · Brain</a><a href="#a6">6 · Screen</a><a href="#promo">Promo page</a><a href="#a7">7 · Win card</a><a href="#a8">8 · Demo</a>
+  <a href="#a1">1 · Setup check</a><a href="#a2">2 · Hire</a><a href="#gwen1">Gwen · Messy message</a><a href="#a3">3 · Brief</a><a href="#a4">4 · First shift</a>
+  <a href="#a5">5 · Brain</a><a href="#a6">6 · Screen</a><a href="#promo">Gwen · Promo page</a><a href="#a7">7 · Win card</a><a href="#a8">8 · Demo</a>
 </div></nav>
 
 <main class="wrap">
@@ -99,7 +99,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
     <ol class="steps">
       <li>Press the Windows key, type PowerShell, press Enter.<span class="see">A dark window with a blinking line.</span></li>
       <li>Copy this line, right-click inside PowerShell to paste, press Enter.
-        <div class="cmd"><pre>$env:CCI_SKILLS='hire,setup'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex</pre><button class="copy">Copy</button></div>
+        <div class="cmd"><pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex</pre><button class="copy">Copy</button></div>
         <span class="see">Lines of text scrolling. If it asks Y/n, press Enter. If Windows asks for permission, click Yes.</span></li>
       <li>When it asks for the Workshop key, type the key from the whiteboard.<span class="see">It keeps installing. This takes a few minutes.</span></li>
       <li>When it finishes, close PowerShell. Open a new one.<span class="see">A fresh, empty window.</span></li>
@@ -108,8 +108,12 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
       <li>Check your buddy's laptop: installed, opens, logged in, named.<span class="see">Both laptops pass all four.</span></li>
     </ol>
     <p class="done"><b>Done when:</b> both laptops pass all four checks. First pair to shout "Hired!" wins the install race.</p>
-    <p class="stuck"><b>Stuck?</b> "Running scripts is disabled": press Windows key, type cmd, paste the line below. "'claude' is not recognized": close every window, open a new one, or restart. Still stuck after 2 minutes: hand up.</p>
-    <div class="cmd"><pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:CCI_SKILLS='hire,setup'; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/install.ps1 | iex"</pre><button class="copy">Copy</button></div>
+    <p class="stuck"><b>On a Mac?</b> Open Terminal and paste this instead.</p>
+    <div class="cmd"><pre>curl -fsSL https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.sh | bash</pre><button class="copy">Copy</button></div>
+    <p class="stuck"><b>Stuck?</b> "Running scripts is disabled" or a red error: paste the backup line below. "'claude' is not recognized": close every window, open a new one, or restart. Still stuck after 2 minutes: hand up.</p>
+    <div class="cmd"><pre>powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol=3072; irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/claude.ps1 | iex"</pre><button class="copy">Copy</button></div>
+    <p class="stuck"><b>Not sure it worked?</b> Paste the doctor line. It checks everything and tells you what to fix.</p>
+    <div class="cmd"><pre>irm https://raw.githubusercontent.com/jtlgrowth/claude-code-installer/main/w/doctor.ps1 | iex</pre><button class="copy">Copy</button></div>
   </div>
 
   <div class="act" id="a2">
@@ -118,7 +122,7 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
     <p class="goal">At the end: one employee with one job, living in its own folder.</p>
     <div class="why"><b>WHY · GWEN</b>A folder is its desk, so its files never mix with your other work. The seven questions are the same ones you ask a real new hire. Reading the job back catches the wrong job before it does the wrong work.</div>
     <ol class="steps">
-      <li>In PowerShell, make your desk. Change marketing-hq to yours: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, it-hq.
+      <li>In PowerShell, make your desk. Change marketing-hq to yours: posters-hq, hr-hq, audit-hq, ops-hq, qa-hq, ai-hq, product-hq.
         <div class="cmd"><pre>mkdir marketing-hq</pre><button class="copy">Copy</button></div><span class="see">Nothing. That is normal.</span></li>
       <li>Go inside it.<div class="cmd"><pre>cd marketing-hq</pre><button class="copy">Copy</button></div><span class="see">The line now ends with your folder name.</span></li>
       <li>Type <b>claude</b>.<span class="see">Claude Code opens with your chief of staff's name.</span></li>
@@ -130,8 +134,39 @@ footer{border-top:1px solid var(--line);margin-top:70px;padding:28px 0 60px;colo
     <p class="done"><b>Done when:</b> roster.json lists your employee, and its job description sounds right to you.</p>
   </div>
 
+  <div class="act" id="gwen1">
+    <span class="eb">Gwen's activity · with your buddy · 20 minutes</span>
+    <h3>The messy message</h3>
+    <p class="goal">At the end: a reply to a client you would actually send, written by your AI from a clear five-line brief.</p>
+    <div class="why"><b>WHY · GWEN</b>This is the kind of message Gladex gets every day: Taglish, many questions in one. If the AI misses even one ask, the client messages again. A good brief makes it catch every ask, and keeps prices in your hands.</div>
+    <p><b>The client message</b> (sample data, safe to paste):</p>
+    <div class="cmd"><pre>hi po!! ask lang, boracay sana kami next month, 4 pax, 3d2n. kasama namin si lola kaya sana di masyado lakad. gusto rin namin mag island hopping kung kaya. budget friendly lang po. pa quote po asap, salamat!!</pre><button class="copy">Copy</button></div>
+    <ol class="steps">
+      <li>With your buddy, count the asks. How many things is the client asking for?<span class="see">Shout the number to Gwen.</span></li>
+      <li>On your sheet, write five lines: Goal, Input, Output, Check, Never.<span class="see">Five short lines. After 5 minutes Gwen shows hers.</span></li>
+      <li>Open your desk folder and type <b>claude</b>.<span class="see">Your AI employee is ready.</span></li>
+      <li>Copy this prompt. Paste the client message where it says [paste the message].
+        <div class="cmd"><pre>Client A sent this: [paste the message].
+Goal: a friendly reply plus a 3 days 2 nights plan.
+Output: save as client-a-reply.md. The reply first, under 120 words, then a day-by-day plan.
+Check: list the 5 things the client asked for and show where each one is answered.
+Never: write a real price (use [PRICE]), invent hotel names or flight times.
+Ask me about anything missing before you start.</pre><button class="copy">Copy</button></div>
+        <span class="see">It may ask you the dates or the budget first. Answer it.</span></li>
+      <li>It asks to create a file. Choose Yes.<span class="see">client-a-reply.md appears in your folder.</span></li>
+      <li>Open the file. Score it with your buddy using Gwen's score card below.<span class="see">A score out of 10.</span></li>
+      <li>Missed an ask? Do not fix the reply by hand. Paste this, then score again.
+        <div class="cmd"><pre>The reply missed [what was missing]. Do not patch the file.
+Update the brief so this cannot happen again, show me the new brief,
+then run it again and save over client-a-reply.md.</pre><button class="copy">Copy</button></div>
+        <span class="see">A second reply. Your score should go up.</span></li>
+    </ol>
+    <p><b>Gwen's score card</b> (out of 10): all 5 asks answered, 5 pts. Every price is [PRICE], 2 pts. Sounds like Gladex, not a robot, 1 pt. You would send it today, 2 pts.</p>
+    <p class="done"><b>Done when:</b> you have a reply you would send to a real client, with every price left as [PRICE]. Top score wins a prize from Gwen.</p>
+  </div>
+
   <div class="act" id="a3">
-    <span class="eb">Activity 3 · 10 minutes · on paper</span>
+    <span class="eb">Activity 3 · 10 minutes · on paper · now for your own desk</span>
     <h3>Write the brief for your one task</h3>
     <p class="goal">At the end: five lines that tell your employee exactly what to do.</p>
     <div class="why"><b>WHY · GWEN</b>AI is only as good as your instructions. Vague brief, vague output. Five parts means it cannot guess what you meant.</div>
