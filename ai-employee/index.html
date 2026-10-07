@@ -253,11 +253,13 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 <!-- QUICK SETTINGS: change values in SETTINGS below, never hunt them in the markup.
      content.bookHref    the AI Employee booking type (Rialto, avas workspace, slug ai-employee)
      content.listPrice / listPriceShort / listPricePh   the list price (Owner pick 2026-10-08)
+     content.withUsPrice / withUsPricePh   Build it with us, above Buy it built so buying it built is the cheaper,
+     tempting pick (Owner pick round 2, 2026-10-08, ops/reports/coach-hormozi/mhira-strategy-review-2026-10-08.md)
      content.foundingPrice   the founding rate (Owner pick C, 2026-10-08); the count line is [data-founding],
      rewritten by tools/founding-sync/sync.py from ops/founding-register.py
      settings: host-ok=book.jtlgrowth.com -->
 <script>
-const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com/"}, "content": {"bookHref": "https://book.jtlgrowth.com/ai-employee", "bookCta": "Book a call", "listPrice": "From USD 1,500", "listPriceShort": "USD 1,500", "listPricePh": "Philippines: from PHP 75,000.", "foundingPrice": "USD 600"}, "behavior": {"animations": true, "preloader": false}};
+const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com/"}, "content": {"bookHref": "https://book.jtlgrowth.com/ai-employee", "bookCta": "Book a call", "listPrice": "From USD 1,500", "listPriceShort": "USD 1,500", "listPricePh": "Philippines: from PHP 75,000.", "withUsPrice": "From USD 2,500", "withUsPricePh": "Philippines: from PHP 125,000.", "foundingPrice": "USD 600"}, "behavior": {"animations": true, "preloader": false}};
 </script>
 </head>
 <body>
@@ -417,7 +419,7 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
       </article>
       <article class="ae-way" data-reveal>
         <p class="w-tag">Build it with us</p>
-        <p class="w-price">Quote<small>After one call about your business.</small></p>
+        <p class="w-price"><span data-setting="content.withUsPrice">From USD 2,500</span><small data-setting="content.withUsPricePh">Philippines: from PHP 125,000.</small></p>
         <p>We look at what is already wired, scope the employee you need, and quote the build in writing.</p>
         <div class="ae-act">
           <a class="btn btn-ghost" data-book="build-with-us" href="https://book.jtlgrowth.com/ai-employee?utm_source=jtlgrowth&amp;utm_medium=ai-employee&amp;utm_content=build-with-us" target="_blank" rel="noopener">Book a call</a>
