@@ -73,7 +73,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 60px;colo
   <div class="gatebox">
     <span class="eb">Gladex Travel and Tours · AI Staff Training</span>
     <h1>Every prompt, one page.</h1>
-    <p>Day 1 and Day 2, every desk, and Gwen's promo page activity. The password is on the screen in the room.</p>
+    <p>Day 1 and Day 2, every desk, and Gwen's tracker activity. The password is on the screen in the room.</p>
     <div class="pwrow">
       <input id="pw" type="password" placeholder="Password on the screen" autocomplete="off" autocapitalize="off" spellcheck="false">
       <button class="btn" id="go" type="button">Open the page</button>
@@ -458,94 +458,130 @@ big enough for a thumb. Then make it installable to the home screen
 </section>
 
 <section id="promo">
-  <span class="eb">Day 2 · Gwen's activity · 25 minutes</span>
-  <h2>Build a promo page with me.</h2>
-  <p class="lead">Gladex just announced a sale (totally made up). The page is due in 25 minutes. Pick one promo per pair. Every price stays [PRICE]. We never invent a fare.</p>
-  <div class="promos">
-    <div class="promo"><b>A · Boracay Barkada Sale</b><span>3 days, 2 nights, for the whole squad.</span></div>
-    <div class="promo"><b>B · Japan Sakura Season</b><span>Cherry blossoms, ramen, a full camera roll.</span></div>
-    <div class="promo"><b>C · Hong Kong Family Weekend</b><span>Disneyland for the kids, dim sum for the titas.</span></div>
-    <div class="promo"><b>D · Bohol Island Hopping</b><span>Chocolate Hills and tarsiers, no stress.</span></div>
-  </div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt A · Brief</div></div><button class="copy">Copy</button></div>
-<pre>Read brain/company.md. Write a plan for a one-page promo: [PROMO].
-Headline under 8 words, 3 reasons to book, what is included,
-and one button. Prices stay [PRICE]. Save as promo/plan.md.</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt B · Build</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md and promo/plan.md. Build promo/promo.html.
-Phone first, then laptop. One big button: "Message us to book".
-No emojis. Open it in my browser.</pre></div>
+  <span class="eb">Day 2 · Gwen's activity · 45 minutes</span>
+  <h2>Build your desk's tracker with me.</h2>
+  <p class="lead">Gladex needs 8 trackers, one per desk: a checklist you tick on your phone or laptop, that downloads to Excel. Something you will really use on Monday. Every price stays [PRICE]. Sample data only.</p>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt A · Plan (backup)</div><div class="n">No desk prompt fits? Start here.</div></div><button class="copy">Copy</button></div>
+<pre>Read brain/. List the 10 steps I repeat every week for [my task],
+with who does each step. Save as trackers/plan.md.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt B · Build (backup)</div><div class="n">Right after A.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and trackers/plan.md. Build trackers/my-checklist.html.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
+Phone first. No emojis. Open it in my browser.</pre></div>
   <div class="p dark"><div class="top"><div><div class="t">Prompt C · Judge</div><div class="n">Two rounds.</div></div><button class="copy">Copy</button></div>
-<pre>Look at it at 375px wide. Fix these: [what is off].
-Then tell me 3 things a customer would still find confusing.
-Fix those too. Follow DESIGN.md only.</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt D · Three headlines</div><div class="n">Before you build. Pick the best one.</div></div><button class="copy">Copy</button></div>
-<pre>Give me 3 headline options for the [PROMO] page, each under 8 words.
-One fun, one urgent, one for families. Tell me which one you would pick and why.</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt E · Add an FAQ</div><div class="n">Answers the questions clients always ask.</div></div><button class="copy">Copy</button></div>
-<pre>Add a short FAQ to promo/promo.html: 5 questions clients really ask about [PROMO]
-(dates, what is included, kids and seniors, payment, how to book).
-Where you do not know the answer, write [ASK GLADEX]. Never guess.</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt F · Make the button work</div><div class="n">So people can message you.</div></div><button class="copy">Copy</button></div>
-<pre>Make the &quot;Message us to book&quot; button open Messenger: [Gladex page link].
-On a phone it should open the Messenger app.</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt G · Real customer test</div><div class="n">Read it like a client would.</div></div><button class="copy">Copy</button></div>
-<pre>Pretend you are a tita with 2 kids seeing this page on her phone.
-What would make you book? What would make you leave? Fix the top 3 things.</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt H · Post it</div><div class="n">Caption for the Gladex page.</div></div><button class="copy">Copy</button></div>
-<pre>Write a Facebook caption for this promo: hook in the first line,
-3 short lines, then &quot;Message us to book&quot;. Light Taglish, max 2 emojis, prices as [PRICE].</pre></div>
-  <div class="p dark"><div class="top"><div><div class="t">Prompt I · Second version</div><div class="n">Compare two styles.</div></div><button class="copy">Copy</button></div>
-<pre>Make promo-v2.html, same promo but a different style: [bolder / calmer / more photos].
-Keep promo.html. Open both so I can compare.</pre></div>
-  <h3>Your desk's page</h3>
-  <p class="lead">Gladex needs 8 new pages, one per desk. Copy yours, then fix it with Prompt C. The promo prompts above are the backup.</p>
-  <div class="p"><div class="top"><div><div class="t">Harmony · Marketing · Ad landing page</div><div class="n">Boracay Barkada Sale page, plus 3 ad captions that match it. Makes promo/boracay-ad.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md and brain/. Build promo/boracay-ad.html: a landing page for the
-Boracay Barkada Sale ad. Headline under 8 words, 3 reasons to book, what is included,
-one big &quot;Message us to book&quot; button. Below the page, in a separate file
-promo/ad-copy.md, write 3 ad captions that match the page.
-Phone first. Prices stay [PRICE]. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Rhoniel · Graphics · Poster promo page</div><div class="n">Japan Sakura page with a big space for his poster. Makes promo/sakura.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md and brain/. Build promo/sakura.html: a Japan Sakura Season promo page.
-Leave a big hero area marked [POSTER] where my poster goes. Use my top headline:
-[headline]. Then 3 reasons to book, what is included, and &quot;Message us to book&quot;.
-Phone first. Prices stay [PRICE]. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Keiko · HR · Work at Gladex page</div><div class="n">A careers page for the travel consultant role from Day 1. Makes careers.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md, brain/ and job-post.html. Build careers.html: a &quot;Work at Gladex&quot;
-page. Why work here (use [ASK GLADEX] where you do not know), the travel consultant
-role, must-haves, how to apply ([HR EMAIL]), and an FAQ for applicants.
-Never: write a salary. Phone first. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Jason · Accounting · How to pay page</div><div class="n">Payment steps for clients, in plain words. No account numbers. Makes how-to-pay.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md and brain/. Build how-to-pay.html for clients: the payment steps
-for a booking, downpayment and full payment deadlines as [DATE RULE], payment
-options as [BANK DETAILS], what to send after paying, and refund rules in plain words
-as [ASK GLADEX]. Never: write a real account number.
+<pre>I tested it like a busy Monday. Fix these: [what is off].
+Check it at 375px wide, on a phone. Make sure the ticks stay and the
+Excel download opens with the right columns. Then tell me 3 things my
+team would still find confusing. Fix those too. Follow DESIGN.md only.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt D · Add a column</div><div class="n">When your team needs one more check.</div></div><button class="copy">Copy</button></div>
+<pre>Add a column to my tracker: [column name]. Put it after [column].
+Keep all my ticks. Update the Excel download too.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt E · Sort by what is due</div><div class="n">The urgent ones on top.</div></div><button class="copy">Copy</button></div>
+<pre>Sort my tracker so the rows due soonest are on top.
+Show overdue rows in red and today&#x27;s rows in bold.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt F · Weekly report</div><div class="n">Two lines for your manager.</div></div><button class="copy">Copy</button></div>
+<pre>Read my tracker. Write a weekly report for my manager: what is done,
+what is late, and what needs help. 5 lines max. Numbers from the tracker only.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt G · Use my real list</div><div class="n">Paste from Excel, no retyping.</div></div><button class="copy">Copy</button></div>
+<pre>Add an &quot;Import&quot; box: when I paste rows copied from Excel or Google Sheets,
+they become rows in my tracker. Keep my old rows and ticks.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt H · On your phone</div><div class="n">Like an app.</div></div><button class="copy">Copy</button></div>
+<pre>Make my tracker work when I add it to my phone&#x27;s home screen:
+an icon, a short name, and it still opens without Wi-Fi.</pre></div>
+  <div class="p dark"><div class="top"><div><div class="t">Prompt I · Print it</div><div class="n">For the wall or the team meeting.</div></div><button class="copy">Copy</button></div>
+<pre>Add a Print button: a clean one-page version of my tracker,
+black and white, with the tick boxes, for the team meeting.</pre></div>
+  <h3>Your desk's tracker</h3>
+  <p class="lead">Copy yours, then test it like a busy Monday and fix it with Prompt C. Prompts A and B are the backup.</p>
+  <div class="p"><div class="top"><div><div class="t">Harmony · Marketing · Content and ads tracker</div><div class="n">Posts and ads: caption, design, approved, posted. Makes trackers/content-tracker.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build trackers/content-tracker.html: my content and ads
+tracker for the next 2 weeks. Sample rows (make 10): date, platform (FB, IG, TikTok),
+promo (Boracay Barkada, Japan Sakura, HK Family, Bohol Hopping), type (post, reel, ad).
+Columns to tick: caption done, design done, approved by manager, posted.
+Never: invent a price or a result. Prices stay [PRICE].
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Kevin · Operations · Trip page on a phone</div><div class="n">Hong Kong Family Weekend, phone first, add to home screen. Makes promo/hk-family.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md and brain/. Build promo/hk-family.html: the Hong Kong Family Weekend
-trip page. Day by day schedule, what to bring, who to message, and one
-&quot;Message us to book&quot; button. Phone first, and make it work when added to the
-home screen. Prices stay [PRICE]. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Paula · Quality · Why book Gladex</div><div class="n">Our booking process as 5 promises a client can trust. Makes why-gladex.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md, brain/ and qa-checklist.html. Build why-gladex.html: our booking
-process as 5 clear steps a client can expect (reply time, quote with inclusions,
-confirmation, itinerary, reminder), plus an FAQ. Where you are not sure, write
-[ASK GLADEX]. Never: promise anything that is not in our process.
+  <div class="p"><div class="top"><div><div class="t">Rhoniel · Graphics · Design request tracker</div><div class="n">Every request, plus the checks before sending. Makes trackers/design-requests.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build trackers/design-requests.html: my design request
+tracker. Sample rows (make 8): who asked, what (poster, story, cover), promo, size
+(1080x1350 or 1080x1920), due date. Columns to tick before I send: logo in, &quot;Message us&quot;
+in, no price shown, spelling checked, approved.
+Never: write a price on a design. Use [PRICE].
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Luisa · AI · Get a quote page</div><div class="n">A form that turns a client&#x27;s answers into a ready brief for the agent. Makes get-a-quote.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md and brain/. Build get-a-quote.html: a short form (destination,
-dates, number of people, kids or seniors, budget, special requests). When the
-client taps &quot;Get my quote&quot;, show a clean summary they can copy and send to
-Gladex on Messenger. Nothing is sent or saved anywhere.
+  <div class="p"><div class="top"><div><div class="t">Keiko · HR · New hire onboarding checklist</div><div class="n">Day 1, week 1, month 1 for a new consultant. Makes trackers/onboarding.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md, brain/ and job-post.html. Build trackers/onboarding.html: the
+onboarding checklist for a new travel consultant. Group the tasks as Day 1, Week 1,
+Month 1 (about 15 tasks: IDs and forms, laptop and email, GDS training, shadow a
+senior, first quote checked, first booking). Each task has an owner (HR, IT,
+supervisor, new hire) and a due day.
+Never: write a salary or any personal ID number.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Christine · Product Dev · Package sales page</div><div class="n">Bohol Island Hopping sales page from her package draft. Makes promo/bohol.html.</div></div><button class="copy">Copy</button></div>
-<pre>Read DESIGN.md, brain/ and package-draft.html. Build promo/bohol.html: a sales page
-for a Bohol Island Hopping package. Headline under 8 words, the day by day plan,
-what is included and not included, 3 reasons to book, and &quot;Message us to book&quot;.
-Prices stay [PRICE]. Never invent a hotel or a rate.
+  <div class="p"><div class="top"><div><div class="t">Jason · Accounting · Booking payment tracker</div><div class="n">Who paid, who still owes, what is overdue. Makes trackers/payments.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build trackers/payments.html: my booking payment tracker.
+Sample rows (make 10, made-up names): booking code, client, package, total, downpayment,
+balance, balance due date. Columns to tick: downpayment received, full payment received,
+official receipt sent. Show in red any balance past its due date, and the total still
+to collect at the top.
+Never: write a real account number or a real client name. Sample data only.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre></div>
-  <div class="note"><b>Then:</b> swap laptops with your buddy. One thing you love, one thing to fix. Gallery walk after: vote for the page you would actually book from.</div>
+  <div class="p"><div class="top"><div><div class="t">Kevin · Operations · Pre-departure checklist</div><div class="n">HK Family Weekend: every check before flying. Makes trackers/pre-departure.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build trackers/pre-departure.html: the pre-departure
+checklist for the Hong Kong Family Weekend group (sample: 6 travelers, made-up names).
+For each traveler, tick: passport valid 6 months, ticket issued, hotel confirmed,
+airport transfer booked, insurance, itinerary sent, reminder sent 3 days before.
+Show which traveler is not ready yet at the top.
+Never: write a passport number. Sample data only.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Paula · Quality · Booking quality checklist</div><div class="n">10 checks on every booking before it goes out. Makes trackers/booking-qa.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md, brain/ and qa-checklist.html. Build trackers/booking-qa.html: the
+quality check for every booking before it goes to the client. Sample: 5 bookings,
+each with 10 checks (name matches passport, dates right, inclusions listed, price as
+[PRICE], cancellation rule shown, supplier confirmed, itinerary attached, reply within
+our time, spelling checked, manager OK). Show a score per booking (8 of 10).
+Never: mark a check done that the data does not show.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Luisa · AI · Inquiry tracker</div><div class="n">Every inquiry, its status, the next follow-up. Makes trackers/inquiries.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md and brain/. Build trackers/inquiries.html: my client inquiry tracker.
+Sample rows (make 12, made-up names): date, client, destination, number of people,
+status (New, Quoted, Follow up, Booked, Lost), next follow-up date. Ticks: replied,
+quote sent, followed up. At the top: how many in each status, and who needs a
+follow-up today.
+Never: save anything outside this file. Sample data only.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">Christine · Product Dev · Package launch checklist</div><div class="n">Bohol package from draft to launch. Makes trackers/package-launch.html.</div></div><button class="copy">Copy</button></div>
+<pre>Read DESIGN.md, brain/ and package-draft.html. Build trackers/package-launch.html:
+the launch checklist for the Bohol Island Hopping package, from draft to selling.
+About 12 steps with an owner and a due date: supplier rates in, hotel confirmed,
+itinerary final, price approved as [PRICE], poster requested, page ready, CSR team
+briefed, first post up.
+Never: invent a hotel or a rate.
+Every row gets a tick box. Ticks stay when I close and open the browser again.
+At the top: a progress bar (how many are done) and filters: All, To do, Done.
+Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
+Phone first. No emojis. Open it in my browser.</pre></div>
+  <div class="note"><b>Then:</b> swap laptops with your buddy. Your buddy uses it for one real task: one thing they love, one thing to fix. Gallery walk after: vote for the tracker you would actually use on Monday.</div>
 </section>
 
 <section id="count">
