@@ -374,7 +374,7 @@ It must work on a phone first. Open it in my browser.</pre><button class="copy">
   <div class="act" id="promo">
     <span class="eb">Gwen's activity · 45 minutes · with your buddy</span>
     <h3>Build your desk's tracker</h3>
-    <p class="goal">At the end: a checklist and spreadsheet for your desk that you will really use on Monday. You tick it on your phone or laptop, and it downloads to Excel. Gladex needs 8 trackers today, one per desk. <a href="#d2-desks">Jump to your desk's prompt</a>. Each desk has 3 options, in case you already built one. Done early? <a href="#d2-extras">Level-up prompts</a>. No desk prompt fits? Use the backup steps below.</p>
+    <p class="goal">At the end: a checklist and spreadsheet for your desk that you will really use on Monday. You tick it on your phone or laptop, and it downloads to Excel. Gladex needs 8 trackers today, one per desk. <a href="#d2-desks">Jump to your desk's prompt</a>. No desk prompt fits? Use the backup steps below.</p>
     <div class="why"><b>WHY · GWEN</b>Most of the work that slips is not hard work. It is the small step somebody forgot: the follow-up, the receipt, the passport check. A tracker your AI employee builds in 10 minutes means nothing gets forgotten, and your manager can see where every client is. And every price stays [PRICE], because we never invent a fare.</div>
     <ol class="steps">
       <li>Find your name below and copy your desk's prompt. Paste it in your desk folder.<span class="see">Your tracker opens in the browser with sample rows.</span></li>
@@ -399,8 +399,8 @@ At the top: a progress bar and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div><span class="see">Your checklist in the browser. Then do Prompt C above.</span></li>
     </ol>
-    <h3 id="d2-extras" style="margin-top:30px">Done early? Level up your tracker</h3>
-    <p>Pick any. Paste one at a time, test, then the next.</p>
+    <details id="d2-extras" style="margin-top:24px"><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Done early? Optional extra prompts (tap to open)</summary>
+    <p>Only if you finished. Pick one, paste, test.</p>
     <ol class="steps">
       <li>Prompt D · Add a column. When your team needs one more check.
         <div class="cmd"><pre>Add a column to my tracker: [column name]. Put it after [column].
@@ -445,9 +445,9 @@ and load them back on another laptop.</pre><button class="copy">Copy</button></d
         <div class="cmd"><pre>Write the steps you used to build this tracker as trackers/tracker-brief.md,
 so next time I just say &quot;use tracker-brief.md for [new task]&quot; and you build it.</pre><button class="copy">Copy</button></div></li>
     </ol>
+    </details>
     <h3 id="d2-desks" style="margin-top:30px">Your desk's tracker</h3>
     <p>Find your name, copy your prompt, paste it in your desk folder. It reads your DESIGN.md and brain/, plus what you built on Day 1. Then fix it with Prompt C above, twice.</p>
-    <p>Already built your desk's tracker? Each desk has Option 2 and Option 3 right under it.</p>
     <p><a href="#d2-harmony">Harmony</a> · <a href="#d2-rhoniel">Rhoniel</a> · <a href="#d2-keiko">Keiko</a> · <a href="#d2-jason">Jason</a> · <a href="#d2-kevin">Kevin</a> · <a href="#d2-paula">Paula</a> · <a href="#d2-luisa">Luisa</a> · <a href="#d2-christine">Christine</a></p>
     <p id="d2-harmony" style="margin:18px 0 4px"><b>Harmony · Marketing: Content and ads tracker</b><br><span style="color:var(--mute)">Posts and ads: caption, design, approved, posted. Makes <b>trackers/content-tracker.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/content-tracker.html: my content and ads
@@ -459,7 +459,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Harmony, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Weekly ads results tracker</b><br><span style="color:var(--mute)">Spend, leads, bookings per campaign, and what to fix. Makes <b>trackers/ads-results.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/ads-results.html: my weekly ads results tracker.
 Sample rows (make 6 campaigns): campaign, spend, leads, bookings, cost per lead (do the math).
@@ -478,6 +478,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-rhoniel" style="margin:18px 0 4px"><b>Rhoniel · Graphics: Design request tracker</b><br><span style="color:var(--mute)">Every request, plus the checks before sending. Makes <b>trackers/design-requests.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/design-requests.html: my design request
 tracker. Sample rows (make 8): who asked, what (poster, story, cover), promo, size
@@ -488,7 +489,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Rhoniel, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Promo asset checklist</b><br><span style="color:var(--mute)">Every size a promo needs, before launch day. Makes <b>trackers/promo-assets.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/promo-assets.html: the asset checklist for
 each promo. Sample: 4 promos (Boracay, Japan Sakura, HK Family, Bohol). For each, tick:
@@ -507,6 +508,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-keiko" style="margin:18px 0 4px"><b>Keiko · HR: New hire onboarding checklist</b><br><span style="color:var(--mute)">Day 1, week 1, month 1 for a new consultant. Makes <b>trackers/onboarding.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md, brain/ and job-post.html. Build trackers/onboarding.html: the
 onboarding checklist for a new travel consultant. Group the tasks as Day 1, Week 1,
@@ -518,7 +520,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Keiko, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Applicant pipeline</b><br><span style="color:var(--mute)">Every applicant from CV to offer. Makes <b>trackers/applicants.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md, brain/ and job-post.html. Build trackers/applicants.html: my applicant
 tracker for the travel consultant role. Sample rows (make 10, made-up names): name,
@@ -539,6 +541,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-jason" style="margin:18px 0 4px"><b>Jason · Accounting: Booking payment tracker</b><br><span style="color:var(--mute)">Who paid, who still owes, what is overdue. Makes <b>trackers/payments.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/payments.html: my booking payment tracker.
 Sample rows (make 10, made-up names): booking code, client, package, total, downpayment,
@@ -550,7 +553,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Jason, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Supplier payables tracker</b><br><span style="color:var(--mute)">What we owe airlines and hotels, and when. Makes <b>trackers/payables.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/payables.html: my supplier payables tracker.
 Sample rows (make 10): supplier (airline, hotel, tour operator, made-up names), booking
@@ -571,6 +574,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-kevin" style="margin:18px 0 4px"><b>Kevin · Operations: Pre-departure checklist</b><br><span style="color:var(--mute)">HK Family Weekend: every check before flying. Makes <b>trackers/pre-departure.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/pre-departure.html: the pre-departure
 checklist for the Hong Kong Family Weekend group (sample: 6 travelers, made-up names).
@@ -582,7 +586,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Kevin, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Visa application tracker</b><br><span style="color:var(--mute)">Every client visa, step by step. Makes <b>trackers/visas.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/visas.html: my visa application tracker.
 Sample rows (make 8, made-up names): client, country (Japan, Korea, Schengen), travel date.
@@ -602,6 +606,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-paula" style="margin:18px 0 4px"><b>Paula · Quality: Booking quality checklist</b><br><span style="color:var(--mute)">10 checks on every booking before it goes out. Makes <b>trackers/booking-qa.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md, brain/ and qa-checklist.html. Build trackers/booking-qa.html: the
 quality check for every booking before it goes to the client. Sample: 5 bookings,
@@ -613,7 +618,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Paula, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Client feedback tracker</b><br><span style="color:var(--mute)">Every complaint or comment, and what we did. Makes <b>trackers/feedback.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md, brain/ and qa-checklist.html. Build trackers/feedback.html: my client
 feedback tracker. Sample rows (make 10, made-up): date, client, trip, feedback type
@@ -634,6 +639,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-luisa" style="margin:18px 0 4px"><b>Luisa · AI: Inquiry tracker</b><br><span style="color:var(--mute)">Every inquiry, its status, the next follow-up. Makes <b>trackers/inquiries.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/inquiries.html: my client inquiry tracker.
 Sample rows (make 12, made-up names): date, client, destination, number of people,
@@ -645,7 +651,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Luisa, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · AI employee task log</b><br><span style="color:var(--mute)">What the AI did this week, and the hours saved. Makes <b>trackers/ai-log.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md and brain/. Build trackers/ai-log.html: our AI employee task log.
 Sample rows (make 12): date, desk, task, minutes before AI, minutes with AI (do the math
@@ -666,6 +672,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
     <p id="d2-christine" style="margin:18px 0 4px"><b>Christine · Product Dev: Package launch checklist</b><br><span style="color:var(--mute)">Bohol package from draft to launch. Makes <b>trackers/package-launch.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md, brain/ and package-draft.html. Build trackers/package-launch.html:
 the launch checklist for the Bohol Island Hopping package, from draft to selling.
@@ -677,7 +684,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
-    <p class="d2-opt" style="margin:12px 0 4px;color:var(--mute)"><b>Christine, already built this?</b> Pick Option 2 or 3 instead.</p>
+    <details><summary style="cursor:pointer;font-weight:700;margin:10px 0;color:var(--mute)">Already built this one? Tap for 2 other options</summary>
     <p style="margin:10px 0 4px"><b>Option 2 · Supplier rate request tracker</b><br><span style="color:var(--mute)">Who we asked for rates, who replied, what is missing. Makes <b>trackers/rate-requests.html</b>.</span></p>
     <div class="cmd"><pre>Read DESIGN.md, brain/ and package-draft.html. Build trackers/rate-requests.html:
 my supplier rate request tracker. Sample rows (make 10, made-up suppliers): supplier,
@@ -698,6 +705,7 @@ Every row gets a tick box. Ticks stay when I close and open the browser again.
 At the top: a progress bar (how many are done) and filters: All, To do, Done.
 Add a &quot;Download for Excel&quot; button that saves a .csv I can open in Excel or Google Sheets.
 Phone first. No emojis. Open it in my browser.</pre><button class="copy">Copy</button></div>
+    </details>
   </div>
 
   <div class="act" id="a7">
