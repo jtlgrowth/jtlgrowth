@@ -85,6 +85,7 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       "logo": "https://jtlgrowth.com/assets/logo-mark.svg",
       "image": "https://jtlgrowth.com/og-image.png",
       "description": "JTL Growth is an AI and automation agency in Metro Manila, Philippines, founded by Jamz Jamorol. It builds AI and automation systems scoped to your goals: AI agents, CRM and workflow automation, and custom web builds. You name the outcome, we quote the build.",
+      "disambiguatingDescription": "The Philippine AI and automation agency founded by Jamz Jamorol in July 2026, at jtlgrowth.com.",
       "foundingDate": "2026-07",
       "founder": { "@id": "https://jamzjamorol.com/#person" },
       "address": {
@@ -121,7 +122,13 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
       "@id": "https://jamzjamorol.com/#person",
       "name": "Jamz Jamorol",
       "url": "https://jamzjamorol.com/",
-      "image": "https://jtlgrowth.com/assets/jamz.webp",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://jtlgrowth.com/assets/portrait-jamz.jpg",
+        "width": 880,
+        "height": 1100,
+        "caption": "Jamz Jamorol, founder of JTL Growth"
+      },
       "jobTitle": "Founder",
       "description": "Jamz Jamorol is a Filipino systems builder and electrical engineer based in Metro Manila, Philippines. Founder of JTL Growth and Co-Founder of AVAS (Ayala Virtual Assistance Services).",
       "nationality": { "@type": "Country", "name": "Philippines" },
@@ -713,7 +720,7 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
     <!-- v7 About, Owner pick C (2026-09-28): the statement on the left, the portrait bleeding off
          the right edge, one "Next" chip to switch founders instead of two tabs. -->
     <div class="about-face rv d2">
-        <a href="https://jamzjamorol.com/" aria-label="Jamz Jamorol: founder profile"><img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol" width="880" height="1100" loading="lazy" decoding="async"></a>
+        <a href="https://jamzjamorol.com/" aria-label="Jamz Jamorol: founder profile"><img class="face is-on" id="face-jamz" src="assets/portrait-jamz.jpg" alt="Jamz Jamorol, founder of JTL Growth" width="880" height="1100" loading="lazy" decoding="async"></a>
         <img class="face" id="face-gwen" src="assets/portrait-gwen.webp" alt="Gwen" width="1099" height="1100" loading="lazy" decoding="async" aria-hidden="true">
       </div>
     <div class="inner about-c">
