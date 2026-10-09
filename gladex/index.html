@@ -630,94 +630,82 @@ big enough for a thumb. Then make it installable to the home screen
 
 <section id="hq">
   <span class="eb">Day 2 · Part 2 · Your HQ</span>
-  <h2>Your own HQ, wired to your brain and your team.</h2>
-  <p class="lead">Yesterday you hired your AI employee. Today it gets an office: our Day 1 room in 3D, on an island like our logo, running on your own laptop. You name it. Everyone in your roster.json sits at a desk, the Brain tab shows your brain/ folder, the Work tab shows what your team made, and every job card has four checks.</p>
-  <img src="hq/preview.webp" alt="An HQ built from this prompt, Luz's Island Office: its name on the top bar, the Brain tab open with two of five brain files and three rules, wood-slat walls, the Gladex logo between two lit display shelves, an LED screen on the wall, a glass meeting room, the long meeting table, and the AI employee Luz at a desk, on a sand island with palm trees." width="1440" height="900" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line);margin:8px 0 16px">
+  <h2>Build your HQ. Then furnish it.</h2>
+  <p class="lead">One prompt builds your own office in 3D on your laptop: the name you pick, our logo, and the AI employee you hired yesterday at a desk. Everything else you add yourself, one sentence at a time.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:8px 0 16px">
+    <figure style="margin:0"><img src="hq/after-prompt.webp" alt="Luz&#x27;s Island Office right after the prompt: the name on the top bar, wood-slat walls, the Gladex logo on the wall, and Luz the Applicant Tracker at a desk, on a sand island with palm trees." width="1440" height="900" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)"><figcaption style="color:var(--mute);font-size:14px;margin-top:6px">Right after the prompt: your name, our logo, your employee.</figcaption></figure>
+    <figure style="margin:0"><img src="hq/after-five.webp" alt="The same office after five sentences: a potted palm by Luz, two lit display shelves, the long meeting table, an LED screen with the brain rules, and a glass meeting room." width="1440" height="900" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)"><figcaption style="color:var(--mute);font-size:14px;margin-top:6px">After five sentences from below.</figcaption></figure>
+  </div>
   <div class="p dark"><div class="top"><div><div class="t">Build my HQ</div><div class="n">Paste inside Claude Code in your desk folder from Day 1 (the one with roster.json). It asks what to call your HQ first. Codex users: paste the same.</div></div><button class="copy">Copy</button></div>
-<pre>I want my desk's office in 3D on my own laptop: my own HQ at Gladex, built on the JTL HQ base (github.com/jtlgrowth/hq-base). It is my system UI: the AI employee I hired yesterday with /hire works at a desk in it, and it shows my brain/ folder and the work my team makes.
+<pre>I want my own HQ: my desk's office in 3D on my laptop, built on the JTL HQ base (github.com/jtlgrowth/hq-base). The AI employee I hired yesterday with /hire works at a desk in it.
 
-First make sure we are in my desk folder from Day 1, the one with roster.json in it. If roster.json is not here, search my user folder (including OneDrive Desktop and Documents) for a roster.json that has a docs/team folder next to it, tell me the full path, and give me the exact command to go there, in quotes. Stop there until I am in the right folder.
+First make sure we are in my desk folder from Day 1, the one with roster.json in it. If it is not here, search my user folder (including OneDrive Desktop and Documents) for a roster.json with a docs/team folder next to it, and give me the exact command to go there, in quotes. Stop there until I am in the right folder.
 
-Then ask me four things, all at once, with options. Ask before you build anything, and wait for my answers:
-1. The name of my HQ. It goes on the top bar and the browser tab. Offer: "[my desk] HQ", "[my employee]'s Island Office", "Gladex [my desk] Island", or a name of my own.
-2. My desk: Marketing, Marketing Graphics, HR, Accounting, Operations, Quality and Learning, AI Engineering, or Product Development.
-3. My team: read roster.json and docs/team/, and show me who you found, one line each (name and job). Ask me if anyone is missing.
-4. Extras for the office. Offer these and let me pick several: a potted palm by each desk, a suitcase, a globe, a teddy bear, a coffee corner, a reading nook, an office cat, a TV wall.
+Then ask me two things, all at once, and wait for my answers:
+1. What do I want to call my HQ? Offer "[my desk] HQ", "[my employee]'s Island Office", or a name of my own.
+2. Which desk am I: Marketing, Marketing Graphics, HR, Accounting, Operations, Quality and Learning, AI Engineering, or Product Development?
 
-Then do this yourself, do not just tell me how:
-1. Get the base into a folder called "hq" here: git clone --depth 1 https://github.com/jtlgrowth/hq-base hq. Then read hq/CLAUDE.md and follow its rules. Never edit the base files.
-2. Write hq/company.json with name "Gladex Travel and Tours", hq "[the HQ name I picked]", tagline "[my desk] desk", and look {"walls": "wood-slat", "floor": "stone", "outside": "island"}. That is our Day 1 room (wood-slat walls, lit display shelves) on an island like our logo.
-3. Leave hq/team.json as [] so the office reads my roster.json.
-4. Download our logo to hq/logo.png from https://jtlgrowth.com/gladex/hq/gladex-logo.png
-5. Write hq/accessories.json, using only ids from hq/ACCESSORIES.md. Start with the Day 1 room: the logo, two display shelves, and the meeting table in the lounge. Then add the extras I picked, placed "near" my employees by name.
-6. Put my three Day 2 jobs on the board in hq/tasks.md as "- [ ]" lines: build the brain/ folder for [my employee], write DESIGN.md for my desk, fill my win card.
-7. Start it in the background: node hq/server.mjs. Open the address it prints in my browser (Windows: start [address], Mac: open [address]).
+Then do this yourself:
+1. git clone --depth 1 https://github.com/jtlgrowth/hq-base hq, then read hq/CLAUDE.md and follow it. Never edit the base files.
+2. Write hq/company.json: name "Gladex Travel and Tours", hq "[my HQ name]", tagline "[my desk] desk", look {"walls": "wood-slat", "floor": "stone", "outside": "island"}. That is our Day 1 room, on an island like our logo.
+3. Download our logo to hq/logo.png from https://jtlgrowth.com/gladex/hq/gladex-logo.png and put only the logo in hq/accessories.json. I will add everything else myself.
+4. Start it in the background (node hq/server.mjs) and open the address it prints in my browser.
 
-When you are done, tell me:
-- the address, and the two lines to start it again tomorrow (go into the hq folder, then node server.mjs)
-- what the three tabs on the right show for me right now, read from [address]/api/state: Today (my board), Brain (my five brain/ files and my rules), Work (the newest files my team made in this folder)
-- for each employee, the four checks on their job card: roster.json, agent file and job card (from [address]/api/team/[their id]), and reads brain/ (brain.reads in /api/state). If one of the first three is missing, the fix is /hire again in this folder; never write those files by hand. If reads brain/ is missing, the fix is the brain interview from Part 1: five files in brain/, and "read brain/ before every task" in CLAUDE.md.
+Then tell me the address, how to start it again tomorrow (cd hq, then node server.mjs), and what kinds of things I can add, one line per group in hq/ACCESSORIES.md.
 
-From now on, when I say "add a ___ to the office", you edit hq/accessories.json and I watch it appear. When I say "rename my HQ", you change hq in hq/company.json.
+From now on, when I say "add a ___ to my HQ", you edit hq/accessories.json and I watch it appear.
 
-To check it worked: the page opens on the island with my HQ name on the top bar, every employee from yesterday sits at a desk with their name over it, clicking a name opens their job card with green checks, and the Brain tab lists my brain/ files.</pre></div>
-  <div class="note"><b>Then add to it.</b> Optional. Paste any of these in the same chat, in any order. Everything appears in a few seconds, no restart.</div>
-  <h3>The system on the walls</h3>
-  <div class="p"><div class="top"><div><div class="t">1. Put my brain on the wall</div><div class="n">An LED screen with the rules from your brain/rules.md, live.</div></div><button class="copy">Copy</button></div>
-<pre>Add an LED screen to my HQ that shows my brain: add { "model": "led-screen", "show": "brain" } to hq/accessories.json. Then tell me which of my five brain/ files the Brain tab says are still missing.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">2. Show my team&#x27;s newest work on the wall</div><div class="n">An LED screen listing the newest files your AI employees made in this folder.</div></div><button class="copy">Copy</button></div>
-<pre>Add an LED screen to my HQ that shows my team's newest work: add { "model": "led-screen", "show": "work" } to hq/accessories.json. Then tell me the three newest files it will show.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">3. A screen for the team and one for the board</div><div class="n">Two more LED screens, one with who is working, one with today&#x27;s board.</div></div><button class="copy">Copy</button></div>
-<pre>Add two LED screens to my HQ: one with "show": "team" and one with "show": "tasks", in hq/accessories.json. Then read hq/tasks.md and tell me what is on my board.</pre></div>
+To check it worked: the page opens on the island with my HQ name on top, and my employee sits at a desk with their name over it.</pre></div>
+  <div class="note"><b>Now make it yours.</b> Say it in your own words: "add a ___ to my HQ". Or paste any of these, in any order. Each one appears in a few seconds, no restart.</div>
+  <h3>Start here</h3>
+  <div class="p"><div class="top"><div><div class="t">1. See what I can add</div></div><button class="copy">Copy</button></div>
+<pre>Show me everything I can add to my HQ, from hq/ACCESSORIES.md, grouped, one short line each.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">2. Add anything, in your own words</div></div><button class="copy">Copy</button></div>
+<pre>Add a [palm / globe / suitcase / teddy bear / office cat] next to [employee name] in my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">3. Make it our Day 1 room</div><div class="n">Two lit display shelves beside the logo and the long meeting table with black chairs.</div></div><button class="copy">Copy</button></div>
+<pre>Add two display shelves and the long meeting table to my HQ.</pre></div>
+  <h3>Screens on the wall</h3>
+  <div class="p"><div class="top"><div><div class="t">4. Put my brain on the wall</div><div class="n">An LED screen with the rules from your brain/rules.md, live.</div></div><button class="copy">Copy</button></div>
+<pre>Add an LED screen to my HQ that shows my brain rules.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">5. Show my team&#x27;s newest work</div></div><button class="copy">Copy</button></div>
+<pre>Add an LED screen to my HQ that shows my team's newest work.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">6. A screen for the team and one for the board</div></div><button class="copy">Copy</button></div>
+<pre>Add two LED screens to my HQ: one that shows my team, one that shows my board.</pre></div>
   <h3>Rooms and corners</h3>
-  <div class="p"><div class="top"><div><div class="t">4. A meeting room</div><div class="n">A glass meeting room with a round table, four chairs and a TV. The room grows to fit it.</div></div><button class="copy">Copy</button></div>
-<pre>Add a meeting room to my HQ: add { "model": "meeting-room" } to hq/accessories.json.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">5. A reception desk at the entrance</div></div><button class="copy">Copy</button></div>
-<pre>Add a reception desk at the entrance of my HQ: { "model": "reception-desk", "spot": "entrance" } in hq/accessories.json.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">6. A world map with pins</div></div><button class="copy">Copy</button></div>
-<pre>Add a world map to the wall of my HQ: { "model": "world-map" } in hq/accessories.json.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">7. A whiteboard</div></div><button class="copy">Copy</button></div>
-<pre>Add a whiteboard on wheels next to [employee name] in my HQ, in hq/accessories.json.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">8. A pantry</div><div class="n">A coffee counter with a machine, a small fridge and a stool, plus a water dispenser.</div></div><button class="copy">Copy</button></div>
-<pre>Add a pantry to my HQ: a coffee-corner and a water-dispenser, both at the "pantry" spot, in hq/accessories.json.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">9. A printer</div></div><button class="copy">Copy</button></div>
-<pre>Add an office printer next to [employee name] in my HQ, in hq/accessories.json.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">10. More travel pieces</div></div><button class="copy">Copy</button></div>
-<pre>Add these to my HQ, near my employees, in hq/accessories.json: a model airplane, a hot air balloon, a paper parasol, a crystal trophy and a potted palm. Use only ids from hq/ACCESSORIES.md.</pre></div>
-  <h3>Wire the system to your brain and your team</h3>
-  <div class="p"><div class="top"><div><div class="t">11. Connect the brain</div><div class="n">The Brain tab shows 5/5 files and &quot;Your team reads it before every task&quot;. Every job card gets its fourth green check.</div></div><button class="copy">Copy</button></div>
-<pre>Read my HQ's state from /api/state at the address hq/server.mjs printed, and look at "brain". Tell me which of the five brain/ files are missing (company.md, desk.md, process.md, examples.md, rules.md) and whether CLAUDE.md tells my team to read brain/.
-For each missing file, ask me three short questions, one at a time, and write it in my words. Sample data only, no real client names, IDs or salaries.
-Then add "Read brain/ before every task." to CLAUDE.md if it is not there.
-Then read /api/state again and show me the Brain tab: five files, and reads brain/ green.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">12. Fix a red check on a job card</div></div><button class="copy">Copy</button></div>
-<pre>[employee name]'s job card in my HQ shows a red mark on [roster.json / agent file / job card / reads brain/].
-Find out why. If it is roster.json, the agent file or the job card, fix it with /hire in this folder, never by hand. If it is reads brain/, do the brain step: five files in brain/ and "Read brain/ before every task." in CLAUDE.md.
-Then show me the four checks again.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">13. Hire one more for the office</div><div class="n">First run this, and answer its questions:</div></div><button class="copy">Copy</button></div>
-<pre>/hire</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Then paste</div></div><button class="copy">Copy</button></div>
-<pre>Show me my new hire at their desk in my HQ: read /api/state and /api/team/[their id], and tell me their four checks. Then add a potted palm next to them.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">14. Check my whole system</div><div class="n">One report on everything your HQ is wired to.</div></div><button class="copy">Copy</button></div>
-<pre>Check my whole HQ system and give me one short report, read from /api/state and /api/team/[id] at the address hq/server.mjs printed:
-1. My HQ name and look.
-2. Every employee, with their four checks (roster.json, agent file, job card, reads brain/).
-3. The Brain tab: how many of the five brain/ files exist, and my rules.
-4. The board: what is done and what is open in hq/tasks.md.
-5. The Work tab: the five newest files my team made.
-6. Any accessory the page does not know (a typo in hq/accessories.json).
-Mark each line green or red, and for every red line give me the one fix.</pre></div>
-  <h3>Make it yours</h3>
-  <div class="p"><div class="top"><div><div class="t">15. Rename my HQ</div></div><button class="copy">Copy</button></div>
-<pre>Rename my HQ to "[new name]": change hq in hq/company.json. Keep everything else.</pre></div>
-  <div class="p"><div class="top"><div><div class="t">16. Change the look</div><div class="n">Walls plain or wood-slat, floor wood or stone, outside lawn or island.</div></div><button class="copy">Copy</button></div>
-<pre>Change the look of my HQ to walls "[plain / wood-slat]", floor "[wood / stone]", outside "[lawn / island]": set look in hq/company.json.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">7. A meeting room</div><div class="n">A glass meeting room with a round table, four chairs and a TV. The room grows to fit it.</div></div><button class="copy">Copy</button></div>
+<pre>Add a glass meeting room to my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">8. A reception desk</div></div><button class="copy">Copy</button></div>
+<pre>Add a reception desk at the entrance of my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">9. A world map</div></div><button class="copy">Copy</button></div>
+<pre>Add a world map with pins to the wall of my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">10. A whiteboard</div></div><button class="copy">Copy</button></div>
+<pre>Add a whiteboard next to [employee name] in my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">11. A pantry</div></div><button class="copy">Copy</button></div>
+<pre>Add a pantry to my HQ: a coffee corner and a water dispenser.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">12. A printer</div></div><button class="copy">Copy</button></div>
+<pre>Add an office printer next to [employee name] in my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">13. Travel pieces</div></div><button class="copy">Copy</button></div>
+<pre>Add a model airplane, a hot air balloon, a paper parasol and a crystal trophy to my HQ.</pre></div>
+  <h3>Wire it to your brain and your team</h3>
+  <div class="p"><div class="top"><div><div class="t">14. Put my jobs on the board</div><div class="n">Your jobs in the Today tab.</div></div><button class="copy">Copy</button></div>
+<pre>Put my three Day 2 jobs on the board in my HQ: build the brain/ folder for [my employee], write DESIGN.md for my desk, fill my win card.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">15. Connect the brain</div><div class="n">The Brain tab shows 5/5 files.</div></div><button class="copy">Copy</button></div>
+<pre>My HQ's Brain tab shows which brain/ files are missing. For each missing one, ask me three short questions, one at a time, and write it in my words. Then make sure CLAUDE.md says to read brain/ before every task.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">16. Fix a red check on a job card</div></div><button class="copy">Copy</button></div>
+<pre>[employee name]'s job card in my HQ has a red mark. Tell me why and fix it: /hire for a missing hire, the brain step for reads brain/. Never write the hire files by hand.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">17. Hire one more</div><div class="n">First run /hire and answer its questions. The new hire gets a desk by itself. Then:</div></div><button class="copy">Copy</button></div>
+<pre>Add a potted palm next to my new hire in my HQ.</pre></div>
+  <div class="p"><div class="top"><div><div class="t">18. Check my whole HQ</div></div><button class="copy">Copy</button></div>
+<pre>Check my whole HQ: every job card's checks, my brain files, my board and my newest work. Tell me what is green and the one fix for anything red.</pre></div>
+  <h3>Change the room</h3>
+  <div class="p"><div class="top"><div><div class="t">19. Rename my HQ</div></div><button class="copy">Copy</button></div>
+<pre>Rename my HQ to "[new name]".</pre></div>
+  <div class="p"><div class="top"><div><div class="t">20. Change the look</div><div class="n">Walls plain or wood-slat, floor wood or stone, outside lawn or island.</div></div><button class="copy">Copy</button></div>
+<pre>Change my HQ to [plain / wood-slat] walls, a [wood / stone] floor, and [lawn / island] outside.</pre></div>
   <h3>Tomorrow</h3>
-  <div class="p"><div class="top"><div><div class="t">17. Start my HQ again</div><div class="n">In PowerShell (Windows) or Terminal (Mac), inside your desk folder:</div></div><button class="copy">Copy</button></div>
+  <div class="p"><div class="top"><div><div class="t">21. Start my HQ again</div><div class="n">In PowerShell (Windows) or Terminal (Mac), inside your desk folder:</div></div><button class="copy">Copy</button></div>
 <pre>cd hq
 node server.mjs</pre></div>
-  <div class="p"><div class="top"><div><div class="t">Or, inside Claude Code in your desk folder</div></div><button class="copy">Copy</button></div>
-<pre>Start my HQ in the background (node hq/server.mjs) and open the address it prints in my browser.</pre></div>
 </section>
 
 <section id="promo">
