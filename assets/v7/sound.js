@@ -1,9 +1,9 @@
 /* v7 sound: real switch samples through the E-49b engine shape.
-   Samples: assets/sounds/gateron-ink-black/<category>_<down|up>_<NN>.wav and
-   assets/sounds/click/sibat-{down,up}.wav (Keeby recordings, shipped on the
-   Owner's call 2026-09-03). Routing mirrors tools/jtlboard/jtlboard.swift:
-   Space, Enter, Backspace, everything else alpha. Volumes from jtlboard:
-   keys .55 down / .40 up, click .30 down / .18 up.
+   Samples: assets/sounds/gateron-ink-black/<category>_<down|up>_<NN>.wav (Gateron
+   Ink Black from kbsim by Thomas Lai, MIT, LICENSE beside them) and
+   assets/sounds/click/jtl-click-{down,up}.wav (the JTL click, our own, synthesized).
+   Routing mirrors jtlboard: Space, Enter, Backspace, everything else alpha.
+   Volumes: keys .55 down / .55 up, click .30 down / .18 up.
    Chain: source -> gain(envelope) -> StereoPanner(by column) -> compressor -> out.
    6-voice cap, round robin down N / up N+1, pitch jitter +-3%.
    Unlocks on the first keydown in the terminal or pointerdown on the laptop.
@@ -17,9 +17,9 @@
     space_down: ['gateron-ink-black/space_down_01.wav'], space_up: ['gateron-ink-black/space_up_01.wav'],
     enter_down: ['gateron-ink-black/enter_down_01.wav'], enter_up: ['gateron-ink-black/enter_up_01.wav'],
     backspace_down: ['gateron-ink-black/backspace_down_01.wav'], backspace_up: ['gateron-ink-black/backspace_up_01.wav'],
-    click_down: ['click/sibat-down.wav'], click_up: ['click/sibat-up.wav']
+    click_down: ['click/jtl-click-down.wav'], click_up: ['click/jtl-click-up.wav']
   };
-  var VOL = { down: 0.55, up: 0.40, click_down: 0.30, click_up: 0.18 };
+  var VOL = { down: 0.55, up: 0.55, click_down: 0.30, click_up: 0.18 };
   var MAX_VOICES = 6;
   var S = { enabled: true, ctx: null, comp: null, buffers: {}, cursor: {}, voices: [], plays: 0, loading: false, loaded: false };
   try { S.enabled = localStorage.getItem('jtl-sound') !== 'off'; } catch (e) {}
