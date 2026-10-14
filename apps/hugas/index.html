@@ -2,13 +2,14 @@
 <!-- QUICK SETTINGS: colours and type live in :root below; every word, price and name lives in SETTINGS at the bottom.
      World E "Si Bubu sa Lababo" (Owner pick 2026-09-28), ported from apps/hugas/redesign/2026-09-28/e-bubu.html.
      settings: host-ok=jtlgrowth.com
+     settings: host-ok=apps.apple.com
      Motion rule: nothing sways on its own. Bubu only wiggles when someone touches him; ambient motion is bubbles rising. -->
 <html lang="fil">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hugas: kaninong turn na sa lababo?</title>
-<meta name="description" content="Kita kung kaninong turn maghugas. Take 1 photo ng malinis na lababo, then next na sa pila. Coming soon sa iPhone. Free with a small ad. ₱99 one-time para walang ads ang buong bahay.">
+<meta name="description" content="Kita kung kaninong turn maghugas. Take 1 photo ng malinis na lababo, then next na sa pila. Nasa App Store na para sa iPhone. Free with a small ad. ₱99 one-time para walang ads ang buong bahay.">
 <link rel="canonical" href="https://jtlgrowth.com/apps/hugas/">
 <meta property="og:title" content="Hugas: kaninong turn na sa lababo?">
 <meta property="og:description" content="Kaninong turn maghugas? May pila na sa app, may photo proof pa. Meet Bubu, ang alaga n&#x27;yong bula sa lababo. Tap mo, kilitiin mo!">
@@ -317,7 +318,7 @@ footer a { font-weight: 800; }
       <div class="copy">
         <h1 class="pop" id="h1" data-t="h1"></h1>
         <div class="cta-row">
-          <button class="btn" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg><span data-t="cta_share"></span></button>
+          <a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a>
         </div>
       </div>
     </section>
@@ -390,7 +391,8 @@ footer a { font-weight: 800; }
     <svg class="bubu-end" viewBox="0 0 200 200" data-m="glow" aria-hidden="true"></svg>
     <h2 class="pop" id="h-end" data-t="end_h"></h2>
     <div class="cta-row">
-      <button class="btn" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg><span data-t="cta_share"></span></button>
+      <a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a>
+      <button class="btn ghost" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg><span data-t="cta_share"></span></button>
     </div>
   </div>
 </section>
@@ -407,10 +409,12 @@ const SETTINGS = {
   "url": "https://jtlgrowth.com/apps/hugas/",
   "share_title": "Hugas",
   "share_text": "May app na para alam natin kung kaninong turn maghugas. May alaga pa tayong bula sa lababo. Meet Bubu!",
-  "soon": "Coming soon sa iPhone",
+  "soon": "Nasa App Store na",
+  "appstore_url": "https://apps.apple.com/app/id6812399879",
   "hint": "Tap mo ako!",
   "bubu_label": "Si Bubu! Tap mo para kilitiin.",
   "h1": "Kita na kung sino ang <em>maghuhugas</em>.",
+  "cta_get": "I-download sa App Store",
   "cta_share": "Share sa family GC",
   "copied": "Link copied! Paste mo na sa GC.",
   "count": "{n} beses mo nang nakiliti si Bubu!",
@@ -447,7 +451,7 @@ const SETTINGS = {
   "price_fine": "Walang subscription. Yung ₱99, one-time lang para tanggal ang ads sa buong bahay.",
   "faq_kick": "May tanong ka?",
   "faq_h": "Baka ito rin tanong sa GC.",
-  "faq": [["Sa iPhone lang?", "Oo, iPhone lang muna. Wala pa sa App Store. Tinetest pa namin sa bahay bago i-release."], ["Ilan ang pwedeng sumali?", "Kahit ilan! Pwedeng kayong mag-asawa, magkakapatid o roommates. Kayo ang mag-aayos ng pila, tapos iikot ang turn sa lahat."], ["Sino ang makakakita ng photos?", "Private sa household ang photos. Kayo lang sa bahay ang makakakita."], ["Paano pag walang signal?", "Saved muna sa phone ang photo. Pag may signal na ulit, automatic itong ise-send ng app. Saka lilipat ang turn."], ["Paano kung may nandadaya?", "Walang photo, walang pasa. Kita rin ng lahat sa bahay ang photo sa history. Mahirap idaan sa \"Trust me.\""]],
+  "faq": [["Sa iPhone lang?", "Oo, iPhone lang muna. Nasa App Store na, free i-download."], ["Ilan ang pwedeng sumali?", "Kahit ilan! Pwedeng kayong mag-asawa, magkakapatid o roommates. Kayo ang mag-aayos ng pila, tapos iikot ang turn sa lahat."], ["Sino ang makakakita ng photos?", "Private sa household ang photos. Kayo lang sa bahay ang makakakita."], ["Paano pag walang signal?", "Saved muna sa phone ang photo. Pag may signal na ulit, automatic itong ise-send ng app. Saka lilipat ang turn."], ["Paano kung may nandadaya?", "Walang photo, walang pasa. Kita rin ng lahat sa bahay ang photo sa history. Mahirap idaan sa \"Trust me.\""]],
   "end_h": "Share mo sa GC. Sino raw mauuna?",
   "footer": "Made in the Philippines by",
   "sound_on": "Sound: on",
@@ -516,6 +520,7 @@ document.querySelectorAll('[data-t]').forEach(el => {
   if (v == null) return;
   if (el.dataset.t === 'h1') el.innerHTML = v; else el.textContent = v;
 });
+document.querySelectorAll('[data-store]').forEach(el => { el.href = SETTINGS.appstore_url; el.target = '_blank'; el.rel = 'noopener'; });
 document.querySelectorAll('[data-label]').forEach(el => el.setAttribute('aria-label', SETTINGS[el.dataset.label] || el.dataset.label));
 document.querySelectorAll('[data-m]').forEach(el => { el.innerHTML = bubu(el.dataset.m); });
 
