@@ -246,6 +246,7 @@ section + section{border-top:1px solid var(--line)}
 .qt-submit{font:600 13px 'Archivo',sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--cement);background:var(--navy);border:none;padding:16px 28px;min-height:44px;cursor:pointer;transition:background .25s}
 .qt-submit:hover{background:var(--wood)}
 .qt-note{font-size:13px;color:var(--gray)}
+.qt-warn{margin:14px auto 22px;max-width:560px;box-sizing:border-box;padding:14px 16px;border-left:3px solid var(--fg);background:color-mix(in srgb,var(--fg) 5%,transparent);font:500 15px/1.55 var(--font-body);color:var(--fg)}
 .qt-note a{color:var(--navy);border-bottom:1px solid var(--wood-warm)}
 .qt-panel{margin-top:26px;border:1px solid var(--line);padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:14px;max-width:760px}
 .qt-panel[hidden]{display:none}
@@ -497,7 +498,7 @@ addEventListener("DOMContentLoaded",function(){
     <div class="qt-day rv d1">
       <p class="qt-daytag">01</p>
       <h3>You describe the bottleneck.</h3>
-      <p>One paragraph is enough; the form below asks the four things we need.</p>
+      <p>One paragraph is enough. The form below asks the rest, one question at a time.</p>
     </div>
     <div class="qt-day rv d2">
       <p class="qt-daytag">02</p>
@@ -514,12 +515,13 @@ addEventListener("DOMContentLoaded",function(){
 
 <section class="wrap" id="form">
   <p class="eyebrow rv">The request</p>
+  <p class="qt-warn rv" id="qt-warn">We only quote real businesses. Give us your business name and a website or page we can check. Requests without them are treated as spam and get no reply.</p>
   <div class="w45-root" id="qt-w45">
   <form class="w45-form" data-lead-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-format="text" data-endpoint-mirror="https://rialto.whereisdotva.workers.dev/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA" data-partial="on" novalidate>
     <div class="w45-card" data-w45-card>
       <div class="w45-top">
         <span class="w45-eyebrow" data-eyebrow></span>
-        <span class="w45-count" data-progress-text>1 / 5</span>
+        <span class="w45-count" data-progress-text>1 / 7</span>
       </div>
       <div class="w45-live" aria-live="polite" data-live></div>
       <input type="text" name="company_website" tabindex="-1" autocomplete="off" hidden>
@@ -543,28 +545,43 @@ addEventListener("DOMContentLoaded",function(){
           <p class="w45-error" id="w45-problem-err" role="alert"></p>
         </fieldset>
 
-        <fieldset class="w45-step" data-step="3" data-type="text" data-name="first_name" data-error="Enter your first name." hidden>
+        <fieldset class="w45-step" data-step="3" data-type="text" data-name="business_name" data-error="Enter your business name so we can look you up." hidden>
+          <legend class="w45-q" id="w45-business_name-q">What's the business called?</legend>
+          <input class="w45-input" type="text" name="business_name" aria-labelledby="w45-business_name-q" aria-describedby="w45-business_name-err" autocomplete="organization">
+          <p class="w45-error" id="w45-business_name-err" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="w45-step" data-step="4" data-type="link" data-name="business_link" data-error="Add a link we can open, like yourbusiness.com or facebook.com/yourpage." hidden>
+          <legend class="w45-q" id="w45-business_link-q">Website or social page?</legend>
+          <input class="w45-input" type="text" name="business_link" aria-labelledby="w45-business_link-q" aria-describedby="w45-business_link-err w45-business_link-note" autocomplete="url" inputmode="url" placeholder="yourbusiness.com" autocapitalize="off" spellcheck="false">
+          <p class="w45-error" id="w45-business_link-err" role="alert"></p>
+          <p class="w45-note" id="w45-business_link-note">No site yet? A Facebook, Instagram or LinkedIn page works. We check every request before we quote.</p>
+        </fieldset>
+
+        <fieldset class="w45-step" data-step="5" data-type="text" data-name="first_name" data-error="Enter your first name." hidden>
           <legend class="w45-q" id="w45-first_name-q">What's your first name?</legend>
           <input class="w45-input" type="text" name="first_name" aria-labelledby="w45-first_name-q" aria-describedby="w45-first_name-err" autocomplete="given-name">
           <p class="w45-error" id="w45-first_name-err" role="alert"></p>
         </fieldset>
 
-        <fieldset class="w45-step" data-step="4" data-type="email" data-name="email" data-error="Enter a valid email, like name@business.com." hidden>
+        <fieldset class="w45-step" data-step="6" data-type="email" data-name="email" data-error="Enter a valid email, like name@business.com." hidden>
           <legend class="w45-q" id="w45-email-q">Best email for the quote?</legend>
           <input class="w45-input" type="email" name="email" aria-labelledby="w45-email-q" aria-describedby="w45-email-err" autocomplete="email" inputmode="email">
           <p class="w45-error" id="w45-email-err" role="alert"></p>
         </fieldset>
 
-        <fieldset class="w45-step" data-step="5" data-type="tel" data-name="whatsapp" data-optional data-error="Enter a number we can reach you on, like 0917 123 4567." hidden>
+        <fieldset class="w45-step" data-step="7" data-type="tel" data-name="whatsapp" data-optional data-error="Enter a number we can reach you on, like 0917 123 4567." hidden>
           <legend class="w45-q" id="w45-whatsapp-q">WhatsApp, so we can reply faster?</legend>
           <input class="w45-input" type="tel" name="whatsapp" aria-labelledby="w45-whatsapp-q" aria-describedby="w45-whatsapp-err w45-whatsapp-note" autocomplete="tel" inputmode="tel" placeholder="0917 123 4567">
           <p class="w45-error" id="w45-whatsapp-err" role="alert"></p>
-          <p class="w45-note" id="w45-whatsapp-note">Optional. Skip if you'd rather we email you.</p>
+          <p class="w45-note" id="w45-whatsapp-note">Optional. Outside the Philippines? Start with your country code, like +1. Skip if you'd rather we email you.</p>
           <label class="w45-consent"><input type="checkbox" name="contact_consent"><span>I agree that JTL Growth may use these details to reply to this request. <a href="/privacy/" data-privacy-link>Privacy</a>.</span></label>
         </fieldset>
       </div>
 
-      <div class="w45-progress" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" data-progress>
+      <div class="w45-progress" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" data-progress>
+        <span class="w45-seg" data-seg></span>
+        <span class="w45-seg" data-seg></span>
         <span class="w45-seg" data-seg></span>
         <span class="w45-seg" data-seg></span>
         <span class="w45-seg" data-seg></span>
@@ -586,6 +603,7 @@ addEventListener("DOMContentLoaded",function(){
       <h2 class="w45-done-title" data-done-title>Request sent.</h2>
       <p class="w45-done-body" data-done-body>We'll read what's already wired in your business and send a written quote within two business days.</p>
       <p class="w45-fallback" data-done-fallback hidden></p>
+      <p class="w45-fallback w45-done-book"><a href="https://book.jtlgrowth.com/" target="_blank" rel="noopener">Want to talk sooner? Book a call</a></p>
     </div>
   </form>
 
@@ -603,6 +621,8 @@ addEventListener("DOMContentLoaded",function(){
   "questions": [
     {"name": "layer", "label": "What do you need built?", "options": ["Funnels & websites", "Automation systems", "AI employees", "Ops portals", "Workshop or training"]},
     {"name": "problem", "label": "What's slow right now?", "placeholder": "What repeats, who does it, how long it takes."},
+    {"name": "business_name", "label": "What's the business called?"},
+    {"name": "business_link", "label": "Website or social page?", "placeholder": "yourbusiness.com"},
     {"name": "first_name", "label": "What's your first name?"},
     {"name": "email", "label": "Best email for the quote?"},
     {"name": "whatsapp", "label": "WhatsApp, so we can reply faster?", "placeholder": "0917 123 4567"}
@@ -761,6 +781,8 @@ addEventListener("DOMContentLoaded",function(){
     text: function(v){ return v.length > 0; },
     email: function(v){ return EMAIL.test(v); },
     tel: function(v){ return /^\+?\d{7,15}$/.test(digits(v)); },
+    // a link we can open: a domain with a dot, optional scheme and path (yourbusiness.com, facebook.com/page)
+    link: function(v){ return /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v); },
     choice: function(v){ return v.length > 0; }
   };
 
