@@ -103,6 +103,14 @@ button { font: inherit; color: inherit; }
 .iconbtn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--surface); border: 2.5px solid var(--ink); cursor: pointer; box-shadow: 0 3px 0 var(--ink); }
 .iconbtn svg { width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .iconbtn:active { transform: translateY(3px); box-shadow: none; }
+/* While the music plays, a small bubble under Sound credits it; a real pointer's hover shows the full label (a tap would stick :hover) */
+.snd { position: relative; display: inline-grid; }
+.credit { position: absolute; top: calc(100% + 10px); right: -4px; z-index: 6; white-space: nowrap; font-size: 12px; font-weight: 700; line-height: 1.2; padding: 6px 10px; border-radius: var(--radius-pill); background: var(--surface); color: var(--ink); border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); pointer-events: none; animation: credit-in .35s ease-out both; }
+.credit::before { content: ""; position: absolute; top: -7px; right: 18px; width: 10px; height: 10px; background: var(--surface); border-left: 2px solid var(--ink); border-top: 2px solid var(--ink); transform: rotate(45deg); }
+.credit .c-l { display: none; }
+@media (hover: hover) { .snd:hover .credit .c-s { display: none; } .snd:hover .credit .c-l { display: inline; } }
+@keyframes credit-in { from { opacity: 0; transform: translateY(-4px); } }
+footer .credits { display: block; margin-top: var(--space-2); font-size: 13px; opacity: .8; }
 .top-r { display: flex; align-items: center; gap: var(--space-2); }
 
 /* Hero: the object leads (visual left, one headline and one CTA) */
@@ -391,9 +399,9 @@ footer a { font-weight: 800; }
     </a>
     <div class="top-r">
       <span class="chip soon"><i></i><span data-t="soon"></span></span>
-      <button class="iconbtn" id="sound" type="button" aria-pressed="true" aria-label="Sound: on">
+      <span class="snd"><button class="iconbtn" id="sound" type="button" aria-pressed="true" aria-label="Sound: on">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><g class="on"><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></g><g class="off" hidden><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></g></svg>
-      </button>
+      </button><span class="credit" id="credit" role="note" hidden><span class="c-s" data-t="music_short"></span><span class="c-l" data-t="music_long"></span></span></span>
     </div>
   </header>
 
@@ -532,7 +540,7 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<footer class="wrap"><span data-t="footer"></span> <a href="https://jtlgrowth.com/apps/">JTL Growth</a><br><a href="privacy/">Privacy</a> · <a href="support/">Support</a> · <a href="https://jtlgrowth.com/terms/">Terms</a></footer>
+<footer class="wrap"><span data-t="footer"></span> <a href="https://jtlgrowth.com/apps/">JTL Growth</a><br><a href="privacy/">Privacy</a> · <a href="support/">Support</a> · <a href="https://jtlgrowth.com/terms/">Terms</a><span class="credits"><span data-t="credits_music"></span> (<a href="https://incompetech.com/">incompetech.com</a>), <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. <span data-t="credits_sfx"></span></span></footer>
 <!-- bir-seal --><style>.bir-seal .dir-badge img{filter:grayscale(1);transition:filter .3s ease}.bir-seal .dir-badge:hover img,.bir-seal .dir-badge:focus-visible img{filter:none}@media (prefers-reduced-motion:reduce){.bir-seal .dir-badge img{transition:none}}</style><div class="bir-seal" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:center;padding:16px 16px 24px"><a href="https://verify.bir.gov.ph/correspondence/d618bd57f9f94c57af3d308c076a985a" target="_blank" rel="noopener" aria-label="BIR registered: verify JTL Growth with the Bureau of Internal Revenue" style="display:inline-block;background:#fff;border-radius:8px;padding:6px 8px;line-height:0"><img src="/assets/bir-seal-2026.png" alt="BIR Registration Seal Badge 2026, RSN 027RC20260000012052" width="260" height="85" loading="lazy" style="width:260px;max-width:100%;height:auto"></a><a class="dir-badge" href="https://www.designrush.com/agency/profile/jtl-growth" target="_blank" rel="noopener" aria-label="JTL Growth is a verified agency on DesignRush" style="display:inline-block;line-height:0"><img src="/assets/designrush-verified-color.svg" alt="Verified Agency, DesignRush.com" width="220" height="57" loading="lazy" style="width:220px;max-width:100%;height:auto"></a><a class="dir-badge" href="https://www.designrush.com/agency/profile/jtl-growth" target="_blank" rel="noopener" aria-label="Read JTL Growth reviews on DesignRush" style="display:inline-block;line-height:0"><img src="/assets/designrush-reviews-color.png" alt="Read our reviews at DesignRush.com" width="220" height="57" loading="lazy" style="width:220px;max-width:100%;height:auto"></a><a class="dir-badge" href="https://www.agencyspotter.com/jtl-growth" target="_blank" rel="noopener" aria-label="JTL Growth on Agency Spotter" style="display:inline-block;line-height:0"><img src="/assets/agencyspotter-badge-color.png" alt="Find us on Agency Spotter" width="129" height="57" loading="lazy" style="width:129px;max-width:100%;height:auto"></a><a class="dir-badge" href="https://clutch.co/profile/jtl-growth" target="_blank" rel="noopener" aria-label="Read JTL Growth reviews on Clutch" style="display:inline-block;line-height:0"><img src="/assets/clutch-reviews-color.png" alt="Reviewed on Clutch, 5 stars, 1 review" width="195" height="57" loading="lazy" style="width:195px;max-width:100%;height:auto"></a></div><!-- /bir-seal -->
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -559,7 +567,7 @@ const SETTINGS = {
   "combo_line": "HAHAHA! SURRENDER NA!",
   "calm_line": "Whew. Kaninong turn na?",
   "calm_after": 25,
-  "combo_taps": 6,
+  "combo_taps": 5,
   "prob_kick": "Pagkatapos kumain",
   "prob_h": "Sa hugasin pa lang, may debate na.",
   "fight": [["Ako na nga kahapon!", "sabay-sabay nilang sabi"], ["Ikaw muna. Busog pa ako.", "sabi ng nakahiga"], ["Binababad ko pa!", "3 days na 'yan"]],
@@ -589,6 +597,10 @@ const SETTINGS = {
   "faq_h": "Baka ito rin tanong sa GC.",
   "faq": [["Sa iPhone lang?", "Oo, iPhone lang muna. Nasa App Store na, free i-download."], ["Ilan ang pwedeng sumali?", "Kahit ilan! Pwedeng kayong mag-asawa, magkakapatid o roommates. Kayo ang mag-aayos ng pila, tapos iikot ang turn sa lahat."], ["Sino ang makakakita ng photos?", "Private sa household ang photos. Kayo lang sa bahay ang makakakita."], ["Paano pag walang signal?", "Saved muna sa phone ang photo. Pag may signal na ulit, automatic itong ise-send ng app. Saka lilipat ang turn."], ["Paano kung may nandadaya?", "Walang photo, walang pasa. Kita rin ng lahat sa bahay ang photo sa history. Mahirap idaan sa \"Trust me.\""]],
   "end_h": "Share mo sa GC. Sino raw mauuna?",
+  "music_short": "♪ Carefree, Kevin MacLeod",
+  "music_long": "♪ Carefree by Kevin MacLeod (incompetech.com), CC BY 4.0",
+  "credits_music": "Music: \"Carefree\" by Kevin MacLeod",
+  "credits_sfx": "Sounds: Eccentric Sounds (goofy laugh), Mixkit, CreatorAssets and Case Portman Audio.",
   "hx_hint": "Scroll lang, pakanan tayo",
   "hx_nav": "Mga page",
   "hx_prev": "Previous",
@@ -690,9 +702,15 @@ $('#steps').innerHTML = SETTINGS.steps.map(([m, h, p], i) => '<div class="step">
 $('#prices').innerHTML = SETTINGS.prices.map(p => '<div class="price' + (p.best ? ' best' : '') + '">' + (p.tag ? '<span class="tag">' + esc(p.tag) + '</span>' : '') + '<h3>' + esc(p.name) + '</h3><div class="amt">' + esc(p.amt) + '<small>' + esc(p.per) + '</small></div><ul>' + p.items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul></div>').join('');
 $('#faq').innerHTML = SETTINGS.faq.map(([q, a]) => '<details><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>').join('');
 
-/* Sound: a tiny synthesized giggle, only ever on a tap. */
-let sound = store('hugas.sound') !== 'off', actx = null;
-const soundBtn = $('#sound');
+/* Sound: real sound files, only ever on a tap, and the music behind the same toggle (credits in the footer).
+   Every sound runs through WebAudio, so the music loops sample-exact with no gap at the seam. */
+const AUDIO = {
+  "tickle": "sfx/tickle.mp3", "combo": "sfx/combo.mp3", "pop": "sfx/pop.mp3",
+  "scrub": "sfx/scrub.mp3", "clean": "sfx/clean.mp3", "panel": "sfx/panel.mp3",
+  "music": "sfx/music.m4a", "music_alt": "sfx/music.opus", "music_loop_start": 4.8, "music_gain": 0.22
+};
+let sound = store('hugas.sound') !== 'off', actx = null, bed = null, bedGain = null, voice = null, voiceBig = false;
+const soundBtn = $('#sound'), credit = $('#credit'), bufs = {};
 function paintSound() {
   soundBtn.setAttribute('aria-pressed', String(sound));
   soundBtn.setAttribute('aria-label', sound ? SETTINGS.sound_on : SETTINGS.sound_off);
@@ -700,27 +718,68 @@ function paintSound() {
   soundBtn.querySelector('.off').toggleAttribute('hidden', sound);
 }
 paintSound();
-soundBtn.addEventListener('click', () => { sound = !sound; store('hugas.sound', sound ? 'on' : 'off'); paintSound(); });
 function audio() { if (!actx) { const A = window.AudioContext || window.webkitAudioContext; if (!A) return null; actx = new A(); } if (actx.state === 'suspended') actx.resume(); return actx; }
-function blip(t, f0, f1, dur, vol, type) {
-  const a = actx, o = a.createOscillator(), g = a.createGain();
-  o.type = type || 'triangle';
-  o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
-  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+function decode(url) {
+  return fetch(url).then(r => r.arrayBuffer()).then(b => new Promise((ok, no) => {
+    const p = actx.decodeAudioData(b, ok, no);
+    if (p && p.catch) p.catch(() => {});     /* the callback carries the error; the promise form would log it again */
+  }));
 }
+function buf(k) {
+  /* No AAC decoder (open-source Chromium, some Linux builds): the music falls back to its Opus copy */
+  if (!bufs[k]) bufs[k] = decode(AUDIO[k]).catch(e => AUDIO[k + '_alt'] ? decode(AUDIO[k + '_alt']) : Promise.reject(e));
+  return bufs[k];
+}
+function sfx(k, vol) {
+  if (!sound || !audio()) return Promise.resolve(null);
+  return buf(k).then(b => {
+    const s = actx.createBufferSource(), g = actx.createGain();
+    s.buffer = b; g.gain.value = vol; s.connect(g).connect(actx.destination); s.start();
+    return s;
+  }).catch(() => null);
+}
+/* One laugh at a time: a new tap restarts the short one; a combo laugh plays out and later taps only pop.
+   The slot is claimed before the file decodes, so two fast taps on a cold page never start two laughs. */
+/* Owner 2026-10-21: a tap is a bubble giggle (pop pop); the man's goofy laugh is the secret on the 5th quick tap
+   (in the app the secret pays 5 coins). Taps during the secret only pop. */
 function giggle(big) {
-  if (!sound || !audio()) return;
-  const n = big ? 7 : 3 + Math.floor(Math.random() * 3), base = 560 + Math.random() * 200;
-  let t = actx.currentTime;
-  for (let i = 0; i < n; i++) { const f = base * (1 + (n - i) * 0.05); blip(t, f * 1.3, f * 0.8, 0.085, big ? 0.2 : 0.15); t += 0.105 + Math.random() * 0.02; }
+  if (voice && voiceBig) { sfx('pop', 0.5); return; }
+  if (voice && voice.stop) { try { voice.stop(); } catch (e) { /* already ended */ } }
+  const mine = {}; voice = mine; voiceBig = big;
+  sfx(big ? 'combo' : 'tickle', 0.8).then(s => {
+    if (voice !== mine) { if (s) s.stop(); return; }
+    if (!s) { voice = null; return; }
+    voice = s; s.onended = () => { if (voice === s) voice = null; };
+  });
 }
-function chime() {
-  if (!sound || !audio()) return;
-  const t = actx.currentTime;
-  [523, 659, 784, 1047].forEach((f, i) => blip(t + i * 0.09, f, f * 1.01, 0.32, 0.14, 'sine'));
+function chime() { sfx('clean', 0.7); }
+let squishT = 0;
+function squish() { const n = performance.now(); if (n - squishT < 140) return; squishT = n; sfx('scrub', 0.45); }
+function music(on) {
+  if (!AUDIO.music) return;                 /* no track set: sound effects only */
+  if (on) {
+    if (bed || !audio()) return;
+    buf('music').then(b => {
+      if (!sound || bed) return;
+      bed = actx.createBufferSource(); bed.buffer = b; bed.loop = true;
+      bed.loopStart = AUDIO.music_loop_start; bed.loopEnd = b.duration;
+      bedGain = actx.createGain(); bedGain.gain.setValueAtTime(0, actx.currentTime);
+      bedGain.gain.linearRampToValueAtTime(AUDIO.music_gain, actx.currentTime + 1.2);
+      bed.connect(bedGain).connect(actx.destination); bed.start();
+      credit.hidden = false;
+    }).catch(() => {});
+  } else if (bed) {
+    const b = bed; bedGain.gain.setTargetAtTime(0, actx.currentTime, 0.12); setTimeout(() => { try { b.stop(); } catch (e) { /* already stopped */ } }, 500);
+    bed = null; credit.hidden = true;
+  }
 }
-function squish() { if (sound && audio()) blip(actx.currentTime, 240 + Math.random() * 90, 130, 0.07, 0.06, 'sine'); }
+soundBtn.addEventListener('click', () => { sound = !sound; store('hugas.sound', sound ? 'on' : 'off'); paintSound(); music(sound); });
+/* The music starts on the visitor's first click, tap or key (browsers allow no sound before one) */
+function firstGesture() { if (sound) music(true); removeEventListener('click', firstGesture); removeEventListener('keydown', firstGesture); }
+addEventListener('click', firstGesture); addEventListener('keydown', firstGesture);
+document.addEventListener('visibilitychange', () => { if (!actx) return; if (document.hidden) actx.suspend(); else if (sound) actx.resume(); });
+/* hx.js announces a panel change; a soft bubble only once sound is already running */
+document.addEventListener('hx:panel', () => { if (actx && actx.state === 'running') sfx('panel', 0.35); });
 
 let toastT;
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2200); }
@@ -1013,6 +1072,7 @@ paintPila(); paintScrub();
 
   function setActive(i) {
     if (i === active) return;
+    if (active >= 0) document.dispatchEvent(new CustomEvent('hx:panel', { detail: i }));  /* the page plays a soft bubble */
     active = i;
     counter.textContent = (i + 1) + ' / ' + panels.length;
     riderSvg.innerHTML = bubu(moods[i]);
