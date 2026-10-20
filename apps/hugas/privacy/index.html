@@ -61,9 +61,9 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
   </nav>
   <main>
     <h1>Privacy policy</h1>
-    <p class="upd">Last updated <span data-s="updated">October 8, 2026</span></p>
+    <p class="upd">Last updated <span data-s="updated">October 21, 2026</span></p>
 
-    <p class="lead">Hugas keeps a household's dish-washing turns and the before and after photos that prove each one. Only the people in your household can see them. There are no analytics, no advertising identifier and no crash reporting in the app.</p>
+    <p class="lead">Hugas keeps a household's dish-washing turns and the before and after photos that prove each one. Only the people in your household can see them. There are no analytics and no crash reporting in the app. The free version shows ads from Google AdMob, and buying no-ads for your household turns them off.</p>
 
     <h2>What Hugas collects</h2>
     <ul>
@@ -74,6 +74,8 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
       <li><b>Before and after photos:</b> a photo of the sink before you wash and another when you finish. Hugas uses the camera only when you tap to take one, and it never reads your photo library.</li>
       <li><b>A notification token, if you allow notifications:</b> Apple gives your phone a token so a member of your household can send you a bula, a notification that it is your turn to wash. We keep the token with your account, together with your app language, and we note the time of each bula so one person can send you at most one every 10 minutes. The token is removed when you sign out or delete your account, and you can turn notifications off at any time in your iPhone's Settings.</li>
       <li><b>Failed join attempts:</b> when you type a wrong code, we note the time so we can stop code guessing (only the last hour counts). These notes are deleted with your account.</li>
+      <li><b>Coins and Bubu's closet:</b> each coin you earn or spend is a record with the reason (a finished wash, poking Bubu, the fastest washer of the day, a rewarded ad, a purchase, a refund or a closet buy) and the day. We also keep today's poke count, the closet items you own and the ones Bubu is wearing. Your household sees the name of yesterday's fastest washer.</li>
+      <li><b>Purchases:</b> for each App Store purchase we keep Apple's transaction number, the product, the coins it gave and whether Apple later refunded it. Apple tells our server about refunds so refunded coins are taken back.</li>
     </ul>
 
     <h2>Where it is kept</h2>
@@ -81,16 +83,20 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
     <p>On your phone, the before and after photos stay only until the server has the turn, so photos taken without signal are not lost. Once the turn is saved, the phone's copies are deleted. While it waits, the photo is protected by iOS file encryption.</p>
 
     <h2>Who can see it</h2>
-    <p>The current members of your household, and nobody else. Someone who leaves or is removed can no longer see the household, its turns or its photos. Photos you took before leaving stay in the household's history until you delete your account. We do not sell, rent or share your information with anyone for advertising or any other purpose. Our team can reach the stored data only to operate Hugas or to answer a request from you.</p>
+    <p>The current members of your household, and nobody else. Someone who leaves or is removed can no longer see the household, its turns or its photos. Photos you took before leaving stay in the household's history until you delete your account. We do not sell or rent your information. Apart from what the free version's ads need (see Ads below), we do not share it with anyone. Our team can reach the stored data only to operate Hugas or to answer a request from you.</p>
 
     <h2>Third parties</h2>
-    <p>The app includes one third-party library, the Supabase client, which talks only to our Hugas database and storage. Notifications are delivered by Apple's push notification service, which receives only the notification text and your phone's token. There are no ad networks or trackers in the current app. If a free version with ads ships, this page will name the ad network and what it receives before that version is released.</p>
+    <p>The app includes two third-party libraries: the Supabase client, which talks only to our Hugas database and storage, and the Google Mobile Ads SDK (with Google's consent library) for the free version's ads. Notifications are delivered by Apple's push notification service, which receives only the notification text and your phone's token.</p>
+
+    <h2>Ads</h2>
+    <p>The free version shows a banner on the Heart (Puso) tab, and a rewarded ad only when you tap to watch one for coins. Ads come from Google AdMob, which receives your device and app information, your IP address and how you interact with the ads, as described in <a href="https://policies.google.com/technologies/partner-sites">Google's policy</a>. After your first finished wash, iOS asks whether Hugas may use your advertising identifier. If you say no, AdMob does not get it and shows ads that are not based on it. Where the law asks for consent first, such as in the EU and the UK, Google's consent form asks you before any ad loads. Ads are limited to content rated for general audiences.</p>
+    <p>When you finish a rewarded ad, Google sends our server your Hugas user number (a random code, not your name or email) so the coins reach the right account. Buying no-ads for your household removes the banner for every member; rewarded ads stay available because you choose them.</p>
 
     <h2>Purchases</h2>
-    <p>Any purchase in Hugas is handled by Apple. We never see your payment details.</p>
+    <p>Any purchase in Hugas is handled by Apple. We never see your payment details. Coins have no cash value and cannot be exchanged for money.</p>
 
     <h2>How long it is kept, and deleting it</h2>
-    <p>Turn records and photos are kept while your household uses Hugas. You can delete your account in the app: Heart, then Household settings, then Delete account (on a phone set to Taglish: Puso, then Settings ng bahay, then Burahin ang account). Apple asks you to confirm, then we revoke Hugas's access to your Apple ID and delete your photos, your turns, your membership, your notification tokens and your login. If you were the last member, the household and all of its photos are deleted too. You can also email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a> and we will delete it within 30 days and confirm when it is done. Deleting the app removes anything still waiting on your phone.</p>
+    <p>Turn records and photos are kept while your household uses Hugas. You can delete your account in the app: Heart, then Household settings, then Delete account (on a phone set to Taglish: Puso, then Settings ng bahay, then Burahin ang account). Apple asks you to confirm, then we revoke Hugas's access to your Apple ID and delete your photos, your turns, your membership, your notification tokens, your coins, your closet and your login. Purchase records stay without your name so the same purchase cannot be credited twice, and a household's no-ads stays with the household. If you were the last member, the household and all of its photos are deleted too. You can also email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a> and we will delete it within 30 days and confirm when it is done. Deleting the app removes anything still waiting on your phone.</p>
 
     <h2>Children</h2>
     <p>Hugas is made for households and is not directed to children under 13. We do not knowingly collect personal information from a child under 13 without a parent or guardian. If you believe a child's information is in Hugas without that consent, email us and we will delete it.</p>
@@ -106,7 +112,7 @@ footer { margin: 56px 0 40px; color: var(--fg-2); font-size: 14px; }
 
 </div>
 <script>
-const SETTINGS = {"support_email": "support@jtlgrowth.com", "updated": "October 8, 2026"};
+const SETTINGS = {"support_email": "support@jtlgrowth.com", "updated": "October 21, 2026"};
 document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
 document.querySelectorAll('[data-s]').forEach(el => { el.textContent = SETTINGS[el.dataset.s]; });
 </script>
