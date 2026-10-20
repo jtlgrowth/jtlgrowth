@@ -428,14 +428,6 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<section class="band" aria-labelledby="h-how" data-mood="happy">
-  <div class="wrap">
-    <span class="kick" data-t="how_kick"></span>
-    <h2 class="pop" id="h-how" data-t="how_h"></h2>
-    <div class="steps" id="steps"></div>
-  </div>
-</section>
-
 <section class="band" data-mood="glow" style="background:var(--lav-soft);border-block:4px solid var(--ink)" aria-labelledby="h-vid">
   <div class="wrap vid-grid">
     <div class="vid">
@@ -446,6 +438,29 @@ footer a { font-weight: 800; }
       <span class="kick" data-t="vid_kick"></span>
       <h2 class="pop" id="h-vid" data-t="vid_h"></h2>
       <p class="lead" data-t="vid_lead"></p>
+      <div class="cta-row"><a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="band" aria-labelledby="h-how" data-mood="happy">
+  <div class="wrap">
+    <span class="kick" data-t="how_kick"></span>
+    <h2 class="pop" id="h-how" data-t="how_h"></h2>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section class="band" data-mood="happy" style="background:var(--mint-soft);border-block:4px solid var(--ink)" aria-labelledby="h-tut">
+  <div class="wrap vid-grid">
+    <div class="vid">
+      <video id="tutVid" src="video/tutorial.mp4" poster="video/tutorial-poster.webp" muted loop playsinline preload="metadata" aria-label="Hugas app tutorial"></video>
+    </div>
+    <div>
+      <span class="kick" data-t="tut_kick"></span>
+      <h2 class="pop" id="h-tut" data-t="tut_h"></h2>
+      <p class="lead" data-t="tut_lead"></p>
       <div class="cta-row"><a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a></div>
     </div>
   </div>
@@ -581,6 +596,9 @@ const SETTINGS = {
   "vid_kick": "Panoorin",
   "vid_h": "22 seconds, kilala mo na si Bubu.",
   "vid_lead": "Ganito ang isang turn sa bahay: pila, hugas, photo, tapos pasa na.",
+  "tut_kick": "Sa totoong app",
+  "tut_h": "Ganito ang isang turn sa phone mo.",
+  "tut_lead": "Gawa ng bahay, before, hugas, after, tapos pasa na. Si Bubu na ang bahala sa oras.",
   "soon_kick": "Parating na",
   "soon_h": "Marami pang gagawin si Bubu.",
   "soon_next": "1.2",
@@ -1000,8 +1018,8 @@ paintPila(); paintScrub();
     riderSvg.innerHTML = bubu(moods[i]);
     if (!reduce) { rider.classList.remove('morph'); void rider.offsetWidth; rider.classList.add('morph'); }
     if (!pin) track.style.height = panels[i].querySelector(':scope > section').offsetHeight + 'px';
-    const v = document.getElementById('bragVid');
-    if (v) { if (panels[i].contains(v)) v.play().catch(() => {}); else v.pause(); }
+    /* a panel's video plays only while that panel is home */
+    hx.querySelectorAll('video').forEach(v => { if (panels[i].contains(v)) v.play().catch(() => {}); else v.pause(); });
   }
 
   function frame(t) {
