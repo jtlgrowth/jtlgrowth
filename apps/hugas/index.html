@@ -291,6 +291,95 @@ footer a { font-weight: 800; }
   .bubu-btn.tickle, .bubu-btn.spin, .hatdrop, .stinkl, .eye { animation: none; }
   .say, .hint, .toast, .pila li { transition: none; }
 }
+/* Horizontal scroll (Owner 2026-10-20: "gusto ko ung scroll pa horizontal", "maganda ung effects like morphing").
+   Desktop (wide and tall enough): the page pins and scrolling down slides the panels to the right.
+   Phone or short screens: a swipe deck, one panel per swipe.
+   Effects, all one-directional (nothing sways on its own): the next panel opens as a growing soap bubble,
+   the panel it covers sinks back and dims, its content slides in at staggered depths, the heading sharpens from a blur,
+   and Bubu rides the foam rail at the bottom, stretching with speed and changing face per panel. */
+.hx { position: relative; }
+.hx-pin { position: relative; }
+.hx-track { display: flex; }
+.hx-panel { position: relative; flex: 0 0 var(--vw, 100vw); width: var(--vw, 100vw); }
+.hx-panel > section { position: relative; height: 100%; background-color: var(--bg); transform-origin: 0% 62%; }
+.hx-panel > section.night { background-color: var(--night); }
+.hx-panel::after { content: ""; position: absolute; inset: 0; z-index: 2; background: var(--ink); opacity: var(--dim, 0); pointer-events: none; }
+/* The seam: the incoming panel pushes in with a soap-bubble belly, deepest mid-way, flat when it lands */
+.hx-bulge { position: absolute; z-index: 0; left: 0; top: 50%; width: 0; height: 128%; border-radius: 50%; pointer-events: none; visibility: hidden;
+  border: 5px solid var(--ink);
+  box-shadow: inset 10px 0 0 6px rgba(154, 217, 255, .55), inset 26px 0 0 4px rgba(255, 255, 255, .5), inset 40px 0 0 3px rgba(185, 167, 255, .3); }
+.hx-panel > section { z-index: 1; }
+/* Depth: content waits a little further right, then settles when the panel is home */
+.hx [data-d] { translate: calc(var(--in, 0) * var(--d) * var(--vw, 100vw)) 0; }
+.hx .hx-panel h2.pop, .hx .hx-panel h1.pop { filter: blur(calc(var(--in, 0) * 9px)); opacity: calc(1 - var(--in, 0) * .7); }
+.hx.no-para [data-d] { translate: none; }
+.hx.no-para .hx-panel h2.pop, .hx.no-para .hx-panel h1.pop { filter: none; opacity: 1; }
+
+/* Bubu on the foam rail */
+.hx-rail { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; height: 10px; background: var(--surface); border-top: 3px solid var(--ink); pointer-events: none; opacity: 0; transition: opacity var(--motion-base); }
+.hx-rail i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: repeating-linear-gradient(90deg, var(--sky) 0 14px, var(--white) 14px 20px); border-right: 3px solid var(--ink); }
+.hx-rider { position: fixed; z-index: 31; left: 0; bottom: 4px; width: 64px; height: 64px; pointer-events: none; opacity: 0; transition: opacity var(--motion-base); transform-origin: 50% 100%; }
+.hx-rider svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.hx-rider .face { transform-origin: 50% 60%; transform-box: fill-box; }
+.hx-rider.morph svg { animation: hxmorph .55s var(--ease-spring); }
+@keyframes hxmorph { 0% { transform: scale(.55); filter: blur(4px); } 60% { filter: blur(0); } 100% { transform: scale(1); } }
+.hx-trail { position: fixed; z-index: 29; width: var(--s); height: var(--s); border-radius: 50%; border: 2.5px solid var(--sky); background: radial-gradient(circle at 30% 30%, var(--white) 0 22%, transparent 25%); pointer-events: none; animation: hxtrail 1s ease-out forwards; }
+@keyframes hxtrail { from { transform: translate(-50%, 0) scale(.4); opacity: .95; } to { transform: translate(-50%, -110px) scale(1); opacity: 0; } }
+.hx-nav { position: fixed; z-index: 32; right: 16px; bottom: 22px; display: flex; align-items: center; gap: var(--space-2); opacity: 0; pointer-events: none; transition: opacity var(--motion-base); }
+.hx-nav .n { min-width: 64px; padding: 8px 12px; border-radius: var(--radius-pill); background: var(--surface); border: 2.5px solid var(--ink); font: 800 var(--text-xs)/1 var(--font-body); text-align: center; }
+.hx-live .hx-rail, .hx-live .hx-rider { opacity: 1; }
+.hx-live .hx-nav { opacity: 1; pointer-events: auto; }
+.hx-hintx { position: absolute; z-index: 4; left: 50%; bottom: 30px; translate: -50% 0; display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: var(--radius-pill); background: var(--sun); border: 3px solid var(--ink); box-shadow: 0 4px 0 var(--ink); font: 800 var(--text-sm)/1 var(--font-body); pointer-events: none; transition: opacity var(--motion-base); }
+.hx-hintx svg { width: 20px; height: 20px; fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.hx-moved .hx-hintx { opacity: 0; }
+
+/* PIN: the page holds still and scrolling slides the track */
+.hx.is-pin .hx-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--ink); }
+.hx.is-pin .hx-track { height: 100%; will-change: transform; }
+.hx.is-pin .hx-panel { height: 100%; }
+.hx.is-pin .hx-panel > section { display: flex; align-items: center; padding-block: 92px 56px; overflow-y: auto; scrollbar-width: none; border-block: 0 !important; }
+.hx.is-pin .hx-panel > section > .wrap { width: min(var(--container-max), 100% - 2 * var(--container-gutter-desktop)); }
+.hx.is-pin .hx-panel > section.hx-hero { align-items: center; }
+.hx.is-pin .hero { min-height: 0; padding-bottom: 0; }
+.hx.is-pin .stage { width: min(100%, calc(100svh - 190px)); margin-inline: auto; }
+.hx.is-pin .tub { width: min(100%, calc(100svh - 200px)); margin-inline: auto; }
+.hx.is-pin .vid video { height: calc(100svh - 190px); }
+.hx-pinmode .top { position: fixed; top: 0; left: 0; right: 0; z-index: 25; width: auto; padding-inline: max(var(--container-gutter-desktop), calc((100% - var(--container-max)) / 2)); pointer-events: none; }
+.hx-pinmode .top > * { pointer-events: auto; }
+.hx-pinmode .brand { padding: 4px 14px 4px 6px; border-radius: var(--radius-pill); background: var(--surface); border: 2.5px solid var(--ink); }
+
+/* DECK: phone swipe, one panel at a time */
+.hx.is-deck .hx-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; align-items: flex-start; transition: height .35s var(--ease-standard); }
+.hx.is-deck .hx-track::-webkit-scrollbar { display: none; }
+.hx.is-deck .hx-panel { scroll-snap-align: start; scroll-snap-stop: always; }
+.hx.is-deck .hx-panel > section { padding-bottom: calc(var(--section-y-phone) + 40px); }
+.hx.is-deck .hx-panel > section.hx-hero { padding-block: var(--space-2) 72px; }
+.hx.is-deck .hx-hintx { position: static; translate: none; width: fit-content; margin: var(--space-5) auto 0; }
+
+/* New panels: the launch video and what is coming */
+.vid-grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-12); align-items: center; }
+.vid { position: relative; justify-self: center; }
+.vid video { display: block; height: min(640px, 72svh); aspect-ratio: 9 / 16; border-radius: 34px; border: 4px solid var(--ink); box-shadow: 0 10px 0 var(--ink); background: var(--pink-soft); object-fit: cover; }
+.vid .iconbtn { position: absolute; right: 14px; bottom: 18px; }
+.soon-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
+.soon-card { position: relative; padding: var(--space-5); border-radius: 24px; background: var(--surface); border: 3.5px solid var(--ink); box-shadow: var(--elev-raised); }
+.soon-card .when { position: absolute; top: -14px; right: 16px; padding: 5px 10px; border-radius: var(--radius-pill); background: var(--lav-soft); border: 2.5px solid var(--ink); font: 800 var(--text-xs)/1 var(--font-body); }
+.soon-card .when.next { background: var(--mint); }
+.soon-card h3 { margin: 0 0 6px; font: 400 var(--text-lg)/1.2 var(--font-display); }
+.soon-card p { margin: 0; color: var(--fg-2); font-weight: 700; font-size: var(--text-sm); }
+@media (max-width: 900px) {
+  .vid-grid { grid-template-columns: 1fr; gap: var(--space-8); text-align: center; }
+  .vid video { height: auto; width: min(78vw, 320px); }
+  .vid-grid .cta-row { justify-content: center; }
+  .soon-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-rider.morph svg, .hx-trail { animation: none; }
+  .hx-trail { display: none; }
+  .hx.is-deck .hx-track { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -329,7 +418,7 @@ footer a { font-weight: 800; }
   </main>
 </div>
 
-<section class="band night" aria-labelledby="h-prob">
+<section class="band night" aria-labelledby="h-prob" data-mood="grumpy">
   <div class="fizz" data-fizz="7"></div>
   <div class="wrap" style="position:relative;z-index:1">
     <span class="kick" data-t="prob_kick"></span>
@@ -339,7 +428,7 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<section class="band" aria-labelledby="h-how">
+<section class="band" aria-labelledby="h-how" data-mood="happy">
   <div class="wrap">
     <span class="kick" data-t="how_kick"></span>
     <h2 class="pop" id="h-how" data-t="how_h"></h2>
@@ -347,7 +436,23 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<section class="band" style="background:var(--surface-warm);border-block:4px solid var(--ink)" aria-labelledby="h-try">
+<section class="band" data-mood="glow" style="background:var(--lav-soft);border-block:4px solid var(--ink)" aria-labelledby="h-vid">
+  <div class="wrap vid-grid">
+    <div class="vid">
+      <video id="bragVid" src="video/brag.mp4" poster="video/poster.webp" muted loop playsinline preload="metadata" aria-label="Hugas launch video"></video>
+      <button class="iconbtn" id="vidSound" type="button" aria-pressed="false" aria-label="Sound: off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/></svg></button>
+    </div>
+    <div>
+      <span class="kick" data-t="vid_kick"></span>
+      <h2 class="pop" id="h-vid" data-t="vid_h"></h2>
+      <p class="lead" data-t="vid_lead"></p>
+      <div class="cta-row"><a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="band" style="background:var(--surface-warm);border-block:4px solid var(--ink)" aria-labelledby="h-try" data-mood="laugh">
   <div class="wrap try">
     <div class="tub" id="tub">
       <div class="sink"></div>
@@ -373,7 +478,17 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<section class="band" aria-labelledby="h-price">
+<section class="band" data-mood="wild" aria-labelledby="h-soon">
+  <div class="wrap">
+    <span class="kick" data-t="soon_kick"></span>
+    <h2 class="pop" id="h-soon" data-t="soon_h"></h2>
+    <div class="soon-grid" id="soonGrid"></div>
+    <p class="fine" data-t="soon_fine"></p>
+  </div>
+</section>
+
+
+<section class="band" aria-labelledby="h-price" data-mood="happy">
   <div class="wrap">
     <span class="kick" data-t="price_kick"></span>
     <h2 class="pop" id="h-price" data-t="price_h"></h2>
@@ -382,7 +497,7 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<section class="band" style="padding-top:0" aria-labelledby="h-faq">
+<section class="band" style="padding-top:0" aria-labelledby="h-faq" data-mood="happy">
   <div class="wrap">
     <span class="kick" data-t="faq_kick"></span>
     <h2 class="pop" id="h-faq" data-t="faq_h"></h2>
@@ -390,7 +505,7 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
-<section class="band end" style="background:var(--mint-soft);border-top:4px solid var(--ink)" aria-labelledby="h-end">
+<section class="band end" style="background:var(--mint-soft);border-top:4px solid var(--ink)" aria-labelledby="h-end" data-mood="glow">
   <div class="wrap">
     <svg class="bubu-end" viewBox="0 0 200 200" data-m="glow" aria-hidden="true"></svg>
     <h2 class="pop" id="h-end" data-t="end_h"></h2>
@@ -459,6 +574,18 @@ const SETTINGS = {
   "faq_h": "Baka ito rin tanong sa GC.",
   "faq": [["Sa iPhone lang?", "Oo, iPhone lang muna. Nasa App Store na, free i-download."], ["Ilan ang pwedeng sumali?", "Kahit ilan! Pwedeng kayong mag-asawa, magkakapatid o roommates. Kayo ang mag-aayos ng pila, tapos iikot ang turn sa lahat."], ["Sino ang makakakita ng photos?", "Private sa household ang photos. Kayo lang sa bahay ang makakakita."], ["Paano pag walang signal?", "Saved muna sa phone ang photo. Pag may signal na ulit, automatic itong ise-send ng app. Saka lilipat ang turn."], ["Paano kung may nandadaya?", "Walang photo, walang pasa. Kita rin ng lahat sa bahay ang photo sa history. Mahirap idaan sa \"Trust me.\""]],
   "end_h": "Share mo sa GC. Sino raw mauuna?",
+  "hx_hint": "Scroll lang, pakanan tayo",
+  "hx_nav": "Mga page",
+  "hx_prev": "Previous",
+  "hx_next": "Next",
+  "vid_kick": "Panoorin",
+  "vid_h": "22 seconds, kilala mo na si Bubu.",
+  "vid_lead": "Ganito ang isang turn sa bahay: pila, hugas, photo, tapos pasa na.",
+  "soon_kick": "Parating na",
+  "soon_h": "Marami pang gagawin si Bubu.",
+  "soon_next": "1.2",
+  "soon_items": [["1.2", "Wala sa bahay", "Nasa labas ka? I-pause mo muna ang turn mo. Laktaw ka sa pila hanggang makauwi ka."], ["Soon", "Kiliti coins", "Every 2 pokes kay Bubu, may lalabas na 1 coin."], ["Soon", "Closet ni Bubu", "May free na damit agad. Ipunin ang coins para sa hats, shades at buong outfit."], ["Soon", "Bilis bonus", "Pinakamabilis maghugas today? May bonus coins ka."], ["Soon", "Mini games", "Bula Pop, Pinggan Stack at Lababo Dash. Pag nanalo ka, may coins."], ["Soon", "Manood para sa coins", "Gusto mo ng free coins? Manood ng maikling ad. Ikaw ang pipili, hindi auto-play."]],
+  "soon_fine": "Darating ang mga 'to sa next updates. Free i-update, kasama na sa app.",
   "footer": "Made in the Philippines by",
   "sound_on": "Sound: on",
   "sound_off": "Sound: off"
@@ -748,6 +875,223 @@ againBtn.addEventListener('click', () => {
   scrubBtn.hidden = false; againBtn.hidden = true; paintScrub(); scrubBtn.focus();
 });
 paintPila(); paintScrub();
+</script>
+<script>
+/* Horizontal scroll driver. Reads SETTINGS (copy) and bubu() (faces) from the page script above it. */
+(() => {
+  const Q = new URLSearchParams(location.search);
+  if (Q.get('h') === 'off') return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fx = { wipe: Q.get('wipe') !== '0' && !reduce, para: Q.get('para') !== '0' && !reduce, ride: Q.get('ride') !== '0' };
+  const root = document.documentElement;
+  const wide = matchMedia('(min-width: 900px) and (min-height: 700px)');
+
+  /* Coming-soon cards come from SETTINGS like every other list on the page */
+  const soonGrid = document.getElementById('soonGrid');
+  if (soonGrid) soonGrid.innerHTML = SETTINGS.soon_items.map(([w, h, p]) =>
+    '<div class="soon-card"><span class="when' + (w === SETTINGS.soon_next ? ' next' : '') + '">' + esc(w) + '</span><h3>' + esc(h) + '</h3><p>' + esc(p) + '</p></div>').join('');
+
+  /* Build: hero + every band becomes one panel, in page order */
+  const main = document.querySelector('main#top');
+  const bands = [...document.querySelectorAll('body > section.band')];
+  if (!main || !bands.length) return;
+  const heroSec = document.createElement('section');
+  heroSec.className = 'hx-hero';
+  heroSec.dataset.mood = 'happy';
+  const heroWrap = document.createElement('div');
+  heroWrap.className = 'wrap';
+  heroSec.appendChild(heroWrap);
+  const hx = document.createElement('div');
+  hx.className = 'hx';
+  hx.id = 'hx';
+  hx.innerHTML = '<div class="hx-pin"><div class="hx-track"></div></div>';
+  bands[0].before(hx);
+  heroWrap.appendChild(main);
+  const track = hx.querySelector('.hx-track');
+  const secs = [heroSec, ...bands];
+  const panels = secs.map((s, i) => {
+    const p = document.createElement('div');
+    p.className = 'hx-panel';
+    p.style.zIndex = i + 1;
+    p.dataset.label = (s.querySelector('.kick, h1')?.textContent || '').trim();
+    track.appendChild(p);
+    p.appendChild(s);
+    if (i) { const b = document.createElement('div'); b.className = 'hx-bulge'; p.prepend(b); }
+    return p;
+  });
+  const moods = secs.map(s => s.dataset.mood || 'happy');
+  const hint = document.createElement('div');
+  hint.className = 'hx-hintx';
+  hint.setAttribute('aria-hidden', 'true');
+  hint.innerHTML = '<span>' + esc(SETTINGS.hx_hint) + '</span><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+  const heroCopy = heroSec.querySelector('.copy');
+
+  /* Depth: each piece of a panel gets its own lag, deeper the later it reads */
+  if (fx.para) panels.forEach(p => {
+    const pieces = p.querySelectorAll('.kick, h1, h2, .lead, .cost, .fine, .cta-row, .store-hint, .stage, .tub, .vid, .meter, .pila, .bubu-end, .fight > *, .steps > *, .prices > *, .faq > *, .soon-grid > *');
+    pieces.forEach((el, k) => el.style.setProperty('--d', Math.min(.12 + k * .06, .6).toFixed(2)));
+    pieces.forEach(el => el.setAttribute('data-d', ''));
+  });
+  if (!fx.para) hx.classList.add('no-para');
+
+  /* Rail, rider, counter */
+  const ui = document.createElement('div');
+  ui.setAttribute('aria-hidden', 'true');
+  ui.innerHTML = '<div class="hx-rail"><i></i></div><div class="hx-rider"><svg viewBox="0 0 200 200"></svg></div>';
+  document.body.appendChild(ui);
+  const rail = ui.querySelector('.hx-rail'), rider = ui.querySelector('.hx-rider'), riderSvg = rider.querySelector('svg');
+  if (!fx.ride) rider.hidden = true;
+  const nav = document.createElement('nav');
+  nav.className = 'hx-nav';
+  nav.setAttribute('aria-label', SETTINGS.hx_nav);
+  nav.innerHTML = '<button class="iconbtn" type="button" data-go="-1" aria-label="' + esc(SETTINGS.hx_prev) + '"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><span class="n" aria-live="polite"></span><button class="iconbtn" type="button" data-go="1" aria-label="' + esc(SETTINGS.hx_next) + '"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>';
+  document.body.appendChild(nav);
+  const counter = nav.querySelector('.n');
+
+  let vw = 0, vh = 0, pin = false, total = 0, x = 0, lastX = 0, squash = 0, active = -1, lastTrail = 0, lastSeam = 0, moved = false, snap = false;
+  const foam = (left, bottom, size) => {
+    const b = document.createElement('i');
+    b.className = 'hx-trail';
+    b.style.setProperty('--s', size.toFixed(0) + 'px');
+    b.style.left = left + 'px';
+    b.style.bottom = bottom + 'px';
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 1000);
+  };
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  function layout() {
+    panels.forEach(p => { const b = p.querySelector(':scope > .hx-bulge'); if (b) b.style.background = getComputedStyle(p.querySelector(':scope > section')).backgroundColor; });
+    vw = root.clientWidth; vh = innerHeight;
+    root.style.setProperty('--vw', vw + 'px');
+    pin = wide.matches;
+    root.classList.toggle('hx-pinmode', pin);
+    (pin ? panels[0] : heroCopy || panels[0]).appendChild(hint);
+    hx.classList.toggle('is-pin', pin);
+    hx.classList.toggle('is-deck', !pin);
+    if (pin) {
+      track.style.height = '';
+      total = Math.max(0, track.scrollWidth - vw);
+      hx.style.height = (vh + total) + 'px';
+    } else {
+      hx.style.height = '';
+      track.style.transform = '';
+      total = Math.max(0, track.scrollWidth - vw);
+    }
+  }
+
+  function target() {
+    if (pin) return clamp(scrollY - hx.offsetTop, 0, total);
+    return track.scrollLeft;
+  }
+
+  function go(i) {
+    i = clamp(i, 0, panels.length - 1);
+    const behavior = reduce ? 'auto' : 'smooth';
+    if (pin) { scrollTo({ top: hx.offsetTop + i * vw, behavior }); return; }
+    track.scrollTo({ left: i * vw, behavior });
+    if (hx.getBoundingClientRect().top < -8) scrollTo({ top: scrollY + hx.getBoundingClientRect().top, behavior });
+  }
+
+  function setActive(i) {
+    if (i === active) return;
+    active = i;
+    counter.textContent = (i + 1) + ' / ' + panels.length;
+    riderSvg.innerHTML = bubu(moods[i]);
+    if (!reduce) { rider.classList.remove('morph'); void rider.offsetWidth; rider.classList.add('morph'); }
+    if (!pin) track.style.height = panels[i].querySelector(':scope > section').offsetHeight + 'px';
+    const v = document.getElementById('bragVid');
+    if (v) { if (panels[i].contains(v)) v.play().catch(() => {}); else v.pause(); }
+  }
+
+  function frame(t) {
+    const tx = target();
+    x = (reduce || !pin || snap) ? tx : x + (tx - x) * .14;
+    snap = false;
+    if (Math.abs(tx - x) < .4) x = tx;
+    if (pin) track.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0)';
+    if (x > 8 && !moved) { moved = true; hx.classList.add('hx-moved'); }
+
+    const r = hx.getBoundingClientRect();
+    const live = r.top < vh * .5 && r.bottom > vh * .5;
+    root.classList.toggle('hx-live', live);
+
+    const diag = Math.hypot(vw, pin ? vh : vh) / Math.SQRT2;
+    for (let i = 0; i < panels.length; i++) {
+      const p = panels[i]; let s = p.querySelector(':scope > section');
+      const o = (i * vw - x) / vw;
+      if (o > 1.05 || o < -1.05) continue;
+      const enter = clamp(o, 0, 1), leave = clamp(-o, 0, 1);
+      p.style.setProperty('--in', fx.para ? enter.toFixed(4) : 0);
+      /* The panel being covered sinks back: it drifts slower, shrinks a touch and dims into the dark behind it */
+      if (fx.wipe && leave > 0 && i < panels.length - 1) {
+        s.style.transform = 'translate3d(' + (leave * vw * .4).toFixed(1) + 'px,0,0) scale(' + (1 - leave * .06).toFixed(4) + ')';
+        p.style.setProperty('--dim', (leave * .45).toFixed(3));
+      } else { s.style.transform = ''; p.style.setProperty('--dim', 0); }
+      /* The incoming panel pushes in with a bubble belly that swells mid-way and flattens as it lands */
+      const bulge = i > 0 ? p.firstElementChild : null;
+      s = p.querySelector(':scope > section');
+      if (bulge) {
+        const depth = fx.wipe && enter > 0.002 && enter < 0.998 ? Math.sin(Math.PI * enter) * Math.min(220, vw * .17) : 0;
+        if (depth > 1) {
+          bulge.style.visibility = 'visible';
+          bulge.style.width = (depth * 2) + 'px';
+          bulge.style.transform = 'translate(' + (-depth) + 'px,-50%)';
+          if (!reduce && Math.abs(x - lastX) > 2 && t - lastSeam > 90) {
+            lastSeam = t;
+            const sx = i * vw - x - depth * .8, sy = vh * (.15 + Math.random() * .7);
+            if (sx > 0 && sx < vw) foam(sx, vh - sy, 8 + Math.random() * 16);
+          }
+        } else bulge.style.visibility = 'hidden';
+      }
+    }
+
+    const p = total ? x / total : 0;
+    rail.style.setProperty('--p', p.toFixed(4));
+    setActive(clamp(Math.round(x / vw), 0, panels.length - 1));
+
+    /* Bubu rides the rail: stretches with speed, settles without bouncing, leaves rising bubbles */
+    if (fx.ride && live) {
+      const v = (x - lastX) / vw;
+      squash += (clamp(Math.abs(v) * 9, 0, .28) - squash) * .18;
+      const left = 12 + p * (vw - 88);
+      rider.style.transform = 'translate3d(' + left.toFixed(1) + 'px,0,0) scale(' + (1 + squash).toFixed(3) + ',' + (1 - squash * .7).toFixed(3) + ')';
+      if (!reduce && Math.abs(v) > .004 && t - lastTrail > 70) {
+        lastTrail = t;
+        foam(left + 32 - Math.sign(v) * 30, 20 + Math.random() * 26, 10 + Math.random() * 14);
+      }
+    }
+    lastX = x;
+    requestAnimationFrame(frame);
+  }
+
+  /* The browser itself reveals things sideways (find in page, focus, scrollIntoView) by scrolling the pinned
+     frame; turn that into page scroll so the track stays the only thing that moves, and land there at once */
+  const pinEl = hx.querySelector('.hx-pin');
+  pinEl.addEventListener('scroll', () => {
+    if (!pin || !pinEl.scrollLeft) return;
+    const want = clamp(x + pinEl.scrollLeft, 0, total);
+    pinEl.scrollLeft = 0;
+    snap = true;
+    scrollTo({ top: hx.offsetTop + want, behavior: 'instant' });
+  });
+  nav.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) go(active + +b.dataset.go); });
+  addEventListener('keydown', e => {
+    if (!root.classList.contains('hx-live') || e.target.closest('input, textarea, [contenteditable]')) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
+  });
+  /* Tabbing into a panel that is off screen brings it home */
+  hx.addEventListener('focusin', e => { const i = panels.findIndex(p => p.contains(e.target)); if (i >= 0 && i !== active) go(i); });
+  const vid = document.getElementById('bragVid'), vidSound = document.getElementById('vidSound');
+  if (vid && vidSound) vidSound.addEventListener('click', () => { vid.muted = !vid.muted; vidSound.setAttribute('aria-pressed', String(!vid.muted)); vidSound.setAttribute('aria-label', vid.muted ? SETTINGS.sound_off : SETTINGS.sound_on); });
+  if (!pin) track.addEventListener('scrollend', () => { track.style.height = panels[active].querySelector(':scope > section').offsetHeight + 'px'; });
+  new ResizeObserver(() => { layout(); if (!pin && active >= 0) track.style.height = panels[active].querySelector(':scope > section').offsetHeight + 'px'; }).observe(document.body);
+  wide.addEventListener('change', layout);
+  addEventListener('resize', layout);
+  layout();
+  requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
