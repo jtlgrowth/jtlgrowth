@@ -133,6 +133,9 @@ button { font: inherit; color: inherit; }
 .btn.mint:active { box-shadow: 0 0 0 var(--mint-lip); }
 .btn.ghost { background: var(--surface); box-shadow: 0 6px 0 var(--ink); }
 .btn.ghost:active { box-shadow: 0 0 0 var(--ink); }
+.store-hint { margin: var(--space-3) 0 0; font: 700 var(--text-sm)/1.4 var(--font-body); color: var(--fg-2); }
+.store-hint b { color: var(--pink-deep); }
+.end .store-hint { text-align: center; }
 .toast { position: fixed; left: 50%; bottom: 24px; z-index: 50; translate: -50% 20px; padding: 12px 20px; border-radius: var(--radius-pill); background: var(--ink); color: var(--white); font: 800 var(--text-sm)/1.2 var(--font-body); opacity: 0; transition: opacity var(--motion-base), translate var(--motion-base) var(--ease-standard); pointer-events: none; }
 .toast.on { opacity: 1; translate: -50% 0; }
 
@@ -320,6 +323,7 @@ footer a { font-weight: 800; }
         <div class="cta-row">
           <a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a>
         </div>
+        <p class="store-hint" data-t="search_hint"></p>
       </div>
     </section>
   </main>
@@ -394,6 +398,7 @@ footer a { font-weight: 800; }
       <a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a>
       <button class="btn ghost" type="button" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg><span data-t="cta_share"></span></button>
     </div>
+    <p class="store-hint" data-t="search_hint"></p>
   </div>
 </section>
 
@@ -415,6 +420,7 @@ const SETTINGS = {
   "bubu_label": "Si Bubu! Tap mo para kilitiin.",
   "h1": "Kita na kung sino ang <em>maghuhugas</em>.",
   "cta_get": "I-download sa App Store",
+  "search_hint": "O i-search sa App Store: <b>hugas app</b>",
   "cta_share": "Share sa family GC",
   "copied": "Link copied! Paste mo na sa GC.",
   "count": "{n} beses mo nang nakiliti si Bubu!",
@@ -518,7 +524,7 @@ function store(k, v) { try { if (v === undefined) return localStorage.getItem(k)
 document.querySelectorAll('[data-t]').forEach(el => {
   const v = SETTINGS[el.dataset.t];
   if (v == null) return;
-  if (el.dataset.t === 'h1') el.innerHTML = v; else el.textContent = v;
+  if (el.dataset.t === 'h1' || el.dataset.t === 'search_hint') el.innerHTML = v; else el.textContent = v;
 });
 document.querySelectorAll('[data-store]').forEach(el => { el.href = SETTINGS.appstore_url; el.target = '_blank'; el.rel = 'noopener'; });
 document.querySelectorAll('[data-label]').forEach(el => el.setAttribute('aria-label', SETTINGS[el.dataset.label] || el.dataset.label));
