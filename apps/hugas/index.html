@@ -369,6 +369,13 @@ footer a { font-weight: 800; }
 .vid { position: relative; justify-self: center; }
 .vid video { display: block; height: min(640px, 72svh); aspect-ratio: 9 / 16; border-radius: 34px; border: 4px solid var(--ink); box-shadow: 0 10px 0 var(--ink); background: var(--pink-soft); object-fit: cover; }
 .vid .iconbtn { position: absolute; right: 14px; bottom: 18px; }
+/* Laro ni Bubu: two real-play loops from the app, square, side by side */
+.demos { display: flex; gap: var(--space-6); justify-self: center; }
+.demos figure { margin: 0; width: min(300px, 24vw); }
+.demos video { display: block; width: 100%; aspect-ratio: 1; border-radius: 28px; border: 4px solid var(--ink); box-shadow: 0 10px 0 var(--ink); background: var(--mint-soft); object-fit: cover; }
+.demos figcaption { margin-top: var(--space-4); }
+.demos figcaption b { display: block; font: 400 var(--text-lg)/1.2 var(--font-display); }
+.demos figcaption span { display: block; margin-top: 4px; color: var(--fg-2); font-weight: 700; font-size: var(--text-sm); }
 .soon-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
 .soon-card { position: relative; padding: var(--space-5); border-radius: 24px; background: var(--surface); border: 3.5px solid var(--ink); box-shadow: var(--elev-raised); }
 .soon-card .when { position: absolute; top: -14px; right: 16px; padding: 5px 10px; border-radius: var(--radius-pill); background: var(--lav-soft); border: 2.5px solid var(--ink); font: 800 var(--text-xs)/1 var(--font-body); }
@@ -378,6 +385,8 @@ footer a { font-weight: 800; }
 @media (max-width: 900px) {
   .vid-grid { grid-template-columns: 1fr; gap: var(--space-8); text-align: center; }
   .vid video { height: auto; width: min(78vw, 320px); }
+  .demos { gap: var(--space-4); }
+  .demos figure { width: min(42vw, 220px); }
   .vid-grid .cta-row { justify-content: center; }
   .soon-grid { grid-template-columns: 1fr; gap: var(--space-6); }
 }
@@ -501,6 +510,24 @@ footer a { font-weight: 800; }
   </div>
 </section>
 
+<section class="band" data-mood="laugh" style="background:var(--pink-soft);border-block:4px solid var(--ink)" aria-labelledby="h-games">
+  <div class="wrap vid-grid">
+    <div class="demos">
+      <figure><video src="video/demo-bula_sama.mp4" poster="video/demo-bula_sama.webp" data-demo muted loop playsinline preload="none" aria-label="Bula Sama, nilalaro sa app"></video>
+        <figcaption><b data-t="games_bula"></b><span data-t="games_bula_p"></span></figcaption></figure>
+      <figure><video src="video/demo-huling_hugas.mp4" poster="video/demo-huling_hugas.webp" data-demo muted loop playsinline preload="none" aria-label="Huling Hugas, nilalaro sa app"></video>
+        <figcaption><b data-t="games_huling"></b><span data-t="games_huling_p"></span></figcaption></figure>
+    </div>
+    <div>
+      <span class="kick" data-t="games_kick"></span>
+      <h2 class="pop" id="h-games" data-t="games_h"></h2>
+      <p class="lead" data-t="games_lead"></p>
+      <div class="cta-row"><a class="btn" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg><span data-t="cta_get"></span></a></div>
+    </div>
+  </div>
+</section>
+
+
 <section class="band" data-mood="wild" aria-labelledby="h-soon">
   <div class="wrap">
     <span class="kick" data-t="soon_kick"></span>
@@ -611,11 +638,18 @@ const SETTINGS = {
   "tut_kick": "Sa totoong app",
   "tut_h": "Ganito ang isang turn sa phone mo.",
   "tut_lead": "Gawa ng bahay, before, hugas, after, tapos pasa na. Si Bubu na ang bahala sa oras.",
-  "soon_kick": "Parating na",
-  "soon_h": "Marami pang gagawin si Bubu.",
-  "soon_next": "1.2",
-  "soon_items": [["1.2", "Wala sa bahay", "Nasa labas ka? I-pause mo muna ang turn mo. Laktaw ka sa pila hanggang makauwi ka."], ["Soon", "Kiliti coins", "Every 2 pokes kay Bubu, may lalabas na 1 coin."], ["Soon", "Closet ni Bubu", "May free na damit agad. Ipunin ang coins para sa hats, shades at buong outfit."], ["Soon", "Bilis bonus", "Pinakamabilis maghugas today? May bonus coins ka."], ["Soon", "Mini games", "Bula Pop, Pinggan Stack at Lababo Dash. Pag nanalo ka, may coins."], ["Soon", "Manood para sa coins", "Gusto mo ng free coins? Manood ng maikling ad. Ikaw ang pipili, hindi auto-play."]],
-  "soon_fine": "Darating ang mga 'to sa next updates. Free i-update, kasama na sa app.",
+  "games_kick": "Parating sa 1.3",
+  "games_h": "Dalawang laro para sa buong bahay.",
+  "games_lead": "Iisang daily para sa buong bahay, may ranking kung sino ang top today, at 10 coins bawat panalo.",
+  "games_bula": "Bula Sama",
+  "games_bula_p": "Ihulog sa lababo. Dalawang pareho, nagiging mas malaki. Abutin ang Kaldero para manalo.",
+  "games_huling": "Huling Hugas",
+  "games_huling_p": "Linisin ang lababo hanggang isa na lang ang matira. 5 stage bawat araw.",
+  "soon_kick": "Parating sa 1.3",
+  "soon_h": "Coins, closet at laro para kay Bubu.",
+  "soon_next": "1.3",
+  "soon_items": [["1.3", "Coins sa hugas", "10 coins kada hugas, hanggang 3 a day. Pinakamabilis maghugas today? May 50 bonus coins pa."], ["1.3", "Kiliti coins", "Every 2 pokes kay Bubu, may 1 coin ka."], ["1.3", "Manood para sa coins", "20 coins bawat maikling ad, hanggang 5 a day. Ikaw ang pipili, hindi auto-play."], ["1.3", "Closet ni Bubu", "May 5 free items agad. Ipunin ang coins para sa cap, shades, barong at bagong background."], ["1.3", "Mini games", "Bula Sama at Huling Hugas. Buong bahay pwedeng maglaro, may daily board, at may coins pag nanalo ka."], ["1.3", "Fiesta at Pasko packs", "₱59 per pack, may damit na sa pack lang makukuha. Gusto mo ng coins agad? May coin packs from ₱49."]],
+  "soon_fine": "Free ang update. Pag labas ng 1.3, i-update mo lang ang app.",
   "footer": "Made in the Philippines by",
   "sound_on": "Sound: on",
   "sound_off": "Sound: off"
@@ -1005,7 +1039,7 @@ paintPila(); paintScrub();
 
   /* Depth: each piece of a panel gets its own lag, deeper the later it reads */
   if (fx.para) panels.forEach(p => {
-    const pieces = p.querySelectorAll('.kick, h1, h2, .lead, .cost, .fine, .cta-row, .store-hint, .stage, .tub, .vid, .meter, .pila, .bubu-end, .fight > *, .steps > *, .prices > *, .faq > *, .soon-grid > *');
+    const pieces = p.querySelectorAll('.kick, h1, h2, .lead, .cost, .fine, .cta-row, .store-hint, .stage, .tub, .vid, .meter, .pila, .bubu-end, .fight > *, .steps > *, .prices > *, .faq > *, .soon-grid > *, .demos > *');
     pieces.forEach((el, k) => el.style.setProperty('--d', Math.min(.12 + k * .06, .6).toFixed(2)));
     pieces.forEach(el => el.setAttribute('data-d', ''));
   });
@@ -1079,7 +1113,8 @@ paintPila(); paintScrub();
     if (!reduce) { rider.classList.remove('morph'); void rider.offsetWidth; rider.classList.add('morph'); }
     if (!pin) track.style.height = panels[i].querySelector(':scope > section').offsetHeight + 'px';
     /* a panel's video plays only while that panel is home */
-    hx.querySelectorAll('video').forEach(v => { if (panels[i].contains(v)) v.play().catch(() => {}); else v.pause(); });
+    /* the game demos stay on their poster for Reduce Motion */
+    hx.querySelectorAll('video').forEach(v => { if (panels[i].contains(v) && !(reduce && v.hasAttribute('data-demo'))) v.play().catch(() => {}); else v.pause(); });
   }
 
   function frame(t) {
