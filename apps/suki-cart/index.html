@@ -19,7 +19,9 @@
   :root { --bg: #0b0b0c; --surface: #141416; --fg: #f4f4f5; --muted: #9a9aa1; --border: #26262a; --accent: #3fbf73; }
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.6 var(--font); letter-spacing: -0.015em; }
+h1, h2 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.6 var(--font); letter-spacing: -0.015em; -webkit-font-smoothing: antialiased; }
 main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
 header { display: flex; align-items: center; gap: 14px; }
 header img { width: 64px; height: 64px; border-radius: 16px; }
@@ -54,7 +56,7 @@ footer { margin-top: 44px; color: var(--muted); font-size: 14px; }
   <details><summary>How do I delete my data?</summary><p>Delete the app to erase everything on your phone. If you are in a Bahay, first open Bahay (Family) and tap Leave the Family: that erases your trips from our server. Details are in the <a href="privacy/">privacy policy</a>.</p></details>
   <details><summary>Is the total exactly what the cashier will charge?</summary><p>It is an estimate from the prices you type. The store receipt is final: shelf prices, promos and rounding can differ at the counter.</p></details>
 
-  <footer>© 2026 JTL Growth, Philippines · <a href="privacy/">Privacy policy</a></footer>
+  <footer>© 2026 JTL Growth, Philippines · <a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of use</a></footer>
 </main>
 </body>
 </html>

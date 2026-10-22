@@ -21,7 +21,9 @@
   :root { --bg: #0b0b0c; --surface: #141416; --fg: #f4f4f5; --muted: #9a9aa1; --border: #26262a; --accent: #3fbf73; }
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.6 var(--font); letter-spacing: -0.015em; }
+h1, h2 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.6 var(--font); letter-spacing: -0.015em; -webkit-font-smoothing: antialiased; }
 main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
 header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
 header img { width: 56px; height: 56px; border-radius: 14px; }
@@ -120,7 +122,7 @@ footer { margin-top: 44px; color: var(--muted); font-size: 14px; }
   <h2>Changes</h2>
   <p>If a future version collects more (for example shared store prices), we will update this policy and ask inside the app before anything more leaves your phone. Joining a Bahay is that choice for the Bahay data above: the join screen says what is shared before you tap.</p>
 
-  <footer>© 2026 JTL Growth · <a href="../">Suki Cart help</a></footer>
+  <footer>© 2026 JTL Growth · <a href="../">Suki Cart help</a> · <a href="../terms/">Terms of use</a></footer>
 </main>
 </body>
 </html>
