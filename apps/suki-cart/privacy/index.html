@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours and type live in :root below (Suki Cart's own Day and Night palettes, app/src/palette.ts).
+ settings: host-ok=jtlgrowth.com
+ Every data claim here comes from ~/Ventures/Budget-App/legal/privacy-policy.md, read against the app source on
+ 2026-10-20 to 2026-10-22 (store.ts, cloud.ts, bahay.ts, scan.ts, backup.ts, iap.ts, supabase/schema.sql).
+ Update this page before any build that shares more (for example public store prices). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suki Cart privacy policy</title>
+<meta name="description" content="What Suki Cart keeps on your phone, what a Bahay (family code) shares, and what it never collects.">
+<link rel="icon" href="../icon.png">
+<style>
+:root {
+  --bg: #f4f4f2; --surface: #ffffff; --fg: #0b0b0c; --muted: #5f5f67; --border: #e2e2df; --accent: #157a43;
+  --font: ui-rounded, -apple-system, "SF Pro Rounded", system-ui, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0b0b0c; --surface: #141416; --fg: #f4f4f5; --muted: #9a9aa1; --border: #26262a; --accent: #3fbf73; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.6 var(--font); letter-spacing: -0.015em; }
+main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+header img { width: 56px; height: 56px; border-radius: 14px; }
+h1 { font-size: 30px; line-height: 1.15; margin: 0; letter-spacing: -0.025em; }
+.sub { color: var(--muted); margin: 6px 0 28px; font-size: 15px; }
+h2 { font-size: 21px; margin: 36px 0 10px; letter-spacing: -0.02em; }
+p, li { max-width: 68ch; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.box { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-top: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; border-top: 0; }
+ul { padding-left: 22px; }
+li { margin: 6px 0; }
+footer { margin-top: 44px; color: var(--muted); font-size: 14px; }
+@media (max-width: 560px) {
+  table, thead, tbody, tr, th, td { display: block; }
+  thead { display: none; }
+  tr { border-top: 1px solid var(--border); padding: 6px 0; }
+  td { border: 0; padding: 4px 12px; }
+  td:first-child { font-weight: 600; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header><img src="../icon.png" alt="" width="56" height="56"><h1>Suki Cart privacy policy</h1></header>
+  <p class="sub">Effective 22 October 2026 · JTL Growth, Philippines · <a href="mailto:jamzjamorol03@gmail.com">jamzjamorol03@gmail.com</a></p>
+
+  <div class="box">
+    <p><b>The short version.</b> Suki Cart has no account, no ads and no tracking. On its own, your trips, prices and budgets are saved only on your phone. If you make or join a <b>Bahay</b> (Family, a family code), the finished trips, the shared list, the payday budget and the name you type are shared with the people in that Bahay, through our server. An open cart is never shared. We never sell or share any of it with anyone else.</p>
+  </div>
+
+  <h2>What the app stores, and where</h2>
+  <table>
+    <thead><tr><th>Data</th><th>Where it lives</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Trips: store name you type or pick, budget, items, prices, quantities, promos, Senior/PWD settings, dates</td><td>Only on your phone, in the app's private storage</td><td>To show your cart total, what is left, and your monthly savings</td></tr>
+      <tr><td>The list, the payday budget, and settings: language (Filipino or English), Light or Dark look, sound</td><td>Only on your phone</td><td>To remember your plans and your choices</td></tr>
+    </tbody>
+  </table>
+  <p>Unless you are in a Bahay, nothing in this table is sent to us or to anyone else. We cannot see it, and we cannot recover it for you. Deleting the app deletes all of it.</p>
+
+  <h2>Bahay (Family code)</h2>
+  <p>Bahay is off until you make or join one. When you do:</p>
+  <table>
+    <thead><tr><th>Data</th><th>Who can see it</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>A random anonymous key for this phone (no name, email or phone number)</td><td>Only our server</td><td>So the server knows which Bahay this phone belongs to</td></tr>
+      <tr><td>The name you type (for example "Nanay")</td><td>The people in your Bahay</td><td>So they know whose trip is whose</td></tr>
+      <tr><td>Each trip you finish: store name, budget, items, quantities, prices, total, date</td><td>The people in your Bahay</td><td>The household total for the month, who spent what, shared prices</td></tr>
+      <tr><td>The shared list and the payday budget</td><td>The people in your Bahay</td><td>Anyone in the Bahay can add to the list or set the budget</td></tr>
+      <tr><td>Your phone's internet address and app version, as our database provider logs every sign-in</td><td>Only our server and Supabase</td><td>Security logs, kept by Supabase under its own policy</td></tr>
+      <tr><td>A scrambled (salted hash) form of your network address, only when a code you typed was wrong</td><td>Only our server</td><td>To stop anyone guessing codes; deleted after one day</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><b>What is never shared:</b> a cart you have not checked out yet, your Senior/PWD settings, your look, sound and language settings, and anything from before you joined.</li>
+    <li><b>Where it is kept:</b> Supabase, our database provider, in its Singapore region. Only the app's own functions can read or write it, and each one only reads the caller's own Bahay; nobody outside your Bahay can read it. The one exception is a tally we keep for ourselves: how many Bahays, members, trips and open list items exist in total across everyone, never a name, a store, an amount or anything else from inside a Bahay. While there are fewer than 5 Bahays, the tally shows only how many Bahays exist, so it can never describe one family.</li>
+    <li><b>Codes:</b> a Bahay code works for 7 days. Leaving a Bahay changes its code.</li>
+    <li><b>Removing someone:</b> the person who made the Bahay can remove a member (for example someone who got the code by mistake, or a lost phone). Their trips are deleted from the server and the code changes. If the maker leaves, the role passes to whoever joined first.</li>
+    <li><b>How long:</b> while you are in the Bahay. Leaving, or being removed, deletes your trips from the server at once; list items you added stay on the shared list without your name. When the last person leaves, the Bahay, its list and its code are deleted. An anonymous key that belongs to no Bahay is deleted after 30 days.</li>
+    <li><b>Moving phones:</b> the key lives on this phone only, in its secure storage. On a new phone, join again with a fresh code.</li>
+  </ul>
+
+  <h2>What the app does not do</h2>
+  <ul>
+    <li>No account, sign-in, email or phone number. A name is asked only if you make or join a Bahay, and only your Bahay sees it.</li>
+    <li>No location, contacts or microphone access. No photo library access except the one photo you pick to scan.</li>
+    <li>No advertising, no ad IDs, no analytics or tracking SDKs.</li>
+    <li>No sale or sharing of personal data with anyone.</li>
+  </ul>
+
+  <h2>Scanning a price tag (Suki Pro)</h2>
+  <p>The camera opens only when you tap the scan key. The text on the tag is read on your phone by its own text reader (Apple Vision on iPhone, Google ML Kit on Android). The photo is never uploaded or kept: the copy the camera hands the app is deleted right after it is read. You can also pick an existing photo; only that one photo is read, and the original stays in your Photos. What the scan read is shown to you, and nothing is added until you tap Add.</p>
+
+  <h2>The backup file</h2>
+  <p>Suki Cart is included in your phone's own backup (iCloud or Google). A backup file is made only when you tap Save or Send in Backup: it holds your trips, list, payday budget and settings, never your Bahay key or your purchase. You choose where it goes. We never receive it. Anyone you give the file to can read those trips, so keep it where you keep your own files.</p>
+
+  <h2>When you choose to share</h2>
+  <p>"Share trip card" opens your phone's own share sheet with a short text summary of one trip. You choose the app and the person. What happens after that is governed by the app you share to.</p>
+
+  <h2>Senior citizen and PWD settings</h2>
+  <p>Turning on the Senior/PWD discount only changes the estimate on your phone. The app does not ask for, read or store an ID number. The cashier checks your ID at the store.</p>
+
+  <h2>Children</h2>
+  <p>Suki Cart is a general shopping calculator and is not directed at children under 13. A child's phone in a family Bahay shares only what is described above, with that family.</p>
+
+  <h2>Your rights under the Data Privacy Act of 2012 (RA 10173)</h2>
+  <p>Outside a Bahay we hold nothing about you, so there is nothing for us to access, correct or erase: edit or remove any item in the app, or delete the app to erase everything. In a Bahay, you can change your name, remove list items, and erase everything of yours on our server by leaving the Bahay (Bahay, then Umalis sa Bahay; in English, Family, then Leave the Family). If you no longer have the phone, ask the person who made your Bahay to remove you, or write to us with your Bahay name, the name you used and about when you joined, and we will find it with you and erase it. Questions or concerns: <a href="mailto:jamzjamorol03@gmail.com">jamzjamorol03@gmail.com</a>. You may also contact the National Privacy Commission (<a href="https://privacy.gov.ph">privacy.gov.ph</a>).</p>
+
+  <h2>App stores and Suki Pro</h2>
+  <p>Apple's App Store and Google Play handle downloads and the Suki Pro purchase (₱149 once) under their own privacy policies. They take the payment; we never see your card, your Apple ID or your Google account. The app asks the store only whether this account owns Suki Pro, so Pro works offline and Restore purchase brings it back on a new phone. We receive no personal data from the stores beyond the standard, anonymous sales reports they give every developer.</p>
+
+  <h2>Changes</h2>
+  <p>If a future version collects more (for example shared store prices), we will update this policy and ask inside the app before anything more leaves your phone. Joining a Bahay is that choice for the Bahay data above: the join screen says what is shared before you tap.</p>
+
+  <footer>© 2026 JTL Growth · <a href="../">Suki Cart help</a></footer>
+</main>
+</body>
+</html>

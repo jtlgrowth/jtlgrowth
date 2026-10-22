@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours and type live in :root below (Suki Cart's own Day and Night palettes, app/src/palette.ts).
+ settings: host-ok=jtlgrowth.com
+ The App Store Support URL for Suki Cart. Answers come from the app source and BRIEF.md (2026-10-22). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suki Cart help</title>
+<meta name="description" content="Suki Cart is a grocery cart calculator for Filipino shoppers: type the price, see what is left of your budget, and Suki fixes it when you go over.">
+<link rel="icon" href="icon.png">
+<style>
+:root {
+  --bg: #f4f4f2; --surface: #ffffff; --fg: #0b0b0c; --muted: #5f5f67; --border: #e2e2df; --accent: #157a43;
+  --font: ui-rounded, -apple-system, "SF Pro Rounded", system-ui, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0b0b0c; --surface: #141416; --fg: #f4f4f5; --muted: #9a9aa1; --border: #26262a; --accent: #3fbf73; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 500 17px/1.6 var(--font); letter-spacing: -0.015em; }
+main { max-width: 720px; margin: 0 auto; padding: 32px 16px 56px; }
+header { display: flex; align-items: center; gap: 14px; }
+header img { width: 64px; height: 64px; border-radius: 16px; }
+h1 { font-size: 32px; line-height: 1.1; margin: 0; letter-spacing: -0.025em; }
+.sub { color: var(--muted); margin: 14px 0 26px; max-width: 60ch; }
+h2 { font-size: 21px; margin: 34px 0 10px; letter-spacing: -0.02em; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.contact { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; }
+details { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 12px 16px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 650; min-height: 28px; }
+details p { margin: 10px 0 2px; color: var(--fg); max-width: 66ch; }
+footer { margin-top: 44px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <header><img src="icon.png" alt="" width="64" height="64"><h1>Suki Cart help</h1></header>
+  <p class="sub">Suki Cart is a grocery cart calculator for Filipino shoppers. Type each price, see what is left of your budget, and let Suki fix the cart when you go over. In Filipino or English.</p>
+
+  <div class="contact">
+    <b>Need help or found a bug?</b> Email <a href="mailto:jamzjamorol03@gmail.com?subject=Suki%20Cart">jamzjamorol03@gmail.com</a>. Say what phone you use and what you tapped.
+  </div>
+
+  <h2>Common questions</h2>
+  <details><summary>Do I need an account?</summary><p>No. There is no sign-in, email or phone number. Your trips stay on your phone.</p></details>
+  <details><summary>How do I switch between Filipino and English?</summary><p>On the start screen, tap the Fil or EN chip at the top, next to Sound and Look. Every screen changes at once.</p></details>
+  <details><summary>What is free, and what does Suki Pro add?</summary><p>Free for life: the cart and budget, Senior/PWD discount math, B1T1 and bundles, the shopping list, the budget until payday, and Bahay (Family). Suki Pro (₱149 once, no subscription) adds price-tag scanning, Suki's smart fix that swaps for a cheaper match, and price history. Your first 3 trips have Pro for free.</p></details>
+  <details><summary>I changed phones. How do I get Suki Pro back?</summary><p>Open Suki Pro from the start screen and tap Restore purchase, signed in with the same Apple ID or Google account you bought it with.</p></details>
+  <details><summary>How do I move my trips to a new phone?</summary><p>Suki Cart is part of your phone's own backup. To move by hand: Backup, then Save to Files (or Send), and on the new phone Backup, then Open a backup file.</p></details>
+  <details><summary>How does Bahay (Family) work?</summary><p>One person taps Bahay (Family), then Make a Family, and shares the 6-character code. Others type the code under Have a code? Each person shops on their own phone; finished trips, the shared list and the payday budget show for everyone. Leaving deletes your trips from the server.</p></details>
+  <details><summary>How do I delete my data?</summary><p>Delete the app to erase everything on your phone. If you are in a Bahay, first open Bahay (Family) and tap Leave the Family: that erases your trips from our server. Details are in the <a href="privacy/">privacy policy</a>.</p></details>
+  <details><summary>Is the total exactly what the cashier will charge?</summary><p>It is an estimate from the prices you type. The store receipt is final: shelf prices, promos and rounding can differ at the counter.</p></details>
+
+  <footer>© 2026 JTL Growth, Philippines · <a href="privacy/">Privacy policy</a></footer>
+</main>
+</body>
+</html>
