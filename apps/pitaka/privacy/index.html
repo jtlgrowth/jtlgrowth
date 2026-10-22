@@ -1,0 +1,127 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours live in :root below (Pitaka Q5 Concierge tokens, apps/pitaka/design/q5-tokens.json);
+     the contact address lives in SETTINGS.
+     settings: host-ok=jtlgrowth.com
+     settings: host-ok=privacy.gov.ph
+     Every line below matches the app as of 0.2 (2026-10-23): Keychain WhenUnlockedThisDeviceOnly, Vision OCR on the
+     phone, no network code, Delete all in the Privacy screen, copied values expire from the clipboard after 60 s. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pitaka privacy policy</title>
+<meta name="description" content="Pitaka keeps your IDs on your iPhone only. No account, no server, no tracking. What the app stores, where, and how to delete it.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/pitaka/privacy/">
+<link rel="icon" href="../icon.png">
+<style>
+/* PROJECT SETTINGS: Pitaka Q5 Concierge, light and dark */
+:root {
+  --bg: #f2f3f5;
+  --bg-2: #dcdee2;
+  --surface: rgba(255,255,255,.72);
+  --fg: #17140f;
+  --muted: #6c665b;
+  --line: #d8d3c8;
+  --accent: #44474d;
+  --focus-ring: #17140f;
+  --font-display: ui-sans-serif, -apple-system, "SF Pro Display", system-ui, sans-serif;
+  --font-body: -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --radius: 18px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #262a31;
+    --bg-2: #08090a;
+    --surface: rgba(255,255,255,.06);
+    --fg: #f4efe6;
+    --muted: #a39d92;
+    --line: #2a2a2d;
+    --accent: #d5d9e0;
+    --focus-ring: #f4efe6;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--bg-2); }
+body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, var(--bg), var(--bg-2)); color: var(--fg); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--fg); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 0; }
+nav .home { display: flex; align-items: center; gap: 10px; font: 600 15px/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+nav .home img { width: 32px; height: 32px; border-radius: 8px; }
+nav .links { display: flex; gap: 8px; }
+nav .links a { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font-size: 14px; text-decoration: none; }
+nav .links a[aria-current] { border-color: var(--accent); }
+h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }
+h1 { margin: 28px 0 6px; font: 600 clamp(30px, 6.5vw, 42px)/1.12 var(--font-display); letter-spacing: -.01em; }
+.meta { margin: 0 0 22px; color: var(--muted); font-size: 15px; }
+.lead { padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+h2 { margin: 38px 0 10px; font: 600 13px/1.3 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.group { border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.row { padding: 14px 18px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.row b { display: block; font-weight: 600; }
+.row span { color: var(--muted); }
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Pitaka">
+    <a class="home" href="../support/"><img src="../icon.png" alt="" width="32" height="32">Pitaka</a>
+    <span class="links"><a href="./" aria-current="page">Privacy</a><a href="../support/">Support</a></span>
+  </nav>
+  <main>
+    <h1>Pitaka privacy policy</h1>
+    <p class="meta">Effective 23 October 2026 · JTL Growth, Philippines · <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a></p>
+    <p class="lead"><b>The short version.</b> Pitaka (on the App Store as "Pitaka: ID Wallet") keeps your ID details on your iPhone only. There is no account, no server, no ads and no tracking. We never see, receive or hold any of your IDs, and the app works with no internet at all.</p>
+
+    <h2>What the app stores, and where</h2>
+    <div class="group">
+      <div class="row"><b>The ID details you save</b><span>For example the name, ID number, birthday, address and expiry on a PhilID, driver's license, passport, UMID, SSS, TIN, PRC, Pag-IBIG, PhilHealth or postal ID. Kept encrypted in the iPhone Keychain on this phone, readable only while the phone is unlocked. Used to show your IDs and to fill forms when you ask.</span></div>
+      <div class="row"><b>Nothing else</b><span>No photos, no contacts, no location, no usage data. Pitaka has no analytics, no crash reporting service and no advertising code.</span></div>
+    </div>
+    <p>The Keychain items are marked "this device only", so they are not copied into iCloud Keychain or into iCloud or computer backups. A new phone starts empty: scan or type your IDs again.</p>
+
+    <h2>Scanning an ID</h2>
+    <p>The camera opens only when you tap Scan. The text on the ID is read on your phone by Apple's own text reader (Vision). The photo is never uploaded and never kept: once the text is read, the image is let go. You can also pick one photo from your library; only that photo is read, and the original stays in your Photos. What the scan read is shown to you, and nothing is saved until you tap "Looks right, save".</p>
+
+    <h2>Face ID and filling forms</h2>
+    <p>Pitaka asks for Face ID (or your passcode) before it shows your IDs. Face ID is handled by iOS; Pitaka only learns yes or no and never receives your face data. Nothing fills by itself: a value goes into a form only after you choose Pitaka from the AutoFill menu, pass Face ID and tap the value. When you copy a value, it stays on this phone's clipboard only (not sent to your other Apple devices) and is cleared after 60 seconds.</p>
+
+    <h2>What the app does not do</h2>
+    <ul>
+      <li>No account, sign-in, email or phone number.</li>
+      <li>No server: Pitaka makes no network connections of its own.</li>
+      <li>No iCloud sync and no outside backup of your IDs.</li>
+      <li>No advertising, no ad IDs, no analytics or tracking.</li>
+      <li>No sale or sharing of personal data with anyone, because we never have it.</li>
+    </ul>
+
+    <h2>Deleting your data</h2>
+    <p>Delete one ID from its page (the trash button), or delete everything at once: tap the ••• menu on the home screen, then "Where are my IDs kept?", then Delete all. Do this before you delete the app: iOS can keep Keychain items after an app is removed, and they would come back if Pitaka is installed again on the same phone.</p>
+
+    <h2>Children</h2>
+    <p>Pitaka is a general utility for keeping your own IDs and is not directed at children under 13.</p>
+
+    <h2>Your rights under the Data Privacy Act of 2012 (RA 10173)</h2>
+    <p>We hold nothing about you, so there is nothing for us to access, correct or erase: edit or delete any ID inside the app. Questions or concerns: <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. You may also contact the National Privacy Commission (<a href="https://privacy.gov.ph">privacy.gov.ph</a>).</p>
+
+    <h2>The App Store</h2>
+    <p>Apple's App Store handles the download under its own privacy policy. Pitaka is free and has no purchases. We receive only the standard, anonymous download reports Apple gives every developer.</p>
+
+    <h2>Changes</h2>
+    <p>If a future version ever needs anything to leave your phone, we will update this policy first and ask inside the app before it happens.</p>
+  </main>
+  <footer>Pitaka is built and maintained by <a href="https://jtlgrowth.com/apps/">JTL Growth</a>. © 2026 · <a href="../support/">Support</a></footer>
+</div>
+<script>
+const SETTINGS = {"support_email": "support@jtlgrowth.com"};
+document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
+</script>
+</body>
+</html>

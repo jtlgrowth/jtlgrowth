@@ -1,0 +1,123 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours live in :root below (Pitaka Q5 Concierge tokens, apps/pitaka/design/q5-tokens.json);
+     the contact address lives in SETTINGS.
+     settings: host-ok=jtlgrowth.com
+     Every line below matches the app as of 0.2 (2026-10-23): Keychain WhenUnlockedThisDeviceOnly, Vision OCR on the
+     phone, no network code, Delete all in the Privacy screen, copied values expire from the clipboard after 60 s. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pitaka support</title>
+<meta name="description" content="Help with Pitaka: turning on AutoFill, filling a form, scanning an ID, Face ID, moving to a new phone, and how to reach us.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/pitaka/support/">
+<link rel="icon" href="../icon.png">
+<style>
+/* PROJECT SETTINGS: Pitaka Q5 Concierge, light and dark */
+:root {
+  --bg: #f2f3f5;
+  --bg-2: #dcdee2;
+  --surface: rgba(255,255,255,.72);
+  --fg: #17140f;
+  --muted: #6c665b;
+  --line: #d8d3c8;
+  --accent: #44474d;
+  --focus-ring: #17140f;
+  --font-display: ui-sans-serif, -apple-system, "SF Pro Display", system-ui, sans-serif;
+  --font-body: -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --radius: 18px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #262a31;
+    --bg-2: #08090a;
+    --surface: rgba(255,255,255,.06);
+    --fg: #f4efe6;
+    --muted: #a39d92;
+    --line: #2a2a2d;
+    --accent: #d5d9e0;
+    --focus-ring: #f4efe6;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--bg-2); }
+body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, var(--bg), var(--bg-2)); color: var(--fg); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--fg); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 0; }
+nav .home { display: flex; align-items: center; gap: 10px; font: 600 15px/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+nav .home img { width: 32px; height: 32px; border-radius: 8px; }
+nav .links { display: flex; gap: 8px; }
+nav .links a { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font-size: 14px; text-decoration: none; }
+nav .links a[aria-current] { border-color: var(--accent); }
+h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }
+h1 { margin: 28px 0 6px; font: 600 clamp(30px, 6.5vw, 42px)/1.12 var(--font-display); letter-spacing: -.01em; }
+.meta { margin: 0 0 22px; color: var(--muted); font-size: 15px; }
+.lead { padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.fix { margin: 12px 0; padding: 16px 18px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.fix b { display: block; margin-bottom: 4px; font-weight: 600; }
+.fix p { margin: 0; color: var(--muted); }
+ol { padding-left: 22px; }
+h2 { margin: 38px 0 10px; font: 600 13px/1.3 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.group { border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.row { padding: 14px 18px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.row b { display: block; font-weight: 600; }
+.row span { color: var(--muted); }
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Pitaka">
+    <a class="home" href="./"><img src="../icon.png" alt="" width="32" height="32">Pitaka</a>
+    <span class="links"><a href="../privacy/">Privacy</a><a href="./" aria-current="page">Support</a></span>
+  </nav>
+  <main>
+    <h1>Pitaka support</h1>
+    <p class="meta">Pitaka keeps your IDs on your iPhone and fills them into forms.</p>
+    <p class="lead">Email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. We read everything and usually reply within two business days. Please never send us an ID number or a photo of an ID.</p>
+
+    <h2>Turn on AutoFill (one time)</h2>
+    <ol>
+      <li>Open the iPhone Settings app.</li>
+      <li>Go to General, then AutoFill &amp; Passwords.</li>
+      <li>Turn on Pitaka.</li>
+    </ol>
+    <p>Pitaka shows these steps too: tap the ••• menu on the home screen, then "Turn on AutoFill".</p>
+
+    <h2>Fill a form</h2>
+    <ol>
+      <li>Tap a field in any app or website.</li>
+      <li>Tap the field again (or long-press it), then choose AutoFill, then Pitaka.</li>
+      <li>Pass Face ID, then tap the value you want. It goes into the field.</li>
+    </ol>
+    <p>To practise first, open Pitaka, tap the ••• menu, then "Try it". It opens a sample form inside the app.</p>
+
+    <h2>Quick fixes</h2>
+    <div class="fix"><b>Pitaka is not in the AutoFill menu</b><p>Check Settings, General, AutoFill &amp; Passwords: Pitaka must be on. Pitaka needs iOS 18 or later.</p></div>
+    <div class="fix"><b>The camera says it is off</b><p>Open the iPhone Settings app, go to Pitaka, and turn on Camera. You can also type the ID by hand, or pick a photo instead.</p></div>
+    <div class="fix"><b>The scan read a field wrong</b><p>Fix it on the review screen before you save, or open the ID later and tap edit. Good light and a flat ID help.</p></div>
+    <div class="fix"><b>Face ID failed</b><p>Try again, or use your iPhone passcode. Pitaka never stores Face ID data; iOS handles it.</p></div>
+    <div class="fix"><b>New phone, and my IDs are gone</b><p>That is by design. Your IDs never leave the old phone: no iCloud, no backup, no server. Scan or type them again on the new phone.</p></div>
+    <div class="fix"><b>Delete everything</b><p>Tap the ••• menu, then "Where are my IDs kept?", then Delete all. Do this before you delete the app.</p></div>
+
+    <h2>Reporting a bug</h2>
+    <p>Tell us what you did, what you expected, and what happened instead. Your iPhone model and iOS version help. A screenshot helps more, but cover any ID details first.</p>
+
+    <h2>Your data</h2>
+    <p>What Pitaka keeps and how to delete it is in the <a href="../privacy/">privacy policy</a>.</p>
+  </main>
+  <footer>Pitaka is built and maintained by <a href="https://jtlgrowth.com/apps/">JTL Growth</a>. © 2026 · <a href="../privacy/">Privacy</a></footer>
+</div>
+<script>
+const SETTINGS = {"support_email": "support@jtlgrowth.com"};
+document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
+</script>
+</body>
+</html>
