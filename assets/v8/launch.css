@@ -615,3 +615,12 @@ html.still .fh-tag{position:relative;left:auto;bottom:auto;opacity:1;text-align:
   .hl-label,.hl-count{background:var(--pill-bg);padding:6px 10px 5px;border-radius:var(--radius-pill)}
   .gr-scrim{background:linear-gradient(0deg,var(--bg) 0%,var(--bg) 40%,var(--scrim-max) 50%,var(--scrim-deep) 60%,transparent 82%)}
 }
+
+/* ---- /workshop/ Batch 2 film (2026-10-25): one 16:9 film under its own heading, before the photo reel ---- */
+.b2{display:grid;gap:22px;padding:4vh 0 14vh}
+.b2 .lead{max-width:40ch;color:var(--muted)}
+.b2-film{margin:10px 0 0;aspect-ratio:16/9;border-radius:var(--radius-md);overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+.b2-film video{display:block;width:100%;height:100%;object-fit:cover}
+/* the question lands first, then the film opens out of its frame as it scrolls in (Owner 2026-10-25) */
+html.js:not(.still) .b2-film[data-reveal]{clip-path:inset(12% 12% round var(--radius-md));transform:scale(.94);transition:opacity .9s var(--ease) .35s,transform 1.1s var(--ease) .35s,clip-path 1.1s var(--ease) .35s}
+html.js:not(.still) .b2-film[data-reveal].in{clip-path:inset(0 round var(--radius-md));transform:none}
