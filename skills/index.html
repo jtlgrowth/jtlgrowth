@@ -29,6 +29,7 @@
   form{display:flex;gap:10px}
   input{flex:1;min-width:0;font:400 14px 'Space Mono',monospace;padding:12px 14px;border:1px solid var(--navy);
         background:var(--cement);color:var(--navy);outline:none;letter-spacing:.06em}
+  @media (pointer: coarse){input{font-size:16px}} /* under 16px iOS Safari zooms the page on focus */
   button{font:600 12px 'Archivo';letter-spacing:.08em;text-transform:uppercase;color:var(--cement);
          background:var(--navy);border:0;padding:12px 22px;cursor:pointer}
   button:hover{background:var(--wood)}

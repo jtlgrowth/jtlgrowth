@@ -66,7 +66,7 @@
 .kb-prompt-mark{color:#E2E2E2;font-weight:700}
 .kb-input{flex:1;background:transparent;border:0;outline:0;color:#E2E2E2;font:16px 'Space Mono',monospace;caret-color:#E2E2E2}
 .kb-input::placeholder{color:#6A6A6A}
-@media (min-width:861px){.kb-input{font-size:13px}}
+@media (min-width:861px) and (pointer: fine){.kb-input{font-size:13px}}
 .kb-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .kb-chip{border:1px solid rgba(226,226,226,.18);background:transparent;color:#B9B9B9;font:11px 'Space Mono',monospace;padding:0 10px;min-height:26px;border-radius:999px;cursor:pointer}
 .kb-chip:hover,.kb-chip:focus-visible{background:#E2E2E2;color:#111}

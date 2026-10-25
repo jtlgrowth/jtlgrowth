@@ -195,6 +195,7 @@ section h2 + .lead{margin-top:14px}
 .pr-lock-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .pr-pw-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
 .pr-pw-form input{min-height:44px;padding:0 15px;border:1px solid rgba(24,24,24,.25);background:transparent;color:inherit;font:400 14px 'Archivo',sans-serif;min-width:200px}
+@media (pointer: coarse){.pr-pw-form input{font-size:16px}} /* under 16px iOS Safari zooms the page on focus */
 [data-theme="dark"] .pr-pw-form input{border-color:rgba(226,226,226,.28)}
 .pr-pw-form button{min-height:44px;padding:0 22px;border:none;background:var(--navy);color:var(--cement);font:600 11.5px 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 .pr-pw-msg{font-size:13px;color:var(--gray);min-height:1.4em}
