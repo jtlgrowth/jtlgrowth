@@ -1389,6 +1389,14 @@ addEventListener("DOMContentLoaded",function(){
   var mirror = (form.getAttribute("data-endpoint-mirror") || "").trim();
   var termsVersion = form.getAttribute("data-terms-version") || "";
   var sending = false;
+  var pendingComplete = null;  /* exact payload: a receipt can be lost after either store committed */
+  var partialSave = Promise.resolve();
+  var DELIVERY = { timeoutMs: 20000, maxBytes: 7900 };
+  var LIMITS = { business_name: 120, first_name: 80, email: 254, whatsapp: 40, business_link: 300,
+    wanted_domain: 253, domain_name: 253, asset_link: 500, reference_links: 600, notes: 600 };
+  Array.prototype.forEach.call(form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea'), function (el) {
+    if (el !== honeypot) el.maxLength = LIMITS[el.name] || 200;
+  });
   var nextHTML = nextBtn.innerHTML;
   var agreeHTML = nextHTML.replace("Next", "I agree, continue");
   var leadId = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);  /* one id, so the partial and the complete post land on the same row */
@@ -1484,7 +1492,7 @@ addEventListener("DOMContentLoaded",function(){
   function saveSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 250); }
   function saveDraft() {
     try {
-      var d = { c: current, lead: leadId, f: {} };
+      var d = { c: current, lead: leadId, f: {}, pending: pendingComplete };
       Array.prototype.forEach.call(form.elements, function (el) {
         if (!el.name || el === honeypot) return;
         if (el.type === "radio" || el.type === "checkbox") { if (el.checked) (d.f[el.name] = d.f[el.name] || []).push(el.value); }
@@ -1502,8 +1510,10 @@ addEventListener("DOMContentLoaded",function(){
       else el.value = d.f[el.name][0];
     });
     if (d.lead) leadId = d.lead;
+    if (d.pending && d.pending.stage === "complete" && d.pending.lead_id === leadId) pendingComplete = d.pending;
     applyWhen();
     var c = Math.max(1, Math.min(d.c || 1, TOTAL));
+    if (pendingComplete) c = reviewAt;
     if (c > termsAt && !agree.checked) c = termsAt;
     return c;
   }
@@ -1565,9 +1575,9 @@ addEventListener("DOMContentLoaded",function(){
     if (sending) return;
     if (returnTo) { nextBtn.innerHTML = nextHTML.replace("Next", "Back to review"); nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
     else if (terms) { nextBtn.innerHTML = agreeHTML; nextBtn.disabled = !agree.checked; nextBtn.setAttribute("aria-disabled", String(!agree.checked)); }
-    else if (last) { nextBtn.textContent = "Send it over"; nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
+    else if (last) { nextBtn.textContent = pendingComplete ? "Retry sending" : "Send it over"; nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
     else { nextBtn.innerHTML = nextHTML; nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
-    noBtn.hidden = !terms || !!returnTo; backBtn.hidden = current === 1 || !!returnTo;
+    noBtn.hidden = !terms || !!returnTo; backBtn.hidden = current === 1 || !!returnTo || !!pendingComplete;
   }
   /* about 8 seconds a question, a minute for the agreement: an honest "how long is left" next to the count */
   function timeLeft(n) {
@@ -1642,7 +1652,8 @@ addEventListener("DOMContentLoaded",function(){
       if (!st.hasAttribute("data-terms")) {
         var b = document.createElement("button"); b.type = "button"; b.className = "fw-edit"; b.textContent = "Edit";
         b.setAttribute("aria-label", "Edit " + st.getAttribute("data-label"));
-        b.addEventListener("click", function () { returnTo = reviewAt; show(k + 1, true); });
+        b.disabled = sending || !!pendingComplete;
+        b.addEventListener("click", function () { if (sending || pendingComplete) return; returnTo = reviewAt; show(k + 1, true); });
         dd.appendChild(b);
       }
       var row = document.createElement("div"); row.className = "fw-review-row"; row.appendChild(dt); row.appendChild(dd);
@@ -1652,6 +1663,12 @@ addEventListener("DOMContentLoaded",function(){
   function validate(step) {
     setErr(step, "");
     Array.prototype.forEach.call(step.querySelectorAll("[aria-invalid]"), function (x) { x.removeAttribute("aria-invalid"); });
+    var typed = step.querySelectorAll("input[maxlength], textarea[maxlength]");
+    for (var ti = 0; ti < typed.length; ti++) {
+      if (!inHidden(typed[ti]) && typed[ti].value.length > typed[ti].maxLength) {
+        return fail(step, typed[ti], "Please keep this answer to " + typed[ti].maxLength + " characters. Your text is still here.");
+      }
+    }
     var fields = step.querySelectorAll("input[data-req],textarea[data-req],input[data-req-when],textarea[data-req-when]"), k, el;
     for (k = 0; k < fields.length; k++) {
       el = fields[k]; if (inHidden(el)) continue;
@@ -1675,14 +1692,18 @@ addEventListener("DOMContentLoaded",function(){
     if (!validate(st)) return;
     if (current === termsAt) {
       if (!agree.checked) { setErr(st, st.getAttribute("data-error")); agree.focus(); return; }
-      if (!returnTo) post(collect("partial")).catch(function () {});  /* they agreed: save the row now, so a drop-off in part 2 still reaches us */
+      if (!returnTo) {
+        var partial = collect("partial");
+        partialSave = partialSave.catch(function () {}).then(function () { return post(partial); });
+        partialSave.catch(function () {});  /* a failed partial must not prevent the final application */
+      }
     }
     if (returnTo && current !== returnTo) { var r = returnTo; returnTo = 0; show(r, true); return; }
     if (current === TOTAL) { submit(); return; }
     show(current + 1, true);
   }
   nextBtn.addEventListener("click", next);
-  backBtn.addEventListener("click", function () { if (current > 1 && !sending) show(current - 1, true); });
+  backBtn.addEventListener("click", function () { if (current > 1 && !sending && !pendingComplete) show(current - 1, true); });
   noBtn.addEventListener("click", function () {
     if (sending) return;
     clearDraft();
@@ -1728,7 +1749,7 @@ addEventListener("DOMContentLoaded",function(){
     /* "Something else" posts what they typed under the same key, so the sheet columns stay as they were */
     Array.prototype.forEach.call(form.querySelectorAll("[data-other-for]"), function (el) {
       var key = el.getAttribute("data-other-for"), typed = val(el);
-      if (!out[key]) return;
+      if (!out[key] || !picked(key, "other")) return;
       var parts = out[key].split(", ").filter(function (p) { return p !== "other"; });
       if (typed) parts.push(typed); else if (!parts.length) parts.push("Something else");
       out[key] = parts.join(", ");
@@ -1753,30 +1774,68 @@ addEventListener("DOMContentLoaded",function(){
     out.problem = lines.join("\n").slice(0, 2000);
     return out;
   }
-  function post(o) {
+  function deliver(url, body) {
+    return new Promise(function (resolve, reject) {
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); reject(new Error("timeout")); }, DELIVERY.timeoutMs);
+      Promise.resolve().then(function () {
+        return fetch(url, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body,
+          keepalive: true, signal: controller.signal });
+      }).then(function (res) {
+        if (!res || !res.ok) throw new Error("bad response");
+        return res.json();
+      }).then(function (j) {
+        if (!j || j.ok !== true) throw new Error("unconfirmed");
+        clearTimeout(timer); resolve();
+      }).catch(function (e) { clearTimeout(timer); reject(e); });
+    });
+  }
+  function prepare(o) {
     var body = JSON.stringify(o);
-    if (mirror && endpoint) { try { fetch(mirror, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body, keepalive: true }).catch(function () {}); } catch (e) {} }
-    if (!endpoint) return Promise.resolve();
-    return fetch(endpoint, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body, keepalive: true }).then(function (res) {
-      if (!res || !res.ok) throw new Error("bad response");
-      return typeof res.json === "function" ? res.json().catch(function () { return null; }) : null;
-    }).then(function (j) { if (j && j.ok === false) throw new Error("refused"); });
+    if (new TextEncoder().encode(body).length > DELIVERY.maxBytes) throw new Error("size");
+    /* Only the deliberately blanked preview sends nothing. Production needs both receipts.
+       A retry uses the same lead_id, so it updates the row and Rialto emits completion once. */
+    if (!endpoint && !mirror && location.protocol === "file:") return null;
+    if (!endpoint || !mirror) throw new Error("configuration");
+    return body;
+  }
+  function post(o) {
+    var body;
+    try { body = prepare(o); } catch (e) { return Promise.reject(e); }
+    if (body === null) return Promise.resolve();
+    /* Wait for both bounded attempts before enabling Retry, including when one refuses early. */
+    return Promise.all([deliver(endpoint, body), deliver(mirror, body)].map(function (p) {
+      return p.then(function () { return null; }, function (e) { return e; });
+    })).then(function (errors) { if (errors[0] || errors[1]) throw errors[0] || errors[1]; });
+  }
+  function deliveryError(e) {
+    sending = false; nextBtn.removeAttribute("aria-busy"); updateNext(); buzz([30, 40, 30]);
+    setErr(steps[TOTAL - 1], e.message === "size"
+      ? "This application has too much text to send. Your answers are still here. Use Edit to shorten your longer answers, then try again, or email hello@jtlgrowth.com."
+      : pendingComplete
+        ? "We couldn't confirm every save yet. Your answers are kept. Press Retry sending to finish the same application. For changes, email hello@jtlgrowth.com."
+        : "We couldn't send yet. Your answers are still here. Try again, or email hello@jtlgrowth.com.");
+    nextBtn.focus();
   }
   function submit() {
     if (!agree.checked) { show(termsAt, true); setErr(steps[termsAt - 1], steps[termsAt - 1].getAttribute("data-error")); return; }
     if (honeypot && honeypot.value) { showDone(); return; }
+    for (var k = 0; k < TOTAL - 1; k++) {
+      if (!validate(steps[k])) { show(k + 1, true); validate(steps[k]); return; }
+    }
+    var complete = pendingComplete || collect("complete");
+    try { prepare(complete); } catch (e) { deliveryError(e); return; }
+    pendingComplete = complete;
+    Array.prototype.forEach.call(reviewEl.querySelectorAll("button"), function (b) { b.disabled = true; });
     sending = true; setErr(steps[TOTAL - 1], "");
     nextBtn.disabled = true; nextBtn.innerHTML = '<span class="fw-spin" aria-hidden="true"></span>Sending';
     nextBtn.setAttribute("aria-busy", "true");
-    var go = post(collect("complete"));
-    go.then(function () { sending = false; nextBtn.removeAttribute("aria-busy"); clearDraft(); showDone(); }).catch(function () {
-      sending = false; nextBtn.removeAttribute("aria-busy"); updateNext(); buzz([30, 40, 30]);
-      var st = steps[TOTAL - 1];
-      setErr(st, "That didn't send, so nothing has reached us yet. Your answers are still here. Check your connection and press Submit again, or email hello@jtlgrowth.com.");
-      nextBtn.focus();
-    });
+    saveDraft();
+    var go = partialSave.catch(function () {}).then(function () { return post(complete); });
+    go.then(function () { sending = false; nextBtn.removeAttribute("aria-busy"); clearDraft(); showDone(); }).catch(deliveryError);
   }
   function showDone() {
+    pendingComplete = null;
     clearDraft();
     flow.hidden = true; doneCard.hidden = false;
     buzz(12);
