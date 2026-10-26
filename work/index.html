@@ -60,6 +60,61 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 <script>
 const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com/"}, "content": {"bookHref": "https://book.jtlgrowth.com/", "bookCta": "Book a call", "quoteHref": "/quote/", "waitlistHref": "https://ayalavirtualassistance.site/ai-workshop-waitlist/", "waitlistCta": "Join the Batch 3 list \u2197"}, "behavior": {"animations": true, "preloader": true}};
 </script>
+<style>
+/* /work additions 2026-10-26 (Owner picker: Gladex, apps with coming-soon teasers, video and motion, AVAS World + Front Desk).
+   Tokens only, from the PROJECT SETTINGS block above; motion is directional, nothing loops on its own. */
+.xw{padding:14vh 0 0}
+.xw>.eyebrow{margin:0}
+.xw>.super{margin:14px 0 0;max-width:16ch;text-wrap:balance}
+.xw>.story{margin-top:18px;font-size:18px}
+.xw-phone{position:relative;width:min(340px,100%);margin-inline:auto;padding:10px;border-radius:44px;background:var(--bezel);box-shadow:inset 0 0 0 2px var(--bezel-edge),0 40px 80px -40px var(--floor-shadow)}
+.xw-phone video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:34px;background:var(--screen-off)}
+.film-slide.xw-tall{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.xw-snd{position:absolute;right:18px;bottom:18px;z-index:2;display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);
+  background:var(--pill-bg);color:var(--white);font:700 11px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.xw-snd:hover,.xw-snd:focus-visible{border-color:var(--white)}
+.xw-snd:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.xw-case{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:5vw;align-items:center}
+.xw-case-copy{display:grid;gap:18px}
+.xw-case-copy .super{margin:0;text-wrap:balance}
+.xw-quotes{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.xw-quotes li{display:grid;gap:6px;padding:16px 0;border-bottom:1px solid var(--line)}
+.xw-quotes q{font:600 19px/1.35 var(--font-body);color:var(--fg);quotes:"\201C" "\201D"}
+.xw-quotes span{font-size:15px;color:var(--muted)}
+.xw-quotes b{color:var(--fg);font-weight:600;margin-left:6px}
+.xw-links{display:flex;flex-wrap:wrap;gap:22px}
+.xw-shelf{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.xw-app{position:relative;display:grid;gap:6px;height:100%;padding:22px;border-radius:var(--radius-lg);background:var(--ink-2);box-shadow:0 0 0 1px var(--line);color:var(--fg);text-decoration:none;transition:box-shadow var(--motion-base),translate .4s var(--ease)}
+a.xw-app:hover,a.xw-app:focus-visible{box-shadow:0 0 0 1px var(--line-strong);translate:0 -4px}
+a.xw-app:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.xw-app img,.xw-mono{width:64px;height:64px;border-radius:15px;margin-bottom:10px}
+.xw-mono{display:grid;place-items:center;background:var(--ink-3);box-shadow:inset 0 0 0 1px var(--line-strong);font:800 30px/1 var(--font-display);color:var(--white)}
+.xw-app-k{font:700 10.5px/1.2 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.xw-app b{font:700 20px/1.2 var(--font-body);letter-spacing:-.01em}
+.xw-app>span:last-of-type{font-size:15px;line-height:1.5;color:var(--muted)}
+.xw-soon .xw-app{overflow:hidden}
+.xw-soon .xw-app>span:last-of-type{filter:blur(4px);user-select:none}
+.xw-soon .xw-app::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,color-mix(in srgb,var(--ink) 55%,transparent));pointer-events:none}
+.xw-soon em{position:absolute;top:18px;right:18px;z-index:1;font:700 10.5px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--white);
+  padding:7px 10px 6px;border-radius:var(--radius-pill);background:var(--pill-bg);box-shadow:inset 0 0 0 1px var(--line-strong);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.xw-reel{margin-top:40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.xw-clip{margin:0;display:grid;gap:10px}
+.xw-frame{position:relative;overflow:hidden;border-radius:var(--radius-lg);background:var(--screen-off);box-shadow:0 0 0 1px var(--line)}
+.xw-frame video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.xw-v .xw-frame video{aspect-ratio:9/16}
+.xw-clip figcaption{font-size:14px;color:var(--muted)}
+.xw-clip figcaption b{color:var(--fg);font-weight:600;margin-right:6px}
+.xw-frame .xw-snd{right:12px;bottom:12px}
+.xw-stings{margin-top:16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,240px) minmax(0,240px);gap:16px;align-items:end}
+.xw-stings-copy{display:grid;gap:12px;align-self:center}
+@media (max-width:900px){
+  .xw-case,.film-slide.xw-tall{grid-template-columns:1fr;gap:28px}
+  .xw-reel{grid-template-columns:1fr}
+  .xw-stings{grid-template-columns:1fr 1fr}
+  .xw-stings-copy{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){.xw-app{transition:none}a.xw-app:hover,a.xw-app:focus-visible{translate:none}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -132,7 +187,7 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
       <p class="bgword" aria-hidden="true">The line-up</p>
       <div class="wrap lu-head">
         <div><p class="eyebrow">Shipped work</p><h2 id="lu-h" class="super silver">The line-up.</h2></div>
-        <p class="lead">Seven builds on one shelf; the AVAS portal runs on stand-in data. <b>Scroll to walk it.</b></p>
+        <p class="lead">Seven builds on this shelf, more further down; the AVAS portal runs on stand-in data. <b>Scroll to walk it.</b></p>
         <p class="count" aria-hidden="true"><b data-count>01</b> / 07</p>
       </div>
       <div class="track" data-track>
@@ -175,7 +230,7 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
       <div class="wrap pk-head">
         <p class="eyebrow">Mobile</p>
         <h2 id="pk-h" class="super silver">The same work, in your <span class="serif">pocket.</span></h2>
-        <p class="lead">Seven phones, seven builds. <b>The AVAS portal plays in the middle, on stand-in data.</b></p>
+        <p class="lead">Seven phones, the same seven builds. <b>The AVAS portal plays in the middle, on stand-in data.</b></p>
       </div>
       <div class="pk-row">
         <figure class="pk-item" data-i="-3" style="z-index:1"><div class="iph dark"><div class="iph-scr"><img src="/assets/v8/media/phone/rnc-1.webp" alt="Robots and Coffee on a phone" loading="lazy"></div></div><figcaption>Workshop page<b>Robots &amp; Coffee</b></figcaption></figure>
@@ -253,7 +308,7 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
   </section>
 
   <!-- 08 Rialto and Venice HQ on film -->
-  <section class="wrap film-slides" aria-label="Rialto and Venice HQ on film">
+  <section class="wrap film-slides" aria-label="Rialto, Venice HQ, AVAS Front Desk and AVAS World on film">
     <article class="film-slide" id="demo-rialto" data-reveal>
       <div class="mbp"><div class="mbp-lid"><div class="mbp-scr"><video muted playsinline loop preload="none" poster="/work/demos/rialto-poster.webp" data-src="/work/demos/rialto.mp4" data-start="0.32" aria-label="Rialto CRM on a laptop, demo data"></video></div></div><div class="mbp-base"></div></div>
       <div class="fs-cap"><p class="eyebrow">CRM platform</p><h3 class="super silver">Rialto.</h3><p class="story"><b>Our own CRM and automation platform.</b> Each business gets a workspace with contacts, pipelines, forms and automations under one login. Filmed on demo data.</p></div>
@@ -262,6 +317,67 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
       <div class="mbp"><div class="mbp-lid"><div class="mbp-scr"><video muted playsinline loop preload="none" poster="/work/demos/hq-poster.webp" data-src="/work/demos/hq.mp4" aria-label="Venice HQ 3D office on a laptop"></video></div></div><div class="mbp-base"></div></div>
       <div class="fs-cap"><p class="eyebrow">3D office</p><h3 class="super silver">Venice HQ.</h3><p class="story"><b>The office of our AI team as a small harbour town.</b> Ride the jeepney in, walk the floors, and see which seat is working on what.</p></div>
     </article>
+    <article class="film-slide" id="demo-frontdesk" data-reveal>
+      <div class="mbp"><div class="mbp-lid"><div class="mbp-scr"><video muted playsinline loop preload="none" poster="/work/more/front-desk-poster.webp" data-src="/work/more/front-desk.mp4" aria-label="AVAS Front Desk workflow in n8n, demo data"></video></div></div><div class="mbp-base"></div></div>
+      <div class="fs-cap"><p class="eyebrow">AI employee</p><h3 class="super silver">AVAS Front Desk.</h3><p class="story"><b>An inquiry agent that remembers.</b> A customer writes in, changes their mind a day later, and the Front Desk updates the CRM record instead of starting over. Built in n8n with a local AI and our own CRM. Filmed on demo data.</p></div>
+    </article>
+    <article class="film-slide flip xw-tall" id="demo-world" data-reveal>
+      <div class="xw-phone"><video muted playsinline loop preload="none" poster="/work/more/avas-world-poster.webp" data-src="/work/more/avas-world.mp4" aria-label="AVAS World, the agency's office as a small 3D world"></video><button class="xw-snd muted" type="button" data-snd aria-pressed="false"><span>Tap for sound</span></button></div>
+      <div class="fs-cap"><p class="eyebrow">Client portal &middot; 3D office</p><h3 class="super silver">AVAS World.</h3><p class="story"><b>Our sister agency's office as a small world.</b> The team works remote, so we built them a place: desks, a meeting room, a lounge, and an AI front desk that greets every client who visits. Built in five days.</p></div>
+    </article>
+  </section>
+
+  <!-- 08c case study: Gladex Travel and Tours (named, Owner picker 2026-10-26) -->
+  <section class="wrap xw xw-case" id="gladex" aria-labelledby="gx-h">
+    <div class="xw-case-film" data-reveal>
+      <div class="xw-phone"><video muted playsinline loop preload="none" poster="/work/more/gladex-teaser-poster.webp" data-src="/work/more/gladex-teaser.mp4" aria-label="Day 2 of the Gladex training, filmed by Gwen Ayala"></video><button class="xw-snd muted" type="button" data-snd aria-pressed="false"><span>Tap for sound</span></button></div>
+    </div>
+    <div class="xw-case-copy">
+      <p class="eyebrow" data-reveal>Case study &middot; Corporate AI training</p>
+      <h2 id="gx-h" class="super silver" data-reveal>Gladex Travel and <span class="serif">Tours.</span></h2>
+      <p class="story" data-reveal><b>Two days with their team, on their own work.</b> Marketing, accounting, people and culture and their developer came in prompting a chatbot. By day 2 they were building AI employees of their own and watching them work in their own HQ.</p>
+      <ul class="xw-quotes" data-reveal>
+        <li><q lang="fil">AI na yung gumagawa, hindi na ako.</q><span>The AI does it now, not me. <b>Marketing</b></span></li>
+        <li><q lang="fil">Bukod sa team ko na dine-delegate, meron akong AI na dine-delegate na.</q><span>Besides my team, I now have an AI I delegate to. <b>People and Culture</b></span></li>
+        <li><q lang="fil">Malaking dagdag knowledge 'to para sa akin, lalo na hindi naman ako IT.</q><span>A big boost for me, and I'm not in IT. <b>Accounting</b></span></li>
+      </ul>
+      <p class="meta" data-reveal>Their developer's plan: publish what they built before the month ends, then teach it to the rest of the team.</p>
+      <p class="xw-links" data-reveal><a class="textlink" href="/workshop/">Train your team</a><a class="textlink" href="/robots-and-coffee/">Robots &amp; Coffee</a></p>
+    </div>
+  </section>
+
+  <!-- 08d apps: shipped, plus what is coming (unpublished apps show blurred, Owner 2026-10-26) -->
+  <section class="wrap xw" id="apps" aria-labelledby="ap-h">
+    <p class="eyebrow" data-reveal>Apps</p>
+    <h2 id="ap-h" class="super silver" data-reveal>Apps we ship. <span class="serif">More on the way.</span></h2>
+    <ul class="xw-shelf" data-reveal>
+      <li><a class="xw-app" href="https://apps.apple.com/app/id6812399879" target="_blank" rel="noopener"><img src="/work/more/icons/hugas.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">iPhone &middot; App Store</span><b>Hugas</b><span>Whose turn to wash the dishes. One photo of a clean sink, then the next person is up.</span></a></li>
+      <li><a class="xw-app" href="/apps/suki-cart/"><img src="/work/more/icons/suki-cart.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">Web app</span><b>Suki Cart</b><span>A grocery cart calculator: type the price, see what is left of your budget.</span></a></li>
+      <li><a class="xw-app" href="/apps/oras/"><img src="/work/more/icons/oras.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">iPhone</span><b>Oras</b><span>Retainer invoicing: who to bill today, hours on top, one tap to send.</span></a></li>
+      <li><a class="xw-app" href="/growth/"><img src="/work/more/icons/growth.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">Mac app</span><b>Growth</b><span>Your AI employees in one animated HQ, every one at a desk, the work moving where you can see it.</span></a></li>
+      <li><a class="xw-app" href="https://maymalisabusinessmo.site/" target="_blank" rel="noopener"><span class="xw-mono" aria-hidden="true">?</span><span class="xw-app-k">Free web tool</span><b>Business Checkup</b><span>A 20-second check for small businesses: what is leaking and what to fix first.</span></a></li>
+      <li class="xw-soon"><div class="xw-app"><img src="/work/more/icons/pitaka.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">iPhone</span><b>Pitaka</b><span>Your IDs on your phone, filling forms for you. No account, no server.</span><em>Coming soon</em></div></li>
+      <li class="xw-soon"><div class="xw-app"><img src="/work/more/icons/resibo.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">iPhone</span><b>Resibo</b><span>Snap a receipt and it lands in your books.</span><em>Coming soon</em></div></li>
+      <li class="xw-soon"><div class="xw-app"><img src="/work/more/icons/tawag.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">iPhone</span><b>Tawag</b><span>One button: say it to your AI team and it gets done.</span><em>Coming soon</em></div></li>
+      <li class="xw-soon"><div class="xw-app"><img src="/work/more/icons/blurredy.webp" alt="" width="256" height="256" loading="lazy"><span class="xw-app-k">iPhone</span><b>Blurredy</b><span>Your photo frosts and folds as the phone tips away from you.</span><em>Coming soon</em></div></li>
+    </ul>
+  </section>
+
+  <!-- 08e video and motion: vlog intros and brand stings -->
+  <section class="wrap xw" id="motion" aria-labelledby="mo-h">
+    <p class="eyebrow" data-reveal>Video and motion</p>
+    <h2 id="mo-h" class="super silver" data-reveal>We cut the <span class="serif">video too.</span></h2>
+    <p class="story" data-reveal><b>Vlog intros, reels and brand stings, edited in house.</b> The same team that builds the systems films the room and cuts the story.</p>
+    <div class="xw-reel" data-reveal>
+      <figure class="xw-clip"><div class="xw-frame"><video muted playsinline loop preload="none" poster="/work/more/intro-jamz-gladex-poster.webp" data-src="/work/more/intro-jamz-gladex.mp4" aria-label="Vlog intro, the Gladex training"></video><button class="xw-snd muted" type="button" data-snd aria-pressed="false"><span>Tap for sound</span></button></div><figcaption><b>Vlog intro</b> Gladex training, Jamz's channel</figcaption></figure>
+      <figure class="xw-clip"><div class="xw-frame"><video muted playsinline loop preload="none" poster="/work/more/intro-gwen-vietnam-poster.webp" data-src="/work/more/intro-gwen-vietnam.mp4" aria-label="Vlog intro, Vietnam part 1"></video><button class="xw-snd muted" type="button" data-snd aria-pressed="false"><span>Tap for sound</span></button></div><figcaption><b>Vlog intro</b> Vietnam, Gwen Ayala</figcaption></figure>
+      <figure class="xw-clip"><div class="xw-frame"><video muted playsinline loop preload="none" poster="/work/more/intro-gwen-vietnam-2-poster.webp" data-src="/work/more/intro-gwen-vietnam-2.mp4" aria-label="Vlog intro, Vietnam part 2"></video><button class="xw-snd muted" type="button" data-snd aria-pressed="false"><span>Tap for sound</span></button></div><figcaption><b>Vlog intro</b> Vietnam part 2, Gwen Ayala</figcaption></figure>
+    </div>
+    <div class="xw-stings" data-reveal>
+      <div class="xw-stings-copy"><p class="eyebrow">Brand stings</p><p class="story"><b>The logo, animated for every reel.</b> A few seconds that open or close a video and tell you whose it is.</p></div>
+      <figure class="xw-clip xw-v"><div class="xw-frame"><video muted playsinline loop preload="none" poster="/work/more/sting-logo-poster.webp" data-src="/work/more/sting-logo.mp4" aria-label="JTL logo sting"></video></div><figcaption><b>Logo sting</b></figcaption></figure>
+      <figure class="xw-clip xw-v"><div class="xw-frame"><video muted playsinline loop preload="none" poster="/work/more/sting-ripple-poster.webp" data-src="/work/more/sting-ripple.mp4" aria-label="JTL logo ripple sting"></video></div><figcaption><b>Ripple sting</b></figcaption></figure>
+    </div>
   </section>
 
   <!-- 09 finale: the Brain on Supernova -->
@@ -297,7 +413,7 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
       <div class="ctas" data-reveal>
         <a class="btn btn-solid" href="https://book.jtlgrowth.com/" target="_blank" rel="noopener" data-setting="content.bookHref" data-attr="href">Book a call ↗</a>
       </div>
-      <p class="more" data-reveal><a class="textlink" href="/services/">Services</a><a class="textlink" href="/workshop/">Workshop</a></p>
+      <p class="more" data-reveal><a class="textlink" href="/services/">Services</a><a class="textlink" href="/shop/">Shop</a><a class="textlink" href="/free-build/">Free website build</a><a class="textlink" href="/workshop/">Workshop</a></p>
     </div>
   </section>
 </main>
