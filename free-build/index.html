@@ -30,9 +30,9 @@
      2026-09-16: /pricing/ retired, this page replaces the public price list.
      2026-10-08 (Owner pick): one public from-price, the AI employee on /ai-employee/;
      every other engagement is scoped and quoted in writing.
-     2026-10-26 (Owner pick): /free-build/ is this shell with its own main; the free website
-     build, USD 500 a month to run, three months minimum. Source: Venice
-     ops/reports/work-visibility-2026-10-26/free-build (assemble.py). -->
+     2026-10-26 (Owner ask): /free-build/ is a gated landing: access code, then one question per screen,
+     terms, agree, submit. Soft gate (client side), nothing secret behind it. Source: Venice
+     ops/reports/free-website-landing-2026-10-26 (assemble.py). -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -45,14 +45,15 @@ if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Free website build · JTL Growth</title>
-<meta name="description" content="We build one business a website for free, live on a domain in your own name. Keeping it running is USD 500 a month, three months minimum. Apply in two minutes.">
+<meta name="description" content="A free website build for the business we invited. Enter your access code to see the offer and apply.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://jtlgrowth.com/free-build/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#121212">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Free website build · JTL Growth">
-<meta property="og:description" content="We build one business a website for free, live on a domain in your own name. Keeping it running is USD 500 a month, three months minimum. Apply in two minutes.">
+<meta property="og:description" content="A free website build for the business we invited. Enter your access code to see the offer and apply.">
 <meta property="og:url" content="https://jtlgrowth.com/free-build/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -436,40 +437,158 @@ addEventListener("DOMContentLoaded",function(){
 });
 </script>
 <style>
-/* /free-build/ (Owner 2026-10-26): light ground, centred statement, the three example sites fanned under it */
-.fb-hero{padding:clamp(8px,2vh,24px) 0 clamp(36px,6vh,64px);text-align:center;overflow:hidden}
-.fb-copy .lead{margin:22px auto 0;max-width:54ch}
-.fb-copy h1,.fb-deal-h,.qt-day h3{text-wrap:balance}
-.fb-copy .lead,.fb-deal dd,.qt-day p{text-wrap:pretty}
-.fb-copy .hub-row{justify-content:center;margin-top:30px}
-.fb-fan{position:relative;width:min(1080px,92vw);height:clamp(210px,24vw,330px);margin:clamp(34px,5vh,56px) auto 0}
-.fb-site{position:absolute;left:50%;bottom:0;width:46%;aspect-ratio:16/10;display:block;overflow:hidden;border:1px solid var(--line);background:var(--navy-deep);
-  box-shadow:0 34px 70px -34px rgba(0,0,0,.55);text-decoration:none;transition:translate .45s cubic-bezier(.2,1.25,.3,1),box-shadow .3s}
-.fb-site img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
-.fb-site span{position:absolute;left:10px;bottom:10px;display:flex;flex-direction:column;gap:3px;padding:8px 11px;background:var(--cement);color:var(--navy);
-  font:700 11px/1.1 'Space Mono',monospace;letter-spacing:.1em;text-transform:uppercase;text-align:left}
-.fb-site small{font:400 10px/1.1 'Space Mono',monospace;color:var(--gray);letter-spacing:.08em}
-.fb-site.s1{transform:translateX(-101%) rotate(-5deg);transform-origin:100% 100%}
-.fb-site.s2{z-index:2;transform:translateX(-50%) translateY(-7%)}
-.fb-site.s3{transform:translateX(1%) rotate(5deg);transform-origin:0 100%}
-.fb-site.s3 span{left:auto;right:10px;text-align:right}
-.fb-site:hover,.fb-site:focus-visible{translate:0 -10px;box-shadow:0 44px 80px -34px rgba(0,0,0,.6)}
-.fb-site:focus-visible{outline:2px solid var(--navy);outline-offset:4px}
-.fb-deal-h{margin-top:14px;max-width:18ch}
-.fb-deal{margin-top:30px;border-top:1px solid var(--line)}
-.fb-deal div{display:grid;grid-template-columns:minmax(170px,250px) 1fr;gap:6px 30px;padding:20px 0;border-bottom:1px solid var(--line)}
-.fb-deal dt{font-family:'Archivo Expanded',sans-serif;font-weight:700;font-size:16px;color:var(--navy)}
-.fb-deal dd{margin:0;color:var(--gray);font-size:15.5px;line-height:1.6;max-width:62ch}
-@media (max-width:760px){
-  .fb-fan{height:auto;width:auto;margin:30px 0 0;padding:0 5vw 6px;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
-  .fb-site{position:relative;left:auto;flex:0 0 82%;width:auto;transform:none!important;scroll-snap-align:center}
-  .fb-site.s2{order:-1}
-  .fb-site.s3 span{left:10px;right:auto;text-align:left}
-  .fb-deal div{grid-template-columns:1fr}
+/* /free-build/ gated landing (Owner 2026-10-26): one card, one question per screen. Tokens come from the shell's .w45-root. */
+.fw{padding:clamp(8px,3vh,28px) 0 clamp(48px,8vh,96px)}
+.fw-root{max-width:640px}
+.fw-card{position:relative;scroll-margin-top:96px}
+.fw-root h1,.fw-root h2{scroll-margin-top:110px}
+.fw-card[hidden],.fw-step[hidden],.fw-cond[hidden]{display:none}
+.fw-ico{width:52px;height:52px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--fg);margin:0 0 18px;background:var(--chip-bg)}
+.fw-svg{width:24px;height:24px;display:block}
+.fw-h1{font:500 clamp(28px,6vw,40px)/1.15 var(--font-display);letter-spacing:-.025em;color:var(--fg);margin:10px 0 0;outline:none;text-wrap:balance}
+.fw-h1 em{font-style:normal;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.fw-lead{margin:16px 0 22px;font:500 16px/1.55 var(--font-body);color:var(--muted);max-width:52ch}
+.fw-label{display:block;margin:18px 0 8px;font:600 16px/1.3 var(--font-body);color:var(--fg)}
+.fw-note{margin:0 0 6px;font:500 16px/1.55 var(--font-body);color:var(--muted)}
+.fw-custom{padding:12px 14px;border:1px solid var(--border);border-left:3px solid var(--fg);border-radius:var(--radius-sm);background:var(--chip-bg);color:var(--fg-2)}
+.w45-root .w45-note.fw-hint{margin:-8px 0 16px;font-size:16px}
+.fw-area{display:block;width:100%;min-height:104px;padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);color:var(--fg);font:500 16px/1.5 var(--font-body);resize:vertical;margin:0}
+.fw-area::placeholder{color:var(--muted);opacity:1}
+.fw-area:focus-visible,.fw-root .w45-input:focus-visible{outline:none;box-shadow:var(--focus-ring);border-color:var(--accent)}
+.fw-step .w45-q{outline:none}
+.fw-step .w45-q:focus-visible{box-shadow:var(--focus-ring);border-radius:4px}
+.fw-h1:focus-visible{box-shadow:var(--focus-ring);border-radius:4px}
+.fw-root [aria-invalid="true"]{border-color:var(--danger)}
+.fw-root .w45-error{font-size:16px}
+.fw-root .w45-chip label span{display:flex;flex-direction:column;gap:3px}
+.fw-root .w45-chip label small{font:500 16px/1.4 var(--font-body);color:var(--muted)}
+.fw-root .w45-chip input:checked + label small{color:var(--fg-2)}
+.fw-root .w45-chip label::before{content:"";flex:none;width:18px;height:18px;margin-right:12px;border:2px solid var(--fg-2);border-radius:50%;background:var(--surface)}
+.fw-root .w45-chip input:checked + label::before{background:radial-gradient(circle,var(--fg) 0 45%,var(--surface) 50%)}
+.fw-root .w45-chip input[type="checkbox"] + label::before{border-radius:4px}
+.fw-root .w45-chip input[type="checkbox"]:checked + label::before{background:var(--fg);box-shadow:inset 0 0 0 3px var(--surface)}
+/* every choice card carries a Lucide glyph, so the cards read at a glance (Owner 2026-10-26 "para hndi plain") */
+.fw-chip-ico{flex:none;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;margin-right:12px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--fg)}
+.fw-chip-ico .fw-svg{width:18px;height:18px}
+.fw-root .w45-chip input:checked + label .fw-chip-ico{background:var(--fg);border-color:var(--fg);color:var(--surface)}
+/* interaction states (Owner 2026-10-26 "walang hover effect"): every control answers the pointer and the finger.
+   Hover lives under (hover:hover) so it never sticks on a phone; press is a small scale, nothing moves on hover. */
+.fw-root .w45-chip label,.fw-root .w45-input,.fw-area,.fw-dom-btn,.fw-agree,.fw-upsell,.fw-root .w45-back,.fw-root .w45-skip,.fw-root .w45-next,.fw-chip-ico{transition:background-color 140ms ease,border-color 140ms ease,box-shadow 140ms ease,color 140ms ease,transform 120ms ease}
+.fw-agree,.fw-upsell{cursor:pointer}
+@media (hover:hover){
+  .fw-root .w45-chip label:hover{border-color:var(--fg-2);background:color-mix(in srgb,var(--chip-bg) 90%,var(--fg))}
+  .fw-root .w45-chip label:hover .fw-chip-ico{border-color:var(--fg)}
+  .fw-root .w45-chip input:checked + label:hover{border-color:var(--fg)}
+  .fw-root .w45-input:hover,.fw-area:hover{border-color:var(--fg-2)}
+  .fw-agree:hover,.fw-upsell:hover{border-color:var(--fg-2);background:var(--chip-bg)}
+  .fw-dom-btn:hover{background:var(--fg);color:var(--surface)}
+  .fw-root .w45-back:hover{color:var(--fg);background:var(--chip-bg)}
+  .fw-root .w45-skip:hover{color:var(--fg);text-decoration-thickness:2px}
+  .fw-root .w45-done a:hover{color:var(--fg);text-decoration-thickness:2px}
 }
-@media (prefers-reduced-motion:reduce){.fb-site{transition:none}.fb-site:hover,.fb-site:focus-visible{translate:none}}
+.fw-root .w45-skip:active,.fw-root .w45-done a:active{transform:scale(.97)}
+.fw-root .w45-done a{display:inline-block;transition:color 140ms ease,transform 120ms ease}
+.fw-root .w45-back{border-radius:var(--radius-sm);padding:10px 12px;margin-left:-12px}
+.fw-root .w45-chip label:active,.fw-dom-btn:active,.fw-agree:active,.fw-upsell:active{transform:scale(.985)}
+.fw-root .w45-next:not(:disabled):active,.fw-root .w45-back:active{transform:scale(.97)}
+.fw-pick{margin-left:6px;font:500 14px/1 var(--font-body);color:var(--muted)}
+/* the agreement, written as a short letter, with the price set apart so it is the one number they remember */
+.fw-letter p{margin:0 0 12px;font:500 17px/1.55 var(--font-body);color:var(--fg)}
+.fw-letter{margin:4px 0 8px}
+.fw-price{margin:10px 0 20px;padding:18px 18px 16px;border:1px solid var(--fg);border-radius:var(--radius-md);background:var(--chip-bg)}
+.fw-price-big{margin:0;font:600 clamp(28px,6vw,36px)/1.1 var(--font-display);letter-spacing:-.02em;color:var(--fg)}
+.fw-price-big span{font:500 16px/1 var(--font-body);color:var(--muted);letter-spacing:0}
+.fw-price-sub{margin:6px 0 12px;font:600 16px/1.4 var(--font-body);color:var(--fg-2)}
+.fw-price-covers{margin:0;font:500 16px/1.55 var(--font-body);color:var(--fg-2)}
+.fw-after{margin-top:12px}
+/* upsell opt-in: interest only, never pre-ticked, quieter than the answer chips (Owner pick 2026-10-26) */
+.fw-upsell{margin-top:14px;padding:12px 14px;border:1px dashed var(--border);border-radius:var(--radius-md);font-size:16px;color:var(--fg-2);align-items:center}
+.fw-upsell input{width:22px;height:22px;flex:none}
+.fw-part{margin:0 0 14px;padding:12px 14px;border:1px solid var(--border);border-left:3px solid var(--fg);border-radius:var(--radius-sm);background:var(--chip-bg);font:500 16px/1.55 var(--font-body);color:var(--fg)}
+/* domain picker */
+.fw-dom-row{display:flex;gap:8px}
+.fw-dom-row .w45-input{flex:1 1 auto;min-width:0}
+.fw-dom-btn{flex:none;min-height:48px;padding:0 18px;border:1px solid var(--fg);border-radius:var(--radius-md);background:var(--surface);color:var(--fg);font:600 16px/1 var(--font-body);cursor:pointer}
+.fw-dom-btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.fw-dom-status{min-height:1.5em;margin:10px 0 0;font:600 16px/1.45 var(--font-body);color:var(--fg-2)}
+.fw-dom-status[data-state="free"]{color:var(--fg)}
+.fw-dom-status[data-state="free"]::before{content:"\2713  "}
+.fw-dom-status[data-state="taken"]::before,.fw-dom-status[data-state="bad"]::before{content:"\2715  "}
+.fw-cond{margin-top:4px}
+@media (max-width:420px){.fw-root .w45-chips[data-cols="2"] label{padding:12px}}
+.fw-root .w45-count{font-size:14px}
+.fw-root .w45-eyebrow{font-size:12px}
+.fw-btn-ico{display:inline-flex;vertical-align:-4px}
+.fw-btn-ico .fw-svg{width:18px;height:18px}
+.fw-root .w45-back{display:inline-flex;align-items:center;gap:6px;font-size:16px}
+.fw-root .w45-next{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.fw-root .w45-skip{font-size:16px;text-decoration:underline;text-underline-offset:3px}
+.fw-no{margin-right:0}
+.fw-terms{list-style:none;margin:16px 0 4px;padding:0;border-top:1px solid var(--border)}
+.fw-terms li{padding:16px 0;border-bottom:1px solid var(--border)}
+.fw-terms h3{margin:0 0 6px;font:700 16px/1.35 var(--font-body);color:var(--fg)}
+.fw-terms p{margin:0;font:500 16px/1.55 var(--font-body);color:var(--fg-2)}
+.fw-agree{margin-top:18px;padding:14px;border:1px solid var(--border);border-radius:var(--radius-md);font-size:16px;color:var(--fg);align-items:center}
+.fw-agree input{width:24px;height:24px}
+.w45-next:disabled{opacity:.45;cursor:not-allowed}
+.fw-root .w45-done-title{outline:none}
+.fw-root .w45-check .fw-svg{width:30px;height:30px}
+.fw-noscript{padding:16px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font:500 16px/1.5 var(--font-body)}
+.fw-preview{position:sticky;top:0;z-index:50;margin:0;padding:10px 16px;background:#121212;color:#fff;font:600 14px/1.4 system-ui,sans-serif;text-align:center}
+/* ---- human-touch pass (Owner 2026-10-26, approved list of 12) ---- */
+/* 4. a check on the picked card, where the keycap sat; the keycap only shows with a mouse */
+.fw-root .w45-chip label .fw-key{flex:none;margin-left:auto;padding-left:10px;display:none;font:600 13px/1 var(--font-mono,ui-monospace,monospace);color:var(--muted)}
+@media (hover:hover) and (pointer:fine){.fw-root .w45-chip label .fw-key{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;margin-left:auto;padding:0 6px;border:1px solid var(--border);border-radius:6px;background:var(--surface)}}
+.fw-root .w45-chip label{position:relative;padding-right:52px}
+.fw-root .w45-chip label::after{content:"";position:absolute;right:16px;top:50%;width:22px;height:22px;opacity:0;transform:translateY(-50%) scale(.6);transition:opacity 160ms ease-out,transform 160ms ease-out;background:var(--fg);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat}
+/* a transition, not a keyframe: a quick re-tap retargets from where the check is instead of restarting (feel-check) */
+.fw-root .w45-chip input:checked + label::after{opacity:1;transform:translateY(-50%) scale(1)}
+.fw-root .w45-chip input:checked + label .fw-key{visibility:hidden}
+/* 5. the next step slides in from the way you are going; one direction, no bounce */
+.fw-in-fwd{animation:fw-in-fwd 220ms cubic-bezier(.2,.7,.2,1)}
+.fw-in-back{animation:fw-in-back 220ms cubic-bezier(.2,.7,.2,1)}
+@keyframes fw-in-fwd{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes fw-in-back{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+/* 6. time left rides next to the count */
+.fw-root .w45-top{gap:12px;flex-wrap:wrap}
+/* 11. every tap target 44px or more */
+.fw-root .w45-back,.fw-root .w45-skip{min-height:44px}
+.fw-root .w45-done a{min-height:44px;align-items:center;display:inline-flex}
+/* 2. on a phone the buttons sit at the bottom, under the thumb, while the questions scroll */
+.fw-root .fw-card{overflow:visible}
+@media (max-width:600px){
+  .fw-root [data-fw-form] > .w45-actions{position:sticky;bottom:0;z-index:20;margin:16px -24px -24px;padding:12px 24px calc(12px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--border);border-radius:0 0 var(--radius-lg) var(--radius-lg)}
+}
+/* 3. back after a refresh */
+.fw-restored{margin:14px 0 0;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--chip-bg);font:500 16px/1.45 var(--font-body);color:var(--fg)}
+.fw-restored[hidden]{display:none}
+/* 12. review before sending */
+.fw-review{margin:8px 0 0;border-top:1px solid var(--border)}
+.fw-review-row{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:14px 0;border-bottom:1px solid var(--border)}
+.fw-review dt{font:600 13px/1.3 var(--font-mono,ui-monospace,monospace);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fw-review dd{margin:0;display:flex;align-items:flex-start;gap:12px;font:500 16px/1.5 var(--font-body);color:var(--fg)}
+.fw-review dd span{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.fw-edit{flex:none;min-height:44px;min-width:64px;padding:0 14px;border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);color:var(--fg);font:600 16px/1 var(--font-body);cursor:pointer;transition:background-color 140ms ease,border-color 140ms ease,transform 120ms ease}
+@media (hover:hover){.fw-edit:hover{border-color:var(--fg);background:var(--chip-bg)}}
+.fw-edit:active{transform:scale(.97)}
+.fw-edit:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+/* 10. sending, then a calm arrival */
+.fw-spin{width:16px;height:16px;margin-right:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:fw-spin 700ms linear infinite}
+@keyframes fw-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:no-preference){
+  /* the stroke is hidden only where the draw animation runs, so a reduced-motion visitor still sees the check */
+  .fw-root .w45-done:not([hidden]) .w45-check{animation:fw-arrive 360ms cubic-bezier(.2,.7,.2,1) both}
+  .fw-root .w45-done:not([hidden]) .w45-check path{stroke-dasharray:40;stroke-dashoffset:40;animation:fw-draw 420ms 160ms ease-out forwards}
+  .fw-root .w45-done:not([hidden]) .w45-done-title,.fw-root .w45-done:not([hidden]) .w45-done-body{animation:fw-in-fwd 320ms 120ms cubic-bezier(.2,.7,.2,1) both}
+}
+@keyframes fw-arrive{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+@keyframes fw-draw{to{stroke-dashoffset:0}}
+@media (max-width:480px){
+  .fw-root .w45-actions{flex-wrap:wrap}
+  .fw-root [data-terminal-on] .w45-next{flex:1 0 100%}
+}
+@media (prefers-reduced-motion:reduce){.fw-root *{animation:none!important;transition:none!important}}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Free website build", "url": "https://jtlgrowth.com/free-build/", "description": "We build one business a website for free, live on a domain in your own name. Keeping it running is USD 500 a month, three months minimum. Apply in two minutes.", "provider": {"@type": "Organization", "name": "JTL Growth", "url": "https://jtlgrowth.com/"}, "areaServed": "Worldwide", "offers": {"@type": "Offer", "price": "500", "priceCurrency": "USD", "description": "Monthly, three months minimum: hosting, Rialto, fixes and small changes. The build itself is free."}}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -512,184 +631,413 @@ addEventListener("DOMContentLoaded",function(){
 </header>
 
 <main id="main">
-<section class="fb-hero" aria-labelledby="fb-h">
-  <div class="wrap fb-copy">
-    <p class="eyebrow">Free website build &middot; one slot</p>
-    <h1 id="fb-h">We build your website <em class="accent">for free.</em></h1>
-    <p class="lead">A hand-coded site like the three below, live on a domain in your own name. The build costs nothing. Keeping it running is USD 500 a month, three months minimum.</p>
-    <div class="hub-row">
-      <a class="hub-chip magnet solid" href="#form">Apply for the free build <span class="arr">&#8599;</span></a>
-      <a class="hub-chip magnet" href="#deal">Read the full deal <span class="arr">&#8595;</span></a>
-    </div>
-  </div>
-  <div class="fb-fan" role="list" aria-label="Sites we built">
-    <a class="fb-site s1" role="listitem" href="https://jamzjamorol.com/" target="_blank" rel="noopener"><img src="/free-build/site-jamz.webp" alt="jamzjamorol.com home screen" width="1200" height="750"><span>jamzjamorol.com<small>Personal brand</small></span></a>
-    <a class="fb-site s3" role="listitem" href="https://jtlgrowth.com/" target="_blank" rel="noopener"><img src="/free-build/site-jtl.webp" alt="jtlgrowth.com home screen" width="1200" height="750"><span>jtlgrowth.com<small>Agency site</small></span></a>
-    <a class="fb-site s2" role="listitem" href="https://gwenayala.com/" target="_blank" rel="noopener"><img src="/free-build/site-gwen.webp" alt="gwenayala.com home screen" width="1200" height="750"><span>gwenayala.com<small>Founder and speaker</small></span></a>
-  </div>
-</section>
+<section class="wrap fw" aria-label="Free website build">
+<div class="w45-root fw-root" id="fw">
+  <noscript><p class="fw-noscript">This page needs JavaScript to run the access code and the questions. Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> and we will help.</p></noscript>
 
-<section class="wrap" id="how">
-  <h2 class="eyebrow rv">How it works</h2>
-  <div class="qt-days" style="margin-top:26px">
-    <div class="qt-day rv d1">
-      <p class="qt-daytag">01</p>
-      <h3>You apply.</h3>
-      <p>Seven short questions, about two minutes: the business, a page we can check, and what the site should get you.</p>
-    </div>
-    <div class="qt-day rv d2">
-      <p class="qt-daytag">02</p>
-      <h3>We build it, free.</h3>
-      <p>Design, copy and pages, coded by hand. It goes live on a domain you buy in your own name, so the address is yours from day one.</p>
-    </div>
-    <div class="qt-day rv d3">
-      <p class="qt-daytag">03</p>
-      <h3>It runs, and we count.</h3>
-      <p>USD 500 a month keeps it running. At day 30 we sit down with you for 20 minutes: what came in before the site, and what comes in now.</p>
-    </div>
+  <!-- 1. the gate -->
+  <div class="w45-card fw-card" data-fw-gate>
+    <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg></div>
+    <p class="w45-eyebrow">Free website build &middot; one slot</p>
+    <h1 class="fw-h1" id="fw-gate-h" tabindex="-1">We build your website <em>for free.</em></h1>
+    <p class="fw-lead">This page is for the business we invited. Enter the access code that came with your link to see the offer and apply.</p>
+    <form data-fw-gate-form novalidate>
+      <label class="fw-label" for="fw-code">Access code</label>
+      <input class="w45-input" id="fw-code" name="code" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" aria-describedby="fw-code-err">
+      <p class="w45-error" id="fw-code-err" role="alert" data-fw-code-err></p>
+      <div class="w45-actions"><button type="submit" class="w45-next">See the offer</button></div>
+    </form>
   </div>
-</section>
 
-<section class="wrap" id="deal" aria-labelledby="deal-h">
-  <p class="eyebrow rv">The full deal</p>
-  <h2 id="deal-h" class="fb-deal-h rv d1">Free to build. <em class="accent">Paid to run.</em></h2>
-  <dl class="fb-deal rv d2">
-    <div><dt>Free</dt><dd>The build: design, copy, pages, and putting it live.</dd></div>
-    <div><dt>USD 500 a month</dt><dd>About PHP 25,000. Covers hosting, Rialto for your leads and bookings, fixes, and small changes. Billing starts the month the site goes live.</dd></div>
-    <div><dt>3 months minimum</dt><dd>USD 1,500 for the first three months. After that, month to month.</dd></div>
-    <div><dt>Your domain</dt><dd>You buy it, in your own name. If you ever leave, the address goes with you.</dd></div>
-    <div><dt>What we ask</dt><dd>Written permission to share the build as a case study, a before and after count of what matters to you (inquiries, bookings or sales), and the 20-minute review at day 30.</dd></div>
-    <div><dt>If you want more</dt><dd>Watch + grow, USD 2,500 a month: a weekly report, one improvement or new channel every month, and errors caught early.</dd></div>
-  </dl>
-</section>
-
-<section class="wrap" id="form">
-  <p class="eyebrow rv">Apply</p>
-  <p class="qt-warn rv" id="qt-warn">One slot. We read every application and pick one real business or personal brand. Give us a page we can check; applications without one get no reply.</p>
-  <div class="w45-root" id="qt-w45">
-  <form class="w45-form" data-lead-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-format="text" data-endpoint-mirror="https://rialto.whereisdotva.workers.dev/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA" data-partial="on" novalidate>
-    <div class="w45-card" data-w45-card>
+  <!-- 2. the questions, one per screen -->
+  <div class="w45-card fw-card" data-fw-flow hidden>
+    <form data-fw-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-mirror="https://rialto.whereisdotva.workers.dev/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA" data-terms-version="free-website-terms-2026-10-26" novalidate>
       <div class="w45-top">
-        <span class="w45-eyebrow" data-eyebrow></span>
-        <span class="w45-count" data-progress-text>1 / 7</span>
+        <span class="w45-eyebrow" data-fw-eyebrow></span>
+        <span class="w45-count" data-fw-count></span>
       </div>
-      <div class="w45-live" aria-live="polite" data-live></div>
+      <div class="w45-live" aria-live="polite" data-fw-live></div>
       <input type="text" name="company_website" tabindex="-1" autocomplete="off" hidden>
 
-      <div class="w45-steps" data-steps>
-        <fieldset class="w45-step" data-step="1" data-type="choice" data-name="site_type" data-error="Pick one so we know what to build.">
-          <legend class="w45-q" id="w45-site_type-q">What site do you need?</legend>
-          <div class="w45-chips" data-cols="2" role="radiogroup" aria-labelledby="w45-site_type-q" aria-describedby="w45-site_type-err">
-            <div class="w45-chip"><input type="radio" name="site_type" id="w45-site_type-0" value="Business website"><label for="w45-site_type-0">Business website</label></div>
-            <div class="w45-chip"><input type="radio" name="site_type" id="w45-site_type-1" value="Personal brand site"><label for="w45-site_type-1">Personal brand site</label></div>
-            <div class="w45-chip"><input type="radio" name="site_type" id="w45-site_type-2" value="Portfolio"><label for="w45-site_type-2">Portfolio</label></div>
-            <div class="w45-chip"><input type="radio" name="site_type" id="w45-site_type-3" value="Landing page for one offer"><label for="w45-site_type-3">Landing page for one offer</label></div>
+      <div class="w45-steps" data-fw-steps>
+
+        <div class="fw-step" data-step data-label="Your business" data-error="Add your business name and tap what you do." role="group" aria-labelledby="fw-q1">
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10 12h4" /><path d="M10 8h4" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></svg></div>
+          <h2 class="w45-q" id="fw-q1" tabindex="-1">What's your business called, and what do you do?</h2>
+          <p class="fw-note fw-custom">Good news first: your website is fully customizable. Pages, copy, look and features are yours to shape.</p>
+          <label class="fw-label" for="fw-business_name">Business name</label>
+          <input class="w45-input" id="fw-business_name" name="business_name" type="text" autocomplete="organization" data-req>
+          <p class="fw-label" id="fw-bw-l">What you do <span class="fw-pick">Tap one</span></p>
+          <div class="w45-chips" data-cols="2" role="radiogroup" aria-labelledby="fw-bw-l">
+            <div class="w45-chip"><input type="radio" id="fw-bw-health" name="business_what" value="Clinic or health" data-radio-req><label for="fw-bw-health"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M11 2v2" /><path d="M5 2v2" /><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /><path d="M8 15a6 6 0 0 0 12 0v-3" /><circle cx="20" cy="10" r="2" /></svg></span>Clinic or health</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-beauty" name="business_what" value="Salon, spa or beauty" data-radio-req><label for="fw-bw-beauty"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></span>Salon, spa or beauty</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-food" name="business_what" value="Restaurant or cafe" data-radio-req><label for="fw-bw-food"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg></span>Restaurant or cafe</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-shop" name="business_what" value="Shop or products" data-radio-req><label for="fw-bw-shop"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M16 10a4 4 0 0 1-8 0" /><path d="M3.103 6.034h17.794" /><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z" /></svg></span>Shop or products</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-coach" name="business_what" value="Coaching or consulting" data-radio-req><label for="fw-bw-coach"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg></span>Coaching or consulting</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-home" name="business_what" value="Home or local services" data-radio-req><label for="fw-bw-home"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" /></svg></span>Home or local services</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-prop" name="business_what" value="Real estate" data-radio-req><label for="fw-bw-prop"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>Real estate</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-bw-other" name="business_what" value="other" data-radio-req><label for="fw-bw-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
           </div>
-          <p class="w45-error" id="w45-site_type-err" role="alert"></p>
-        </fieldset>
+          <div class="fw-cond" data-when="business_what=other" hidden>
+            <label class="fw-label" for="fw-business_what_other">Type what you do</label>
+            <input class="w45-input" id="fw-business_what_other" name="business_what_other" type="text" data-other-for="business_what" data-req-when="business_what=other" placeholder="e.g. dental clinic, wedding photographer">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
 
-        <fieldset class="w45-step" data-step="2" data-type="text" data-name="business_name" data-error="Enter the name so we can look you up." hidden>
-          <legend class="w45-q" id="w45-business_name-q">What's the business or brand called?</legend>
-          <input class="w45-input" type="text" name="business_name" aria-labelledby="w45-business_name-q" aria-describedby="w45-business_name-err" autocomplete="organization">
-          <p class="w45-error" id="w45-business_name-err" role="alert"></p>
-        </fieldset>
+        <div class="fw-step" data-step data-label="Your website now" data-error="Pick one, and add the link if you have a site." role="group" aria-labelledby="fw-q2" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+          <h2 class="w45-q" id="fw-q2" tabindex="-1">Do you have a website now?</h2>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-q2">
+            <div class="w45-chip"><input type="radio" id="fw-hw-yes" name="has_website" value="yes" data-radio-req><label for="fw-hw-yes"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></span>Yes, I have one</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-hw-no" name="has_website" value="no" data-radio-req><label for="fw-hw-no"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10.1 2.182a10 10 0 0 1 3.8 0" /><path d="M13.9 21.818a10 10 0 0 1-3.8 0" /><path d="M17.609 3.721a10 10 0 0 1 2.69 2.7" /><path d="M2.182 13.9a10 10 0 0 1 0-3.8" /><path d="M20.279 17.609a10 10 0 0 1-2.7 2.69" /><path d="M21.818 10.1a10 10 0 0 1 0 3.8" /><path d="M3.721 6.391a10 10 0 0 1 2.7-2.69" /><path d="M6.391 20.279a10 10 0 0 1-2.69-2.7" /></svg></span>No, none yet</label></div>
+          </div>
+          <div class="fw-cond" data-when="has_website=yes" hidden>
+            <label class="fw-label" for="fw-business_link">Link to it</label>
+            <input class="w45-input" id="fw-business_link" name="business_link" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="yourbusiness.com" data-req-when="has_website=yes">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
 
-        <fieldset class="w45-step" data-step="3" data-type="link" data-name="business_link" data-error="Add a link we can open, like facebook.com/yourpage." hidden>
-          <legend class="w45-q" id="w45-business_link-q">Where can we see you now?</legend>
-          <input class="w45-input" type="text" name="business_link" aria-labelledby="w45-business_link-q" aria-describedby="w45-business_link-err w45-business_link-note" autocomplete="url" inputmode="url" placeholder="facebook.com/yourpage" autocapitalize="off" spellcheck="false">
-          <p class="w45-error" id="w45-business_link-err" role="alert"></p>
-          <p class="w45-note" id="w45-business_link-note">No website yet is fine. A Facebook, Instagram or LinkedIn page works.</p>
-        </fieldset>
+        <div class="fw-step" data-step data-label="The goal" data-error="Tap at least one. Not sure is a fine answer." role="group" aria-labelledby="fw-q3" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg></div>
+          <h2 class="w45-q" id="fw-q3" tabindex="-1">What should the website do for your business?</h2>
+          <p class="w45-note fw-hint">Tap all that fit.</p>
+          <div class="w45-chips" role="group" aria-labelledby="fw-q3">
+            <div class="w45-chip"><input type="checkbox" id="fw-g-inq" name="goal" value="More inquiries" data-check-req><label for="fw-g-inq"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></span>More inquiries and messages</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-g-book" name="goal" value="More bookings" data-check-req><label for="fw-g-book"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="m9 15 2 2 4-4" /></svg></span>More bookings and appointments</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-g-sell" name="goal" value="Sell online" data-check-req><label for="fw-g-sell"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg></span>Sell my products online</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-g-trust" name="goal" value="Look more trustworthy" data-check-req><label for="fw-g-trust"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></span>Look more legit so clients trust me faster</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-g-show" name="goal" value="Show my work" data-check-req><label for="fw-g-show"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg></span>Show my work, menu or services</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-g-ns" name="goal" value="Not sure yet" data-check-req><label for="fw-g-ns"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></span>Not sure yet, help me decide</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-g-other" name="goal" value="other" data-check-req><label for="fw-g-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
+          </div>
+          <div class="fw-cond" data-when="goal=other" hidden>
+            <label class="fw-label" for="fw-goal_other">Type it in your own words</label>
+            <input class="w45-input" id="fw-goal_other" name="goal_other" type="text" data-other-for="goal" data-req-when="goal=other">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
 
-        <fieldset class="w45-step" data-step="4" data-type="text" data-name="goal" data-error="Tell us what the site should do for you." hidden>
-          <legend class="w45-q" id="w45-goal-q">What should the site get you?</legend>
-          <input class="w45-input" type="text" name="goal" aria-labelledby="w45-goal-q" aria-describedby="w45-goal-err" placeholder="More inquiries, more bookings, clients who trust you faster." autocomplete="off">
-          <p class="w45-error" id="w45-goal-err" role="alert"></p>
-        </fieldset>
+        <div class="fw-step" data-step data-label="Pages and features" data-error="Tap at least one. You decide is a fine answer." role="group" aria-labelledby="fw-q4" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg></div>
+          <h2 class="w45-q" id="fw-q4" tabindex="-1">Which pages and features do you need?</h2>
+          <p class="w45-note fw-hint">Tap all that fit. A rough pick is fine, we shape it with you.</p>
+          <div class="w45-chips" data-cols="2" role="group" aria-labelledby="fw-q4">
+            <div class="w45-chip"><input type="checkbox" id="fw-p-home" name="pages_features" value="Home" data-check-req><label for="fw-p-home"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>Home</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-about" name="pages_features" value="About" data-check-req><label for="fw-p-about"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg></span>About</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-svc" name="pages_features" value="Services" data-check-req><label for="fw-p-svc"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /><rect width="20" height="14" x="2" y="6" rx="2" /></svg></span>Services</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-price" name="pages_features" value="Pricing" data-check-req><label for="fw-p-price"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg></span>Pricing</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-book" name="pages_features" value="Booking" data-check-req><label for="fw-p-book"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg></span>Booking</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-gal" name="pages_features" value="Gallery" data-check-req><label for="fw-p-gal"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></span>Gallery</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-rev" name="pages_features" value="Reviews" data-check-req><label for="fw-p-rev"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></svg></span>Reviews</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-faq" name="pages_features" value="FAQ" data-check-req><label for="fw-p-faq"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></span>FAQ</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-shop" name="pages_features" value="Online shop" data-check-req><label for="fw-p-shop"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></svg></span>Online shop</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-contact" name="pages_features" value="Contact" data-check-req><label for="fw-p-contact"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /><rect x="2" y="4" width="20" height="16" rx="2" /></svg></span>Contact</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-you" name="pages_features" value="You decide" data-check-req><label for="fw-p-you"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" /><path d="m14 7 3 3" /><path d="M5 6v4" /><path d="M19 14v4" /><path d="M10 2v2" /><path d="M7 8H3" /><path d="M21 16h-4" /><path d="M11 3H9" /></svg></span>Not sure, you decide</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-p-other" name="pages_features" value="other" data-check-req><label for="fw-p-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
+          </div>
+          <div class="fw-cond" data-when="pages_features=other" hidden>
+            <label class="fw-label" for="fw-pages_features_other">Type the other pages or features</label>
+            <input class="w45-input" id="fw-pages_features_other" name="pages_features_other" type="text" data-other-for="pages_features" data-req-when="pages_features=other" placeholder="e.g. menu, careers, events">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
 
-        <fieldset class="w45-step" data-step="5" data-type="text" data-name="first_name" data-error="Enter your first name." hidden>
-          <legend class="w45-q" id="w45-first_name-q">What's your first name?</legend>
-          <input class="w45-input" type="text" name="first_name" aria-labelledby="w45-first_name-q" aria-describedby="w45-first_name-err" autocomplete="given-name">
-          <p class="w45-error" id="w45-first_name-err" role="alert"></p>
-        </fieldset>
+        <div class="fw-step" data-step data-label="Chatbot" data-error="Pick one. Not sure is a fine answer." role="group" aria-labelledby="fw-q5" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg></div>
+          <h2 class="w45-q" id="fw-q5" tabindex="-1">Do you need a chatbot?</h2>
+          <p class="w45-note fw-hint">A chatbot answers your visitors' questions on the site, any time of day. One chatbot is included in your support.</p>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-q5">
+            <div class="w45-chip"><input type="radio" id="fw-cb-yes" name="chatbot" value="yes" data-radio-req><label for="fw-cb-yes"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20 6 9 17l-5-5" /></svg></span>Yes</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-cb-no" name="chatbot" value="no" data-radio-req><label for="fw-cb-no"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span>No</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-cb-ns" name="chatbot" value="not sure" data-radio-req><label for="fw-cb-ns"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></span>Not sure</label></div>
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
 
-        <fieldset class="w45-step" data-step="6" data-type="email" data-name="email" data-error="Enter a valid email, like name@business.com." hidden>
-          <legend class="w45-q" id="w45-email-q">Best email for our reply?</legend>
-          <input class="w45-input" type="email" name="email" aria-labelledby="w45-email-q" aria-describedby="w45-email-err" autocomplete="email" inputmode="email">
-          <p class="w45-error" id="w45-email-err" role="alert"></p>
-        </fieldset>
+        <div class="fw-step" data-step data-label="Automations" data-error="Pick one. Not sure is a fine answer." role="group" aria-labelledby="fw-q6" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></svg></div>
+          <h2 class="w45-q" id="fw-q6" tabindex="-1">Do you need automations?</h2>
+          <p class="w45-note fw-hint">For example: booking confirmations, or a follow-up message after someone sends an inquiry. Two simple ones are included, and more are quoted first.</p>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-q6">
+            <div class="w45-chip"><input type="radio" id="fw-au-yes" name="automations" value="yes" data-radio-req><label for="fw-au-yes"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20 6 9 17l-5-5" /></svg></span>Yes</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-au-no" name="automations" value="no" data-radio-req><label for="fw-au-no"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span>No</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-au-ns" name="automations" value="not sure" data-radio-req><label for="fw-au-ns"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></span>Not sure</label></div>
+          </div>
+          <label class="w45-consent fw-upsell"><input type="checkbox" name="upsell_ai_employee" value="Interested in an AI employee"><span>I'd like to hear about an AI employee that answers and books for me, day and night.</span></label>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
 
-        <fieldset class="w45-step" data-step="7" data-type="tel" data-name="whatsapp" data-optional data-error="Enter a number we can reach you on, like 0917 123 4567." hidden>
-          <legend class="w45-q" id="w45-whatsapp-q">WhatsApp, so we can reply faster?</legend>
-          <input class="w45-input" type="tel" name="whatsapp" aria-labelledby="w45-whatsapp-q" aria-describedby="w45-whatsapp-err w45-whatsapp-note" autocomplete="tel" inputmode="tel" placeholder="0917 123 4567">
-          <p class="w45-error" id="w45-whatsapp-err" role="alert"></p>
-          <p class="w45-note" id="w45-whatsapp-note">Optional. Outside the Philippines? Start with your country code, like +1. Skip if you'd rather we email you.</p>
-          <label class="w45-consent"><input type="checkbox" name="deal_ok"><span>I've read the deal: the build is free, and the site runs at USD 500 a month, three months minimum.</span></label>
-          <label class="w45-consent"><input type="checkbox" name="contact_consent"><span>I agree that JTL Growth may use these details to reply to this application. <a href="/privacy/" data-privacy-link>Privacy</a>.</span></label>
-        </fieldset>
+        <div class="fw-step" data-step data-label="Subdomains" data-error="Pick one. Not sure is a fine answer." role="group" aria-labelledby="fw-q7" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
+          <h2 class="w45-q" id="fw-q7" tabindex="-1">Do you need subdomains?</h2>
+          <p class="w45-note fw-hint">A subdomain is a separate section on its own address, like book.yourbusiness.com or shop.yourbusiness.com. Extra subdomains are quoted first.</p>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-q7">
+            <div class="w45-chip"><input type="radio" id="fw-sd-yes" name="subdomains" value="yes" data-radio-req><label for="fw-sd-yes"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20 6 9 17l-5-5" /></svg></span>Yes</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-sd-no" name="subdomains" value="no" data-radio-req><label for="fw-sd-no"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></span>No</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-sd-ns" name="subdomains" value="not sure" data-radio-req><label for="fw-sd-ns"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></span>Not sure</label></div>
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Your domain" data-error="Pick one so we know who buys the domain." role="group" aria-labelledby="fw-q8" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" /><circle cx="16.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
+          <h2 class="w45-q" id="fw-q8" tabindex="-1">Who gets the domain?</h2>
+          <p class="w45-note fw-hint">The domain is your address, like yourbusiness.com. It is USD 500 a month whichever you pick.</p>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-q8">
+            <div class="w45-chip"><input type="radio" id="fw-dm-jtl" name="domain_choice" value="JTL buys it" data-radio-req><label for="fw-dm-jtl"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10 12h4" /><path d="M10 8h4" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></svg></span><span><strong>JTL buys it</strong><small>JTL owns the domain. It is included in the USD 500 a month.</small></span></label></div>
+            <div class="w45-chip"><input type="radio" id="fw-dm-me" name="domain_choice" value="I'll buy it" data-radio-req><label for="fw-dm-me"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg></span><span><strong>I'll buy it</strong><small>The domain is yours. Still USD 500 a month.</small></span></label></div>
+            <div class="w45-chip"><input type="radio" id="fw-dm-have" name="domain_choice" value="I already have one" data-radio-req><label for="fw-dm-have"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" /><circle cx="16.5" cy="7.5" r=".5" fill="currentColor" /></svg></span><span><strong>I already have one</strong><small>The domain stays yours. Still USD 500 a month.</small></span></label></div>
+          </div>
+          <div class="fw-cond fw-dom" data-when="domain_choice=JTL buys it|I'll buy it" hidden>
+            <label class="fw-label" for="fw-wanted_domain">Your preferred domain name (optional)</label>
+            <div class="fw-dom-row">
+              <input class="w45-input" id="fw-wanted_domain" name="wanted_domain" type="text" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="yourbusiness.com" aria-describedby="fw-dom-status fw-dom-note" data-domain>
+              <button type="button" class="fw-dom-btn" data-dom-check>Check</button>
+            </div>
+            <p class="fw-dom-status" id="fw-dom-status" role="status" aria-live="polite" data-dom-status></p>
+            <p class="w45-note" id="fw-dom-note">This isn't guaranteed yet. We'll check it on our side, and if it's not available, we'll email you a few options to pick from.</p>
+          </div>
+          <div class="fw-cond" data-when="domain_choice=I already have one" hidden>
+            <label class="fw-label" for="fw-domain_name">Your domain (optional)</label>
+            <input class="w45-input" id="fw-domain_name" name="domain_name" type="text" inputmode="url" autocapitalize="none" spellcheck="false" placeholder="yourbusiness.com">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Contact" data-error="Add your name and a valid email. A phone number, if you give one, needs 7 or more digits." role="group" aria-labelledby="fw-q10" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg></div>
+          <h2 class="w45-q" id="fw-q10" tabindex="-1">How do we reach you?</h2>
+          <label class="fw-label" for="fw-first_name">Your name</label>
+          <input class="w45-input" id="fw-first_name" name="first_name" type="text" autocomplete="name" data-req>
+          <label class="fw-label" for="fw-email">Email</label>
+          <input class="w45-input" id="fw-email" name="email" type="email" autocomplete="email" inputmode="email" data-req data-kind="email">
+          <label class="fw-label" for="fw-whatsapp">WhatsApp or phone (optional)</label>
+          <input class="w45-input" id="fw-whatsapp" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="0917 123 4567" data-kind="tel">
+          <p class="w45-note">Outside the Philippines? Start with your country code, like +1. We only message this number about your website. Msg &amp; data rates may apply, reply STOP to opt out.</p>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step fw-terms-step" data-step data-terms data-label="Before we build" data-error="Tick the box to agree, so we can publish your website." role="group" aria-labelledby="fw-q11" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path d="m21 3 1 11h-2" /><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /><path d="M3 4h8" /></svg></div>
+          <h2 class="w45-q" id="fw-q11" tabindex="-1">One honest thing before we build your website.</h2>
+          <div class="fw-letter">
+            <p>Your website build is free. Really free.</p>
+            <p>But a website needs a home to live in, and someone to look after it.</p>
+            <p>That's what Website Support and Maintenance is.</p>
+          </div>
+          <div class="fw-price">
+            <p class="fw-price-big">USD 500 <span>a month</span></p>
+            <p class="fw-price-sub">or PHP 32,000 &middot; 3-month lock-in</p>
+            <p class="fw-price-covers">It covers your domain, server hosting on Rialto (our own platform, like GoHighLevel), website upkeep, bug fixes, up to 4 small changes a month, 1 chatbot and 2 simple automations. Full support, so you never have to think about it.</p>
+          </div>
+          <div class="fw-letter">
+            <p>Now, here's the part we want to be upfront about.</p>
+            <p>Once you agree, we send your first invoice. We start building the day month 1 is paid.</p>
+            <p>We only publish your website when maintenance is active. That's how we skip the back and forth and put your site live right away.</p>
+            <p>The first 3 months are a lock-in: USD 500 a month, USD 1,500 in total.</p>
+            <p>Why? Because the build is free, and those 3 months are what make it fair for both of us.</p>
+            <p>After that, you decide. Keep it, and it simply continues month to month.</p>
+            <p>And if the maintenance stops, the website goes offline. No hard feelings. That's just how it stays fair.</p>
+          </div>
+          <ol class="fw-terms">
+            <li><h3>What's included each month</h3><p>Up to 4 small changes (a line of text, a photo, a section), 1 chatbot and 2 simple automations. Anything bigger, more automations, or extra subdomains, we quote first so there are no surprises. Usage fees for messages, SMS or AI are billed at cost.</p></li>
+            <li><h3>The domain</h3><p>If JTL buys it, it stays JTL's and it's included in the USD 500. If you buy one or already have one, it stays yours. Same USD 500 a month either way.</p></li>
+            <li><h3>The case study</h3><p>The free build comes with three things from you: written permission to show your website and its results, a before and after count of what matters to you (inquiries, bookings or sales), and a 20-minute review with us at day 30.</p></li>
+            <li><h3>If you ever leave</h3><p>After the 3 months, you can stop any time. Your website lives on Rialto and goes offline when maintenance stops. Your logo, photos, words, and any domain you bought stay yours. Moving the website to another host is a paid handover, and we quote it when you ask.</p></li>
+            <li><h3>It's yours to shape</h3><p>Pages, words, look and features are fully customizable. Small changes ride your monthly allowance, and bigger ones are quoted first.</p></li>
+          </ol>
+          <label class="w45-consent fw-agree"><input type="checkbox" name="agreed_terms" id="fw-agree" aria-describedby="fw-q11"><span>I agree: USD 500 a month for Website Support and Maintenance, a 3-month lock-in, month 1 paid before we start building, and the case study above.</span></label>
+          <p class="w45-note fw-after">Not for you right now? That's completely ok. Tap "No, not for me" and nothing is sent.</p>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <!-- part 2: assets and how it should look, unlocked by the agreement -->
+        <div class="fw-step" data-step data-label="Your logo" data-error="Tap one. We can help either way." role="group" aria-labelledby="fw-a1" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+          <p class="fw-part">Thank you for trusting us with this. Now the fun part: a few quick taps about your logo, photos and look, and then we start building.</p>
+          <h2 class="w45-q" id="fw-a1" tabindex="-1">Do you have a logo?</h2>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-a1">
+            <div class="w45-chip"><input type="radio" id="fw-lg-have" name="logo" value="I have one" data-radio-req><label for="fw-lg-have"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /><path d="m9 12 2 2 4-4" /></svg></span>Yes, I have one</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-lg-make" name="logo" value="Make one for me" data-radio-req><label for="fw-lg-make"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg></span>No, make one for me</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-lg-name" name="logo" value="Use my business name for now" data-radio-req><label for="fw-lg-name"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 4v16" /><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><path d="M9 20h6" /></svg></span>Just use my business name for now</label></div>
+          </div>
+          <label class="w45-consent fw-upsell"><input type="checkbox" name="upsell_brand" value="Interested in a brand kit"><span>I'd also like a full brand kit, not just a logo. Tell me more.</span></label>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Your photos" data-error="Tap at least one. Stock photos for now is a fine answer." role="group" aria-labelledby="fw-a2" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></div>
+          <h2 class="w45-q" id="fw-a2" tabindex="-1">Which photos can we use?</h2>
+          <p class="w45-note fw-hint">Tap all that fit.</p>
+          <div class="w45-chips" role="group" aria-labelledby="fw-a2">
+            <div class="w45-chip"><input type="checkbox" id="fw-ph-own" name="photos" value="My own photos" data-check-req><label for="fw-ph-own"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></span>My own photos</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-ph-social" name="photos" value="Photos from my Facebook or Instagram" data-check-req><label for="fw-ph-social"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></span>Photos from my Facebook or Instagram</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-ph-new" name="photos" value="I'll take new photos" data-check-req><label for="fw-ph-new"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /><circle cx="12" cy="13" r="3" /></svg></span>I'll take new photos</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-ph-stock" name="photos" value="Stock photos for now" data-check-req><label for="fw-ph-stock"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg></span>Use stock photos for now</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-ph-other" name="photos" value="other" data-check-req><label for="fw-ph-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
+          </div>
+          <div class="fw-cond" data-when="photos=other" hidden>
+            <label class="fw-label" for="fw-photos_other">Type it in your own words</label>
+            <input class="w45-input" id="fw-photos_other" name="photos_other" type="text" data-other-for="photos" data-req-when="photos=other">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Your files" data-error="Tap at least one so we know where to look." role="group" aria-labelledby="fw-a3" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" /></svg></div>
+          <h2 class="w45-q" id="fw-a3" tabindex="-1">Where can we get your logo, photos and files?</h2>
+          <p class="w45-note fw-hint">Tap all that fit. We'll ask for access later, nothing to upload now.</p>
+          <div class="w45-chips" data-cols="2" role="group" aria-labelledby="fw-a3">
+            <div class="w45-chip"><input type="checkbox" id="fw-src-fb" name="asset_sources" value="Facebook page" data-check-req><label for="fw-src-fb"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /><path d="M7 10v12" /></svg></span>Facebook page</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-ig" name="asset_sources" value="Instagram" data-check-req><label for="fw-src-ig"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="m14.31 8 5.74 9.94" /><path d="M9.69 8h11.48" /><path d="m7.38 12 5.74-9.94" /><path d="M9.69 16 3.95 6.06" /><path d="M14.31 16H2.83" /><path d="m16.62 12-5.74 9.94" /></svg></span>Instagram</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-drive" name="asset_sources" value="Google Drive or Dropbox" data-check-req><label for="fw-src-drive"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></span>Google Drive or Dropbox</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-phone" name="asset_sources" value="On my phone" data-check-req><label for="fw-src-phone"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" /></svg></span>On my phone</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-canva" name="asset_sources" value="Canva" data-check-req><label for="fw-src-canva"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></span>Canva</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-site" name="asset_sources" value="My current website" data-check-req><label for="fw-src-site"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></span>My current website</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-none" name="asset_sources" value="I don't have files yet" data-check-req><label for="fw-src-none"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /><path d="m9.5 10.5 5 5" /><path d="m14.5 10.5-5 5" /></svg></span>I don't have files yet</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-src-other" name="asset_sources" value="other" data-check-req><label for="fw-src-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
+          </div>
+          <div class="fw-cond" data-when="asset_sources=other" hidden>
+            <label class="fw-label" for="fw-asset_sources_other">Type where they are</label>
+            <input class="w45-input" id="fw-asset_sources_other" name="asset_sources_other" type="text" data-other-for="asset_sources" data-req-when="asset_sources=other">
+          </div>
+          <label class="fw-label" for="fw-asset_link">Have a link? Paste it here (optional)</label>
+          <input class="w45-input" id="fw-asset_link" name="asset_link" type="text" inputmode="url" autocapitalize="none" spellcheck="false" placeholder="facebook.com/yourbusiness">
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Your colors" data-error="Tap one. You choose for me is a fine answer." role="group" aria-labelledby="fw-a4" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
+          <h2 class="w45-q" id="fw-a4" tabindex="-1">Do you have brand colors?</h2>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-a4">
+            <div class="w45-chip"><input type="radio" id="fw-co-have" name="brand_colors" value="I have them" data-radio-req><label for="fw-co-have"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></span>Yes, I have them</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-co-logo" name="brand_colors" value="Take them from my logo" data-radio-req><label for="fw-co-logo"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" /><path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" /><path d="m2 22 .414-.414" /></svg></span>Take them from my logo</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-co-you" name="brand_colors" value="You choose for me" data-radio-req><label for="fw-co-you"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" /><path d="m14 7 3 3" /><path d="M5 6v4" /><path d="M19 14v4" /><path d="M10 2v2" /><path d="M7 8H3" /><path d="M21 16h-4" /><path d="M11 3H9" /></svg></span>You choose for me</label></div>
+          </div>
+          <div class="fw-cond" data-when="brand_colors=I have them" hidden>
+            <label class="fw-label" for="fw-brand_colors_list">Your colors (optional)</label>
+            <input class="w45-input" id="fw-brand_colors_list" name="brand_colors_list" type="text" placeholder="e.g. navy and gold, or #1a2b3c">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Your look" data-error="Tap one. Something else works too." role="group" aria-labelledby="fw-a5" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m11 10 3 3" /><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z" /><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031" /></svg></div>
+          <h2 class="w45-q" id="fw-a5" tabindex="-1">What feel fits your business?</h2>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-a5">
+            <div class="w45-chip"><input type="radio" id="fw-lk-clean" name="look" value="Clean and simple" data-radio-req><label for="fw-lk-clean"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="3" rx="2" /></svg></span>Clean and simple</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-lk-bold" name="look" value="Bold and modern" data-radio-req><label for="fw-lk-bold"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></svg></span>Bold and modern</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-lk-warm" name="look" value="Warm and friendly" data-radio-req><label for="fw-lk-warm"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg></span>Warm and friendly</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-lk-prem" name="look" value="Premium and elegant" data-radio-req><label for="fw-lk-prem"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></span>Premium and elegant</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-lk-other" name="look" value="other" data-radio-req><label for="fw-lk-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
+          </div>
+          <div class="fw-cond" data-when="look=other" hidden>
+            <label class="fw-label" for="fw-look_other">Describe it, or name a website you like</label>
+            <input class="w45-input" id="fw-look_other" name="look_other" type="text" data-other-for="look" data-req-when="look=other">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="References" data-error="Tap one, and paste at least one link if you have them." role="group" aria-labelledby="fw-a5b" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z" /></svg></div>
+          <h2 class="w45-q" id="fw-a5b" tabindex="-1">Seen a website you'd love yours to feel like?</h2>
+          <p class="w45-note fw-hint">Any industry counts. No reference is ok too: we pick a look that fits you and show it to you before anything goes live.</p>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-a5b">
+            <div class="w45-chip"><input type="radio" id="fw-rf-links" name="reference" value="Sent links" data-radio-req><label for="fw-rf-links"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg></span><span><strong>Yes, here are links</strong><small>A website, a Facebook page or a Pinterest board.</small></span></label></div>
+            <div class="w45-chip"><input type="radio" id="fw-rf-later" name="reference" value="Screenshots later" data-radio-req><label for="fw-rf-later"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></span><span><strong>I'll send screenshots later</strong><small>We ask for them in our email.</small></span></label></div>
+            <div class="w45-chip"><input type="radio" id="fw-rf-you" name="reference" value="You decide" data-radio-req><label for="fw-rf-you"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" /><path d="m14 7 3 3" /><path d="M5 6v4" /><path d="M19 14v4" /><path d="M10 2v2" /><path d="M7 8H3" /><path d="M21 16h-4" /><path d="M11 3H9" /></svg></span><span><strong>You decide for me</strong><small>We design it and show you first.</small></span></label></div>
+          </div>
+          <div class="fw-cond" data-when="reference=Sent links" hidden>
+            <label class="fw-label" for="fw-reference_links">Paste 1 to 3 links</label>
+            <textarea class="fw-area" id="fw-reference_links" name="reference_links" rows="3" inputmode="url" autocapitalize="none" spellcheck="false" placeholder="e.g. apple.com&#10;facebook.com/yourfavoritecafe" data-req-when="reference=Sent links"></textarea>
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="The words" data-error="Tap one. Write it for me is a fine answer." role="group" aria-labelledby="fw-a6" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 21h8" /><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /></svg></div>
+          <h2 class="w45-q" id="fw-a6" tabindex="-1">Who writes the words on your website?</h2>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-a6">
+            <div class="w45-chip"><input type="radio" id="fw-cp-us" name="copy_by" value="Write it for me" data-radio-req><label for="fw-cp-us"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 21h8" /><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /></svg></span><span><strong>Write it for me</strong><small>We use your Facebook, Instagram and a short call.</small></span></label></div>
+            <div class="w45-chip"><input type="radio" id="fw-cp-me" name="copy_by" value="I'll send my own text" data-radio-req><label for="fw-cp-me"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></svg></span><span><strong>I'll send my own text</strong><small>You write it, we place it and polish it.</small></span></label></div>
+            <div class="w45-chip"><input type="radio" id="fw-cp-mix" name="copy_by" value="A mix of both" data-radio-req><label for="fw-cp-mix"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></span><span><strong>A mix of both</strong><small>You give the basics, we fill in the rest.</small></span></label></div>
+          </div>
+          <label class="w45-consent fw-upsell"><input type="checkbox" name="upsell_content" value="Interested in content help"><span>I'd also like help posting content after launch. Tell me more.</span></label>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Getting in touch" data-error="Tap at least one way people can reach you." role="group" aria-labelledby="fw-a7" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg></div>
+          <h2 class="w45-q" id="fw-a7" tabindex="-1">How should visitors reach you from your website?</h2>
+          <p class="w45-note fw-hint">Tap all that fit.</p>
+          <div class="w45-chips" data-cols="2" role="group" aria-labelledby="fw-a7">
+            <div class="w45-chip"><input type="checkbox" id="fw-rc-wa" name="reach_by" value="WhatsApp" data-check-req><label for="fw-rc-wa"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg></span>WhatsApp</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-rc-call" name="reach_by" value="Call" data-check-req><label for="fw-rc-call"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></span>Call</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-rc-email" name="reach_by" value="Email" data-check-req><label for="fw-rc-email"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /><rect x="2" y="4" width="20" height="16" rx="2" /></svg></span>Email</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-rc-msgr" name="reach_by" value="Messenger" data-check-req><label for="fw-rc-msgr"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /><path d="M12 11h.01" /><path d="M16 11h.01" /><path d="M8 11h.01" /></svg></span>Messenger</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-rc-book" name="reach_by" value="Booking form" data-check-req><label for="fw-rc-book"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="m9 15 2 2 4-4" /></svg></span>Booking form</label></div>
+            <div class="w45-chip"><input type="checkbox" id="fw-rc-other" name="reach_by" value="other" data-check-req><label for="fw-rc-other"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></span>Something else</label></div>
+          </div>
+          <div class="fw-cond" data-when="reach_by=other" hidden>
+            <label class="fw-label" for="fw-reach_by_other">Type it here</label>
+            <input class="w45-input" id="fw-reach_by_other" name="reach_by_other" type="text" data-other-for="reach_by" data-req-when="reach_by=other">
+          </div>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <div class="fw-step" data-step data-label="Going live" data-error="Tap one so we can plan your build." role="group" aria-labelledby="fw-a8" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /></svg></div>
+          <h2 class="w45-q" id="fw-a8" tabindex="-1">When would you love to go live?</h2>
+          <div class="w45-chips" role="radiogroup" aria-labelledby="fw-a8">
+            <div class="w45-chip"><input type="radio" id="fw-tm-asap" name="go_live" value="As soon as possible" data-radio-req><label for="fw-tm-asap"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /></svg></span>As soon as possible</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-tm-month" name="go_live" value="Within a month" data-radio-req><label for="fw-tm-month"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /></svg></span>Within a month</label></div>
+            <div class="w45-chip"><input type="radio" id="fw-tm-norush" name="go_live" value="No rush" data-radio-req><label for="fw-tm-norush"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M5 22h14" /><path d="M5 2h14" /><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" /><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" /></svg></span>No rush</label></div>
+          </div>
+          <label class="fw-label" for="fw-notes">Anything else you'd like us to know? (optional)</label>
+          <textarea class="fw-area" id="fw-notes" name="notes" rows="3" placeholder="A feature you've been wanting, a deadline, anything."></textarea>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
+
+        <!-- last look: every answer with an Edit that jumps to its step and comes straight back here -->
+        <div class="fw-step" data-step data-review data-label="Review" role="group" aria-labelledby="fw-rv" hidden>
+          <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 5h8" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="m3 17 2 2 4-4" /><path d="m3 7 2 2 4-4" /></svg></div>
+          <h2 class="w45-q" id="fw-rv" tabindex="-1">Here's everything you told us.</h2>
+          <p class="w45-note fw-hint">Take a quick look. Tap Edit on anything you want to change, then send it over.</p>
+          <dl class="fw-review" data-fw-review></dl>
+          <p class="w45-error" role="alert" data-err></p>
+        </div>
       </div>
+      <p class="fw-restored" data-fw-restored role="status" hidden>Welcome back. We kept your answers, so you can pick up where you left off.</p>
 
-      <div class="w45-progress" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" data-progress>
-        <span class="w45-seg" data-seg></span>
-        <span class="w45-seg" data-seg></span>
-        <span class="w45-seg" data-seg></span>
-        <span class="w45-seg" data-seg></span>
-        <span class="w45-seg" data-seg></span>
-        <span class="w45-seg" data-seg></span>
-        <span class="w45-seg" data-seg></span>
-      </div>
+      <div class="w45-progress" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuenow="1" data-fw-progress></div>
 
       <div class="w45-actions">
-        <button type="button" class="w45-back" data-back hidden>Back</button>
-        <button type="button" class="w45-skip" data-skip hidden>Skip</button>
-        <button type="button" class="w45-next" data-next>Next</button>
+        <button type="button" class="w45-back" data-fw-back hidden><span class="fw-btn-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg></span>Back</button>
+        <button type="button" class="w45-skip fw-no" data-fw-no hidden>No, not for me</button>
+        <button type="button" class="w45-next" data-fw-next>Next <span class="fw-btn-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span></button>
       </div>
-    </div>
-
-    <div class="w45-card w45-done" data-done hidden>
-      <div class="w45-check" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      </div>
-      <h2 class="w45-done-title" data-done-title>Application sent.</h2>
-      <p class="w45-done-body" data-done-body>We read every application and pick one business. You hear back from us within two business days either way.</p>
-      <p class="w45-fallback" data-done-fallback hidden></p>
-      <p class="w45-fallback w45-done-book"><a href="/work/">While you wait, see what we've built</a></p>
-    </div>
-  </form>
-
-  <script type="application/json" data-w45-settings>
-{
-  "leadForm": {"storageKey": "jtl-freebuild-w45"},
-  "content": {
-    "eyebrow": "",
-    "privacyUrl": "/privacy/",
-    "fallbackPhone": "",
-    "doneTitle": "Application sent.",
-    "doneBody": "We read every application and pick one business. You hear back from us within two business days either way.",
-    "submitLabel": "Send my application"
-  },
-  "questions": [
-    {"name": "site_type", "label": "What site do you need?", "options": ["Business website", "Personal brand site", "Portfolio", "Landing page for one offer"]},
-    {"name": "business_name", "label": "What's the business or brand called?"},
-    {"name": "business_link", "label": "Where can we see you now?", "placeholder": "facebook.com/yourpage"},
-    {"name": "goal", "label": "What should the site get you?", "placeholder": "More inquiries, more bookings, clients who trust you faster."},
-    {"name": "first_name", "label": "What's your first name?"},
-    {"name": "email", "label": "Best email for our reply?"},
-    {"name": "whatsapp", "label": "WhatsApp, so we can reply faster?", "placeholder": "0917 123 4567"}
-  ]
-}
-  </script>
-</div>
-<p class="qt-note">Questions first? <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></p>
-</section>
-
-<section class="wrap" id="elsewhere">
-  <p class="eyebrow rv">Elsewhere on the site</p>
-  <div class="hub-row rv d1">
-    <a class="hub-chip magnet" href="/work/">Our work <span class="arr">&#8599;</span></a>
-    <a class="hub-chip magnet" href="/shop/">Shop <span class="arr">&#8599;</span></a>
-    <a class="hub-chip magnet" href="/quote/">Request a quote <span class="arr">&#8599;</span></a>
+    </form>
   </div>
+
+  <!-- 3. thank you -->
+  <div class="w45-card fw-card w45-done" data-fw-done hidden>
+    <div class="w45-check" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg></div>
+    <h2 class="w45-done-title" tabindex="-1">Thank you. We have everything we need.</h2>
+    <p class="w45-done-body">We read every application ourselves and pick one business. Either way, you'll get an email from us within two business days with what happens next.</p>
+    <p class="w45-done-body">And thank you for trusting us with something you've worked so hard to build.</p>
+    <p class="w45-fallback w45-done-book"><a href="/work/">While you wait, see what we've built</a></p>
+  </div>
+
+  <!-- 4. polite no -->
+  <div class="w45-card fw-card w45-done" data-fw-declined hidden>
+    <div class="w45-check" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg></div>
+    <h2 class="w45-done-title" tabindex="-1">That's completely ok.</h2>
+    <p class="w45-done-body">Thank you for taking a look. Nothing was sent and we kept nothing. If you change your mind, the same link and code still work.</p>
+    <p class="w45-fallback w45-done-book"><a href="/work/">See what we've built</a></p>
+  </div>
+</div>
 </section>
 </main>
 
@@ -1015,6 +1363,436 @@ addEventListener("DOMContentLoaded",function(){
   }
 
   Array.prototype.forEach.call(document.querySelectorAll(".w45-root"), boot);
+})();
+</script>
+<script>
+/* Free website build landing. Soft gate: the access code is checked in the browser, so it only keeps
+   casual visitors out. Nothing secret sits behind it (the page text, the questions and the terms are all in
+   this file). One question per screen; answers stay in the DOM, so Back keeps them. */
+(function () {
+  "use strict";
+  var root = document.getElementById("fw");
+  if (!root) return;
+  var CODE = "websitejtl";
+  var gate = root.querySelector("[data-fw-gate]"), gateForm = root.querySelector("[data-fw-gate-form]");
+  var codeIn = root.querySelector("#fw-code"), codeErr = root.querySelector("[data-fw-code-err]");
+  var flow = root.querySelector("[data-fw-flow]"), form = root.querySelector("[data-fw-form]");
+  var doneCard = root.querySelector("[data-fw-done]"), declCard = root.querySelector("[data-fw-declined]");
+  var steps = Array.prototype.slice.call(form.querySelectorAll("[data-step]"));
+  var TOTAL = steps.length, current = 1;
+  var eyebrow = form.querySelector("[data-fw-eyebrow]"), countEl = form.querySelector("[data-fw-count]");
+  var liveEl = form.querySelector("[data-fw-live]"), prog = form.querySelector("[data-fw-progress]");
+  var backBtn = form.querySelector("[data-fw-back]"), nextBtn = form.querySelector("[data-fw-next]"), noBtn = form.querySelector("[data-fw-no]");
+  var stepsEl = form.querySelector("[data-fw-steps]"), agree = form.querySelector("#fw-agree");
+  var honeypot = form.querySelector('input[name="company_website"]');
+  var endpoint = (form.getAttribute("data-endpoint") || "").trim();
+  var mirror = (form.getAttribute("data-endpoint-mirror") || "").trim();
+  var termsVersion = form.getAttribute("data-terms-version") || "";
+  var sending = false;
+  var nextHTML = nextBtn.innerHTML;
+  var agreeHTML = nextHTML.replace("Next", "I agree, continue");
+  var leadId = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);  /* one id, so the partial and the complete post land on the same row */
+  var termsAt = steps.findIndex(function (st) { return st.hasAttribute("data-terms"); }) + 1;
+  var reviewAt = steps.findIndex(function (st) { return st.hasAttribute("data-review"); }) + 1;
+  var reviewEl = form.querySelector("[data-fw-review]"), restoredEl = form.querySelector("[data-fw-restored]");
+  var returnTo = 0;          /* set while editing one answer from the review screen */
+  var intent = false;        /* a deliberate tap or letter key, so arrow keys moving through a radio group never auto-advance */
+  var autoTimer = 0, saveTimer = 0;
+  var DRAFT = "fw-draft-v1";
+  prog.setAttribute("aria-valuemax", String(TOTAL));
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, TEL = /^\+?\d{7,15}$/;
+
+  for (var i = 0; i < TOTAL; i++) { var s = document.createElement("span"); s.className = "w45-seg"; prog.appendChild(s); }
+  var segs = prog.querySelectorAll(".w45-seg");
+
+  /* letter keycaps (A, B, C...) on every choice card; shown only with a mouse, the keys work either way */
+  steps.forEach(function (st) {
+    Array.prototype.forEach.call(st.querySelectorAll(".w45-chips .w45-chip label"), function (lb, k) {
+      if (k > 25) return;
+      var cap = document.createElement("span"); cap.className = "fw-key"; cap.setAttribute("aria-hidden", "true");
+      cap.textContent = String.fromCharCode(65 + k); lb.appendChild(cap);
+    });
+  });
+
+  /* a light tick on a normal tap, a stronger buzz only when something is wrong (Android; iOS ignores vibrate) */
+  function buzz(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {} }
+
+  function val(el) { return (el.value || "").trim(); }
+  function checked(name) { var r = form.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ""; }
+  function picked(name, value) {  /* radio or checkbox: is this exact option ticked */
+    return Array.prototype.some.call(form.querySelectorAll('input[name="' + name + '"]:checked'), function (r) { return r.value === value; });
+  }
+  function inHidden(el) { return !!el.closest("[data-when][hidden]"); }  /* only a closed conditional field is skipped; other steps are hidden but still count */
+
+  /* ---- gate ---- */
+  gateForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (codeIn.value.trim().toLowerCase() === CODE) {
+      codeErr.textContent = ""; codeIn.removeAttribute("aria-invalid");
+      gate.hidden = true; flow.hidden = false; show(1, true);
+    } else {
+      codeErr.textContent = "That code didn't match. Check the message that came with your link and try again.";
+      codeIn.setAttribute("aria-invalid", "true"); codeIn.focus();
+    }
+  });
+
+  /* ---- conditional fields ---- */
+  function applyWhen() {
+    Array.prototype.forEach.call(form.querySelectorAll("[data-when]"), function (el) {
+      var kv = el.getAttribute("data-when").split("=");
+      el.hidden = !kv[1].split("|").some(function (v) { return picked(kv[0], v); });
+    });
+  }
+  form.addEventListener("pointerdown", function (e) {
+    if (!e.target.closest(".w45-chip label")) return;
+    intent = true; setTimeout(function () { intent = false; }, 800);  /* a tap on the card already picked changes nothing, so the flag must not linger */
+  });
+  form.addEventListener("change", function (e) {
+    saveSoon();
+    if (e.target === agree) { updateNext(); return; }
+    applyWhen();
+    /* clear a message on chip picks only: clearing on a text blur shifts the layout between mousedown and mouseup and the Next click misses */
+    var t = e.target, err = t.closest("[data-step]");
+    if (err && (t.type === "radio" || t.type === "checkbox")) setErr(err, "");
+    var tapped = intent; intent = false;
+    if (tapped && t.closest(".w45-chips")) buzz(8);
+    /* tap = continue (Owner pick 2026-10-26): a single-choice step with nothing else to fill moves on by itself,
+       after a beat long enough to see the check. Multi-pick, type boxes and opt-in ticks keep the Next button. */
+    clearTimeout(autoTimer);
+    if (tapped && t.type === "radio" && err && err === steps[current - 1] && canAuto(err)) {
+      autoTimer = setTimeout(function () { if (steps[current - 1] === err && !sending) next(); }, 350);
+    }
+    /* "Something else" opens its type box: put the cursor there so they can just type */
+    if (t.value === "other" && t.checked) { var box = form.querySelector('[data-other-for="' + t.name + '"]'); if (box) box.focus(); }
+    /* a pick that opens a required box (reference links) does the same, so the box never hides under the phone's sticky Next */
+    else if (t.checked) { var need = form.querySelector('[data-req-when="' + t.name + "=" + t.value + '"]'); if (need && !inHidden(need)) { need.focus({ preventScroll: true }); need.scrollIntoView({ block: "center", behavior: "smooth" }); } }
+    /* they will buy a domain: suggest one from the business name and check it, so most people just tap Next */
+    if (t.name === "domain_choice" && domIn && !domIn.closest("[data-when]").hidden && !domIn.value.trim()) {
+      var s = slug(val(form.querySelector("#fw-business_name"))); if (s) { domIn.value = s + ".com"; checkDomain(); }
+    }
+  });
+  form.addEventListener("input", function (e) { saveSoon(); var st = e.target.closest("[data-step]"); if (st && e.target !== agree) { e.target.removeAttribute("aria-invalid"); setErr(st, ""); } });
+  function canAuto(step) {
+    if (step.hasAttribute("data-terms") || step.hasAttribute("data-review")) return false;
+    return !Array.prototype.some.call(step.querySelectorAll("input, textarea, select"), function (el) {
+      return el.type !== "radio" && !el.closest("[data-when][hidden]");
+    });
+  }
+
+  /* ---- keep their answers: a refresh or a closed tab picks up where they left off ---- */
+  function saveSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(saveDraft, 250); }
+  function saveDraft() {
+    try {
+      var d = { c: current, lead: leadId, f: {} };
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name || el === honeypot) return;
+        if (el.type === "radio" || el.type === "checkbox") { if (el.checked) (d.f[el.name] = d.f[el.name] || []).push(el.value); }
+        else if (el.value) d.f[el.name] = [el.value];
+      });
+      localStorage.setItem(DRAFT, JSON.stringify(d));
+    } catch (e) {}
+  }
+  function loadDraft() { try { var d = JSON.parse(localStorage.getItem(DRAFT) || "null"); return d && d.f ? d : null; } catch (e) { return null; } }
+  function clearDraft() { clearTimeout(saveTimer); try { localStorage.removeItem(DRAFT); } catch (e) {} }
+  function restoreDraft(d) {
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el === honeypot || !d.f[el.name]) return;
+      if (el.type === "radio" || el.type === "checkbox") el.checked = d.f[el.name].indexOf(el.value) >= 0;
+      else el.value = d.f[el.name][0];
+    });
+    if (d.lead) leadId = d.lead;
+    applyWhen();
+    var c = Math.max(1, Math.min(d.c || 1, TOTAL));
+    if (c > termsAt && !agree.checked) c = termsAt;
+    return c;
+  }
+
+  /* ---- domain name check ---- */
+  var domIn = form.querySelector("[data-domain]"), domStatus = form.querySelector("[data-dom-status]");
+  var domState = "", domSeq = 0, domTimer = 0;
+  function cleanDomain(s) {
+    s = (s || "").trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split(/[\/?#\s]/)[0];
+    if (s && s.indexOf(".") < 0) s += ".com";
+    return /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/.test(s) ? s : "";
+  }
+  function slug(s) { return (s || "").toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "").slice(0, 40); }
+  /* "taken" | "free" | "unknown". Name servers in DNS mean it is registered. Otherwise RDAP through rdap.org:
+     200 taken, 404 free. A TLD with no RDAP (.ph) never leaves rdap.org, so it is unknown unless DNS answers NXDOMAIN.
+     Both services send CORS *, and a result is a hint, not a registration: the copy says "looks available". */
+  function lookup(d) {
+    var dns = fetch("https://cloudflare-dns.com/dns-query?name=" + encodeURIComponent(d) + "&type=NS", { headers: { accept: "application/dns-json" } })
+      .then(function (r) { return r.json(); }).catch(function () { return null; });
+    return dns.then(function (j) {
+      if (j && j.Answer && j.Answer.length) return "taken";
+      var nx = !!(j && j.Status === 3);
+      return fetch("https://rdap.org/domain/" + encodeURIComponent(d)).then(function (r) {
+        var onRegistry = !!r.url && r.url.indexOf("https://rdap.org/") !== 0;
+        if (onRegistry && r.status === 200) return "taken";
+        if (onRegistry && r.status === 404) return "free";
+        return nx ? "free" : "unknown";
+      }).catch(function () { return nx ? "free" : "unknown"; });
+    });
+  }
+  function setDom(state, msg) { domState = state; domStatus.textContent = msg; domStatus.setAttribute("data-state", state); }
+  function checkDomain() {
+    /* Owner 2026-10-26: say available or not available, no prices and no alternatives here; the options go out by email */
+    var d = cleanDomain(domIn.value), seq = ++domSeq;
+    if (!domIn.value.trim()) { setDom("", ""); return; }
+    if (!d) { setDom("bad", "That doesn't look like a domain yet. Try something like yourbusiness.com"); return; }
+    setDom("checking", "Checking " + d + "...");
+    lookup(d).then(function (res) {
+      if (seq !== domSeq) return;
+      if (res === "free") setDom("free", d + " is available.");
+      else if (res === "taken") setDom("taken", d + " is not available. No worries, we'll email you a few options.");
+      else setDom("unknown", "We'll check " + d + " for you on our side.");
+    });
+  }
+  if (domIn) {
+    domIn.addEventListener("input", function () { clearTimeout(domTimer); domTimer = setTimeout(checkDomain, 700); });
+    form.querySelector("[data-dom-check]").addEventListener("click", function () { clearTimeout(domTimer); checkDomain(); });
+  }
+
+  /* ---- steps ---- */
+  function setErr(step, msg) { var p = step.querySelector("[data-err]"); if (p) p.textContent = msg; }
+  function focusStep(step) {
+    var h = step.querySelector(".w45-q"); if (h) h.focus({ preventScroll: false });
+  }
+  function updateNext() {
+    var last = current === TOTAL, terms = current === termsAt;
+    form.toggleAttribute("data-terminal-on", last || terms);
+    form.parentNode.toggleAttribute("data-terminal-on", last || terms);
+    if (sending) return;
+    if (returnTo) { nextBtn.innerHTML = nextHTML.replace("Next", "Back to review"); nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
+    else if (terms) { nextBtn.innerHTML = agreeHTML; nextBtn.disabled = !agree.checked; nextBtn.setAttribute("aria-disabled", String(!agree.checked)); }
+    else if (last) { nextBtn.textContent = "Send it over"; nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
+    else { nextBtn.innerHTML = nextHTML; nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
+    noBtn.hidden = !terms || !!returnTo; backBtn.hidden = current === 1 || !!returnTo;
+  }
+  /* about 8 seconds a question, a minute for the agreement: an honest "how long is left" next to the count */
+  function timeLeft(n) {
+    var sec = 0;
+    for (var k = n; k <= TOTAL; k++) sec += k === termsAt ? 60 : 8;
+    if (n === TOTAL) return "last step";
+    return sec < 45 ? "almost done" : "about " + Math.max(1, Math.round(sec / 60)) + " min left";
+  }
+  function show(n, focus) {
+    var dir = n >= current ? "fwd" : "back";
+    current = n;
+    clearTimeout(autoTimer);
+    steps.forEach(function (st, k) { st.hidden = k !== n - 1; });
+    applyWhen();
+    var st = steps[n - 1];
+    if (n === reviewAt) renderReview();
+    eyebrow.textContent = st.getAttribute("data-label") || "";
+    countEl.textContent = n + " of " + TOTAL + " · " + timeLeft(n);
+    prog.setAttribute("aria-valuenow", String(n)); prog.setAttribute("aria-valuetext", "Question " + n + " of " + TOTAL);
+    Array.prototype.forEach.call(segs, function (sg, k) { if (k < n) sg.setAttribute("data-filled", ""); else sg.removeAttribute("data-filled"); });
+    liveEl.textContent = "Question " + n + " of " + TOTAL;
+    /* the new step slides in from the side you are heading to: right on Next, left on Back */
+    if (!reduce) { stepsEl.classList.remove("fw-in-fwd", "fw-in-back"); void stepsEl.offsetWidth; stepsEl.classList.add("fw-in-" + dir); }
+    updateNext();
+    if (focus !== false) focusStep(st);
+    if (flow.getBoundingClientRect().top < 0) flow.scrollIntoView({ block: "start" });  /* scroll-margin in the css keeps it clear of the fixed header */
+    saveSoon();
+  }
+  function fail(step, field, msg) {
+    setErr(step, msg || step.getAttribute("data-error") || "Please answer this one.");
+    buzz([30, 40, 30]);
+    if (field) {
+      field.setAttribute("aria-invalid", "true");
+      field.focus({ preventScroll: true });
+      /* bring the thing to fix into the middle of the screen, never a shake */
+      (field.closest(".w45-chips") || field).scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+    }
+    return false;
+  }
+
+  /* ---- review: every answer in plain words, each with Edit ---- */
+  function labelText(lb) {
+    var c = lb.cloneNode(true);
+    Array.prototype.forEach.call(c.querySelectorAll(".fw-key, .fw-chip-ico, small"), function (x) { x.remove(); });
+    return c.textContent.replace(/\s+/g, " ").trim();
+  }
+  function answersFor(step) {
+    var out = [];
+    Array.prototype.forEach.call(step.querySelectorAll("input, textarea"), function (el) {
+      if (!el.name || el === honeypot || el === agree || el.hasAttribute("data-other-for") || el.closest("[data-when][hidden]")) return;
+      if (el.type === "radio" || el.type === "checkbox") {
+        if (!el.checked) return;
+        if (el.value === "other") { var box = form.querySelector('[data-other-for="' + el.name + '"]'); out.push(box && val(box) ? val(box) : "Something else"); return; }
+        var lb = el.closest(".w45-chips") ? form.querySelector('label[for="' + el.id + '"]') : null;
+        out.push(lb ? labelText(lb) : el.value);
+        return;
+      }
+      if (val(el)) out.push(val(el));
+    });
+    return out;
+  }
+  function renderReview() {
+    reviewEl.innerHTML = "";
+    steps.forEach(function (st, k) {
+      if (st.hasAttribute("data-review")) return;
+      var dt = document.createElement("dt"), dd = document.createElement("dd");
+      dt.textContent = st.getAttribute("data-label");
+      var text = document.createElement("span");
+      if (st.hasAttribute("data-terms")) text.textContent = agree.checked ? "You agreed to the terms." : "Not agreed yet.";
+      else { var a = answersFor(st); text.textContent = a.length ? a.join(", ") : "Skipped"; }
+      dd.appendChild(text);
+      if (!st.hasAttribute("data-terms")) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "fw-edit"; b.textContent = "Edit";
+        b.setAttribute("aria-label", "Edit " + st.getAttribute("data-label"));
+        b.addEventListener("click", function () { returnTo = reviewAt; show(k + 1, true); });
+        dd.appendChild(b);
+      }
+      var row = document.createElement("div"); row.className = "fw-review-row"; row.appendChild(dt); row.appendChild(dd);
+      reviewEl.appendChild(row);
+    });
+  }
+  function validate(step) {
+    setErr(step, "");
+    Array.prototype.forEach.call(step.querySelectorAll("[aria-invalid]"), function (x) { x.removeAttribute("aria-invalid"); });
+    var fields = step.querySelectorAll("input[data-req],textarea[data-req],input[data-req-when],textarea[data-req-when]"), k, el;
+    for (k = 0; k < fields.length; k++) {
+      el = fields[k]; if (inHidden(el)) continue;
+      if (val(el) === "") return fail(step, el);
+    }
+    var radios = {}; Array.prototype.forEach.call(step.querySelectorAll("input[data-radio-req]"), function (r) { radios[r.name] = r; });
+    for (var nm in radios) { if (!checked(nm)) return fail(step, radios[nm].closest(".w45-chips").querySelector("input")); }
+    var boxes = {}; Array.prototype.forEach.call(step.querySelectorAll("input[data-check-req]"), function (r) { boxes[r.name] = r; });
+    for (var bn in boxes) { if (!checked(bn)) return fail(step, boxes[bn].closest(".w45-chips").querySelector("input")); }
+    var kinds = step.querySelectorAll("[data-kind]");
+    for (k = 0; k < kinds.length; k++) {
+      el = kinds[k]; var v = val(el);
+      if (el.getAttribute("data-kind") === "email" && !EMAIL.test(v)) return fail(step, el);
+      if (el.getAttribute("data-kind") === "tel" && v !== "" && !TEL.test(v.replace(/[\s\-().]/g, ""))) return fail(step, el);
+    }
+    return true;
+  }
+  function next() {
+    if (sending) return;
+    var st = steps[current - 1];
+    if (!validate(st)) return;
+    if (current === termsAt) {
+      if (!agree.checked) { setErr(st, st.getAttribute("data-error")); agree.focus(); return; }
+      if (!returnTo) post(collect("partial")).catch(function () {});  /* they agreed: save the row now, so a drop-off in part 2 still reaches us */
+    }
+    if (returnTo && current !== returnTo) { var r = returnTo; returnTo = 0; show(r, true); return; }
+    if (current === TOTAL) { submit(); return; }
+    show(current + 1, true);
+  }
+  nextBtn.addEventListener("click", next);
+  backBtn.addEventListener("click", function () { if (current > 1 && !sending) show(current - 1, true); });
+  noBtn.addEventListener("click", function () {
+    if (sending) return;
+    clearDraft();
+    flow.hidden = true; declCard.hidden = false;
+    var h = declCard.querySelector(".w45-done-title"); h.focus(); declCard.scrollIntoView({ block: "start" });
+  });
+  /* desktop: letter keys pick the matching card, like the keycaps show; never while typing in a field */
+  document.addEventListener("keydown", function (e) {
+    if (flow.hidden || e.metaKey || e.ctrlKey || e.altKey || e.isComposing || !/^[a-z]$/i.test(e.key)) return;
+    var t = e.target;
+    if (t.tagName === "TEXTAREA" || (t.tagName === "INPUT" && !/^(radio|checkbox)$/.test(t.type))) return;
+    var lbs = steps[current - 1].querySelectorAll(".w45-chips .w45-chip label");
+    var lb = lbs[e.key.toLowerCase().charCodeAt(0) - 97];
+    if (!lb) return;
+    e.preventDefault(); intent = true; lb.click();
+    var inp = form.querySelector("#" + lb.getAttribute("for")); if (inp) inp.focus({ preventScroll: true });
+  });
+  form.addEventListener("submit", function (e) { e.preventDefault(); });
+  form.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" || e.isComposing) return;
+    var t = e.target, tag = t.tagName;
+    if (tag === "BUTTON" || tag === "A" || (tag === "INPUT" && t.type === "checkbox")) return;
+    if (tag === "TEXTAREA" && e.shiftKey) return;
+    e.preventDefault();
+    if (t === domIn) { clearTimeout(domTimer); checkDomain(); return; }
+    if (current < TOTAL) next();
+  });
+
+  /* ---- submit ---- */
+  function collect(stage) {
+    var out = { stage: stage || "complete", source: "free-website-landing", page: location.href, ts: new Date().toISOString() };
+    out.lead_id = leadId;
+    out.site_type = "Free website build";
+    var multi = {};
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el === honeypot || el.name === "agreed_terms" || el.hasAttribute("data-other-for")) return;
+      if (el.type === "radio") { if (el.checked) out[el.name] = el.value; return; }
+      if (el.type === "checkbox") { if (el.checked) (multi[el.name] = multi[el.name] || []).push(el.value); return; }
+      if (inHidden(el)) return;
+      var v = val(el); if (v !== "") out[el.name] = v;
+    });
+    for (var mk in multi) out[mk] = multi[mk].join(", ");
+    /* "Something else" posts what they typed under the same key, so the sheet columns stay as they were */
+    Array.prototype.forEach.call(form.querySelectorAll("[data-other-for]"), function (el) {
+      var key = el.getAttribute("data-other-for"), typed = val(el);
+      if (!out[key]) return;
+      var parts = out[key].split(", ").filter(function (p) { return p !== "other"; });
+      if (typed) parts.push(typed); else if (!parts.length) parts.push("Something else");
+      out[key] = parts.join(", ");
+    });
+    if (out.wanted_domain) { out.wanted_domain = cleanDomain(out.wanted_domain) || out.wanted_domain; out.wanted_domain_check = domState || "unchecked"; }
+    out.name = out.first_name;
+    out.agreed_terms = agree.checked;
+    out.terms_version = termsVersion;
+    /* the lead Sheet keeps a fixed set of columns (apps/jtl-lead-inbox/Code.gs), so every answer also rides
+       as one readable block in "problem", the column its notification email prints */
+    out.layer = "Free website build";
+    var lines = [], seen = {};
+    steps.forEach(function (st) {
+      if (st.hasAttribute("data-terms")) { if (agree.checked) lines.push("Agreed: USD 500 a month, 3-month lock-in (" + termsVersion + ")"); return; }
+      var vals = [];
+      Array.prototype.forEach.call(st.querySelectorAll("[name]"), function (el) {
+        if (seen[el.name] || el.hasAttribute("data-other-for")) return; seen[el.name] = 1;
+        if (out[el.name]) vals.push(out[el.name] + (el.name === "wanted_domain" ? " (" + out.wanted_domain_check + ")" : ""));
+      });
+      if (vals.length) lines.push(st.getAttribute("data-label") + ": " + vals.join(" / "));
+    });
+    out.problem = lines.join("\n").slice(0, 2000);
+    return out;
+  }
+  function post(o) {
+    var body = JSON.stringify(o);
+    if (mirror && endpoint) { try { fetch(mirror, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body, keepalive: true }).catch(function () {}); } catch (e) {} }
+    if (!endpoint) return Promise.resolve();
+    return fetch(endpoint, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: body, keepalive: true }).then(function (res) {
+      if (!res || !res.ok) throw new Error("bad response");
+      return typeof res.json === "function" ? res.json().catch(function () { return null; }) : null;
+    }).then(function (j) { if (j && j.ok === false) throw new Error("refused"); });
+  }
+  function submit() {
+    if (!agree.checked) { show(termsAt, true); setErr(steps[termsAt - 1], steps[termsAt - 1].getAttribute("data-error")); return; }
+    if (honeypot && honeypot.value) { showDone(); return; }
+    sending = true; setErr(steps[TOTAL - 1], "");
+    nextBtn.disabled = true; nextBtn.innerHTML = '<span class="fw-spin" aria-hidden="true"></span>Sending';
+    nextBtn.setAttribute("aria-busy", "true");
+    var go = post(collect("complete"));
+    go.then(function () { sending = false; nextBtn.removeAttribute("aria-busy"); clearDraft(); showDone(); }).catch(function () {
+      sending = false; nextBtn.removeAttribute("aria-busy"); updateNext(); buzz([30, 40, 30]);
+      var st = steps[TOTAL - 1];
+      setErr(st, "That didn't send, so nothing has reached us yet. Your answers are still here. Check your connection and press Submit again, or email hello@jtlgrowth.com.");
+      nextBtn.focus();
+    });
+  }
+  function showDone() {
+    clearDraft();
+    flow.hidden = true; doneCard.hidden = false;
+    buzz(12);
+    doneCard.querySelector(".w45-done-title").focus();
+    doneCard.scrollIntoView({ block: "start" });
+  }
+
+  /* came back after a refresh or a closed tab: they already passed the code, so open straight on their step */
+  var saved = loadDraft();
+  if (saved) {
+    gate.hidden = true; flow.hidden = false;
+    var at = restoreDraft(saved);
+    restoredEl.hidden = false;
+    show(at, false);
+    if (domIn && domIn.value && !domIn.closest("[data-when]").hidden) checkDomain();
+  }
 })();
 </script>
 </body>
