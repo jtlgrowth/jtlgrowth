@@ -84,6 +84,80 @@
     { name: 'clear', kws: ['clear', 'cls', 'reset'], a: null }
   ];
   var GREETING = 'Venice here, the AI employee that runs this firm’s repetitive half. Ask what we build, what it costs, or type go to services.';
+  // Real answers come from ask.jtlgrowth.com (apps/jtl-ask in HQ), a Worker with the AVAS bot's guards.
+  // The canned INTENTS stay the instant layer (chips, short keywords, navigation) and the fallback
+  // whenever the bot is dark, slow or down. Replies render as text only; links are rebuilt as anchors
+  // here only when they point at our own hosts.
+  var ASK_URL = 'https://ask.jtlgrowth.com/ask';
+  var ASK_TIMEOUT = 40000;
+  var OWN_LINK = /^(?:https:\/\/(?:www\.|book\.|shop\.|download\.)?jtlgrowth\.com(?:\/[A-Za-z0-9\-._~\/#?=&%]*)?|hello@jtlgrowth\.com)$/;
+  var bot = { state: 'unknown', history: [], waiters: [] };
+  function botStatus(cb) {
+    if (bot.state === 'on' || bot.state === 'off') { cb(bot.state === 'on'); return; }
+    bot.waiters.push(cb);
+    if (bot.state === 'checking') return;
+    bot.state = 'checking';
+    function done(on) {
+      bot.state = on ? 'on' : 'off';
+      var w = bot.waiters;
+      bot.waiters = [];
+      for (var i = 0; i < w.length; i++) w[i](on);
+    }
+    if (!window.fetch) { done(false); return; }
+    fetch(ASK_URL, { method: 'GET', credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : { online: false }; })
+      .then(function (j) { done(!!(j && j.online === true)); }, function () { done(false); });
+  }
+  function askBot(text, ok, fail) {
+    var msgs = bot.history.slice(-6).concat([{ role: 'user', content: text }]);
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, ASK_TIMEOUT);
+    fetch(ASK_URL, {
+      method: 'POST',
+      credentials: 'omit',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: msgs }),
+      signal: ctl ? ctl.signal : undefined
+    }).then(function (r) {
+      return r.json().then(function (j) { return { status: r.status, body: j || {} }; }, function () { return { status: r.status, body: {} }; });
+    }).then(function (res) {
+      clearTimeout(timer);
+      var reply = res.body && typeof res.body.reply === 'string' ? res.body.reply : '';
+      if (res.status === 503) bot.state = 'off';
+      if (res.status === 200 && reply) {
+        bot.history.push({ role: 'user', content: text });
+        bot.history.push({ role: 'assistant', content: reply, sig: res.body.sig });
+        bot.history = bot.history.slice(-8);
+        ok(reply);
+      } else {
+        fail(res.status === 429 ? 'Lots of questions at once. Give me a minute, or type book to talk to Gwen.' : null);
+      }
+    }, function () { clearTimeout(timer); fail(null); });
+  }
+  function linkify(el) {
+    var text = el.textContent;
+    var re = /(https:\/\/[^\s]+|hello@jtlgrowth\.com)/g;
+    var parts = text.split(re);
+    if (parts.length < 2) return;
+    while (el.firstChild) el.removeChild(el.firstChild);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (!p) continue;
+      var tail = '';
+      var m = p.match(/[.,;:!?)]+$/);
+      if (i % 2 === 1 && m) { tail = m[0]; p = p.slice(0, -tail.length); }
+      if (i % 2 === 1 && OWN_LINK.test(p)) {
+        var a = document.createElement('a');
+        a.href = p.indexOf('@') !== -1 && p.indexOf('://') === -1 ? 'mailto:' + p : p;
+        a.textContent = p;
+        if (/^https:\/\/book\./.test(p)) { a.target = '_blank'; a.rel = 'noopener'; }
+        el.appendChild(a);
+      } else {
+        el.appendChild(document.createTextNode(p));
+      }
+      if (tail) el.appendChild(document.createTextNode(tail));
+    }
+  }
   function escHtml(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -131,7 +205,8 @@
   TermUI.prototype.appendSys = function (text) {
     var d = document.createElement('div');
     d.className = 'kb-line kb-line-sys';
-    d.innerHTML = '<span class="kb-txt">' + text + '</span>';
+    d.innerHTML = '<span class="kb-txt"></span>';
+    d.firstChild.textContent = text;
     this.log.appendChild(d);
     this.trim14();
     this.scrollBottom();
@@ -147,6 +222,7 @@
     window.JTLTerm.last = text;
     if (reduced()) {
       txt.textContent = text;
+      linkify(txt);
       if (done) done();
       return;
     }
@@ -157,13 +233,16 @@
     function step() {
       if (i >= text.length) {
         if (caret.parentNode) caret.parentNode.removeChild(caret);
+        linkify(txt);
         self.scrollBottom();
         if (done) done();
         return;
       }
-      var ch = text.charAt(i);
+      // long bot answers type three characters a tick, so a 600-character reply lands in about 5 s
+      var ch = text.substr(i, text.length > 240 ? 3 : 1);
       txt.insertBefore(document.createTextNode(ch), caret);
-      i++;
+      i += ch.length;
+      ch = ch.charAt(ch.length - 1);
       self.scrollBottom();
       var delay = 16 + Math.floor(Math.random() * 15);
       if (ch === '.' || ch === ',') delay = 110;
@@ -278,23 +357,52 @@
     }
     // a bare page name navigates only when no intent claims the word: "services" explains, "go to services" opens
     if (bare && !best) { this.doNav(bare, cb); return; }
-    if (!best && lower.indexOf('?') !== -1) best = intentByName('help');
-    if (best) {
-      if (best.name === 'clear') {
-        this.log.innerHTML = '';
-        cb();
-        return;
-      }
-      if (best.go) {
-        // setup-night intents answer, then open the page: no second step to type
-        var dest = { type: 'path', path: best.go };
-        this.typeAnswer(best.a, function () { self.doNav(dest, cb); });
-        return;
-      }
-      this.typeAnswer(best.a, cb);
+    if (best && best.name === 'clear') {
+      this.log.innerHTML = '';
+      cb();
       return;
     }
+    // chips and short commands stay instant and canned; a real question goes to the bot
+    var question = lower.split(' ').length >= 4 || lower.indexOf('?') !== -1;
+    if (best && !question) { this.canned(best, cb); return; }
+    botStatus(function (on) {
+      if (!on) { self.offline(best, lower, cb); return; }
+      var wait = self.appendThinking();
+      var drop = function () { if (wait.parentNode) wait.parentNode.removeChild(wait); };
+      askBot(norm, function (reply) {
+        drop();
+        self.typeAnswer(reply, cb);
+      }, function (msg) {
+        drop();
+        if (msg) self.typeAnswer(msg, cb); else self.offline(best, lower, cb);
+      });
+    });
+  };
+  TermUI.prototype.canned = function (best, cb) {
+    var self = this;
+    if (best.go) {
+      // setup-night intents answer, then open the page: no second step to type
+      var dest = { type: 'path', path: best.go };
+      this.typeAnswer(best.a, function () { self.doNav(dest, cb); });
+      return;
+    }
+    this.typeAnswer(best.a, cb);
+  };
+  // the bot is dark or down: the canned answers carry the terminal exactly as before it existed
+  TermUI.prototype.offline = function (best, lower, cb) {
+    if (!best && lower.indexOf('?') !== -1) best = intentByName('help');
+    if (best) { this.canned(best, cb); return; }
     this.typeAnswer('I only know the firm. Try setup, help, or go to services.', cb);
+  };
+  TermUI.prototype.appendThinking = function () {
+    var d = document.createElement('div');
+    d.className = 'kb-line kb-line-ai kb-line-wait';
+    d.innerHTML = '<span class="kb-who">venice</span><span class="kb-txt"><span class="kb-caret"></span></span>';
+    d.setAttribute('aria-hidden', 'true');
+    this.log.appendChild(d);
+    this.trim14();
+    this.scrollBottom();
+    return d;
   };
   TermUI.prototype.doNav = function (target, cb) {
     if (target.type === 'path') {
@@ -332,6 +440,7 @@
       }
     },
     navigate: function (path) { location.href = path; },
+    ask: ASK_URL,
     intents: INTENTS,
     answers: (function () {
       var t = {};
