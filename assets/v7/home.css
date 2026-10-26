@@ -61,6 +61,9 @@
 .kb-line-you .kb-txt{color:#E2E2E2}
 .kb-line-ai .kb-txt{color:#D5D5D5}
 .kb-line-sys .kb-txt{color:#9E9E9E}
+.kb-txt a{color:#F2F2F2;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#7A7A7A;word-break:break-all;transition:color .15s ease,text-decoration-color .15s ease}
+.kb-txt a:hover,.kb-txt a:focus-visible{color:#FFF;text-decoration-color:#FFF}
+.kb-txt a:active{color:#BDBDBD}
 .kb-caret{display:inline-block;width:.6ch;height:1em;background:#E2E2E2;vertical-align:-.15em;margin-left:2px;animation:kbBlink 1s steps(1) infinite}
 .kb-prompt{display:flex;align-items:center;gap:8px;margin-top:8px;border-top:1px solid rgba(226,226,226,.1);padding-top:8px}
 .kb-prompt-mark{color:#E2E2E2;font-weight:700}
