@@ -14,6 +14,7 @@
 - Homepage: hero, an About Me section on the founder, and a contact/booking section; links out to every page below.
 - Services (https://jtlgrowth.com/services/): start with one AI employee (buy it built from USD 1,500); the funnel, website and automation fixes it needs go inside the same written quote; ops portals are a quote-only add-on.
 - Quote (https://jtlgrowth.com/quote/): request a written quote; the only public price is the AI employee's from-price
+- Free website build (https://jtlgrowth.com/free-build/): one business gets a website built free; it runs at USD 500 a month (hosting, Rialto, fixes, small changes), three months minimum, on a domain in the client's own name
 - Products (https://jtlgrowth.com/products/): things you can get or install today: Inbox Scout, The AI Employee, the Growth software demo, the AgentKit archive, Scout packs, and Robots & Coffee (off-site storefront).
 - Workshop (https://jtlgrowth.com/workshop/): a two-day, hands-on founder AI workshop: build a working AI employee and give it a UI system.
 - Work (https://jtlgrowth.com/work/): six shipped, live systems (FWIB, this site, AVAS Night Shift, Robots & Coffee, Oras, the Batch 1 workshop) plus short films of our own apps (jtlboard, Blurred, the Brain, Venice HQ, Rialto, the AVAS portal).
