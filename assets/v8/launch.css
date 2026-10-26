@@ -621,6 +621,13 @@ html.still .fh-tag{position:relative;left:auto;bottom:auto;opacity:1;text-align:
 .b2 .lead{max-width:40ch;color:var(--muted)}
 .b2-film{margin:10px 0 0;aspect-ratio:16/9;border-radius:var(--radius-md);overflow:hidden;background:var(--surface);border:1px solid var(--border)}
 .b2-film video{display:block;width:100%;height:100%;object-fit:cover}
+/* the film carries its own sound (Owner 2026-10-26, "hndi kaya i sama ung audio ?"); browsers never start it unasked, so it asks */
+.b2-film{position:relative}
+.b2-snd{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px;border:0;border-radius:999px;background:rgba(10,10,12,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font:600 14px/1 inherit;cursor:pointer}
+.b2-snd.muted{background:#fff;color:#0a0a0c}
+.b2-snd svg{width:18px;height:18px}
+.b2-snd svg:first-of-type,.b2-snd.muted svg:last-of-type{display:none}
+.b2-snd.muted svg:first-of-type{display:block}
 /* the question lands first, then the film opens out of its frame as it scrolls in (Owner 2026-10-25) */
 html.js:not(.still) .b2-film[data-reveal]{clip-path:inset(12% 12% round var(--radius-md));transform:scale(.94);transition:opacity .9s var(--ease) .35s,transform 1.1s var(--ease) .35s,clip-path 1.1s var(--ease) .35s}
 html.js:not(.still) .b2-film[data-reveal].in{clip-path:inset(0 round var(--radius-md));transform:none}

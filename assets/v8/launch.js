@@ -42,7 +42,7 @@
     }
   }
 
-  /* ---------- lazy films: src lands near the viewport, plays muted only while seen ---------- */
+  /* ---------- lazy films: src lands near the viewport, plays (muted unless asked) only while seen ---------- */
   const load = (v) => { if (v.dataset.loaded) return; v.dataset.loaded = '1'; v.src = v.dataset.src; v.load(); };
   const vids = $$('video[data-src]');
   const nearV = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { load(e.target); nearV.unobserve(e.target); } }), { rootMargin: '100% 0px' });
@@ -61,6 +61,14 @@
     }
     if (rm) { v.controls = true; v.loop = false; v.removeAttribute('autoplay'); }
     nearV.observe(v); seenV.observe(v);
+  });
+
+  /* ---------- a film with its own sound (Batch 2): it plays muted like the rest until the button asks for sound ---------- */
+  $$('[data-snd]').forEach((b) => {
+    const v = $('video', b.parentElement);
+    const ui = () => { b.classList.toggle('muted', v.muted); b.setAttribute('aria-pressed', String(!v.muted)); $('span', b).textContent = v.muted ? 'Tap for sound' : 'Sound on'; };
+    b.addEventListener('click', () => { v.muted = !v.muted; if (!v.muted) { load(v); const pr = v.play(); if (pr) pr.catch(() => {}); } ui(); });
+    ui();
   });
 
   /* ---------- services compare (phone): the cue's dots follow the tier column in view ---------- */
