@@ -439,6 +439,8 @@ addEventListener("DOMContentLoaded",function(){
 /* /free-build/ (Owner 2026-10-26): light ground, centred statement, the three example sites fanned under it */
 .fb-hero{padding:clamp(8px,2vh,24px) 0 clamp(36px,6vh,64px);text-align:center;overflow:hidden}
 .fb-copy .lead{margin:22px auto 0;max-width:54ch}
+.fb-copy h1,.fb-deal-h,.qt-day h3{text-wrap:balance}
+.fb-copy .lead,.fb-deal dd,.qt-day p{text-wrap:pretty}
 .fb-copy .hub-row{justify-content:center;margin-top:30px}
 .fb-fan{position:relative;width:min(1080px,92vw);height:clamp(210px,24vw,330px);margin:clamp(34px,5vh,56px) auto 0}
 .fb-site{position:absolute;left:50%;bottom:0;width:46%;aspect-ratio:16/10;display:block;overflow:hidden;border:1px solid var(--line);background:var(--navy-deep);
@@ -467,6 +469,7 @@ addEventListener("DOMContentLoaded",function(){
 }
 @media (prefers-reduced-motion:reduce){.fb-site{transition:none}.fb-site:hover,.fb-site:focus-visible{translate:none}}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Free website build", "url": "https://jtlgrowth.com/free-build/", "description": "We build one business a website for free, live on a domain in your own name. Keeping it running is USD 500 a month, three months minimum. Apply in two minutes.", "provider": {"@type": "Organization", "name": "JTL Growth", "url": "https://jtlgrowth.com/"}, "areaServed": "Worldwide", "offers": {"@type": "Offer", "price": "500", "priceCurrency": "USD", "description": "Monthly, three months minimum: hosting, Rialto, fixes and small changes. The build itself is free."}}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -527,7 +530,7 @@ addEventListener("DOMContentLoaded",function(){
 </section>
 
 <section class="wrap" id="how">
-  <p class="eyebrow rv">How it works</p>
+  <h2 class="eyebrow rv">How it works</h2>
   <div class="qt-days" style="margin-top:26px">
     <div class="qt-day rv d1">
       <p class="qt-daytag">01</p>
