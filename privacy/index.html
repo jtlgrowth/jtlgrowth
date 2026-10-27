@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="/assets/tracking.js"></script>
 <title>Privacy Policy · JTL Growth</title>
-<meta name="description" content="What JTL Growth collects, why, how long we keep it, and how to have it deleted. Covers the website and our Instagram messaging integration.">
+<meta name="description" content="What JTL Growth collects, why, how long we keep it, and how to have it deleted. Covers the website, our Instagram messaging integration and the Messenger and Instagram inbox we run for businesses.">
 <link rel="canonical" href="https://jtlgrowth.com/privacy/">
 <meta property="og:title" content="Privacy Policy · JTL Growth">
 <meta property="og:description" content="What we collect, why, how long we keep it, and how to have it deleted.">
@@ -141,11 +141,11 @@
   <p class="kicker">Legal</p>
   <h1>Privacy Policy</h1>
   <p class="lede">What we collect, why we collect it, how long we keep it, and how to make us delete it. Written to be read, not to be survived.</p>
-  <p class="updated">Last updated 18 August 2026</p>
+  <p class="updated">Last updated 27 October 2026</p>
 
   <section style="margin-top:44px">
     <h2>Who we are</h2>
-    <p>JTL Growth builds AI and automation systems for businesses. We operate from the Philippines and serve clients worldwide. This policy covers <a href="/">jtlgrowth.com</a> and the Instagram messaging integration described below.</p>
+    <p>JTL Growth builds AI and automation systems for businesses. We operate from the Philippines and serve clients worldwide. This policy covers <a href="/">jtlgrowth.com</a> and the messaging integrations described below.</p>
     <p>Questions, corrections, or deletion requests: <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a>.</p>
   </section>
 
@@ -193,6 +193,45 @@
     </div>
   </section>
 
+  <section id="inbox">
+    <h2>Messages you send to a business we run the inbox for</h2>
+    <p>We run a shared inbox called Rialto for our own businesses (JTL Growth and Ayala Virtual Assistance Services) and for clients who ask us to. When you send a message to one of those Facebook Pages or Instagram accounts, Meta passes it to Rialto so a person on that business's team can read it and answer you.</p>
+
+    <h3>What Meta sends us</h3>
+    <ul>
+      <li>an ID that Meta makes for you and that business only: not your password, email, or phone number</li>
+      <li>your name as Meta shows it</li>
+      <li>the text of your message and the time you sent it</li>
+    </ul>
+
+    <h3>What we do with it</h3>
+    <ul>
+      <li>show your message in that business's inbox, so the team sees it in one place</li>
+      <li>prepare a suggested reply with an AI model run by Anthropic. A person reads it, changes it if needed, and decides to send it. Nothing is sent to you automatically.</li>
+      <li>record the reply that person sends, so the next person on the team sees the whole conversation</li>
+    </ul>
+    <p>We only reply inside the windows Meta allows: within 24 hours of your last message, or up to 7 days later for a reply written by a person.</p>
+
+    <h3>What we keep</h3>
+    <table>
+      <tr><th>Data</th><th>Why</th><th>Kept for</th></tr>
+      <tr><td>Your messages and the replies</td><td>So the conversation can continue</td><td>Until you ask us to delete them</td></tr>
+      <tr><td>Your name and Meta ID</td><td>So your messages stay in one conversation</td><td>Until you ask us to delete them</td></tr>
+    </table>
+
+    <h3>What we never do</h3>
+    <ul>
+      <li>send you marketing you did not ask for</li>
+      <li>sell, rent, or share your messages with anyone outside that business and the services listed below</li>
+      <li>use your messages to train AI models</li>
+    </ul>
+
+    <div class="box">
+      <h3>Deleting your data</h3>
+      <p style="margin-bottom:0">Follow the steps on <a href="/data-deletion/">our data deletion page</a>. We delete your messages and your name from Rialto and confirm within 30 days. When the business is one of our clients, we do it on their behalf, and their own privacy policy also applies.</p>
+    </div>
+  </section>
+
   <section>
     <h2>The follow gate on Products and Workshop</h2>
     <p>Some downloads on <a href="/products/">/products/</a> and <a href="/workshop/">/workshop/</a> are offered behind a follow gate: you're asked to follow us on a platform, then given the file.</p>
@@ -219,7 +258,10 @@
     <h2>Third parties we rely on</h2>
     <ul>
       <li><strong>Google Analytics</strong>: website measurement, consent-gated</li>
-      <li><strong>Meta Platforms</strong>: Instagram messaging and comment webhooks</li>
+      <li><strong>Meta Platforms</strong>: Facebook Messenger and Instagram messaging, and comment webhooks</li>
+      <li><strong>Anthropic</strong>: suggested replies in the Rialto inbox, read by a person before anything is sent</li>
+      <li><strong>Cloudflare</strong>: hosting for the Rialto inbox</li>
+      <li><strong>Supabase</strong>: the database that stores Rialto inbox conversations</li>
       <li><strong>GitHub Pages</strong>: hosting for this website</li>
       <li><strong>Vercel</strong>: hosting for the webhook endpoint that powers the Instagram reply</li>
     </ul>
