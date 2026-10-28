@@ -535,6 +535,21 @@ addEventListener("DOMContentLoaded",function(){
 .fw-dom-status[data-state="free"]::before{content:"\2713  "}
 .fw-dom-status[data-state="taken"]::before,.fw-dom-status[data-state="bad"]::before{content:"\2715  "}
 .fw-cond{margin-top:4px}
+/* pay month 1 (2026-10-28 draft) */
+.fw-pay{margin-top:22px;padding:18px;border:1px solid var(--fg);border-radius:var(--radius-md);background:var(--chip-bg)}
+.fw-pay-h{margin:0;font:600 clamp(22px,5vw,26px)/1.2 var(--font-display);letter-spacing:-.01em;color:var(--fg)}
+.fw-qr{text-align:center}
+.fw-qr img{display:block;width:min(240px,100%);height:auto;margin:16px auto 10px;border:1px solid var(--border);border-radius:12px;background:#fff}
+.fw-amt{margin:0;font:700 18px/1.4 var(--font-body);color:var(--fg)}
+.fw-qr .w45-note{text-align:left}
+.fw-qr a,.fw-pay a{color:var(--fg);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.fw-file{display:block;width:100%;min-height:56px;padding:12px;border:1px dashed var(--fg-2);border-radius:var(--radius-md);background:var(--surface);color:var(--fg);font:500 16px/1.4 var(--font-body)}
+.fw-file:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.fw-file[aria-invalid="true"]{border-color:var(--fg);border-style:solid}
+/* Owner-only money terms: visible on purpose until he writes the final words, so a draft cannot ship quietly */
+.fw-tbc{display:block;margin-top:8px;padding:10px 12px;border:2px dashed #b45309;border-radius:var(--radius-sm);background:color-mix(in oklab,#f59e0b,var(--surface) 85%);color:var(--fg)}
+.fw-tbc-k{font-weight:700}
+@media (max-width:420px){.fw-pay{padding:14px 10px}.fw-pay .w45-chip label{padding-left:10px;padding-right:10px}}
 @media (max-width:420px){.fw-root .w45-chips[data-cols="2"] label{padding:12px}}
 .fw-root .w45-count{font-size:14px}
 .fw-root .w45-eyebrow{font-size:12px}
@@ -662,8 +677,8 @@ addEventListener("DOMContentLoaded",function(){
     <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg></div>
     <p class="w45-eyebrow">Free website build &middot; one slot</p>
     <h1 class="fw-h1" id="fw-gate-h" tabindex="-1">We build your website <em>for free.</em></h1>
-    <p class="fw-lead">The build is really free: we design and make your website at no cost, and it becomes one of our case studies. Keeping it online is a monthly plan on our own hosting. You see the full price on the last screen, before anything is sent.</p>
-    <details class="fw-peek"><summary>See the price now</summary><p>Build: &#8369;0. Website Support and Maintenance: &#8369;32,000 or USD 500 a month, with hosting, your domain and upkeep included. 3-month lock-in, counted from go-live.</p></details>
+    <p class="fw-lead">The build is really free: we design and make your website at no cost, and it becomes one of our case studies. Keeping it online is a monthly plan on our own hosting. The last screen shows the full price, and you apply by paying month 1 there. No calls, no reservation fee.</p>
+    <details class="fw-peek"><summary>See the price now</summary><p>Build: &#8369;0. Website Support and Maintenance: &#8369;32,000 or USD 500 a month, with hosting, your domain and upkeep included. 3-month lock-in, counted from go-live. You apply by paying month 1 (&#8369;32,000 or USD 500) on the last screen.</p></details>
     <p class="fw-lead fw-lead-code">This page is for the business we invited. Enter the access code that came with your link.</p>
     <form data-fw-gate-form novalidate>
       <label class="fw-label" for="fw-code">Access code</label>
@@ -675,7 +690,7 @@ addEventListener("DOMContentLoaded",function(){
 
   <!-- 2. the questions, one per screen -->
   <div class="w45-card fw-card" data-fw-flow hidden>
-    <form data-fw-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-mirror="https://rialto.whereisdotva.workers.dev/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA" data-terms-version="free-website-terms-2026-10-27" novalidate>
+    <form data-fw-form data-endpoint="https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec" data-endpoint-mirror="https://rialto.whereisdotva.workers.dev/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA" data-terms-version="free-website-terms-2026-10-28-draft" data-upload-endpoint="https://shop.jtlgrowth.com/api/free-build-payment" novalidate>
       <div class="w45-top">
         <span class="w45-eyebrow" data-fw-eyebrow></span>
         <span class="w45-count" data-fw-count></span>
@@ -685,7 +700,7 @@ addEventListener("DOMContentLoaded",function(){
 
       <div class="w45-steps" data-fw-steps>
 
-        <div class="fw-step" data-step data-label="Your business" data-error="Add your business name, tap what you do, and tell us if you have a website or domain." role="group" aria-labelledby="fw-q1">
+        <div class="fw-step" data-step data-label="Your business" data-error="Add your business name, tap what you do, tell us if you have a website or domain, and if you can log in to it." role="group" aria-labelledby="fw-q1">
           <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M10 12h4" /><path d="M10 8h4" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></svg></div>
           <h2 class="w45-q" id="fw-q1" tabindex="-1">Tell us about your business.</h2>
           <p class="fw-note fw-custom">Good news first: your website is fully customizable. Pages, copy, look and features are yours to shape.</p>
@@ -729,6 +744,14 @@ addEventListener("DOMContentLoaded",function(){
             </div>
             <p class="fw-dom-status" id="fw-dom-status" role="status" aria-live="polite" data-dom-status></p>
             <p class="w45-note" id="fw-dom-note">This isn't guaranteed yet. We'll check it on our side, and if it's not available, we'll email you a few options to pick from.</p>
+          </div>
+          <div class="fw-cond" data-when="has_website=yes|domain only" hidden>
+            <h3 class="fw-subq" id="fw-q2b">Can you log in to where your domain is registered?</h3>
+            <p class="w45-note fw-hint">Like GoDaddy, Namecheap or dot.ph. We need that login to connect your domain.</p>
+            <div class="w45-chips" role="radiogroup" aria-labelledby="fw-q2b">
+              <div class="w45-chip"><input type="radio" id="fw-dl-yes" name="domain_login" value="yes" data-radio-req><label for="fw-dl-yes"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" /> <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" /></svg></span><span><strong>Yes, I can log in</strong><small>We connect your domain. It stays yours.</small></span></label></div>
+              <div class="w45-chip"><input type="radio" id="fw-dl-no" name="domain_login" value="no" data-radio-req><label for="fw-dl-no"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /></svg></span><span><strong>No, or not sure</strong><small>No problem. We buy a new domain for you, included.</small></span></label></div>
+            </div>
           </div>
           <p class="w45-error" role="alert" data-err></p>
         </div>
@@ -821,7 +844,7 @@ addEventListener("DOMContentLoaded",function(){
         <div class="fw-step" data-step data-review data-label="Review" role="group" aria-labelledby="fw-rv" hidden>
           <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M13 5h8" /><path d="M13 12h8" /><path d="M13 19h8" /><path d="m3 17 2 2 4-4" /><path d="m3 7 2 2 4-4" /></svg></div>
           <h2 class="w45-q" id="fw-rv" tabindex="-1">Here's everything you told us.</h2>
-          <p class="w45-note fw-hint">Take a quick look. Tap Edit on anything you want to change. The last screen shows the price, before anything is sent.</p>
+          <p class="w45-note fw-hint">Take a quick look. Tap Edit on anything you want to change. The last screen shows the price and how to pay month 1. Nothing is sent until you add your payment screenshot and tap Send.</p>
           <dl class="fw-review" data-fw-review></dl>
           <label class="fw-label" for="fw-notes">Anything else you'd like us to know? (optional)</label>
           <textarea class="fw-area" id="fw-notes" name="notes" rows="3" placeholder="A feature you've been wanting, a deadline, anything."></textarea>
@@ -829,7 +852,7 @@ addEventListener("DOMContentLoaded",function(){
         </div>
 
         <!-- last: the money, after every question and the review, right before anything is sent (Owner 2026-10-27) -->
-        <div class="fw-step fw-terms-step" data-step data-terms data-label="The honest part" data-error="Tick both boxes to send your application." role="group" aria-labelledby="fw-q11" hidden>
+        <div class="fw-step fw-terms-step" data-step data-terms data-label="The honest part" data-error="Tick both boxes, pay month 1, then add your payment screenshot to send." role="group" aria-labelledby="fw-q11" hidden>
           <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path d="m21 3 1 11h-2" /><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /><path d="M3 4h8" /></svg></div>
           <h2 class="w45-q" id="fw-q11" tabindex="-1">The honest part: the build is free. Keeping it online is not.</h2>
           <div class="fw-bill">
@@ -838,15 +861,39 @@ addEventListener("DOMContentLoaded",function(){
           </div>
           <ol class="fw-terms">
             <li><h3>Your domain</h3><p>No domain yet? We buy one for you, and it is included in the monthly. Already have one? We connect yours, and it stays yours. Same price either way.</p></li>
-            <li><h3>3-month lock-in</h3><p>&#8369;96,000 or USD 1,500 in total. Month 1 is paid before we start building, and the 3 months count from the day your website goes live. After that, you decide: keep it month to month, or stop.</p></li>
+            <li><h3>3-month lock-in</h3><p>&#8369;96,000 or USD 1,500 in total, counted from the day your website goes live. After that, you decide: keep it month to month, or stop.</p></li>
+            <li><h3>Month 1 is how you apply</h3><p>You pay month 1 on this screen. No calls and no reservation fee. <span class="fw-tbc" data-owner-tbc><b class="fw-tbc-k">Owner to confirm:</b> It counts as the first month of your 3-month lock-in, the month your website goes live.</span></p></li>
+            <li><h3>If we never go live</h3><p><span class="fw-tbc" data-owner-tbc><b class="fw-tbc-k">Owner to confirm:</b> If your website is not live within 60 days of your payment for a reason on our side, we refund month 1 in full. Days we spend waiting on your logo, photos or answers do not count.</span></p></li>
             <li><h3>If you stop</h3><p>Your website goes offline when maintenance stops. Your logo, photos, words, and any domain you bought stay yours. Moving the website to another host is a paid handover, and we quote it when you ask.</p></li>
             <li><h3>What we ask for the free build</h3><p>Written permission to show your website as a case study, one before and after number that matters to you (inquiries, bookings or sales), and a 20-minute review with us at day 30.</p></li>
             <li><h3>Anything bigger</h3><p>More automations, extra subdomains or bigger changes, we quote first so there are no surprises. Usage fees for messages, SMS or AI are billed at cost.</p></li>
           </ol>
-          <p class="w45-note fw-after">Sending this costs nothing. We confirm everything by email before your first invoice.</p>
           <label class="w45-consent fw-agree"><input type="checkbox" name="agreed_terms" id="fw-agree" aria-describedby="fw-q11"><span>I understand the monthly fee, the 3-month lock-in, and what happens if I stop.</span></label>
           <label class="w45-consent fw-agree"><input type="checkbox" name="agreed_case_study" id="fw-agree-case"><span>I&#39;m ok with the case study.</span></label>
-          <p class="w45-note fw-after">Not for you right now? That&#39;s completely ok. Tap &ldquo;No, not for me&rdquo; and nothing is sent.</p>
+          <section class="fw-pay" aria-labelledby="fw-pay-h">
+            <h3 class="fw-pay-h" id="fw-pay-h">Pay month 1 to apply</h3>
+            <p class="fw-label" id="fw-pay-cur-l">How will you pay?</p>
+            <div class="w45-chips" role="radiogroup" aria-labelledby="fw-pay-cur-l">
+              <div class="w45-chip"><input type="radio" id="fw-pc-php" name="pay_currency" value="PHP" checked><label for="fw-pc-php"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="5" height="5" x="3" y="3" rx="1" /> <rect width="5" height="5" x="16" y="3" rx="1" /> <rect width="5" height="5" x="3" y="16" rx="1" /> <path d="M21 16h-3a2 2 0 0 0-2 2v3" /> <path d="M21 21v.01" /> <path d="M12 7v3a2 2 0 0 1-2 2H7" /> <path d="M3 12h.01" /> <path d="M12 3h.01" /> <path d="M12 16v.01" /> <path d="M16 12h1" /> <path d="M21 12v.01" /> <path d="M12 21v-1" /></svg></span><span><strong>In pesos: &#8369;32,000</strong><small>Any PH bank or e-wallet, by GoTyme QR.</small></span></label></div>
+              <div class="w45-chip"><input type="radio" id="fw-pc-usd" name="pay_currency" value="USD"><label for="fw-pc-usd"><span class="fw-chip-ico" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /> <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></svg></span><span><strong>In US dollars: USD 500</strong><small>Wise, from anywhere.</small></span></label></div>
+            </div>
+            <div class="fw-cond fw-qr" data-when="pay_currency=PHP">
+              <img src="/free-build/gotyme-qr.png" width="399" height="520" loading="lazy" alt="GoTyme InstaPay QR code. Account name Jamz Todd Laurence Jamorol, account ending 3309.">
+              <p class="fw-amt">Send exactly &#8369;32,000</p>
+              <p class="w45-note">Paying on this phone? Save the QR, then open your bank or e-wallet app, tap Scan QR and pick the saved image. <a href="/free-build/gotyme-qr.png" download="jtl-growth-gotyme-qr.png">Save the QR</a></p>
+            </div>
+            <div class="fw-cond fw-qr" data-when="pay_currency=USD" hidden>
+              <img src="/free-build/wise-qr.png" width="328" height="328" loading="lazy" alt="Wise payment QR code for JTL Growth.">
+              <p class="fw-amt">Send exactly USD 500</p>
+              <p class="w45-note">Paying on this phone? <a href="https://wise.com/pay/business/jtlgrowthcomputerprogrammingservices" target="_blank" rel="noopener">Open the Wise payment page</a></p>
+            </div>
+            <label class="fw-label" for="fw-pay-shot">Your payment screenshot</label>
+            <input class="fw-file" type="file" id="fw-pay-shot" name="payment_screenshot" accept="image/png,image/jpeg,image/webp,application/pdf" aria-describedby="fw-pay-shot-n" data-pay-shot>
+            <p class="w45-note" id="fw-pay-shot-n">A screenshot or PDF of the payment confirmation, up to 5 MB. A screenshot is not the money yet: we check that the payment landed before we start.</p>
+            <label class="fw-label" for="fw-pay-ref">Reference number (optional)</label>
+            <input class="w45-input" id="fw-pay-ref" name="pay_reference" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="From your bank, GoTyme or Wise">
+          </section>
+          <p class="w45-note fw-after">Not ready to pay right now? That&#39;s completely ok. Tap &ldquo;No, not for me&rdquo; and nothing is sent.</p>
           <p class="w45-error" role="alert" data-err></p>
         </div>
       </div>
@@ -865,8 +912,8 @@ addEventListener("DOMContentLoaded",function(){
   <!-- 3. thank you -->
   <div class="w45-card fw-card w45-done" data-fw-done hidden>
     <div class="w45-check" aria-hidden="true"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg></div>
-    <h2 class="w45-done-title" tabindex="-1">Thank you. We have everything we need.</h2>
-    <p class="w45-done-body">We read every application ourselves and pick one business. Either way, you'll get an email from us within two business days. If it's you, we ask about your logo, photos and the look you want there, then we start building.</p>
+    <h2 class="w45-done-title" tabindex="-1">Thank you. Your application and payment screenshot are in.</h2>
+    <p class="w45-done-body">Check your email: we're sending your schedule and a short form for your logo, photos and the look you want. We also check that your payment landed, then we message you to start. Questions? Just reply to that email.</p>
     <p class="w45-done-body">And thank you for trusting us with something you've worked so hard to build.</p>
     <p class="w45-fallback w45-done-book"><a href="/work/">While you wait, see what we've built</a></p>
   </div>
@@ -1217,6 +1264,47 @@ addEventListener("DOMContentLoaded",function(){
   /* ---- English / Filipino (Owner 2026-10-27): English first, the pick is remembered. A text node keeps its English in
      __en so switching back is exact. Answers always post their English values, so the Sheet and Rialto read the same. ---- */
   var FIL = {
+"The build is really free: we design and make your website at no cost, and it becomes one of our case studies. Keeping it online is a monthly plan on our own hosting. The last screen shows the full price, and you apply by paying month 1 there. No calls, no reservation fee.": "Libre talaga ang build: kami ang magde-design at gagawa ng website mo, walang bayad, at magiging isa ito sa mga case study namin. Ang may bayad ay ang pag-keep nito online, monthly plan sa sarili naming hosting. Sa huling screen makikita mo ang buong presyo, at doon ka mag-a-apply sa pagbayad ng month 1. Walang call, walang reservation fee.",
+"Build: ₱0. Website Support and Maintenance: ₱32,000 or USD 500 a month, with hosting, your domain and upkeep included. 3-month lock-in, counted from go-live. You apply by paying month 1 (₱32,000 or USD 500) on the last screen.": "Build: ₱0. Website Support and Maintenance: ₱32,000 o USD 500 kada buwan, kasama na ang hosting, domain at upkeep. 3-month lock-in, bilang simula pag live na ang site. Mag-a-apply ka sa pagbayad ng month 1 (₱32,000 o USD 500) sa huling screen.",
+"Take a quick look. Tap Edit on anything you want to change. The last screen shows the price and how to pay month 1. Nothing is sent until you add your payment screenshot and tap Send.": "Silipin mo saglit. Pindutin ang Edit sa gusto mong baguhin. Sa huling screen makikita mo ang presyo at kung paano magbayad ng month 1. Walang ma-se-send hangga't hindi mo nailalagay ang payment screenshot at napipindot ang Send.",
+"Add your business name, tap what you do, tell us if you have a website or domain, and if you can log in to it.": "Ilagay ang pangalan ng business mo, piliin kung ano ang ginagawa nyo, sabihin kung may website o domain ka na, at kung kaya mong mag-log in dito.",
+"Can you log in to where your domain is registered?": "Kaya mo bang mag-log in kung saan naka-register ang domain mo?",
+"Like GoDaddy, Namecheap or dot.ph. We need that login to connect your domain.": "Tulad ng GoDaddy, Namecheap o dot.ph. Kailangan namin yung login para maikabit ang domain mo.",
+"Yes, I can log in": "Oo, kaya kong mag-log in",
+"No, or not sure": "Hindi, o hindi sigurado",
+"No problem. We buy a new domain for you, included.": "Ok lang. Kami ang bibili ng bagong domain para sa'yo, kasama na.",
+"Tick both boxes, pay month 1, then add your payment screenshot to send.": "I-check ang dalawang box, bayaran ang month 1, tapos ilagay ang payment screenshot para ma-send.",
+"₱96,000 or USD 1,500 in total, counted from the day your website goes live. After that, you decide: keep it month to month, or stop.": "₱96,000 o USD 1,500 lahat-lahat, bilang simula sa araw na mag-live ang website mo. Pagkatapos nun, ikaw na bahala: tuloy month to month, o stop na.",
+"Month 1 is how you apply": "Ang month 1 ang application mo",
+"You pay month 1 on this screen. No calls and no reservation fee.": "Dito sa screen na ito babayaran ang month 1. Walang call at walang reservation fee.",
+"Owner to confirm:": "Owner to confirm:",
+"It counts as the first month of your 3-month lock-in, the month your website goes live.": "Ito na ang first month ng 3-month lock-in mo, yung buwan na mag-live ang website mo.",
+"If we never go live": "Kung hindi kami makapag-go live",
+"If your website is not live within 60 days of your payment for a reason on our side, we refund month 1 in full. Days we spend waiting on your logo, photos or answers do not count.": "Kung hindi pa live ang website mo within 60 days mula sa bayad mo dahil sa amin, ire-refund namin nang buo ang month 1. Hindi kasama sa bilang ang mga araw na hinihintay namin ang logo, photos o sagot mo.",
+"Pay month 1 to apply": "Bayaran ang month 1 para mag-apply",
+"How will you pay?": "Paano ka magbabayad?",
+"In pesos: ₱32,000": "Sa peso: ₱32,000",
+"Any PH bank or e-wallet, by GoTyme QR.": "Kahit anong PH bank o e-wallet, via GoTyme QR.",
+"In US dollars: USD 500": "Sa US dollars: USD 500",
+"Wise, from anywhere.": "Wise, kahit saan ka man.",
+"Send exactly ₱32,000": "Magpadala ng eksaktong ₱32,000",
+"Paying on this phone? Save the QR, then open your bank or e-wallet app, tap Scan QR and pick the saved image.": "Sa phone na ito ka magbabayad? I-save ang QR, buksan ang bank o e-wallet app mo, pindutin ang Scan QR at piliin ang na-save na image.",
+"Save the QR": "I-save ang QR",
+"Send exactly USD 500": "Magpadala ng eksaktong USD 500",
+"Paying on this phone?": "Sa phone na ito ka magbabayad?",
+"Open the Wise payment page": "Buksan ang Wise payment page",
+"Your payment screenshot": "Ang payment screenshot mo",
+"A screenshot or PDF of the payment confirmation, up to 5 MB. A screenshot is not the money yet: we check that the payment landed before we start.": "Screenshot o PDF ng payment confirmation, hanggang 5 MB. Hindi pa pera ang screenshot: iche-check muna namin na pumasok ang bayad bago kami magsimula.",
+"Reference number (optional)": "Reference number (optional)",
+"From your bank, GoTyme or Wise": "Galing sa bank mo, GoTyme o Wise",
+"Not ready to pay right now? That's completely ok. Tap “No, not for me” and nothing is sent.": "Hindi pa ready magbayad ngayon? Ok na ok lang. Pindutin ang “Hindi muna” at walang ma-send.",
+"Thank you. Your application and payment screenshot are in.": "Salamat. Natanggap na namin ang application at payment screenshot mo.",
+"Check your email: we're sending your schedule and a short form for your logo, photos and the look you want. We also check that your payment landed, then we message you to start. Questions? Just reply to that email.": "I-check ang email mo: ipapadala namin ang schedule mo at isang maikling form para sa logo, photos at itsura na gusto mo. Iche-check din namin na pumasok ang bayad mo, tapos imemessage ka namin para magsimula. May tanong? Mag-reply lang sa email na yun.",
+"I paid, send it": "Nagbayad na ako, i-send na",
+"Add your payment screenshot to send.": "Ilagay ang payment screenshot mo para ma-send.",
+"That file type won't work. Use a PNG, JPG, WebP or PDF screenshot.": "Hindi gagana ang file type na yan. Gumamit ng PNG, JPG, WebP o PDF na screenshot.",
+"That file is over 5 MB. Try a smaller screenshot.": "Lagpas 5 MB ang file. Subukan ang mas maliit na screenshot.",
+"We couldn't upload your screenshot, so nothing was sent. Try again, or email it to hello@jtlgrowth.com.": "Hindi namin ma-upload ang screenshot mo, kaya walang na-send. Subukan ulit, o i-email ito sa hello@jtlgrowth.com.",
 "Language": "Wika",
 "Free website build · one slot": "Free website build · isang slot lang",
 "We build your website": "Gagawin namin ang website mo",
@@ -1409,6 +1497,25 @@ addEventListener("DOMContentLoaded",function(){
   var backBtn = form.querySelector("[data-fw-back]"), nextBtn = form.querySelector("[data-fw-next]"), noBtn = form.querySelector("[data-fw-no]");
   var stepsEl = form.querySelector("[data-fw-steps]"), agree = form.querySelector("#fw-agree"), agreeCase = form.querySelector("#fw-agree-case");
   function agreed() { return agree.checked && agreeCase.checked; }  /* both boxes on the last screen: the money terms and the case study */
+  /* pay month 1 (Owner 2026-10-28: "kapag nag bayad sila ng first month qualified na sila"): a screenshot is required to send */
+  var shotIn = form.querySelector("[data-pay-shot]");
+  var uploadUrl = (form.getAttribute("data-upload-endpoint") || "").trim();
+  var SHOT = { maxBytes: 5 * 1024 * 1024, types: ["image/png", "image/jpeg", "image/webp", "application/pdf"], timeoutMs: 45000 };
+  var RECEIPT = "https://shop.jtlgrowth.com/api/receipt/";
+  function shotFile() { return shotIn && shotIn.files && shotIn.files[0] || null; }
+  function shotProblem(f) {
+    if (!f) return "Add your payment screenshot to send.";
+    if (SHOT.types.indexOf(f.type) < 0) return "That file type won't work. Use a PNG, JPG, WebP or PDF screenshot.";
+    if (f.size < 1 || f.size > SHOT.maxBytes) return "That file is over 5 MB. Try a smaller screenshot.";
+    return "";
+  }
+  function paid() { return !!pendingComplete || !shotProblem(shotFile()); }
+  function shotChanged() {
+    var why = shotFile() ? shotProblem(shotFile()) : "";
+    setErr(steps[termsAt - 1], why ? t(why) : "");
+    if (why) shotIn.setAttribute("aria-invalid", "true"); else shotIn.removeAttribute("aria-invalid");
+    updateNext();
+  }
   var honeypot = form.querySelector('input[name="company_website"]');
   var endpoint = (form.getAttribute("data-endpoint") || "").trim();
   var mirror = (form.getAttribute("data-endpoint-mirror") || "").trim();
@@ -1418,7 +1525,7 @@ addEventListener("DOMContentLoaded",function(){
   var partialSave = Promise.resolve();
   var DELIVERY = { timeoutMs: 20000, maxBytes: 7900 };
   var LIMITS = { business_name: 120, first_name: 80, email: 254, whatsapp: 40, business_link: 300,
-    wanted_domain: 253, domain_name: 253, asset_link: 500, reference_links: 600, notes: 600 };
+    wanted_domain: 253, domain_name: 253, asset_link: 500, reference_links: 600, notes: 600, pay_reference: 60 };
   Array.prototype.forEach.call(form.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea'), function (el) {
     if (el !== honeypot) el.maxLength = LIMITS[el.name] || 200;
   });
@@ -1431,7 +1538,7 @@ addEventListener("DOMContentLoaded",function(){
   var returnTo = 0;          /* set while editing one answer from the review screen */
   var intent = false;        /* a deliberate tap or letter key, so arrow keys moving through a radio group never auto-advance */
   var autoTimer = 0, saveTimer = 0;
-  var DRAFT = "fw-draft-v2";  /* v2: the 6-step flow (2026-10-27); a v1 draft points at steps that no longer exist */
+  var DRAFT = "fw-draft-v2";  /* v2: the 6-step flow (2026-10-27); a v1 draft points at steps that no longer exist. Same steps in the pay-first draft, so v2 still fits */
   prog.setAttribute("aria-valuemax", String(TOTAL));
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, TEL = /^\+?\d{7,15}$/;
@@ -1484,6 +1591,7 @@ addEventListener("DOMContentLoaded",function(){
   form.addEventListener("change", function (e) {
     saveSoon();
     if (e.target === agree || e.target === agreeCase) { updateNext(); return; }
+    if (e.target === shotIn) { shotChanged(); return; }  /* outside this handler: its own "var t" hides t() here */
     applyWhen();
     /* clear a message on chip picks only: clearing on a text blur shifts the layout between mousedown and mouseup and the Next click misses */
     var t = e.target, err = t.closest("[data-step]");
@@ -1519,7 +1627,7 @@ addEventListener("DOMContentLoaded",function(){
     try {
       var d = { c: current, lead: leadId, f: {}, pending: pendingComplete };
       Array.prototype.forEach.call(form.elements, function (el) {
-        if (!el.name || el === honeypot) return;
+        if (!el.name || el === honeypot || el.type === "file") return;
         if (el.type === "radio" || el.type === "checkbox") { if (el.checked) (d.f[el.name] = d.f[el.name] || []).push(el.value); }
         else if (el.value) d.f[el.name] = [el.value];
       });
@@ -1530,7 +1638,7 @@ addEventListener("DOMContentLoaded",function(){
   function clearDraft() { clearTimeout(saveTimer); try { localStorage.removeItem(DRAFT); } catch (e) {} }
   function restoreDraft(d) {
     Array.prototype.forEach.call(form.elements, function (el) {
-      if (!el.name || el === honeypot || !d.f[el.name]) return;
+      if (!el.name || el === honeypot || el.type === "file" || !d.f[el.name]) return;
       if (el.type === "radio" || el.type === "checkbox") el.checked = d.f[el.name].indexOf(el.value) >= 0;
       else el.value = d.f[el.name][0];
     });
@@ -1600,7 +1708,7 @@ addEventListener("DOMContentLoaded",function(){
     /* the money screen is the last one now: its button agrees and sends in one tap, enabled once both boxes are ticked */
     if (returnTo) { nextBtn.innerHTML = nextHTML.replace("Next", t("Back to review")); nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
     else if (terms && pendingComplete) { nextBtn.textContent = t("Retry sending"); nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
-    else if (terms) { nextBtn.textContent = t("I agree, send it"); nextBtn.disabled = !agreed(); nextBtn.setAttribute("aria-disabled", String(!agreed())); }
+    else if (terms) { var ready = agreed() && paid(); nextBtn.textContent = t("I paid, send it"); nextBtn.disabled = !ready; nextBtn.setAttribute("aria-disabled", String(!ready)); }
     else { nextBtn.innerHTML = nextHTML.replace("Next", t("Next")); nextBtn.disabled = false; nextBtn.removeAttribute("aria-disabled"); }
     noBtn.hidden = !terms || !!returnTo || !!pendingComplete; backBtn.hidden = current === 1 || !!returnTo || !!pendingComplete;
   }
@@ -1698,7 +1806,7 @@ addEventListener("DOMContentLoaded",function(){
       el = fields[k]; if (inHidden(el)) continue;
       if (val(el) === "") return fail(step, el);
     }
-    var radios = {}; Array.prototype.forEach.call(step.querySelectorAll("input[data-radio-req]"), function (r) { radios[r.name] = r; });
+    var radios = {}; Array.prototype.forEach.call(step.querySelectorAll("input[data-radio-req]"), function (r) { if (!inHidden(r)) radios[r.name] = r; });
     for (var nm in radios) { if (!checked(nm)) return fail(step, radios[nm].closest(".w45-chips").querySelector("input")); }
     var boxes = {}; Array.prototype.forEach.call(step.querySelectorAll("input[data-check-req]"), function (r) { boxes[r.name] = r; });
     for (var bn in boxes) { if (!checked(bn)) return fail(step, boxes[bn].closest(".w45-chips").querySelector("input")); }
@@ -1716,6 +1824,7 @@ addEventListener("DOMContentLoaded",function(){
     if (!validate(st)) return;
     /* nothing is sent before the last screen: "No, not for me" there still means nothing was sent (no partial post) */
     if (current === termsAt && !agreed()) { setErr(st, t(st.getAttribute("data-error"))); (agree.checked ? agreeCase : agree).focus(); return; }
+    if (current === termsAt && !paid()) { fail(st, shotIn, t(shotProblem(shotFile()))); return; }
     if (returnTo && current !== returnTo) { var r = returnTo; returnTo = 0; show(r, true); return; }
     if (current === TOTAL) { submit(); return; }
     show(current + 1, true);
@@ -1751,14 +1860,14 @@ addEventListener("DOMContentLoaded",function(){
   });
 
   /* ---- submit ---- */
-  function collect(stage) {
+  function collect(stage, link) {
     var out = { stage: stage || "complete", source: "free-website-landing", page: location.href, ts: new Date().toISOString() };
     out.lead_id = leadId;
     out.site_type = "Free website build";
     var multi = {};
     Array.prototype.forEach.call(form.elements, function (el) {
-      if (!el.name || el === honeypot || el.name === "agreed_terms" || el.name === "agreed_case_study" || el.hasAttribute("data-other-for")) return;
-      if (el.type === "radio") { if (el.checked) out[el.name] = el.value; return; }
+      if (!el.name || el === honeypot || el.type === "file" || el.name === "agreed_terms" || el.name === "agreed_case_study" || el.hasAttribute("data-other-for")) return;
+      if (el.type === "radio") { if (el.checked && !inHidden(el)) out[el.name] = el.value; return; }
       if (el.type === "checkbox") { if (el.checked) (multi[el.name] = multi[el.name] || []).push(el.value); return; }
       if (inHidden(el)) return;
       var v = val(el); if (v !== "") out[el.name] = v;
@@ -1778,12 +1887,25 @@ addEventListener("DOMContentLoaded",function(){
     out.agreed_case_study = agreeCase.checked;
     out.form_language = lang;
     out.terms_version = termsVersion;
+    /* hassle filter (Owner 2026-10-28): a domain nobody can log in to counts as no domain, so we buy one */
+    out.domain_plan = out.has_website === "no" || out.domain_login === "no" ? "we buy" : "theirs";
+    out.domain_buy = out.domain_plan === "we buy"; out.domain_connect = !out.domain_buy;  /* booleans the email template switches on */
+    out.pay_currency = out.pay_currency === "USD" ? "USD" : "PHP";
+    out.pay_amount = out.pay_currency === "USD" ? "USD 500" : "PHP 32,000";
+    out.pay_method = out.pay_currency === "USD" ? "Wise" : "GoTyme QR";
+    out.payment_status = "paid_unconfirmed";
+    if (link) out.payment_screenshot = link;  /* a screenshot is not proof: the Owner confirms the money landed */
     /* the lead Sheet keeps a fixed set of columns (apps/jtl-lead-inbox/Code.gs), so every answer also rides
        as one readable block in "problem", the column its notification email prints */
     out.layer = "Free website build";
     var lines = [], seen = {};
     steps.forEach(function (st) {
-      if (st.hasAttribute("data-terms")) { if (agreed()) lines.push("Agreed: PHP 32,000 / USD 500 a month, 3-month lock-in from go-live, case study (" + termsVersion + ")"); return; }
+      if (st.hasAttribute("data-terms")) {
+        if (agreed()) lines.push("Agreed: PHP 32,000 / USD 500 a month, 3-month lock-in from go-live, case study (" + termsVersion + ")");
+        lines.push("Paid month 1 (NOT CONFIRMED): " + out.pay_amount + " by " + out.pay_method + (out.pay_reference ? ", ref " + out.pay_reference : "") + ", screenshot " + (out.payment_screenshot || "(none)"));
+        lines.push("Domain: " + out.domain_plan);
+        return;
+      }
       var vals = [];
       Array.prototype.forEach.call(st.querySelectorAll("[name]"), function (el) {
         if (seen[el.name] || el.hasAttribute("data-other-for")) return; seen[el.name] = 1;
@@ -1816,7 +1938,7 @@ addEventListener("DOMContentLoaded",function(){
     /* Only the deliberately blanked preview sends nothing. Production needs both receipts.
        A retry uses the same lead_id, so it updates the row and Rialto emits completion once. */
     if (!endpoint && !mirror && location.protocol === "file:") return null;
-    if (!endpoint || !mirror) throw new Error("configuration");
+    if (!endpoint || !mirror || !uploadUrl) throw new Error("configuration");
     return body;
   }
   function post(o) {
@@ -1828,8 +1950,35 @@ addEventListener("DOMContentLoaded",function(){
       return p.then(function () { return null; }, function (e) { return e; });
     })).then(function (errors) { if (errors[0] || errors[1]) throw errors[0] || errors[1]; });
   }
+  /* the screenshot goes to the shop Worker first (private bucket, the same door and checks as a shop order);
+     only its signed link rides in the application, so the Sheet and Rialto never hold the file */
+  function upload(f) {
+    return new Promise(function (resolve, reject) {
+      if (!uploadUrl && location.protocol === "file:") { resolve(RECEIPT + "preview.png"); return; }
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); reject(new Error("upload")); }, SHOT.timeoutMs);
+      var body = new FormData();
+      body.append("screenshot", f); body.append("lead_id", leadId);
+      body.append("email", val(form.querySelector("#fw-email"))); body.append("currency", checked("pay_currency") || "PHP");
+      fetch(uploadUrl, { method: "POST", body: body, signal: controller.signal }).then(function (res) {
+        if (!res || !res.ok) throw new Error("upload");
+        return res.json();
+      }).then(function (j) {
+        clearTimeout(timer);
+        if (!j || j.ok !== true || typeof j.screenshot !== "string" || j.screenshot.indexOf(RECEIPT) !== 0) throw new Error("upload");
+        resolve(j.screenshot);
+      }).catch(function () { clearTimeout(timer); reject(new Error("upload")); });
+    });
+  }
   function deliveryError(e) {
     sending = false; nextBtn.removeAttribute("aria-busy"); updateNext(); buzz([30, 40, 30]);
+    if (e.message === "upload") {
+      /* nothing reached the Sheet or Rialto, so Back and "No, not for me" are honest again */
+      pendingComplete = null; backBtn.hidden = false; noBtn.hidden = false;
+      Array.prototype.forEach.call(reviewEl.querySelectorAll("button"), function (b) { b.disabled = false; });
+      setErr(steps[TOTAL - 1], t("We couldn't upload your screenshot, so nothing was sent. Try again, or email it to hello@jtlgrowth.com."));
+      nextBtn.focus(); return;
+    }
     setErr(steps[TOTAL - 1], t(e.message === "size"
       ? "This application has too much text to send. Your answers are still here. Use Edit to shorten your longer answers, then try again, or email hello@jtlgrowth.com."
       : pendingComplete
@@ -1843,17 +1992,23 @@ addEventListener("DOMContentLoaded",function(){
     for (var k = 0; k < TOTAL - 1; k++) {
       if (!validate(steps[k])) { show(k + 1, true); validate(steps[k]); return; }
     }
+    if (!pendingComplete && shotProblem(shotFile())) { show(termsAt, true); fail(steps[termsAt - 1], shotIn, t(shotProblem(shotFile()))); return; }
     var complete = pendingComplete || collect("complete");
-    try { prepare(complete); } catch (e) { deliveryError(e); return; }
-    pendingComplete = complete;
+    /* size and endpoints are checked before the upload, with room for the link, so a refusal never strands a stored screenshot */
+    try { var probe = JSON.parse(JSON.stringify(complete)); if (!probe.payment_screenshot) { probe.payment_screenshot = RECEIPT + new Array(200).join("x"); probe.problem = (probe.problem + probe.payment_screenshot).slice(0, 2000); } prepare(probe); } catch (e) { deliveryError(e); return; }
     backBtn.hidden = true; noBtn.hidden = true;  /* once a send starts, "nothing was sent" can no longer be promised */
     Array.prototype.forEach.call(reviewEl.querySelectorAll("button"), function (b) { b.disabled = true; });
     sending = true; setErr(steps[TOTAL - 1], "");
     nextBtn.disabled = true; nextBtn.textContent = ""; var spin = document.createElement("span"); spin.className = "fw-spin"; spin.setAttribute("aria-hidden", "true");
     nextBtn.appendChild(spin); nextBtn.appendChild(document.createTextNode(t("Sending")));
     nextBtn.setAttribute("aria-busy", "true");
-    saveDraft();
-    var go = partialSave.catch(function () {}).then(function () { return post(complete); });
+    var go = (complete.payment_screenshot ? Promise.resolve(complete) : upload(shotFile()).then(function (link) {
+      complete = collect("complete", link);
+      return complete;
+    })).then(function (c) {
+      pendingComplete = c; saveDraft();  /* from here the exact payload is kept, so a retry never uploads twice */
+      return partialSave.catch(function () {}).then(function () { return post(c); });
+    });
     go.then(function () { sending = false; nextBtn.removeAttribute("aria-busy"); clearDraft(); showDone(); }).catch(deliveryError);
   }
   function showDone() {

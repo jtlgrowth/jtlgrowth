@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!-- /free-build/assets/: form 2 of the pay-first free build (Owner Telegram 2026-10-28: "uploading assets preference style
+     or kung ako na bahala like surprise me"). DRAFT. Reached only from the applicant email (?id=<lead_id>&e=<email>&b=<business>&lang=fil).
+     One page, not one question per screen: an asset list reads better whole. Files go to the shop Worker's planned
+     /api/free-build-assets (private R2, signed links to Rialto), never to the Sheet. Built from the v6 page tokens. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){try{var t=localStorage.getItem('jtl-theme');
+if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<title>Your website assets · JTL Growth</title>
+<meta name="description" content="Send us your logo, photos and the look you want for your free website build.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://jtlgrowth.com/free-build/assets/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta name="theme-color" content="#121212">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,650&display=swap" rel="stylesheet">
+<style>
+/* PROJECT SETTINGS */
+:root{
+  --cement:#E2E2E2; --cement-deep:#D5D5D5; --paper:#F0F0F0; --navy:#181818; --ink-2:#3A3A3A; --gray:#616161; --line:rgba(24,24,24,.18);
+  --chip-bg:#EAEAEA; --focus:#1F6FEB; --tbc:#b45309;
+  --bg:var(--cement); --surface:var(--paper); --fg:var(--navy); --fg-2:var(--ink-2); --muted:var(--gray); --border:var(--line);
+  --font-display:'Fraunces',Georgia,serif; --font-body:'Archivo',system-ui,sans-serif;
+  --radius:0; --container-max:620px;
+}
+[data-theme="dark"]{
+  --cement:#121212; --cement-deep:#1A1A1A; --paper:#1C1C1C; --navy:#E2E2E2; --ink-2:#C4C4C4; --gray:#A6A6A6; --line:rgba(226,226,226,.18);
+  --chip-bg:#232323; --focus:#6EA8FE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cement:#121212; --cement-deep:#1A1A1A; --paper:#1C1C1C; --navy:#E2E2E2; --ink-2:#C4C4C4; --gray:#A6A6A6; --line:rgba(226,226,226,.18);
+    --chip-bg:#232323; --focus:#6EA8FE;
+  }
+}
+/* END SETTINGS */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font:500 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased}
+.page{width:100%;max-width:var(--container-max);margin:0 auto;padding:32px 16px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}
+.brand{font:700 16px/1 var(--font-body);color:var(--fg);text-decoration:none}
+.lang{display:inline-flex;border:1px solid var(--border)}
+.lang button{min-height:44px;padding:0 14px;border:0;background:transparent;color:var(--fg);font:600 14px/1 var(--font-body);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+h1{font:650 clamp(30px,7vw,42px)/1.1 var(--font-display);letter-spacing:-.01em}
+.lead{margin-top:12px;color:var(--fg-2);max-width:56ch}
+.card{margin-top:24px;padding:20px 18px;background:var(--surface);border:1px solid var(--border)}
+.card h2{font:650 22px/1.25 var(--font-display)}
+.card h2 span{font:700 14px/1 var(--font-body);color:var(--muted);margin-right:8px}
+.note{margin-top:8px;font-size:15px;color:var(--muted)}
+.lbl{display:block;margin:16px 0 8px;font-weight:600}
+.opts{display:grid;gap:10px;margin-top:14px}
+.opt{display:flex;align-items:flex-start;gap:12px;min-height:48px;padding:12px 14px;border:1px solid var(--border);background:var(--bg);cursor:pointer}
+.opt input{flex:none;width:22px;height:22px;margin-top:1px;accent-color:var(--fg)}
+.opt:has(input:checked){border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.opt small{display:block;color:var(--muted);font-size:14px}
+.big{border:2px solid var(--fg);background:var(--chip-bg)}
+input[type="text"],input[type="email"],input[type="url"],textarea{display:block;width:100%;min-height:52px;padding:12px 14px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font:500 16px/1.4 var(--font-body)}
+textarea{min-height:96px;resize:vertical}
+input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:1px dashed var(--fg-2);background:var(--bg);color:var(--fg);font:500 16px/1.4 var(--font-body)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+[hidden]{display:none!important}
+.err{min-height:1.4em;margin-top:10px;font-weight:600;color:var(--fg)}
+.err:not(:empty)::before{content:"\2715  "}
+.send{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;margin-top:24px;border:0;background:var(--fg);color:var(--bg);font:700 17px/1 var(--font-body);cursor:pointer}
+.send:disabled{opacity:.5;cursor:progress}
+.done{margin-top:24px;padding:24px 18px;border:2px solid var(--fg);background:var(--surface)}
+.done h2{font:650 26px/1.2 var(--font-display)}
+.done p{margin-top:10px;color:var(--fg-2)}
+.foot{margin-top:40px;font-size:14px;color:var(--muted)}
+.foot a{color:var(--fg)}
+@media (prefers-reduced-motion:no-preference){.opt{transition:border-color 140ms ease}}
+</style>
+</head>
+<body>
+<main class="page" id="fa">
+  <div class="top">
+    <a class="brand" href="/">JTL Growth</a>
+    <div class="lang" role="group" aria-label="Language" data-fa-lang><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="fil" aria-pressed="false">Filipino</button></div>
+  </div>
+
+  <form data-fa-form data-endpoint="https://shop.jtlgrowth.com/api/free-build-assets" novalidate>
+    <p class="note" data-fa-hello hidden></p>
+    <h1>Let's make it look like you.</h1>
+    <p class="lead">Send what you have: your logo, photos and the look you like. No logo or photos yet? That's ok. Tap "surprise me" and we take care of it.</p>
+    <input type="hidden" name="lead_id"><input type="hidden" name="business_name"><input type="hidden" name="form_language" value="en">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" hidden>
+
+    <label class="opt big" for="fa-surprise"><input type="checkbox" id="fa-surprise" name="surprise" value="yes"><span><strong>Surprise me on everything</strong><small>We pick the look, the photos and the words, then you review it with us before go-live.</small></span></label>
+
+    <div data-fa-detail>
+      <section class="card" aria-labelledby="fa-h1">
+        <h2 id="fa-h1"><span>1</span>Your logo</h2>
+        <div class="opts" role="radiogroup" aria-labelledby="fa-h1">
+          <label class="opt"><input type="radio" name="logo_choice" value="upload"><span><strong>I have one, here it is</strong></span></label>
+          <label class="opt"><input type="radio" name="logo_choice" value="make one"><span><strong>No logo yet, make a simple one for me</strong></span></label>
+          <label class="opt"><input type="radio" name="logo_choice" value="surprise me"><span><strong>Surprise me</strong></span></label>
+        </div>
+        <div data-when="logo_choice=upload" hidden>
+          <label class="lbl" for="fa-logo">Your logo file</label>
+          <input type="file" id="fa-logo" name="logo" accept="image/png,image/jpeg,image/webp,application/pdf">
+          <p class="note">PNG, JPG, WebP or PDF, up to 10 MB. An SVG or AI file? Put it in the folder link below, or email it to hello@jtlgrowth.com.</p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="fa-h2">
+        <h2 id="fa-h2"><span>2</span>Photos</h2>
+        <p class="note">Your place, your team, your products, your work. Phone photos are fine.</p>
+        <div class="opts" role="radiogroup" aria-labelledby="fa-h2">
+          <label class="opt"><input type="radio" name="photos_choice" value="upload"><span><strong>Upload them here</strong><small>Up to 10 photos, 10 MB each</small></span></label>
+          <label class="opt"><input type="radio" name="photos_choice" value="link"><span><strong>I'll share a folder link</strong><small>Google Drive, Dropbox or iCloud</small></span></label>
+          <label class="opt"><input type="radio" name="photos_choice" value="reuse current"><span><strong>Reuse the photos on my current website</strong></span></label>
+          <label class="opt"><input type="radio" name="photos_choice" value="use stock"><span><strong>Use good stock photos for now</strong></span></label>
+          <label class="opt"><input type="radio" name="photos_choice" value="surprise me"><span><strong>Surprise me</strong></span></label>
+        </div>
+        <div data-when="photos_choice=upload" hidden>
+          <label class="lbl" for="fa-photos">Your photos</label>
+          <input type="file" id="fa-photos" name="photos" accept="image/png,image/jpeg,image/webp" multiple>
+        </div>
+        <div data-when="photos_choice=link|upload" hidden>
+          <label class="lbl" for="fa-photos-link">Folder link <span data-fa-opt-link>(optional)</span></label>
+          <input type="url" id="fa-photos-link" name="photos_link" inputmode="url" autocapitalize="none" spellcheck="false" placeholder="https://drive.google.com/...">
+          <p class="note">Set it so anyone with the link can view.</p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="fa-h3">
+        <h2 id="fa-h3"><span>3</span>The look and feel</h2>
+        <p class="note">Tap all that fit.</p>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="style" value="Clean and simple"><span><strong>Clean and simple</strong></span></label>
+          <label class="opt"><input type="checkbox" name="style" value="Warm and friendly"><span><strong>Warm and friendly</strong></span></label>
+          <label class="opt"><input type="checkbox" name="style" value="Bold and loud"><span><strong>Bold and loud</strong></span></label>
+          <label class="opt"><input type="checkbox" name="style" value="Premium and calm"><span><strong>Premium and calm</strong></span></label>
+          <label class="opt"><input type="checkbox" name="style" value="Playful"><span><strong>Playful</strong></span></label>
+          <label class="opt"><input type="checkbox" name="style" value="Surprise me"><span><strong>Surprise me</strong></span></label>
+        </div>
+        <label class="lbl" for="fa-colors">Colors you like (optional)</label>
+        <input type="text" id="fa-colors" name="colors" maxlength="200" placeholder="e.g. cream and dark green, or the colors of my logo">
+        <label class="lbl" for="fa-refs">Websites you like (optional)</label>
+        <textarea id="fa-refs" name="references" maxlength="600" placeholder="Paste up to 5 links, one per line"></textarea>
+      </section>
+
+      <section class="card" aria-labelledby="fa-h4">
+        <h2 id="fa-h4"><span>4</span>Who writes the words?</h2>
+        <div class="opts" role="radiogroup" aria-labelledby="fa-h4">
+          <label class="opt"><input type="radio" name="words" value="I'll send the words"><span><strong>I'll send the words</strong><small>Reply to our email with them</small></span></label>
+          <label class="opt"><input type="radio" name="words" value="You write, I check"><span><strong>You write them, I check</strong></span></label>
+          <label class="opt"><input type="radio" name="words" value="You write it all"><span><strong>You write it all, ikaw na bahala</strong></span></label>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="fa-h5">
+      <h2 id="fa-h5">Anything else? (optional)</h2>
+      <textarea id="fa-notes" name="notes" maxlength="600" aria-labelledby="fa-h5" placeholder="Opening hours, a promo, a deadline, anything."></textarea>
+      <label class="lbl" for="fa-email">Your email</label>
+      <input type="email" id="fa-email" name="email" autocomplete="email" inputmode="email" maxlength="254">
+    </section>
+
+    <p class="err" role="alert" data-fa-err></p>
+    <button type="submit" class="send" data-fa-send>Send my assets</button>
+  </form>
+
+  <div class="done" data-fa-done hidden tabindex="-1">
+    <h2>Got it, thank you.</h2>
+    <p>Your assets are in. We start on your website this week and show you the first version in week 2 or 3. Questions? Reply to our email.</p>
+  </div>
+
+  <p class="foot">Trouble with the form? Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> and we will help.</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var FIL = {
+    "Language": "Wika",
+    "Let's make it look like you.": "Gawin nating kamukha mo ito.",
+    "Send what you have: your logo, photos and the look you like. No logo or photos yet? That's ok. Tap \"surprise me\" and we take care of it.": "I-send mo kung ano ang meron ka: logo, photos at itsura na gusto mo. Wala pang logo o photos? Ok lang. Pindutin ang \"surprise me\" at kami na ang bahala.",
+    "Surprise me on everything": "Surprise me sa lahat, kayo na bahala",
+    "We pick the look, the photos and the words, then you review it with us before go-live.": "Kami ang pipili ng itsura, photos at mga salita, tapos ire-review mo ito kasama namin bago mag-live.",
+    "Your logo": "Ang logo mo",
+    "I have one, here it is": "Meron ako, heto",
+    "No logo yet, make a simple one for me": "Wala pa, gawan nyo ako ng simple",
+    "Surprise me": "Surprise me",
+    "Your logo file": "Ang logo file mo",
+    "PNG, JPG, WebP or PDF, up to 10 MB. An SVG or AI file? Put it in the folder link below, or email it to hello@jtlgrowth.com.": "PNG, JPG, WebP o PDF, hanggang 10 MB. SVG o AI file? Ilagay sa folder link sa baba, o i-email sa hello@jtlgrowth.com.",
+    "Photos": "Photos",
+    "Your place, your team, your products, your work. Phone photos are fine.": "Ang lugar mo, team mo, products mo, gawa mo. Ok lang ang photos galing phone.",
+    "Upload them here": "I-upload dito",
+    "Up to 10 photos, 10 MB each": "Hanggang 10 photos, 10 MB bawat isa",
+    "I'll share a folder link": "Magse-share ako ng folder link",
+    "Google Drive, Dropbox or iCloud": "Google Drive, Dropbox o iCloud",
+    "Use good stock photos for now": "Gumamit muna ng magandang stock photos",
+    "Reuse the photos on my current website": "Gamitin ulit yung photos sa current website ko",
+    "Your photos": "Ang photos mo",
+    "Folder link": "Folder link",
+    "(optional)": "(optional)",
+    "Set it so anyone with the link can view.": "I-set na makikita ng kahit sinong may link.",
+    "The look and feel": "Ang itsura at dating",
+    "Tap all that fit.": "Piliin lahat ng swak.",
+    "Clean and simple": "Malinis at simple",
+    "Warm and friendly": "Warm at friendly",
+    "Bold and loud": "Bold at malakas ang dating",
+    "Premium and calm": "Premium at kalmado",
+    "Playful": "Masaya at playful",
+    "Colors you like (optional)": "Mga kulay na gusto mo (optional)",
+    "e.g. cream and dark green, or the colors of my logo": "hal. cream at dark green, o yung kulay ng logo ko",
+    "Websites you like (optional)": "Mga website na gusto mo (optional)",
+    "Paste up to 5 links, one per line": "Mag-paste ng hanggang 5 links, isa bawat linya",
+    "Who writes the words?": "Sino ang magsusulat ng mga salita?",
+    "I'll send the words": "Ako ang magse-send ng mga salita",
+    "Reply to our email with them": "I-reply mo sa email namin",
+    "You write them, I check": "Kayo ang magsulat, ako ang mag-check",
+    "You write it all, ikaw na bahala": "Kayo na lahat, ikaw na bahala",
+    "Anything else? (optional)": "May iba pa? (optional)",
+    "Opening hours, a promo, a deadline, anything.": "Oras ng bukas, promo, deadline, kahit ano.",
+    "Your email": "Ang email mo",
+    "Send my assets": "I-send ang assets ko",
+    "Sending...": "Sine-send...",
+    "Got it, thank you.": "Natanggap namin, salamat.",
+    "Your assets are in. We start on your website this week and show you the first version in week 2 or 3. Questions? Reply to our email.": "Nandito na ang assets mo. Sisimulan namin ang website mo ngayong linggo at ipapakita namin ang unang version sa week 2 o 3. May tanong? Mag-reply sa email namin.",
+    "Trouble with the form? Email": "May problema sa form? Mag-email sa",
+    "and we will help.": "at tutulungan ka namin.",
+    "For {b}": "Para sa {b}",
+    "Pick an answer for your logo, photos and words, or tick Surprise me on everything.": "Pumili ng sagot para sa logo, photos at words, o i-check ang Surprise me sa lahat.",
+    "Tap at least one look, or Surprise me.": "Pumili ng kahit isang itsura, o Surprise me.",
+    "Add your logo file, or pick another logo answer.": "Ilagay ang logo file mo, o pumili ng ibang sagot para sa logo.",
+    "Add at least one photo, or pick another photos answer.": "Maglagay ng kahit isang photo, o pumili ng ibang sagot para sa photos.",
+    "Paste your folder link (it starts with https://).": "I-paste ang folder link mo (nagsisimula sa https://).",
+    "Up to 10 photos, please.": "Hanggang 10 photos lang.",
+    "One of your files is over 10 MB or not a PNG, JPG, WebP or PDF.": "May file na lagpas 10 MB o hindi PNG, JPG, WebP o PDF.",
+    "Your files add up to more than 50 MB. Send some in a folder link instead.": "Lagpas 50 MB ang lahat ng files mo. Ilagay ang iba sa folder link.",
+    "Add a valid email, the one you applied with.": "Ilagay ang tamang email, yung ginamit mo sa application.",
+    "We couldn't send yet. Your answers are still here. Try again, or email hello@jtlgrowth.com.": "Hindi pa namin ma-send. Nandito pa rin ang mga sagot mo. Subukan ulit, o mag-email sa hello@jtlgrowth.com."
+  };
+  var root = document.getElementById("fa"), form = root.querySelector("[data-fa-form]"), err = root.querySelector("[data-fa-err]");
+  var sendBtn = root.querySelector("[data-fa-send]"), done = root.querySelector("[data-fa-done]"), detail = root.querySelector("[data-fa-detail]");
+  var surprise = form.querySelector("#fa-surprise"), endpoint = (form.getAttribute("data-endpoint") || "").trim();
+  var MAX = 10 * 1024 * 1024, TOTAL = 50 * 1024 * 1024, TYPES = ["image/png", "image/jpeg", "image/webp", "application/pdf"];
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, sending = false, lang = "en";
+  var q = new URLSearchParams(location.search);
+  try { lang = q.get("lang") === "fil" || (!q.get("lang") && localStorage.getItem("fw-lang") === "fil") ? "fil" : "en"; } catch (e) {}
+  function t(s) { return lang === "fil" && FIL[s] ? FIL[s] : s; }
+  function translate() {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return n.parentNode.closest("script,style,[data-fa-err],[data-fa-hello],[data-fa-send]") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } }), n;
+    while ((n = w.nextNode())) {
+      if (n.__en == null) { if (!/[A-Za-z]/.test(n.nodeValue)) continue; n.__en = n.nodeValue; }
+      var core = n.__en.trim(); n.nodeValue = lang === "fil" && FIL[core] ? n.__en.replace(core, FIL[core]) : n.__en;
+    }
+    Array.prototype.forEach.call(root.querySelectorAll("[placeholder],[aria-label]"), function (el) {
+      ["placeholder", "aria-label"].forEach(function (a) { if (!el.hasAttribute(a)) return; var k = "__en_" + a; if (el[k] == null) el[k] = el.getAttribute(a); el.setAttribute(a, t(el[k])); });
+    });
+    document.documentElement.lang = lang === "fil" ? "fil" : "en";
+    form.querySelector('[name="form_language"]').value = lang;
+    Array.prototype.forEach.call(root.querySelectorAll("[data-fa-lang] button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
+    if (!sending) sendBtn.textContent = t("Send my assets");
+    var hello = root.querySelector("[data-fa-hello]"), b = form.querySelector('[name="business_name"]').value;
+    hello.hidden = !b; hello.textContent = b ? t("For {b}").replace("{b}", b) : "";
+    err.textContent = "";
+  }
+  /* the email link carries who this is: the lead id from form 1, the email they applied with, the business name */
+  var id = (q.get("id") || "").replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  form.querySelector('[name="lead_id"]').value = id;
+  form.querySelector('[name="business_name"]').value = (q.get("b") || "").slice(0, 120);
+  form.querySelector("#fa-email").value = (q.get("e") || "").replace(/ /g, "+").slice(0, 254);  /* a + in the address arrives as a space */
+
+  function picked(name) { var r = form.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ""; }
+  function applyWhen() {
+    detail.hidden = surprise.checked;
+    Array.prototype.forEach.call(form.querySelectorAll("[data-when]"), function (el) {
+      var kv = el.getAttribute("data-when").split("="); el.hidden = kv[1].split("|").indexOf(picked(kv[0])) < 0;
+    });
+    root.querySelector("[data-fa-opt-link]").hidden = picked("photos_choice") === "link";
+  }
+  form.addEventListener("change", function () { applyWhen(); err.textContent = ""; });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-fa-lang] button"), function (b) {
+    b.addEventListener("click", function () { lang = b.getAttribute("data-lang"); try { localStorage.setItem("fw-lang", lang); } catch (e) {} translate(); });
+  });
+  function files(name) { var el = form.querySelector('input[name="' + name + '"]'); return el && el.files ? Array.prototype.slice.call(el.files) : []; }
+  function problem() {
+    if (!EMAIL.test(form.querySelector("#fa-email").value.trim())) return ["Add a valid email, the one you applied with.", "#fa-email"];
+    if (surprise.checked) return null;
+    if (!picked("logo_choice") || !picked("photos_choice") || !picked("words")) return ["Pick an answer for your logo, photos and words, or tick Surprise me on everything.", !picked("logo_choice") ? 'input[name="logo_choice"]' : !picked("photos_choice") ? 'input[name="photos_choice"]' : 'input[name="words"]'];
+    if (!form.querySelector('input[name="style"]:checked')) return ["Tap at least one look, or Surprise me.", 'input[name="style"]'];
+    if (picked("logo_choice") === "upload" && !files("logo").length) return ["Add your logo file, or pick another logo answer.", "#fa-logo"];
+    if (picked("photos_choice") === "upload" && !files("photos").length) return ["Add at least one photo, or pick another photos answer.", "#fa-photos"];
+    if (picked("photos_choice") === "link" && !/^https:\/\/\S+$/i.test(form.querySelector("#fa-photos-link").value.trim())) return ["Paste your folder link (it starts with https://).", "#fa-photos-link"];
+    var all = (picked("logo_choice") === "upload" ? files("logo") : []).concat(picked("photos_choice") === "upload" ? files("photos") : []);
+    if (files("photos").length > 10 && picked("photos_choice") === "upload") return ["Up to 10 photos, please.", "#fa-photos"];
+    if (all.some(function (f) { return f.size > MAX || TYPES.indexOf(f.type) < 0; })) return ["One of your files is over 10 MB or not a PNG, JPG, WebP or PDF.", all.length && files("logo").indexOf(all[0]) >= 0 ? "#fa-logo" : "#fa-photos"];
+    if (all.reduce(function (s, f) { return s + f.size; }, 0) > TOTAL) return ["Your files add up to more than 50 MB. Send some in a folder link instead.", "#fa-photos"];
+    return null;
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (sending) return;
+    var p = problem();
+    if (p) { err.textContent = t(p[0]); var f = form.querySelector(p[1]); if (f) { f.focus({ preventScroll: true }); f.scrollIntoView({ block: "center" }); } return; }
+    if (form.querySelector('[name="website"]').value) { form.hidden = true; done.hidden = false; return; }
+    var body = new FormData();
+    ["lead_id", "business_name", "form_language", "colors", "references", "notes"].forEach(function (k) { body.append(k, form.querySelector('[name="' + k + '"]').value.trim()); });
+    body.append("email", form.querySelector("#fa-email").value.trim().toLowerCase());
+    if (surprise.checked) body.append("surprise", "yes");
+    else {
+      body.append("logo_choice", picked("logo_choice")); body.append("photos_choice", picked("photos_choice")); body.append("words", picked("words"));
+      body.append("style", Array.prototype.map.call(form.querySelectorAll('input[name="style"]:checked'), function (c) { return c.value; }).join(", "));
+      body.append("photos_link", form.querySelector("#fa-photos-link").value.trim());
+      if (picked("logo_choice") === "upload") files("logo").forEach(function (f) { body.append("logo", f); });
+      if (picked("photos_choice") === "upload") files("photos").forEach(function (f) { body.append("photos", f); });
+    }
+    sending = true; sendBtn.disabled = true; sendBtn.textContent = t("Sending...");
+    var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, 120000);
+    fetch(endpoint, { method: "POST", body: body, signal: ctl.signal }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      clearTimeout(timer);
+      if (!j || j.ok !== true) throw new Error("refused");
+      form.hidden = true; done.hidden = false; done.focus(); done.scrollIntoView({ block: "start" });
+    }).catch(function () {
+      clearTimeout(timer); sending = false; sendBtn.disabled = false; sendBtn.textContent = t("Send my assets");
+      err.textContent = t("We couldn't send yet. Your answers are still here. Try again, or email hello@jtlgrowth.com.");
+    });
+  });
+  applyWhen(); translate();
+})();
+</script>
+</body>
+</html>
