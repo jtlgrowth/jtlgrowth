@@ -76,6 +76,20 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 .done p{margin-top:10px;color:var(--fg-2)}
 .foot{margin-top:40px;font-size:14px;color:var(--muted)}
 .foot a{color:var(--fg)}
+.order h3{margin-top:22px;font:650 18px/1.3 var(--font-display)}
+.order h3 small{display:block;font:500 14px/1.4 var(--font-body);color:var(--muted)}
+.order .opt .price{display:block;margin-top:6px;white-space:pre-line;font:600 14px/1.4 var(--font-body);color:var(--fg)}
+.order .opt .price s{color:var(--muted);font-weight:500}
+.addon{display:grid;gap:0}
+.proof{margin:0;padding:10px;border:1px solid var(--border);border-top:0;background:var(--surface)}
+.proof video,.proof img{display:block;width:100%;height:auto;max-height:240px;object-fit:contain;background:#111}
+.proof figcaption{margin-top:8px;font-size:13px;line-height:1.45;color:var(--muted)}
+.proof figcaption b{color:var(--fg);font-weight:700}
+.total{margin-top:20px;padding:16px;border:2px solid var(--fg);background:var(--bg)}
+.total p{font-weight:600}
+.total p+p{margin-top:6px}
+.total .t-note{font-weight:500;font-size:14px;color:var(--muted)}
+.total .t-big{font:650 22px/1.25 var(--font-display)}
 @media (prefers-reduced-motion:no-preference){.opt{transition:border-color 140ms ease}}
 </style>
 </head>
@@ -158,6 +172,17 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
       </section>
     </div>
 
+    <section class="card order" aria-labelledby="fa-h6" data-fa-order>
+      <h2 id="fa-h6">Want to add anything? (optional)</h2>
+      <p class="note">Your plan stays at USD 500 a month unless you add something. Pick 2 or more add-ons and every one gets the bundle price.</p>
+      <div class="opts" role="radiogroup" aria-labelledby="fa-h6" data-fa-plans></div>
+      <h3 id="fa-h7">One-time add-ons<small>Paid once.</small></h3>
+      <div class="opts" data-fa-addons="once" role="group" aria-labelledby="fa-h7"></div>
+      <h3 id="fa-h8">+ Monthly add-ons<small>Added to your monthly.</small></h3>
+      <div class="opts" data-fa-addons="month" role="group" aria-labelledby="fa-h8"></div>
+      <div class="total" aria-live="polite" data-fa-total></div>
+    </section>
+
     <section class="card" aria-labelledby="fa-h5">
       <h2 id="fa-h5">Anything else? (optional)</h2>
       <textarea id="fa-notes" name="notes" maxlength="600" aria-labelledby="fa-h5" placeholder="Opening hours, a promo, a deadline, anything."></textarea>
@@ -176,6 +201,7 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 
   <p class="foot">Trouble with the form? Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> and we will help.</p>
 </main>
+<script type="application/json" id="fa-offers">{"version": "free-build-offers-2026-10-29", "note": "Owner 2026-10-29: base USD 500 a month, then one-time add-ons and + monthly add-ons. Pick 2 or more add-ons and every one gets the bundle price; one on its own is solo (1.5x). SEO is the SEO + AIO + GEO bundle (pk SEO Mid). fixed = a catalog price the bundle rule does not touch. quote = no number, we quote.", "php_per_usd": 64, "bundle_min": 2, "plans": [{"key": "support-500", "name": "Website Support and Maintenance", "usd_month": 500, "php_month": 32000, "line": "What you signed up for: hosting, your domain, up to 5 pages, 4 small changes a month, 1 chatbot, 2 simple automations."}, {"key": "plus-900", "name": "Website Plus", "usd_month": 900, "php_month": 57600, "line": "Everything in the USD 500 plan, plus 8 small changes a month, 5 more automations, Google review requests, 2 articles a month and a monthly call."}], "addons": [{"key": "extra-page", "billing": "once", "bundle": 150, "solo": 225, "name": "Extra page", "line": "One more page on your website, per page."}, {"key": "landing-page", "billing": "once", "bundle": 250, "solo": 375, "name": "Landing page for an ad or promo", "line": "A one-page site on its own link, made to turn ad clicks into inquiries.", "clip": "landing"}, {"key": "booking", "billing": "once", "bundle": 300, "solo": 450, "name": "Booking system", "line": "Clients pick a time, get a confirmation and a reminder, and can reschedule."}, {"key": "shop", "billing": "once", "bundle": 500, "solo": 750, "from": true, "name": "Online shop with payments", "line": "Your products, a cart and checkout. Payment fees are the provider's."}, {"key": "language", "billing": "once", "bundle": 200, "solo": 300, "name": "Second language", "line": "An English and Filipino switch on every page."}, {"key": "biz-email", "billing": "once", "bundle": 50, "solo": 75, "name": "Business email on your domain", "line": "you@yourbusiness.com, set up for you. The Google fee is at cost."}, {"key": "seo-starter", "billing": "once", "bundle": 500, "solo": 750, "name": "SEO Starter", "line": "Google Business Profile set up, every page tuned for search, Search Console, 20 directory listings."}, {"key": "reviews", "billing": "once", "bundle": 150, "solo": 225, "name": "Google review requests", "line": "Happy clients get a short message asking for a Google review."}, {"key": "channel-bot", "billing": "once", "bundle": 200, "solo": 300, "name": "Chatbot on Messenger, Instagram or WhatsApp", "line": "The same chatbot as your website, answering where your clients already message you. Per channel."}, {"key": "brand-kit", "billing": "once", "bundle": 300, "solo": 450, "name": "Brand kit", "line": "Logo, colors, fonts and 5 social post templates."}, {"key": "ai-employee", "billing": "once", "fixed": 1500, "from": true, "name": "AI employee", "line": "Answers, qualifies and books your clients day and night, on your website and your messages.", "clip": "frontdesk", "fixed_php": 75000}, {"key": "seo-local", "billing": "month", "bundle": 800, "solo": 1200, "name": "SEO + AIO + GEO", "line": "Found on Google, in Google's AI Overviews, and in ChatGPT and Perplexity answers. Weekly Google posts, review replies, 2 articles and a ranking report every month.", "clip": "seo"}, {"key": "seo-founder", "billing": "month", "bundle": 1000, "solo": 1500, "name": "+ Founder SEO", "line": "Your own name found too: a founder profile page, your Google knowledge panel, your LinkedIn, Instagram and YouTube lined up, 2 founder articles a month.", "pair": {"with": "seo-local", "both_usd": 1500}, "clip": "founder"}, {"key": "automation-pack", "billing": "month", "bundle": 150, "solo": 225, "name": "Automation pack", "line": "5 more simple automations, like follow-ups, reminders and thank-you messages."}, {"key": "crm-seat", "billing": "month", "fixed": 50, "from": true, "name": "Your own Rialto inbox and CRM", "line": "Your contacts, pipeline and messages in one place, on the same platform as your website.", "clip": "rialto"}, {"key": "priority", "billing": "month", "bundle": 200, "solo": 300, "name": "Priority changes", "line": "Same-day small changes and 8 a month instead of 4."}], "clips": {"frontdesk": {"src": "clips/frontdesk.mp4", "poster": "clips/frontdesk.webp", "proof": "Real demo: our AVAS front desk answering a bakery owner, in Taglish, in seconds.", "webm": "clips/frontdesk.webm"}, "landing": {"src": "clips/landing.mp4", "poster": "clips/landing.webp", "proof": "Real work: the Gala Night landing page we built for FWIB, on a phone.", "webm": "clips/landing.webm"}, "rialto": {"src": "clips/rialto.mp4", "poster": "clips/rialto.webp", "proof": "Real demo: Rialto, a website inquiry landing as a contact and a deal.", "webm": "clips/rialto.webm"}, "seo": {"img": "clips/seo-proof.webp", "proof": "Real search: \"jtlgrowth\" on Google. Our own site comes first, with our Business Profile right beside it."}, "founder": {"img": "clips/founder-proof.webp", "proof": "Real search: \"jamz jamorol\" on Google. The AI Overview names our founder and his work, and his own site is the first result."}}}</script>
 <script>
 (function () {
   "use strict";
@@ -238,7 +264,67 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     "One of your files is over 10 MB or not a PNG, JPG, WebP or PDF.": "May file na lagpas 10 MB o hindi PNG, JPG, WebP o PDF.",
     "Your files add up to more than 50 MB. Send some in a folder link instead.": "Lagpas 50 MB ang lahat ng files mo. Ilagay ang iba sa folder link.",
     "Add a valid email, the one you applied with.": "Ilagay ang tamang email, yung ginamit mo sa application.",
-    "We couldn't send yet. Your answers are still here. Try again, or email hello@jtlgrowth.com.": "Hindi pa namin ma-send. Nandito pa rin ang mga sagot mo. Subukan ulit, o mag-email sa hello@jtlgrowth.com."
+    "We couldn't send yet. Your answers are still here. Try again, or email hello@jtlgrowth.com.": "Hindi pa namin ma-send. Nandito pa rin ang mga sagot mo. Subukan ulit, o mag-email sa hello@jtlgrowth.com.",
+    "Want to add anything? (optional)": "May gusto ka bang idagdag? (optional)",
+    "Your plan stays at USD 500 a month unless you add something. Pick 2 or more add-ons and every one gets the bundle price.": "USD 500 a month pa rin ang plan mo hangga't wala kang idinadagdag. Pumili ng 2 o higit pang add-ons at bundle price na lahat.",
+    "One-time add-ons": "One-time add-ons",
+    "Paid once.": "Isang bayad lang.",
+    "+ Monthly add-ons": "+ Monthly add-ons",
+    "Added to your monthly.": "Dagdag sa monthly mo.",
+    "Website Support and Maintenance": "Website Support and Maintenance",
+    "Website Plus": "Website Plus",
+    "What you signed up for: hosting, your domain, up to 5 pages, 4 small changes a month, 1 chatbot, 2 simple automations.": "Ito ang pinasukan mo: hosting, domain mo, hanggang 5 pages, 4 small changes kada buwan, 1 chatbot, 2 simple automations.",
+    "Everything in the USD 500 plan, plus 8 small changes a month, 5 more automations, Google review requests, 2 articles a month and a monthly call.": "Lahat ng nasa USD 500 plan, plus 8 small changes kada buwan, 5 pang automations, Google review requests, 2 articles kada buwan at isang monthly call.",
+    "Extra page": "Dagdag na page",
+    "One more page on your website, per page.": "Isa pang page sa website mo, per page.",
+    "Landing page for an ad or promo": "Landing page para sa ad o promo",
+    "A one-page site on its own link, made to turn ad clicks into inquiries.": "Isang one-page site sa sarili nitong link, ginawa para maging inquiry ang mga ad click.",
+    "Booking system": "Booking system",
+    "Clients pick a time, get a confirmation and a reminder, and can reschedule.": "Pipili ng oras ang client, may confirmation at reminder, at puwedeng mag-reschedule.",
+    "Online shop with payments": "Online shop na may bayaran",
+    "Your products, a cart and checkout. Payment fees are the provider's.": "Ang products mo, may cart at checkout. Ang payment fees ay sa provider.",
+    "Second language": "Pangalawang wika",
+    "An English and Filipino switch on every page.": "English at Filipino switch sa bawat page.",
+    "Business email on your domain": "Business email sa domain mo",
+    "you@yourbusiness.com, set up for you. The Google fee is at cost.": "ikaw@business.com, kami ang mag-se-set up. Ang Google fee ay at cost.",
+    "SEO Starter": "SEO Starter",
+    "Google Business Profile set up, every page tuned for search, Search Console, 20 directory listings.": "Naka-set up ang Google Business Profile, naka-ayos ang bawat page para sa search, Search Console, 20 directory listings.",
+    "Google review requests": "Google review requests",
+    "Happy clients get a short message asking for a Google review.": "Ang mga masayang client ay makakatanggap ng maikling message para mag-iwan ng Google review.",
+    "Chatbot on Messenger, Instagram or WhatsApp": "Chatbot sa Messenger, Instagram o WhatsApp",
+    "The same chatbot as your website, answering where your clients already message you. Per channel.": "Parehong chatbot ng website mo, sumasagot kung saan ka na talaga mine-message ng clients mo. Per channel.",
+    "Brand kit": "Brand kit",
+    "Logo, colors, fonts and 5 social post templates.": "Logo, kulay, fonts at 5 social post templates.",
+    "AI employee": "AI employee",
+    "Answers, qualifies and books your clients day and night, on your website and your messages.": "Sumasagot, nag-qualify at nagbu-book ng clients mo araw at gabi, sa website at sa messages mo.",
+    "SEO + AIO + GEO": "SEO + AIO + GEO",
+    "Found on Google, in Google's AI Overviews, and in ChatGPT and Perplexity answers. Weekly Google posts, review replies, 2 articles and a ranking report every month.": "Makikita ka sa Google, sa AI Overviews ng Google, at sa sagot ng ChatGPT at Perplexity. Weekly Google posts, sagot sa reviews, 2 articles at ranking report kada buwan.",
+    "+ Founder SEO": "+ Founder SEO",
+    "Your own name found too: a founder profile page, your Google knowledge panel, your LinkedIn, Instagram and YouTube lined up, 2 founder articles a month.": "Makikita rin ang pangalan mo mismo: founder profile page, Google knowledge panel mo, naka-ayos ang LinkedIn, Instagram at YouTube mo, 2 founder articles kada buwan.",
+    "Automation pack": "Automation pack",
+    "5 more simple automations, like follow-ups, reminders and thank-you messages.": "5 pang simple automations, tulad ng follow-ups, reminders at thank-you messages.",
+    "Your own Rialto inbox and CRM": "Sariling Rialto inbox at CRM mo",
+    "Your contacts, pipeline and messages in one place, on the same platform as your website.": "Ang contacts, pipeline at messages mo sa iisang lugar, sa parehong platform ng website mo.",
+    "Priority changes": "Priority changes",
+    "Same-day small changes and 8 a month instead of 4.": "Same-day na small changes at 8 kada buwan imbes na 4.",
+    "Real demo: our AVAS front desk answering a bakery owner, in Taglish, in seconds.": "Totoong demo: ang AVAS front desk namin, sumasagot sa isang bakery owner in Taglish, sa loob ng ilang segundo.",
+    "Real work: the Gala Night landing page we built for FWIB, on a phone.": "Totoong gawa: ang Gala Night landing page na ginawa namin para sa FWIB, sa phone.",
+    "Real demo: Rialto, a website inquiry landing as a contact and a deal.": "Totoong demo: Rialto, isang website inquiry na pumapasok bilang contact at deal.",
+    "Real search: \"jtlgrowth\" on Google. Our own site comes first, with our Business Profile right beside it.": "Totoong search: \"jtlgrowth\" sa Google. Una ang sarili naming site, katabi ang Business Profile namin.",
+    "Real search: \"jamz jamorol\" on Google. The AI Overview names our founder and his work, and his own site is the first result.": "Totoong search: \"jamz jamorol\" sa Google. Pinapangalanan ng AI Overview ang founder namin at ang gawa niya, at una ang sarili niyang site.",
+    "Bundle: {u}\nOn its own: {s}": "Bundle: {u}\nKapag mag-isa: {s}",
+    "From {u}": "Mula {u}",
+    "From {u} a month": "Mula {u} kada buwan",
+    "Bundle: {u} a month\nOn its own: {s} a month": "Bundle: {u} kada buwan\nKapag mag-isa: {s} kada buwan",
+    "{u} a month": "{u} kada buwan",
+    "With SEO + AIO + GEO: {u} a month for both.": "Kasama ang SEO + AIO + GEO: {u} kada buwan para sa dalawa.",
+    "Your monthly": "Monthly mo",
+    "One-time": "One-time",
+    "and up": "pataas",
+    "Bundle price is on. You save {u}.": "Naka-bundle price na. Tipid ka ng {u}.",
+    "Add one more add-on and both get the bundle price.": "Magdagdag pa ng isang add-on at bundle price na pareho.",
+    "Nothing is charged here. We email you a quote, and you say yes before any invoice.": "Walang sisingilin dito. Magpapadala kami ng quote sa email, at ikaw ang magsasabi ng yes bago ang kahit anong invoice.",
+    "No add-ons. Your plan stays as it is.": "Walang add-ons. Ganun pa rin ang plan mo."
   };
   var root = document.getElementById("fa"), form = root.querySelector("[data-fa-form]"), err = root.querySelector("[data-fa-err]");
   var sendBtn = root.querySelector("[data-fa-send]"), done = root.querySelector("[data-fa-done]"), detail = root.querySelector("[data-fa-detail]");
@@ -249,7 +335,7 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
   try { lang = q.get("lang") === "fil" || (!q.get("lang") && localStorage.getItem("fw-lang") === "fil") ? "fil" : "en"; } catch (e) {}
   function t(s) { return lang === "fil" && FIL[s] ? FIL[s] : s; }
   function translate() {
-    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return n.parentNode.closest("script,style,[data-fa-err],[data-fa-hello],[data-fa-send]") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } }), n;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { return n.parentNode.closest("script,style,[data-fa-err],[data-fa-hello],[data-fa-send],[data-fa-dyn]") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } }), n;
     while ((n = w.nextNode())) {
       if (n.__en == null) { if (!/[A-Za-z]/.test(n.nodeValue)) continue; n.__en = n.nodeValue; }
       var core = n.__en.trim(); n.nodeValue = lang === "fil" && FIL[core] ? n.__en.replace(core, FIL[core]) : n.__en;
@@ -257,6 +343,7 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     Array.prototype.forEach.call(root.querySelectorAll("[placeholder],[aria-label]"), function (el) {
       ["placeholder", "aria-label"].forEach(function (a) { if (!el.hasAttribute(a)) return; var k = "__en_" + a; if (el[k] == null) el[k] = el.getAttribute(a); el.setAttribute(a, t(el[k])); });
     });
+    if (typeof renderOrder === "function") renderOrder();
     document.documentElement.lang = lang === "fil" ? "fil" : "en";
     form.querySelector('[name="form_language"]').value = lang;
     Array.prototype.forEach.call(root.querySelectorAll("[data-fa-lang] button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
@@ -279,6 +366,89 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     });
     root.querySelector("[data-fa-opt-link]").hidden = picked("photos_choice") === "link";
   }
+
+  /* the order step: everything priced comes from #fa-offers (free-build-offers.json, the Worker recomputes it) */
+  var OFF = JSON.parse(document.getElementById("fa-offers").textContent), RATE = OFF.php_per_usd;
+  var BYKEY = {}; OFF.addons.forEach(function (a) { BYKEY[a.key] = a; });
+  function num(n) { return n.toLocaleString("en-US"); }
+  function money(usd, php) { return "USD " + num(usd) + " · ₱" + num(php == null ? usd * RATE : php); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function proof(key) {
+    var c = OFF.clips[key]; if (!c) return null;
+    var fig = el("figure", "proof"), media;
+    if (c.img) { media = el("img"); media.src = c.img; media.alt = c.proof; media.loading = "lazy"; media.decoding = "async"; }
+    else {
+      media = el("video"); media.muted = true; media.loop = true; media.playsInline = true; media.preload = "none";
+      media.setAttribute("muted", ""); media.setAttribute("playsinline", ""); media.poster = c.poster;
+      [[c.webm, "video/webm"], [c.src, "video/mp4"]].forEach(function (x) { if (!x[0]) return; var so = el("source"); so.src = x[0]; so.type = x[1]; media.appendChild(so); });
+      media.setAttribute("aria-label", c.proof); media.setAttribute("data-fa-loop", "");
+    }
+    fig.appendChild(media); fig.appendChild(el("figcaption", null, c.proof)); return fig;
+  }
+  var planBox = form.querySelector("[data-fa-plans]");
+  OFF.plans.forEach(function (pl, i) {
+    var lab = el("label", "opt"), inp = el("input"), sp = el("span");
+    inp.type = "radio"; inp.name = "plan"; inp.value = pl.key; if (i === 0) inp.checked = true;
+    sp.appendChild(el("strong", null, pl.name)); sp.appendChild(el("small", null, pl.line));
+    var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-plan-price", pl.key); sp.appendChild(pr);
+    lab.appendChild(inp); lab.appendChild(sp); planBox.appendChild(lab);
+  });
+  OFF.addons.forEach(function (a) {
+    var wrap = el("div", "addon"), lab = el("label", "opt"), inp = el("input"), sp = el("span");
+    inp.type = "checkbox"; inp.name = "addons"; inp.value = a.key;
+    sp.appendChild(el("strong", null, a.name)); sp.appendChild(el("small", null, a.line));
+    var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-addon-price", a.key); sp.appendChild(pr);
+    lab.appendChild(inp); lab.appendChild(sp); wrap.appendChild(lab);
+    var f = a.clip && proof(a.clip); if (f) wrap.appendChild(f);
+    form.querySelector('[data-fa-addons="' + a.billing + '"]').appendChild(wrap);
+  });
+  /* the same rule the Worker applies: 2 or more bundle-priced add-ons -> bundle price on all, one alone -> solo */
+  function quote(plan, keys) {
+    var pl = OFF.plans.filter(function (x) { return x.key === plan; })[0] || OFF.plans[0];
+    var items = keys.map(function (k) { return BYKEY[k]; }).filter(Boolean);
+    var priced = items.filter(function (a) { return a.fixed == null && !a.quote; });
+    var bundle = priced.length >= OFF.bundle_min, q = { month: pl.usd_month, once: 0, from: false, bundle: bundle, save: 0 };
+    items.forEach(function (a) {
+      var v = a.fixed != null ? a.fixed : bundle ? a.bundle : a.solo;
+      if (bundle && a.fixed == null) q.save += a.solo - a.bundle;
+      q[a.billing === "month" ? "month" : "once"] += v; if (a.from) q.from = true;
+    });
+    items.forEach(function (a) {
+      if (a.pair && keys.indexOf(a.pair.with) >= 0) {
+        var other = BYKEY[a.pair.with], paid = (bundle ? a.bundle + other.bundle : a.solo + other.solo);
+        q.month -= paid - a.pair.both_usd; q.save += paid - a.pair.both_usd;
+      }
+    });
+    return q;
+  }
+  function chosen() { return Array.prototype.map.call(form.querySelectorAll('input[name="addons"]:checked'), function (c) { return c.value; }); }
+  function renderOrder() {
+    OFF.plans.forEach(function (pl) { form.querySelector('[data-fa-plan-price="' + pl.key + '"]').textContent = t("{u} a month").replace("{u}", money(pl.usd_month, pl.php_month)); });
+    OFF.addons.forEach(function (a) {
+      var pr = form.querySelector('[data-fa-addon-price="' + a.key + '"]'), txt;
+      if (a.fixed != null) txt = t(a.billing === "month" ? "From {u} a month" : "From {u}").replace("{u}", money(a.fixed, a.fixed_php));
+      else txt = t(a.billing === "month" ? "Bundle: {u} a month\nOn its own: {s} a month" : "Bundle: {u}\nOn its own: {s}").replace("{u}", money(a.bundle)).replace("{s}", money(a.solo));
+      if (a.from && a.fixed == null) txt = txt.split("\n").map(function (l) { return l + " " + t("and up"); }).join("\n");
+      if (a.pair) txt += "\n" + t("With SEO + AIO + GEO: {u} a month for both.").replace("{u}", money(a.pair.both_usd));
+      pr.textContent = txt;
+    });
+    var keys = chosen(), q = quote(picked("plan"), keys), box = root.querySelector("[data-fa-total]");
+    box.textContent = "";
+    box.appendChild(el("p", "t-big", t("Your monthly") + ": " + money(q.month)));
+    if (q.once) box.appendChild(el("p", null, t("One-time") + ": " + money(q.once) + (q.from ? " " + t("and up") : "")));
+    if (!keys.length) box.appendChild(el("p", "t-note", t("No add-ons. Your plan stays as it is.")));
+    else if (q.bundle && q.save > 0) box.appendChild(el("p", null, t("Bundle price is on. You save {u}.").replace("{u}", money(q.save))));
+    else if (keys.filter(function (k) { return BYKEY[k].fixed == null; }).length === 1) box.appendChild(el("p", "t-note", t("Add one more add-on and both get the bundle price.")));
+    box.appendChild(el("p", "t-note", t("Nothing is charged here. We email you a quote, and you say yes before any invoice.")));
+  }
+  root.querySelector("[data-fa-total]").setAttribute("data-fa-dyn", "");
+  form.addEventListener("change", renderOrder);
+  /* proof loops play only on screen, and never for reduced motion (the poster stays, controls let them play it) */
+  var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  Array.prototype.forEach.call(form.querySelectorAll("[data-fa-loop]"), function (v) {
+    if (still || !("IntersectionObserver" in window)) { v.controls = true; return; }
+    new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var pp = v.play(); if (pp && pp.catch) pp.catch(function () { v.controls = true; }); } else v.pause(); }); }, { threshold: 0.4 }).observe(v);
+  });
   form.addEventListener("change", function () { applyWhen(); err.textContent = ""; });
   Array.prototype.forEach.call(root.querySelectorAll("[data-fa-lang] button"), function (b) {
     b.addEventListener("click", function () { lang = b.getAttribute("data-lang"); try { localStorage.setItem("fw-lang", lang); } catch (e) {} translate(); });
@@ -307,6 +477,9 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     var body = new FormData();
     ["lead_id", "business_name", "form_language", "colors", "references", "notes"].forEach(function (k) { body.append(k, form.querySelector('[name="' + k + '"]').value.trim()); });
     body.append("email", form.querySelector("#fa-email").value.trim().toLowerCase());
+    body.append("plan", picked("plan") || OFF.plans[0].key);
+    body.append("addons", chosen().join(",") || "none");
+    body.append("offers_version", OFF.version);
     if (surprise.checked) body.append("surprise", "yes");
     else {
       body.append("logo_choice", picked("logo_choice")); body.append("photos_choice", picked("photos_choice")); body.append("words", picked("words"));
