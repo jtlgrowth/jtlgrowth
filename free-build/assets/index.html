@@ -119,16 +119,17 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 .swap{display:grid;overflow:hidden}
 .swap>.sw,.swap>.sz{grid-area:1/1}
 .swap>.sz{visibility:hidden}
-.sumbar{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-top:20px;padding:12px 16px;border:2px solid var(--fg);background:var(--lift)}
+.sumbar{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding:10px 12px;border:2px solid var(--fg);background:var(--lift)}
 .sb-text{flex:1 1 auto;min-width:0}
-.sb-lead{font:600 16px/1.35 var(--font-body);color:var(--fg-2)}
-.sb-fig{display:block;font:600 16px/1.35 var(--font-body);color:var(--fg)}
-.sb-num{display:inline-block;font:650 30px/1.15 var(--font-display);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;color:var(--fg)}
+.sb-lead{font:600 16px/1.3 var(--font-body);color:var(--fg-2);white-space:nowrap}
+.sb-fig{display:block;font:600 16px/1.3 var(--font-body);color:var(--fg)}
+.sb-num{display:inline-block;font:650 26px/1.1 var(--font-display);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;color:var(--fg)}
 .sumbar.saving .sb-num{color:var(--save)}
-.sb-tail.long{display:block;color:var(--fg-2)}
-.sb-btn{flex:none;max-width:32%;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:6px 12px;text-align:center;border:0;background:var(--fg);color:var(--bg);font:700 16px/1.2 var(--font-body);cursor:pointer}
+.sb-tail{display:inline-block;margin-left:6px;white-space:nowrap;color:var(--fg-2)}
+.sb-tail.unit{margin-left:0}
+.sb-btn{flex:none;max-width:25%;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:6px 10px;text-align:center;border:0;background:var(--fg);color:var(--bg);font:700 16px/1.2 var(--font-body);cursor:pointer}
 .sb-btn .swap{display:inline-grid}
-@media (max-width:640px){html{scroll-padding-bottom:150px}.sumbar{position:sticky;bottom:0;z-index:5;margin:20px -18px 0;border-width:2px 0 0;box-shadow:0 -8px 20px rgba(0,0,0,.14);padding-bottom:calc(12px + env(safe-area-inset-bottom))}}
+@media (max-width:640px){html{scroll-padding-bottom:150px}.sumbar{position:sticky;bottom:0;z-index:5;margin:20px -18px 0;border-width:2px 0 0;box-shadow:0 -8px 20px rgba(0,0,0,.14);padding-bottom:calc(10px + env(safe-area-inset-bottom))}}
 .deal{margin-top:24px;padding:14px 16px;border:2px solid var(--save);background:var(--bg)}
 .deal-head{display:flex;align-items:center;gap:8px;font:650 19px/1.3 var(--font-display)}
 .deal-head svg{color:var(--save);width:22px;height:22px}
@@ -436,12 +437,16 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     "{name} and {n} add-ons save you": "Sa {name} at {n} add-ons, tipid ka ng",
     "{n} add-ons picked saves you": "{n} add-ons ang napili mo, tipid ka ng",
     "Your picks save you": "Sa mga napili mo, tipid ka ng",
-    "Your monthly stays": "Ganun pa rin ang monthly mo:",
-    "Your monthly is now": "Monthly mo na ngayon:",
+    "Your monthly stays": "Monthly mo pa rin:",
+    "Your monthly is now": "Monthly mo na:",
     " one-time, plus {m} a month.": " one-time, plus {m} kada buwan.",
     " a month.": " kada buwan.",
     ", plus {u} one-time.": ", plus {u} one-time.",
     "See my savings": "Tingnan ang tipid ko",
+    "You save": "Tipid ka ng",
+    "+ {m}/mo": "+ {m}/buwan",
+    "/mo": "/buwan",
+    "+ {u} one-time": "+ {u} one-time",
     "See my total": "Tingnan ang total ko"
   };
   var root = document.getElementById("fa"), form = root.querySelector("[data-fa-form]"), err = root.querySelector("[data-fa-err]");
@@ -623,11 +628,11 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
   function countTo(numEl, v) {
     numEl.setAttribute("data-value", String(v));
     if (cnt.raf) cancelAnimationFrame(cnt.raf); clearTimeout(cnt.timer); cnt.raf = 0;
-    var from = cnt.shown, land = function () { cnt.raf = 0; cnt.shown = v; numEl.textContent = "USD " + num(v); numEl.style.minWidth = ""; };
+    var from = cnt.shown, land = function () { cnt.raf = 0; cnt.shown = v; numEl.textContent = "USD " + num(v); numEl.style.minWidth = ""; numEl.removeAttribute("data-rolling"); };
     if (from == null || from === v || calm()) { land(); return; }
     /* hold the widest of the two values while it rolls, so the sticky bar never grows mid-count over what is under it */
     numEl.style.minWidth = ""; numEl.textContent = "USD " + num(Math.max(from, v));
-    numEl.style.minWidth = Math.ceil(numEl.getBoundingClientRect().width) + "px"; numEl.textContent = "USD " + num(from);
+    numEl.style.minWidth = Math.ceil(numEl.getBoundingClientRect().width) + "px"; numEl.textContent = "USD " + num(from); numEl.setAttribute("data-rolling", "");
     var t0 = null, D = 1000;
     var step = function (ts) {
       if (t0 == null) t0 = ts;
@@ -653,9 +658,12 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     }
     bar.classList.toggle("saving", !!(so || sm)); bar.setAttribute("data-big", String(big));
     root.querySelector("[data-fa-sum-sr]").textContent = lead + " USD " + num(big) + tail;
-    swapText(root.querySelector("[data-fa-sum-lead]"), lead);
+    /* on screen it stays two short lines (Venice polish 2026-10-29: the full sentence wrapped and the bar ran 150 px tall) */
+    var vLead = so || sm ? t("You save") : keys.length || P || q.plan !== OFF.plans[0].key ? t("Your monthly is now") : t("Your monthly stays");
+    var vTail = so && sm ? fill(t("+ {m}/mo"), { m: "USD " + num(sm) }) : sm ? t("/mo") : !so && q.once ? fill(t("+ {u} one-time"), { u: "USD " + num(q.once) }) + up : "";
+    swapText(root.querySelector("[data-fa-sum-lead]"), vLead);
     countTo(root.querySelector("[data-fa-sum-num]"), big);
-    var tl = root.querySelector("[data-fa-sum-tail]"); tl.textContent = tail; tl.classList.toggle("long", tail.length > 2);
+    var tl = root.querySelector("[data-fa-sum-tail]"); tl.textContent = vTail; tl.classList.toggle("unit", vTail.charAt(0) === "/");
     /* both labels sit invisibly in the button as sizers, so the swap never changes its width */
     var btn = root.querySelector("[data-fa-sum-btn]"), BL = [t("See my savings"), t("See my total")];
     Array.prototype.forEach.call(btn.querySelectorAll(".sz"), function (x) { btn.removeChild(x); });
