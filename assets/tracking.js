@@ -27,7 +27,9 @@
     // filter by $host. posthogLive false ships no PostHog at all. Flip it only together with
     // the PostHog copy on /privacy/ (check: ~/Venice/ops/runs/jtl-posthog-2026-10-29/jtl-ph-qa.mjs).
     posthogLive: true,
-    posthog: { key: 'phc_po4dGx6cfc8VHkgMfTMEWDDHmxjLdaGDtA4YCcXQHBcN', host: 'https://us.i.posthog.com' },
+    // host is our relay (~/Venice/apps/ph-relay): PostHog's CDN stalls on Manila cache misses (2026-10-29).
+    // Roll back by setting host to 'https://us.i.posthog.com'.
+    posthog: { key: 'phc_po4dGx6cfc8VHkgMfTMEWDDHmxjLdaGDtA4YCcXQHBcN', host: 'https://e.jtlgrowth.com', ui: 'https://us.posthog.com' },
     // Consent default. 'denied' since 2026-10-08 so the /privacy/ promise is true
     // (analytics storage denied by default). The bar below asks; Accept and Decline
     // each fire a consent update (the consent-audit skill checks both directions).
@@ -155,6 +157,7 @@
     !function (t, e) { var o, n, p, r; e.__SV || (w.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split('.'); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))); }; } (p = t.createElement('script')).type = 'text/javascript', p.crossOrigin = 'anonymous', p.async = !0, p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js', (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = 'posthog', u.people = u.people || [], o = 'init capture register identify reset opt_in_capturing opt_out_capturing'.split(' '), n = 0; n < o.length; n++) g(u, o[n]); e._i.push([i, s, a]); }, e.__SV = 1); }(document, w.posthog || []);
     w.posthog.init(PH.key, {
       api_host: PH.host,
+      ui_host: PH.ui,
       person_profiles: 'identified_only',
       capture_pageview: true,
       capture_pageleave: true,
