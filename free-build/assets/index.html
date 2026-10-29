@@ -26,18 +26,19 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 :root{
   --cement:#E2E2E2; --cement-deep:#D5D5D5; --paper:#F0F0F0; --navy:#181818; --ink-2:#3A3A3A; --gray:#616161; --line:rgba(24,24,24,.18);
   --chip-bg:#EAEAEA; --focus:#1F6FEB; --tbc:#b45309; --save:#0A5C27; --save-ink:#FFFFFF;
+  --lift:#FFFFFF; --warn-bg:#FBE3C4; --warn-ink:#7A3A06; --ease:cubic-bezier(.16,1,.3,1);
   --bg:var(--cement); --surface:var(--paper); --fg:var(--navy); --fg-2:var(--ink-2); --muted:var(--gray); --border:var(--line);
   --font-display:'Fraunces',Georgia,serif; --font-body:'Archivo',system-ui,sans-serif;
   --radius:0; --container-max:620px;
 }
 [data-theme="dark"]{
   --cement:#121212; --cement-deep:#1A1A1A; --paper:#1C1C1C; --navy:#E2E2E2; --ink-2:#C4C4C4; --gray:#A6A6A6; --line:rgba(226,226,226,.18);
-  --chip-bg:#232323; --focus:#6EA8FE; --save:#7EE2A0; --save-ink:#0A0A0A;
+  --chip-bg:#232323; --focus:#6EA8FE; --save:#7EE2A0; --save-ink:#0A0A0A; --lift:#2A2A2A; --warn-bg:#3A2410; --warn-ink:#FFC98A;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --cement:#121212; --cement-deep:#1A1A1A; --paper:#1C1C1C; --navy:#E2E2E2; --ink-2:#C4C4C4; --gray:#A6A6A6; --line:rgba(226,226,226,.18);
-    --chip-bg:#232323; --focus:#6EA8FE; --save:#7EE2A0; --save-ink:#0A0A0A;
+    --chip-bg:#232323; --focus:#6EA8FE; --save:#7EE2A0; --save-ink:#0A0A0A; --lift:#2A2A2A; --warn-bg:#3A2410; --warn-ink:#FFC98A;
   }
 }
 /* END SETTINGS */
@@ -86,10 +87,48 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 .order svg{flex:none;width:18px;height:18px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .pkg .pk-items{display:block;margin-top:2px;font-weight:500;color:var(--fg-2)}
-.pkg .was{display:block;margin-top:10px;font:500 15px/1.3 var(--font-body)}
+.pkg .was{display:block;margin-top:10px;font:500 16px/1.3 var(--font-body)}
 .pkg .now{display:block;margin-top:2px;font:650 28px/1.15 var(--font-display);color:var(--fg)}
-.pkg .now small{display:inline;font:600 15px/1.3 var(--font-body);color:var(--fg-2)}
-.badge{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;background:var(--save);color:var(--save-ink);font:700 15px/1.3 var(--font-body)}
+.pkg .now small{display:inline;font:600 16px/1.3 var(--font-body);color:var(--fg-2)}
+.badge{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;background:var(--save);color:var(--save-ink);font:700 16px/1.3 var(--font-body)}
+.choices{position:relative;grid-template-columns:repeat(2,minmax(0,1fr))}
+.choices.pk{grid-template-columns:minmax(0,1fr)}
+@media (min-width:600px){.choices.pk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.choices .plate{position:absolute;left:0;top:0;z-index:0;width:0;height:0;border:2px solid var(--fg);background:var(--lift);box-shadow:0 6px 18px rgba(0,0,0,.12);pointer-events:none;opacity:0}
+.choices .plate.on{opacity:1}
+.order .choice{position:relative;z-index:1;display:grid;grid-template-columns:22px 1fr;align-items:start;align-content:start;gap:10px;padding:14px 12px;background:transparent;-webkit-tap-highlight-color:transparent}
+.order .choice:has(input:checked){border-color:transparent;box-shadow:none}
+.order .choice:has(input:focus-visible),[data-kbd] .order .choice:has(input:focus){outline:2px solid var(--focus);outline-offset:2px}
+.order .choice input{appearance:none;-webkit-appearance:none;display:grid;place-content:center;margin:0;border:2px solid var(--fg-2);border-radius:50%;background:var(--bg);cursor:pointer}
+.order .choice input::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--fg);transform:scale(0)}
+.order .choice input:checked{border-color:var(--fg)}
+.order .choice input:checked::before{transform:scale(1)}
+.order .choice input:focus-visible{outline:none}
+.choice .ch-ico{justify-self:end;color:var(--fg-2)}
+.order .choice .ch-ico svg{width:24px;height:24px}
+.choice .ch-body{grid-column:1/-1;min-width:0}
+.choice strong{display:block;font:700 17px/1.3 var(--font-body)}
+.order .choice small{margin-top:2px;font-size:16px;line-height:1.45}
+.order .choice .price{font-size:16px}
+.choice .ch-num{display:block;margin-top:10px}
+.choice .ch-num .ch-big{display:block;font:650 26px/1.15 var(--font-display);white-space:nowrap;font-variant-numeric:lining-nums;color:var(--fg)}
+.choice .ch-num .when{display:block;font:500 16px/1.35 var(--font-body);color:var(--fg-2)}
+.pill{display:inline-block;margin-top:10px;padding:4px 10px;border:1px solid var(--border);background:var(--surface);color:var(--fg-2);font:600 16px/1.35 var(--font-body)}
+.pill.warn{border-color:var(--warn-bg);background:var(--warn-bg);color:var(--warn-ink)}
+.choice-note{margin-top:10px;font-size:16px;color:var(--fg-2)}
+.swap{display:grid;overflow:hidden}
+.swap>.sw,.swap>.sz{grid-area:1/1}
+.swap>.sz{visibility:hidden}
+.sumbar{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-top:20px;padding:12px 16px;border:2px solid var(--fg);background:var(--lift)}
+.sb-text{flex:1 1 auto;min-width:0}
+.sb-lead{font:600 16px/1.35 var(--font-body);color:var(--fg-2)}
+.sb-fig{display:block;font:600 16px/1.35 var(--font-body);color:var(--fg)}
+.sb-num{display:inline-block;font:650 30px/1.15 var(--font-display);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;color:var(--fg)}
+.sumbar.saving .sb-num{color:var(--save)}
+.sb-tail.long{display:block;color:var(--fg-2)}
+.sb-btn{flex:none;max-width:32%;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:6px 12px;text-align:center;border:0;background:var(--fg);color:var(--bg);font:700 16px/1.2 var(--font-body);cursor:pointer}
+.sb-btn .swap{display:inline-grid}
+@media (max-width:640px){html{scroll-padding-bottom:150px}.sumbar{position:sticky;bottom:0;z-index:5;margin:20px -18px 0;border-width:2px 0 0;box-shadow:0 -8px 20px rgba(0,0,0,.14);padding-bottom:calc(12px + env(safe-area-inset-bottom))}}
 .deal{margin-top:24px;padding:14px 16px;border:2px solid var(--save);background:var(--bg)}
 .deal-head{display:flex;align-items:center;gap:8px;font:650 19px/1.3 var(--font-display)}
 .deal-head svg{color:var(--save);width:22px;height:22px}
@@ -112,6 +151,11 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 .total .t-save{display:flex;align-items:flex-start;gap:8px;margin-top:10px;padding:8px 10px;border:2px solid var(--save);color:var(--save);font:700 17px/1.35 var(--font-body)}
 .total .t-save svg{margin-top:2px}
 @media (prefers-reduced-motion:no-preference){.opt{transition:border-color 140ms ease}}
+@media (prefers-reduced-motion:no-preference){
+.choices.ready .plate{transition:transform 280ms var(--ease),width 280ms var(--ease),height 280ms var(--ease),opacity 120ms linear}
+.order .choice{transition:border-color 280ms var(--ease)}
+.order .choice input::before{transition:transform 160ms var(--ease) 130ms}
+}
 </style>
 </head>
 <body>
@@ -196,9 +240,10 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     <section class="card order" aria-labelledby="fa-h6" data-fa-order>
       <h2 id="fa-h6">Want to add anything? (optional)</h2>
       <p class="note">Your plan stays at USD 500 a month unless you add something.</p>
-      <div class="opts" role="radiogroup" aria-labelledby="fa-h6" data-fa-plans></div>
+      <div class="opts choices" role="radiogroup" aria-labelledby="fa-h6" data-fa-plans><span class="plate" aria-hidden="true"></span></div>
+      <p class="choice-note" aria-hidden="true" data-fa-dyn data-fa-plan-note></p>
       <h3 id="fa-h9">Packages<small>We put these together for you. One price, paid once.</small></h3>
-      <div class="opts" role="radiogroup" aria-labelledby="fa-h9" data-fa-packages></div>
+      <div class="opts choices pk" role="radiogroup" aria-labelledby="fa-h9" data-fa-packages><span class="plate" aria-hidden="true"></span></div>
       <div class="deal" data-fa-deal>
         <p class="deal-head" data-fa-dyn data-fa-deal-head></p>
         <div class="meter" aria-hidden="true" data-fa-meter></div>
@@ -208,7 +253,15 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
       <div class="opts" data-fa-addons="once" role="group" aria-labelledby="fa-h7"></div>
       <h3 id="fa-h8">+ Monthly add-ons<small>Added to your monthly.</small></h3>
       <div class="opts" data-fa-addons="month" role="group" aria-labelledby="fa-h8"></div>
-      <div class="total" aria-live="polite" data-fa-total></div>
+      <div class="sumbar" data-fa-sumbar>
+        <p class="vh" data-fa-dyn data-fa-sum-sr></p>
+        <div class="sb-text" aria-hidden="true" data-fa-dyn>
+          <span class="sb-lead swap" data-fa-sum-lead></span>
+          <span class="sb-fig"><b class="sb-num" data-fa-sum-num></b><span class="sb-tail" data-fa-sum-tail></span></span>
+        </div>
+        <button type="button" class="sb-btn" data-fa-sum-go><span class="swap" data-fa-dyn data-fa-sum-btn></span></button>
+      </div>
+      <div class="total" aria-live="polite" tabindex="-1" data-fa-total></div>
     </section>
 
     <section class="card" aria-labelledby="fa-h5">
@@ -375,7 +428,21 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     "One-time": "One-time",
     "and up": "pataas",
     "Nothing is charged here. We email you a quote, and you say yes before any invoice.": "Walang sisingilin dito. Magpapadala kami ng quote sa email, at ikaw ang magsasabi ng yes bago ang kahit anong invoice.",
-    "No add-ons. Your plan stays as it is.": "Walang add-ons. Ganun pa rin ang plan mo."
+    "No add-ons. Your plan stays as it is.": "Walang add-ons. Ganun pa rin ang plan mo.",
+    "Included: 4 changes a month": "Kasama na: 4 changes kada buwan",
+    "+4 changes, articles, monthly call": "+4 changes, articles, monthly call",
+    "Priced one by one": "Per add-on ang bayad",
+    "{name} saves you": "Sa {name}, tipid ka ng",
+    "{name} and {n} add-ons save you": "Sa {name} at {n} add-ons, tipid ka ng",
+    "{n} add-ons picked saves you": "{n} add-ons ang napili mo, tipid ka ng",
+    "Your picks save you": "Sa mga napili mo, tipid ka ng",
+    "Your monthly stays": "Ganun pa rin ang monthly mo:",
+    "Your monthly is now": "Monthly mo na ngayon:",
+    " one-time, plus {m} a month.": " one-time, plus {m} kada buwan.",
+    " a month.": " kada buwan.",
+    ", plus {u} one-time.": ", plus {u} one-time.",
+    "See my savings": "Tingnan ang tipid ko",
+    "See my total": "Tingnan ang total ko"
   };
   var root = document.getElementById("fa"), form = root.querySelector("[data-fa-form]"), err = root.querySelector("[data-fa-err]");
   var sendBtn = root.querySelector("[data-fa-send]"), done = root.querySelector("[data-fa-done]"), detail = root.querySelector("[data-fa-detail]");
@@ -460,6 +527,7 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
   /* a struck regular price; the hidden words tell a screen reader what the line through means */
   function strike(s) { var x = el("s"); x.appendChild(el("span", "vh", t("Regular price:") + " ")); x.appendChild(txt(s)); return x; }
   function fill(s, o) { Object.keys(o).forEach(function (k) { s = s.replace("{" + k + "}", String(o[k])); }); return s; }
+  var DIMS = { frontdesk: [480, 382], landing: [240, 520], rialto: [480, 300], seo: [640, 224], founder: [640, 402] };  /* ffprobe of clips/ */
   function proof(key) {
     var c = OFF.clips[key]; if (!c) return null;
     var fig = el("figure", "proof"), media;
@@ -470,28 +538,137 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
       [[c.webm, "video/webm"], [c.src, "video/mp4"]].forEach(function (x) { if (!x[0]) return; var so = el("source"); so.src = x[0]; so.type = x[1]; media.appendChild(so); });
       media.setAttribute("aria-label", c.proof); media.setAttribute("data-fa-loop", "");
     }
+    /* the box is sized before the media loads, so nothing under it jumps when a poster or screenshot arrives */
+    if (DIMS[key]) media.style.aspectRatio = DIMS[key][0] + " / " + DIMS[key][1];
     fig.appendChild(media); fig.appendChild(el("figcaption", null, c.proof)); return fig;
+  }
+  /* Choice cards (the pattern from the Owner's 2026-10-29 reference, rebuilt from scratch): a real radio, a Lucide icon, the
+     title, the key number, when it is paid, and one consequence pill (muted = no change, amber = costs more, green = saves).
+     The picked look is ONE plate per group that slides from the old card to the new one; the dot fills as it arrives. */
+  function lu(d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + d + '</svg>'; }
+  var CICON = {  /* Lucide v1.31 (ISC): wrench, sparkles, list-checks, search, calendar-check, shopping-bag */
+    "support-500": lu('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/>'),
+    "plus-900": lu('<path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/>'),
+    "none": lu('<path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/>'),
+    "get-found": lu('<path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>'),
+    "get-booked": lu('<path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/>'),
+    "sell-online": lu('<path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/>')
+  };
+  var PILL = { "support-500": ["Included: 4 changes a month", ""], "plus-900": ["+4 changes, articles, monthly call", "warn"] };
+  function choiceCard(name, key, checked, cls) {
+    var lab = el("label", "opt choice" + (cls ? " " + cls : "")), inp = el("input"), ico = el("span", "ch-ico"), body = el("span", "ch-body");
+    inp.type = "radio"; inp.name = name; inp.value = key; if (checked) inp.checked = true;
+    ico.innerHTML = CICON[key] || ""; ico.setAttribute("aria-hidden", "true");
+    lab.appendChild(inp); lab.appendChild(ico); lab.appendChild(body); return { lab: lab, body: body };
   }
   var planBox = form.querySelector("[data-fa-plans]");
   OFF.plans.forEach(function (pl, i) {
-    var lab = el("label", "opt"), inp = el("input"), sp = el("span");
-    inp.type = "radio"; inp.name = "plan"; inp.value = pl.key; if (i === 0) inp.checked = true;
-    sp.appendChild(el("strong", null, pl.name)); sp.appendChild(el("small", null, pl.line));
-    var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-plan-price", pl.key); sp.appendChild(pr);
-    lab.appendChild(inp); lab.appendChild(sp); planBox.appendChild(lab);
+    var c = choiceCard("plan", pl.key, i === 0);
+    c.body.appendChild(el("strong", null, pl.name));
+    var pr = el("span", "ch-num"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-plan-price", pl.key); c.body.appendChild(pr);
+    if (PILL[pl.key]) c.body.appendChild(el("span", "pill" + (PILL[pl.key][1] ? " " + PILL[pl.key][1] : ""), PILL[pl.key][0]));
+    c.body.appendChild(el("span", "vh", pl.line));  /* the full scope stays in the radio's name; the note under the pair shows the picked one */
+    planBox.appendChild(c.lab);
   });
   /* packages are ours: a fixed set of add-ons at one price; "No package" keeps the radio group clearable */
   var pkgBox = form.querySelector("[data-fa-packages]");
   [{ key: "none" }].concat(OFF.packages).forEach(function (pk, i) {
-    var lab = el("label", "opt pkg"), inp = el("input"), sp = el("span");
-    inp.type = "radio"; inp.name = "package"; inp.value = pk.key; if (i === 0) inp.checked = true;
-    if (pk.key === "none") { sp.appendChild(el("strong", null, "No package")); sp.appendChild(el("small", null, "I'll pick add-ons one by one.")); }
-    else {
-      sp.appendChild(el("strong", null, pk.name)); sp.appendChild(el("small", null, pk.line));
-      var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-pkg-price", pk.key); sp.appendChild(pr);
+    var c = choiceCard("package", pk.key, i === 0, "pkg");
+    if (pk.key === "none") {
+      c.body.appendChild(el("strong", null, "No package")); c.body.appendChild(el("small", null, "I'll pick add-ons one by one."));
+      c.body.appendChild(el("span", "pill", "Priced one by one"));
+    } else {
+      c.body.appendChild(el("strong", null, pk.name)); c.body.appendChild(el("small", null, pk.line));
+      var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-pkg-price", pk.key); c.body.appendChild(pr);
     }
-    lab.appendChild(inp); lab.appendChild(sp); pkgBox.appendChild(lab);
+    pkgBox.appendChild(c.lab);
   });
+  /* motion: one easing token (--ease in the settings block) for the plate, the footer swap, the count and the blur-in */
+  function calm() { return !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); }
+  var EASE = (getComputedStyle(document.documentElement).getPropertyValue("--ease") || "").trim() || "cubic-bezier(.16,1,.3,1)";
+  var EB = (EASE.match(/[\d.]+/g) || [0.16, 1, 0.3, 1]).map(Number);
+  function ease(x) {  /* the same cubic-bezier, solved for x by bisection, for the JS-driven count */
+    if (x <= 0) return 0; if (x >= 1) return 1;
+    var B = function (p1, p2, s) { return 3 * p1 * s * (1 - s) * (1 - s) + 3 * p2 * s * s * (1 - s) + s * s * s; }, lo = 0, hi = 1, s = x;
+    for (var i = 0; i < 30; i++) { s = (lo + hi) / 2; if (B(EB[0], EB[2], s) < x) lo = s; else hi = s; }
+    return B(EB[1], EB[3], s);
+  }
+  function placePlates() {
+    [planBox, pkgBox].forEach(function (box) {
+      var plate = box.querySelector(".plate"), c = box.querySelector("input:checked"), card = c && c.closest(".choice");
+      if (!card) { plate.classList.remove("on"); return; }
+      plate.style.width = card.offsetWidth + "px"; plate.style.height = card.offsetHeight + "px";
+      plate.style.transform = "translate(" + card.offsetLeft + "px," + card.offsetTop + "px)"; plate.classList.add("on");
+      if (!box.classList.contains("ready")) requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add("ready"); }); });
+    });
+  }
+  if ("ResizeObserver" in window) new ResizeObserver(placePlates).observe(pkgBox), new ResizeObserver(placePlates).observe(planBox);
+  else window.addEventListener("resize", placePlates);
+  /* a text swap: old words slide up and out, new words slide up and in (reduced motion: just swap) */
+  function swapText(host, text) {
+    var sws = host.querySelectorAll(".sw"), cur = sws[sws.length - 1];
+    if (cur && cur.textContent === text) return;
+    var nu = el("span", "sw", text);
+    if (!cur || calm() || !nu.animate) { Array.prototype.forEach.call(sws, function (x) { host.removeChild(x); }); host.appendChild(nu); return; }
+    Array.prototype.forEach.call(sws, function (x) { if (x !== cur) host.removeChild(x); });
+    cur.setAttribute("aria-hidden", "true"); host.appendChild(nu);
+    var o = { duration: 200, easing: EASE, fill: "forwards" };
+    cur.animate([{ opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(-0.7em)" }], o).onfinish = function () { if (cur.parentNode) cur.parentNode.removeChild(cur); };
+    nu.animate([{ opacity: 0, transform: "translateY(0.7em)" }, { opacity: 1, transform: "translateY(0)" }], o);
+  }
+  /* a new line enters blur to sharp */
+  function blurIn(e) { if (e && e.animate && !calm()) e.animate([{ opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0)" }], { duration: 300, easing: EASE }); }
+  /* the big number rolls from the old value to the new one, fast first and settling slowly, and always lands exact */
+  var cnt = { shown: null, raf: 0, timer: 0 };
+  function countTo(numEl, v) {
+    numEl.setAttribute("data-value", String(v));
+    if (cnt.raf) cancelAnimationFrame(cnt.raf); clearTimeout(cnt.timer); cnt.raf = 0;
+    var from = cnt.shown, land = function () { cnt.raf = 0; cnt.shown = v; numEl.textContent = "USD " + num(v); numEl.style.minWidth = ""; };
+    if (from == null || from === v || calm()) { land(); return; }
+    /* hold the widest of the two values while it rolls, so the sticky bar never grows mid-count over what is under it */
+    numEl.style.minWidth = ""; numEl.textContent = "USD " + num(Math.max(from, v));
+    numEl.style.minWidth = Math.ceil(numEl.getBoundingClientRect().width) + "px"; numEl.textContent = "USD " + num(from);
+    var t0 = null, D = 1000;
+    var step = function (ts) {
+      if (t0 == null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / D);
+      if (k >= 1) { land(); return; }
+      cnt.shown = Math.round(from + (v - from) * ease(k)); numEl.textContent = "USD " + num(cnt.shown); cnt.raf = requestAnimationFrame(step);
+    };
+    cnt.raf = requestAnimationFrame(step);
+    cnt.timer = setTimeout(land, D + 400);  /* a throttled tab still lands on the exact value */
+  }
+  /* the footer: the live consequence of the current picks in one sentence with one big number */
+  function renderBar(q, P, keys) {
+    var bar = root.querySelector("[data-fa-sumbar]"), so = q.reg_once - q.once, sm = q.reg_month - q.month, lead, big, tail, up = q.from ? " " + t("and up") : "";
+    if (so || sm) {
+      var pkgSave = 0; if (P) { P.items.forEach(function (k) { pkgSave += BYKEY[k].usd; }); pkgSave -= P.usd; }
+      var addSave = so + sm - pkgSave;
+      lead = P && !addSave ? fill(t("{name} saves you"), { name: P.name }) : P && q.discount ? fill(t("{name} and {n} add-ons save you"), { name: P.name, n: q.count })
+        : !P && q.discount ? fill(t("{n} add-ons picked saves you"), { n: q.count }) : t("Your picks save you");
+      big = so || sm; tail = so && sm ? fill(t(" one-time, plus {m} a month."), { m: "USD " + num(sm) }) : so ? "." : t(" a month.");
+    } else {
+      big = q.month; lead = keys.length || P || q.plan !== OFF.plans[0].key ? t("Your monthly is now") : t("Your monthly stays");
+      tail = q.once ? fill(t(", plus {u} one-time."), { u: "USD " + num(q.once) + up }) : ".";
+    }
+    bar.classList.toggle("saving", !!(so || sm)); bar.setAttribute("data-big", String(big));
+    root.querySelector("[data-fa-sum-sr]").textContent = lead + " USD " + num(big) + tail;
+    swapText(root.querySelector("[data-fa-sum-lead]"), lead);
+    countTo(root.querySelector("[data-fa-sum-num]"), big);
+    var tl = root.querySelector("[data-fa-sum-tail]"); tl.textContent = tail; tl.classList.toggle("long", tail.length > 2);
+    /* both labels sit invisibly in the button as sizers, so the swap never changes its width */
+    var btn = root.querySelector("[data-fa-sum-btn]"), BL = [t("See my savings"), t("See my total")];
+    Array.prototype.forEach.call(btn.querySelectorAll(".sz"), function (x) { btn.removeChild(x); });
+    BL.forEach(function (s) { var z = el("span", "sz", s); z.setAttribute("aria-hidden", "true"); btn.insertBefore(z, btn.firstChild); });
+    swapText(btn, BL[so || sm ? 0 : 1]);
+  }
+  root.querySelector("[data-fa-sum-go]").addEventListener("click", function () {
+    var box = root.querySelector("[data-fa-total]"); box.scrollIntoView({ block: "center", behavior: calm() ? "auto" : "smooth" }); box.focus({ preventScroll: true });
+  });
+  /* WebKit drops :focus-visible when arrow keys move the pick inside a radio group, so keyboard use is also tracked here */
+  document.addEventListener("keydown", function (e) { if (!e.metaKey && !e.ctrlKey && !e.altKey) document.documentElement.setAttribute("data-kbd", ""); }, true);
+  document.addEventListener("pointerdown", function () { document.documentElement.removeAttribute("data-kbd"); }, true);
+  var primed = false;
   OFF.addons.forEach(function (a) {
     var wrap = el("div", "addon"), lab = el("label", "opt"), inp = el("input"), sp = el("span");
     inp.type = "checkbox"; inp.name = "addons"; inp.value = a.key;
@@ -520,7 +697,14 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
   function renderOrder() {
     lockPackage();
     var keys = chosen(), q = price(OFF, picked("plan"), keys, picked("package")), P = OFF.packages.filter(function (x) { return x.key === q.pkg; })[0];
-    OFF.plans.forEach(function (pl) { form.querySelector('[data-fa-plan-price="' + pl.key + '"]').textContent = t("{u} a month").replace("{u}", money(pl.usd_month, pl.php_month)); });
+    var hadSave = !!root.querySelector("[data-fa-total] [data-fa-save]"), hadOff = {};
+    Array.prototype.forEach.call(form.querySelectorAll("[data-fa-addon-price] b"), function (b) { hadOff[b.parentNode.getAttribute("data-fa-addon-price")] = 1; });
+    OFF.plans.forEach(function (pl) {
+      var box = form.querySelector('[data-fa-plan-price="' + pl.key + '"]'); box.textContent = "";
+      box.appendChild(el("span", "ch-big", "USD " + num(pl.usd_month))); box.appendChild(el("span", "when", t("{u} a month").replace("{u}", "₱" + num(pl.php_month))));
+    });
+    var PL = OFF.plans.filter(function (x) { return x.key === q.plan; })[0];
+    root.querySelector("[data-fa-plan-note]").textContent = t(PL.line);
     OFF.packages.forEach(function (pk) {
       var box = form.querySelector('[data-fa-pkg-price="' + pk.key + '"]'), reg = 0;
       pk.items.forEach(function (k) { reg += BYKEY[k].usd; });
@@ -570,6 +754,12 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     if (!keys.length && !P) box.appendChild(el("p", "t-note", t("No add-ons. Your plan stays as it is.")));
     else if (q.count) box.appendChild(el("p", "t-note", progress(q.count)));
     box.appendChild(el("p", "t-note", t("Nothing is charged here. We email you a quote, and you say yes before any invoice.")));
+    renderBar(q, P, keys); placePlates();
+    if (primed) {
+      if (!hadSave) blurIn(save);
+      Array.prototype.forEach.call(form.querySelectorAll("[data-fa-addon-price] b"), function (b) { if (!hadOff[b.parentNode.getAttribute("data-fa-addon-price")]) blurIn(b); });
+    }
+    primed = true;
   }
   root.querySelector("[data-fa-total]").setAttribute("data-fa-dyn", "");
   form.addEventListener("change", renderOrder);
