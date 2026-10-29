@@ -25,19 +25,19 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 /* PROJECT SETTINGS */
 :root{
   --cement:#E2E2E2; --cement-deep:#D5D5D5; --paper:#F0F0F0; --navy:#181818; --ink-2:#3A3A3A; --gray:#616161; --line:rgba(24,24,24,.18);
-  --chip-bg:#EAEAEA; --focus:#1F6FEB; --tbc:#b45309;
+  --chip-bg:#EAEAEA; --focus:#1F6FEB; --tbc:#b45309; --save:#0A5C27; --save-ink:#FFFFFF;
   --bg:var(--cement); --surface:var(--paper); --fg:var(--navy); --fg-2:var(--ink-2); --muted:var(--gray); --border:var(--line);
   --font-display:'Fraunces',Georgia,serif; --font-body:'Archivo',system-ui,sans-serif;
   --radius:0; --container-max:620px;
 }
 [data-theme="dark"]{
   --cement:#121212; --cement-deep:#1A1A1A; --paper:#1C1C1C; --navy:#E2E2E2; --ink-2:#C4C4C4; --gray:#A6A6A6; --line:rgba(226,226,226,.18);
-  --chip-bg:#232323; --focus:#6EA8FE;
+  --chip-bg:#232323; --focus:#6EA8FE; --save:#7EE2A0; --save-ink:#0A0A0A;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --cement:#121212; --cement-deep:#1A1A1A; --paper:#1C1C1C; --navy:#E2E2E2; --ink-2:#C4C4C4; --gray:#A6A6A6; --line:rgba(226,226,226,.18);
-    --chip-bg:#232323; --focus:#6EA8FE;
+    --chip-bg:#232323; --focus:#6EA8FE; --save:#7EE2A0; --save-ink:#0A0A0A;
   }
 }
 /* END SETTINGS */
@@ -79,7 +79,24 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 .order h3{margin-top:22px;font:650 18px/1.3 var(--font-display)}
 .order h3 small{display:block;font:500 14px/1.4 var(--font-body);color:var(--muted)}
 .order .opt .price{display:block;margin-top:6px;white-space:pre-line;font:600 14px/1.4 var(--font-body);color:var(--fg)}
-.order .opt .price s{color:var(--muted);font-weight:500}
+.order s{color:var(--muted);font-weight:500;text-decoration-thickness:2px}
+.order .opt .price b{font-weight:700;color:var(--save);white-space:nowrap}
+.order .opt .price .inc{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--save)}
+.order .opt:has(input:disabled){cursor:default;background:var(--surface)}
+.order svg{flex:none;width:18px;height:18px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.pkg .pk-items{display:block;margin-top:2px;font-weight:500;color:var(--fg-2)}
+.pkg .was{display:block;margin-top:10px;font:500 15px/1.3 var(--font-body)}
+.pkg .now{display:block;margin-top:2px;font:650 28px/1.15 var(--font-display);color:var(--fg)}
+.pkg .now small{display:inline;font:600 15px/1.3 var(--font-body);color:var(--fg-2)}
+.badge{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;background:var(--save);color:var(--save-ink);font:700 15px/1.3 var(--font-body)}
+.deal{margin-top:24px;padding:14px 16px;border:2px solid var(--save);background:var(--bg)}
+.deal-head{display:flex;align-items:center;gap:8px;font:650 19px/1.3 var(--font-display)}
+.deal-head svg{color:var(--save);width:22px;height:22px}
+.meter{display:flex;gap:6px;margin-top:10px}
+.meter i{flex:1;height:10px;border:1px solid var(--save)}
+.meter i.on{background:var(--save)}
+.deal-prog{margin-top:8px;font-weight:600}
 .addon{display:grid;gap:0}
 .proof{margin:0;padding:10px;border:1px solid var(--border);border-top:0;background:var(--surface)}
 .proof video,.proof img{display:block;width:100%;height:auto;max-height:240px;object-fit:contain;background:#111}
@@ -90,6 +107,10 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 .total p+p{margin-top:6px}
 .total .t-note{font-weight:500;font-size:14px;color:var(--muted)}
 .total .t-big{font:650 22px/1.25 var(--font-display)}
+.total .t-big s{font:500 16px/1.25 var(--font-body)}
+.total .amt{white-space:nowrap}
+.total .t-save{display:flex;align-items:flex-start;gap:8px;margin-top:10px;padding:8px 10px;border:2px solid var(--save);color:var(--save);font:700 17px/1.35 var(--font-body)}
+.total .t-save svg{margin-top:2px}
 @media (prefers-reduced-motion:no-preference){.opt{transition:border-color 140ms ease}}
 </style>
 </head>
@@ -174,8 +195,15 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 
     <section class="card order" aria-labelledby="fa-h6" data-fa-order>
       <h2 id="fa-h6">Want to add anything? (optional)</h2>
-      <p class="note">Your plan stays at USD 500 a month unless you add something. Prices are for one add-on. Pick 2 or more and you get the bundle price on the total.</p>
+      <p class="note">Your plan stays at USD 500 a month unless you add something.</p>
       <div class="opts" role="radiogroup" aria-labelledby="fa-h6" data-fa-plans></div>
+      <h3 id="fa-h9">Packages<small>We put these together for you. One price, paid once.</small></h3>
+      <div class="opts" role="radiogroup" aria-labelledby="fa-h9" data-fa-packages></div>
+      <div class="deal" data-fa-deal>
+        <p class="deal-head" data-fa-dyn data-fa-deal-head></p>
+        <div class="meter" aria-hidden="true" data-fa-meter></div>
+        <p class="deal-prog" data-fa-dyn data-fa-progress></p>
+      </div>
       <h3 id="fa-h7">One-time add-ons<small>Paid once.</small></h3>
       <div class="opts" data-fa-addons="once" role="group" aria-labelledby="fa-h7"></div>
       <h3 id="fa-h8">+ Monthly add-ons<small>Added to your monthly.</small></h3>
@@ -201,7 +229,7 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
 
   <p class="foot">Trouble with the form? Email <a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a> and we will help.</p>
 </main>
-<script type="application/json" id="fa-offers">{"version": "free-build-offers-2026-10-29", "note": "Owner 2026-10-29: base USD 500 a month, then one-time add-ons and + monthly add-ons. Pick 2 or more add-ons and every one gets the bundle price; one on its own is solo (1.5x). SEO is the SEO + AIO + GEO bundle (pk SEO Mid). fixed = a catalog price the bundle rule does not touch. quote = no number, we quote.", "php_per_usd": 64, "bundle_min": 2, "plans": [{"key": "support-500", "name": "Website Support and Maintenance", "usd_month": 500, "php_month": 32000, "line": "What you signed up for: hosting, your domain, up to 5 pages, 4 small changes a month, 1 chatbot, 2 simple automations."}, {"key": "plus-900", "name": "Website Plus", "usd_month": 900, "php_month": 57600, "line": "Everything in the USD 500 plan, plus 8 small changes a month, 5 more automations, Google review requests, 2 articles a month and a monthly call."}], "addons": [{"key": "extra-page", "billing": "once", "bundle": 150, "solo": 225, "name": "Extra page", "line": "One more page on your website, per page."}, {"key": "landing-page", "billing": "once", "bundle": 250, "solo": 375, "name": "Landing page for an ad or promo", "line": "A one-page site on its own link, made to turn ad clicks into inquiries.", "clip": "landing"}, {"key": "booking", "billing": "once", "bundle": 300, "solo": 450, "name": "Booking system", "line": "Clients pick a time, get a confirmation and a reminder, and can reschedule."}, {"key": "shop", "billing": "once", "bundle": 500, "solo": 750, "from": true, "name": "Online shop with payments", "line": "Your products, a cart and checkout. Payment fees are the provider's."}, {"key": "language", "billing": "once", "bundle": 200, "solo": 300, "name": "Second language", "line": "An English and Filipino switch on every page."}, {"key": "biz-email", "billing": "once", "bundle": 50, "solo": 75, "name": "Business email on your domain", "line": "you@yourbusiness.com, set up for you. The Google fee is at cost."}, {"key": "seo-starter", "billing": "once", "bundle": 500, "solo": 750, "name": "SEO Starter", "line": "Google Business Profile set up, every page tuned for search, Search Console, 20 directory listings."}, {"key": "reviews", "billing": "once", "bundle": 150, "solo": 225, "name": "Google review requests", "line": "Happy clients get a short message asking for a Google review."}, {"key": "channel-bot", "billing": "once", "bundle": 200, "solo": 300, "name": "Chatbot on Messenger, Instagram or WhatsApp", "line": "The same chatbot as your website, answering where your clients already message you. Per channel."}, {"key": "brand-kit", "billing": "once", "bundle": 300, "solo": 450, "name": "Brand kit", "line": "Logo, colors, fonts and 5 social post templates."}, {"key": "ai-employee", "billing": "once", "fixed": 1500, "from": true, "name": "AI employee", "line": "Answers, qualifies and books your clients day and night, on your website and your messages.", "clip": "frontdesk", "fixed_php": 75000}, {"key": "seo-local", "billing": "month", "bundle": 800, "solo": 1200, "name": "SEO + AIO + GEO", "line": "Found on Google, in Google's AI Overviews, and in ChatGPT and Perplexity answers. Weekly Google posts, review replies, 2 articles and a ranking report every month.", "clip": "seo"}, {"key": "seo-founder", "billing": "month", "bundle": 1000, "solo": 1500, "name": "+ Founder SEO", "line": "Your own name found too: a founder profile page, your Google knowledge panel, your LinkedIn, Instagram and YouTube lined up, 2 founder articles a month.", "pair": {"with": "seo-local", "both_usd": 1500}, "clip": "founder"}, {"key": "automation-pack", "billing": "month", "bundle": 150, "solo": 225, "name": "Automation pack", "line": "5 more simple automations, like follow-ups, reminders and thank-you messages."}, {"key": "crm-seat", "billing": "month", "fixed": 50, "from": true, "name": "Your own Rialto inbox and CRM", "line": "Your contacts, pipeline and messages in one place, on the same platform as your website.", "clip": "rialto"}, {"key": "priority", "billing": "month", "bundle": 200, "solo": 300, "name": "Priority changes", "line": "Same-day small changes and 8 a month instead of 4."}], "clips": {"frontdesk": {"src": "clips/frontdesk.mp4", "poster": "clips/frontdesk.webp", "proof": "Real demo: our AVAS front desk answering a bakery owner, in Taglish, in seconds.", "webm": "clips/frontdesk.webm"}, "landing": {"src": "clips/landing.mp4", "poster": "clips/landing.webp", "proof": "Real work: the Gala Night landing page we built for FWIB, on a phone.", "webm": "clips/landing.webm"}, "rialto": {"src": "clips/rialto.mp4", "poster": "clips/rialto.webp", "proof": "Real demo: Rialto, a website inquiry landing as a contact and a deal.", "webm": "clips/rialto.webm"}, "seo": {"img": "clips/seo-proof.webp", "proof": "Real search: \"jtlgrowth\" on Google. Our own site comes first, with our Business Profile right beside it."}, "founder": {"img": "clips/founder-proof.webp", "proof": "Real search: \"jamz jamorol\" on Google. The AI Overview names our founder and his work, and his own site is the first result."}}}</script>
+<script type="application/json" id="fa-offers">{"version": "free-build-offers-2026-10-29-a", "note": "Owner 2026-10-29, Option A. Base USD 500 a month. Add-ons are picked one by one at their regular price (usd). Pick addon_discount.min or more priced add-ons (not fixed, not inside the chosen package) and each gets addon_discount.pct off, one-time and monthly alike, rounded to the whole dollar. Packages are put together by us at their own one-time price (usd); their regular total is the sum of their items' usd, and package items never count toward the add-on discount. + Founder SEO with SEO + AIO + GEO is pair.both_usd a month for both, flat (no add-on discount on the pair). fixed = a catalog price no discount touches. Every number here is the one the page shows and the Worker charges.", "php_per_usd": 64, "addon_discount": {"min": 3, "pct": 15}, "plans": [{"key": "support-500", "name": "Website Support and Maintenance", "usd_month": 500, "php_month": 32000, "line": "What you signed up for: hosting, your domain, up to 5 pages, 4 small changes a month, 1 chatbot, 2 simple automations."}, {"key": "plus-900", "name": "Website Plus", "usd_month": 900, "php_month": 57600, "line": "Everything in the USD 500 plan, plus 8 small changes a month, 5 more automations, Google review requests, 2 articles a month and a monthly call."}], "packages": [{"key": "get-found", "name": "Get Found", "billing": "once", "usd": 700, "items": ["seo-starter", "reviews", "biz-email"], "line": "Show up on Google, collect reviews, and email from your own domain."}, {"key": "get-booked", "name": "Get Booked", "billing": "once", "usd": 750, "items": ["booking", "channel-bot", "landing-page"], "line": "A page for your ad, a chatbot where clients message you, and bookings without the back and forth."}, {"key": "sell-online", "name": "Sell Online", "billing": "once", "usd": 850, "from": true, "items": ["shop", "language", "extra-page"], "line": "Sell your products online, in English and Filipino, with one more page for your story."}], "addons": [{"key": "extra-page", "billing": "once", "usd": 225, "name": "Extra page", "line": "One more page on your website, per page."}, {"key": "landing-page", "billing": "once", "usd": 375, "name": "Landing page for an ad or promo", "line": "A one-page site on its own link, made to turn ad clicks into inquiries.", "clip": "landing"}, {"key": "booking", "billing": "once", "usd": 450, "name": "Booking system", "line": "Clients pick a time, get a confirmation and a reminder, and can reschedule."}, {"key": "shop", "billing": "once", "usd": 750, "from": true, "name": "Online shop with payments", "line": "Your products, a cart and checkout. Payment fees are the provider's."}, {"key": "language", "billing": "once", "usd": 300, "name": "Second language", "line": "An English and Filipino switch on every page."}, {"key": "biz-email", "billing": "once", "usd": 75, "name": "Business email on your domain", "line": "you@yourbusiness.com, set up for you. The Google fee is at cost."}, {"key": "seo-starter", "billing": "once", "usd": 750, "name": "SEO Starter", "line": "Google Business Profile set up, every page tuned for search, Search Console, 20 directory listings."}, {"key": "reviews", "billing": "once", "usd": 225, "name": "Google review requests", "line": "Happy clients get a short message asking for a Google review."}, {"key": "channel-bot", "billing": "once", "usd": 300, "name": "Chatbot on Messenger, Instagram or WhatsApp", "line": "The same chatbot as your website, answering where your clients already message you. Per channel."}, {"key": "brand-kit", "billing": "once", "usd": 450, "name": "Brand kit", "line": "Logo, colors, fonts and 5 social post templates."}, {"key": "ai-employee", "billing": "once", "fixed": 1500, "from": true, "name": "AI employee", "line": "Answers, qualifies and books your clients day and night, on your website and your messages.", "clip": "frontdesk", "fixed_php": 75000}, {"key": "seo-local", "billing": "month", "usd": 1200, "name": "SEO + AIO + GEO", "line": "Found on Google, in Google's AI Overviews, and in ChatGPT and Perplexity answers. Weekly Google posts, review replies, 2 articles and a ranking report every month.", "clip": "seo"}, {"key": "seo-founder", "billing": "month", "usd": 1500, "name": "+ Founder SEO", "line": "Your own name found too: a founder profile page, your Google knowledge panel, your LinkedIn, Instagram and YouTube lined up, 2 founder articles a month.", "pair": {"with": "seo-local", "both_usd": 1500}, "clip": "founder"}, {"key": "automation-pack", "billing": "month", "usd": 225, "name": "Automation pack", "line": "5 more simple automations, like follow-ups, reminders and thank-you messages."}, {"key": "crm-seat", "billing": "month", "fixed": 50, "from": true, "name": "Your own Rialto inbox and CRM", "line": "Your contacts, pipeline and messages in one place, on the same platform as your website.", "clip": "rialto"}, {"key": "priority", "billing": "month", "usd": 300, "name": "Priority changes", "line": "Same-day small changes and 8 a month instead of 4."}], "clips": {"frontdesk": {"src": "clips/frontdesk.mp4", "poster": "clips/frontdesk.webp", "proof": "Real demo: our AVAS front desk answering a bakery owner, in Taglish, in seconds.", "webm": "clips/frontdesk.webm"}, "landing": {"src": "clips/landing.mp4", "poster": "clips/landing.webp", "proof": "Real work: the Gala Night landing page we built for FWIB, on a phone.", "webm": "clips/landing.webm"}, "rialto": {"src": "clips/rialto.mp4", "poster": "clips/rialto.webp", "proof": "Real demo: Rialto, a website inquiry landing as a contact and a deal.", "webm": "clips/rialto.webm"}, "seo": {"img": "clips/seo-proof.webp", "proof": "Real search: \"jtlgrowth\" on Google. Our own site comes first, with our Business Profile right beside it."}, "founder": {"img": "clips/founder-proof.webp", "proof": "Real search: \"jamz jamorol\" on Google. The AI Overview names our founder and his work, and his own site is the first result."}}}</script>
 <script>
 (function () {
   "use strict";
@@ -266,7 +294,32 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     "Add a valid email, the one you applied with.": "Ilagay ang tamang email, yung ginamit mo sa application.",
     "We couldn't send yet. Your answers are still here. Try again, or email hello@jtlgrowth.com.": "Hindi pa namin ma-send. Nandito pa rin ang mga sagot mo. Subukan ulit, o mag-email sa hello@jtlgrowth.com.",
     "Want to add anything? (optional)": "May gusto ka bang idagdag? (optional)",
-    "Your plan stays at USD 500 a month unless you add something. Prices are for one add-on. Pick 2 or more and you get the bundle price on the total.": "USD 500 a month pa rin ang plan mo hangga't wala kang idinadagdag. Presyo ito ng isang add-on. Pumili ng 2 o higit pa at bundle price na ang total.",
+    "Your plan stays at USD 500 a month unless you add something.": "USD 500 a month pa rin ang plan mo unless may idagdag ka.",
+    "Packages": "Packages",
+    "We put these together for you. One price, paid once.": "Kami na ang bumuo nito para sa'yo. Isang presyo, one-time lang.",
+    "No package": "Walang package",
+    "I'll pick add-ons one by one.": "Add-ons lang, isa-isa kong pipiliin.",
+    "Show up on Google, collect reviews, and email from your own domain.": "Lumabas sa Google, makakuha ng reviews, at mag-email gamit ang sarili mong domain.",
+    "A page for your ad, a chatbot where clients message you, and bookings without the back and forth.": "May page para sa ad mo, chatbot kung saan ka mine-message ng clients, at booking na walang pabalik-balik.",
+    "Sell your products online, in English and Filipino, with one more page for your story.": "Ibenta online ang products mo, in English at Filipino, may isa pang page para sa story mo.",
+    "Includes: {list}": "Kasama: {list}",
+    "Regular price:": "Regular price:",
+    "Save {u} ({p}% off)": "Tipid {u} ({p}% off)",
+    "Pick {n} or more add-ons: {p}% off each": "Pick ka ng {n} or more add-ons: {p}% off bawat isa",
+    "None picked yet: add {k} for {p}% off.": "Wala pang napili: mag-add ng {k} para sa {p}% off.",
+    "{n} picked: add {k} more for {p}% off": "{n} na ang napili: add ka pa ng {k} para sa {p}% off",
+    "{n} picked: {p}% off each is on.": "{n} na ang napili: naka-{p}% off na bawat isa.",
+    "Add-ons inside your package do not count toward this.": "Hindi kasama sa bilang ang add-ons na nasa package mo.",
+    "Included in your package": "Kasama na sa package mo",
+    "{u} ({p}% off)": "{u} ({p}% off)",
+    "{u} a month ({p}% off)": "{u} kada buwan ({p}% off)",
+    "{u} with your {p}% off": "{u} na lang with your {p}% off",
+    "{u} a month with SEO + AIO + GEO": "{u} kada buwan kasama ang SEO + AIO + GEO",
+    "Pair price with + Founder SEO": "Pair price kasama ang + Founder SEO",
+    "With the {name} package.": "Kasama ang {name} package.",
+    "You save {u}": "Tipid ka ng {u}",
+    "You save {u} a month": "Tipid ka ng {u} kada buwan",
+    "You save {u} one-time and {m} a month": "Tipid ka ng {u} one-time at {m} kada buwan",
     "One-time add-ons": "One-time add-ons",
     "Paid once.": "Isang bayad lang.",
     "+ Monthly add-ons": "+ Monthly add-ons",
@@ -321,8 +374,6 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     "Your monthly": "Monthly mo",
     "One-time": "One-time",
     "and up": "pataas",
-    "Bundle price for your {n} add-ons together. You save {u}.": "Bundle price para sa {n} add-ons mo. Tipid ka ng {u}.",
-    "Add one more add-on to get the bundle price on the total.": "Magdagdag pa ng isang add-on para bundle price na ang total.",
     "Nothing is charged here. We email you a quote, and you say yes before any invoice.": "Walang sisingilin dito. Magpapadala kami ng quote sa email, at ikaw ang magsasabi ng yes bago ang kahit anong invoice.",
     "No add-ons. Your plan stays as it is.": "Walang add-ons. Ganun pa rin ang plan mo."
   };
@@ -368,11 +419,47 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
   }
 
   /* the order step: everything priced comes from #fa-offers (free-build-offers.json, the Worker recomputes it) */
-  var OFF = JSON.parse(document.getElementById("fa-offers").textContent), RATE = OFF.php_per_usd;
+  var OFF = JSON.parse(document.getElementById("fa-offers").textContent), RATE = OFF.php_per_usd, DISC = OFF.addon_discount;
   var BYKEY = {}; OFF.addons.forEach(function (a) { BYKEY[a.key] = a; });
+  /* PRICE-START: the same rule as price() in free-build-quote.ts (the Worker); test-parity.ts runs both on the same baskets */
+  function price(OFF, planKey, keys, pkgKey) {
+    var by = {}; OFF.addons.forEach(function (a) { by[a.key] = a; });
+    var D = OFF.addon_discount;
+    var pl = OFF.plans.filter(function (x) { return x.key === planKey; })[0] || OFF.plans[0];
+    var pkg = OFF.packages.filter(function (x) { return x.key === pkgKey; })[0] || null;
+    var inPkg = pkg ? pkg.items : [], ks = [];
+    keys.forEach(function (k) { if (by[k] && ks.indexOf(k) < 0 && inPkg.indexOf(k) < 0) ks.push(k); });
+    var elig = ks.filter(function (k) { return by[k].fixed == null; });
+    var on = elig.length >= D.min;
+    var r = { plan: pl.key, pkg: pkg ? pkg.key : "", keys: ks, count: elig.length, discount: on, month: pl.usd_month, once: 0,
+      reg_month: pl.usd_month, reg_once: 0, from: false, lines: {} };
+    if (pkg) { r.once += pkg.usd; pkg.items.forEach(function (k) { r.reg_once += by[k].usd; }); if (pkg.from) r.from = true; }
+    ks.forEach(function (k) {
+      var a = by[k], reg = a.fixed != null ? a.fixed : a.usd, v = reg, why = a.fixed != null ? "fixed" : "";
+      if (a.fixed == null) {
+        if (a.pair && elig.indexOf(a.pair.with) >= 0) { v = a.pair.both_usd - by[a.pair.with].usd; why = "pair"; }
+        else if (elig.some(function (o) { return by[o].pair && by[o].pair.with === k; })) why = "pair";
+        else if (on) { v = Math.round(reg * (100 - D.pct) / 100); why = "pct"; }
+      }
+      r.lines[k] = { regular: reg, usd: v, why: why };
+      if (a.billing === "month") { r.month += v; r.reg_month += reg; } else { r.once += v; r.reg_once += reg; }
+      if (a.from) r.from = true;
+    });
+    return r;
+  }
+  /* PRICE-END */
+  var ICON = {
+    pct: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m15 9-6 6"/><path d="M9 9h.01"/><path d="M15 15h.01"/></svg>',
+    ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>'
+  };
   function num(n) { return n.toLocaleString("en-US"); }
   function money(usd, php) { return "USD " + num(usd) + " · ₱" + num(php == null ? usd * RATE : php); }
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function txt(s) { return document.createTextNode(s); }
+  function iconEl(cls, name, text, tag) { var e = el(tag || "span", cls); e.innerHTML = ICON[name]; e.appendChild(txt(text)); return e; }
+  /* a struck regular price; the hidden words tell a screen reader what the line through means */
+  function strike(s) { var x = el("s"); x.appendChild(el("span", "vh", t("Regular price:") + " ")); x.appendChild(txt(s)); return x; }
+  function fill(s, o) { Object.keys(o).forEach(function (k) { s = s.replace("{" + k + "}", String(o[k])); }); return s; }
   function proof(key) {
     var c = OFF.clips[key]; if (!c) return null;
     var fig = el("figure", "proof"), media;
@@ -393,6 +480,18 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-plan-price", pl.key); sp.appendChild(pr);
     lab.appendChild(inp); lab.appendChild(sp); planBox.appendChild(lab);
   });
+  /* packages are ours: a fixed set of add-ons at one price; "No package" keeps the radio group clearable */
+  var pkgBox = form.querySelector("[data-fa-packages]");
+  [{ key: "none" }].concat(OFF.packages).forEach(function (pk, i) {
+    var lab = el("label", "opt pkg"), inp = el("input"), sp = el("span");
+    inp.type = "radio"; inp.name = "package"; inp.value = pk.key; if (i === 0) inp.checked = true;
+    if (pk.key === "none") { sp.appendChild(el("strong", null, "No package")); sp.appendChild(el("small", null, "I'll pick add-ons one by one.")); }
+    else {
+      sp.appendChild(el("strong", null, pk.name)); sp.appendChild(el("small", null, pk.line));
+      var pr = el("span", "price"); pr.setAttribute("data-fa-dyn", ""); pr.setAttribute("data-fa-pkg-price", pk.key); sp.appendChild(pr);
+    }
+    lab.appendChild(inp); lab.appendChild(sp); pkgBox.appendChild(lab);
+  });
   OFF.addons.forEach(function (a) {
     var wrap = el("div", "addon"), lab = el("label", "opt"), inp = el("input"), sp = el("span");
     inp.type = "checkbox"; inp.name = "addons"; inp.value = a.key;
@@ -402,42 +501,74 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     var f = a.clip && proof(a.clip); if (f) wrap.appendChild(f);
     form.querySelector('[data-fa-addons="' + a.billing + '"]').appendChild(wrap);
   });
-  /* the same rule the Worker applies: 2 or more bundle-priced add-ons -> bundle price on all, one alone -> solo */
-  function quote(plan, keys) {
-    var pl = OFF.plans.filter(function (x) { return x.key === plan; })[0] || OFF.plans[0];
-    var items = keys.map(function (k) { return BYKEY[k]; }).filter(Boolean);
-    var priced = items.filter(function (a) { return a.fixed == null && !a.quote; });
-    var bundle = priced.length >= OFF.bundle_min, q = { month: pl.usd_month, once: 0, from: false, bundle: bundle, save: 0 };
-    items.forEach(function (a) {
-      var v = a.fixed != null ? a.fixed : bundle ? a.bundle : a.solo;
-      if (bundle && a.fixed == null) q.save += a.solo - a.bundle;
-      q[a.billing === "month" ? "month" : "once"] += v; if (a.from) q.from = true;
+  var meter = root.querySelector("[data-fa-meter]");
+  for (var mi = 0; mi < DISC.min; mi++) meter.appendChild(el("i"));
+  /* an add-on inside the chosen package is ticked and locked; leaving the package gives back what they had */
+  function lockPackage() {
+    var P = OFF.packages.filter(function (x) { return x.key === picked("package"); })[0], items = P ? P.items : [];
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="addons"]'), function (c) {
+      var inc = items.indexOf(c.value) >= 0;
+      if (inc && !c.disabled) { c.setAttribute("data-was", c.checked ? "1" : ""); c.checked = true; c.disabled = true; }
+      else if (!inc && c.disabled) { c.disabled = false; c.checked = c.getAttribute("data-was") === "1"; c.removeAttribute("data-was"); }
     });
-    items.forEach(function (a) {
-      if (a.pair && keys.indexOf(a.pair.with) >= 0) {
-        var other = BYKEY[a.pair.with], paid = (bundle ? a.bundle + other.bundle : a.solo + other.solo);
-        q.month -= paid - a.pair.both_usd; q.save += paid - a.pair.both_usd;
-      }
-    });
-    return q;
   }
-  function chosen() { return Array.prototype.map.call(form.querySelectorAll('input[name="addons"]:checked'), function (c) { return c.value; }); }
+  function chosen() { return Array.prototype.map.call(form.querySelectorAll('input[name="addons"]:checked:not(:disabled)'), function (c) { return c.value; }); }
+  function progress(n) {
+    var s = n >= DISC.min ? "{n} picked: {p}% off each is on." : n ? "{n} picked: add {k} more for {p}% off" : "None picked yet: add {k} for {p}% off.";
+    return fill(t(s), { n: n, k: DISC.min - n, p: DISC.pct });
+  }
   function renderOrder() {
+    lockPackage();
+    var keys = chosen(), q = price(OFF, picked("plan"), keys, picked("package")), P = OFF.packages.filter(function (x) { return x.key === q.pkg; })[0];
     OFF.plans.forEach(function (pl) { form.querySelector('[data-fa-plan-price="' + pl.key + '"]').textContent = t("{u} a month").replace("{u}", money(pl.usd_month, pl.php_month)); });
-    OFF.addons.forEach(function (a) {
-      var pr = form.querySelector('[data-fa-addon-price="' + a.key + '"]'), txt;
-      if (a.fixed != null) txt = t(a.billing === "month" ? "From {u} a month" : "From {u}").replace("{u}", money(a.fixed, a.fixed_php));
-      else txt = t(a.billing === "month" ? "{s} a month" : "{s}").replace("{s}", money(a.solo) + (a.from ? " " + t("and up") : ""));
-      if (a.pair) txt += "\n" + t("With SEO + AIO + GEO: {u} a month for both.").replace("{u}", money(a.pair.both_usd));
-      pr.textContent = txt;
+    OFF.packages.forEach(function (pk) {
+      var box = form.querySelector('[data-fa-pkg-price="' + pk.key + '"]'), reg = 0;
+      pk.items.forEach(function (k) { reg += BYKEY[k].usd; });
+      box.textContent = "";
+      box.appendChild(el("span", "pk-items", fill(t("Includes: {list}"), { list: pk.items.map(function (k) { return t(BYKEY[k].name); }).join(", ") })));
+      var was = el("span", "was"); was.appendChild(strike(money(reg))); box.appendChild(was);
+      var now = el("span", "now", "USD " + num(pk.usd)); now.appendChild(el("small", null, " · ₱" + num(pk.usd * RATE) + (pk.from ? " " + t("and up") : ""))); box.appendChild(now);
+      box.appendChild(iconEl("badge", "pct", fill(t("Save {u} ({p}% off)"), { u: "USD " + num(reg - pk.usd), p: Math.round((reg - pk.usd) * 100 / reg) })));
     });
-    var keys = chosen(), q = quote(picked("plan"), keys), box = root.querySelector("[data-fa-total]");
+    var head = root.querySelector("[data-fa-deal-head]");
+    head.innerHTML = ICON.pct; head.appendChild(txt(fill(t("Pick {n} or more add-ons: {p}% off each"), { n: DISC.min, p: DISC.pct })));
+    Array.prototype.forEach.call(meter.children, function (b, i) { b.className = i < q.count ? "on" : ""; });
+    var prog = root.querySelector("[data-fa-progress]");
+    prog.textContent = progress(q.count) + (q.pkg ? " " + t("Add-ons inside your package do not count toward this.") : "");
+    OFF.addons.forEach(function (a) {
+      var pr = form.querySelector('[data-fa-addon-price="' + a.key + '"]'), l = q.lines[a.key], mo = a.billing === "month";
+      pr.textContent = "";
+      if (P && P.items.indexOf(a.key) >= 0) { pr.appendChild(iconEl("inc", "ok", t("Included in your package"))); return; }
+      if (a.fixed != null) { pr.appendChild(txt(t(mo ? "From {u} a month" : "From {u}").replace("{u}", money(a.fixed, a.fixed_php)))); return; }
+      if (l && l.usd !== l.regular) {
+        pr.appendChild(strike("USD " + num(l.regular))); pr.appendChild(txt(" "));
+        pr.appendChild(el("b", null, l.why === "pair" ? t("{u} a month with SEO + AIO + GEO").replace("{u}", money(l.usd))
+          : fill(t(mo ? "{u} a month ({p}% off)" : "{u} ({p}% off)"), { u: money(l.usd) + (a.from ? " " + t("and up") : ""), p: DISC.pct })));
+      } else {
+        pr.appendChild(txt(t(mo ? "{s} a month" : "{s}").replace("{s}", money(a.usd) + (a.from ? " " + t("and up") : ""))));
+        var mate = (a.pair && q.lines[a.pair.with]) || OFF.addons.some(function (o) { return o.pair && o.pair.with === a.key && q.lines[o.key]; });
+        if (l && l.why === "pair" && !a.pair) pr.appendChild(txt("\n" + t("Pair price with + Founder SEO")));
+        else if (!l && q.discount && !mate) pr.appendChild(txt("\n" + fill(t("{u} with your {p}% off"), { u: "USD " + num(Math.round(a.usd * (100 - DISC.pct) / 100)), p: DISC.pct })));
+      }
+      if (a.pair) pr.appendChild(txt("\n" + t("With SEO + AIO + GEO: {u} a month for both.").replace("{u}", money(a.pair.both_usd))));
+    });
+    var box = root.querySelector("[data-fa-total]"), sm = q.reg_month - q.month, so = q.reg_once - q.once, up = q.from ? " " + t("and up") : "";
     box.textContent = "";
-    box.appendChild(el("p", "t-big", t("Your monthly") + ": " + money(q.month)));
-    if (q.once) box.appendChild(el("p", null, t("One-time") + ": " + money(q.once) + (q.from ? " " + t("and up") : "")));
-    if (!keys.length) box.appendChild(el("p", "t-note", t("No add-ons. Your plan stays as it is.")));
-    else if (q.bundle && q.save > 0) box.appendChild(el("p", null, t("Bundle price for your {n} add-ons together. You save {u}.").replace("{n}", String(keys.filter(function (k) { return BYKEY[k].fixed == null; }).length)).replace("{u}", money(q.save))));
-    else if (keys.filter(function (k) { return BYKEY[k].fixed == null; }).length === 1) box.appendChild(el("p", "t-note", t("Add one more add-on to get the bundle price on the total.")));
+    [["month", q.month], ["once", q.once], ["save-month", sm], ["save-once", so], ["count", q.count]].forEach(function (x) { box.setAttribute("data-" + x[0], String(x[1])); });
+    var m = el("p", "t-big"); m.appendChild(txt(t("Your monthly") + ": "));
+    if (sm) { m.appendChild(strike("USD " + num(q.reg_month))); m.appendChild(txt(" ")); }
+    m.appendChild(el("span", "amt", money(q.month))); box.appendChild(m);
+    if (q.once || q.reg_once) {
+      var o = el("p", "t-big"); o.appendChild(txt(t("One-time") + ": "));
+      if (so) { o.appendChild(strike("USD " + num(q.reg_once))); o.appendChild(txt(" ")); }
+      o.appendChild(el("span", "amt", money(q.once) + up)); box.appendChild(o);
+    }
+    if (P) box.appendChild(el("p", "t-note", fill(t("With the {name} package."), { name: P.name })));
+    if (sm || so) box.appendChild(iconEl("t-save", "pct", so && sm ? fill(t("You save {u} one-time and {m} a month"), { u: money(so), m: money(sm) })
+      : fill(t(so ? "You save {u}" : "You save {u} a month"), { u: money(so || sm) }), "p"));
+    var save = box.querySelector(".t-save"); if (save) save.setAttribute("data-fa-save", "");
+    if (!keys.length && !P) box.appendChild(el("p", "t-note", t("No add-ons. Your plan stays as it is.")));
+    else if (q.count) box.appendChild(el("p", "t-note", progress(q.count)));
     box.appendChild(el("p", "t-note", t("Nothing is charged here. We email you a quote, and you say yes before any invoice.")));
   }
   root.querySelector("[data-fa-total]").setAttribute("data-fa-dyn", "");
@@ -477,6 +608,7 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
     ["lead_id", "business_name", "form_language", "colors", "references", "notes"].forEach(function (k) { body.append(k, form.querySelector('[name="' + k + '"]').value.trim()); });
     body.append("email", form.querySelector("#fa-email").value.trim().toLowerCase());
     body.append("plan", picked("plan") || OFF.plans[0].key);
+    body.append("package", picked("package") || "none");
     body.append("addons", chosen().join(",") || "none");
     body.append("offers_version", OFF.version);
     if (surprise.checked) body.append("surprise", "yes");
