@@ -22,6 +22,12 @@
     // recordings. Owner setup (2 min): clarity.microsoft.com → sign in →
     // "Add new project" → site jtlgrowth.com → copy the Project ID here.
     clarity: '',
+    // PostHog visit analytics: pages, clicks, and a replay of the visit with every typed
+    // field hidden. One free project serves the AVAS site, jtlgrowth.com and Checkup (pk-1320);
+    // filter by $host. posthogLive false ships no PostHog at all. Flip it only together with
+    // the PostHog copy on /privacy/ (check: ~/Venice/ops/runs/jtl-posthog-2026-10-29/jtl-ph-qa.mjs).
+    posthogLive: true,
+    posthog: { key: 'phc_po4dGx6cfc8VHkgMfTMEWDDHmxjLdaGDtA4YCcXQHBcN', host: 'https://us.i.posthog.com' },
     // Consent default. 'denied' since 2026-10-08 so the /privacy/ promise is true
     // (analytics storage denied by default). The bar below asks; Accept and Decline
     // each fire a consent update (the consent-audit skill checks both directions).
@@ -43,6 +49,12 @@
       ],
       accept: 'Accept',
       decline: 'Decline',
+      // With PostHog on: a new key asks everyone again (a past yes covered Google Analytics only).
+      withPosthog: {
+        key: 'jtl-consent-2',
+        body: 'We use Google Analytics and PostHog to see which pages get read and where people get stuck, so we know what to fix. Both stay off until you say yes.',
+        accept: ' turns on Google Analytics and PostHog: pages viewed and what you click, a replay of the visit with everything you type hidden, approximate location from your IP, device, and how you arrived.',
+      },
       // JTL black and white: a lifted dark card that reads on the dark and the light pages
       look: { bg: '#1A1A1A', fg: '#FCFCFC', body: '#BEBEBE', line: 'rgba(252,252,252,.16)', solidBg: '#FCFCFC', solidFg: '#121212', ghostHover: 'rgba(252,252,252,.08)' },
     },
@@ -68,6 +80,12 @@
   // The visitor's stored answer. Only the categories this site actually uses are
   // asked for: analytics, plus the ad signals once an ads id or pixel is filled in.
   var CON = CFG.consent;
+  var PH = CFG.posthogLive && CFG.posthog.key ? CFG.posthog : null;
+  if (PH) {
+    CON.key = CON.withPosthog.key;
+    CON.body = CON.withPosthog.body;
+    CON.items[0][1] = CON.withPosthog.accept;
+  }
   function stored() { try { return w.localStorage.getItem(CON.key); } catch (e) { return null; } }
   function store(v) { try { if (v) w.localStorage.setItem(CON.key, v); else w.localStorage.removeItem(CON.key); } catch (e) {} }
   function grants(v) {
@@ -130,8 +148,31 @@
       y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
     })(window, document, 'clarity', 'script', CFG.clarity);
   }
+
+  // ─── PostHog (pages, clicks, replay with every input masked) ──────────────
+  if (PH) {
+    // PostHog's own loader stub, trimmed to the calls made before array.js arrives
+    !function (t, e) { var o, n, p, r; e.__SV || (w.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split('.'); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))); }; } (p = t.createElement('script')).type = 'text/javascript', p.crossOrigin = 'anonymous', p.async = !0, p.src = s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js', (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = 'posthog', u.people = u.people || [], o = 'init capture register identify reset opt_in_capturing opt_out_capturing'.split(' '), n = 0; n < o.length; n++) g(u, o[n]); e._i.push([i, s, a]); }, e.__SV = 1); }(document, w.posthog || []);
+    w.posthog.init(PH.key, {
+      api_host: PH.host,
+      person_profiles: 'identified_only',
+      capture_pageview: true,
+      capture_pageleave: true,
+      autocapture: true,
+      session_recording: { maskAllInputs: true },
+      // Our consent key is the source of truth: a past "Change your choice" left
+      // PostHog opted out on this device, and this yes undoes it.
+      loaded: function (ph) { if (ph.has_opted_out_capturing()) ph.opt_in_capturing({ captureEventName: false }); },
+    });
+  }
   }
   if (stored() === 'granted') loadOptIns();
+  // PostHog once running stops on a later no and resumes on a later yes, same page.
+  function posthogFollow(v) {
+    if (!PH || !optedIn || !w.posthog) return;
+    if (v === 'granted') w.posthog.opt_in_capturing({ captureEventName: false });
+    else { w.posthog.opt_out_capturing(); w.posthog.reset(); }
+  }
 
   // ─── Unified event dispatch ───────────────────────────────────────────────
   // One call, three platforms. meta maps to a Meta standard event name.
@@ -152,6 +193,8 @@
         send_to: CFG.googleAds + '/' + CFG.googleAdsBookingLabel,
       });
     }
+
+    if (PH && optedIn && stored() === 'granted') w.posthog.capture(name, params);
   }
   w.veniceTrack = track;
 
@@ -162,6 +205,7 @@
   function answer(v) {
     store(v);
     gtag('consent', 'update', grants(v));
+    posthogFollow(v);
     if (v === 'granted') { loadOptIns(); track('consent_granted', {}); }
     if (bar) { bar.hidden = true; }
   }
@@ -244,7 +288,7 @@
   }
   w.jtlConsent = {
     state: function () { return stored(); },
-    reset: function () { store(null); gtag('consent', 'update', grants('denied')); onReady(showBar); },
+    reset: function () { store(null); gtag('consent', 'update', grants('denied')); posthogFollow('denied'); onReady(showBar); },
   };
   if (!stored()) onReady(showBar);
   // the /privacy/ page's "Change your choice" button
