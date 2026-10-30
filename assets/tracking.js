@@ -18,10 +18,10 @@
     metaPixel: '',              // Meta pixel id, or '' to disable
     googleAds: '',              // 'AW-XXXXXXXXX', or '' to disable
     googleAdsBookingLabel: '',  // conversion label for the booking action
-    // Microsoft Clarity project id, or '' to disable. Free heatmaps + session
-    // recordings. Owner setup (2 min): clarity.microsoft.com → sign in →
-    // "Add new project" → site jtlgrowth.com → copy the Project ID here.
-    clarity: '',
+    // Microsoft Clarity project id, or '' to disable. Free heatmaps + session recordings,
+    // masking Balanced, project on jamzjamorol03@gmail.com. Loads behind the bar like the rest.
+    // Empty it only together with the Clarity copy on /privacy/ (same check as PostHog below).
+    clarity: 'z5ufe5e12x',
     // PostHog visit analytics: pages, clicks, and a replay of the visit with every typed
     // field hidden. One free project serves the AVAS site, jtlgrowth.com and Checkup (pk-1320);
     // filter by $host. posthogLive false ships no PostHog at all. Flip it only together with
@@ -51,11 +51,11 @@
       ],
       accept: 'Accept',
       decline: 'Decline',
-      // With PostHog on: a new key asks everyone again (a past yes covered Google Analytics only).
+      // With PostHog and Clarity on: a new key asks everyone again (a past yes never covered Clarity).
       withPosthog: {
-        key: 'jtl-consent-2',
-        body: 'We use Google Analytics and PostHog to see which pages get read and where people get stuck, so we know what to fix. Both stay off until you say yes.',
-        accept: ' turns on Google Analytics and PostHog: pages viewed and what you click, a replay of the visit with everything you type hidden, approximate location from your IP, device, and how you arrived.',
+        key: 'jtl-consent-3',
+        body: 'We use Google Analytics, PostHog and Microsoft Clarity to see which pages get read and where people get stuck, so we know what to fix. All three stay off until you say yes.',
+        accept: ' turns on Google Analytics, PostHog and Microsoft Clarity: pages viewed, what you click and how far you scroll, a replay of the visit with everything you type hidden, approximate location from your IP, device, and how you arrived.',
       },
       // JTL black and white: a lifted dark card that reads on the dark and the light pages
       look: { bg: '#1A1A1A', fg: '#FCFCFC', body: '#BEBEBE', line: 'rgba(252,252,252,.16)', solidBg: '#FCFCFC', solidFg: '#121212', ghostHover: 'rgba(252,252,252,.08)' },
@@ -123,6 +123,7 @@
   // ─── Opt-in tags: Google above, and Meta and Clarity, which set their own
   // cookies and ignore Google's consent signal, load only once the visitor says yes.
   var optedIn = false;
+  var CLARITY_YES = { ad_Storage: 'denied', analytics_Storage: 'granted' };
   function loadOptIns() {
   if (optedIn) return;
   optedIn = true;
@@ -149,6 +150,8 @@
       t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
       y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
     })(window, document, 'clarity', 'script', CFG.clarity);
+    // This code only runs after a yes. Clarity drops EEA, UK and Swiss visits without the signal.
+    w.clarity('consentv2', CLARITY_YES);
   }
 
   // ─── PostHog (pages, clicks, replay with every input masked) ──────────────
@@ -175,6 +178,12 @@
     if (!PH || !optedIn || !w.posthog) return;
     if (v === 'granted') w.posthog.opt_in_capturing({ captureEventName: false });
     else { w.posthog.opt_out_capturing(); w.posthog.reset(); }
+  }
+  // Clarity the same way: a later no clears its cookies and stops it until a new yes.
+  function clarityFollow(v) {
+    if (!CFG.clarity || !optedIn || !w.clarity) return;
+    if (v === 'granted') w.clarity('consentv2', CLARITY_YES);
+    else w.clarity('consent', false);
   }
 
   // ─── Unified event dispatch ───────────────────────────────────────────────
@@ -209,6 +218,7 @@
     store(v);
     gtag('consent', 'update', grants(v));
     posthogFollow(v);
+    clarityFollow(v);
     if (v === 'granted') { loadOptIns(); track('consent_granted', {}); }
     if (bar) { bar.hidden = true; }
   }
@@ -291,7 +301,7 @@
   }
   w.jtlConsent = {
     state: function () { return stored(); },
-    reset: function () { store(null); gtag('consent', 'update', grants('denied')); posthogFollow('denied'); onReady(showBar); },
+    reset: function () { store(null); gtag('consent', 'update', grants('denied')); posthogFollow('denied'); clarityFollow('denied'); onReady(showBar); },
   };
   if (!stored()) onReady(showBar);
   // the /privacy/ page's "Change your choice" button
