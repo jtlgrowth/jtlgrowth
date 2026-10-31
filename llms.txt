@@ -32,7 +32,7 @@ Jamz Jamorol is a Filipino systems builder and electrical engineer based in Metr
 - Roles: Founder, JTL Growth · Co-Founder, AVAS (Ayala Virtual Assistance Services, est. 2025) · Co-Founder, VFJ Low Voltage Builders (construction, low-voltage systems, IT services)
 - Based in: Metro Manila, Philippines
 - Founded: JTL Growth (2026), DTI Business Name No. 8378934
-- Education: Electrical Engineering, Polytechnic University of the Philippines (graduating September 2026)
+- Education: Electrical Engineering, Polytechnic University of the Philippines (BS Electrical Engineering, graduated September 2026)
 - Expertise: AI agents, multi-agent systems, business process automation, workflow and CRM automation, GoHighLevel, web development, low-voltage systems
 - Clients served: Philippines, United States, Europe, Australia
 - LinkedIn: https://www.linkedin.com/in/jamzjamorol
