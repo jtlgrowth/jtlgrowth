@@ -65,6 +65,7 @@ h1{font:650 clamp(30px,7vw,42px)/1.1 var(--font-display);letter-spacing:-.01em}
 .big{border:2px solid var(--fg);background:var(--chip-bg)}
 input[type="text"],input[type="email"],input[type="url"],textarea{display:block;width:100%;min-height:52px;padding:12px 14px;border:1px solid var(--border);background:var(--bg);color:var(--fg);font:500 16px/1.4 var(--font-body)}
 textarea{min-height:96px;resize:vertical}
+input[readonly]{background:transparent;color:var(--fg-2);border-style:dashed}
 input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:1px dashed var(--fg-2);background:var(--bg);color:var(--fg);font:500 16px/1.4 var(--font-body)}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 [hidden]{display:none!important}
@@ -514,7 +515,9 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
   var id = (q.get("id") || "").replace(/[^a-z0-9-]/g, "").slice(0, 40);
   form.querySelector('[name="lead_id"]').value = id;
   form.querySelector('[name="business_name"]').value = (q.get("b") || "").slice(0, 120);
-  form.querySelector("#fa-email").value = (q.get("e") || "").replace(/ /g, "+").slice(0, 254);  /* a + in the address arrives as a space */
+  var applied = (q.get("e") || "").replace(/ /g, "+").slice(0, 254);  /* a + in the address arrives as a space */
+  form.querySelector("#fa-email").value = applied;
+  form.querySelector("#fa-email").readOnly = !!applied;  /* it must match their application or nothing is saved, so the link's address stays as sent */
 
   function picked(name) { var r = form.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ""; }
   function applyWhen() {
@@ -860,7 +863,9 @@ input[type="file"]{display:block;width:100%;min-height:52px;padding:12px;border:
       if (picked("photos_choice") === "upload") files("photos").forEach(function (f) { body.append("photos", f); });
     }
     sending = true; sendBtn.disabled = true; sendBtn.textContent = t("Sending...");
-    var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, 120000);
+    /* a slow phone upload gets its time: at least 2 minutes, else a minute plus 100 KB a second, so 50 MB waits about 9 minutes */
+    var upload = 0; body.forEach(function (v) { if (typeof v !== "string") upload += v.size; });
+    var ctl = new AbortController(), timer = setTimeout(function () { ctl.abort(); }, Math.max(120000, 60000 + upload / 100));
     fetch(endpoint, { method: "POST", body: body, signal: ctl.signal }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
       clearTimeout(timer);
       if (!j || j.ok !== true) throw new Error("refused");
