@@ -547,8 +547,6 @@ addEventListener("DOMContentLoaded",function(){
 .fw-file:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .fw-file[aria-invalid="true"]{border-color:var(--fg);border-style:solid}
 /* Owner-only money terms: visible on purpose until he writes the final words, so a draft cannot ship quietly */
-.fw-tbc{display:block;margin-top:8px;padding:10px 12px;border:2px dashed #b45309;border-radius:var(--radius-sm);background:color-mix(in oklab,#f59e0b,var(--surface) 85%);color:var(--fg)}
-.fw-tbc-k{font-weight:700}
 @media (max-width:420px){.fw-pay{padding:14px 10px}.fw-pay .w45-chip label{padding-left:10px;padding-right:10px}}
 @media (max-width:420px){.fw-root .w45-chips[data-cols="2"] label{padding:12px}}
 .fw-root .w45-count{font-size:14px}
@@ -675,7 +673,7 @@ addEventListener("DOMContentLoaded",function(){
   <!-- 1. the gate -->
   <div class="w45-card fw-card" data-fw-gate>
     <div class="fw-ico"><svg class="fw-svg" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg></div>
-    <p class="w45-eyebrow">Free website build &middot; one slot</p>
+    <p class="w45-eyebrow">Free website build &middot; one business</p>
     <h1 class="fw-h1" id="fw-gate-h" tabindex="-1">We build your website <em>for free.</em></h1>
     <p class="fw-lead">The build is really free: we design and make your website at no cost, and it becomes one of our case studies. Keeping it online is a monthly plan on our own hosting. The last screen shows the full price, and you apply by paying month 1 there. No calls, no reservation fee.</p>
     <details class="fw-peek"><summary>See the price now</summary><p>Build: &#8369;0. Website Support and Maintenance: &#8369;32,000 or USD 500 a month, with hosting, your domain and upkeep included. 3-month lock-in, counted from go-live. You apply by paying month 1 (&#8369;32,000 or USD 500) on the last screen.</p></details>
@@ -862,8 +860,9 @@ addEventListener("DOMContentLoaded",function(){
           <ol class="fw-terms">
             <li><h3>Your domain</h3><p>No domain yet? We buy one for you, and it is included in the monthly. Already have one? We connect yours, and it stays yours. Same price either way.</p></li>
             <li><h3>3-month lock-in</h3><p>&#8369;96,000 or USD 1,500 in total, counted from the day your website goes live. After that, you decide: keep it month to month, or stop.</p></li>
-            <li><h3>Month 1 is how you apply</h3><p>You pay month 1 on this screen. No calls and no reservation fee. <span class="fw-tbc" data-owner-tbc><b class="fw-tbc-k">Owner to confirm:</b> It counts as the first month of your 3-month lock-in, the month your website goes live.</span></p></li>
-            <li><h3>If we never go live</h3><p><span class="fw-tbc" data-owner-tbc><b class="fw-tbc-k">Owner to confirm:</b> If your website is not live within 60 days of your payment for a reason on our side, we refund month 1 in full. Days we spend waiting on your logo, photos or answers do not count.</span></p></li>
+            <li><h3>Month 1 is how you apply</h3><p>You pay month 1 on this screen. No calls and no reservation fee. <span>It counts as the first month of your 3-month lock-in, the month your website goes live.</span></p></li>
+            <li><h3>If we never go live</h3><p><span>If your website is not live within 60 days of your payment for a reason on our side, we refund month 1 in full. Days we spend waiting on your logo, photos or answers do not count.</span></p></li>
+            <li><h3>One website per business</h3><p>Every business that pays month 1 gets its own build. A second business is a separate application, with its own USD 500 / PHP 32,000 a month.</p></li>
             <li><h3>If you stop</h3><p>Your website goes offline when maintenance stops. Your logo, photos, words, and any domain you bought stay yours. Moving the website to another host is a paid handover, and we quote it when you ask.</p></li>
             <li><h3>What we ask for the free build</h3><p>Written permission to show your website as a case study, one before and after number that matters to you (inquiries, bookings or sales), and a 20-minute review with us at day 30.</p></li>
             <li><h3>What a small change is</h3><p>One edit to what is already there, about 30 minutes of work: text, prices, hours, a photo, a link. Unused changes do not carry over. New info for your chatbot is always included and does not count as a change. We reply within 1 business day and finish small changes within 2.</p></li>
@@ -1278,7 +1277,6 @@ addEventListener("DOMContentLoaded",function(){
 "₱96,000 or USD 1,500 in total, counted from the day your website goes live. After that, you decide: keep it month to month, or stop.": "₱96,000 o USD 1,500 lahat-lahat, bilang simula sa araw na mag-live ang website mo. Pagkatapos nun, ikaw na bahala: tuloy month to month, o stop na.",
 "Month 1 is how you apply": "Ang month 1 ang application mo",
 "You pay month 1 on this screen. No calls and no reservation fee.": "Dito sa screen na ito babayaran ang month 1. Walang call at walang reservation fee.",
-"Owner to confirm:": "Owner to confirm:",
 "It counts as the first month of your 3-month lock-in, the month your website goes live.": "Ito na ang first month ng 3-month lock-in mo, yung buwan na mag-live ang website mo.",
 "If we never go live": "Kung hindi kami makapag-go live",
 "If your website is not live within 60 days of your payment for a reason on our side, we refund month 1 in full. Days we spend waiting on your logo, photos or answers do not count.": "Kung hindi pa live ang website mo within 60 days mula sa bayad mo dahil sa amin, ire-refund namin nang buo ang month 1. Hindi kasama sa bilang ang mga araw na hinihintay namin ang logo, photos o sagot mo.",
@@ -1307,7 +1305,9 @@ addEventListener("DOMContentLoaded",function(){
 "That file is over 5 MB. Try a smaller screenshot.": "Lagpas 5 MB ang file. Subukan ang mas maliit na screenshot.",
 "We couldn't upload your screenshot, so nothing was sent. Try again, or email it to hello@jtlgrowth.com.": "Hindi namin ma-upload ang screenshot mo, kaya walang na-send. Subukan ulit, o i-email ito sa hello@jtlgrowth.com.",
 "Language": "Wika",
-"Free website build · one slot": "Free website build · isang slot lang",
+"Free website build · one business": "Free website build · isang business",
+"One website per business": "Isang website bawat business",
+"Every business that pays month 1 gets its own build. A second business is a separate application, with its own USD 500 / PHP 32,000 a month.": "Bawat business na magbayad ng month 1 ay may sariling build. Hiwalay na application ang pangalawang business, na may sarili ring USD 500 / PHP 32,000 a month.",
 "We build your website": "Gagawin namin ang website mo",
 "for free.": "nang libre.",
 "The build is really free: we design and make your website at no cost, and it becomes one of our case studies. Keeping it online is a monthly plan on our own hosting. You see the full price on the last screen, before anything is sent.": "Libre talaga ang build: kami ang magde-design at gagawa ng website mo, walang bayad, at magiging isa ito sa mga case study namin. Ang may bayad ay ang pag-keep nito online, monthly plan sa sarili naming hosting. Makikita mo ang buong presyo sa huling screen, bago may ma-send.",
