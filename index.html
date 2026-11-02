@@ -3,34 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- v10 cinematic preloader surface, in the head so the curtain is styled at the first paint -->
-<link rel="preload" as="image" href="/assets/boot/jtl-film-poster.webp" fetchpriority="high">
+<!-- intro (2026-11-03, Owner pick A "Draw", replaces the v10 film preloader): styled at the first paint -->
 <style>
-/* v10 cinematic preloader (2026-09-28, Owner: a close-up on a white bar, the angle changes as it
-   finishes, something subtle about AI employees, "the animation and the loading is sabay"). Higgy
-   (MiniMax H3, start frame a macro of one bar, end frame our exact mark) films the glass bars; the
-   film only runs as far as the page has loaded, and the angle change waits for the load event.
-   27 seat lights (Venice's AI team) clock in with the progress. Ends on the crisp SVG mark, then the
-   curtain slides left. v9 draw-on: HQ ops/reports/jtl-site-refresh-2026-09-28/work/preloader. */
-#boot{position:fixed;inset:0;z-index:9999;background:#0f0f0f;overflow:hidden;will-change:transform;transition:transform .5s cubic-bezier(.83,0,.17,1)}
-#boot.off{transform:translateX(-100%);pointer-events:none}
-#boot .bt-film{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);aspect-ratio:16/9;transform:translate(-50%,-50%)}
-#boot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0f0f0f;transition:opacity .35s ease}
-#boot .bt-mark{position:absolute;left:50%;top:50%;width:39.06%;transform:translate(-50%,-50%);opacity:0;transition:opacity .35s ease}
-#boot.crisp .bt-mark{opacity:1}
-#boot.crisp video{opacity:0;transition:opacity 0s .35s}
-#boot .bt-hud{position:absolute;left:0;right:0;bottom:clamp(30px,8vh,72px);display:flex;flex-direction:column;align-items:center;gap:14px}
-#boot .bt-seats{display:flex;gap:7px}
-#boot .bt-seats i{width:4px;height:4px;border-radius:50%;background:#333;transition:background .35s ease,box-shadow .35s ease}
-#boot .bt-seats i.on{background:#E2E2E2;box-shadow:0 0 6px rgba(226,226,226,.55)}
-#boot .bt-pct{margin:0;font:700 11px/1 'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8A8A8A;font-variant-numeric:tabular-nums}
-#boot .bt-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-#boot .bt-skip{position:absolute;right:18px;bottom:16px;font:12px/1 'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A8A8A;background:none;border:0;padding:14px 12px;cursor:pointer}
-#boot .bt-skip:hover,#boot .bt-skip:focus-visible{color:#E2E2E2}
-#boot .bt-skip:focus-visible{outline:2px solid #E2E2E2;outline-offset:2px}
-/* portrait screens: a wide letterboxed band, so the whole mark stays on screen, edges melt into the curtain */
-@media (max-aspect-ratio:1/1){#boot .bt-film{width:150vw;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent)}}
-@media (prefers-reduced-motion:reduce){#boot{transition:opacity .4s ease}#boot.off{transform:none;opacity:0}#boot video{display:none}#boot .bt-mark{opacity:1;transition:none}#boot .bt-hud{visibility:hidden}}
+/* Draw intro (Owner pick A, 2026-11-03). The lockup is the nav logo drawn --s times bigger, so the
+   flight into the nav lands pixel for pixel. Brand tokens on #boot; source HQ ops/runs/intro-ref-2026-11-03/ship. */
+#boot{position:fixed;inset:0;z-index:9999}
+#boot.off{visibility:hidden;pointer-events:none}
+#boot .bd-cur{position:absolute;inset:0;background:var(--bd-bg)}
+#boot .bd-stage{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+#boot .bd-box{display:flex;flex-direction:column;align-items:center}
+#boot .bd-row{display:flex;align-items:center}
+#boot .bd-lk{display:flex;align-items:flex-start;transform-origin:0 0;color:var(--bd-mark)}
+#boot .bd-lk svg{display:block;flex:none;width:calc(var(--mw) * var(--s));height:calc(var(--mh) * var(--s))}
+#boot .bd-word{overflow:hidden;white-space:nowrap;color:var(--bd-word)}
+#boot .bd-word i{font-style:normal;display:inline-block}
+#boot .bd-tag{margin-top:calc(var(--s) * 7px);font:400 13px/1.2 'Space Mono',ui-monospace,Menlo,monospace;letter-spacing:.32em;text-transform:uppercase;white-space:nowrap;color:var(--bd-tag)}
+#boot .bd-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:600px){#boot .bd-tag{font-size:10.5px}}
+@media (prefers-reduced-motion:reduce){#boot{display:none}}
+/* JTL tokens: black curtain like the header, the mark in the nav's #E2E2E2, wordmark fades on the way in */
+#boot{--bd-bg:#111;--bd-mark:#E2E2E2;--bd-word:#E2E2E2;--bd-tag:#9a9a9a;--mw:46.203125px;--mh:22px;--s:3}
+#boot .bd-word{font:700 30px/1 'Archivo Expanded',Archivo,sans-serif;letter-spacing:.06em;margin-left:26px}
+@media (max-width:600px){#boot{--s:2}#boot .bd-word{font-size:19px;margin-left:16px}}
+html.bd-on a.logo .lmark{visibility:hidden}
 </style>
 <!-- template: v2-mono (own, 2026-07-23) + v3.1 grafts + v4 "clean filmstrip"
      2026-08-20 (Owner directive, Saturday presentation): 8 panels -> 3
@@ -505,115 +500,69 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 </style>
 </head>
 <body>
-<!-- v10 cinematic preloader (2026-09-28). Static markup + head CSS + inline script so the curtain is
-     in the first paint. Contract kept from v8/v9: sessionStorage jtlboot, .off slide-left, node removed
-     700 ms later, Esc or SKIP dismisses, reduced motion shows the final mark and fades at 0.4 s. -->
-<div id="boot"><div class="bt-film"><video muted playsinline preload="none" disablepictureinpicture poster="/assets/boot/jtl-film-poster.webp" aria-hidden="true"><source src="/assets/boot/jtl-film.mp4" type='video/mp4; codecs="avc1.64001F"'><source src="/assets/boot/jtl-film.webm" type='video/webm; codecs="vp9"'></video><svg class="bt-mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="#FCFCFC" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></div><div class="bt-hud" aria-hidden="true"><div class="bt-seats"></div><p class="bt-pct">Clocking in <span>0</span>%</p></div><span class="bt-sr" role="status">Loading JTL Growth</span><button class="bt-skip" type="button" aria-label="Skip intro">skip</button></div>
+<!-- intro (2026-11-03, Owner pick A "Draw"): static markup + inline script so the curtain is in the first paint.
+     Contract kept from v8-v10: #boot, sessionStorage jtlboot, .off, node removed 700 ms later, Esc skips, reduced motion skips. -->
+<div id="boot" data-key="jtlboot" data-nav="a.logo" data-draw="stroke" data-fade="1" data-step="40" aria-hidden="true"><div class="bd-cur"></div><div class="bd-stage"><div class="bd-box"><div class="bd-row"><div class="bd-lk"><svg viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5" stroke-linecap="butt"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg></div><div class="bd-word"><i>J</i><i>T</i><i>L</i><i>&nbsp;</i><i>G</i><i>R</i><i>O</i><i>W</i><i>T</i><i>H</i></div></div><p class="bd-tag">Growth, engineered.</p></div></div></div>
 <script>
-/* v10 cinematic preloader. The film (3.7 s) has two parts: a close-up travelling along one bar
-   (0 to 2.0 s), then the angle swings round onto the flat mark. The travel may only run as far as
-   the page has loaded (parsing eases toward 40%, DOMContentLoaded 45%, eager images and fonts fill
-   to 95%), and the angle change waits for the load event, so the reveal can never land before the
-   page is ready. Near its limit the film eases into slow motion instead of freezing. The number and
-   the 27 seat lights follow the film's own position, so they never run ahead of the page either.
-   If the film cannot play (blocked autoplay, error, not ready in time) the poster stays and the
-   count falls back to the v9 rule: real progress, never faster than 1.6 s. A stuck resource cannot
-   hold the curtain past 9 s. Once per tab session (sessionStorage jtlboot). ?hold=1 keeps it up. */
+/* Draw intro (Owner pick A, 2026-11-03): the mark is drawn, the wordmark rises letter by letter, the
+   tagline settles, then the lockup flies into the nav logo while the curtain lifts like a blind.
+   Same contract as the film preloader it replaces: #boot, .off when done, removed after, once per tab
+   session (data-key), the done event (data-event), ?hold=1 keeps it up, Escape skips, reduced motion
+   skips. The curtain lifts once the page has loaded, never before 1.45 s, never later than 4.5 s.
+   Source: HQ ops/runs/intro-ref-2026-11-03/ship/boot-draw.js (one copy per site, keep them equal). */
 (function () {
   'use strict';
   var root = document.getElementById('boot'); if (!root) return;
-  try { if (sessionStorage.getItem('jtlboot')) { root.parentNode.removeChild(root); return; } } catch (e) {}
-  var TRAVEL = 2.0, FILM = 3.7, FPS = 24, SEATS = 27, MIN = 1600, CAP = 9000, SPEED = 1 / 800;
-  var S = { shown: 0, real: 0, frame: -1, dom: false, fonts: false, loaded: false, film: 'loading', finishing: false, done: false, reduced: false, t: 0, trace: [], hold: /[?&]hold=1/.test(location.search) };
-  var t0 = performance.now(), last = t0, lit = 0;
-  var v = root.querySelector('video'), num = root.querySelector('.bt-pct span'), row = root.querySelector('.bt-seats');
-  var seats = [];
-  for (var k = 0; k < SEATS; k++) { var d = document.createElement('i'); row.appendChild(d); seats.push(d); }
-  v.muted = true;
-  // State is polled each frame, not taken from events: canplay can fire before this script runs,
-  // iOS ignores preload until play() is called, and a skipped <source> fires its own error.
-  var srcs = v.querySelectorAll('source');
-  srcs[srcs.length - 1].addEventListener('error', function () { S.film = 'failed'; });
-  function real() {
-    if (S.loaded) return 1;
-    if (!S.dom) return Math.min(0.4, 0.04 + 0.36 * (1 - Math.exp(-(performance.now() - t0) / 900)));
-    var imgs = [].filter.call(document.images, function (i) { return i.loading !== 'lazy'; });
-    var got = imgs.filter(function (i) { return i.complete; }).length;
-    return Math.min(0.95, 0.45 + 0.5 * ((imgs.length ? got / imgs.length : 1) * 0.75 + (S.fonts ? 0.25 : 0)));
-  }
-  function steer(dur) {
-    // how far into the film the page lets it run: the travel follows real progress, the rest needs load
-    var open = S.loaded || S.t > CAP;
-    var lim = open ? dur : Math.min(S.real / 0.95, 1) * TRAVEL;
-    var room = lim - v.currentTime;
-    // once the page is loaded the film plays out to its last frame; before that it parks at the limit
-    if (!open && room <= 0.03) { if (!v.paused) v.pause(); return; }
-    var rate = open || room >= 0.6 ? 1 : Math.max(0.25, Math.round(room / 0.6 * 10) / 10);
-    if (v.playbackRate !== rate) v.playbackRate = rate;
-    if (v.paused && !v.ended) {
-      var p = v.play();
-      // autoplay refused: blocked; no playable source: failed; a play() cut short by pause() is normal
-      if (p && p.catch) p.catch(function (e) { if (e && e.name === 'NotAllowedError') S.film = 'blocked'; else if (e && e.name === 'NotSupportedError') S.film = 'failed'; });
-    }
-  }
-  function light(p) {
-    var n = Math.round(p * SEATS);
-    while (lit < n) seats[lit++].className = 'on';
-  }
-  function done() {
-    if (S.done) return; S.done = true;
-    root.classList.add('off');
-    try { v.pause(); } catch (e) {}
-    try { sessionStorage.setItem('jtlboot', '1'); } catch (e) {}
-    setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 700);
-  }
+  var html = document.documentElement, D = root.dataset;
+  function gone() { html.classList.remove('bd-on'); if (root.parentNode) root.parentNode.removeChild(root); }
+  try { if (sessionStorage.getItem(D.key)) { gone(); return; } } catch (e) {}
+  var hold = /[?&]hold=1/.test(location.search), over = false, landed = false;
   function finish() {
-    if (S.finishing) return; S.finishing = true;
-    root.classList.add('crisp');
-    if (!S.hold) setTimeout(done, 550);
+    if (over) return; over = true;
+    root.classList.add('off'); html.classList.remove('bd-on');
+    try { sessionStorage.setItem(D.key, '1'); } catch (e) {}
+    if (D.event) document.dispatchEvent(new Event(D.event));
+    setTimeout(gone, 700);
   }
-  function tick(now) {
-    if (S.done) return;
-    var dt = Math.min(64, now - last); last = now; S.t = now - t0;
-    S.real = real();
-    // the film gets 2.5 s to start moving; after that, or if it fails, the poster holds the frame
-    var dur = v.duration && isFinite(v.duration) ? v.duration : FILM;
-    if (v.error) S.film = 'failed';
-    if (S.film === 'loading' || S.film === 'ready') steer(dur);
-    if (S.film === 'loading' && v.currentTime > 0) S.film = 'ready';
-    if (S.film === 'loading' && S.t > 2500) S.film = 'late';
-    var target;
-    if (S.film === 'loading') {
-      target = S.shown;
-    } else if (S.film === 'ready') {
-      target = v.ended || v.currentTime >= dur - 0.05 ? 1 : Math.min(v.currentTime / dur, 0.999);
-      S.frame = Math.round(v.currentTime * FPS);
-    } else {
-      var soft = S.t > CAP ? 1 : Math.min(S.real, S.t / MIN);
-      target = S.shown + Math.min(Math.max(0, soft - S.shown), dt * SPEED);
-    }
-    if (target > S.shown) S.shown = target;
-    var n = Math.round(S.shown * 100);
-    if (num.textContent !== String(n)) num.textContent = n;
-    light(S.shown);
-    if (S.trace.length < 900) S.trace.push([Math.round(S.t), +S.shown.toFixed(3), +S.real.toFixed(3), S.frame]);
-    if (S.shown >= 1 || S.t > CAP + 1500) { S.shown = 1; num.textContent = '100'; light(1); finish(); return; }
-    requestAnimationFrame(tick);
+  if (!root.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
+  html.classList.add('bd-on');   // the nav logo hides until the lockup lands on it
+  var E = 'cubic-bezier(.22,1,.36,1)', EIO = 'cubic-bezier(.65,0,.35,1)', PEN = 'cubic-bezier(.45,0,.2,1)';
+  function A(el, kf, delay, dur, ease, fill) { return el.animate(kf, { delay: delay, duration: dur, easing: ease || E, fill: fill || 'both' }); }
+  var cur = root.querySelector('.bd-cur'), lk = root.querySelector('.bd-lk'), mark = lk.querySelector('svg');
+  var word = root.querySelector('.bd-word'), tag = root.querySelector('.bd-tag');
+  var letters = word.querySelectorAll('i'), step = +(D.step || 50);
+
+  // 1. draw: a stroked mark draws path by path, a filled mark is revealed upward like a pen stroke
+  if (D.draw === 'stroke') {
+    [].forEach.call(mark.querySelectorAll('path'), function (p, i) {
+      p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1';
+      A(p, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], 100 + i * 170, 520, PEN);
+    });
+  } else {
+    A(mark, [{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], 120, 750, PEN);
   }
-  document.addEventListener('DOMContentLoaded', function () { S.dom = true; });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { S.fonts = true; });
-  addEventListener('load', function () { S.loaded = true; });
-  root.querySelector('.bt-skip').addEventListener('click', done);
-  addEventListener('keydown', function (e) { if (!S.done && e.key === 'Escape') done(); });
-  window.JTLBOOT = window.KC = { state: S, done: done };
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    S.reduced = true; root.classList.add('crisp');
-    if (!S.hold) setTimeout(done, 400);
-    return;
+  [].forEach.call(letters, function (c, i) { A(c, [{ transform: 'translateY(105%)' }, { transform: 'none' }], 560 + i * step, 520); });
+  A(tag, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], 950, 380);
+
+  // 2. land: the lockup flies into the real nav logo (measured now, so any width lands exactly)
+  function land() {
+    if (landed || over || hold) return; landed = true;
+    var nav = document.querySelector(D.nav), target = nav && nav.querySelector('svg');
+    var n = target && target.getBoundingClientRect();
+    if (!n || !n.width) { finish(); return; }
+    var m = mark.getBoundingClientRect(), s = n.width / m.width;
+    A(tag, [{ opacity: 1 }, { opacity: 0 }], 0, 300, 'ease-out', 'forwards');
+    if (D.fade) A(word, [{ opacity: 1 }, { opacity: 0 }], 100, 250, 'ease-out', 'forwards');
+    A(lk, [{ transform: 'none' }, { transform: 'translate(' + (n.left - m.left) + 'px,' + (n.top - m.top) + 'px) scale(' + s + ')' }], 100, 700, EIO, 'forwards');
+    A(cur, [{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 100% 0)' }], 150, 650, EIO, 'forwards');
+    setTimeout(finish, 810);
   }
-  // the markup ships preload="none" so reduced-motion visitors never download the film
-  v.preload = 'auto';
-  requestAnimationFrame(tick);
+  var t0 = performance.now(), MIN = 1450, CAP = 4500, loaded = document.readyState === 'complete';
+  function maybe() { if (loaded && performance.now() - t0 >= MIN - 20) land(); }
+  addEventListener('load', function () { loaded = true; maybe(); });
+  setTimeout(maybe, MIN); setTimeout(land, CAP);
+  addEventListener('keydown', function (e) { if (!over && e.key === 'Escape') finish(); });
+  window.BOOTDRAW = { finish: finish, land: land };
 })();
 </script>
 
@@ -1368,5 +1317,8 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 <script src="assets/v7/hint.js"></script>
 <script src="assets/v7/work-prompts.js"></script>
 <script>(function(){function t(){var d=new Date(),s=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');document.querySelectorAll('[data-clock]').forEach(function(e){e.textContent=s});}t();setInterval(t,30000);})();</script>
+<style>/* the slide counter steps left so the contact button never sits on it */#counter{right:calc(min(5vw,68px) + 72px)}@media (max-width:600px){#counter{right:88px}}</style>
+<!-- contact widget (Owner 2026-11-03: book a call and socials; source HQ ops/runs/intro-ref-2026-11-03/ship) -->
+<script src="/assets/contact-widget.js" data-cw="{&quot;title&quot;:&quot;TALK TO JTL GROWTH&quot;,&quot;sub&quot;:&quot;Questions about a build, pricing or timelines? Reach us wherever is easiest.&quot;,&quot;teaser&quot;:&quot;Hi! Want AI running the busy half?&quot;,&quot;fabLabel&quot;:&quot;Contact JTL Growth&quot;,&quot;rows&quot;:[{&quot;k&quot;:&quot;msg&quot;,&quot;label&quot;:&quot;Messenger&quot;,&quot;handle&quot;:&quot;jtlgrowth&quot;,&quot;href&quot;:&quot;https://m.me/jtlgrowth&quot;},{&quot;k&quot;:&quot;ig&quot;,&quot;label&quot;:&quot;Instagram&quot;,&quot;handle&quot;:&quot;@jtlgrowth&quot;,&quot;href&quot;:&quot;https://www.instagram.com/jtlgrowth/&quot;},{&quot;k&quot;:&quot;fb&quot;,&quot;label&quot;:&quot;Facebook&quot;,&quot;handle&quot;:&quot;JTL Growth&quot;,&quot;href&quot;:&quot;https://www.facebook.com/jtlgrowth&quot;},{&quot;k&quot;:&quot;li&quot;,&quot;label&quot;:&quot;LinkedIn&quot;,&quot;handle&quot;:&quot;JTL Growth&quot;,&quot;href&quot;:&quot;https://www.linkedin.com/company/jtlgrowth&quot;},{&quot;k&quot;:&quot;mail&quot;,&quot;label&quot;:&quot;Email&quot;,&quot;handle&quot;:&quot;hello@jtlgrowth.com&quot;,&quot;href&quot;:&quot;mailto:hello@jtlgrowth.com&quot;}],&quot;cta&quot;:{&quot;label&quot;:&quot;Book a free call&quot;,&quot;href&quot;:&quot;https://book.jtlgrowth.com&quot;},&quot;mark&quot;:{&quot;w&quot;:30,&quot;h&quot;:15,&quot;aw&quot;:22,&quot;ah&quot;:11,&quot;svg&quot;:&quot;&lt;svg width=\&quot;100%\&quot; height=\&quot;100%\&quot; viewBox=\&quot;288 703 1315 626\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;g fill=\&quot;none\&quot; stroke=\&quot;currentColor\&quot; stroke-width=\&quot;141.5\&quot; stroke-linecap=\&quot;butt\&quot;&gt;&lt;path d=\&quot;M624 774H1267\&quot;/&gt;&lt;path d=\&quot;M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122\&quot;/&gt;&lt;path d=\&quot;M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602\&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&quot;},&quot;theme&quot;:{&quot;font&quot;:&quot;Archivo,system-ui,-apple-system,sans-serif&quot;,&quot;dark&quot;:&quot;#111&quot;,&quot;onDark&quot;:&quot;#E2E2E2&quot;,&quot;card&quot;:&quot;#F4F4F4&quot;,&quot;ink&quot;:&quot;#111&quot;,&quot;icon&quot;:&quot;#111&quot;,&quot;hover&quot;:&quot;#E6E6E6&quot;,&quot;line&quot;:&quot;rgba(255,255,255,.08)&quot;,&quot;teaseBg&quot;:&quot;#111&quot;,&quot;teaseInk&quot;:&quot;#E2E2E2&quot;,&quot;teaseRadius&quot;:&quot;2px&quot;,&quot;teaseFont&quot;:&quot;&#x27;Space Mono&#x27;,monospace&quot;,&quot;radius&quot;:&quot;4px&quot;,&quot;rowRadius&quot;:&quot;2px&quot;,&quot;avRadius&quot;:&quot;2px&quot;,&quot;titleFont&quot;:&quot;&#x27;Archivo Expanded&#x27;,sans-serif&quot;,&quot;cta&quot;:&quot;#111&quot;,&quot;ctaInk&quot;:&quot;#E2E2E2&quot;,&quot;ctaHover&quot;:&quot;#2a2a2a&quot;,&quot;ctaRadius&quot;:&quot;2px&quot;,&quot;ctaFont&quot;:&quot;&#x27;Archivo Expanded&#x27;,sans-serif&quot;},&quot;z&quot;:110}" defer></script>
 </body>
 </html>
