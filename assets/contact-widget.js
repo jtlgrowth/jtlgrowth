@@ -22,7 +22,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   var css = '.cw-w{position:fixed;z-index:' + (C.z || 100) + ';right:24px;bottom:24px;display:flex;flex-direction:column;align-items:flex-end;font-family:' + T.font + ';opacity:0;transform:translateY(10px);transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1);pointer-events:none}'
-    + '.cw-w.cw-in{opacity:1;transform:none;pointer-events:auto}'
+    + '.cw-w.cw-in{opacity:1;transform:none;pointer-events:auto}.cw-w.cw-in.cw-away{opacity:0;transform:translateY(10px);pointer-events:none}'
     + '.cw-fab{width:58px;height:58px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;cursor:pointer;position:relative;background:' + T.dark + ';color:' + T.onDark + ';box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .2s ease}'
     + '.cw-fab:active{transform:scale(.92)}.cw-fab:focus-visible{outline:2px solid ' + T.dark + ';outline-offset:3px}'
     + '.cw-fab>span{position:absolute;display:grid;place-items:center;transition:opacity .22s ease,transform .26s cubic-bezier(.22,1,.36,1)}'
@@ -75,9 +75,16 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && w.classList.contains('cw-open')) { set(false); fab.focus(); } });
     document.addEventListener('click', function (e) { if (w.classList.contains('cw-open') && !w.contains(e.target)) set(false); });
     requestAnimationFrame(function () { w.classList.add('cw-in'); });
+    // another bottom prompt of the page (C.avoid, e.g. JTL's "See our work" toast) owns that corner while it shows
+    function away() { return !!(C.avoid && document.querySelector(C.avoid)); }
+    if (C.avoid) setInterval(function () {
+      var a = away();
+      if (a && !w.classList.contains('cw-away')) { set(false); w.classList.add('cw-away'); }
+      else if (!a && w.classList.contains('cw-away')) w.classList.remove('cw-away');
+    }, 400);
     var teased = false; try { teased = !!sessionStorage.getItem('cw-teased'); } catch (e) {}
     if (!teased) setTimeout(function () {
-      if (w.classList.contains('cw-open')) return;
+      if (w.classList.contains('cw-open') || away()) return;
       tease.classList.add('cw-on');
       try { sessionStorage.setItem('cw-teased', '1'); } catch (e) {}
       setTimeout(function () { tease.classList.remove('cw-on'); }, 9000);
