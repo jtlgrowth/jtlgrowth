@@ -62,6 +62,7 @@
     var nav = el('<nav class="wp-choose" aria-label="Where to start"><p class="wp-choose-k">Not ready for a call?</p><div class="wp-choose-row">' +
       '<a href="' + WORK + '">See what we\'ve built ' + NE + '</a>' +
       '<a href="' + SHOP + '">Shop AI employees ' + NE + '</a>' +
+      '<a href="https://course.jtlgrowth.com/">Free AI course ' + NE + '</a>' +
       "</div></nav>");
     if (id === "#p1clone") nav.querySelectorAll("a").forEach(function (a) { a.tabIndex = -1; });
     copy.insertBefore(nav, copy.querySelector(".kb-hint"));
