@@ -157,7 +157,7 @@ cover, before booking.
 **Already attended?** Links to a setup page with the commands and code from the attendee's
 room.
 
-**CTA.** "Book a call": talk through whether this workshop fits your team before you
+**CTA.** "Book a free 30-min call": talk through whether this workshop fits your team before you
 commit. Links to booking, /services/, /products/.
 
 ---
