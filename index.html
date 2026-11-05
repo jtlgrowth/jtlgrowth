@@ -51,6 +51,8 @@ html.bd-on a.logo .lmark{visibility:hidden}
 <script src="/assets/attribution.js"></script>
 <script src="/assets/tracking.js"></script>
 <script>
+/* header proposal preview: ?hdr=A|B|C, default A (strip this line to freeze A) */
+try{var hm=/[?&]hdr=([ABC])\b/.exec(location.search);document.documentElement.setAttribute('data-hdr',hm?hm[1]:'A')}catch(e){document.documentElement.setAttribute('data-hdr','A')}
 /* theme boot — pre-paint, no flash */
 (function(){try{var t=localStorage.getItem('jtl-theme');
 if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
@@ -839,12 +841,14 @@ header.on-dark :focus-visible,.dark :focus-visible{outline-color:#B9B9B9}
 
   function setUI(i){
     i=i%N; // LOOP: while transiting into the clone (i can reach N), fold back to the real panel it visually matches
-    if(i===idx)return; idx=i;
+    if(i===idx)return; const prevIdx=idx; idx=i;
     dots.forEach((d,k)=>d.classList.toggle('active',k===i));
     counter.textContent=String(i+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
     panels.forEach((p,k)=>p.classList.toggle('in',k===i));
     const dark=darkPanels.includes(i);
     [hdr,dotsEl,counter,hint].forEach(el=>el.classList.toggle('on-dark',dark));
+    document.documentElement.classList.toggle('past-hero',i!==0); // morphing header: links out, status pill in
+    document.dispatchEvent(new CustomEvent('jtl-panel',{detail:{i:i,prev:prevIdx}}));
   }
   dots[0].classList.add('active');
   [hdr,dotsEl,counter,hint].forEach(el=>el.classList.toggle('on-dark',darkPanels.includes(0))); // hero is dark from first paint

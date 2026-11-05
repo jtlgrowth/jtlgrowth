@@ -124,3 +124,34 @@
  .sg .sg-sbody .sg-bub{display:none}.sg .sg-sbody .sg-st small.sg-sm2{display:block}
  .sg .sg-lip{height:10px;margin:0 -6px}
 }
+
+/* ===== Morphing header (Owner Telegram 1213): hero = full nav; past the hero the links slide up and the status pill grows from the centre.
+   One direction, 360 ms ease-out, transform + opacity only; logo and Book CTA never move. ===== */
+html[data-hdr="A"] .nav-row{transition:transform .36s cubic-bezier(.16,.84,.3,1),opacity .36s cubic-bezier(.16,.84,.3,1),visibility 0s}
+html[data-hdr="A"].past-hero .nav-row{transform:translate3d(0,-14px,0);opacity:0;visibility:hidden;pointer-events:none;transition:transform .36s cubic-bezier(.16,.84,.3,1),opacity .36s cubic-bezier(.16,.84,.3,1),visibility 0s .36s}
+html[data-hdr="A"] #greetpill{opacity:0;transform:translateX(-50%) scale(.6);transform-origin:50% 0;pointer-events:none;max-width:min(560px,40vw);overflow:hidden;text-overflow:ellipsis;
+  transition:opacity .36s cubic-bezier(.16,.84,.3,1),transform .36s cubic-bezier(.16,.84,.3,1),background .3s}
+html[data-hdr="A"].past-hero #greetpill{opacity:1;transform:translateX(-50%) scale(1);pointer-events:auto}
+@media (max-width:860px),(prefers-reduced-motion:reduce){
+ html[data-hdr="A"] #greetpill{display:inline-flex!important;top:65px;max-width:calc(100vw - 16px);white-space:normal;text-align:center;justify-content:center;font-size:9px;letter-spacing:.06em;line-height:1.5;padding:7px 14px 8px;z-index:40}
+}
+@media (prefers-reduced-motion:reduce){
+ html[data-hdr="A"] .nav-row,html[data-hdr="A"].past-hero .nav-row,html[data-hdr="A"] #greetpill,html[data-hdr="A"].past-hero #greetpill{transition:none}
+ html[data-hdr="A"] #greetpill{transform:translateX(-50%)}
+}
+
+/* ===== Header proposals B and C (preview with ?hdr=B|C; A is the default) ===== */
+.hd-status,.hd-live{display:none}
+html[data-hdr="B"] #greetpill,html[data-hdr="C"] #greetpill{display:none!important}
+/* B Rail: the status line lives in the bottom rail next to the section dots */
+html[data-hdr="B"] .hd-status{display:inline-block;margin-left:10px;padding-left:18px;border-left:1px solid var(--line);font:400 9.5px 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);white-space:nowrap}
+html[data-hdr="B"] #dots.on-dark .hd-status{color:rgba(228,228,228,.7);border-color:rgba(228,228,228,.2)}
+/* C Live dot: chip after the logo, sentence on hover / focus / tap; the header leaves on the way down and returns on the way up */
+html[data-hdr="C"] .hd-live{display:inline-flex;align-items:center;position:relative;margin-left:18px;gap:8px;padding:6px 10px;border:1px solid rgba(226,226,226,.28);border-radius:999px;font:400 10px/1 'Space Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#E2E2E2;background:rgba(16,16,16,.55);cursor:default;outline-offset:3px}
+html[data-hdr="C"] .hd-live i{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.14),0 0 10px rgba(255,255,255,.6)}
+html[data-hdr="C"] .hd-tip{position:absolute;left:0;top:calc(100% + 10px);width:max-content;max-width:min(360px,calc(100vw - 32px));padding:10px 14px;border-radius:10px;background:#111;border:1px solid rgba(226,226,226,.2);color:#EEE;font:700 10px/1.5 'Space Mono',monospace;letter-spacing:.16em;white-space:normal;opacity:0;transform:translate3d(0,-6px,0);pointer-events:none;transition:opacity .3s cubic-bezier(.16,.84,.3,1),transform .3s cubic-bezier(.16,.84,.3,1)}
+html[data-hdr="C"] .hd-live:hover .hd-tip,html[data-hdr="C"] .hd-live:focus .hd-tip,html[data-hdr="C"] .hd-live:focus-within .hd-tip{opacity:1;transform:none}
+html[data-hdr="C"] #hdr{transition:transform .36s cubic-bezier(.16,.84,.3,1)}
+html[data-hdr="C"].hdr-hide #hdr{transform:translate3d(0,-100%,0)}
+@media (max-width:480px){html[data-hdr="C"] .hd-live{position:static}html[data-hdr="C"] .hd-tip{position:fixed;left:16px;right:16px;top:70px;width:auto;max-width:none}html[data-hdr="C"] .hd-live{margin-left:8px;padding:8px;gap:0}html[data-hdr="C"] .hd-live b{display:none}}
+@media (prefers-reduced-motion:reduce){html[data-hdr="C"] #hdr,html[data-hdr="C"] .hd-tip{transition:none}}

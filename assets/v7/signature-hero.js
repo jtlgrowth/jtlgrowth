@@ -99,3 +99,49 @@
     setTimeout(h, 5000);
   }
 })();
+
+/* Morphing header: html.past-hero (set by setUI on the filmstrip, here for the stacked/static mode) swaps the nav links for the status pill */
+(function () {
+  var H = document.documentElement, P = document.getElementById('p1');
+  if (!P) return;
+  function stat() { return matchMedia('(max-width:860px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function upd() { if (stat()) H.classList.toggle('past-hero', (window.pageYOffset || 0) > P.offsetHeight * 0.5); }
+  addEventListener('scroll', upd, { passive: true });
+  addEventListener('resize', function () { if (stat()) upd(); });
+  upd();
+})();
+
+/* Header proposals B (status in the bottom rail) and C (live dot chip + smart header). Default A needs none of this. */
+(function () {
+  var H = document.documentElement, v = H.getAttribute('data-hdr');
+  if (v !== 'B' && v !== 'C') return;
+  function greet() {
+    var d = new Date(), h = d.getHours(), t = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    if (h < 5) return 'Up late \u00b7 ' + t + ' \u00b7 so are our agents';
+    return (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ' \u00b7 ' + t + ' \u00b7 our agents are already working';
+  }
+  var el;
+  if (v === 'B') {
+    el = document.createElement('span'); el.className = 'hd-status'; el.setAttribute('aria-hidden', 'true');
+    var dots = document.getElementById('dots'); if (!dots) return; dots.appendChild(el);
+  } else {
+    el = document.createElement('span'); el.className = 'hd-live'; el.tabIndex = 0; el.setAttribute('role', 'status');
+    el.innerHTML = '<i aria-hidden="true"></i><b>Agents working</b><span class="hd-tip"></span>';
+    var lg = document.querySelector('#hdr .logo'); lg.parentNode.insertBefore(el, lg.nextSibling);
+  }
+  var tip = el.querySelector('.hd-tip');
+  function put() { var g = greet(); if (tip) { tip.textContent = g; el.setAttribute('aria-label', 'Agents working. ' + g); } else el.textContent = g; }
+  put(); setInterval(put, 30000);
+  if (v === 'C') {
+    var lastY = 0;
+    function hide(on) { H.classList.toggle('hdr-hide', on); }
+    document.addEventListener('jtl-panel', function (e) { var d = e.detail; hide(d.i !== 0 && d.i > d.prev); });
+    function stat() { return matchMedia('(max-width:860px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    addEventListener('scroll', function () {
+      if (!stat()) return; var y = window.pageYOffset || 0, P = document.getElementById('p1');
+      hide(y > P.offsetHeight * 0.5 && y > lastY); lastY = y;
+    }, { passive: true });
+    addEventListener('mousemove', function (e) { if (e.clientY < 70) hide(false); }, { passive: true });
+    el.addEventListener('click', function () { el.focus(); });
+  }
+})();
