@@ -105,7 +105,7 @@
   var H = document.documentElement, P = document.getElementById('p1');
   if (!P) return;
   function stat() { return matchMedia('(max-width:860px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches; }
-  function upd() { if (stat()) H.classList.toggle('past-hero', (window.pageYOffset || 0) > P.offsetHeight * 0.5); }
+  function upd() { if (stat()) H.classList.toggle('past-hero', (window.pageYOffset || 0) > P.offsetHeight - innerHeight * 0.4); }
   addEventListener('scroll', upd, { passive: true });
   addEventListener('resize', function () { if (stat()) upd(); });
   upd();
@@ -144,4 +144,23 @@
     addEventListener('mousemove', function (e) { if (e.clientY < 70) hide(false); }, { passive: true });
     el.addEventListener('click', function () { el.focus(); });
   }
+})();
+
+/* Stacked (phone / reduced-motion) mode: the panel in view comes from the real scroll position, so the Island pill label and
+   __goTo follow what is on screen instead of the filmstrip loop, which does not move the page here. */
+(function () {
+  var panels = [].slice.call(document.querySelectorAll('.panel:not(.panel-clone)')), orig = window.__goTo;
+  function stat() { return matchMedia('(max-width:860px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  window.__goTo = function (i) {
+    if (!stat()) { if (orig) orig(i); return; }
+    var p = panels[Math.max(0, Math.min(panels.length - 1, i))];
+    if (p) p.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+  function pos() {
+    if (!stat()) return;
+    var m = innerHeight * 0.4, k = 0;
+    panels.forEach(function (p, i) { var r = p.getBoundingClientRect(); if (r.top <= m && r.bottom > m) k = i; });
+    window.__xu = k;
+  }
+  addEventListener('scroll', pos, { passive: true }); addEventListener('resize', pos); pos();
 })();

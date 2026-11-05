@@ -69,8 +69,12 @@
   });
 
   /* toast */
+  /* the toast never stacks on the cookie banner: it waits (checks once a second) until the banner is answered or gone */
+  var tWait = 0;
+  function consentOpen() { var c = D.getElementById("jtl-consent"); return !!(c && !c.hidden && c.getClientRects().length); }
   function toastOnce() {
     if (shut("toast") || D.querySelector(".wp-toast")) return;
+    if (consentOpen()) { if (!tWait) tWait = setTimeout(function () { tWait = 0; toastOnce(); }, 1000); return; }
     var t = el('<aside class="wp-toast" role="dialog" aria-label="See our work">' +
       '<img src="/work/demos/brain-poster.webp" alt="" width="1440" height="900">' +
       '<div><small>Our work</small><b>Want to see it running?</b><p>Live sites, apps and AI employees we built.</p>' +
