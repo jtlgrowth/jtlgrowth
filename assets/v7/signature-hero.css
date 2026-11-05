@@ -91,3 +91,13 @@
  #p1.sg .rv{opacity:1;transform:none}
  .sg .sg-bg{opacity:1}
 }
+/* nav on narrow phones: short CTA label so the logo, theme and menu keep clear gaps (checked at 360, 390, 430) */
+.nav-cta .nc-s{display:none}
+.nav-cta{white-space:nowrap}
+@media (max-width:480px){
+ .nav-cta .nc-l{display:none}.nav-cta .nc-s{display:inline}
+ header .logo{flex:none}
+ .hdr-right{gap:8px}
+ header .nav-cta,header.on-dark .nav-cta{padding:10px 12px}
+ .menu-btn,header.on-dark .menu-btn{padding:10px 10px}
+}
