@@ -39,7 +39,7 @@
       });
     }
     function layout() {
-      var W = H0.clientWidth, H = H0.clientHeight, tgt = H0.querySelector('.sg-card');
+      var W = H0.clientWidth, H = H0.clientHeight, tgt = H0.querySelector('.sg-tgt');
       if (!W || !H || !tgt || !tgt.offsetWidth) return false;
       [].forEach.call(svg.querySelectorAll('*'), function (n) { n.remove(); });
       P = { m: [], p: [], f: [] };

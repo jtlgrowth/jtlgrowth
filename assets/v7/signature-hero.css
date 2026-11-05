@@ -101,3 +101,26 @@
  header .nav-cta,header.on-dark .nav-cta{padding:10px 12px}
  .menu-btn,header.on-dark .menu-btn{padding:10px 10px}
 }
+/* ===== Owner direction 2026-11-05 (Telegram 1201): the workflow runs on the laptop screen, not a glass card ===== */
+.sg .sg-laptop{width:100%;max-width:700px;justify-self:start}
+.sg .sg-lid{position:relative;background:#0b0b0b;border:1px solid rgba(255,255,255,.12);border-radius:18px 18px 6px 6px;padding:14px 14px 18px;box-shadow:0 40px 90px -40px rgba(0,0,0,.9)}
+.sg .sg-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:14px;background:#0b0b0b;border-radius:0 0 8px 8px}
+.sg .sg-screen{aspect-ratio:16/10;background:#0e0e0e;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;font-family:'Space Mono',ui-monospace,monospace}
+.sg .sg-mb{height:26px;flex:none;background:#141414;border-bottom:1px solid rgba(226,226,226,.1);display:flex;align-items:center;gap:14px;padding:0 12px;font-size:11px;color:#c4c4c4}
+.sg .sg-mb .sg-sp{flex:1}
+.sg .sg-sbody{flex:1;padding:16px 24px;display:flex;flex-direction:column;justify-content:center}
+.sg .sg-sbody .sg-ch{padding-bottom:12px;margin-bottom:16px}
+.sg .sg-sbody .sg-wf{gap:20px}
+.sg .sg-lip{height:14px;background:#151515;border-radius:0 0 14px 14px;border-top:1px solid #262626;margin:0 -10px}
+.sg .sg-st small.sg-sm2{display:none}
+@media (max-width:860px){
+ .sg .sg-laptop{order:2}
+ .sg .sg-lid{padding:8px 8px 10px;border-radius:12px 12px 4px 4px}.sg .sg-notch{width:64px;height:8px}
+ .sg .sg-mb{height:20px;font-size:9.5px;gap:10px;padding:0 8px}
+ .sg .sg-sbody{padding:8px 14px}.sg .sg-sbody .sg-ch{padding-bottom:6px;margin-bottom:8px}.sg .sg-sbody .sg-wf{gap:9px}
+ .sg .sg-sbody .sg-ic{width:30px;height:30px}.sg .sg-sbody .sg-ic svg{width:15px;height:15px}
+ .sg .sg-sbody .sg-wf::before,.sg .sg-sbody .sg-rail{left:14.5px;top:15px}.sg .sg-sbody .sg-rail{height:calc(100% - 30px)}
+ .sg .sg-sbody .sg-st{gap:12px;align-items:center}.sg .sg-sbody .sg-st b{font-size:13px}.sg .sg-sbody .sg-st small{font-size:10px;margin-top:1px}
+ .sg .sg-sbody .sg-bub{display:none}.sg .sg-sbody .sg-st small.sg-sm2{display:block}
+ .sg .sg-lip{height:10px;margin:0 -6px}
+}
