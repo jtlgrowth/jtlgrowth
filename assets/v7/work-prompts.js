@@ -57,7 +57,7 @@
   /* chooser: above the "ask Venice" hint so its arrow keeps its path; the loop's hero
      clone (#p1clone, aria-hidden) gets the same pills, out of the tab order, so the wrap stays seamless */
   ["#p1", "#p1clone"].forEach(function (id) {
-    var copy = D.querySelector(id + " .kb-copy");
+    var copy = D.querySelector(id + " .sg-copy");
     if (!copy) return;
     var nav = el('<nav class="wp-choose" aria-label="Where to start"><p class="wp-choose-k">Not ready for a call?</p><div class="wp-choose-row">' +
       '<a href="' + WORK + '">See what we\'ve built ' + NE + '</a>' +

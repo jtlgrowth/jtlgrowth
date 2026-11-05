@@ -1,0 +1,93 @@
+/* JTL Signature hero (Owner pick pk-1388, Variant A, bg1 "Routed lines"). Preview source:
+   HQ ops/runs/jtl-signature-2026-11-05/. Everything is namespaced sg-* and lives on #p1 / #p1clone.
+   The hero is a constant-dark panel in both themes (like the globe): ground = --bg-globe. */
+#p1.sg,#p1clone.sg{--sg-bg:var(--bg-globe,#101010);--sg-ink:#f5f5f5;--sg-mute:#adadad;--sg-line:rgba(255,255,255,.16);--sg-pad:max(18px,5vw);
+  background:var(--sg-bg);color:var(--sg-ink);font-family:'Archivo',system-ui,sans-serif}
+#p1.sg *,#p1clone.sg *{-webkit-font-smoothing:antialiased}
+.sg .sg-grain{position:absolute;inset:0;pointer-events:none;opacity:.5;background:radial-gradient(1200px 700px at 50% 50%,transparent 40%,rgba(0,0,0,.55) 100%)}
+/* routed-lines background: traces are static SVG, pulses move by transform + opacity only */
+.sg .sg-bg{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1.4s ease .1s}
+.sg.sg-go .sg-bg{opacity:1}
+.sg .sg-bg svg{position:absolute;inset:0;width:100%;height:100%}
+.sg .t1,.sg .t2,.sg .t3{fill:none;stroke:#fff;stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.sg .t1{stroke-opacity:.42}.sg .t2{stroke-opacity:.2}.sg .t3{stroke-opacity:.15}
+.sg .vi{fill:var(--sg-bg);stroke:#fff;stroke-opacity:.5;vector-effect:non-scaling-stroke}
+.sg .pl{position:absolute;left:0;top:0;border-radius:50%;background:#fff;will-change:transform,opacity;opacity:0;box-shadow:0 0 12px 2px rgba(255,255,255,.5)}
+/* reveal: reuses the site's .rv; held until the draw intro hands over (JS adds .sg-go) */
+#p1.sg:not(.sg-go) .rv{opacity:0;transform:translateY(36px)}
+/* layout */
+.sg .sg-stage{position:relative;z-index:2;width:min(1380px,90vw);height:100%;margin:0 auto;padding-top:72px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:clamp(40px,5vw,80px);align-items:center}
+.sg .sg-copy{display:flex;flex-direction:column;gap:26px;text-align:left;align-items:flex-start}
+.sg .sg-kick{font:400 12px/1.2 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#cfcfcf}
+.sg .sg-h1{font-family:Fraunces,Georgia,serif;font-weight:650;line-height:1.02;letter-spacing:-.015em;color:#fff;font-size:clamp(46px,6.1vw,92px)}
+.sg .sg-h1 .l{display:block}
+.sg .sg-h1 em{font-style:italic;display:block;color:#fff}
+.sg .sg-lead{font-size:clamp(17px,1.35vw,20px);line-height:1.55;color:#d6d6d6;max-width:34ch;font-weight:400;margin:0}
+.sg .sg-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.sg .sg-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:#fff;color:#0a0a0a;font:600 16px/1 Archivo,sans-serif;letter-spacing:.005em;text-decoration:none;border:1px solid #fff;box-shadow:0 10px 40px rgba(255,255,255,.14);transition:transform .25s ease,box-shadow .25s ease}
+.sg .sg-btn:hover{transform:translateY(-1px);box-shadow:0 12px 48px rgba(255,255,255,.28)}
+.sg .sg-alt{font:400 13px/1.3 'Space Mono',ui-monospace,monospace;letter-spacing:.04em;color:#cfcfcf;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding:6px 0}
+.sg .sg-alt:hover{color:#fff;border-color:#fff}
+.sg .sg-btn:focus-visible,.sg .sg-alt:focus-visible{outline:2px solid #fff;outline-offset:3px}
+/* the "Not ready for a call?" chooser (work-prompts.js) on the black ground, left aligned */
+.sg .wp-choose{margin:2px 0 0}
+.sg .wp-choose-k{color:#adadad}
+.sg .wp-choose-row{justify-content:flex-start}
+.sg .wp-choose-row a{color:#f0f0f0;border-color:rgba(255,255,255,.28);background:rgba(16,16,16,.5)}
+.sg .wp-choose-row a:hover{border-color:#fff}
+/* frosted glass card */
+.sg .sg-card{position:relative;border-radius:26px;padding:26px 28px 24px;border:1px solid var(--sg-line);
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02)),rgba(8,8,8,.58);
+  -webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2);
+  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.2)}
+.sg .sg-wfw{transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+#p1.sg .sg-wfw.rst{opacity:0}
+.sg .sg-ch{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid rgba(255,255,255,.12)}
+.sg .sg-ch .sg-kick{color:#d0d0d0}
+.sg .sg-cnt{font:400 12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;color:var(--sg-mute);text-transform:uppercase;font-variant-numeric:tabular-nums}
+.sg .sg-wf{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:30px}
+.sg .sg-wf::before,.sg .sg-rail{content:"";position:absolute;left:21.5px;top:22px;bottom:22px;width:1px;background:rgba(255,255,255,.2)}
+.sg .sg-rail{background:#fff;bottom:auto;height:calc(100% - 44px);transform:scaleY(0);transform-origin:50% 0;transition:transform 1.4s cubic-bezier(.45,.05,.2,1)}
+.sg .sg-wf[data-n="1"] .sg-rail{transform:scaleY(.5)}.sg .sg-wf[data-n="2"] .sg-rail,.sg .sg-wf[data-n="3"] .sg-rail{transform:scaleY(1)}
+.sg .sg-st{position:relative;display:flex;gap:16px;align-items:flex-start;margin:0}
+.sg .sg-ic{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.26);color:#cfcfcf;background:rgba(10,10,10,.5);transition:background .5s,color .5s,border-color .5s,box-shadow .6s}
+.sg .sg-ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sg .sg-tx{opacity:.5;transition:opacity .6s}
+.sg .sg-st b{display:block;font:600 17px/1.25 Archivo,sans-serif;color:#fff}
+.sg .sg-st small{display:block;font:400 12px/1.4 'Space Mono',ui-monospace,monospace;letter-spacing:.06em;color:#c9c9c9;margin-top:4px}
+.sg .sg-st.on .sg-tx,.sg .sg-st.done .sg-tx{opacity:1}
+.sg .sg-st.on .sg-ic{border-color:#fff;color:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.12),0 0 28px rgba(255,255,255,.4)}
+.sg .sg-st.done .sg-ic{background:#fff;color:#0a0a0a;border-color:#fff;box-shadow:none}
+.sg .sg-bub{opacity:0;transition:opacity .5s ease;margin-top:10px;padding:12px 14px;border-radius:14px 14px 14px 4px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);font-size:15px;line-height:1.5;color:#f0f0f0;max-width:34ch}
+.sg .sg-wd{display:inline-block;opacity:0;transform:translate3d(0,4px,0);transition:opacity .45s ease,transform .45s ease}
+.sg .sg-st.on .sg-wd,.sg .sg-st.done .sg-wd{opacity:1;transform:none}
+.sg .sg-st.on .sg-bub,.sg .sg-st.done .sg-bub{opacity:1}
+.sg .sg-foot{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)}
+.sg .sg-foot .sg-kick{color:var(--sg-mute)}
+/* clone: the loop copy is a still frame, the workflow shown complete */
+#p1clone.sg .sg-bg{opacity:1;transition:none}
+#p1clone.sg .rv,#p1clone.sg .sg-wfw{transition:none}
+/* the site's static mode (phone width or reduced motion) stacks panels: keep the hero one screen tall */
+@media (max-width:860px),(prefers-reduced-motion:reduce){#p1.sg,#p1clone.sg{height:100svh;min-height:600px;padding:0}}
+@media (max-width:860px){
+ .sg .sg-stage{grid-template-columns:1fr;grid-auto-rows:min-content;align-content:center;gap:22px;padding-top:56px;padding-bottom:20px;width:calc(100% - 2*var(--sg-pad))}
+ .sg .sg-copy{order:1;gap:16px;align-items:stretch}.sg .sg-card{order:2}
+ .sg .sg-h1{font-size:clamp(44px,12vw,56px)}
+ .sg .sg-lead{font-size:17px;max-width:none}
+ .sg .sg-ctas{gap:10px 20px}.sg .sg-btn{width:100%}
+ .sg .sg-card{border-radius:20px;padding:18px 18px 14px}
+ .sg .sg-ch{padding-bottom:12px;margin-bottom:14px}
+ .sg .sg-wf{gap:14px}
+ .sg .sg-ic{width:38px;height:38px}.sg .sg-wf::before,.sg .sg-rail{left:18.5px;top:19px}.sg .sg-rail{height:calc(100% - 38px)}
+ .sg .sg-st b{font-size:16px}.sg .sg-bub{font-size:14px;margin-top:6px;padding:9px 12px}
+ .sg .sg-foot{display:none}
+ .sg .wp-choose{display:none}
+}
+@media (max-width:860px) and (max-height:700px){.sg .sg-lead{display:none}}
+/* a short desktop window: drop the chooser first, it is the least important thing on the screen */
+@media (min-width:861px) and (max-height:760px){.sg .wp-choose{display:none}}
+@media (prefers-reduced-motion:reduce){
+ .sg .sg-bg,.sg .sg-wfw,.sg .sg-ic,.sg .sg-tx,.sg .sg-rail,.sg .sg-bub,.sg .sg-wd{transition:none}
+ #p1.sg .rv{opacity:1;transform:none}
+ .sg .sg-bg{opacity:1}
+}
