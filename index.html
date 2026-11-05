@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-hdr="A">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,8 +51,6 @@ html.bd-on a.logo .lmark{visibility:hidden}
 <script src="/assets/attribution.js"></script>
 <script src="/assets/tracking.js"></script>
 <script>
-/* header proposal preview: ?hdr=A|B|C, default A (strip this line to freeze A) */
-try{var hm=/[?&]hdr=([ABC])\b/.exec(location.search);document.documentElement.setAttribute('data-hdr',hm?hm[1]:'A')}catch(e){document.documentElement.setAttribute('data-hdr','A')}
 /* theme boot — pre-paint, no flash */
 (function(){try{var t=localStorage.getItem('jtl-theme');
 if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
