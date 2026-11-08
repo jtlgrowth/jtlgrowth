@@ -1,0 +1,135 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours live in :root below (same tokens and layout as the other app pages, light and dark);
+     the contact address lives in SETTINGS.
+     settings: host-ok=jtlgrowth.com
+     settings: host-ok=privacy.gov.ph
+     Every line below matches the Alaala app as of 2026-11-09: SwiftData on the iPhone, on-device transcription,
+     optional Apple online transcription off by default, no network code of our own. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alaala privacy policy</title>
+<meta name="description" content="Alaala keeps your journal on your iPhone only. Free, no account, no server, no tracking. What the app stores, where, and how to delete it.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/alaala/privacy/">
+<link rel="icon" href="../icon.png">
+<style>
+/* PROJECT SETTINGS: Alaala pages (same layout as Alaala), light and dark */
+:root {
+  --bg: #f2f3f5;
+  --bg-2: #dcdee2;
+  --surface: rgba(255,255,255,.72);
+  --fg: #17140f;
+  --muted: #6c665b;
+  --line: #d8d3c8;
+  --accent: #44474d;
+  --focus-ring: #17140f;
+  --font-display: ui-sans-serif, -apple-system, "SF Pro Display", system-ui, sans-serif;
+  --font-body: -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --radius: 18px;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #262a31;
+    --bg-2: #08090a;
+    --surface: rgba(255,255,255,.06);
+    --fg: #f4efe6;
+    --muted: #a39d92;
+    --line: #2a2a2d;
+    --accent: #d5d9e0;
+    --focus-ring: #f4efe6;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--bg-2); }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; background: linear-gradient(180deg, var(--bg), var(--bg-2)); color: var(--fg); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--fg); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 0; }
+nav .home { display: flex; align-items: center; gap: 10px; font: 600 15px/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+nav .home img { width: 32px; height: 32px; border-radius: 8px; }
+nav .links { display: flex; gap: 8px; }
+nav .links a { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font-size: 14px; text-decoration: none; }
+nav .links a[aria-current] { border-color: var(--accent); }
+h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }
+h1 { margin: 28px 0 6px; font: 600 clamp(30px, 6.5vw, 42px)/1.12 var(--font-display); letter-spacing: -.01em; }
+.meta { margin: 0 0 22px; color: var(--muted); font-size: 15px; }
+.lead { padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+h2 { margin: 38px 0 10px; font: 600 13px/1.3 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.group { border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.row { padding: 14px 18px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.row b { display: block; font-weight: 600; }
+.row span { color: var(--muted); }
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Alaala">
+    <a class="home" href="../support/"><img src="../icon.png" alt="" width="32" height="32">Alaala</a>
+    <span class="links"><a href="./" aria-current="page">Privacy</a><a href="../support/">Support</a></span>
+  </nav>
+  <main>
+    <h1>Alaala privacy policy</h1>
+    <p class="meta">Effective 9 November 2026 · JTL Growth, Philippines · <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a></p>
+    <p class="lead"><b>The short version.</b> Alaala keeps your journal on your iPhone only. It is free, with no account, no server, no ads and no tracking. We never see, receive or hold your notes, photos or voice recordings, and the app works with no internet at all.</p>
+
+    <h2>What the app stores, and where</h2>
+    <div class="group">
+      <div class="row"><b>Your notes</b><span>The text, the time and the notebook they belong to. Kept in the app's storage (SwiftData) on this iPhone.</span></div>
+      <div class="row"><b>Your photos</b><span>Photos you pick from your library or take with the camera. Alaala keeps a copy inside the app; the original stays in Photos.</span></div>
+      <div class="row"><b>Your voice notes</b><span>Recordings you make in Alaala, and the text of what was said, which you can edit. Kept on this iPhone.</span></div>
+      <div class="row"><b>Your settings</b><span>For example your chosen transcription language. Kept on this iPhone.</span></div>
+    </div>
+    <p>Nothing else: no contacts, no location, no usage data. Alaala has no analytics, no crash reporting service and no advertising code.</p>
+
+    <h2>Voice notes and transcription</h2>
+    <p>The microphone turns on only when you tap record. To turn a recording into text, Alaala uses Apple's Speech framework, and the transcription happens on your iPhone: the audio does not leave it.</p>
+    <p>There is one optional setting, "Allow Apple's online transcription". It is off by default, and you can turn it on or off again in the record screen. Only if you turn it on, and only when on-device transcription is not available for your language, the recording is sent to Apple's speech service to be converted to text. That audio goes to Apple, never to us, and Apple handles it under its own privacy policy.</p>
+
+    <h2>Photos and camera</h2>
+    <p>The camera opens only when you add a photo with it. The photo picker shows only what you choose. Alaala keeps a copy of the photos you choose inside the app.</p>
+
+    <h2>Siri and Shortcuts</h2>
+    <p>Alaala offers shortcuts to count your notes, add a text note and open the app. They run on your iPhone and only when it is unlocked. Alaala sends nothing to us.</p>
+
+    <h2>What the app does not do</h2>
+    <ul>
+      <li>No account, sign-in, email or phone number.</li>
+      <li>No server: Alaala makes no network connections of its own.</li>
+      <li>No advertising, no ad IDs, no analytics or tracking.</li>
+      <li>No sale or sharing of personal data with anyone, because we never have it.</li>
+    </ul>
+
+    <h2>Backups</h2>
+    <p>Your journal is part of the normal app data on your iPhone, so Apple's iCloud or computer backup of your iPhone can include it, under your own Apple settings. We do not run a backup or sync of our own.</p>
+
+    <h2>Deleting your data</h2>
+    <p>Delete a note from its editor, or a notebook from the shelf; its photos and recordings are deleted with it. Deleting the Alaala app removes everything it stored on the iPhone.</p>
+
+    <h2>Children</h2>
+    <p>Alaala is a general journal and is not directed at children under 13.</p>
+
+    <h2>Your rights under the Data Privacy Act of 2012 (RA 10173)</h2>
+    <p>We hold nothing about you, so there is nothing for us to access, correct or erase: edit or delete anything inside the app. Questions or concerns: <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. You may also contact the National Privacy Commission (<a href="https://privacy.gov.ph">privacy.gov.ph</a>).</p>
+
+    <h2>The App Store</h2>
+    <p>Apple's App Store handles the download under its own privacy policy. Alaala is free and has no purchases. We receive only the standard, anonymous download reports Apple gives every developer.</p>
+
+    <h2>Changes</h2>
+    <p>If a future version ever needs anything to leave your phone (for example optional cloud storage), we will update this policy first and ask inside the app before it happens.</p>
+  </main>
+  <footer>Alaala is built and maintained by <a href="https://jtlgrowth.com/apps/">JTL Growth</a>. © 2026 · <a href="../support/">Support</a></footer>
+</div>
+<script>
+const SETTINGS = {"support_email": "support@jtlgrowth.com"};
+document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
+</script>
+</body>
+</html>
