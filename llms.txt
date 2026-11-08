@@ -45,3 +45,8 @@ Note: JTL Growth is an independent Philippine agency. It is not affiliated with 
   every indexed page (home, founder profile, Services, Products, Workshop, Work, Inbox
   Scout, The AI Employee, privacy policy), quoted close to verbatim, for crawlers and
   language models that don't execute JavaScript.
+
+## Guides
+- [Best AI Employee Setups for Small Businesses in 2027](https://jtlgrowth.com/best-ai-employee-setups-small-business-2027/)
+- [Best Lead Follow-Up Automation Tools for Service Businesses in 2027](https://jtlgrowth.com/best-lead-follow-up-automation-tools-service-businesses-2027/)
+- [Best CRM for Coaches and Small Agencies in 2027](https://jtlgrowth.com/best-crm-for-coaches-and-small-agencies-2027/)
