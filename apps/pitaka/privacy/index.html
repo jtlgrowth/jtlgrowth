@@ -43,7 +43,7 @@
 }
 * { box-sizing: border-box; }
 html { background: var(--bg-2); }
-body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, var(--bg), var(--bg-2)); color: var(--fg); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+body { margin: 0; min-height: 100vh; min-height: 100dvh; background: linear-gradient(180deg, var(--bg), var(--bg-2)); color: var(--fg); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
 a { color: var(--fg); text-underline-offset: 3px; }
 :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
 .wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
@@ -77,15 +77,26 @@ footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; }
   </nav>
   <main>
     <h1>Pitaka privacy policy</h1>
-    <p class="meta">Effective 23 October 2026 · JTL Growth, Philippines · <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a></p>
-    <p class="lead"><b>The short version.</b> Pitaka (on the App Store as "Pitaka: ID Wallet") keeps your ID details on your iPhone only. There is no account, no server, no ads and no tracking. We never see, receive or hold any of your IDs, and the app works with no internet at all.</p>
+    <p class="meta">Effective 11 November 2026 · JTL Growth, Philippines · <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a></p>
+    <p class="lead"><b>The short version.</b> Pitaka (on the App Store as "Pitaka: ID Wallet") keeps your ID details and your spend log on your iPhone only. There is no account, no server, no ads and no tracking. We never see, receive or hold any of your IDs or spends, and the app works with no internet at all.</p>
 
     <h2>What the app stores, and where</h2>
     <div class="group">
       <div class="row"><b>The ID details you save</b><span>For example the name, ID number, birthday, address and expiry on a PhilID, driver's license, passport, UMID, SSS, TIN, PRC, Pag-IBIG, PhilHealth or postal ID. Kept encrypted in the iPhone Keychain on this phone, readable only while the phone is unlocked. Used to show your IDs and to fill forms when you ask.</span></div>
+      <div class="row"><b>Your spend log (Gastos, from version 0.3)</b><span>The spends you type in, and the ones you choose to send from Apple Shortcuts: the amount and merchant of an Apple Pay tap, or the text of a bank, GCash or Maya alert. Pitaka keeps the amount, the merchant, the time, a category, the last 4 digits of the card when the alert shows them, and the text of the alert so it can be read again. One-time passwords, promos and money received are not logged. Kept in the app's storage on this phone. Used to show your spends and what is left until payday.</span></div>
       <div class="row"><b>Nothing else</b><span>No photos, no contacts, no location, no usage data. Pitaka has no analytics, no crash reporting service and no advertising code.</span></div>
     </div>
     <p>The Keychain items are marked "this device only", so they are not copied into iCloud Keychain or into iCloud or computer backups. A new phone starts empty: scan or type your IDs again.</p>
+    <p>The spend log is a file in the app's storage on this phone, locked by the phone's passcode like your other app data. Pitaka does not send it anywhere. If you back up your iPhone to iCloud or to a computer, iOS can include that file in your own backup, as it does for other apps.</p>
+
+    <h2>Gastos and Apple Shortcuts</h2>
+    <p>Gastos logs a spend by itself only when you set it up. You make the automation yourself in Apple's Shortcuts app: it hands Pitaka the amount and merchant of an Apple Pay tap, or the text of an alert from a sender you pick. Pitaka reads it on the phone and saves the spend. Pitaka cannot read your messages by itself, does not connect to any bank or e-wallet, and holds no account, card number, PIN or password. You can remove an automation in the Shortcuts app at any time.</p>
+
+    <h2>Suki Cart on the same iPhone</h2>
+    <p>Suki Cart is our grocery app. When both apps are on the same iPhone they share the spend log through storage on the phone that iOS gives to apps from one developer. A finished grocery trip in Suki Cart shows up in Gastos, and Suki Cart can show what is left until payday. Nothing leaves the phone for this.</p>
+
+    <h2>Checking for updates (from version 0.3)</h2>
+    <p>Pitaka asks you first: "Check for updates?". Only if you allow it, at most once a day, the app asks Apple's App Store lookup (itunes.apple.com) whether a newer version is out. The request names the app only: its App Store number and the country code "ph". It carries nothing about you, your IDs or your spends, no cookies and no identifier of ours. As with any internet request, Apple's server sees the IP address of your phone, and Apple handles that under its own privacy policy. We receive nothing. Turn it off at any time: the ••• menu, then "Update notice".</p>
 
     <h2>Scanning an ID</h2>
     <p>The camera opens only when you tap Scan. The text on the ID is read on your phone by Apple's own text reader (Vision). The photo is never uploaded and never kept: once the text is read, the image is let go. You can also pick one photo from your library; only that photo is read, and the original stays in your Photos. What the scan read is shown to you, and nothing is saved until you tap "Looks right, save".</p>
@@ -96,20 +107,21 @@ footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; }
     <h2>What the app does not do</h2>
     <ul>
       <li>No account, sign-in, email or phone number.</li>
-      <li>No server: Pitaka makes no network connections of its own.</li>
-      <li>No iCloud sync and no outside backup of your IDs.</li>
+      <li>No server of ours. The only internet request the app can make is the update check above, and only if you allow it.</li>
+      <li>No iCloud sync and no outside backup of your IDs. No sync of your spends.</li>
       <li>No advertising, no ad IDs, no analytics or tracking.</li>
       <li>No sale or sharing of personal data with anyone, because we never have it.</li>
     </ul>
 
     <h2>Deleting your data</h2>
     <p>Delete one ID from its page (the trash button), or delete everything at once: tap the ••• menu on the home screen, then "Where are my IDs kept?", then Delete all. Do this before you delete the app: iOS can keep Keychain items after an app is removed, and they would come back if Pitaka is installed again on the same phone.</p>
+    <p>Delete one spend from its page (Delete this spend). Deleting Pitaka removes the spend log from the phone, unless Suki Cart is also installed: the two apps share that file, so it stays until Suki Cart is deleted too.</p>
 
     <h2>Children</h2>
-    <p>Pitaka is a general utility for keeping your own IDs and is not directed at children under 13.</p>
+    <p>Pitaka is a general utility for keeping your own IDs and your own spends and is not directed at children under 13.</p>
 
     <h2>Your rights under the Data Privacy Act of 2012 (RA 10173)</h2>
-    <p>We hold nothing about you, so there is nothing for us to access, correct or erase: edit or delete any ID inside the app. Questions or concerns: <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. You may also contact the National Privacy Commission (<a href="https://privacy.gov.ph">privacy.gov.ph</a>).</p>
+    <p>We hold nothing about you, so there is nothing for us to access, correct or erase: edit or delete any ID or spend inside the app. Questions or concerns: <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. You may also contact the National Privacy Commission (<a href="https://privacy.gov.ph">privacy.gov.ph</a>).</p>
 
     <h2>The App Store</h2>
     <p>Apple's App Store handles the download under its own privacy policy. Pitaka is free and has no purchases. We receive only the standard, anonymous download reports Apple gives every developer.</p>
