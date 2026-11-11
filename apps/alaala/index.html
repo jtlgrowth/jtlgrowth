@@ -184,6 +184,11 @@ button, input, textarea { font: inherit; color: inherit; }
 .book.open.stamped .sheet .hint-in { opacity: 0; transition: opacity var(--motion-base); }
 .cover { position: absolute; inset: 0; z-index: 4; transform-origin: 0 50%; transform-style: preserve-3d; transition: transform var(--motion-page) var(--ease-page); cursor: pointer; border: 0; padding: 0; background: none; border-radius: 2px 10px 10px 2px; }
 .book.open .cover { transform: rotateY(-176deg); cursor: default; }
+/* WebKit paints a backface-hidden face's children through the flipped cover, so each side also hides itself at the half-turn */
+.cover .face { transition: visibility 0s linear .5s; }
+.cover .back { visibility: hidden; transition: visibility 0s linear .5s; }
+.book.open .cover .face { visibility: hidden; }
+.book.open .cover .back { visibility: visible; }
 .cover .face, .cover .back { position: absolute; inset: 0; border-radius: 2px 10px 10px 2px; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
 .cover .face { background: radial-gradient(circle at 30% 26%, var(--cov-tomato) 0 22%, transparent 48%), radial-gradient(circle at 74% 52%, var(--cov-mustard) 0 16%, transparent 40%), radial-gradient(circle at 34% 78%, var(--cov-navy) 0 14%, transparent 36%), var(--photo-a); box-shadow: var(--elev-raised); container-type: inline-size; }
 .cover .face::after { content: ""; position: absolute; inset: 0; background-image: var(--grain); opacity: .55; mix-blend-mode: multiply; }
@@ -392,6 +397,7 @@ footer .credits { display: block; margin-top: var(--space-2); font-size: 13px; o
   .day { min-height: 360px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .cover .face, .cover .back { transition: none; }
   html { scroll-behavior: auto; }
   .drift { display: none; }
   .book, .cover, .shot, .dropped, .bigstamp.in, .book .sheet .stamp { transition: none; animation: none; }
