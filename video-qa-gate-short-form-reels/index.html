@@ -1,0 +1,176 @@
+<!doctype html>
+<!-- DRAFT engineering article for owner review. Not in sitemap or llms.txt. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/attribution.js"></script>
+<script src="/assets/tracking.js"></script>
+<title>Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels · JTL Growth</title><meta name="robots" content="noindex">
+<meta name="description" content="How two reviewer catches on b-roll reels, a stutter and text over a face, became checks that run on every render.">
+<link rel="canonical" href="https://jtlgrowth.com/video-qa-gate-short-form-reels/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<meta property="og:title" content="Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels">
+<meta property="og:description" content="How two reviewer catches on b-roll reels, a stutter and text over a face, became checks that run on every render.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jtlgrowth.com/video-qa-gate-short-form-reels/">
+<meta property="og:image" content="https://jtlgrowth.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels",
+ "description": "How two reviewer catches on b-roll reels, a stutter and text over a face, became checks that run on every render.",
+ "mainEntityOfPage": "https://jtlgrowth.com/video-qa-gate-short-form-reels/",
+ "dateModified": "2026-11-11",
+ "author": {
+  "@type": "Person",
+  "name": "Jamz Jamorol"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "JTL Growth",
+  "url": "https://jtlgrowth.com/"
+ }
+}
+</script>
+
+<style>
+/* PROJECT SETTINGS: venice-base role names on top of the JTL mono palette (black, white, Apple gray #E2E2E2).
+   Change a value here, never in the rules below. */
+:root {
+  --ink: #121212; --ink-2: #262626; --graphite: #4A4A4A; --cement: #E2E2E2; --mist: #F4F4F4; --white: #FFFFFF; --line-strong: #C6C6C6;
+  --nav-glass: rgba(255, 255, 255, .86); --shade: rgba(18, 18, 18, .16); --shade-deep: rgba(18, 18, 18, .30);
+  --on-ink-muted: rgba(255, 255, 255, .74); --on-ink-line: rgba(255, 255, 255, .16);
+  /* roles (venice-base names) */
+  --bg: var(--white); --surface: var(--mist); --fg: var(--ink); --muted: var(--graphite);
+  --border: var(--cement); --border-strong: var(--line-strong);
+  --accent: var(--ink); --accent-on: var(--white); --accent-hover: var(--ink-2);
+  --success: var(--ink); --warn: var(--ink); --danger: var(--ink);
+  /* type: Apple rounded at 500 with negative tracking; "JTL Rounded" is the inlined Nunito fallback for Windows and Android */
+  --font-display: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "JTL Rounded", system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-body: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "JTL Rounded", system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --weight: 500; --tracking: -0.022em; --tracking-display: -0.028em;
+  --t-h1: clamp(34px, 4.2vw, 62px); --t-h2: clamp(30px, 3.3vw, 48px); --t-h3: 21px; --t-lead: clamp(18px, 1.4vw, 21px);
+  --t-body: 18px; --t-small: 15px; --t-label: 12px;
+  --radius-sm: 10px; --radius-md: 14px; --radius-lg: 28px; --radius-pill: 999px;
+  --container-max: 1240px; --gutter: clamp(16px, 4vw, 48px); --nav-h: 64px; --section-y: clamp(72px, 11vh, 128px);
+  --shadow-win: 0 30px 60px -34px var(--shade-deep), 0 2px 6px -2px var(--shade);
+  --motion-base: 220ms; --motion-in: 640ms; --ease: cubic-bezier(.2, .7, .2, 1);
+}
+/* END SETTINGS */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:var(--weight) var(--t-body)/1.55 var(--font-body);letter-spacing:var(--tracking);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+b{font-weight:600}
+.ln{display:block;text-wrap:balance}
+.wrap{width:min(var(--container-max),100% - 2 * var(--gutter));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;z-index:50;background:var(--ink);color:var(--white);padding:10px 14px;border-radius:var(--radius-sm)}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;height:var(--nav-h);background:var(--nav-glass);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--border)}
+.nav-in{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:17px;letter-spacing:-.02em}
+.brand .mark{width:36px;height:auto}
+.nav-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+.nav-links a{text-decoration:none;transition:color var(--motion-base) var(--ease)}
+.nav-links a:hover{color:var(--fg)}
+
+/* buttons: colour changes on hover, nothing moves */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border:1px solid var(--accent);border-radius:var(--radius-pill);font:600 16px/1.1 var(--font-body);letter-spacing:-.01em;text-decoration:none;text-align:center;transition:background-color var(--motion-base) var(--ease),border-color var(--motion-base) var(--ease),color var(--motion-base) var(--ease)}
+.btn svg{width:18px;height:18px;flex:0 0 18px}
+.btn-solid{background:var(--accent);color:var(--accent-on)}
+.btn-solid:hover{background:var(--accent-hover)}
+.btn-ghost{background:transparent;color:var(--fg);border-color:var(--border-strong)}
+.btn-ghost:hover{border-color:var(--fg)}
+.btn-lg{min-height:58px;padding:0 28px;font-size:18px}
+.nav .btn{min-height:40px;padding:0 18px;font-size:15px}
+
+
+.foot{padding:28px 0 40px;border-top:1px solid var(--border);font-size:14px;color:var(--muted)}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
+.foot nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+.foot a{text-decoration:none;transition:color var(--motion-base) var(--ease)}
+.foot a:hover{color:var(--fg)}
+
+.art{padding-block:clamp(40px,7vh,80px)}
+.art .col{max-width:760px}
+.art h1{font:600 var(--t-h1)/1.06 var(--font-display);letter-spacing:var(--tracking-display);text-wrap:balance;margin-top:14px}
+.answer{margin-top:24px;padding:24px 26px;border:2px solid var(--ink);border-radius:var(--radius-lg);font-size:var(--t-lead);line-height:1.5}
+.art p{margin-top:16px;color:var(--muted);text-wrap:pretty}
+.art .answer p,.art .answer{color:var(--fg)}
+.art h2{margin-top:56px;font:600 var(--t-h2)/1.1 var(--font-display);letter-spacing:var(--tracking-display)}
+.art h3{margin-top:36px;font:600 var(--t-h3)/1.25 var(--font-display);letter-spacing:-.02em}
+.tbl{margin-top:28px;overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-md)}
+.tbl table{border-collapse:collapse;width:100%;min-width:560px;font-size:15.5px}
+.tbl th,.tbl td{text-align:left;padding:12px 14px;border-top:1px solid var(--border);vertical-align:top}
+.tbl th{border-top:0;background:var(--surface);font:600 var(--t-label)/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tbl td:first-child{font-weight:600}
+.faq details{border-bottom:1px solid var(--border);padding:16px 0}
+.faq summary{cursor:pointer;font-weight:600;font-size:19px}
+.faq details p{margin-top:10px}
+.cta{margin-top:56px;padding:32px;border-radius:var(--radius-lg);background:var(--ink);color:var(--white)}
+.cta p{color:var(--on-ink-muted);margin:0 0 20px;font-size:var(--t-lead)}
+.cta .btn{background:var(--white);color:var(--ink);border-color:var(--white)}
+.jtl-row td{background:var(--surface)}
+@media(max-width:640px){.nav-links{display:none}.cta .btn{width:100%;margin-top:8px}}
+
+
+/* tap targets: 44px minimum hit area on phone (ship-scan tap_target_small) */
+.nav .brand,.nav .btn,.foot a{min-height:44px;display:inline-flex;align-items:center}
+.foot a{min-width:44px}
+.eyebrow{font:600 var(--t-label)/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.art ul.pts{margin-top:14px;padding-left:22px;list-style:disc;color:var(--muted)}
+.art ul.pts li{margin-top:8px}
+.art a{text-decoration:underline;text-underline-offset:3px}
+.src{margin-top:16px;font-size:var(--t-small);color:var(--muted)}
+.src li{margin-top:10px;overflow-wrap:anywhere}
+.cta a.btn{text-decoration:none}
+</style>
+</head>
+<body>
+<header class="nav" id="top"><div class="wrap nav-in"><a class="brand" href="https://jtlgrowth.com/" aria-label="JTL Growth, back to top"><svg class="mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg><span>JTL Growth</span></a><nav class="nav-links" aria-label="Site"><a href="https://jtlgrowth.com/ai-employee/">AI employee</a><a href="https://jtlgrowth.com/services/">Services</a><a href="https://jtlgrowth.com/quote/">Quote</a></nav><a class="btn btn-solid" href="https://book.jtlgrowth.com/" target="_blank" rel="noopener">Book a call</a></div></header>
+<main class="art"><div class="wrap"><div class="col"><p class="eyebrow">Engineering · November 2026</p><h1>Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels</h1>
+<div class="answer">We make short-form b-roll reels for a client's clinic. Two reviewers caught problems that our own checks missed. We turned each catch into a script that runs on every render. The same mistake can no longer reach a reviewer twice.</div>
+<h2>The problem</h2>
+<p>A reel is a few seconds of footage with text on top. We build many of them, fast. Our first review step was simple: look at three still frames per reel, then send it.</p>
+<p>That step passed a draft that looked fine in stills. In motion it stuttered. Our owner watched it and said it seemed to "stop, stop". He was right.</p>
+<h2>What broke</h2>
+<p>The source clip held about 140 duplicated frames. Our short slices landed on them, so the picture froze for a beat, then moved. The same shot also showed up in more than one reel. Stills cannot show either problem. A still is one frame. A stutter is a pattern over time.</p>
+<h2>What we tried</h2>
+<p>First, we promised to watch every render before sending. That is a habit, not a fix. Habits fail on busy days, so we wrote a gate.</p>
+<p>The gate reads each video with ffmpeg and runs these checks:</p>
+<ul class="pts"><li><b>Duplicate frames.</b> The mpdecimate filter drops frames that match the one before. More than two in a row fails the video, and the gate prints the times so we can move the cut.</li>
+<li><b>Held stills.</b> Any frame held longer than 1.5 seconds fails.</li>
+<li><b>Black frames.</b> The blackdetect filter flags any black run of 0.1 seconds or more.</li>
+<li><b>Shot reuse.</b> We sample each video at 2 frames a second, shrink the frames, and compare them on a 4 by 4 grid of tiles. A different text overlay on a few tiles does not hide a match. A matching run of one second or more fails the batch.</li>
+<li><b>Contact sheet.</b> The gate also builds a 6 frames a second sheet for a human to read.</li></ul>
+<p>The reuse check needs the whole batch in one call. That detail matters, because the repeats we saw were across reels, not inside one.</p>
+<p>The gate caught our bad first draft. We also wrote regression tests for its cut-detection rule, so a later tweak cannot quietly loosen it.</p>
+<h2>The second catch</h2>
+<p>A team editor then pointed out that our on-screen text sat on top of a person's face on some shots. The text had one fixed position. On some shots, that position was a face.</p>
+<p>We wrote a second script. It detects faces shot by shot with a small ONNX face model, at 6 frames a second. It also tries the frame turned 90, 180 and 270 degrees, because people lie down and cameras rotate. Each face is grown by 15 percent, and the text box keeps 40 pixels clear of it.</p>
+<p>It then tries the text box at every 20 pixel height inside the safe zone for the Reels app. If one height works for every shot, it uses that. If not, each shot gets the nearest free height to the last one, so the box jumps as little as possible. If any shot has no free height, the script exits with an error.</p>
+<p>The margin came from a later miss. A face still sat under the text at a plain detection score with no margin. We added the margin and the sideways frames after that.</p>
+<h2>The check that guards it now</h2>
+<p>Both scripts run on every render, before anything goes to a reviewer. A pass writes one line to a ledger, so any send can be traced to its gate run. A failed video does not go out.</p>
+<p>The gate cannot watch for us. It says so in its own notes: someone still reads the contact sheets. What it removes is the repeat error.</p>
+<h2>What we would do differently</h2>
+<ul class="pts"><li>Write the gate before the first batch, not after the first complaint. A video has failure modes that stills hide, and that was knowable.</li>
+<li>Run face detection on the clean video before text goes on. We now do, and we should have started there.</li>
+<li>Put every new reviewer catch into the same gate on the day it happens, with a test that fails on the old mistake.</li></ul>
+<h2>The lesson</h2>
+<p>Review is expensive and people forget. A catch that stays in someone's memory will come back. A catch that becomes a check runs every time, costs nothing, and gets better with each miss.</p>
+<div class="cta"><p>Want systems that check their own work? Book a call and we will scope one job and quote it in writing.</p><a class="btn" href="https://book.jtlgrowth.com">Book a free 30-min call</a></div>
+</div></div></main>
+<footer class="foot"><div class="wrap"><p>&copy; 2026 JTL Growth · Metro Manila, Philippines</p><nav aria-label="Contact"><a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></nav><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></footer>
+</body>
+</html>
