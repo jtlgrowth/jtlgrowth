@@ -1,37 +1,106 @@
 <!doctype html>
-<!-- DRAFT engineering article for owner review. Not in sitemap or llms.txt. -->
+<!-- DRAFT blog page for Owner review. noindex, not in sitemap.xml or llms.txt until he approves going live. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/assets/attribution.js"></script>
 <script src="/assets/tracking.js"></script>
-<title>Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels · JTL Growth</title><meta name="robots" content="noindex">
-<meta name="description" content="How two reviewer catches on b-roll reels, a stutter and text over a face, became checks that run on every render.">
-<link rel="canonical" href="https://jtlgrowth.com/video-qa-gate-short-form-reels/">
+<title>AI Side Projects by Jamz Jamorol · JTL Growth Philippines</title><meta name="robots" content="noindex"><!-- GO-LIVE: delete this noindex tag -->
+<meta name="description" content="The free tools and apps we built on the side at JTL Growth: JTL Academy, Inbox Scout, Oras and Hugas. Made in the Philippines.">
+<link rel="canonical" href="https://jtlgrowth.com/blog/projects/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<meta property="og:title" content="Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels">
-<meta property="og:description" content="How two reviewer catches on b-roll reels, a stutter and text over a face, became checks that run on every render.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://jtlgrowth.com/video-qa-gate-short-form-reels/">
+<meta property="og:title" content="AI Side Projects by Jamz Jamorol · JTL Growth Philippines">
+<meta property="og:description" content="The free tools and apps we built on the side at JTL Growth: JTL Academy, Inbox Scout, Oras and Hugas. Made in the Philippines.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jtlgrowth.com/blog/projects/">
 <meta property="og:image" content="https://jtlgrowth.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Side Projects by Jamz Jamorol · JTL Growth Philippines">
+<meta name="twitter:description" content="The free tools and apps we built on the side at JTL Growth: JTL Academy, Inbox Scout, Oras and Hugas. Made in the Philippines.">
+<meta name="twitter:image" content="https://jtlgrowth.com/og-image.png">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
- "@type": "Article",
- "headline": "Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels",
- "description": "How two reviewer catches on b-roll reels, a stutter and text over a face, became checks that run on every render.",
- "mainEntityOfPage": "https://jtlgrowth.com/video-qa-gate-short-form-reels/",
- "dateModified": "2026-11-11",
+ "@type": "CollectionPage",
+ "name": "Side projects",
+ "description": "The free tools and apps we built on the side at JTL Growth: JTL Academy, Inbox Scout, Oras and Hugas. Made in the Philippines.",
+ "url": "https://jtlgrowth.com/blog/projects/",
+ "inLanguage": "en",
+ "isPartOf": {
+  "@id": "https://jtlgrowth.com/blog/"
+ },
  "author": {
   "@type": "Person",
-  "name": "Jamz Jamorol"
+  "@id": "https://jamzjamorol.com/#person",
+  "name": "Jamz Jamorol",
+  "url": "https://jamzjamorol.com/",
+  "jobTitle": "AI Engineer",
+  "description": "Filipino AI engineer and founder of JTL Growth.",
+  "worksFor": {
+   "@type": "Organization",
+   "@id": "https://jtlgrowth.com/#organization",
+   "name": "JTL Growth",
+   "url": "https://jtlgrowth.com/"
+  },
+  "homeLocation": {
+   "@type": "Place",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Metro Manila",
+    "addressCountry": "PH"
+   }
+  },
+  "knowsAbout": [
+   "Artificial intelligence",
+   "AI automation",
+   "AI agents",
+   "Claude Code"
+  ],
+  "sameAs": [
+   "https://www.linkedin.com/in/jamzjamorol",
+   "https://www.instagram.com/jamzjamorol",
+   "https://www.crunchbase.com/person/jamz-jamorol"
+  ]
  },
  "publisher": {
   "@type": "Organization",
+  "@id": "https://jtlgrowth.com/#organization",
   "name": "JTL Growth",
-  "url": "https://jtlgrowth.com/"
+  "url": "https://jtlgrowth.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://jtlgrowth.com/assets/logo-mark.svg"
+  }
+ },
+ "mainEntity": {
+  "@type": "ItemList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "JTL Academy",
+    "url": "https://course.jtlgrowth.com/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Inbox Scout",
+    "url": "https://jtlgrowth.com/inbox-scout/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 3,
+    "name": "Oras",
+    "url": "https://jtlgrowth.com/apps/oras/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 4,
+    "name": "Hugas",
+    "url": "https://jtlgrowth.com/apps/hugas/"
+   }
+  ]
  }
 }
 </script>
@@ -131,46 +200,40 @@ b{font-weight:600}
 .art ul.pts{margin-top:14px;padding-left:22px;list-style:disc;color:var(--muted)}
 .art ul.pts li{margin-top:8px}
 .art a{text-decoration:underline;text-underline-offset:3px}
+.art .card,.art .tabs a,.art .back{text-decoration:none}
 .src{margin-top:16px;font-size:var(--t-small);color:var(--muted)}
 .src li{margin-top:10px;overflow-wrap:anywhere}
 .cta a.btn{text-decoration:none}
+
+.byline{margin-top:14px;font-size:var(--t-small);color:var(--muted)}
+.byline a{color:var(--fg)}
+.ctx{margin-top:12px;font-size:var(--t-small);color:var(--muted)}
+.cards{margin-top:32px;display:grid;gap:16px}
+.card{display:block;padding:26px 28px;border:1px solid var(--border-strong);border-radius:var(--radius-lg);text-decoration:none;transition:border-color var(--motion-base) var(--ease),background var(--motion-base) var(--ease)}
+.card:hover{border-color:var(--ink);background:var(--surface)}
+.card h2,.card h3{margin:10px 0 0;font:600 26px/1.2 var(--font-display);letter-spacing:var(--tracking-display);text-wrap:balance}
+.card p{margin-top:10px;color:var(--muted)}
+.card .meta{margin-top:14px;font:600 var(--t-label)/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card .status{display:inline-block;margin-top:14px;padding:4px 12px;border:1px solid var(--ink);border-radius:var(--radius-pill);font:600 var(--t-label)/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
+.card .status.soft{border-style:dashed;border-color:var(--border-strong);color:var(--muted)}
+.art .tabs{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.art .tabs a{text-decoration:none}
+.back{display:inline-flex;align-items:center;min-height:44px;font-size:var(--t-small);color:var(--muted);text-decoration:none}
+.back:hover{color:var(--fg)}
+@media(max-width:640px){.card{padding:22px 20px}.card h2,.card h3{font-size:23px}}
 </style>
 </head>
 <body>
-<header class="nav" id="top"><div class="wrap nav-in"><a class="brand" href="https://jtlgrowth.com/" aria-label="JTL Growth, back to top"><svg class="mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg><span>JTL Growth</span></a><nav class="nav-links" aria-label="Site"><a href="https://jtlgrowth.com/ai-employee/">AI employee</a><a href="https://jtlgrowth.com/services/">Services</a><a href="https://jtlgrowth.com/quote/">Quote</a></nav><a class="btn btn-solid" href="https://book.jtlgrowth.com/" target="_blank" rel="noopener">Book a call</a></div></header>
-<main class="art"><div class="wrap"><div class="col"><p class="eyebrow">Engineering · November 2026</p><h1>Every Catch Becomes a Check: The QA Gate Behind Our Short-Form Reels</h1>
-<div class="answer">We make short-form b-roll reels for a client's clinic. Two reviewers caught problems that our own checks missed. We turned each catch into a script that runs on every render. The same mistake can no longer reach a reviewer twice.</div>
-<h2>The problem</h2>
-<p>A reel is a few seconds of footage with text on top. We build many of them, fast. Our first review step was simple: look at three still frames per reel, then send it.</p>
-<p>That step passed a draft that looked fine in stills. In motion it stuttered. Our owner watched it and said it seemed to "stop, stop". He was right.</p>
-<h2>What broke</h2>
-<p>The source clip held about 140 duplicated frames. Our short slices landed on them, so the picture froze for a beat, then moved. The same shot also showed up in more than one reel. Stills cannot show either problem. A still is one frame. A stutter is a pattern over time.</p>
-<h2>What we tried</h2>
-<p>First, we promised to watch every render before sending. That is a habit, not a fix. Habits fail on busy days, so we wrote a gate.</p>
-<p>The gate reads each video with ffmpeg and runs these checks:</p>
-<ul class="pts"><li><b>Duplicate frames.</b> The mpdecimate filter drops frames that match the one before. More than two in a row fails the video, and the gate prints the times so we can move the cut.</li>
-<li><b>Held stills.</b> Any frame held longer than 1.5 seconds fails.</li>
-<li><b>Black frames.</b> The blackdetect filter flags any black run of 0.1 seconds or more.</li>
-<li><b>Shot reuse.</b> We sample each video at 2 frames a second, shrink the frames, and compare them on a 4 by 4 grid of tiles. A different text overlay on a few tiles does not hide a match. A matching run of one second or more fails the batch.</li>
-<li><b>Contact sheet.</b> The gate also builds a 6 frames a second sheet for a human to read.</li></ul>
-<p>The reuse check needs the whole batch in one call. That detail matters, because the repeats we saw were across reels, not inside one.</p>
-<p>The gate caught our bad first draft. We also wrote regression tests for its cut-detection rule, so a later tweak cannot quietly loosen it.</p>
-<h2>The second catch</h2>
-<p>A team editor then pointed out that our on-screen text sat on top of a person's face on some shots. The text had one fixed position. On some shots, that position was a face.</p>
-<p>We wrote a second script. It detects faces shot by shot with a small ONNX face model, at 6 frames a second. It also tries the frame turned 90, 180 and 270 degrees, because people lie down and cameras rotate. Each face is grown by 15 percent, and the text box keeps 40 pixels clear of it.</p>
-<p>It then tries the text box at every 20 pixel height inside the safe zone for the Reels app. If one height works for every shot, it uses that. If not, each shot gets the nearest free height to the last one, so the box jumps as little as possible. If any shot has no free height, the script exits with an error.</p>
-<p>The margin came from a later miss. A face still sat under the text at a plain detection score with no margin. We added the margin and the sideways frames after that.</p>
-<h2>The check that guards it now</h2>
-<p>Both scripts run on every render, before anything goes to a reviewer. A pass writes one line to a ledger, so any send can be traced to its gate run. A failed video does not go out.</p>
-<p>The gate cannot watch for us. It says so in its own notes: someone still reads the contact sheets. What it removes is the repeat error.</p>
-<h2>What we would do differently</h2>
-<ul class="pts"><li>Write the gate before the first batch, not after the first complaint. A video has failure modes that stills hide, and that was knowable.</li>
-<li>Run face detection on the clean video before text goes on. We now do, and we should have started there.</li>
-<li>Put every new reviewer catch into the same gate on the day it happens, with a test that fails on the old mistake.</li></ul>
-<h2>The lesson</h2>
-<p>Review is expensive and people forget. A catch that stays in someone's memory will come back. A catch that becomes a check runs every time, costs nothing, and gets better with each miss.</p>
-<div class="cta"><p>Want systems that check their own work? Book a call and we will scope one job and quote it in writing.</p><a class="btn" href="https://book.jtlgrowth.com">Book a free 30-min call</a></div>
-</div></div></main>
-<footer class="foot"><div class="wrap"><p>&copy; 2026 JTL Growth · Metro Manila, Philippines</p><nav aria-label="Contact"><a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></nav><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></footer>
+<header class="nav" id="top"><div class="wrap nav-in"><a class="brand" href="https://jtlgrowth.com/" aria-label="JTL Growth, back to top"><svg class="mark" viewBox="288 703 1315 626" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="141.5"><path d="M624 774H1267"/><path d="M846 706V1122A134.5 134.5 0 0 1 711.5 1256.5H494A134.5 134.5 0 0 1 359.5 1122"/><path d="M1195 706V1122A134.5 134.5 0 0 0 1329.5 1256.5H1602"/></g></svg><span>JTL Growth</span></a><nav class="nav-links" aria-label="Site"><a href="https://jtlgrowth.com/ai-employee/">AI employee</a><a href="https://jtlgrowth.com/services/">Services</a><a href="https://jtlgrowth.com/quote/">Quote</a><a href="/blog/" aria-current="page">Blog</a></nav><a class="btn btn-solid" href="https://book.jtlgrowth.com/" target="_blank" rel="noopener">Book a call</a></div></header>
+<main class="art"><div class="wrap"><div class="col"><a class="back" href="/blog/">&larr; Back to blog</a><p class="eyebrow">Engineering</p><h1>Side projects</h1>
+<p>Things we built because we needed them, now public. Each one gets an engineering article here: the real problem, what broke, the fix and the check that guards it. By <a href="https://jamzjamorol.com/">Jamz Jamorol</a>, built in the Philippines.</p>
+<p class="tabs"><a class="btn btn-ghost" href="/blog/">Articles</a><a class="btn btn-solid" href="/blog/projects/">Side projects</a></p>
+<div class="cards">
+<div class="card"><h2>JTL Academy</h2><p>Free AI courses for people who want to use AI at work.</p><p class="meta"><a href="https://course.jtlgrowth.com/" target="_blank" rel="noopener">course.jtlgrowth.com &#8599;</a></p><span class="status soft">Article coming</span></div>
+<div class="card"><h2>Inbox Scout</h2><p>A free email drafter. Paste your unanswered emails and get every reply drafted in your voice.</p><p class="meta"><a href="/inbox-scout/">jtlgrowth.com/inbox-scout &#8599;</a></p><span class="status soft">Article coming</span></div>
+<div class="card"><h2>Oras</h2><p>Retainer-first invoicing for people who bill the same clients every month.</p><p class="meta"><a href="/apps/oras/">jtlgrowth.com/apps/oras &#8599;</a></p><span class="status soft">Article coming</span></div>
+<div class="card"><h2>Hugas</h2><p>A chore app for the household: kaninong turn na sa lababo?</p><p class="meta"><a href="/apps/hugas/">jtlgrowth.com/apps/hugas &#8599;</a></p><span class="status soft">Article coming</span></div>
+</div></div></div></main>
+<footer class="foot"><div class="wrap"><p>&copy; 2026 JTL Growth · Metro Manila, Philippines</p><nav aria-label="Footer"><a href="/blog/">Blog</a><a href="/blog/projects/">Side projects</a><a href="/services/">Services</a></nav><nav aria-label="Contact"><a href="mailto:hello@jtlgrowth.com">hello@jtlgrowth.com</a></nav><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav></div></footer>
 </body>
 </html>
