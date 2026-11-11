@@ -1,0 +1,137 @@
+<!doctype html>
+<!-- QUICK SETTINGS: colours live in :root below (Tropa tokens, from apps/tropa-ios/Sources/UI/Theme.swift);
+     the contact address lives in SETTINGS.
+     settings: host-ok=jtlgrowth.com
+     settings: host-ok=privacy.gov.ph
+     settings: host-ok=supabase.com
+     Every line below matches the app as of 0.2 (2026-11-11): join rules (8-character code, 3 to 8 members,
+     10 wrong tries per hour, 30 per day), the km board rule (GPS and Apple Health only, never faster than 2:45 per km),
+     report, block, remove and leave in the Tropa tab, Account with Sign out and Delete account. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tropa support</title>
+<meta name="description" content="Help for Tropa: joining a tropa, runs and the km board, maps, photos, the rules of a tropa, reporting, and deleting your account.">
+<link rel="canonical" href="https://jtlgrowth.com/apps/tropa/support/">
+<link rel="icon" href="../icon.png">
+<style>
+/* PROJECT SETTINGS: Tropa, dark first (the app is dark), light for readers who ask for it */
+:root {
+  --bg: #1b1b1e;
+  --bg-2: #101012;
+  --surface: rgba(255,255,255,.06);
+  --fg: #f5f2ee;
+  --muted: #aaa39a;
+  --line: #2d2d31;
+  --accent: #ff8c33;
+  --focus-ring: #ff8c33;
+  --font-display: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
+  --font-body: -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --radius: 18px;
+  color-scheme: dark light;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fbf7f2;
+    --bg-2: #efe7dd;
+    --surface: rgba(255,255,255,.78);
+    --fg: #1b1917;
+    --muted: #6a6259;
+    --line: #e0d6c9;
+    --accent: #b94f06;
+    --focus-ring: #1b1917;
+  }
+}
+* { box-sizing: border-box; }
+html { background: var(--bg-2); }
+body { margin: 0; min-height: 100vh; background: linear-gradient(180deg, var(--bg), var(--bg-2)); color: var(--fg); font: 400 17px/1.6 var(--font-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--fg); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(720px, 100% - 32px); margin-inline: auto; }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 0; }
+nav .home { display: flex; align-items: center; gap: 10px; font: 800 20px/1 var(--font-display); color: var(--accent); text-decoration: none; }
+nav .home img { width: 32px; height: 32px; border-radius: 8px; }
+nav .links { display: flex; gap: 8px; }
+nav .links a { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font-size: 14px; text-decoration: none; }
+nav .links a[aria-current] { border-color: var(--accent); }
+h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }
+h1 { margin: 28px 0 6px; font: 800 clamp(30px, 6.5vw, 42px)/1.12 var(--font-display); letter-spacing: -.01em; }
+.meta { margin: 0 0 22px; color: var(--muted); font-size: 15px; }
+.lead { padding: 18px 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); }
+h2 { margin: 38px 0 10px; font: 700 13px/1.3 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.group { border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.row { padding: 14px 18px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.row b { display: block; font-weight: 600; }
+.row span { color: var(--muted); }
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+.fix { padding: 14px 18px; margin: 10px 0; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.fix b { display: block; font-weight: 600; }
+.fix p { margin: 4px 0 0; color: var(--muted); }
+ol { padding-left: 22px; }
+footer { margin: 56px 0 40px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Tropa">
+    <a class="home" href="./"><img src="../icon.png" alt="" width="32" height="32">Tropa</a>
+    <span class="links"><a href="../privacy/">Privacy</a><a href="./" aria-current="page">Support</a></span>
+  </nav>
+  <main>
+    <h1>Tropa support</h1>
+    <p class="meta">Tropa is a 6-month challenge for you and your friends: each one picks a goal, everyone logs and posts, and the tropa votes at the end.</p>
+    <p class="lead">Email <a data-mail href="mailto:support@jtlgrowth.com">support@jtlgrowth.com</a>. We read everything and usually reply within two business days. Reports about a person or a post are reviewed within 24 hours.</p>
+
+    <h2>Start a tropa</h2>
+    <ol>
+      <li>Sign in with Apple and type the name your friends will see.</li>
+      <li>Tap "Gumawa ng tropa", choose a name, how long it runs and the forfeit for the one who finishes last.</li>
+      <li>Show the QR or give the 8-character code to your friends. A tropa has 3 to 8 members.</li>
+      <li>Each member picks a challenge. Then log your sessions, post your progress, and vote when the cycle ends.</li>
+    </ol>
+
+    <h2>Quick fixes</h2>
+    <div class="fix"><b>My friend cannot join</b><p>Check the 8 characters of the code, or scan the QR in the Tropa tab. A tropa holds 8 members at most. After 10 wrong codes in one hour, or 30 in one day, the app asks you to wait. A member the creator removed cannot come back with the same code.</p></div>
+    <div class="fix"><b>My run did not count on the km board</b><p>The km board counts runs that Tropa recorded with GPS and runs it read from Apple Health. A log you typed by hand does not count for km, and neither does a pace faster than 2:45 per kilometer. It still counts for your week and your streak.</p></div>
+    <div class="fix"><b>My activity has no map</b><p>A workout from Apple Health shows a map only when Health holds a route for it and Tropa may read routes. Open the iPhone Settings app, go to Health, Data Access and Devices, Tropa, and turn on Workout Routes. New workouts will carry the map.</p></div>
+    <div class="fix"><b>The record screen says location is off</b><p>Open the iPhone Settings app, go to Tropa, Location, and choose "While Using the App". Tropa reads your location only while a recording is on.</p></div>
+    <div class="fix"><b>The camera says it is off</b><p>Open the iPhone Settings app, go to Tropa, and turn on Camera. For a video, turn on Microphone too.</p></div>
+    <div class="fix"><b>A friend's photo or video does not show</b><p>Pull the feed down to refresh. Photos and videos need signal the first time; after that the phone keeps them.</p></div>
+    <div class="fix"><b>What I did has not reached my friends</b><p>No signal is fine. Tropa keeps what you did on the phone and sends it by itself when signal is back. Pull down to send it now.</p></div>
+    <div class="fix"><b>It says "Hindi tinanggap ng server"</b><p>The server said no to your last change, for example a vote after the results came out. The app put things back the way the server has them. Nothing else is lost.</p></div>
+    <div class="fix"><b>I started without an account and now want my friends in</b><p>Open the menu on the Bahay tab, tap Settings, then "Mag-sign in gamit ang Apple". What you made without an account stays on the phone and is not uploaded.</p></div>
+
+    <h2 id="rules">The rules of a tropa</h2>
+    <p>A tropa is a private group of friends. These rules still apply to everything posted in it:</p>
+    <ul>
+      <li>No nudity or sexual content.</li>
+      <li>No bullying, threats or harassment, and no hate against a person or a group.</li>
+      <li>No one else's private information, and nothing illegal.</li>
+    </ul>
+    <p>To report a post or an activity, open the menu on its card and tap "I-report". To report or block a member, open the Tropa tab. The creator of a tropa can remove a member there, and anyone can leave. We review every report within 24 hours, and we remove content and close accounts that break these rules.</p>
+
+    <h2>Delete your account</h2>
+    <ol>
+      <li>Open the Tropa tab and tap Account at the top right.</li>
+      <li>Tap "Burahin ang account", then confirm with Apple.</li>
+    </ol>
+    <p>This deletes your profile, your tropa memberships and everything you posted, and it cannot be undone. If you cannot open the app, email us from the address of your Apple account and we will delete it for you.</p>
+
+    <h2>Reporting a bug</h2>
+    <p>Tell us what you did, what you expected, and what happened instead. Your iPhone model and iOS version help. A screenshot helps more.</p>
+
+    <h2>Your data</h2>
+    <p>What Tropa keeps, who can see it and how to delete it is in the <a href="../privacy/">privacy policy</a>.</p>
+  </main>
+  <footer>Tropa is built and maintained by <a href="https://jtlgrowth.com/apps/">JTL Growth</a>. © 2026 · <a href="../privacy/">Privacy</a></footer>
+</div>
+<script>
+const SETTINGS = {"support_email": "support@jtlgrowth.com"};
+document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + SETTINGS.support_email; a.textContent = SETTINGS.support_email; });
+</script>
+</body>
+</html>
