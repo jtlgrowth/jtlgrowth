@@ -88,7 +88,7 @@
   // The canned INTENTS stay the instant layer (chips, short keywords, navigation) and the fallback
   // whenever the bot is dark, slow or down. Replies render as text only; links are rebuilt as anchors
   // here only when they point at our own hosts.
-  var ASK_URL = 'https://ask.jtlgrowth.com/ask';
+  var ASK_URL = 'https://lane.jtlgrowth.com/ask';
   var ASK_TIMEOUT = 40000;
   var OWN_LINK = /^(?:https:\/\/(?:www\.|book\.|shop\.|download\.)?jtlgrowth\.com(?:\/[A-Za-z0-9\-._~\/#?=&%]*)?|hello@jtlgrowth\.com)$/;
   var bot = { state: 'unknown', history: [], waiters: [] };

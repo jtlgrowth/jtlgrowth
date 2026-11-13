@@ -306,7 +306,7 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
 
   <!-- close -->
   <!-- w47:begin -->
-<section class="jtl-faq w47-root" id="faq" data-endpoint="" data-allow="" aria-labelledby="faq-h">
+<section class="jtl-faq w47-root" id="faq" data-endpoint="https://lane.jtlgrowth.com/ask" data-allow="https://book.jtlgrowth.com,https://jtlgrowth.com,mailto:hello@jtlgrowth.com" aria-labelledby="faq-h">
   <style>
 /* W-47 ask-faq, built by library/ask-faq/embed.py from library/ask-faq/sites/jtlgrowth.json: edit the spec, not this block */
 .w47-root{color:var(--fg);font:500 16px/1.55 var(--font-body);letter-spacing:var(--tracking);-webkit-font-smoothing:antialiased;text-align:left}
@@ -369,7 +369,132 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
     <header class="w47-head">
       <p class="eyebrow" data-reveal>Before you start</p>
       <h2 id="faq-h" class="super silver" data-reveal>Questions, <span class="serif">answered.</span></h2>
-      <p class="lead" data-reveal>The short answers. Not on the list? <b>Ask it in the last row.</b></p>
+      <p class="lead" data-reveal>The short answers. Not on the list? <b>Ask us right here.</b></p>
+<!-- ai-lane: "Got a question? Chat here." card in the FAQ's empty left column (Owner Telegram 922 + 924, "sa faq";
+     English copy is his pick, Telegram 930).
+     Live since 2026-11-13 (answers from lane.jtlgrowth.com, apps/ai-lane). It drives the W-47 ask row underneath, so
+     there is one chat engine, one history and one answer list. Hidden until W-47 says the ask row is live. -->
+<div class="lane-chat" data-lane-chat hidden>
+  <style>
+.lane-chat{margin-top:32px;max-width:480px;padding:24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(252,252,252,.06),rgba(252,252,252,.02)) ,var(--ink-2);box-shadow:0 1px 0 rgba(252,252,252,.06) inset,0 24px 60px -30px rgba(0,0,0,.9)}
+.lane-chat[hidden]{display:none}
+.lane-chat-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lane-chat-ico{width:44px;height:44px;display:grid;place-items:center;border-radius:999px;background:var(--white);color:var(--ink)}
+.lane-chat-ico svg{width:22px;height:22px}
+.lane-chat-status{display:inline-flex;align-items:center;gap:8px;font:600 12px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--grey-1)}
+.lane-chat-status i{width:8px;height:8px;border-radius:999px;background:var(--white);box-shadow:0 0 0 0 rgba(252,252,252,.5)}
+.lane-chat-title{margin:20px 0 0;font:600 clamp(26px,2.4vw,34px)/1.1 var(--font-body);letter-spacing:-.02em;color:var(--white)}
+.lane-chat-title .serif{font-weight:400}
+.lane-chat-sub{margin:10px 0 0;color:var(--grey-1);font-size:16px;line-height:1.5;max-width:36ch}
+.lane-chat-form{display:flex;align-items:center;gap:8px;margin-top:20px;padding:6px 6px 6px 18px;border:1px solid rgba(252,252,252,.22);border-radius:999px;background:var(--ink);transition:border-color 600ms ease}
+.lane-chat-form:focus-within{border-color:var(--white)}
+.lane-chat-in{flex:1;min-width:0;height:44px;border:0;background:transparent;color:var(--white);font:500 16px/1.3 var(--font-body);outline:none}
+.lane-chat-in::placeholder{color:var(--grey-1);transition:opacity 600ms ease}
+.lane-chat-in.is-swap::placeholder{opacity:0}
+.lane-chat-send{flex:none;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:999px;background:var(--white);color:var(--ink);cursor:pointer;transition:transform 400ms ease,opacity 400ms ease}
+.lane-chat-send:disabled{opacity:.35;cursor:default}
+.lane-chat-send:not(:disabled):hover{transform:translateY(-2px)}
+.lane-chat-send svg{width:18px;height:18px}
+.lane-chat-send:focus-visible,.lane-chat-chip:focus-visible{outline:2px solid var(--white);outline-offset:3px}
+.lane-chat-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.lane-chat-chip{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--cement);font:500 15px/1 var(--font-body);cursor:pointer;transition:background-color 400ms ease,border-color 400ms ease}
+.lane-chat-chip:hover{background:rgba(252,252,252,.06);border-color:rgba(252,252,252,.3)}
+.lane-chat-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:899px){.lane-chat{max-width:none;margin-top:28px;padding:20px}}
+@media (prefers-reduced-motion:no-preference){
+  .lane-chat:not([hidden]){animation:laneChatRise 900ms cubic-bezier(.2,.7,.2,1) both}
+  .lane-chat-status i{animation:laneChatBreathe 2800ms ease-in-out infinite}
+}
+@keyframes laneChatRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes laneChatBreathe{0%,100%{box-shadow:0 0 0 0 rgba(252,252,252,.45)}50%{box-shadow:0 0 0 7px rgba(252,252,252,0)}}
+  </style>
+  <div class="lane-chat-top">
+    <span class="lane-chat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>
+    <span class="lane-chat-status"><i aria-hidden="true"></i>AI assistant online</span>
+  </div>
+  <p class="lane-chat-title">Got a question? <span class="serif">Chat here.</span></p>
+  <p class="lane-chat-sub">Ask in English or Taglish. It answers from this site in seconds, and a person can take it from there.</p>
+  <form class="lane-chat-form" data-lane-chat-form>
+    <label class="lane-chat-sr" for="lane-chat-in">Ask a question</label>
+    <input class="lane-chat-in" id="lane-chat-in" type="text" autocomplete="off" enterkeyhint="send" maxlength="400" placeholder="How much does an AI employee cost?">
+    <button class="lane-chat-send" type="submit" aria-label="Send" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></button>
+  </form>
+  <div class="lane-chat-chips">
+    <button class="lane-chat-chip" type="button" data-q="How much does an AI employee cost?">How much?</button>
+    <button class="lane-chat-chip" type="button" data-q="How long does a build take?">How long?</button>
+    <button class="lane-chat-chip" type="button" data-q="How do I book a call?">Book a call</button>
+  </div>
+  <script>
+  (function (card) {
+    "use strict";
+    // The W-47 ask row is parsed after this card, so wire up once the document is in.
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { wire(card); });
+    else wire(card);
+  function wire(card) {
+    var root = card && card.closest(".w47-root");
+    var form = root && root.querySelector("[data-w47-ask]");
+    var faqIn = form && form.querySelector("input");
+    if (!form || !faqIn) return;
+    var mine = card.querySelector("[data-lane-chat-form]");
+    var input = card.querySelector(".lane-chat-in");
+    var send = card.querySelector(".lane-chat-send");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function follow() { card.hidden = form.hidden; }
+    follow();
+    new MutationObserver(follow).observe(form, { attributes: true, attributeFilter: ["hidden"] });
+    function sync() { send.disabled = !input.value.trim(); }
+    input.addEventListener("input", sync);
+    function go(q) {
+      q = String(q || "").trim();
+      if (!q || form.hidden) return;
+      faqIn.value = q;
+      faqIn.dispatchEvent(new Event("input", { bubbles: true }));
+      if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event("submit", { cancelable: true }));
+      input.value = ""; sync();
+      // The answer opens in the list; on a phone that is below this card, so bring it into view.
+      setTimeout(function () {
+        var rows = root.querySelectorAll(".w47-asked");
+        var row = rows[rows.length - 1];
+        if (!row) return;
+        var r = row.getBoundingClientRect();
+        if (r.top >= 80 && r.bottom <= window.innerHeight) return;
+        // Clear the site's fixed header so the question shows above its answer.
+        var hdr = document.querySelector("header.site-header, .nav, header");
+        var off = (hdr && getComputedStyle(hdr).position === "fixed" ? hdr.getBoundingClientRect().height : 0) + 24;
+        glide(window.scrollY + r.top - off);
+      }, 60);
+    }
+    // A long jump on a phone is about 1,500 px: the browser's own smooth scroll does that in half a second, which
+    // reads as a snap. This glides at a steady, readable pace (0.9 to 1.6 s, eased both ends).
+    function glide(to) {
+      var from = window.scrollY, dist = to - from;
+      if (reduce || Math.abs(dist) < 4) { window.scrollTo(0, to); return; }
+      var dur = Math.min(1600, Math.max(900, Math.abs(dist) * 0.7)), t0 = null;
+      function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+      function step(now) {
+        if (t0 === null) t0 = now;
+        var k = Math.min(1, (now - t0) / dur);
+        window.scrollTo(0, from + dist * ease(k));
+        if (k < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    mine.addEventListener("submit", function (e) { e.preventDefault(); go(input.value); });
+    card.querySelectorAll("[data-q]").forEach(function (b) { b.addEventListener("click", function () { go(b.getAttribute("data-q")); }); });
+    if (reduce) return;
+    // Slow, readable placeholder examples while the box is empty and not in use.
+    var tips = ["How much does an AI employee cost?", "Can you build my booking bot?", "Gaano katagal ang build?", "Do you build websites too?"];
+    var i = 0;
+    setInterval(function () {
+      if (input.value || document.activeElement === input) return;
+      input.classList.add("is-swap");
+      setTimeout(function () { i = (i + 1) % tips.length; input.placeholder = tips[i]; input.classList.remove("is-swap"); }, 600);
+    }, 4200);
+  }
+  })(document.currentScript.closest("[data-lane-chat]"));
+  </script>
+</div>
+
     </header>
     <div class="w47-list" data-w47-list>
       <details class="w47-item">
@@ -561,13 +686,14 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
       var ctl = window.AbortController ? new AbortController() : null;
       var timer = setTimeout(function () { if (ctl) ctl.abort(); }, L.askTimeoutMs || 30000);
       fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history.slice(-(L.historyTurns || 12)) }), signal: ctl ? ctl.signal : undefined })
-        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (r) { return r.json().then(function (j) { if (j && typeof j === "object") j._live = r.ok; return j; }).catch(function () { return {}; }); })
         .then(function (j) {
           clearTimeout(timer);
           if (!j || typeof j.reply !== "string" || !j.reply.trim()) throw new Error("empty");
           box.textContent = "";
-          blocks(box, j.reply);
-          tag(box, C.liveTag || "Answered from our docs", SPARK);
+          // A canned line (every tier missed, cap, slow down) is not an answer from the docs: it shows as the fallback.
+          if (j._live) { blocks(box, j.reply); tag(box, C.liveTag || "Answered from our docs", SPARK); }
+          else fallback(box, j.reply);
           if (j.sig) history.push({ role: "assistant", content: j.reply, sig: j.sig });
           else history.pop();
         })
