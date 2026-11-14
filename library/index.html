@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- DRAFT page, branch library-draft. Header, footer, type and tokens copied from prompts/index.html.
-     Not on main, not deployed. Form is behind DRAFT = true (logs, posts nothing). -->
+<!-- Source library (live 2026-11-14, Owner Telegram 1276). Header, footer, type and tokens copied from prompts/index.html. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -14,7 +13,6 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <title>Source library · motion pieces and their prompts · JTL Growth</title>
 <meta name="description" content="Twenty-nine motion and interface pieces built with Claude. Browse them free, then leave an email to copy the prompt that rebuilds any one.">
-<meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://jtlgrowth.com/library/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -1028,7 +1026,7 @@ section h2 + .lead{margin-top:14px}
    Going live = set DRAFT to false. Endpoint and payload shape are the quote page's lead form
    (Google Apps Script primary, text/plain; Rialto mirror, text/plain, fire and forget). */
 (function(){
-  var DRAFT = true;
+  var DRAFT = false;
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbwPO-TEF3boA0dUyyJ0QFNA41ZsIW-5HUSEAjYrr82Y15rwzCJgwb8ahtbPAXzquxIC/exec";
   var MIRROR = "https://rialto.whereisdotva.workers.dev/api/public/forms/jtl-growth/xsT5RN8m0Jo4KBK16DHJFA";
   var REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
