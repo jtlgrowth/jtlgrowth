@@ -1071,8 +1071,10 @@ section h2 + .lead{margin-top:14px}
   }
   function post(body){
     if(DRAFT){ console.info('[library DRAFT] would post', JSON.stringify(body)); return Promise.resolve({ok:true, draft:true}); }
-    try { fetch(MIRROR, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(body), keepalive:true}).catch(function(){}); } catch(e){}
-    return fetch(ENDPOINT, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(body), keepalive:true});
+    /* Both stores get the lead; the prompt shows as soon as either one confirms (the Apps Script answer takes ~6 s, the mirror well under 1 s). */
+    function send(url){ return fetch(url, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(body), keepalive:true}).then(function(r){ if(!r.ok) throw new Error('http'); return r; }); }
+    var a = send(MIRROR), b = send(ENDPOINT);
+    return new Promise(function(res, rej){ var fails = 0; function no(){ if(++fails === 2) rej(new Error('both')); } a.then(res, no); b.then(res, no); });
   }
   var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -1086,13 +1088,13 @@ section h2 + .lead{margin-top:14px}
     get.addEventListener('click', function(){
       var open = form.hidden;
       form.hidden = !open; get.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if(open) input.focus();
+      if(open){ input.focus(); getPrompts().catch(function(){ promptsReq = null; }); }
     });
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
       var v = (input.value || '').trim();
       if(!EMAIL.test(v)){ err.textContent = 'Enter a valid email, like name@business.com.'; input.setAttribute('aria-invalid','true'); input.focus(); return; }
-      err.textContent = ''; input.removeAttribute('aria-invalid'); send.disabled = true;
+      err.textContent = ''; input.removeAttribute('aria-invalid'); send.disabled = true; send.textContent = 'Sending...';
       var body = { stage:'complete', lead_id:leadId(), page:location.href, ts:new Date().toISOString(), email:v, source:'library:' + id };
       Promise.all([post(body), getPrompts()]).then(function(r){
         var text = r[1][id];
@@ -1100,7 +1102,7 @@ section h2 + .lead{margin-top:14px}
         try { localStorage.setItem('lib-email', v); } catch(e){}
         pre.textContent = text; form.hidden = true; get.hidden = true; out.hidden = false; pre.focus();
       }).catch(function(){
-        err.textContent = 'Something went wrong on our side. Try again, or email hello@jtlgrowth.com.'; send.disabled = false;
+        err.textContent = 'Something went wrong on our side. Try again, or email hello@jtlgrowth.com.'; send.disabled = false; send.textContent = 'Send me the prompt';
       });
     });
     copy.addEventListener('click', function(){
