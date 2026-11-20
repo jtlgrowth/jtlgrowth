@@ -180,6 +180,50 @@ document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 .ae-stage .cost b{color:var(--fg)}
 .ae-stage .tools{font:400 13px/1.6 var(--font-mono);color:var(--grey-2);border-top:1px solid var(--line);padding-top:12px}
 
+/* 03b the gate (E-088 arming switch, /assets/arming-switch.js): routine replies stream past on their own,
+   the one big send waits behind the cover. Four layers: mono ground and type; a moving stream seen through
+   frosted glass; one direction, linear, 52 s and 90 s; the stream is the product doing its job. */
+.ae-gate .story b{color:var(--fg);font-weight:600}
+.gate-stage{position:relative;isolation:isolate;overflow:hidden;margin-top:44px;padding:84px clamp(12px,6vw,104px);border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--ink)}
+.gate-flow{position:absolute;inset:0;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.gate-lane{position:absolute;left:0;display:flex;width:max-content;will-change:transform}
+.gate-lane.near{font-size:14px;opacity:.78}
+.gate-lane.near.a{top:26px}
+.gate-lane.near.b{bottom:26px;animation-delay:-19s}
+.gate-lane.far{top:calc(31% - .9em);font-size:21px;opacity:.7;filter:blur(1.5px)}
+.gate-flow.on .gate-lane{animation:gate-flow 52s linear infinite;animation-play-state:paused}
+.gate-flow.on .gate-lane.far{animation-duration:90s}
+.gate-flow.on.live .gate-lane{animation-play-state:running}
+@keyframes gate-flow{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.gate-chip{display:inline-flex;align-items:center;gap:.6em;margin-right:3.2em;padding:.5em 1em .5em .8em;border:1px solid var(--line-strong);border-radius:var(--radius-pill);font:400 1em/1 var(--font-mono);color:var(--fg);white-space:nowrap}
+.gate-chip svg{width:1.15em;height:1.15em;flex:none}
+.gate-card{position:relative;z-index:1;max-width:1000px;margin-inline:auto;border:1px solid var(--line-strong);border-radius:var(--radius-md);background:rgba(18,18,18,.56);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);box-shadow:0 40px 70px -50px #000}
+.gate-tag{margin:0;padding:20px 34px 0;font:500 15px/1.3 var(--font-body);color:var(--muted)}
+.gate-card arming-switch{display:block;font:17px/1.45 var(--font-body);--as-bg:transparent;--as-line:transparent;--as-ink:var(--cement);--as-muted:var(--grey-1);--as-chip:rgba(252,252,252,.09)}
+.gate-card arming-switch:not(:defined){min-height:300px}
+.gate-nojs{margin:0;padding:28px 2em;color:var(--muted);font-size:16px}
+.js .gate-nojs{display:none}
+.gate-split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin-top:20px}
+.gate-col{display:grid;gap:16px;align-content:start;padding:28px;border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface)}
+.gate-col.hold{background:var(--white);border-color:var(--white);color:var(--ink)}
+.gate-col h3{font:700 clamp(20px,1.8vw,24px)/1.2 var(--font-display);letter-spacing:-.015em;color:var(--white)}
+.gate-col.hold h3{color:var(--ink)}
+.gate-col ul{list-style:none;display:grid;gap:10px;padding:0;margin:0}
+.gate-col li{position:relative;padding-left:22px;font-size:17px;line-height:1.5;color:var(--fg)}
+.gate-col.hold li{color:var(--ink)}
+.gate-col li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--grey-1)}
+.gate-col.hold li::before{background:var(--ink);box-shadow:none}
+/* under 900 the switch stacks (text above the hardware): the far lane moves to the clear band above the plate */
+@media(max-width:900px){.gate-lane.far{top:calc(50% - .9em)} .gate-tag{padding:18px 17px 0}}
+@media(max-width:760px){
+  .gate-stage{margin-top:32px;padding:72px 10px}
+  .gate-lane.near.a{top:21px}
+  .gate-lane.near.b{bottom:21px}
+  .gate-lane.far{font-size:18px}
+  .gate-card arming-switch:not(:defined){min-height:540px}
+}
+@media(prefers-reduced-motion:reduce){.gate-flow.on .gate-lane{animation:none;transform:translateX(-25%)}}
+
 /* 04 the honest version: the box is drawn absolutely so inline links never split a line into columns */
 .ae-check{list-style:none;display:grid;gap:18px;margin-top:34px;max-width:62ch;padding:0}
 .ae-check li{position:relative;padding-left:40px;font-size:18px;line-height:1.55;color:var(--fg)}
@@ -396,6 +440,33 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
     </div>
   </section>
 
+  <!-- 03b the gate: a live demo of the guarded confirm we put in front of anything that cannot be undone -->
+  <section class="wrap ae-sec ae-gate" id="gate" aria-labelledby="gate-h">
+    <p class="eyebrow" data-reveal>Who presses send</p>
+    <h2 id="gate-h" class="h2 silver" data-reveal>Nothing big sends without your <span class="serif">yes.</span></h2>
+    <p class="story" data-reveal>An AI employee answers the routine on its own: the lead at 2 a.m., the follow-up, the booking. That is the job.</p>
+    <p class="story" data-reveal><b>What it can't take back, it can't do alone.</b> A send to your whole list, a refund, a delete: those stop at a gate and wait for a person. This is the gate. Try it.</p>
+    <div class="gate-stage" data-reveal>
+      <!-- the routine work that needs no gate: edit the chips here, the script copies them into the other lanes -->
+      <div class="gate-flow" aria-hidden="true"><div class="gate-lane near a"><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18v-2a4 4 0 0 0-4-4H4"/><path d="m9 17-5-5 5-5"/></svg>Reply sent · 02:14</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 11 2 2 4-4"/><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Lead qualified</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/></svg>Call booked · Thu 2:00 PM</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>Follow-up sent</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M22 8c0-2.3-.8-4.3-2-6"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/><path d="M4 2C2.8 3.7 2 5.7 2 8"/></svg>Reminder sent</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18v-2a4 4 0 0 0-4-4H4"/><path d="m9 17-5-5 5-5"/></svg>Question answered</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/></svg>Booking confirmed</span><span class="gate-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 18v-2a4 4 0 0 0-4-4H4"/><path d="m9 17-5-5 5-5"/></svg>Missed call texted back</span></div><div class="gate-lane far"></div><div class="gate-lane near b"></div></div>
+      <div class="gate-card">
+        <p class="gate-tag">A sample. Nothing is really sent.</p>
+        <arming-switch id="gate-switch" tone="mono" theme="dark" heading="Send to 1,240 customers" detail="A promo email, drafted and ready. Once it goes, it cannot be pulled back." action="send it" running-label="Sending" running-note="Sending now." done-label="Sent" done-note="That was the demo. Nothing was sent." demo="1600"><p class="gate-nojs">This demo needs JavaScript. The gate has three steps: lift the safety cover, throw the switch to Arm, then press and hold the lamp.</p></arming-switch>
+      </div>
+    </div>
+    <div class="gate-split">
+      <div class="gate-col" data-reveal>
+        <h3>Goes out on its own</h3>
+        <ul><li>Replies to new leads, day or night</li><li>Follow-ups and reminders</li><li>Booking confirmations</li></ul>
+      </div>
+      <div class="gate-col hold" data-reveal>
+        <h3>Waits for your yes</h3>
+        <ul><li>A send to your whole list</li><li>Refunds and price changes</li><li>Deleting customer records</li></ul>
+      </div>
+    </div>
+    <p class="ae-fine" data-reveal>We run our own AI staff the same way: it cannot spend, delete or send to a list until one of us says yes. Your gate goes in at stage 4, Wire.</p>
+  </section>
+
   <!-- 04 the honest version -->
   <section class="wrap ae-sec" id="checklist" aria-labelledby="checklist-h">
     <p class="eyebrow" data-reveal>Do this next</p>
@@ -548,6 +619,29 @@ const SETTINGS = {"brand": {"name": "JTL Growth", "home": "https://jtlgrowth.com
     var q = 'utm_source=jtlgrowth&utm_medium=ai-employee&utm_content=' + encodeURIComponent(a.getAttribute('data-book'));
     if (code) q += '&utm_campaign=' + encodeURIComponent(code.toLowerCase());
     a.setAttribute('href', base + '?' + q);
+  });
+})();
+</script>
+<script src="/assets/arming-switch.js" defer></script>
+<script>
+/* The gate demo: copy the chips into every lane, twice, so the stream loops with no jump; run it only on screen. */
+(function(){
+  var flow = document.querySelector('.gate-flow');
+  if (!flow) return;
+  var lanes = flow.querySelectorAll('.gate-lane'), chips = [].slice.call(lanes[0].children);
+  lanes.forEach(function(lane, n){
+    while (lane.firstChild) lane.removeChild(lane.firstChild);
+    for (var i = 0; i < chips.length * 2; i++) lane.appendChild(chips[(i + n * 3) % chips.length].cloneNode(true));
+  });
+  flow.classList.add('on');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){ flow.classList.toggle('live', es[0].isIntersecting); }, {rootMargin: '160px'}).observe(flow);
+  } else flow.classList.add('live');
+  var sw = document.getElementById('gate-switch'), told = false;
+  if (sw) sw.addEventListener('arming-done', function(){
+    if (told || !window.veniceTrack) return;
+    told = true;
+    window.veniceTrack('gate_demo', {page: 'ai-employee'});
   });
 })();
 </script>
