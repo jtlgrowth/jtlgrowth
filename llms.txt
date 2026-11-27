@@ -52,3 +52,10 @@ Note: JTL Growth is an independent Philippine agency. It is not affiliated with 
 - [Best CRM for Coaches and Small Agencies in 2027](https://jtlgrowth.com/best-crm-for-coaches-and-small-agencies-2027/)
 - [How Much Does an AI Employee Cost in the Philippines?](https://jtlgrowth.com/ai-employee-small-business-philippines-cost/)
 - [How much does GoHighLevel setup cost in the Philippines?](https://jtlgrowth.com/gohighlevel-setup-philippines-cost/)
+
+## Blog: Built by Venice
+- [Built by Venice, engineering stories from JTL Growth](https://jtlgrowth.com/blog/)
+- [How we built Hugas, a dish-washing turn app for Filipino households](https://jtlgrowth.com/blog/how-we-built-hugas-app-philippines/)
+- [How we built Pitaka, an ID wallet app for the Philippines, and the skin bug our tests could not see](https://jtlgrowth.com/blog/how-we-built-pitaka-id-wallet-app-philippines/)
+- [How we built Suki Cart, a grocery budget app for Filipino shoppers, and the row that only broke on a real screen](https://jtlgrowth.com/blog/how-we-built-suki-cart-grocery-budget-app-philippines/)
+- [How we built Alaala, a private offline journal app, when Apple had no Filipino speech recognizer](https://jtlgrowth.com/blog/how-we-built-alaala-private-journal-app-philippines/)
